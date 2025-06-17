@@ -1,5 +1,7 @@
 # Project-MorningStar
-Project MorningStar (MS11-Core) is an advanced interface assistant for long-session open-world automation. Inspired by player realism, faction-based systems, and strategic progression loops.
+Project MorningStar (formerly known as MS11-Core) is an advanced interface assistant for long-session open-world automation. Inspired by player realism, faction-based systems, and strategic progression loops.
+
+The original MS11-Core implementation has been archived under `archive/ms11-core` to preserve legacy code.
 
 ## Lore
 In the world of **Argent**, legendary guilds compete to recover the fragments of the star "Morning". Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. MorningStar provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.
