@@ -14,7 +14,7 @@ pip install -r requirements.txt
 Generate a short story or track XP in your automation scripts:
 ```python
 from src.story_generator import generate_story
-from xp_manager import XPManager
+from src.xp_manager import XPManager
 
 print(generate_story("A rogue explores the ruins"))
 
