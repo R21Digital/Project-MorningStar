@@ -1,0 +1,1 @@
+# Entry point for MorningStar (MS11-Core)

@@ -1,0 +1,1 @@
+# Tracks gold/credit balance across sessions
