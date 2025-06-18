@@ -24,3 +24,53 @@ xp.record_action("quest_complete")
 xp.end_session()
 ```
 The modules under `src/` offer simple building blocks that you can integrate into larger systems.
+
+## Getting Started
+
+This section walks through a fresh setup so you can try the project locally.
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/yourname/Project-MorningStar.git
+   cd Project-MorningStar
+   ```
+
+2. **(Optional) Create a virtual environment**
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the example application**
+
+   Launch the main script to see the questing demo:
+
+   ```bash
+   python src/main.py
+   ```
+
+   You can also run the CLI runner directly and select a mode:
+
+   ```bash
+   python -m src.runner --mode quest
+   ```
+
+5. **Run the tests**
+
+   The repository contains a small test suite powered by `pytest`.
+   Execute it with:
+
+   ```bash
+   pytest
+   ```
+
+These steps should give you a working copy of MorningStar and confidence
+that the provided modules function as expected.
