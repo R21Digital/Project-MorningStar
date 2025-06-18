@@ -31,3 +31,22 @@ def test_debug_mode_replays_logs(monkeypatch, capsys):
     captured = capsys.readouterr()
     for l in lines:
         assert l in captured.out
+
+
+def test_run_mode_dispatches(monkeypatch):
+    calls = []
+
+    class FakeXP:
+        def __init__(self, character):
+            pass
+
+        def record_action(self, action):
+            calls.append(action)
+
+        def end_session(self):
+            calls.append("end")
+
+    monkeypatch.setattr(runner, "XPManager", FakeXP)
+    monkeypatch.setattr(runner, "MODE_DISPATCH", {"quest": lambda xp: xp.record_action("quest_complete")})
+    runner.run_mode("quest")
+    assert calls == ["quest_complete", "end"]
