@@ -1,6 +1,6 @@
 from datetime import datetime
-from xp_session import XPSession
-from xp_tracker import track_xp_sync
+from .xp_session import XPSession
+from .xp_tracker import track_xp_sync
 
 
 class XPManager:
