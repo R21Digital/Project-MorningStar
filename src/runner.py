@@ -1,16 +1,6 @@
 import argparse
-import os
-from src.xp_manager import XPManager
-
-
-def get_version_from_readme() -> str:
-    """Extract the version string from the README.md file."""
-    readme_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "README.md")
-    with open(readme_path, "r", encoding="utf-8") as f:
-        for line in f:
-            if line.strip().lower().startswith("version"):
-                return line.split(":", 1)[-1].strip()
-    return "unknown"
+from .xp_manager import XPManager
+from . import __version__
 
 
 def run_mode(mode: str):
@@ -36,7 +26,7 @@ def main():
     args = parser.parse_args()
 
     if args.version:
-        print(get_version_from_readme())
+        print(__version__)
         return
 
     run_mode(args.mode)

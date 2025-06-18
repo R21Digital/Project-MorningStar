@@ -4,7 +4,7 @@ from importlib import reload
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src import runner
+from src import runner, __version__
 
 
 def test_version_option_prints_version(capsys, monkeypatch):
@@ -13,4 +13,4 @@ def test_version_option_prints_version(capsys, monkeypatch):
     reload(runner)
     runner.main()
     captured = capsys.readouterr()
-    assert captured.out.strip() == "0.1.0"
+    assert captured.out.strip() == __version__
