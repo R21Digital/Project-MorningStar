@@ -1,5 +1,7 @@
 import argparse
 import os
+from typing import Callable, Dict
+
 from src.xp_manager import XPManager
 from src.logger_utils import read_logs, DEFAULT_LOG_PATH
 
@@ -14,7 +16,17 @@ def get_version_from_readme() -> str:
     return "unknown"
 
 
-def run_mode(mode: str):
+# Mapping of mode name to a callable that performs the action for that mode.
+# Each callable accepts an ``XPManager`` instance as its only argument.
+MODE_DISPATCH: Dict[str, Callable[[XPManager], None]] = {
+    "quest": lambda xp: xp.record_action("quest_complete"),
+    "grind": lambda xp: xp.record_action("mob_kill"),
+    "heal": lambda xp: xp.record_action("healing_tick"),
+}
+
+
+def run_mode(mode: str) -> None:
+    """Run the specified mode."""
     print(f"[\U0001F30C] MorningStar Runner Active: Mode = {mode}")
     if mode == "debug":
         lines = read_logs(DEFAULT_LOG_PATH, num_lines=5)
@@ -27,12 +39,9 @@ def run_mode(mode: str):
 
     xp = XPManager(character="Ezra")
 
-    if mode == "quest":
-        xp.record_action("quest_complete")
-    elif mode == "grind":
-        xp.record_action("mob_kill")
-    elif mode == "heal":
-        xp.record_action("healing_tick")
+    action = MODE_DISPATCH.get(mode)
+    if action:
+        action(xp)
     else:
         print("[\u26A0\uFE0F] Unknown mode selected.")
 
