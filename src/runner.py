@@ -1,6 +1,7 @@
 import argparse
 import os
 from src.xp_manager import XPManager
+from src.logger_utils import read_logs, DEFAULT_LOG_PATH
 
 
 def get_version_from_readme() -> str:
@@ -15,6 +16,15 @@ def get_version_from_readme() -> str:
 
 def run_mode(mode: str):
     print(f"[\U0001F30C] MorningStar Runner Active: Mode = {mode}")
+    if mode == "debug":
+        lines = read_logs(DEFAULT_LOG_PATH, num_lines=5)
+        if not lines:
+            print("[\u26A0\uFE0F] No logs to display.")
+        else:
+            for line in lines:
+                print(line)
+        return
+
     xp = XPManager(character="Ezra")
 
     if mode == "quest":
@@ -31,7 +41,7 @@ def run_mode(mode: str):
 
 def main():
     parser = argparse.ArgumentParser(description="MorningStar Core Runner")
-    parser.add_argument("--mode", type=str, default="quest", help="Choose a mode: quest, grind, heal")
+    parser.add_argument("--mode", type=str, default="quest", help="Choose a mode: quest, grind, heal, debug")
     parser.add_argument("--version", action="store_true", help="Show application version and exit")
     args = parser.parse_args()
 
