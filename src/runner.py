@@ -2,6 +2,7 @@ import argparse
 import os
 from src.xp_manager import XPManager
 from src.logger_utils import read_logs, DEFAULT_LOG_PATH
+from src.story_generator import generate_story
 
 
 def get_version_from_readme() -> str:
@@ -14,7 +15,56 @@ def get_version_from_readme() -> str:
     return "unknown"
 
 
+def run_quest_mode():
+    """Simulate quest completion and log XP."""
+    xp = XPManager(character="Ezra")
+    xp.record_action("quest_complete")
+    xp.end_session()
+
+
+def run_grind_mode():
+    """Simulate grinding mobs for XP."""
+    xp = XPManager(character="Ezra")
+    xp.record_action("mob_kill")
+    xp.end_session()
+
+
+def run_heal_mode():
+    """Simulate healing actions for XP."""
+    xp = XPManager(character="Ezra")
+    xp.record_action("healing_tick")
+    xp.end_session()
+
+
+def run_medic_mode():
+    """Demo for medic mode."""
+    xp = XPManager(character="Ezra")
+    xp.record_action("healing_tick")
+    xp.end_session()
+
+
+def run_crafting_mode():
+    """Demo for crafting mode."""
+    print("[CRAFT] Crafting placeholder...")
+
+
+def run_story_demo():
+    """Generate a short demo story."""
+    print(generate_story("In the beginning"))
+
+
+mode_map = {
+    "quest": run_quest_mode,
+    "grind": run_grind_mode,
+    "heal": run_heal_mode,
+    "medic": run_medic_mode,
+    "crafting": run_crafting_mode,
+    "story": run_story_demo,
+}
+
+
 def run_mode(mode: str):
+    """Dispatch the requested mode."""
     print(f"[\U0001F30C] MorningStar Runner Active: Mode = {mode}")
     if mode == "debug":
         lines = read_logs(DEFAULT_LOG_PATH, num_lines=5)
@@ -25,23 +75,21 @@ def run_mode(mode: str):
                 print(line)
         return
 
-    xp = XPManager(character="Ezra")
-
-    if mode == "quest":
-        xp.record_action("quest_complete")
-    elif mode == "grind":
-        xp.record_action("mob_kill")
-    elif mode == "heal":
-        xp.record_action("healing_tick")
+    handler = mode_map.get(mode)
+    if handler:
+        handler()
     else:
         print("[\u26A0\uFE0F] Unknown mode selected.")
-
-    xp.end_session()
 
 
 def main():
     parser = argparse.ArgumentParser(description="MorningStar Core Runner")
-    parser.add_argument("--mode", type=str, default="quest", help="Choose a mode: quest, grind, heal, debug")
+    parser.add_argument(
+        "--mode",
+        type=str,
+        default="quest",
+        help="Choose a mode: quest, grind, heal, medic, crafting, story, debug",
+    )
     parser.add_argument("--version", action="store_true", help="Show application version and exit")
     args = parser.parse_args()
 
