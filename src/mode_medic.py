@@ -1,4 +1,9 @@
-# mode_medic.py
+
+"""Medic mode automation helpers.
+
+Future tasks involve loading healing macros, checking group status, and
+applying buffs as needed.
+"""
 
 def start_medic(character_name: str):
     print(f"🩺 Medic Mode Activated for {character_name}...")

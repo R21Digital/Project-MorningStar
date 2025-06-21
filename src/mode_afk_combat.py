@@ -1,4 +1,9 @@
-# mode_afk_combat.py
+
+"""AFK combat automation helpers.
+
+Planned features include loading a combat macro, monitoring for whispers,
+and rotating through targets while the player is away.
+"""
 
 def start_afk_combat(character_name: str):
     print(f"🛡️ AFK Combat Mode Activated for {character_name}...")
