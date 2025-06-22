@@ -34,6 +34,11 @@ class LegacyQuestManager:
         planet = planet.lower()
         return [q for q in self.quests if planet in q.get("planet", "").lower()]
 
+    def find_by_status(self, status: str) -> List[Dict[str, Any]]:
+        """Return quests matching the given completion status."""
+        status = status.lower()
+        return [q for q in self.quests if status in str(q.get("status", "")).lower()]
+
     def search(self, term: str) -> List[Dict[str, Any]]:
         """Search quests by title or notes."""
         term = term.lower()
@@ -49,10 +54,21 @@ class LegacyQuestManager:
 def _parse_args(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Legacy quest data explorer")
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--list", action="store_true", help="List all quests")
+    group.add_argument("--list", action="store_true", help="List quests")
     group.add_argument("--search", type=str, help="Search title or notes")
     group.add_argument("--npc", type=str, help="Filter quests by NPC")
-    group.add_argument("--planet", type=str, help="Filter quests by planet")
+
+    parser.add_argument(
+        "--planet",
+        type=str,
+        help="Only show quests on the specified planet when listing",
+    )
+    parser.add_argument(
+        "--status",
+        type=str,
+        help="Only show quests with the given completion status when listing",
+    )
+
     return parser.parse_args(argv)
 
 
@@ -61,12 +77,14 @@ def main(argv=None):
     manager = LegacyQuestManager()
     if args.list:
         results = manager.list_all_quests()
+        if args.planet:
+            results = [q for q in results if args.planet.lower() in q.get("planet", "").lower()]
+        if args.status:
+            results = [q for q in results if args.status.lower() in str(q.get("status", "")).lower()]
     elif args.search:
         results = manager.search(args.search)
     elif args.npc:
         results = manager.find_by_npc(args.npc)
-    elif args.planet:
-        results = manager.find_by_planet(args.planet)
     else:
         results = []
 
