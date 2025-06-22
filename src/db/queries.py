@@ -8,7 +8,7 @@ def select_best_quest(character_name: str):
 
     # Prioritize official, validated quests
     cursor.execute("""
-        SELECT quest_id, title, steps
+        SELECT id, title, steps
         FROM quests
         WHERE validated = 1 AND source_type = 'official' AND character = ?
         ORDER BY fallback_rank ASC
