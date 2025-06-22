@@ -1,4 +1,4 @@
-"""XP Tracker wrapper for MorningStar (formerly MS11-Core)."""
+"""XP Tracker wrapper for Android MS11 (formerly MS11-Core)."""
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 

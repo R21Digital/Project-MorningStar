@@ -1,8 +1,8 @@
-"""Logging utilities for MorningStar."""
+"""Logging utilities for Android MS11."""
 import os
 from typing import List
 
-DEFAULT_LOG_PATH = "ms.log"
+DEFAULT_LOG_PATH = "ams11.log"
 
 def read_logs(path: str = DEFAULT_LOG_PATH, num_lines: int = 5) -> List[str]:
     """Return the last ``num_lines`` lines from ``path``.

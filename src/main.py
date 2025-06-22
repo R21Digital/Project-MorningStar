@@ -12,7 +12,7 @@ from src.mode_buff_by_tell import start_buff_by_tell
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="MorningStar Mode Runner")
+    parser = argparse.ArgumentParser(description="Android MS11 Mode Runner")
     parser.add_argument(
         "--mode",
         type=str,
@@ -32,7 +32,7 @@ def parse_args():
 def main():
     args = parse_args()
 
-    print("\U0001F6F0\uFE0F MorningStar MS11 Initialized")
+    print("\U0001F6F0\uFE0F Android MS11 Initialized")
     print(f"\U0001F4CC Mode: {args.mode.upper()}")
 
     start_log()

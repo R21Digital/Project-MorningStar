@@ -27,7 +27,7 @@ MODE_DISPATCH: Dict[str, Callable[[XPManager], None]] = {
 
 def run_mode(mode: str) -> None:
     """Run the specified mode."""
-    print(f"[\U0001F30C] MorningStar Runner Active: Mode = {mode}")
+    print(f"[\U0001F30C] Android MS11 Runner Active: Mode = {mode}")
     if mode == "debug":
         lines = read_logs(DEFAULT_LOG_PATH, num_lines=5)
         if not lines:
@@ -49,7 +49,7 @@ def run_mode(mode: str) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="MorningStar Core Runner")
+    parser = argparse.ArgumentParser(description="Android MS11 Core Runner by Project Galatic Beholder")
     parser.add_argument("--mode", type=str, default="quest", help="Choose a mode: quest, grind, heal, debug")
     parser.add_argument("--version", action="store_true", help="Show application version and exit")
     args = parser.parse_args()
