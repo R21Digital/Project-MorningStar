@@ -25,6 +25,27 @@ xp.end_session()
 ```
 The modules under `src/` offer simple building blocks that you can integrate into larger systems.
 
+## Working with Quests
+
+Three lightweight helpers provide a basic quest pipeline:
+
+- `quest_selector.select_quest` picks the next mission for a character.
+- `quest_executor.execute_quest` iterates through the quest steps.
+- `source_verifier.verify_source` checks that the data you loaded is trustworthy.
+
+```python
+from src.quest_selector import select_quest
+from src.quest_executor import execute_quest
+from src.source_verifier import verify_source
+
+quest = select_quest("Ezra") or {
+    "title": "Tutorial",
+    "steps": ["Talk to trainer", "Complete objectives"],
+}
+if verify_source(quest):
+    execute_quest(quest)
+```
+
 ## Getting Started
 
 This section walks through a fresh setup so you can try the project locally.
