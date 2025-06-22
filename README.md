@@ -103,4 +103,6 @@ Use the legacy quest tool to explore old mission data.
 python -m src.data.legacy_quest_manager --list
 python -m src.data.legacy_quest_manager --search Corellia
 python -m src.data.legacy_quest_manager --npc "Rebel Trainer"
+python -m src.data.legacy_quest_manager --list --planet Naboo
+python -m src.data.legacy_quest_manager --list --status completed
 ```
