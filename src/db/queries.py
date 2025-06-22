@@ -32,3 +32,51 @@ def insert_quest(character, title, steps):
     conn.commit()
     conn.close()
     print(f"✅ Quest inserted for {character}: {title}")
+
+
+def insert_note(character: str, topic: str, content: str):
+    """Insert a note for a given character."""
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+            INSERT INTO notes (character, topic, content)
+            VALUES (?, ?, ?)
+        """,
+        (character, topic, content),
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_notes(character: str, topic: str | None = None):
+    """Retrieve notes for a character, optionally filtered by topic."""
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    if topic is None:
+        cursor.execute(
+            """
+                SELECT id, character, topic, content, created_at
+                FROM notes
+                WHERE character = ?
+                ORDER BY created_at DESC
+            """,
+            (character,),
+        )
+    else:
+        cursor.execute(
+            """
+                SELECT id, character, topic, content, created_at
+                FROM notes
+                WHERE character = ? AND topic = ?
+                ORDER BY created_at DESC
+            """,
+            (character, topic),
+        )
+
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
