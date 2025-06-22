@@ -74,3 +74,12 @@ This section walks through a fresh setup so you can try the project locally.
 
 These steps should give you a working copy of Android MS11 and confidence
 that the provided modules function as expected.
+
+## Legacy Quest Manager CLI
+Use the legacy quest tool to explore old mission data.
+
+```bash
+python -m src.data.legacy_quest_manager --list
+python -m src.data.legacy_quest_manager --search Corellia
+python -m src.data.legacy_quest_manager --npc "Rebel Trainer"
+```
