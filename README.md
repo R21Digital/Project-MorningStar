@@ -86,10 +86,12 @@ This section walks through a fresh setup so you can try the project locally.
 
 5. **Run the tests**
 
-   The repository contains a small test suite powered by `pytest`.
-   Execute it with:
+   The repository contains a small test suite powered by `pytest`. The
+   tests rely on packages such as `langchain` and `transformers`, so
+   make sure all dependencies are installed first:
 
    ```bash
+   pip install -r requirements.txt
    pytest
    ```
 
