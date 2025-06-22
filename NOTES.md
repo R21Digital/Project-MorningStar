@@ -1,4 +1,4 @@
-# Project MorningStar Notes
+# Android MS11 Notes
 
 ## Current Features
 - **XP tracking**: `xp_manager.py`, `xp_session.py`, and `xp_tracker.py` allow recording actions and saving session logs.

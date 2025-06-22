@@ -1,4 +1,4 @@
-"""Manage log output for MorningStar."""
+"""Manage log output for Android MS11."""
 
 def start_log():
     """Placeholder to initialize logging."""

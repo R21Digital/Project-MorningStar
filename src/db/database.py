@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 # Define database path
-DB_FILENAME = "morningstar.db"
+DB_FILENAME = "android_ms11.db"
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "..", DB_FILENAME)
 
 def get_connection():

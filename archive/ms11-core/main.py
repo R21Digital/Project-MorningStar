@@ -1,1 +1,1 @@
-# Entry point for MorningStar (MS11-Core)
+# Entry point for Android MS11 (legacy core)

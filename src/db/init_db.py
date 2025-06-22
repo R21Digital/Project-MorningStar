@@ -1,7 +1,7 @@
 import sqlite3
 
 def initialize_database():
-    conn = sqlite3.connect("morningstar.db")
+    conn = sqlite3.connect("android_ms11.db")
     cursor = conn.cursor()
 
     # Drop and recreate progress table
