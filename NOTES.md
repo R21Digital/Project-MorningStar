@@ -6,9 +6,9 @@
 - **Quest database**: `src/db` holds SQLite schema, quest insertion helpers, and utilities for viewing quests.
 
 ## Modules Needing Work
-- `quest_selector.py` – not yet implemented.
-- `quest_executor.py` – not yet implemented.
-- `utils/source_verifier.py` – placeholder for validating external quest sources.
+- `quest_selector.py` – basic selection helpers implemented.
+- `quest_executor.py` – stub execution logic added.
+- `utils/source_verifier.py` – validates and sanitizes external quest data.
 
 ## Planned Improvements
 - Implement quest selection logic using user preferences and DB rankings.
