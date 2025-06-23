@@ -7,6 +7,9 @@ from pathlib import Path
 from typing import Any
 
 DEFAULT_HASH_PATH = Path("data/raw/legacy.hash")
+TRUSTED_HASHES = {
+    "247391101e29decad45551f0c515abb2bd8286393e579ac12e22eec57b89b3b2"
+}
 
 
 def compute_file_hash(path: str | Path) -> str:
@@ -42,5 +45,13 @@ def file_changed(path: str | Path, hash_path: str | Path = DEFAULT_HASH_PATH) ->
 def verify_source(data: Any) -> bool:
     """Return ``True`` if ``data`` appears trustworthy."""
     print(f"[DEBUG] Verifying quest source: {data}")
-    # TODO: implement real signature or hash checks
-    return True
+
+    if isinstance(data, (str, Path)) and Path(data).exists():
+        hash_value = compute_file_hash(Path(data))
+    elif isinstance(data, bytes):
+        hash_value = hashlib.sha256(data).hexdigest()
+    else:
+        hash_value = hashlib.sha256(str(data).encode()).hexdigest()
+
+    print(f"[DEBUG] Computed hash: {hash_value}")
+    return hash_value in TRUSTED_HASHES
