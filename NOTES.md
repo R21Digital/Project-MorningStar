@@ -4,11 +4,11 @@
 - **XP tracking**: `xp_manager.py`, `xp_session.py`, and `xp_tracker.py` allow recording actions and saving session logs.
 - **Mode runner**: `main.py` and `runner.py` provide CLI entry points to launch different automation modes.
 - **Quest database**: `src/db` holds SQLite schema, quest insertion helpers, and utilities for viewing quests.
+- **Source verifier**: `src/source_verifier.py` validates quest data and detects file changes.
 
 ## Modules Needing Work
 - `quest_selector.py` – now includes `select_quest()` stub returning `None`; needs real selection logic.
 - `quest_executor.py` – provides `execute_quest()` placeholder; expand with automation steps.
-- `src/source_verifier.py` – provides helpers for verifying quest data and detecting file changes.
 
 ## Planned Improvements
 - Implement quest selection logic using user preferences and DB rankings.

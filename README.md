@@ -32,7 +32,7 @@ Three lightweight helpers provide a basic quest pipeline:
 
 - `quest_selector.select_quest` picks the next mission for a character.
 - `quest_executor.execute_quest` iterates through the quest steps.
-- `source_verifier.verify_source` checks that the data you loaded is trustworthy.
+- `src.source_verifier.verify_source` checks that the data you loaded is trustworthy.
 
 ```python
 from src.quest_selector import select_quest
