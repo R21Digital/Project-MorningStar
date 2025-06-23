@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 from bs4 import BeautifulSoup
 
-from src.source_verifier import file_changed
+from utils.source_verifier import file_changed
 
 RAW_HTML_PATH = "data/raw/legacy.html"
 OUTPUT_JSON_PATH = "data/processed/legacy_quests.json"
