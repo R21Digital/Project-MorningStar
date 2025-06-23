@@ -3,3 +3,4 @@ transformers==4.36.2
 pytest==7.4.0
 beautifulsoup4==4.12.3
 playwright==1.42.0
+requests>=2.0
