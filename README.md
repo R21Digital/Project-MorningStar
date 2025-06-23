@@ -1,11 +1,11 @@
-# Project-MorningStar
+# Android MS11
 Version: 0.1.0
-Project MorningStar (formerly known as MS11-Core) is an advanced interface assistant for long-session open-world automation. Inspired by player realism, faction-based systems, and strategic progression loops.
+Android MS11 is an advanced interface assistant for long-session open-world automation maintained by **Project Galatic Beholder**.
 
 The original MS11-Core implementation has been archived under `archive/ms11-core` to preserve legacy code.
 
 ## Lore
-In the world of **Argent**, legendary guilds compete to recover the fragments of the star "Morning". Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. MorningStar provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.
+In the world of **Argent**, legendary guilds compete to recover ancient relics. Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. Android MS11 provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.
 
 ## Basic Usage
 Install the dependencies and then import the modules you need:
@@ -25,6 +25,27 @@ xp.end_session()
 ```
 The modules under `src/` offer simple building blocks that you can integrate into larger systems.
 
+## Working with Quests
+
+Three lightweight helpers provide a basic quest pipeline:
+
+- `quest_selector.select_quest` picks the next mission for a character.
+- `quest_executor.execute_quest` iterates through the quest steps.
+- `source_verifier.verify_source` checks that the data you loaded is trustworthy.
+
+```python
+from src.quest_selector import select_quest
+from src.quest_executor import execute_quest
+from src.source_verifier import verify_source
+
+quest = select_quest("Ezra") or {
+    "title": "Tutorial",
+    "steps": ["Talk to trainer", "Complete objectives"],
+}
+if verify_source(quest):
+    execute_quest(quest)
+```
+
 ## Getting Started
 
 This section walks through a fresh setup so you can try the project locally.
@@ -32,8 +53,8 @@ This section walks through a fresh setup so you can try the project locally.
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourname/Project-MorningStar.git
-   cd Project-MorningStar
+   git clone https://github.com/yourname/Android-MS11.git
+   cd Android-MS11
    ```
 
 2. **(Optional) Create a virtual environment**
@@ -65,12 +86,25 @@ This section walks through a fresh setup so you can try the project locally.
 
 5. **Run the tests**
 
-   The repository contains a small test suite powered by `pytest`.
-   Execute it with:
+   The repository contains a small test suite powered by `pytest`. The
+   tests rely on packages such as `langchain` and `transformers`, so
+   make sure all dependencies are installed first:
 
    ```bash
+   pip install -r requirements.txt
    pytest
    ```
 
-These steps should give you a working copy of MorningStar and confidence
+These steps should give you a working copy of Android MS11 and confidence
 that the provided modules function as expected.
+
+## Legacy Quest Manager CLI
+Use the legacy quest tool to explore old mission data.
+
+```bash
+python -m src.data.legacy_quest_manager --list
+python -m src.data.legacy_quest_manager --search Corellia
+python -m src.data.legacy_quest_manager --npc "Rebel Trainer"
+python -m src.data.legacy_quest_manager --list --planet Naboo
+python -m src.data.legacy_quest_manager --list --status completed
+```

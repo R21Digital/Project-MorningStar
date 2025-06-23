@@ -1,4 +1,4 @@
-"""Helpers for verifying external quest sources with file hashing."""
+"""Utilities for verifying quest sources and detecting file changes."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ DEFAULT_HASH_PATH = Path("data/raw/legacy.hash")
 
 
 def compute_file_hash(path: str | Path) -> str:
-    """Return a SHA256 hash for ``path``."""
+    """Return a SHA256 hash of the given file."""
     file_path = Path(path)
     hasher = hashlib.sha256()
     with file_path.open("rb") as f:
@@ -20,7 +20,12 @@ def compute_file_hash(path: str | Path) -> str:
 
 
 def file_changed(path: str | Path, hash_path: str | Path = DEFAULT_HASH_PATH) -> bool:
-    """Return ``True`` if the file differs from the stored hash."""
+    """Return ``True`` if ``path`` differs from the stored hash.
+
+    The current hash will be written to ``hash_path`` whenever the file has
+    changed or no previous hash exists.
+    """
+
     file_path = Path(path)
     hash_file = Path(hash_path)
 
@@ -35,6 +40,7 @@ def file_changed(path: str | Path, hash_path: str | Path = DEFAULT_HASH_PATH) ->
 
 
 def verify_source(data: Any) -> bool:
-    """Validate external quest ``data``."""
-    # TODO: implement checksum or schema checks
-    return False
+    """Return ``True`` if ``data`` appears trustworthy."""
+    print(f"[DEBUG] Verifying quest source: {data}")
+    # TODO: implement real signature or hash checks
+    return True

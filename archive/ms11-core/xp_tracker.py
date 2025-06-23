@@ -1,5 +1,5 @@
 """
-XP Tracker module for MorningStar MS11.
+XP Tracker module for Android MS11.
 Combines OCR and heuristic estimation to track character progression.
 """
 

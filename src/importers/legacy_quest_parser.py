@@ -1,11 +1,19 @@
 import os
 import json
+from pathlib import Path
 from bs4 import BeautifulSoup
+
+from src.source_verifier import file_changed
 
 RAW_HTML_PATH = "data/raw/legacy.html"
 OUTPUT_JSON_PATH = "data/processed/legacy_quests.json"
+HASH_PATH = Path(RAW_HTML_PATH).with_suffix(".hash")
 
 def parse_legacy_quest_html():
+    if not file_changed(RAW_HTML_PATH, HASH_PATH):
+        print("ℹ️ legacy.html unchanged, skipping parse")
+        return
+
     with open(RAW_HTML_PATH, "r", encoding="utf-8") as f:
         html = f.read()
 

@@ -13,8 +13,8 @@ def view_all_quests():
     else:
         print(f"✅ Retrieved {len(rows)} quest(s):\n")
         for row in rows:
-            quest_id, character, title, steps, source_type, validated, fallback_rank, chain_id, step_number = row
-            print(f"🧾 Quest ID: {quest_id}")
+            id, character, title, steps, source_type, validated, fallback_rank, chain_id, step_number = row
+            print(f"🧾 Quest ID: {id}")
             print(f"👤 Character: {character}")
             print(f"📌 Title: {title}")
             print(f"📜 Steps: {json.loads(steps)}")

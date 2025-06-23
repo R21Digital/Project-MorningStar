@@ -1,11 +1,20 @@
-from src.db.quest_utils import get_next_quest_in_chain
+import os
+import sys
+from unittest.mock import MagicMock
 
-chain_id = 1
-current_step = 1  # adjust based on your test data
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-next_quest = get_next_quest_in_chain(chain_id, current_step)
+from src.db import quest_utils
 
-if next_quest:
-    print("✅ Next quest found:", next_quest)
-else:
-    print("❌ No next quest found.")
+
+def test_get_next_quest_in_chain(monkeypatch):
+    fake_cursor = MagicMock()
+    fake_cursor.fetchone.return_value = {"id": 2}
+    fake_conn = MagicMock()
+    fake_conn.cursor.return_value = fake_cursor
+    monkeypatch.setattr(quest_utils, 'get_connection', lambda: fake_conn)
+
+    result = quest_utils.get_next_quest_in_chain(1, 1)
+    assert result == {"id": 2}
+    fake_cursor.execute.assert_called()
+    fake_conn.close.assert_called_once()
