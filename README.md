@@ -8,7 +8,8 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 In the world of **Argent**, legendary guilds compete to recover ancient relics. Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. Android MS11 provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.
 
 ## Basic Usage
-Install the dependencies and then import the modules you need:
+Install the dependencies and then import the modules you need.
+The `requirements.txt` file now includes `requests>=2.0`:
 ```bash
 pip install -r requirements.txt
 ```
@@ -69,6 +70,7 @@ This section walks through a fresh setup so you can try the project locally.
    ```bash
    pip install -r requirements.txt
    ```
+   The requirements file includes `requests>=2.0`.
 
 4. **Run the example application**
 
@@ -93,6 +95,7 @@ This section walks through a fresh setup so you can try the project locally.
    ```bash
    pip install -r requirements.txt
    pytest
+   # includes requests>=2.0
    ```
 
 These steps should give you a working copy of Android MS11 and confidence
