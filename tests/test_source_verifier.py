@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.source_verifier import file_changed
+from src.source_verifier import file_changed, verify_source
 
 
 def test_file_changed_detects_modifications(tmp_path):
@@ -20,3 +20,9 @@ def test_file_changed_detects_modifications(tmp_path):
     # Modify file and ensure change is detected
     html_path.write_text("second")
     assert file_changed(html_path, hash_path) is True
+
+
+def test_verify_source_basic_validation():
+    assert verify_source({"title": "Quest", "steps": []}) is True
+    assert verify_source({"steps": []}) is False
+    assert verify_source("oops") is False

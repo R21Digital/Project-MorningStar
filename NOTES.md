@@ -8,7 +8,7 @@
 ## Modules Needing Work
 - `quest_selector.py` – now includes `select_quest()` stub returning `None`; needs real selection logic.
 - `quest_executor.py` – provides `execute_quest()` placeholder; expand with automation steps.
-- `utils/source_verifier.py` – contains `verify_source()` stub; implement actual validation of external quest data.
+- `src/source_verifier.py` – provides helpers for verifying quest data and detecting file changes.
 
 ## Planned Improvements
 - Implement quest selection logic using user preferences and DB rankings.

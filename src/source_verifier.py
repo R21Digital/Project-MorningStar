@@ -40,7 +40,23 @@ def file_changed(path: str | Path, hash_path: str | Path = DEFAULT_HASH_PATH) ->
 
 
 def verify_source(data: Any) -> bool:
-    """Return ``True`` if ``data`` appears trustworthy."""
+    """Basic validation for quest data structures.
+
+    The function currently checks that ``data`` is a mapping containing a
+    ``"title"`` string and a ``"steps"`` list. More sophisticated validation can
+    be plugged in later.
+    """
+
     print(f"[DEBUG] Verifying quest source: {data}")
-    # TODO: implement real signature or hash checks
+
+    if not isinstance(data, dict):
+        return False
+
+    if not isinstance(data.get("title"), str):
+        return False
+
+    steps = data.get("steps")
+    if not isinstance(steps, list):
+        return False
+
     return True
