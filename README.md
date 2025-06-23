@@ -32,7 +32,8 @@ Three lightweight helpers provide a basic quest pipeline:
 
 - `quest_selector.select_quest` picks the next mission for a character.
 - `quest_executor.execute_quest` iterates through the quest steps.
-- `source_verifier.verify_source` checks that the data you loaded is trustworthy.
+- `source_verifier.verify_source` hashes quest data and validates it against
+  values stored in `TRUSTED_HASHES` to confirm the source is trustworthy.
 
 ```python
 from src.quest_selector import select_quest
@@ -45,6 +46,15 @@ quest = select_quest("Ezra") or {
 }
 if verify_source(quest):
     execute_quest(quest)
+```
+
+You can extend the trust list by precomputing hashes and storing them in
+`TRUSTED_HASHES`:
+
+```python
+from src.source_verifier import compute_file_hash, TRUSTED_HASHES
+
+TRUSTED_HASHES["tutorial.json"] = compute_file_hash("data/tutorial.json")
 ```
 
 ## Getting Started
