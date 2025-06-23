@@ -32,12 +32,12 @@ Three lightweight helpers provide a basic quest pipeline:
 
 - `quest_selector.select_quest` picks the next mission for a character.
 - `quest_executor.execute_quest` iterates through the quest steps.
-- `source_verifier.verify_source` checks that the data you loaded is trustworthy.
+- `utils.source_verifier.verify_source` checks that the data you loaded is trustworthy.
 
 ```python
 from src.quest_selector import select_quest
 from src.quest_executor import execute_quest
-from src.source_verifier import verify_source
+from utils.source_verifier import verify_source
 
 quest = select_quest("Ezra") or {
     "title": "Tutorial",
