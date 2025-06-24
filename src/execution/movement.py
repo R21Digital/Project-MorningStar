@@ -1,21 +1,12 @@
 def execute_movement(step: dict) -> None:
-    """Handle movement steps.
+    """Simulate a movement step by logging the destination.
 
-    This stub simulates issuing a movement command based on quest data.
+    The ``step`` dictionary should contain a ``to`` mapping with ``planet`` and
+    ``city`` keys. Only a simple print statement is used to emulate movement.
     """
 
-    coords = step.get("coords")
-    region = step.get("region", "Unknown")
+    destination = step.get("to", {})
+    planet = destination.get("planet", "Unknown planet")
+    city = destination.get("city", "Unknown city")
 
-    # Basic log of destination
-    print(f"\U0001F4CD [Move] Navigating to {coords} in {region}")
-
-    # Construct a fake navigation command for demonstration purposes
-    if coords:
-        move_cmd = f"/navigate {coords[0]} {coords[1]} --zone={region}"
-    else:
-        move_cmd = f"/navigate --zone={region}"
-
-    print(f"\U0001F9ED Executing: {move_cmd}")
-
-    # TODO: Plug into your movement handler (e.g. send keyboard input or use bot nav module)
+    print(f"Moving to {planet}, {city}")
