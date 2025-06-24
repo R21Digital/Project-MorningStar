@@ -9,7 +9,7 @@ In the world of **Argent**, legendary guilds compete to recover ancient relics. 
 
 ## Basic Usage
 Install the dependencies and then import the modules you need.
-The `requirements.txt` file now includes `requests>=2.0`:
+The `requirements.txt` file now includes `requests>=2.0` and `PyYAML`:
 ```bash
 pip install -r requirements.txt
 ```
@@ -93,7 +93,7 @@ This section walks through a fresh setup so you can try the project locally.
    ```bash
    pip install -r requirements.txt
    ```
-   The requirements file includes `requests>=2.0`.
+    The requirements file includes `requests>=2.0` and `PyYAML`.
 
 4. **Run the example application**
 
@@ -118,7 +118,7 @@ This section walks through a fresh setup so you can try the project locally.
    ```bash
    pip install -r requirements.txt
    pytest
-   # includes requests>=2.0
+    # includes requests>=2.0 and PyYAML
    ```
 
 These steps should give you a working copy of Android MS11 and confidence

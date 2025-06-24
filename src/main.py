@@ -1,6 +1,7 @@
 from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
 from src.movement.movement_profiles import patrol_route
+from src.training.trainer_visit import visit_trainer
 
 
 def main():
@@ -16,6 +17,9 @@ def main():
     # Movement Test
     agent = MovementAgent(session=session)
     patrol_route(agent, "Anchorhead-Loop")
+
+    # Try visiting artisan trainer
+    visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
 
     # End session and save log
     session.end_session()
