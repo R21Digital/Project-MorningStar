@@ -1,24 +1,18 @@
-import argparse
-
-from src.vision.states import register_state
-from src.modes.mode_runner import run_mode
+from core.session_manager import SessionManager
 
 
-def setup_known_states() -> None:
-    register_state("continue_prompt", ["press enter to continue"])
-    register_state(
-        "npc_dialogue",
-        ["what can i do", "greetings", "how can i help"],
-    )
+def main():
+    # Initialize new session in your desired mode
+    session = SessionManager(mode="medic")  # Example mode: 'medic', 'crafting', 'questing'
 
+    # Simulated: retrieve credits before and after
+    session.set_start_credits(2000)
+    session.add_action("Entered Theed Medical Center")
+    session.add_action("Began healing nearby players")
+    session.set_end_credits(2300)
 
-def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", required=True, help="Mode to run (questing, medic, etc.)")
-    args = parser.parse_args()
-
-    setup_known_states()
-    run_mode(args.mode)
+    # End session and save log
+    session.end_session()
 
 
 if __name__ == "__main__":
