@@ -1,5 +1,6 @@
 from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
+from src.movement.movement_profiles import travel_to_city
 
 
 def main():
@@ -13,10 +14,8 @@ def main():
     session.set_end_credits(2300)
 
     # Movement Test
-    agent = MovementAgent(
-        session=session, current_location="Theed", destination="Mos Eisley"
-    )
-    agent.move_to()
+    agent = MovementAgent(session=session)
+    travel_to_city(agent, "Anchorhead")
 
     # End session and save log
     session.end_session()
