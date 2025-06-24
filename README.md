@@ -1,6 +1,6 @@
 # Android MS11
 Version: 0.1.0
-Android MS11 is an advanced interface assistant for long-session open-world automation maintained by **Project Galatic Beholder**.
+Android MS11 is an advanced interface assistant for long-session open-world automation maintained by **Project Galactic Beholder**.
 
 The original MS11-Core implementation has been archived under `archive/ms11-core` to preserve legacy code.
 
