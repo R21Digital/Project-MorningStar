@@ -4,7 +4,8 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.automation.training import train_with_npc
-from src.training.trainer_data_loader import get_trainer_coords
+from pathlib import Path
+from src.training.trainer_data_loader import get_trainer_coords, load_trainer_data
 from src.training.trainer_visit import visit_trainer
 
 
@@ -49,3 +50,10 @@ def test_visit_trainer_missing(monkeypatch, capsys):
     visit_trainer(agent, "medic", planet="naboo", city="theed")
     out = capsys.readouterr().out
     assert "No static data" in out
+
+
+def test_load_trainer_data_missing_file(monkeypatch):
+    missing = Path("nonexistent_file.yaml")
+    monkeypatch.setattr("src.training.trainer_data_loader.TRAINER_FILE", missing)
+    data = load_trainer_data()
+    assert data == {}
