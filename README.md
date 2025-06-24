@@ -161,6 +161,18 @@ You can further control the selection with these options:
 
 Every run appends the chosen quest to `logs/quest_selections.log`.
 
+## Trainer Lookup CLI
+Locate the in-game coordinates for a profession trainer.
+
+```bash
+python scripts/cli/find_trainer.py artisan --planet tatooine --city mos_eisley
+```
+
+The `profession` argument is required. `--planet` and `--city` default to
+`tatooine` and `mos_eisley`. When a matching entry is found in
+`data/trainers.yaml`, the trainer's name and coordinates are printed; otherwise
+a helpful message is shown.
+
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
