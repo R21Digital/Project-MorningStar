@@ -56,6 +56,10 @@ updating ``current_state`` to the matched key. Modules under
 the state module when you want to react to global game conditions and the
 execution module when writing step-by-step automation.
 
+Both classes share the same basic API. The version in `src/state` remembers
+the last matched phrase through its ``current_state`` attribute, while the one
+in `src/execution` omits this attribute to remain a minimal dependency.
+
 ```python
 from src.state.state_manager import StateManager
 
