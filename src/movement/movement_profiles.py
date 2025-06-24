@@ -2,6 +2,8 @@
 
 from .agent_mover import MovementAgent
 from .waypoints import get_waypoint_route
+import time
+import random
 
 
 def travel_to_city(agent: MovementAgent, destination: str) -> None:
@@ -20,6 +22,13 @@ def patrol_route(agent: MovementAgent, route_name: str) -> None:
     for stop in route:
         agent.destination = stop
         agent.move_to()
+
+        # Simulate human-like pause between moves
+        wait_time = random.uniform(5.0, 15.0)
+        agent.session.add_action(
+            f"Waiting {wait_time:.1f} seconds before next move."
+        )
+        time.sleep(wait_time)
 
 
 def idle(agent: MovementAgent) -> None:
