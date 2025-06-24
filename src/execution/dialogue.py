@@ -1,5 +1,6 @@
 import random
 import time
+from src.automation.training import train_with_npc
 
 
 def execute_dialogue(step: dict) -> None:
@@ -16,6 +17,11 @@ def execute_dialogue(step: dict) -> None:
     selected_index = step.get("selected_index")
 
     print(f"\U0001F5E8\uFE0F [Dialogue] Interacting with {npc}")
+
+    if step.get("npc") == "Trainer":
+        train_with_npc(step)
+    else:
+        print(f"[DIALOGUE] Talking to {step.get('npc', 'Unknown')}")
 
     if options:
         print("\U0001F4AC Dialogue Options:")
