@@ -53,11 +53,26 @@ def test_visit_trainer_found(monkeypatch, capsys):
 
 
 def test_visit_trainer_missing(monkeypatch, capsys):
+    from src.training import trainer_visit
+
     agent = DummyAgent()
+    walk_calls = []
+
     monkeypatch.setattr("src.training.trainer_visit.travel_to_city", lambda a, d: None)
+    monkeypatch.setattr(
+        "src.training.trainer_visit.walk_to_coords",
+        lambda a, x, y: walk_calls.append((x, y)),
+    )
+
+    trainer_visit.visited_npcs.clear()
+
     visit_trainer(agent, "medic", planet="naboo", city="theed")
     out = capsys.readouterr().out
     assert "Trainer not found" in out
+    assert "/find medic trainer" in out
+    assert (0, 0) in walk_calls
+    assert (10, 10) in walk_calls
+    assert "medic trainer" in trainer_visit.visited_npcs
 
 
 def test_load_trainer_data_missing_file(monkeypatch):
