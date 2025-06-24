@@ -111,3 +111,19 @@ python -m src.data.legacy_quest_manager --npc "Rebel Trainer"
 python -m src.data.legacy_quest_manager --list --planet Naboo
 python -m src.data.legacy_quest_manager --list --status completed
 ```
+
+## Quest Selection CLI
+Quickly pick the next quest for a character by running:
+
+```bash
+python scripts/cli/execute_quest.py --character "Ezra"
+```
+
+You can further control the selection with these options:
+
+- `--planet PLANET` &ndash; filter quests by planet.
+- `--type TYPE` &ndash; filter by quest type.
+- `--random` &ndash; choose randomly among matches.
+- `--debug` &ndash; show the full quest data instead of a summary.
+
+Every run appends the chosen quest to `logs/quest_selections.log`.
