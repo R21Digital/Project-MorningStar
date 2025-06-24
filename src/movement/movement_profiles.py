@@ -34,3 +34,15 @@ def patrol_route(agent: MovementAgent, route_name: str) -> None:
 def idle(agent: MovementAgent) -> None:
     """Perform no movement."""
     agent.session.add_action("Staying idle, no movement performed.")
+
+
+def walk_to_coords(agent: MovementAgent, x: int, y: int) -> None:
+    """Walk the agent to the specified ``x`` and ``y`` coordinates."""
+
+    print(f"[Movement] Walking to coordinates: ({x}, {y})...")
+
+    # TODO: Implement screen recognition & WASD walking here
+    import time
+
+    time.sleep(2)
+    print("[Movement] Arrived at destination.")

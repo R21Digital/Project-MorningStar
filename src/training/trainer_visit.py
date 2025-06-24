@@ -1,6 +1,5 @@
 from .trainer_data_loader import get_trainer_coords
-from src.movement.movement_profiles import travel_to_city
-from src.movement.coordinate_movement import move_to_coordinates
+from src.movement.movement_profiles import travel_to_city, walk_to_coords
 
 
 def visit_trainer(agent, profession, planet="tatooine", city="mos_eisley"):
@@ -8,9 +7,11 @@ def visit_trainer(agent, profession, planet="tatooine", city="mos_eisley"):
 
     if trainer_info:
         name, x, y = trainer_info
-        print(f"[Trainer] Found static trainer data: {name} at ({x}, {y})")
+        print(
+            f"[Trainer] Found trainer: {name} at ({x}, {y}) in {city.title()}, {planet.title()}"
+        )
         travel_to_city(agent, city)
-        move_to_coordinates(agent, x, y)
+        walk_to_coords(agent, x, y)
     else:
-        print("[Trainer] No static data. Will try /find or scan logic next.")
-        # Stub: implement /find fallback here
+        print(f"[Trainer] Trainer not found for {profession} in {city}, {planet}.")
+        print("[Trainer] Attempting /find or fallback logic (not yet implemented)")

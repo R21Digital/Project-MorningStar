@@ -42,7 +42,7 @@ def test_visit_trainer_found(monkeypatch, capsys):
 
     monkeypatch.setattr("src.training.trainer_visit.travel_to_city", fake_travel)
     monkeypatch.setattr(
-        "src.training.trainer_visit.move_to_coordinates",
+        "src.training.trainer_visit.walk_to_coords",
         fake_coords,
     )
     visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
@@ -57,7 +57,7 @@ def test_visit_trainer_missing(monkeypatch, capsys):
     monkeypatch.setattr("src.training.trainer_visit.travel_to_city", lambda a, d: None)
     visit_trainer(agent, "medic", planet="naboo", city="theed")
     out = capsys.readouterr().out
-    assert "No static data" in out
+    assert "Trainer not found" in out
 
 
 def test_load_trainer_data_missing_file(monkeypatch):
