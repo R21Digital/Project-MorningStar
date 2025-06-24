@@ -49,7 +49,7 @@ def run_mode(mode: str) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Android MS11 Core Runner by Project Galatic Beholder")
+    parser = argparse.ArgumentParser(description="Android MS11 Core Runner by Project Galactic Beholder")
     parser.add_argument("--mode", type=str, default="quest", help="Choose a mode: quest, grind, heal, debug")
     parser.add_argument("--version", action="store_true", help="Show application version and exit")
     args = parser.parse_args()
