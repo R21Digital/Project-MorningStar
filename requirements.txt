@@ -8,3 +8,4 @@ requests>=2.0
 pytesseract
 opencv-python
 pyautogui
+Pillow
