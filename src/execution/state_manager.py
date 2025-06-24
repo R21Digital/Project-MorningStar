@@ -1,4 +1,10 @@
-"""Simple state monitoring via OCR."""
+"""Simple state monitoring via OCR.
+
+This lightweight manager is used by modules under :mod:`src.execution`.
+It simply triggers callbacks when keywords appear and does **not** keep
+track of the last matched phrase.  For a higher level manager that also
+stores the current state, see :class:`src.state.StateManager`.
+"""
 
 from __future__ import annotations
 

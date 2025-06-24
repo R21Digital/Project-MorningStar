@@ -1,4 +1,9 @@
-"""State manager that monitors on-screen text."""
+"""State manager that monitors on-screen text.
+
+This version mirrors :class:`src.execution.StateManager` but keeps track of
+the most recent matched phrase in :pyattr:`current_state`.  Use it when you
+need to react to global game conditions rather than one-off execution steps.
+"""
 
 from __future__ import annotations
 
