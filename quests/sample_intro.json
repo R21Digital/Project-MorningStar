@@ -1,0 +1,4 @@
+[
+  { "type": "quest", "id": "intro_mission", "action": "start" },
+  { "type": "move", "to": { "planet": "Tatooine", "city": "Mos Eisley" } }
+]
