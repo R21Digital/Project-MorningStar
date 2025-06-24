@@ -3,6 +3,8 @@ import sys
 import time
 from types import ModuleType
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 # Provide fake OCR module before importing StateManager
 fake_ocr = ModuleType("src.vision.ocr")
 texts = iter(["ignore", "quest accepted"])
@@ -12,8 +14,6 @@ fake_ocr.screen_text = lambda *a, **k: next(texts)
 sys.modules["src.vision.ocr"] = fake_ocr
 if "src.vision" in sys.modules:
     sys.modules["src.vision"].ocr = fake_ocr
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.execution.state_manager import StateManager
 
