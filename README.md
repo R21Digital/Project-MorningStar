@@ -150,3 +150,11 @@ You can further control the selection with these options:
 - `--debug` &ndash; show the full quest data instead of a summary.
 
 Every run appends the chosen quest to `logs/quest_selections.log`.
+
+## Log Files
+The application writes several logs under the `logs/` directory:
+
+- `logs/app.log` &ndash; general runtime messages produced by `start_log()`.
+- `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
+- `logs/step_journal.log` &ndash; success/failure records from step validation.
+- `logs/session_*.log` &ndash; detailed step traces for each session.
