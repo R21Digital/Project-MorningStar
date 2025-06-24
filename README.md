@@ -47,6 +47,22 @@ if verify_source(quest):
     execute_quest(quest)
 ```
 
+## Monitoring On-Screen Events
+
+`src/execution/state_manager.py` contains `StateManager`, a helper that watches
+OCR text and triggers callbacks when phrases appear. Register your conditions in
+a dictionary and run the monitor to react to game state.
+
+```python
+from src.execution.state_manager import StateManager
+
+def on_accept():
+    print("Quest accepted!")
+
+manager = StateManager({"quest accepted": on_accept}, interval=0.5)
+manager.run(duration=10)
+```
+
 ## Getting Started
 
 This section walks through a fresh setup so you can try the project locally.
