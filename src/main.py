@@ -1,6 +1,6 @@
 from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
-from src.movement.movement_profiles import travel_to_city
+from src.movement.movement_profiles import patrol_route
 
 
 def main():
@@ -15,7 +15,7 @@ def main():
 
     # Movement Test
     agent = MovementAgent(session=session)
-    travel_to_city(agent, "Anchorhead")
+    patrol_route(agent, "Anchorhead-Loop")
 
     # End session and save log
     session.end_session()
