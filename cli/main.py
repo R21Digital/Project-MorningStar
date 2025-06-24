@@ -1,5 +1,6 @@
 import argparse
 from src.quest_selector import get_random_quest
+from src.quest_executor import execute_quest
 
 
 def main(argv=None):
@@ -19,6 +20,7 @@ def main(argv=None):
         if isinstance(description, list):
             description = description[0] if description else ""
         print(f"\n\U0001F9ED Starting Quest:\n{name} - {description}")
+        execute_quest(quest)
     else:
         print("\u26A0\ufe0f No quests found for the selected mode.")
 
