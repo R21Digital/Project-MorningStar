@@ -1,18 +1,20 @@
 import re
-from typing import Callable, List, Dict, Tuple
+from typing import List, Dict
 
-# A global dictionary to hold state handlers
-screen_states: Dict[str, Tuple[List[str], Callable]] = {}
+from src.automation.handlers import STATE_HANDLERS
+
+# A global dictionary to hold patterns for each screen state
+state_patterns: Dict[str, List[str]] = {}
 
 
-def register_state(state_name: str, match_phrases: List[str], handler: Callable):
-    """Register a screen state with match phrases and a handler."""
-    screen_states[state_name] = (match_phrases, handler)
+def register_state(state_name: str, match_phrases: List[str]):
+    """Register a screen state with match phrases."""
+    state_patterns[state_name] = match_phrases
 
 
 def detect_state(screen_text: str) -> str:
     """Check if ``screen_text`` matches any known state. Return state name if matched."""
-    for state_name, (phrases, _) in screen_states.items():
+    for state_name, phrases in state_patterns.items():
         if all(re.search(phrase, screen_text, re.IGNORECASE) for phrase in phrases):
             return state_name
     return ""
@@ -20,6 +22,6 @@ def detect_state(screen_text: str) -> str:
 
 def handle_state(state_name: str):
     """Call the handler for the matched state."""
-    if state_name in screen_states:
-        _, handler = screen_states[state_name]
+    handler = STATE_HANDLERS.get(state_name)
+    if handler:
         handler()
