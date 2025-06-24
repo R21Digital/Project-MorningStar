@@ -15,7 +15,7 @@ sys.modules["src.vision.ocr"] = fake_ocr
 if "src.vision" in sys.modules:
     sys.modules["src.vision"].ocr = fake_ocr
 
-from src.execution.state_manager import StateManager
+from src.state.state_manager import StateManager
 
 
 def test_state_manager_callbacks(monkeypatch):
@@ -32,3 +32,4 @@ def test_state_manager_callbacks(monkeypatch):
     manager.run(duration=1)
 
     assert triggered == ["quest"]
+    assert manager.current_state == "quest"
