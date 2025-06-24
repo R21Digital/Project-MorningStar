@@ -1,0 +1,18 @@
+artisan:
+  corellia:
+    coronet:
+      name: "Artisan Trainer"
+      x: -123
+      y: 44
+  tatooine:
+    mos_eisley:
+      name: "Artisan Trainer"
+      x: 3432
+      y: -4795
+
+marksman:
+  corellia:
+    coronet:
+      name: "Marksman Trainer"
+      x: -150
+      y: 60

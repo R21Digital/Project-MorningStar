@@ -3,13 +3,50 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 import sqlite3
 from typing import Optional, Any, Dict, List
 
+from utils.db import get_db_connection
+
 from src.data.legacy_quest_manager import LegacyQuestManager
 from src.db.queries import select_best_quest
 from .db.database import get_connection
+
+
+# Map quest modes to JSON data paths. Modes not in this map
+# are expected to be stored in MongoDB.
+QUEST_DATA_MAP = {
+    "legacy": os.path.join("data", "legacy_quests.json"),
+    "ground": os.path.join("data", "commands", "ground.json"),
+    "mustafar": os.path.join("data", "mustafar", "mustafar_quests.json"),
+    "themeparks": os.path.join("data", "themeparks", "themeparks.json"),
+}
+
+
+def load_quests_from_file(file_path: str) -> list:
+    """Load quest data from ``file_path`` if it exists."""
+    if not os.path.exists(file_path):
+        return []
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_quests_from_db(mode: str) -> list:
+    """Retrieve quest documents from MongoDB for ``mode``."""
+    db = get_db_connection()
+    return list(db.quests.find({"type": mode}))
+
+
+def get_random_quest(mode: str):
+    """Return a random quest dict for ``mode``."""
+    if mode in QUEST_DATA_MAP:
+        quests = load_quests_from_file(QUEST_DATA_MAP[mode])
+    else:
+        quests = load_quests_from_db(mode)
+
+    return random.choice(quests) if quests else None
 
 
 def _filter_quests(quests: List[dict], planet: str | None, quest_type: str | None) -> List[dict]:

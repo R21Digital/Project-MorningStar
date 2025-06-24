@@ -5,6 +5,7 @@ from importlib import reload
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src import runner
+from src.runner.step_runner import run_step_list
 
 
 def test_version_option_prints_version(capsys, monkeypatch):
@@ -50,3 +51,10 @@ def test_run_mode_dispatches(monkeypatch):
     monkeypatch.setattr(runner, "MODE_DISPATCH", {"quest": lambda xp: xp.record_action("quest_complete")})
     runner.run_mode("quest")
     assert calls == ["quest_complete", "end"]
+
+
+def test_run_step_list(monkeypatch):
+    monkeypatch.setattr("builtins.open", lambda f, _: __import__("io").StringIO(
+        '[{"type":"quest","id":"intro_mission","action":"start"}]'
+    ))
+    run_step_list("fake_path.json")

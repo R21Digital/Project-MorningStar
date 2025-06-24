@@ -1,6 +1,6 @@
 # Android MS11
 Version: 0.1.0
-Android MS11 is an advanced interface assistant for long-session open-world automation maintained by **Project Galatic Beholder**.
+Android MS11 is an advanced interface assistant for long-session open-world automation maintained by **Project Galactic Beholder**.
 
 The original MS11-Core implementation has been archived under `archive/ms11-core` to preserve legacy code.
 
@@ -9,7 +9,7 @@ In the world of **Argent**, legendary guilds compete to recover ancient relics. 
 
 ## Basic Usage
 Install the dependencies and then import the modules you need.
-The `requirements.txt` file now includes `requests>=2.0`:
+The `requirements.txt` file now includes `requests>=2.0`, `PyYAML`, and `pymongo>=3.0`:
 ```bash
 pip install -r requirements.txt
 ```
@@ -32,12 +32,12 @@ Three lightweight helpers provide a basic quest pipeline:
 
 - `quest_selector.select_quest` picks the next mission for a character.
 - `quest_executor.execute_quest` iterates through the quest steps.
-- `source_verifier.verify_source` checks that the data you loaded is trustworthy.
+- `utils.source_verifier.verify_source` checks that the data you loaded is trustworthy.
 
 ```python
 from src.quest_selector import select_quest
 from src.quest_executor import execute_quest
-from src.source_verifier import verify_source
+from utils.source_verifier import verify_source
 
 quest = select_quest("Ezra") or {
     "title": "Tutorial",
@@ -45,6 +45,29 @@ quest = select_quest("Ezra") or {
 }
 if verify_source(quest):
     execute_quest(quest)
+```
+
+## Monitoring On-Screen Events
+
+`src/state/state_manager.py` provides a `StateManager` for general game state
+tracking. It watches OCR text and triggers callbacks when phrases appear,
+updating ``current_state`` to the matched key. Modules under
+`src/execution` still expose a lightweight version for internal helpers. Use
+the state module when you want to react to global game conditions and the
+execution module when writing step-by-step automation.
+
+Both classes share the same basic API. The version in `src/state` remembers
+the last matched phrase through its ``current_state`` attribute, while the one
+in `src/execution` omits this attribute to remain a minimal dependency.
+
+```python
+from src.state.state_manager import StateManager
+
+def on_accept():
+    print("Quest accepted!")
+
+manager = StateManager({"quest accepted": on_accept}, interval=0.5)
+manager.run(duration=10)
 ```
 
 ## Getting Started
@@ -70,7 +93,7 @@ This section walks through a fresh setup so you can try the project locally.
    ```bash
    pip install -r requirements.txt
    ```
-   The requirements file includes `requests>=2.0`.
+    The requirements file includes `requests>=2.0`, `PyYAML`, and `pymongo>=3.0`.
 
 4. **Run the example application**
 
@@ -95,11 +118,21 @@ This section walks through a fresh setup so you can try the project locally.
    ```bash
    pip install -r requirements.txt
    pytest
-   # includes requests>=2.0
+    # includes requests>=2.0, PyYAML, and pymongo>=3.0
    ```
 
 These steps should give you a working copy of Android MS11 and confidence
 that the provided modules function as expected.
+
+## Automation Modes
+Select a runtime mode when starting the automation. The ``--mode`` option
+controls which behavior module is activated.
+
+```bash
+python src/main.py --mode questing
+python src/main.py --mode medic
+python src/main.py --mode grinding
+```
 
 ## Legacy Quest Manager CLI
 Use the legacy quest tool to explore old mission data.
@@ -111,3 +144,39 @@ python -m src.data.legacy_quest_manager --npc "Rebel Trainer"
 python -m src.data.legacy_quest_manager --list --planet Naboo
 python -m src.data.legacy_quest_manager --list --status completed
 ```
+
+## Quest Selection CLI
+Quickly pick the next quest for a character by running:
+
+```bash
+python scripts/cli/execute_quest.py --character "Ezra"
+```
+
+You can further control the selection with these options:
+
+- `--planet PLANET` &ndash; filter quests by planet.
+- `--type TYPE` &ndash; filter by quest type.
+- `--random` &ndash; choose randomly among matches.
+- `--debug` &ndash; show the full quest data instead of a summary.
+
+Every run appends the chosen quest to `logs/quest_selections.log`.
+
+## Trainer Lookup CLI
+Locate the in-game coordinates for a profession trainer.
+
+```bash
+python scripts/cli/find_trainer.py artisan --planet tatooine --city mos_eisley
+```
+
+The `profession` argument is required. `--planet` and `--city` default to
+`tatooine` and `mos_eisley`. When a matching entry is found in
+`data/trainers.yaml`, the trainer's name and coordinates are printed; otherwise
+a helpful message is shown.
+
+## Log Files
+The application writes several logs under the `logs/` directory:
+
+- `logs/app.log` &ndash; general runtime messages produced by `start_log()`.
+- `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
+- `logs/step_journal.log` &ndash; success/failure records from step validation.
+- `logs/session_*.log` &ndash; detailed step traces for each session.

@@ -8,7 +8,7 @@ from src.logger_utils import read_logs, DEFAULT_LOG_PATH
 
 def get_version_from_readme() -> str:
     """Extract the version string from the README.md file."""
-    readme_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "README.md")
+    readme_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "README.md")
     with open(readme_path, "r", encoding="utf-8") as f:
         for line in f:
             if line.strip().lower().startswith("version"):
@@ -49,7 +49,7 @@ def run_mode(mode: str) -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Android MS11 Core Runner by Project Galatic Beholder")
+    parser = argparse.ArgumentParser(description="Android MS11 Core Runner by Project Galactic Beholder")
     parser.add_argument("--mode", type=str, default="quest", help="Choose a mode: quest, grind, heal, debug")
     parser.add_argument("--version", action="store_true", help="Show application version and exit")
     args = parser.parse_args()

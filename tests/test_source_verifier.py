@@ -1,10 +1,9 @@
 import os
 import sys
-from pathlib import Path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.source_verifier import file_changed, verify_source
+from utils.source_verifier import file_changed, verify_source
 
 
 def test_file_changed_detects_modifications(tmp_path):
