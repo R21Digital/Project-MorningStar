@@ -6,6 +6,7 @@ playwright==1.42.0
 requests>=2.0
 
 PyYAML
+pymongo>=3.0
 
 pytesseract
 opencv-python
