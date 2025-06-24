@@ -124,6 +124,16 @@ This section walks through a fresh setup so you can try the project locally.
 These steps should give you a working copy of Android MS11 and confidence
 that the provided modules function as expected.
 
+## Automation Modes
+Select a runtime mode when starting the automation. The ``--mode`` option
+controls which behavior module is activated.
+
+```bash
+python src/main.py --mode questing
+python src/main.py --mode medic
+python src/main.py --mode grinding
+```
+
 ## Legacy Quest Manager CLI
 Use the legacy quest tool to explore old mission data.
 
