@@ -21,6 +21,9 @@ def test_run_validated_step_retries(monkeypatch):
     monkeypatch.setattr(
         "src.engine.step_executor.watch_text", lambda *a, **k: next(outputs)
     )
+    fake_mod = ModuleType("src.vision.ocr")
+    fake_mod.screen_text = lambda *a, **k: "dummy"
+    sys.modules["src.vision.ocr"] = fake_mod
     executed = []
 
     def step():

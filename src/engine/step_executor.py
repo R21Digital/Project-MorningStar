@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Callable, Sequence
 
 from src.game_state.feedback import watch_text
+from src.logging import journal
 
 
 def run_validated_step(
@@ -19,9 +20,16 @@ def run_validated_step(
     attempts = 0
     while attempts < max_retries:
         step_fn()
+        # Import here to avoid heavy dependencies during module import
+        from src.vision.ocr import screen_text
         if not success_markers:
+            journal.log_step(True, None)
             return True
-        if watch_text(success_markers):
+
+        success = watch_text(success_markers)
+        text = screen_text()
+        journal.log_step(success, text)
+        if success:
             return True
         attempts += 1
     return False
