@@ -3,6 +3,11 @@ import sys
 import types
 from PIL import Image
 import pytesseract
+sys.modules['cv2'] = types.SimpleNamespace(COLOR_RGB2BGR=None, cvtColor=lambda img, flag: img)
+fake_np = types.ModuleType('numpy')
+fake_np.array = lambda x: x
+fake_np.ndarray = object
+sys.modules['numpy'] = fake_np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

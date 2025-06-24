@@ -4,10 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Iterable
 
-from .execution.combat import execute_combat
-from .execution.dialogue import execute_dialogue
-from .execution.interaction import execute_interaction
-from .execution.movement import execute_movement
+from .engine.quest_executor import run_step_with_feedback
 
 
 def _iter_steps(quest: Any) -> Iterable[dict]:
@@ -41,16 +38,8 @@ def execute_quest(quest: Any, *, dry_run: bool = False) -> Dict[str, bool]:
             print(f"\u27A1\uFE0F Step {idx}: {action or step}")
             if dry_run:
                 continue
-            if action == "move":
-                execute_movement(step)
-            elif action == "interact":
-                execute_interaction(step)
-            elif action == "combat":
-                execute_combat(step)
-            elif action == "dialogue":
-                execute_dialogue(step)
-            else:
-                print(f"\u26A0\uFE0F Unknown step type: {action}")
+            if not run_step_with_feedback(step):
+                print(f"\u26A0\uFE0F Step validation failed: {action}")
 
         status["completed"] = True
     except Exception as exc:  # pragma: no cover - unexpected failures

@@ -2,6 +2,15 @@ import os
 import sys
 import pytest
 from unittest.mock import MagicMock, patch, ANY
+import types
+
+sys.modules['transformers'] = types.ModuleType('transformers')
+sys.modules['transformers'].pipeline = lambda *a, **k: None
+sys.modules['langchain'] = types.ModuleType('langchain')
+sys.modules['langchain'].LLMChain = object
+sys.modules['langchain'].PromptTemplate = types.SimpleNamespace(from_template=lambda t: t)
+sys.modules['langchain.llms'] = types.ModuleType('langchain.llms')
+sys.modules['langchain.llms'].HuggingFacePipeline = object
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
