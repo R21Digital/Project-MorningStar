@@ -37,11 +37,19 @@ def test_visit_trainer_found(monkeypatch, capsys):
     def fake_travel(agent_obj, destination):
         called["dest"] = destination
 
+    def fake_coords(agent_obj, x, y):
+        called["coords"] = (x, y)
+
     monkeypatch.setattr("src.training.trainer_visit.travel_to_city", fake_travel)
+    monkeypatch.setattr(
+        "src.training.trainer_visit.move_to_coordinates",
+        fake_coords,
+    )
     visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
     out = capsys.readouterr().out
     assert "Artisan Trainer" in out
     assert called["dest"] == "mos_eisley"
+    assert called["coords"] == (3432, -4795)
 
 
 def test_visit_trainer_missing(monkeypatch, capsys):
