@@ -79,6 +79,7 @@ def test_visit_trainer_missing(monkeypatch, capsys):
 def test_load_trainers_missing_file(monkeypatch):
     missing = Path("nonexistent_file.yaml")
     monkeypatch.setattr("utils.load_trainers.TRAINER_FILE", missing)
+    monkeypatch.setattr("utils.load_trainers.TRAINER_JSON_FILE", missing)
     monkeypatch.delenv("TRAINER_FILE", raising=False)
     data = load_trainers()
     assert data == {}
@@ -92,7 +93,7 @@ def test_load_trainers_env_override(monkeypatch, tmp_path):
 
     def fake_open(path, *a, **k):
         calls["path"] = Path(path)
-        return io.StringIO("")
+        return io.StringIO("{}")
 
     monkeypatch.setenv("TRAINER_FILE", str(custom))
     monkeypatch.setattr("builtins.open", fake_open)
@@ -107,7 +108,7 @@ def test_load_trainers_arg_override(monkeypatch, tmp_path):
 
     def fake_open(path, *a, **k):
         calls["path"] = Path(path)
-        return io.StringIO("")
+        return io.StringIO("{}")
 
     monkeypatch.setenv("TRAINER_FILE", "ignored")
     monkeypatch.setattr("builtins.open", fake_open)
@@ -124,17 +125,17 @@ def test_load_trainers_resolves_default(monkeypatch, tmp_path):
 
     def fake_open(path, *a, **k):
         calls["path"] = Path(path)
-        return io.StringIO("")
+        return io.StringIO("{}")
 
     monkeypatch.delenv("TRAINER_FILE", raising=False)
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr("builtins.open", fake_open)
     lt.load_trainers()
-    assert calls["path"] == lt.TRAINER_FILE
+    assert calls["path"] == lt.TRAINER_JSON_FILE
 
 
 def test_load_trainers_default_path(monkeypatch, tmp_path):
-    """load_trainers should read from data/trainers.yaml when no overrides are provided."""
+    """load_trainers should read from data/trainers/trainers.json when no overrides are provided."""
     import io
 
     from utils import load_trainers as lt
@@ -143,12 +144,17 @@ def test_load_trainers_default_path(monkeypatch, tmp_path):
 
     def fake_open(path, *a, **k):
         calls["path"] = Path(path)
-        return io.StringIO("")
+        return io.StringIO("{}")
 
     monkeypatch.delenv("TRAINER_FILE", raising=False)
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr("builtins.open", fake_open)
     lt.load_trainers()
-    expected = Path(__file__).resolve().parents[1] / "data" / "trainers.yaml"
-    assert lt.TRAINER_FILE == expected
+    expected = (
+        Path(__file__).resolve().parents[1]
+        / "data"
+        / "trainers"
+        / "trainers.json"
+    )
+    assert lt.TRAINER_JSON_FILE == expected
     assert calls["path"] == expected
