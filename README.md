@@ -186,6 +186,16 @@ loads coordinates from the same YAML file and directs an agent to travel to the
 trainer. Dialogue steps referencing "Trainer" trigger `train_with_npc()` to log
 the interaction.
 
+## Trainer Data Extraction
+Generate trainer location entries from sample screenshots.
+
+```bash
+python scripts/data/extract_trainers.py
+```
+
+The script runs OCR on images under `docs/samples/` and writes structured
+results to `data/trainers.yaml`.
+
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
