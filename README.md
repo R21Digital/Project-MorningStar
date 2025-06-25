@@ -173,6 +173,11 @@ The `profession` argument is required. `--planet` and `--city` default to
 `data/trainers.yaml`, the trainer's name and coordinates are printed; otherwise
 a helpful message is shown.
 
+Automating the visit is possible through `trainer_visit.visit_trainer()`. It
+loads coordinates from the same YAML file and directs an agent to travel to the
+trainer. Dialogue steps referencing "Trainer" trigger `train_with_npc()` to log
+the interaction.
+
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
