@@ -5,7 +5,7 @@ import logging
 
 # Path to the YAML file containing trainer locations. Resolved relative to this
 # module to avoid depending on the caller's working directory.
-TRAINER_FILE = Path(__file__).resolve().parents[2] / "data" / "trainers.yaml"
+TRAINER_FILE = Path(__file__).resolve().parents[1] / "data" / "trainers.yaml"
 
 
 def load_trainers(trainer_file=None):
