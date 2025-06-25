@@ -238,6 +238,31 @@ python scripts/data/extract_trainers.py
 The script runs OCR on images under `docs/samples/` and writes structured
 results to `data/trainers.yaml`.
 
+## Shuttle Travel Utilities
+Shuttle locations and connections are defined in `data/shuttles.json`. Each
+planet key contains a list of shuttles with NPC coordinates and destination
+links. A minimal entry looks like:
+
+```json
+{
+  "tatooine": [
+    {
+      "city": "mos_eisley",
+      "npc": "Shuttle Conductor",
+      "x": 3520,
+      "y": -4800,
+      "destinations": [
+        {"planet": "corellia", "city": "coronet"}
+      ]
+    }
+  ]
+}
+```
+
+Utilities under `scripts/travel/` read this file to determine the nearest
+shuttle and to plan multi-hop routes. After traveling, `navigate_to(city, agent)`
+walks the agent from the shuttle to the destination coordinates.
+
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
