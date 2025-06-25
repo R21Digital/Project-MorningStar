@@ -29,11 +29,6 @@ def _distance(a: Coords, b: Coords) -> float:
     return math.hypot(a[0] - b[0], a[1] - b[1])
 
 
-def load_trainer_data(trainer_file: Optional[str] = None) -> Dict[str, dict]:
-    """Wrapper around :func:`load_trainers` for external use."""
-    return load_trainers(trainer_file)
-
-
 def find_nearby_trainers(
     player_pos: Coords,
     planet: str,
@@ -47,7 +42,10 @@ def find_nearby_trainers(
     The returned list contains dictionaries with ``profession``, ``name``,
     ``x``, ``y`` and ``distance`` keys sorted by distance.
     """
-    data = load_trainer_data(trainer_file)
+    # Delegate reading trainer data to :func:`utils.load_trainers.load_trainers`
+    # so callers benefit from environment variable overrides and consistent
+    # path handling.
+    data = load_trainers(trainer_file)
     results: List[Dict[str, object]] = []
 
     for profession, planets in data.items():

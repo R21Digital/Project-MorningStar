@@ -23,7 +23,7 @@ def test_find_nearby_trainers(monkeypatch):
         "marksman": {"tatooine": {"mos_eisley": {"name": "Mark", "x": 10, "y": 0}}},
     }
     loader = DummyLoad(data)
-    monkeypatch.setattr(tn, "load_trainer_data", loader)
+    monkeypatch.setattr(tn, "load_trainers", loader)
 
     result = tn.find_nearby_trainers((0, 0), "tatooine", "mos_eisley", threshold=11)
     assert loader.called
@@ -38,7 +38,7 @@ def test_threshold(monkeypatch):
         "artisan": {"tatooine": {"mos_eisley": {"name": "Art", "x": 100, "y": 0}}}
     }
     loader = DummyLoad(data)
-    monkeypatch.setattr(tn, "load_trainer_data", loader)
+    monkeypatch.setattr(tn, "load_trainers", loader)
 
     result = tn.find_nearby_trainers((0, 0), "tatooine", "mos_eisley", threshold=50)
     assert result == []
