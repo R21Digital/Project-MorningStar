@@ -5,7 +5,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from src.automation.training import train_with_npc
 from pathlib import Path
-from src.training.trainer_data_loader import get_trainer_coords, load_trainer_data
+from utils.get_trainer_location import get_trainer_location
+from utils.load_trainers import load_trainers
 from src.training.trainer_visit import visit_trainer
 
 
@@ -24,8 +25,8 @@ def test_train_with_npc(capfd):
     assert "Learning new abilities from Trainer" in out
 
 
-def test_get_trainer_coords():
-    result = get_trainer_coords("artisan", "tatooine", "mos_eisley")
+def test_get_trainer_location():
+    result = get_trainer_location("artisan", "tatooine", "mos_eisley")
     assert result == ("Artisan Trainer", 3432, -4795)
 
 
@@ -75,8 +76,8 @@ def test_visit_trainer_missing(monkeypatch, capsys):
     assert "medic trainer" in trainer_visit.visited_npcs
 
 
-def test_load_trainer_data_missing_file(monkeypatch):
+def test_load_trainers_missing_file(monkeypatch):
     missing = Path("nonexistent_file.yaml")
-    monkeypatch.setattr("src.training.trainer_data_loader.TRAINER_FILE", missing)
-    data = load_trainer_data()
+    monkeypatch.setattr("utils.load_trainers.TRAINER_FILE", missing)
+    data = load_trainers()
     assert data == {}

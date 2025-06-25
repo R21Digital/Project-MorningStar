@@ -172,6 +172,8 @@ The `profession` argument is required. `--planet` and `--city` default to
 `tatooine` and `mos_eisley`. When a matching entry is found in
 `data/trainers.yaml`, the trainer's name and coordinates are printed; otherwise
 a helpful message is shown.
+The lookup uses `utils.get_trainer_location.get_trainer_location()` to read
+locations from the YAML file.
 
 Automating the visit is possible through `trainer_visit.visit_trainer()`. It
 loads coordinates from the same YAML file and directs an agent to travel to the

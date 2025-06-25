@@ -1,5 +1,5 @@
 import argparse
-from src.training.trainer_data_loader import get_trainer_coords
+from utils.get_trainer_location import get_trainer_location
 
 
 def _parse_args(argv=None) -> argparse.Namespace:
@@ -12,7 +12,7 @@ def _parse_args(argv=None) -> argparse.Namespace:
 
 def main(argv=None):
     args = _parse_args(argv)
-    result = get_trainer_coords(args.profession, args.planet, args.city)
+    result = get_trainer_location(args.profession, args.planet, args.city)
     if result:
         name, x, y = result
         print(f"{name} at ({x}, {y}) in {args.city.title()}, {args.planet.title()}")
