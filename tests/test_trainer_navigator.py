@@ -101,3 +101,19 @@ def test_navigate_to_trainer_calls_helpers(monkeypatch):
 
     assert calls["visit"] == ("A", "artisan", "tatooine", "mos_eisley")
     assert calls["log"] == ("artisan", "Trainer", 0.0)
+
+
+def test_navigate_to_trainer_logs_events(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+
+    monkeypatch.setattr(tn, "visit_trainer", lambda *a, **k: None)
+    monkeypatch.setattr(tn, "log_training_event", lambda *a, **k: None)
+    monkeypatch.setattr(tn, "get_trainer_location", lambda *a, **k: ("Trainer", 1, 2))
+
+    tn.navigate_to_trainer("artisan", "tatooine", "mos_eisley", agent="A")
+
+    log_file = tmp_path / "logs" / "session.log"
+    assert log_file.exists()
+    lines = log_file.read_text().splitlines()
+    assert any("Starting trainer visit" in l for l in lines)
+    assert any("Completed trainer visit" in l for l in lines)

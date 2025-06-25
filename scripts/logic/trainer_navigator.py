@@ -17,6 +17,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 from utils.load_trainers import load_trainers
 from utils.get_trainer_location import get_trainer_location
 from src.training.trainer_visit import visit_trainer
+from src.utils.logger import log_event
 
 # Default log file under the project's ``logs`` directory.
 DEFAULT_LOG_PATH = os.path.join("logs", "training_log.txt")
@@ -104,6 +105,8 @@ def navigate_to_trainer(
     :func:`log_training_event`.
     """
 
+    log_event(f"Starting trainer visit: {trainer_name} in {city}, {planet}")
+
     location = get_trainer_location(trainer_name, planet, city)
     if not location:
         data = load_trainers()
@@ -123,5 +126,8 @@ def navigate_to_trainer(
         log_training_event(trainer_name, location[0], 0.0)
     else:
         log_training_event(trainer_name, f"{trainer_name} trainer", 0.0)
+
+    log_event(f"Completed trainer visit: {trainer_name} in {city}, {planet}")
+
     return location
 

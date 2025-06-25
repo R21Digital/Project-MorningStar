@@ -24,3 +24,12 @@ def test_log_ocr_text(tmp_path):
     content = log_file.read_text()
     assert "hello" in content
 
+
+def test_log_event(tmp_path):
+    from src.utils import logger
+    log_file = tmp_path / "ev.log"
+    logger.log_event("hi", log_path=str(log_file))
+    assert log_file.exists()
+    content = log_file.read_text()
+    assert "hi" in content
+
