@@ -186,6 +186,38 @@ loads coordinates from the same YAML file and directs an agent to travel to the
 trainer. Dialogue steps referencing "Trainer" trigger `train_with_npc()` to log
 the interaction.
 
+## Trainer Navigator Script
+`scripts/logic/trainer_navigator.py` exposes helper functions for locating
+nearby trainers and logging training sessions. It expects a YAML file at
+`data/trainers.yaml` structured by profession, planet and city:
+
+```yaml
+artisan:
+  tatooine:
+    mos_eisley:
+      name: "Artisan Trainer"
+      x: 3432
+      y: -4795
+```
+
+Use the module interactively to list trainers near a position and record the
+visit:
+
+```bash
+python - <<'EOF'
+from scripts.logic import trainer_navigator as tn
+
+pos = (3400, -4800)
+trainers = tn.find_nearby_trainers(pos, "tatooine", "mos_eisley", threshold=200)
+for t in trainers:
+    print(t)
+    tn.log_training_event(t["profession"], t["name"], t["distance"])
+EOF
+```
+
+Each call to `log_training_event` appends a timestamped entry to
+`logs/training_log.txt`.
+
 ## Trainer Data Extraction
 Generate trainer location entries from sample screenshots.
 
@@ -203,3 +235,4 @@ The application writes several logs under the `logs/` directory:
 - `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
 - `logs/step_journal.log` &ndash; success/failure records from step validation.
 - `logs/session_*.log` &ndash; detailed step traces for each session.
+- `logs/training_log.txt` &ndash; entries recorded by the trainer navigator.
