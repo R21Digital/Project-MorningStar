@@ -77,7 +77,14 @@ def log_training_event(
     log_path: str = DEFAULT_LOG_PATH,
 ) -> None:
     """Append a training event to ``log_path`` with a timestamp."""
-    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    if os.path.abspath(log_path) == os.path.abspath(DEFAULT_LOG_PATH):
+        # Ensure the default ``logs`` directory exists when writing the
+        # standard ``training_log.txt`` file.
+        os.makedirs("logs", exist_ok=True)
+    else:
+        dir_name = os.path.dirname(log_path)
+        if dir_name:
+            os.makedirs(dir_name, exist_ok=True)
     timestamp = datetime.now().isoformat()
     message = f"{timestamp} - Trained with {trainer_name} ({profession}) at distance {distance:.1f}\n"
     with open(log_path, "a", encoding="utf-8") as fh:
