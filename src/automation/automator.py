@@ -4,6 +4,7 @@ from src.vision.ocr import capture_screen, extract_text
 from src.vision.states import detect_state, handle_state
 from src.utils.logger import save_screenshot, log_ocr_text
 from . import mode_manager
+from .quest_path import visit_trainer_if_needed
 
 
 def _questing_behavior() -> None:
@@ -19,6 +20,7 @@ def _questing_behavior() -> None:
         handle_state(state)
     else:
         print("[NO MATCH] Continuing scan...")
+        visit_trainer_if_needed()
 
 
 def _combat_behavior() -> None:
