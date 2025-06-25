@@ -15,6 +15,8 @@ from datetime import datetime
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from utils.load_trainers import load_trainers
+from utils.get_trainer_location import get_trainer_location
+from src.training.trainer_visit import visit_trainer
 
 # Default log file under the project's ``logs`` directory.
 DEFAULT_LOG_PATH = os.path.join("logs", "training_log.txt")
@@ -89,4 +91,37 @@ def log_training_event(
     message = f"{timestamp} - Trained with {trainer_name} ({profession}) at distance {distance:.1f}\n"
     with open(log_path, "a", encoding="utf-8") as fh:
         fh.write(message)
+
+
+def navigate_to_trainer(
+    trainer_name: str, planet: str, city: str, agent
+) -> Optional[Tuple[str, int, int]]:
+    """Travel to the requested trainer and log the visit.
+
+    The function looks up coordinates using :func:`utils.get_trainer_location`
+    or :func:`utils.load_trainers.load_trainers`.  It then delegates movement to
+    :func:`src.training.trainer_visit.visit_trainer` and records the trip with
+    :func:`log_training_event`.
+    """
+
+    location = get_trainer_location(trainer_name, planet, city)
+    if not location:
+        data = load_trainers()
+        try:
+            entry = data[trainer_name][planet][city]
+            location = (
+                entry.get("name", f"{trainer_name} trainer"),
+                entry.get("x"),
+                entry.get("y"),
+            )
+        except KeyError:
+            location = None
+
+    visit_trainer(agent, trainer_name, planet=planet, city=city)
+
+    if location:
+        log_training_event(trainer_name, location[0], 0.0)
+    else:
+        log_training_event(trainer_name, f"{trainer_name} trainer", 0.0)
+    return location
 

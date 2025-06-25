@@ -82,3 +82,22 @@ def test_log_training_event_default_appends(monkeypatch, tmp_path):
     second = log_file.read_text().splitlines()
     assert len(second) == 2
     assert first[0] != second[1]
+
+
+def test_navigate_to_trainer_calls_helpers(monkeypatch):
+    calls = {}
+
+    def fake_visit(agent, prof, planet="tatooine", city="mos_eisley"):
+        calls["visit"] = (agent, prof, planet, city)
+
+    def fake_log(prof, name, dist, log_path=tn.DEFAULT_LOG_PATH):
+        calls["log"] = (prof, name, dist)
+
+    monkeypatch.setattr(tn, "visit_trainer", fake_visit)
+    monkeypatch.setattr(tn, "log_training_event", fake_log)
+    monkeypatch.setattr(tn, "get_trainer_location", lambda *a, **k: ("Trainer", 1, 2))
+
+    tn.navigate_to_trainer("artisan", "tatooine", "mos_eisley", agent="A")
+
+    assert calls["visit"] == ("A", "artisan", "tatooine", "mos_eisley")
+    assert calls["log"] == ("artisan", "Trainer", 0.0)
