@@ -50,3 +50,35 @@ def test_log_training_event(tmp_path):
     assert log_file.exists()
     content = log_file.read_text()
     assert "Artisan Trainer" in content
+
+
+def test_find_nearby_trainers_sorted(monkeypatch):
+    data = {
+        "artisan": {"tatooine": {"mos_eisley": {"name": "Art", "x": 1, "y": 0}}},
+        "brawler": {"tatooine": {"mos_eisley": {"name": "Brawl", "x": 3, "y": 0}}},
+        "marksman": {"tatooine": {"mos_eisley": {"name": "Mark", "x": 5, "y": 0}}},
+    }
+    loader = DummyLoad(data)
+    monkeypatch.setattr(tn, "load_trainers", loader)
+
+    result = tn.find_nearby_trainers((0, 0), "tatooine", "mos_eisley", threshold=10)
+    names = [r["name"] for r in result]
+    distances = [r["distance"] for r in result]
+
+    assert names == ["Art", "Brawl", "Mark"]
+    assert distances == sorted(distances)
+
+
+def test_log_training_event_default_appends(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+
+    tn.log_training_event("artisan", "Artisan Trainer", 5.0)
+    log_file = tmp_path / "logs" / "training_log.txt"
+    assert log_file.exists()
+    first = log_file.read_text().splitlines()
+    assert len(first) == 1
+
+    tn.log_training_event("medic", "Medic Trainer", 7.0)
+    second = log_file.read_text().splitlines()
+    assert len(second) == 2
+    assert first[0] != second[1]
