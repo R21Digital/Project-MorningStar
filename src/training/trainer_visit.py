@@ -1,4 +1,4 @@
-from .trainer_data_loader import get_trainer_coords
+from utils.get_trainer_location import get_trainer_location
 from src.movement.movement_profiles import travel_to_city, walk_to_coords
 
 # Keep a simple in-memory log of NPCs we've attempted to visit.  This can be
@@ -15,7 +15,7 @@ COMMON_LOCATIONS = [
 
 
 def visit_trainer(agent, profession, planet="tatooine", city="mos_eisley"):
-    trainer_info = get_trainer_coords(profession, planet, city)
+    trainer_info = get_trainer_location(profession, planet, city)
 
     if trainer_info:
         name, x, y = trainer_info
