@@ -21,3 +21,21 @@ if 'numpy' not in sys.modules:
     sys.modules['numpy'] = np_module
 
 sys.modules.setdefault('pyautogui', types.SimpleNamespace(screenshot=lambda *a, **k: sys.modules['PIL.Image'].new('RGB', (1, 1))))
+
+if 'yaml' not in sys.modules:
+    yaml_module = types.ModuleType('yaml')
+    def safe_load(stream):
+        # Minimal trainer data for tests
+        return {
+            'artisan': {
+                'tatooine': {
+                    'mos_eisley': {
+                        'name': 'Artisan Trainer',
+                        'x': 3432,
+                        'y': -4795,
+                    }
+                }
+            }
+        }
+    yaml_module.safe_load = safe_load
+    sys.modules['yaml'] = yaml_module
