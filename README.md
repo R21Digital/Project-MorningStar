@@ -173,7 +173,9 @@ The `profession` argument is required. `--planet` and `--city` default to
 `data/trainers.yaml`, the trainer's name and coordinates are printed; otherwise
 a helpful message is shown.
 The lookup uses `utils.get_trainer_location.get_trainer_location()` to read
-locations from the YAML file.
+locations from the YAML file. Trainer coordinates are currently curated
+manually. A future script may automate populating `data/trainers.yaml` once
+reliable NPC extraction is available.
 
 Automating the visit is possible through `trainer_visit.visit_trainer()`. It
 loads coordinates from the same YAML file and directs an agent to travel to the
