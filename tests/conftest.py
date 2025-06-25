@@ -39,3 +39,16 @@ if 'yaml' not in sys.modules:
         }
     yaml_module.safe_load = safe_load
     sys.modules['yaml'] = yaml_module
+
+import os
+from pathlib import Path
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def trainer_file_env(monkeypatch):
+    """Ensure tests load trainers from the project data directory."""
+    default = Path(__file__).resolve().parents[1] / "data" / "trainers.yaml"
+    monkeypatch.setenv("TRAINER_FILE", str(default))
+    yield
+    monkeypatch.delenv("TRAINER_FILE", raising=False)

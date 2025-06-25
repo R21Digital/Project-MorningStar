@@ -79,5 +79,55 @@ def test_visit_trainer_missing(monkeypatch, capsys):
 def test_load_trainers_missing_file(monkeypatch):
     missing = Path("nonexistent_file.yaml")
     monkeypatch.setattr("utils.load_trainers.TRAINER_FILE", missing)
+    monkeypatch.delenv("TRAINER_FILE", raising=False)
     data = load_trainers()
     assert data == {}
+
+
+def test_load_trainers_env_override(monkeypatch, tmp_path):
+    import io
+    custom = tmp_path / "custom.yaml"
+
+    calls = {}
+
+    def fake_open(path, *a, **k):
+        calls["path"] = Path(path)
+        return io.StringIO("")
+
+    monkeypatch.setenv("TRAINER_FILE", str(custom))
+    monkeypatch.setattr("builtins.open", fake_open)
+    load_trainers()
+    assert calls["path"] == custom
+
+
+def test_load_trainers_arg_override(monkeypatch, tmp_path):
+    import io
+    custom = tmp_path / "override.yaml"
+    calls = {}
+
+    def fake_open(path, *a, **k):
+        calls["path"] = Path(path)
+        return io.StringIO("")
+
+    monkeypatch.setenv("TRAINER_FILE", "ignored")
+    monkeypatch.setattr("builtins.open", fake_open)
+    load_trainers(trainer_file=custom)
+    assert calls["path"] == custom
+
+
+def test_load_trainers_resolves_default(monkeypatch, tmp_path):
+    import io
+
+    from utils import load_trainers as lt
+
+    calls = {}
+
+    def fake_open(path, *a, **k):
+        calls["path"] = Path(path)
+        return io.StringIO("")
+
+    monkeypatch.delenv("TRAINER_FILE", raising=False)
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("builtins.open", fake_open)
+    lt.load_trainers()
+    assert calls["path"] == lt.TRAINER_FILE
