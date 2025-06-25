@@ -131,3 +131,24 @@ def test_load_trainers_resolves_default(monkeypatch, tmp_path):
     monkeypatch.setattr("builtins.open", fake_open)
     lt.load_trainers()
     assert calls["path"] == lt.TRAINER_FILE
+
+
+def test_load_trainers_default_path(monkeypatch, tmp_path):
+    """load_trainers should read from data/trainers.yaml when no overrides are provided."""
+    import io
+
+    from utils import load_trainers as lt
+
+    calls = {}
+
+    def fake_open(path, *a, **k):
+        calls["path"] = Path(path)
+        return io.StringIO("")
+
+    monkeypatch.delenv("TRAINER_FILE", raising=False)
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr("builtins.open", fake_open)
+    lt.load_trainers()
+    expected = Path(__file__).resolve().parents[1] / "data" / "trainers.yaml"
+    assert lt.TRAINER_FILE == expected
+    assert calls["path"] == expected
