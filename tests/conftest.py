@@ -48,7 +48,12 @@ import pytest
 @pytest.fixture(autouse=True)
 def trainer_file_env(monkeypatch):
     """Ensure tests load trainers from the project data directory."""
-    default = Path(__file__).resolve().parents[1] / "data" / "trainers.yaml"
+    default = (
+        Path(__file__).resolve().parents[1]
+        / "data"
+        / "trainers"
+        / "trainers.json"
+    )
     monkeypatch.setenv("TRAINER_FILE", str(default))
     yield
     monkeypatch.delenv("TRAINER_FILE", raising=False)
