@@ -4,6 +4,7 @@ import cv2
 
 SCREENSHOT_DIR = os.path.join("logs", "screenshots")
 OCR_LOG_PATH = os.path.join("logs", "ocr_text.log")
+SESSION_LOG_PATH = os.path.join("logs", "session.log")
 
 
 def save_screenshot(image, *, directory: str = SCREENSHOT_DIR) -> str:
@@ -27,4 +28,16 @@ def log_ocr_text(text: str, *, log_path: str = OCR_LOG_PATH) -> str:
             f.write(f"{timestamp} | {text}\n")
     except Exception as e:  # pragma: no cover - best effort logging
         print(f"[LOGGER] Failed to log OCR text: {e}")
+    return log_path
+
+
+def log_event(message: str, *, log_path: str = SESSION_LOG_PATH) -> str:
+    """Append ``message`` to ``log_path`` with a timestamp."""
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    timestamp = datetime.datetime.now().isoformat()
+    try:
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(f"{timestamp} | {message}\n")
+    except Exception as e:  # pragma: no cover - best effort logging
+        print(f"[LOGGER] Failed to log event: {e}")
     return log_path
