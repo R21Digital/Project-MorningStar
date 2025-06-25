@@ -186,6 +186,16 @@ loads coordinates from the same YAML file and directs an agent to travel to the
 trainer. Dialogue steps referencing "Trainer" trigger `train_with_npc()` to log
 the interaction.
 
+## Trainer Navigation CLI
+Navigate and log a trainer visit in one step:
+
+```bash
+python cli/trainer/find_trainer.py --trainer "Master Combat Medic"
+```
+
+The command accepts the same `--planet` and `--city` options as the lookup
+script, defaulting to `tatooine` and `mos_eisley`.
+
 ## Trainer Navigator Script
 `scripts/logic/trainer_navigator.py` exposes helper functions for locating
 nearby trainers and logging training sessions. It expects a YAML file at
