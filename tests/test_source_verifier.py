@@ -21,7 +21,14 @@ def test_file_changed_detects_modifications(tmp_path):
     assert file_changed(html_path, hash_path) is True
 
 
-def test_verify_source_basic_validation():
-    assert verify_source({"title": "Quest", "steps": []}) is True
-    assert verify_source({"steps": []}) is False
-    assert verify_source("oops") is False
+def test_verify_source_with_string():
+    assert verify_source("trusted_data") is True
+    assert verify_source("untrusted") is False
+
+
+def test_verify_source_with_file(tmp_path):
+    p = tmp_path / "data.txt"
+    p.write_text("trusted_data")
+    assert verify_source(p) is True
+    p.write_text("evil")
+    assert verify_source(p) is False
