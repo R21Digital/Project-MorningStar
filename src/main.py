@@ -3,11 +3,11 @@
 import argparse
 import json
 import os
-from queue import Queue
+import threading
 from typing import Dict, Any
 
-from discord_bridge import DiscordRelayBot
-from whisper_monitor import WhisperMonitor
+from discord.ext import commands
+import discord_relay
 
 from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
@@ -19,7 +19,7 @@ from utils.load_trainers import load_trainers
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
 SESSION_CONFIG_PATH = os.path.join("config", "session_config.json")
-DISCORD_SETTINGS_PATH = os.path.join("config", "discord_settings.json")
+DISCORD_CONFIG_PATH = os.path.join("config", "discord_config.json")
 
 
 def load_runtime_profile(name: str, directory: str = DEFAULT_PROFILE_DIR) -> Dict[str, Any]:
@@ -69,14 +69,16 @@ def main(argv: list[str] | None = None) -> None:
 
     session_cfg = load_json(SESSION_CONFIG_PATH)
     relay_enabled = session_cfg.get("enable_discord_relay", False)
-    msg_queue = Queue()
     bot = None
-    monitor = None
     if relay_enabled:
-        bot = DiscordRelayBot(msg_queue, settings_path=DISCORD_SETTINGS_PATH)
-        monitor = WhisperMonitor(msg_queue)
-        bot.start()
-        monitor.start()
+        discord_cfg = load_json(DISCORD_CONFIG_PATH)
+        bot = commands.Bot(command_prefix="!")
+        discord_relay.setup(bot, discord_cfg)
+        threading.Thread(
+            target=bot.run,
+            args=(discord_cfg["discord_token"],),
+            daemon=True,
+        ).start()
 
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
