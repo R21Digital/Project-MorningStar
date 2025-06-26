@@ -2,5 +2,6 @@
   "discord_token": "YOUR_BOT_TOKEN",
   "relay_channel_id": 0,
   "relay_mode": "manual",
-  "reply_queue": []
+  "reply_queue": [],
+  "relay_user_id": 0
 }
