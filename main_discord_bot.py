@@ -1,6 +1,6 @@
 """Compatibility wrapper for launching the Discord relay bot."""
 
-from discord.bot import start_bot
+from relaybot.bot import start_bot
 
 
 def main() -> None:
