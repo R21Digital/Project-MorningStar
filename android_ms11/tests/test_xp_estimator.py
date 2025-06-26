@@ -1,11 +1,12 @@
 import os
 import sys
-from pathlib import Path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
-from scripts.xp_estimator.static_estimator import StaticXPEstimator
-from scripts.xp_estimator.learning_model import LearningXPEstimator
+from profession_logic.modules.xp_estimator import (
+    StaticXPEstimator,
+    LearningXPEstimator,
+)
 
 
 def test_logging_and_average(tmp_path):
