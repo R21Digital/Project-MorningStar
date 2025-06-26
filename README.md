@@ -25,6 +25,7 @@ xp.record_action("quest_complete")
 xp.end_session()
 ```
 The modules under `src/` offer simple building blocks that you can integrate into larger systems.
+Utilities for planning professions and trainer routes live under `profession_logic/`.
 
 ## Working with Quests
 
