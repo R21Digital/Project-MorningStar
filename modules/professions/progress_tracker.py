@@ -5,7 +5,8 @@ from typing import List, Optional, Dict
 
 from modules.learning import xp_estimator
 
-DATA_DIR = os.path.join("data", "parsed", "professions")
+# Default location for profession metadata JSON files
+DATA_DIR = os.path.join("android_ms11", "data", "professions")
 
 
 def _skill_name(text: str) -> str:
