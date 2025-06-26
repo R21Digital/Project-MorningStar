@@ -1,9 +1,16 @@
-"""Simple Discord bot placeholder for future automation notifications."""
+"""Entry point for launching the Discord relay bot."""
+
+from queue import Queue
+
+from discord_bridge import DiscordRelayBot
 
 
-def start_bot():
-    """Launch the Discord bot (stub)."""
-    print("Discord bot would start here.")
+def start_bot() -> None:
+    """Launch the Discord relay bot using default settings."""
+    q = Queue()
+    bot = DiscordRelayBot(q)
+    bot.start()
+    print("Discord relay bot started.")
 
 
 if __name__ == "__main__":

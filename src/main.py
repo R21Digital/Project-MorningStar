@@ -3,7 +3,11 @@
 import argparse
 import json
 import os
+from queue import Queue
 from typing import Dict, Any
+
+from discord_bridge import DiscordRelayBot
+from whisper_monitor import WhisperMonitor
 
 from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
@@ -11,6 +15,8 @@ from src.movement.movement_profiles import patrol_route
 from src.training.trainer_visit import visit_trainer
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
+SESSION_CONFIG_PATH = os.path.join("config", "session_config.json")
+DISCORD_SETTINGS_PATH = os.path.join("config", "discord_settings.json")
 
 
 def load_runtime_profile(name: str, directory: str = DEFAULT_PROFILE_DIR) -> Dict[str, Any]:
@@ -20,6 +26,16 @@ def load_runtime_profile(name: str, directory: str = DEFAULT_PROFILE_DIR) -> Dic
         return {}
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def load_json(path: str) -> Dict[str, Any]:
+    if os.path.exists(path):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            return {}
+    return {}
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -33,6 +49,17 @@ def main(argv: list[str] | None = None) -> None:
     profile = load_runtime_profile(args.profile) if args.profile else {}
 
     mode = args.mode or profile.get("mode", "medic")
+
+    session_cfg = load_json(SESSION_CONFIG_PATH)
+    relay_enabled = session_cfg.get("enable_discord_relay", False)
+    msg_queue = Queue()
+    bot = None
+    monitor = None
+    if relay_enabled:
+        bot = DiscordRelayBot(msg_queue, settings_path=DISCORD_SETTINGS_PATH)
+        monitor = WhisperMonitor(msg_queue)
+        bot.start()
+        monitor.start()
 
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
