@@ -1,0 +1,9 @@
+{
+  "mode": "crafting",
+  "location": "Corellia",
+  "objectives": [
+    "Build experimental weapons",
+    "Sell finished goods at the bazaar"
+  ],
+  "priority": 3
+}

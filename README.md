@@ -135,6 +135,13 @@ python src/main.py --mode medic
 python src/main.py --mode grinding
 ```
 
+Runtime profiles stored in `profiles/runtime/` let you bundle these
+settings together. Use the ``--profile`` option to load one:
+
+```bash
+python src/main.py --profile questing
+```
+
 ## Legacy Quest Manager CLI
 Use the legacy quest tool to explore old mission data.
 

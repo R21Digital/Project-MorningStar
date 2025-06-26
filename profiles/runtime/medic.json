@@ -1,0 +1,9 @@
+{
+  "mode": "medic",
+  "location": "Naboo",
+  "objectives": [
+    "Heal players in Theed",
+    "Restock medical supplies"
+  ],
+  "priority": 1
+}

@@ -1,0 +1,9 @@
+{
+  "mode": "questing",
+  "location": "Tatooine",
+  "objectives": [
+    "Complete starter quests around Mos Eisley",
+    "Check in with faction recruiter"
+  ],
+  "priority": 1
+}
