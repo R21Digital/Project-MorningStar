@@ -3,6 +3,9 @@ import json
 import uuid
 from datetime import datetime
 
+from core.xp_estimator import XPEstimator
+from utils.session_utils import track_xp_gain
+
 class SessionManager:
     def __init__(self, mode: str = "unknown"):
         self.session_id = str(uuid.uuid4())[:8]
@@ -11,6 +14,8 @@ class SessionManager:
         self.end_time = None
         self.start_credits = 0
         self.end_credits = 0
+        self.start_xp = 0
+        self.end_xp = None
         self.xp_gained = 0
         self.actions_log = []
 
@@ -22,8 +27,14 @@ class SessionManager:
     def set_start_credits(self, credits: int) -> None:
         self.start_credits = credits
 
+    def set_start_xp(self, xp: int) -> None:
+        self.start_xp = xp
+
     def set_end_credits(self, credits: int) -> None:
         self.end_credits = credits
+
+    def set_end_xp(self, xp: int) -> None:
+        self.end_xp = xp
 
     def add_action(self, action: str) -> None:
         timestamp = datetime.now().isoformat()
@@ -32,6 +43,17 @@ class SessionManager:
     def end_session(self) -> None:
         self.end_time = datetime.now()
         self.duration = (self.end_time - self.start_time).total_seconds() / 60
+        estimator = XPEstimator()
+        if self.end_xp is None:
+            # if end xp not explicitly set treat as no change
+            self.end_xp = self.start_xp
+        self.xp_gained = track_xp_gain(
+            self.session_id,
+            "session",
+            self.start_xp,
+            self.end_xp,
+            estimator,
+        )
         print(
             f"[SESSION ENDED] ID: {self.session_id} | Duration: {self.duration:.2f} mins"
         )
@@ -47,6 +69,8 @@ class SessionManager:
             "start_credits": self.start_credits,
             "end_credits": self.end_credits,
             "credits_earned": self.end_credits - self.start_credits,
+            "start_xp": self.start_xp,
+            "end_xp": self.end_xp,
             "xp_gained": self.xp_gained,
             "actions": self.actions_log,
         }
