@@ -330,6 +330,8 @@ The application writes several logs under the `logs/` directory:
 - `logs/session_*.json` &ndash; detailed step traces and summaries for each session.
 - `logs/training_log.txt` &ndash; entries recorded by the trainer navigator.
 
+Running the test suite also writes logs to this directory.
+
 ## Running Tests
 
 Before executing the test suite, install all dependencies listed in
