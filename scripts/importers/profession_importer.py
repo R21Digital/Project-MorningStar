@@ -1,8 +1,17 @@
 import os
 import json
 import re
-import requests
-from bs4 import BeautifulSoup
+try:
+    import requests
+except ImportError as exc:
+    print("Error: the 'requests' package is required. Install it with 'pip install requests'.")
+    raise SystemExit(1) from exc
+
+try:
+    from bs4 import BeautifulSoup
+except ImportError as exc:
+    print("Error: the 'bs4' package (BeautifulSoup) is required. Install it with 'pip install beautifulsoup4'.")
+    raise SystemExit(1) from exc
 
 BASE_URL = "https://swgr.org/wiki/"
 OUTPUT_DIR = os.path.join("android_ms11", "data", "professions")
