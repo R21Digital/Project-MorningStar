@@ -269,5 +269,5 @@ The application writes several logs under the `logs/` directory:
 - `logs/app.log` &ndash; general runtime messages produced by `start_log()`.
 - `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
 - `logs/step_journal.log` &ndash; success/failure records from step validation.
-- `logs/session_*.log` &ndash; detailed step traces for each session.
+- `logs/session_*.json` &ndash; detailed step traces and summaries for each session.
 - `logs/training_log.txt` &ndash; entries recorded by the trainer navigator.
