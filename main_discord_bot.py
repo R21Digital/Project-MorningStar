@@ -1,11 +1,17 @@
 from discord.ext import commands
 import json
+import os
 import discord_relay
 
 
 def load_config(path: str = "config/discord_config.json") -> dict:
     with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        cfg = json.load(f)
+    if not cfg.get("discord_token"):
+        env_token = os.getenv("DISCORD_TOKEN")
+        if env_token:
+            cfg["discord_token"] = env_token
+    return cfg
 
 
 def main() -> None:
