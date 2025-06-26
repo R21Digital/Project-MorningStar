@@ -5,6 +5,9 @@ beautifulsoup4==4.12.3
 playwright==1.42.0
 requests>=2.0
 
+# For Discord relay bot functionality
+discord.py
+
 PyYAML
 pymongo>=3.0
 

@@ -6,8 +6,12 @@ import os
 import threading
 from typing import Dict, Any
 
-from discord.ext import commands
-import discord_relay
+try:
+    from discord.ext import commands
+    import discord_relay
+except Exception:  # pragma: no cover - optional dependency
+    commands = None
+    discord_relay = None
 
 from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
@@ -70,7 +74,7 @@ def main(argv: list[str] | None = None) -> None:
     session_cfg = load_json(SESSION_CONFIG_PATH)
     relay_enabled = session_cfg.get("enable_discord_relay", False)
     bot = None
-    if relay_enabled:
+    if relay_enabled and commands and discord_relay:
         discord_cfg = load_json(DISCORD_CONFIG_PATH)
         bot = commands.Bot(command_prefix="!")
         discord_relay.setup(bot, discord_cfg)
@@ -79,6 +83,8 @@ def main(argv: list[str] | None = None) -> None:
             args=(discord_cfg["discord_token"],),
             daemon=True,
         ).start()
+    elif relay_enabled:
+        print("[DISCORD] discord.py not available; relay disabled")
 
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
