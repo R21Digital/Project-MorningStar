@@ -272,3 +272,19 @@ The application writes several logs under the `logs/` directory:
 - `logs/step_journal.log` &ndash; success/failure records from step validation.
 - `logs/session_*.json` &ndash; detailed step traces and summaries for each session.
 - `logs/training_log.txt` &ndash; entries recorded by the trainer navigator.
+
+## Running Tests
+
+Before executing the test suite, install all dependencies listed in
+`requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Once dependencies are installed you can run the tests directly with
+`pytest` or use the convenience target:
+
+```bash
+make test
+```
