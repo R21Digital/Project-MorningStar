@@ -54,7 +54,10 @@ def test_run_mode_dispatches(monkeypatch):
 
 
 def test_run_step_list(monkeypatch):
-    monkeypatch.setattr("builtins.open", lambda f, _: __import__("io").StringIO(
-        '[{"type":"quest","id":"intro_mission","action":"start"}]'
-    ))
+    monkeypatch.setattr(
+        "builtins.open",
+        lambda f, _=None, **__: __import__("io").StringIO(
+            '[{"type":"quest","id":"intro_mission","action":"start"}]'
+        ),
+    )
     run_step_list("fake_path.json")

@@ -2,7 +2,8 @@ from datetime import datetime
 import json
 import os
 
-LOG_DIR = "data/xp_logs"
+# Store all session logs under the common ``logs/`` directory
+LOG_DIR = "logs"
 os.makedirs(LOG_DIR, exist_ok=True)
 
 
@@ -28,7 +29,9 @@ class XPSession:
         self.xp_gain = xp_end - self.xp_start
 
     def save(self):
-        path = os.path.join(LOG_DIR, f"{self.character}_{self.session_start.replace(':', '-')}.json")
+        """Write the session log to ``logs/session_*.json`` and return the path."""
+        timestamp = self.session_start.replace(":", "-")
+        path = os.path.join(LOG_DIR, f"session_{timestamp}.json")
         with open(path, "w") as f:
             json.dump(self.__dict__, f, indent=2)
         return path
