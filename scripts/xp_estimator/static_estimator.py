@@ -1,7 +1,9 @@
 import os
 from datetime import datetime
 
-LOG_DIR = "android_ms11/data/logs/xp_tracking"
+from src.xp_paths import LOG_ROOT
+
+LOG_DIR = LOG_ROOT
 LOG_FILE = "xp_actions.log"
 
 
