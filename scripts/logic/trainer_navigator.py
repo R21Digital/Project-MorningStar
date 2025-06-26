@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import math
 import os
+import json
 from datetime import datetime
 from typing import Dict, Iterable, List, Optional, Tuple
 
@@ -19,8 +20,9 @@ from utils.get_trainer_location import get_trainer_location
 from src.training.trainer_visit import visit_trainer
 from src.utils.logger import log_event
 
-# Default log file under the project's ``logs`` directory.
+# Default log files under the project's ``logs`` directory.
 DEFAULT_LOG_PATH = os.path.join("logs", "training_log.txt")
+DEFAULT_JSON_PATH = os.path.join("logs", "training.json")
 
 # Type aliases for clarity
 Coords = Tuple[int, int]
@@ -78,8 +80,14 @@ def log_training_event(
     trainer_name: str,
     distance: float,
     log_path: str = DEFAULT_LOG_PATH,
+    *,
+    json_path: Optional[str] = None,
 ) -> None:
-    """Append a training event to ``log_path`` with a timestamp."""
+    """Append a training event to ``log_path`` with a timestamp.
+
+    If ``json_path`` is provided, the event is also appended as JSON to that
+    file (one object per line).
+    """
     if os.path.abspath(log_path) == os.path.abspath(DEFAULT_LOG_PATH):
         # Ensure the default ``logs`` directory exists when writing the
         # standard ``training_log.txt`` file.
@@ -92,6 +100,22 @@ def log_training_event(
     message = f"{timestamp} - Trained with {trainer_name} ({profession}) at distance {distance:.1f}\n"
     with open(log_path, "a", encoding="utf-8") as fh:
         fh.write(message)
+
+    if json_path:
+        if os.path.abspath(json_path) == os.path.abspath(DEFAULT_JSON_PATH):
+            os.makedirs("logs", exist_ok=True)
+        else:
+            dir_name = os.path.dirname(json_path)
+            if dir_name:
+                os.makedirs(dir_name, exist_ok=True)
+        entry = {
+            "timestamp": timestamp,
+            "profession": profession,
+            "trainer": trainer_name,
+            "distance": distance,
+        }
+        with open(json_path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(entry) + "\n")
 
 
 def navigate_to_trainer(

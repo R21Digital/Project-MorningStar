@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 from importlib import reload
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -50,6 +51,21 @@ def test_log_training_event(tmp_path):
     assert log_file.exists()
     content = log_file.read_text()
     assert "Artisan Trainer" in content
+
+
+def test_log_training_event_json(tmp_path):
+    log_file = tmp_path / "subdir" / "log.txt"
+    json_file = tmp_path / "subdir" / "training.json"
+    tn.log_training_event(
+        "artisan",
+        "Artisan Trainer",
+        5.0,
+        log_path=str(log_file),
+        json_path=str(json_file),
+    )
+    assert json_file.exists()
+    data = [json.loads(line) for line in json_file.read_text().splitlines()]
+    assert data[0]["trainer"] == "Artisan Trainer"
 
 
 def test_find_nearby_trainers_sorted(monkeypatch):
