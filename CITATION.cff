@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: "Android MS11"
+message: "If you use this software, please cite it as below."
+version: "0.1.0"
+authors:
+  - family-names: "Volvik"
+    given-names: "R21"
+date-released: "2025-06-26"
+repository-code: "https://github.com/yourname/Android-MS11"
+license: "MIT"
+
+# Data Acknowledgment
+# Quest and item data derived from swgr.org/wiki, hosted on Fandom under the Creative Commons Attribution-ShareAlike 3.0 license. See data/metadata_index.json for details on data sources.
