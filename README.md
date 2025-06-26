@@ -161,6 +161,9 @@ Example configuration:
   "relay_user_id": 0
 }
 ```
+If ``discord_token`` is empty in the JSON file, the bot will look for a
+``DISCORD_TOKEN`` environment variable instead. This lets you keep the token out
+of the repo when deploying or running locally.
 
 `relay_mode` controls how whispers are delivered:
 

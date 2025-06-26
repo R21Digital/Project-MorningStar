@@ -76,6 +76,10 @@ def main(argv: list[str] | None = None) -> None:
     bot = None
     if relay_enabled and commands and discord_relay:
         discord_cfg = load_json(DISCORD_CONFIG_PATH)
+        if not discord_cfg.get("discord_token"):
+            env_token = os.getenv("DISCORD_TOKEN")
+            if env_token:
+                discord_cfg["discord_token"] = env_token
         bot = commands.Bot(command_prefix="!")
         discord_relay.setup(bot, discord_cfg)
         threading.Thread(
