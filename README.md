@@ -177,7 +177,7 @@ configured channel is used.
 Run the bot directly:
 
 ```bash
-python discord/bot.py
+python relaybot/bot.py
 ```
 
 Or start the demo with relay enabled:
