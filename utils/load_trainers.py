@@ -10,7 +10,7 @@ import logging
 # working directory.
 TRAINER_FILE = Path(__file__).resolve().parents[1] / "data" / "trainers.yaml"
 TRAINER_JSON_FILE = (
-    Path(__file__).resolve().parents[1] / "data" / "trainers" / "trainers.json"
+    Path(__file__).resolve().parents[1] / "data" / "trainers.json"
 )
 
 

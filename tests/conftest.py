@@ -51,7 +51,6 @@ def trainer_file_env(monkeypatch):
     default = (
         Path(__file__).resolve().parents[1]
         / "data"
-        / "trainers"
         / "trainers.json"
     )
     monkeypatch.setenv("TRAINER_FILE", str(default))
