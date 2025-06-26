@@ -1,24 +1,11 @@
-from discord.ext import commands
-import json
-import os
-import discord_relay
+"""Compatibility wrapper for launching the Discord relay bot."""
 
-
-def load_config(path: str = "config/discord_config.json") -> dict:
-    with open(path, "r", encoding="utf-8") as f:
-        cfg = json.load(f)
-    if not cfg.get("discord_token"):
-        env_token = os.getenv("DISCORD_TOKEN")
-        if env_token:
-            cfg["discord_token"] = env_token
-    return cfg
+from discord.bot import start_bot
 
 
 def main() -> None:
-    config = load_config()
-    bot = commands.Bot(command_prefix="!")
-    discord_relay.setup(bot, config)
-    bot.run(config["discord_token"])
+    """Launch the Discord relay bot using the shared entry point."""
+    start_bot()
 
 
 if __name__ == "__main__":
