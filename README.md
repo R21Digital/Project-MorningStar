@@ -97,7 +97,8 @@ This section walks through a fresh setup so you can try the project locally.
    # then install Python packages
    pip install -r requirements.txt
    ```
-    The requirements file includes `requests>=2.0`, `PyYAML`, and `pymongo>=3.0`.
+    The requirements file includes `requests>=2.0`, `PyYAML`, `pymongo>=3.0`, and
+    `discord.py` for the optional Discord relay bot.
 
 4. **Run the example application**
 
@@ -143,6 +144,43 @@ settings together. Use the ``--profile`` option to load one:
 
 ```bash
 python src/main.py --profile questing
+```
+
+## Discord Relay Bot
+The relay bot depends on the `discord.py` package. Enable it by editing
+`config/session_config.json` and `config/discord_config.json`.
+
+Example configuration:
+
+```json
+{
+  "discord_token": "YOUR_BOT_TOKEN",
+  "relay_channel_id": 1234567890,
+  "relay_mode": "manual",
+  "reply_queue": [],
+  "relay_user_id": 0
+}
+```
+
+`relay_mode` controls how whispers are delivered:
+
+- `notify` – forward messages without replying.
+- `manual` – wait for manual replies via DM.
+- `auto` – auto-reply using placeholder AI logic.
+
+Set `relay_user_id` (or `dm_user_id`) to deliver messages via DM; otherwise the
+configured channel is used.
+
+Run the bot directly:
+
+```bash
+python main_discord_bot.py
+```
+
+Or start the demo with relay enabled:
+
+```bash
+python src/main.py --mode medic
 ```
 
 ## Legacy Quest Manager CLI
