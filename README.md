@@ -249,6 +249,12 @@ python scripts/data/extract_trainers.py
 The script runs OCR on images under `docs/samples/` and writes structured
 results to `data/trainers.yaml`.
 
+### Migration Note
+The JSON trainer data file has moved from `data/trainers/trainers.json` to
+`data/trainers.json`. `utils.load_trainers` now looks for this new path by
+default. Update any custom scripts referencing the old location or set the
+`TRAINER_FILE` environment variable if needed.
+
 ## Shuttle Travel Utilities
 Shuttle locations and connections are defined in `data/shuttles.json`. Each
 planet key contains a list of shuttles with NPC coordinates and destination

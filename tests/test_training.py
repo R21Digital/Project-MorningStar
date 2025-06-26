@@ -135,7 +135,7 @@ def test_load_trainers_resolves_default(monkeypatch, tmp_path):
 
 
 def test_load_trainers_default_path(monkeypatch, tmp_path):
-    """load_trainers should read from data/trainers/trainers.json when no overrides are provided."""
+    """load_trainers should read from data/trainers.json when no overrides are provided."""
     import io
 
     from utils import load_trainers as lt
@@ -153,7 +153,6 @@ def test_load_trainers_default_path(monkeypatch, tmp_path):
     expected = (
         Path(__file__).resolve().parents[1]
         / "data"
-        / "trainers"
         / "trainers.json"
     )
     assert lt.TRAINER_JSON_FILE == expected
