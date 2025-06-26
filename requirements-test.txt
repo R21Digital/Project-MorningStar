@@ -1,0 +1,3 @@
+# Additional dependencies required when running the test suite
+requests>=2.0
+discord.py
