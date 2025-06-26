@@ -4,7 +4,7 @@ import json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from modules.learning import xp_estimator
+from profession_logic.modules import xp_estimator
 
 
 def test_log_xp_and_estimate(monkeypatch, tmp_path):
@@ -23,8 +23,8 @@ def test_log_xp_and_estimate(monkeypatch, tmp_path):
 
 def test_log_action_uses_estimator(monkeypatch, tmp_path):
     monkeypatch.setattr(xp_estimator, "LOG_ROOT", tmp_path)
-    monkeypatch.setattr("modules.learning.xp_estimator.StaticXPEstimator.log_action", lambda self, a, x: None)
-    monkeypatch.setattr("modules.learning.xp_estimator.estimate_xp", lambda a: 200)
+    monkeypatch.setattr("profession_logic.modules.xp_estimator.StaticXPEstimator.log_action", lambda self, a, x: None)
+    monkeypatch.setattr("profession_logic.modules.xp_estimator.estimate_xp", lambda a: 200)
     gained = xp_estimator.log_action("fighter", "mob_kill", 0.5)
     assert gained == 200
     log_file = tmp_path / "fighter_mob_kill.json"

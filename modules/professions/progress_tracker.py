@@ -3,7 +3,7 @@ import os
 import re
 from typing import List, Optional, Dict
 
-from modules.learning import xp_estimator
+from profession_logic.modules import xp_estimator
 
 # Default location for profession metadata JSON files
 DATA_DIR = os.path.join("android_ms11", "data", "professions")
