@@ -5,8 +5,8 @@ from typing import List, Dict
 
 from src.xp_tracker import estimate_xp
 from scripts.xp_estimator.static_estimator import StaticXPEstimator
+from src.xp_paths import LOG_ROOT
 
-LOG_ROOT = os.path.join("logs", "xp_tracking")
 os.makedirs(LOG_ROOT, exist_ok=True)
 
 
