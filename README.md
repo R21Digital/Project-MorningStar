@@ -295,3 +295,6 @@ Once dependencies are installed you can run the tests directly with
 ```bash
 make test
 ```
+
+## Disclaimer
+Android MS11 is an unofficial project, not affiliated with SWGR or LucasArts, and must be used in accordance with the game's terms of service.
