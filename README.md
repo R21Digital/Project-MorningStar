@@ -338,7 +338,7 @@ Before executing the test suite, install all dependencies listed in
 ```bash
 sudo apt-get install tesseract-ocr libtesseract-dev
 # then install Python packages
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-test.txt
 ```
 
 Once dependencies are installed you can run the tests directly with
