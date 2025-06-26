@@ -1,0 +1,9 @@
+{
+  "mode": "grinding",
+  "location": "Dantooine",
+  "objectives": [
+    "Farm creatures near the Jedi ruins",
+    "Gather resources for crafting"
+  ],
+  "priority": 2
+}
