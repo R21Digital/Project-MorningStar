@@ -13,6 +13,9 @@ from core.session_manager import SessionManager
 from src.movement.agent_mover import MovementAgent
 from src.movement.movement_profiles import patrol_route
 from src.training.trainer_visit import visit_trainer
+from modules.skills.training_check import get_trainable_skills
+from modules.travel.trainer_travel import travel_to_trainer
+from utils.load_trainers import load_trainers
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
 SESSION_CONFIG_PATH = os.path.join("config", "session_config.json")
@@ -36,6 +39,20 @@ def load_json(path: str) -> Dict[str, Any]:
         except json.JSONDecodeError:
             return {}
     return {}
+
+
+def check_and_train_skills(
+    agent,
+    character_skills: Dict[str, int],
+    profession_tree: Dict[str, Any],
+) -> None:
+    """Check for trainable skills and visit trainers if available."""
+
+    trainer_data = load_trainers()
+    trainable = get_trainable_skills(character_skills, profession_tree)
+    for profession, next_level in trainable:
+        print(f"[TRAIN] {profession} -> level {next_level}")
+        travel_to_trainer(profession, trainer_data, agent=agent)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -84,6 +101,11 @@ def main(argv: list[str] | None = None) -> None:
 
     # Try visiting artisan trainer
     visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
+
+    # Check for new skills after quest completion
+    sample_skills = {"artisan": 0}
+    skill_tree = {"artisan": [0, 1]}
+    check_and_train_skills(agent, sample_skills, skill_tree)
 
     # End session and save log
     session.end_session()
