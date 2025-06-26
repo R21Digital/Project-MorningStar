@@ -11,6 +11,7 @@ In the world of **Argent**, legendary guilds compete to recover ancient relics. 
 Install the dependencies and then import the modules you need.
 The `requirements.txt` file now includes `requests>=2.0`, `PyYAML`, and `pymongo>=3.0`:
 ```bash
+sudo apt-get install tesseract-ocr libtesseract-dev
 pip install -r requirements.txt
 ```
 Generate a short story or track XP in your automation scripts:
@@ -92,6 +93,8 @@ This section walks through a fresh setup so you can try the project locally.
 3. **Install dependencies**
 
    ```bash
+   sudo apt-get install tesseract-ocr libtesseract-dev
+   # then install Python packages
    pip install -r requirements.txt
    ```
     The requirements file includes `requests>=2.0`, `PyYAML`, and `pymongo>=3.0`.
@@ -286,6 +289,8 @@ Before executing the test suite, install all dependencies listed in
 `requirements.txt`:
 
 ```bash
+sudo apt-get install tesseract-ocr libtesseract-dev
+# then install Python packages
 pip install -r requirements.txt
 ```
 
