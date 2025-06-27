@@ -1,0 +1,61 @@
+"""Utilities for traveling to trainers and managing profession training."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Dict, List, Any
+
+from .trainer_scanner import TrainerScanner
+
+# Placeholder imports until real utilities are available
+try:  # pragma: no cover - used for future integration
+    from utils.travel import go_to_waypoint, verify_location
+except Exception:  # pragma: no cover - fallback placeholders
+    def go_to_waypoint(*_args: Any, **_kwargs: Any) -> None:
+        """Placeholder travel function."""
+        pass
+
+    def verify_location(*_args: Any, **_kwargs: Any) -> None:
+        """Placeholder verification function."""
+        pass
+
+
+class TravelManager:
+    """Manage travel to profession trainers."""
+
+    def __init__(self, trainer_file: str | None = None) -> None:
+        self.trainer_file = (
+            Path(trainer_file)
+            if trainer_file is not None
+            else Path(__file__).resolve().parents[1] / "profiles" / "trainers.json"
+        )
+        self.trainers: Dict[str, Dict] = {}
+        self.trainer_scanner = TrainerScanner()
+        self.load_trainers()
+
+    # --------------------------------------------------
+    def load_trainers(self) -> None:
+        """Load trainer data from :attr:`trainer_file`."""
+        try:
+            with open(self.trainer_file, "r", encoding="utf-8") as fh:
+                self.trainers = json.load(fh)
+        except FileNotFoundError:
+            self.trainers = {}
+
+    # --------------------------------------------------
+    def train_profession(self, profession: str) -> List[str]:
+        """Travel to the trainer for ``profession`` and return offered skills."""
+        trainer = self.trainers.get(profession)
+        if not trainer:
+            return []
+
+        coords = trainer.get("coords") or [trainer.get("x", 0), trainer.get("y", 0)]
+        planet = trainer.get("planet")
+        city = trainer.get("city")
+
+        go_to_waypoint(coords, planet=planet, city=city)
+        verify_location(coords, planet=planet, city=city)
+
+        skills = self.trainer_scanner.scan()
+        return skills
