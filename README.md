@@ -235,19 +235,18 @@ python scripts/cli/find_trainer.py artisan --planet tatooine --city mos_eisley
 
 The `profession` argument is required. `--planet` and `--city` default to
 `tatooine` and `mos_eisley`. When a matching entry is found in
-`data/trainers.yaml`, the trainer's name and coordinates are printed; otherwise
-a helpful message is shown.
-The lookup uses `utils.get_trainer_location.get_trainer_location()` to read
-locations from the YAML file. By default the file is loaded relative to the
+`data/trainers.json`, the trainer's name and coordinates are printed; otherwise
+the lookup uses `utils.get_trainer_location.get_trainer_location()` to read
+locations from the JSON file. By default the file is loaded relative to the
 project root, but you can override the location by setting the
 `TRAINER_FILE` environment variable or passing a custom path to
 `utils.load_trainers.load_trainers()`.
 Trainer coordinates are currently curated manually. A future script may
-automate populating `data/trainers.yaml` once reliable NPC extraction is
+automate populating `data/trainers.json` once reliable NPC extraction is
 available.
 
 Automating the visit is possible through `trainer_visit.visit_trainer()`. It
-loads coordinates from the same YAML file and directs an agent to travel to the
+loads coordinates from the same JSON file and directs an agent to travel to the
 trainer. Dialogue steps referencing "Trainer" trigger `train_with_npc()` to log
 the interaction.
 
@@ -263,16 +262,15 @@ script, defaulting to `tatooine` and `mos_eisley`.
 
 ## Trainer Navigator Script
 `scripts/logic/trainer_navigator.py` exposes helper functions for locating
-nearby trainers and logging training sessions. It expects a YAML file at
-`data/trainers.yaml` structured by profession, planet and city:
+nearby trainers and logging training sessions. Trainer locations are stored in
+`data/trainers.json` using a list of entries per profession:
 
-```yaml
-artisan:
-  tatooine:
-    mos_eisley:
-      name: "Artisan Trainer"
-      x: 3432
-      y: -4795
+```json
+{
+  "artisan": [
+    {"planet": "tatooine", "city": "mos_eisley", "name": "Artisan Trainer", "coords": [3432, -4795]}
+  ]
+}
 ```
 
 Use the module interactively to list trainers near a position and record the
@@ -301,7 +299,7 @@ python scripts/data/extract_trainers.py
 ```
 
 The script runs OCR on images under `docs/samples/` and writes structured
-results to `data/trainers.yaml`.
+results to `data/trainers.json`.
 
 ### Migration Note
 The JSON trainer data file has moved from `data/trainers/trainers.json` to
