@@ -7,6 +7,7 @@ from .trainer_ocr import (
     scan_and_detect_untrained_skills,
 )
 from .trainer_scanner import scan_trainer_skills, TrainerScanner
+from .travel_manager import TravelManager
 
 __all__ = [
     "preprocess_image",
@@ -15,4 +16,5 @@ __all__ = [
     "scan_and_detect_untrained_skills",
     "scan_trainer_skills",
     "TrainerScanner",
+    "TravelManager",
 ]
