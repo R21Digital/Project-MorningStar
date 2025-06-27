@@ -307,6 +307,35 @@ The JSON trainer data file has moved from `data/trainers/trainers.json` to
 default. Update any custom scripts referencing the old location or set the
 `TRAINER_FILE` environment variable if needed.
 
+## Trainer Profiles
+`core.TravelManager` reads profession trainer information from
+`profiles/trainers.json`. Each profession key maps to an object with the fields
+below:
+
+- `name` – in‑game NPC name of the trainer.
+- `waypoint` – `[x, y]` waypoint coordinates.
+- `expected_zone` – city or outpost where the trainer is found.
+- `expected_skill` – skill expected to be available when visiting.
+
+An example file:
+
+```json
+{
+  "artisan": {
+    "name": "Artisan Trainer",
+    "waypoint": [3432, -4795],
+    "expected_zone": "mos_eisley",
+    "expected_skill": "Novice Artisan"
+  },
+  "marksman": {
+    "name": "Marksman Trainer",
+    "waypoint": [-150, 60],
+    "expected_zone": "coronet",
+    "expected_skill": "Novice Marksman"
+  }
+}
+```
+
 ## Shuttle Travel Utilities
 Shuttle locations and connections are defined in `data/shuttles.json`. Each
 planet key contains a list of shuttles with NPC coordinates and destination
