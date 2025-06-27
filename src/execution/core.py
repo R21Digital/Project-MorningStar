@@ -17,4 +17,4 @@ def execute_step(step: dict) -> None:
         from .quest import execute_quest
         execute_quest(step)
     else:
-        print(f"[TODO] Unsupported step type: {step_type}")
+        print(f"[Unsupported] Step type '{step_type}' is not implemented.")

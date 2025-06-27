@@ -17,4 +17,4 @@ def test_execute_step_unknown(capsys):
     step = {"type": "dance"}
     execute_step(step)
     captured = capsys.readouterr()
-    assert "[TODO] Unsupported step type: dance" in captured.out
+    assert "[Unsupported] Step type 'dance' is not implemented." in captured.out
