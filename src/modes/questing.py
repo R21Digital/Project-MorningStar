@@ -9,13 +9,28 @@ def load_legacy_quest():
 
 def run_questing_mode(character: str) -> None:
     print(f"[QUESTING] Starting Legacy Quest mode for {character}")
-    steps = load_legacy_quest()
+    raw_steps = load_legacy_quest()
 
-    for step in steps:
-        print(f"\n[STEP {step['id']}] {step['title']}")
+    for raw in raw_steps:
+        print(f"\n[STEP {raw['id']}] {raw['title']}")
+        # movement step to coordinates
+        move = {"type": "move", "data": {"zone": raw["zone"], "coords": raw["coords"]}}
+        handle_quest_step(move)
+
+        if raw["action"] == "talk":
+            step = {"type": "npc", "data": {"npc_name": raw["npc"]}}
+        elif raw["action"] == "kill":
+            step = {
+                "type": "combat",
+                "data": {"target_name": raw["target"], "count": raw.get("count", 1)},
+            }
+        else:
+            print(f"[!] Unknown legacy action: {raw['action']}")
+            continue
+
         success = handle_quest_step(step)
         if not success:
-            print(f"[!] Failed to complete step: {step['id']}")
+            print(f"[!] Failed to complete step: {raw['id']}")
             break
     else:
         print("[\u2713] All Legacy steps complete.")
