@@ -155,10 +155,9 @@ Example configuration:
 ```json
 {
   "discord_token": "YOUR_BOT_TOKEN",
-  "relay_channel_id": 1234567890,
   "relay_mode": "manual",
-  "reply_queue": [],
-  "relay_user_id": 0
+  "target_user_id": 0,
+  "reply_queue": []
 }
 ```
 If ``discord_token`` is empty in the JSON file, the bot will look for a
@@ -171,8 +170,7 @@ of the repo when deploying or running locally.
 - `manual` – wait for manual replies via DM.
 - `auto` – auto-reply using placeholder AI logic.
 
-Set `relay_user_id` (or `dm_user_id`) to deliver messages via DM; otherwise the
-configured channel is used.
+Set `target_user_id` to specify the DM recipient.
 
 Run the bot directly:
 
