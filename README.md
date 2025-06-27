@@ -344,8 +344,15 @@ Running the test suite also writes logs to this directory.
 
 ## Running Tests
 
-Before executing the test suite, install all dependencies listed in
-`requirements.txt`:
+Before executing the test suite, ensure all dependencies are installed.
+You can run the helper script below or manually install the packages.
+
+```bash
+./scripts/setup_test_env.sh
+```
+
+If you prefer to install manually, install the system packages and
+then the Python requirements:
 
 ```bash
 sudo apt-get install tesseract-ocr libtesseract-dev

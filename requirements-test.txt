@@ -1,3 +1,7 @@
 # Additional dependencies required when running the test suite
-requests>=2.0
-discord.py
+# Install these alongside `requirements.txt` before invoking pytest
+#   pip install -r requirements.txt -r requirements-test.txt
+# or run `scripts/setup_test_env.sh`
+
+requests>=2.0   # used by profession_importer tests
+discord.py      # used by Discord relay tests
