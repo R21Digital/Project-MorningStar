@@ -180,6 +180,12 @@ Run the bot directly:
 python relaybot/bot.py
 ```
 
+To launch a bot that only uses direct messages, run:
+
+```bash
+python discord_dm_bot.py
+```
+
 Or start the demo with relay enabled:
 
 ```bash
