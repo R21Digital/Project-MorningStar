@@ -18,6 +18,9 @@ class DiscordRelay(commands.Cog):
         self.user_id = config.get("relay_user_id")
         self.mode = config.get("relay_mode", "notify")
 
+        if not self.user_id:
+            raise ValueError("relay_user_id must be configured for DiscordRelay")
+
     @commands.Cog.listener()
     async def on_ready(self) -> None:
         print(f"[DiscordRelay] Connected as {self.bot.user}")

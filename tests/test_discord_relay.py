@@ -2,6 +2,7 @@ import os
 import sys
 import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
+import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import discord_relay
@@ -75,3 +76,10 @@ def test_on_message_extracts_manual_reply(monkeypatch):
     asyncio.run(relay.on_message(msg))
 
     assert relay.config["reply_queue"] == [("bob", "hi there")]
+
+
+def test_init_requires_user_id():
+    bot = MagicMock()
+    config = {"relay_mode": "notify", "relay_channel_id": 42}
+    with pytest.raises(ValueError):
+        DiscordRelay(bot, config)
