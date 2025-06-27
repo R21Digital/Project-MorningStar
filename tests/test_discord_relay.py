@@ -1,8 +1,40 @@
 import os
 import sys
+import os
+import sys
 import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
+import types
 import pytest
+
+# Provide a stub for the discord module if it's missing
+if "discord" not in sys.modules:
+    discord_mod = types.ModuleType("discord")
+    discord_mod.Message = object
+    discord_mod.HTTPException = Exception
+    discord_mod.DMChannel = object
+    sys.modules["discord"] = discord_mod
+
+    ext_mod = types.ModuleType("discord.ext")
+
+    class DummyCog:
+        @staticmethod
+        def listener(*a, **k):
+            def decorator(func):
+                return func
+            return decorator
+
+    class DummyBot:
+        pass
+
+    commands_mod = types.ModuleType("discord.ext.commands")
+    commands_mod.Cog = DummyCog
+    commands_mod.Bot = DummyBot
+    commands_mod.listener = DummyCog.listener
+
+    ext_mod.commands = commands_mod
+    sys.modules["discord.ext"] = ext_mod
+    sys.modules["discord.ext.commands"] = commands_mod
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import discord_relay

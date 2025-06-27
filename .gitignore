@@ -198,3 +198,4 @@ cython_debug/
 
 # Raw HTML quest data
 data/raw/*.html
+archive/*.html
