@@ -1,12 +1,14 @@
 
 """Automation routines for crafting mode.
 
-This module will eventually load crafting macros, survey resources,
-and execute the steps required to craft a target item.
+The crafting system is largely unimplemented. For now the helper simply
+prints messages describing the high level actions that would occur.
 """
 
-def start_crafting(character_name: str):
+def start_crafting(character_name: str) -> None:
+    """Simulate a short crafting session for the given character."""
+
     print(f"🛠️ Crafting Mode Activated for {character_name}...")
-    print("🔧 [TODO] Load crafting macros, survey for resources, and craft target item.")
+    print("🔧 Surveying resources and executing crafting macros...")
     # Simulate test output
     print("🔧 Simulation: Crafted 2 Mineral Survey Devices.")

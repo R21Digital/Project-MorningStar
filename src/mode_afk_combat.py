@@ -1,12 +1,14 @@
 
 """AFK combat automation helpers.
 
-Planned features include loading a combat macro, monitoring for whispers,
-and rotating through targets while the player is away.
+The real AFK combat system is not implemented yet. This stub simply
+prints messages that mimic basic target rotation and whisper monitoring.
 """
 
-def start_afk_combat(character_name: str):
+def start_afk_combat(character_name: str) -> None:
+    """Simulate passive combat actions for a character."""
+
     print(f"🛡️ AFK Combat Mode Activated for {character_name}...")
-    print("⚔️ [TODO] Load afk-combat macro, monitor for whispers, and trigger target rotation.")
+    print("⚔️ Rotating through targets and listening for whispers...")
     # Simulate test output
     print("⚔️ Simulation: Defeated 5 mobs at waypoint.")

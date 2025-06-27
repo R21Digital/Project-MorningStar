@@ -1,12 +1,14 @@
 
 """Utilities for buff-by-tell mode.
 
-This mode will monitor private tells and respond with queued buff macros
-when a request is detected.
+The full buff-by-tell system is still under construction. This stub
+demonstrates the expected console output when a request is handled.
 """
 
-def start_buff_by_tell(character_name: str):
+def start_buff_by_tell(character_name: str) -> None:
+    """Simulate responding to buff requests sent via tell."""
+
     print(f"📨 Buff-by-Tell Mode Activated for {character_name}...")
-    print("🧙 [TODO] Monitor tells for buff requests and respond with queued macros.")
+    print("🧙 Listening for buff requests and queueing macros...")
     # Simulate test output
     print("📨 Simulation: Responded to 2 buff requests.")

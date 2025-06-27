@@ -1,12 +1,15 @@
 
 """Medic mode automation helpers.
 
-Future tasks involve loading healing macros, checking group status, and
-applying buffs as needed.
+This module currently provides a very small stub that simulates basic
+healing behaviour. The real automation logic for loading macros and
+monitoring group status has not been implemented yet.
 """
 
-def start_medic(character_name: str):
+def start_medic(character_name: str) -> None:
+    """Simulate healing and buffing nearby allies."""
+
     print(f"🩺 Medic Mode Activated for {character_name}...")
-    print("🧪 [TODO] Load healing macros, monitor group status, and apply buffs.")
+    print("🧪 Monitoring group status and applying basic heals...")
     # Simulate test output
     print("🧪 Simulation: Buffed 3 nearby players.")
