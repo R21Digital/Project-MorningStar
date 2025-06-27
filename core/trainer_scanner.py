@@ -26,3 +26,14 @@ def scan_trainer_skills(region: Tuple[int, int, int, int] | None = DEFAULT_REGIO
         if line:
             skills.append(line)
     return skills
+
+
+class TrainerScanner:
+    """Class wrapper around :func:`scan_trainer_skills`."""
+
+    def __init__(self, region: Tuple[int, int, int, int] | None = DEFAULT_REGION) -> None:
+        self.region = region
+
+    def scan(self) -> List[str]:
+        """Return detected trainer skills from :attr:`region`."""
+        return scan_trainer_skills(self.region)
