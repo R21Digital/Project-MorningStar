@@ -9,7 +9,9 @@ def interact_with_npc(npc_name: str) -> bool:
     return True
 
 
-def interact_with_trainer(trainer_name: str) -> bool:
-    """Simulate interacting with a trainer NPC."""
+def interact_with_trainer(trainer_name: str, skill: str) -> bool:
+    """Simulate training with a profession trainer."""
     print(f"[TRAINER] Talking to {trainer_name}")
-    return interact_with_npc(trainer_name)
+    interact_with_npc(trainer_name)
+    print(f"[TRAINER] {trainer_name} teaches you {skill}")
+    return True

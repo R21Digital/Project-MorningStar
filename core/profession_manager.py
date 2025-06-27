@@ -29,5 +29,6 @@ class ProfessionManager:
             zone = trainer["planet"]
             coords = trainer["coords"]
             travel_to(zone, coords)
-            interact_with_trainer(trainer["name"])
+            for skill in missing:
+                interact_with_trainer(trainer["name"], skill)
 
