@@ -18,7 +18,7 @@ OUTPUT_DIR = os.path.join("android_ms11", "data", "professions")
 
 def fetch_profession_html(name: str) -> str:
     url = f"{BASE_URL}{name}/"
-    resp = requests.get(url)
+    resp = requests.get(url, timeout=10)
     resp.raise_for_status()
     return resp.text
 

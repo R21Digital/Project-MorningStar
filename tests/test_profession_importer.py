@@ -31,7 +31,7 @@ def test_fetch_and_save(monkeypatch, tmp_path):
         def raise_for_status(self):
             pass
 
-    def fake_get(url):
+    def fake_get(url, *args, **kwargs):
         assert url == profession_importer.BASE_URL + "Doctor/"
         return DummyResponse()
 

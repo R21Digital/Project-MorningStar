@@ -23,7 +23,7 @@ from utils import wiki_scraper
 def test_fetch_page_success(monkeypatch):
     expected_html = "<html>OK</html>"
 
-    def fake_get(url):
+    def fake_get(url, *args, **kwargs):
         assert url == wiki_scraper.WikiScraper.BASE_URL + "page"
         return types.SimpleNamespace(status_code=200, text=expected_html)
 
@@ -34,7 +34,7 @@ def test_fetch_page_success(monkeypatch):
 
 
 def test_fetch_page_error(monkeypatch):
-    def fake_get(url):
+    def fake_get(url, *args, **kwargs):
         return types.SimpleNamespace(status_code=404, text="")
 
     monkeypatch.setattr(wiki_scraper.requests, "get", fake_get)
