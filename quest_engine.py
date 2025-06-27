@@ -1,23 +1,19 @@
-from utils.movement_manager import travel_to
-from utils.npc_handler import interact_with_npc
-from utils.combat_handler import engage_targets
+"""Simple quest step executor."""
+
+from src.execution.action_router import get_handler
 
 
 def handle_quest_step(step: dict) -> bool:
-    """Route a quest step to the appropriate handler."""
-    action = step.get("action")
-    coords = step.get("coords", (0, 0))
-    zone = step.get("zone", "Unknown")
+    """Execute a quest step using the action router."""
+    step_type = step.get("type")
+    data = step.get("data", {})
 
-    print(f"[ENGINE] Handling action: {action} at {coords}")
-    travel_to(zone, coords)
+    print(f"[ENGINE] Handling step type: {step_type} with data: {data}")
 
-    if action == "talk":
-        return interact_with_npc(step.get("npc", "Unknown"))
-    if action == "kill":
-        target = step.get("target", "Unknown")
-        count = step.get("count", 1)
-        return engage_targets(target, count)
+    handler = get_handler(step_type)
+    if not handler:
+        print(f"[!] Unknown action type: {step_type}")
+        return False
 
-    print(f"[!] Unknown action type: {action}")
-    return False
+    handler(**data)
+    return True
