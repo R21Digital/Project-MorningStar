@@ -18,7 +18,7 @@ def test_generate_ai_reply_basic():
 def test_relay_notify_mode():
     bot = MagicMock()
     bot.fetch_user = AsyncMock(return_value=MagicMock())
-    config = {'relay_mode': 'notify', 'relay_user_id': 1, 'relay_channel_id': 42}
+    config = {'relay_mode': 'notify', 'target_user_id': 1}
     relay = DiscordRelay(bot, config)
     relay.safe_send_user = AsyncMock()
 
@@ -32,7 +32,7 @@ def test_relay_notify_mode():
 def test_relay_auto_mode_generates_reply():
     bot = MagicMock()
     bot.fetch_user = AsyncMock(return_value=MagicMock())
-    config = {'relay_mode': 'auto', 'relay_user_id': 1, 'relay_channel_id': 42}
+    config = {'relay_mode': 'auto', 'target_user_id': 1}
     relay = DiscordRelay(bot, config)
     relay.safe_send_user = AsyncMock()
 
@@ -48,7 +48,7 @@ def test_relay_auto_mode_generates_reply():
 def test_relay_fetch_user_error():
     bot = MagicMock()
     bot.fetch_user = AsyncMock(side_effect=Exception('fail'))
-    config = {'relay_mode': 'notify', 'relay_user_id': 1, 'relay_channel_id': 42}
+    config = {'relay_mode': 'notify', 'target_user_id': 1}
     relay = DiscordRelay(bot, config)
     relay.safe_send_user = AsyncMock()
 
@@ -60,7 +60,7 @@ def test_relay_fetch_user_error():
 
 def test_on_message_extracts_manual_reply(monkeypatch):
     bot = MagicMock()
-    config = {"relay_mode": "manual", "relay_user_id": 99, "relay_channel_id": 42}
+    config = {"relay_mode": "manual", "target_user_id": 99}
     relay = DiscordRelay(bot, config)
 
     class DummyDM:
@@ -80,6 +80,6 @@ def test_on_message_extracts_manual_reply(monkeypatch):
 
 def test_init_requires_user_id():
     bot = MagicMock()
-    config = {"relay_mode": "notify", "relay_channel_id": 42}
+    config = {"relay_mode": "notify"}
     with pytest.raises(ValueError):
         DiscordRelay(bot, config)

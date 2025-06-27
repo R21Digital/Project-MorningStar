@@ -1,11 +1,24 @@
-"""Compatibility wrapper for launching the Discord relay bot."""
+"""Simple entry point for running the Discord relay bot."""
 
-from relaybot.bot import start_bot
+import json
+from discord.ext import commands
+
+from discord_relay import DiscordRelay
 
 
 def main() -> None:
-    """Launch the Discord relay bot using the shared entry point."""
-    start_bot()
+    """Load configuration and launch the bot."""
+    with open("config/discord_config.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
+
+    bot = commands.Bot(command_prefix="!")
+    bot.add_cog(DiscordRelay(bot, config))
+
+    @bot.event
+    async def on_ready() -> None:
+        print(f"[Bot] Logged in as {bot.user}")
+
+    bot.run(config["discord_token"])
 
 
 if __name__ == "__main__":
