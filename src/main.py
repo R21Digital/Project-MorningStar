@@ -22,6 +22,7 @@ from modules.travel.trainer_travel import travel_to_trainer
 from utils.load_trainers import load_trainers
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
+CONFIG_PATH = os.path.join("config", "config.json")
 SESSION_CONFIG_PATH = os.path.join("config", "session_config.json")
 DISCORD_CONFIG_PATH = os.path.join("config", "discord_config.json")
 
@@ -43,6 +44,11 @@ def load_json(path: str) -> Dict[str, Any]:
         except json.JSONDecodeError:
             return {}
     return {}
+
+
+def load_config(path: str | None = None) -> Dict[str, Any]:
+    """Return global configuration data."""
+    return load_json(path or CONFIG_PATH)
 
 
 def check_and_train_skills(
@@ -67,12 +73,15 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--profile", type=str, help="Runtime profile name")
     args = parser.parse_args(argv)
 
+    config = load_config()
     profile = load_runtime_profile(args.profile) if args.profile else {}
 
-    mode = args.mode or profile.get("mode", "medic")
+    mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
 
-    session_cfg = load_json(SESSION_CONFIG_PATH)
-    relay_enabled = session_cfg.get("enable_discord_relay", False)
+    relay_enabled = config.get("enable_discord_relay")
+    if relay_enabled is None:
+        session_cfg = load_json(SESSION_CONFIG_PATH)
+        relay_enabled = session_cfg.get("enable_discord_relay", False)
     bot = None
     if relay_enabled and commands and discord_relay:
         discord_cfg = load_json(DISCORD_CONFIG_PATH)
