@@ -103,7 +103,9 @@ This section walks through a fresh setup so you can try the project locally.
 4. **Configure runtime defaults**
 
    Edit `config/config.json` to set your character name, default mode,
-   and whether the Discord relay is enabled.
+   and whether the Discord relay is enabled. These values are not read
+   from `config/session_config.json`, which only stores temporary session
+   settings.
 
 5. **Run the example application**
 
@@ -154,7 +156,8 @@ python src/main.py --profile questing
 ## Discord Relay Bot
 The relay bot depends on the `discord.py` package. Enable it by editing
 `config/config.json` (set `enable_discord_relay`) and
-`config/discord_config.json`.
+`config/discord_config.json`. The relay flag is only read from
+`config/config.json`.
 
 Example configuration:
 

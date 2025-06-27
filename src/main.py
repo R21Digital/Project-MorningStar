@@ -23,7 +23,6 @@ from utils.load_trainers import load_trainers
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
 CONFIG_PATH = os.path.join("config", "config.json")
-SESSION_CONFIG_PATH = os.path.join("config", "session_config.json")
 DISCORD_CONFIG_PATH = os.path.join("config", "discord_config.json")
 
 
@@ -78,10 +77,7 @@ def main(argv: list[str] | None = None) -> None:
 
     mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
 
-    relay_enabled = config.get("enable_discord_relay")
-    if relay_enabled is None:
-        session_cfg = load_json(SESSION_CONFIG_PATH)
-        relay_enabled = session_cfg.get("enable_discord_relay", False)
+    relay_enabled = config.get("enable_discord_relay", False)
     bot = None
     if relay_enabled and commands and discord_relay:
         discord_cfg = load_json(DISCORD_CONFIG_PATH)
