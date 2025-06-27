@@ -6,8 +6,9 @@ from typing import Tuple
 
 import cv2
 import numpy as np
-import pyautogui
 from PIL import Image
+
+from utils.screen_capture import capture_screen_region
 
 
 def capture_trainer_window(
@@ -24,9 +25,9 @@ def capture_trainer_window(
     Returns
     -------
     PIL.Image.Image
-        Screenshot image captured via ``pyautogui``.
+        Screenshot image captured via :func:`utils.screen_capture.capture_screen_region`.
     """
-    return pyautogui.screenshot(region=region)
+    return capture_screen_region(region)
 
 
 def locate_skill_boxes(image: Image.Image | np.ndarray) -> list[Tuple[int, int, int, int]]:
