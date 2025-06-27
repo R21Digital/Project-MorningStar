@@ -100,7 +100,12 @@ This section walks through a fresh setup so you can try the project locally.
     The requirements file includes `requests>=2.0`, `PyYAML`, `pymongo>=3.0`, and
     `discord.py` for the optional Discord relay bot.
 
-4. **Run the example application**
+4. **Configure runtime defaults**
+
+   Edit `config/config.json` to set your character name, default mode,
+   and whether the Discord relay is enabled.
+
+5. **Run the example application**
 
    Launch the main script to see the questing demo:
 
@@ -114,7 +119,7 @@ This section walks through a fresh setup so you can try the project locally.
    python -m src.runner --mode quest
    ```
 
-5. **Run the tests**
+6. **Run the tests**
 
    The repository contains a small test suite powered by `pytest`. The
    tests rely on packages such as `langchain` and `transformers`, so
@@ -148,7 +153,8 @@ python src/main.py --profile questing
 
 ## Discord Relay Bot
 The relay bot depends on the `discord.py` package. Enable it by editing
-`config/session_config.json` and `config/discord_config.json`.
+`config/config.json` (set `enable_discord_relay`) and
+`config/discord_config.json`.
 
 Example configuration:
 
