@@ -12,7 +12,16 @@ if 'PIL' not in sys.modules:
     sys.modules['PIL'] = pil_module
     sys.modules['PIL.Image'] = pil_image
 
-sys.modules.setdefault('cv2', types.SimpleNamespace(COLOR_RGB2BGR=None, cvtColor=lambda img, flag: img))
+sys.modules.setdefault(
+    'cv2',
+    types.SimpleNamespace(
+        COLOR_RGB2BGR=None,
+        COLOR_BGR2GRAY=None,
+        THRESH_BINARY=None,
+        cvtColor=lambda img, flag: img,
+        threshold=lambda img, *a, **k: (None, img),
+    ),
+)
 
 if 'numpy' not in sys.modules:
     np_module = types.ModuleType('numpy')
