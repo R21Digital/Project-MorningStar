@@ -14,8 +14,8 @@ def test_train_missing_skills_travels(monkeypatch):
 
     monkeypatch.setattr("core.profession_manager.scan_skills_ui", lambda: [])
 
-    def fake_travel(zone, coords):
-        calls.setdefault("travel", []).append((zone, coords))
+    def fake_travel(coords, planet=None):
+        calls.setdefault("travel", []).append((coords, planet))
 
     def fake_interact(name, skill):
         calls.setdefault("interact", []).append((name, skill))
@@ -26,7 +26,8 @@ def test_train_missing_skills_travels(monkeypatch):
 
     pm.train_missing_skills()
 
-    assert calls["travel"][0][0] == "tatooine"
+    assert calls["travel"][0][1] == "tatooine"
+    assert calls["travel"][0][0] == [3432, -4795]
     assert calls["interact"][0] == ("Artisan Trainer", "Novice Artisan")
 
 
