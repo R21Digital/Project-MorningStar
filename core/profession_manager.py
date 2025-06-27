@@ -26,9 +26,9 @@ class ProfessionManager:
             trainer = self.trainer_map.get(profession)
             if not trainer:
                 continue
-            zone = trainer["planet"]
+            planet = trainer["planet"]
             coords = trainer["coords"]
-            travel_to(zone, coords)
+            travel_to(coords, planet)
             for skill in missing:
                 interact_with_trainer(trainer["name"], skill)
 

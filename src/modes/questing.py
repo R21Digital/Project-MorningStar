@@ -14,7 +14,7 @@ def run_questing_mode(character: str) -> None:
     for raw in raw_steps:
         print(f"\n[STEP {raw['id']}] {raw['title']}")
         # movement step to coordinates
-        move = {"type": "move", "data": {"zone": raw["zone"], "coords": raw["coords"]}}
+        move = {"type": "move", "data": {"coords": raw["coords"], "planet": raw["zone"]}}
         handle_quest_step(move)
 
         if raw["action"] == "talk":
