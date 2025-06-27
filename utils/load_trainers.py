@@ -51,12 +51,25 @@ def _normalize(data: dict) -> dict:
 def load_trainers(trainer_file=None):
     """Return trainer location data.
 
-    ``trainer_file`` overrides the default path. If omitted, the environment
-    variable ``TRAINER_FILE`` is checked before falling back to the module
-    constant.
+    The path to the trainer file is determined using the following
+    precedence:
 
-    If the YAML file is missing, an empty dictionary is returned and a warning
-    is logged. This mirrors the behavior of the original loader found under
+    1. **Argument** ``trainer_file`` – typically provided by a command-line
+       option.
+    2. **Environment variable** ``TRAINER_FILE``.
+    3. **Default** location under :data:`TRAINER_JSON_FILE` or
+       :data:`TRAINER_FILE`.
+
+    ``TRAINER_JSON_FILE`` is preferred when present; otherwise the legacy
+    YAML file is loaded.
+
+    Example
+    -------
+    >>> from utils.load_trainers import load_trainers
+    >>> data = load_trainers("/tmp/custom_trainers.yaml")
+
+    If the file is missing, an empty dictionary is returned and a warning
+    is logged.  This mirrors the behavior of the original loader found under
     ``src/training``.
     """
     env_override = os.environ.get("TRAINER_FILE")
