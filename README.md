@@ -367,6 +367,9 @@ Once dependencies are installed you can run the tests directly with
 ```bash
 make test
 ```
+Note: When running tests in headless CI, `pyautogui` requires a virtual display such as Xvfb.
+
+Launch the test suite with `xvfb-run -a pytest` or an equivalent wrapper.
 
 ## Wiki Content and Licensing
 
