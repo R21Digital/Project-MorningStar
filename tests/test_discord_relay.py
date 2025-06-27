@@ -4,6 +4,7 @@ import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import discord_relay
 
 from discord_relay import generate_ai_reply, DiscordRelay
 
@@ -54,3 +55,23 @@ def test_relay_fetch_user_error():
 
     relay.safe_send_user.assert_not_called()
     assert result is None
+
+
+def test_on_message_extracts_manual_reply(monkeypatch):
+    bot = MagicMock()
+    config = {"relay_mode": "manual", "relay_user_id": 99, "relay_channel_id": 42}
+    relay = DiscordRelay(bot, config)
+
+    class DummyDM:
+        pass
+
+    msg = MagicMock()
+    msg.channel = DummyDM()
+    msg.author.id = 99
+    msg.content = "@bob hi there"
+
+    monkeypatch.setattr(discord_relay.discord, "DMChannel", DummyDM, raising=False)
+
+    asyncio.run(relay.on_message(msg))
+
+    assert relay.config["reply_queue"] == [("bob", "hi there")]
