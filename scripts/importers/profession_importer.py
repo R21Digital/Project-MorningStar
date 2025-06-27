@@ -9,9 +9,8 @@ except ImportError as exc:
 
 try:
     from bs4 import BeautifulSoup
-except ImportError as exc:
-    print("Error: the 'bs4' package (BeautifulSoup) is required. Install it with 'pip install beautifulsoup4'.")
-    raise SystemExit(1) from exc
+except Exception:  # pragma: no cover - optional dependency
+    BeautifulSoup = None
 
 BASE_URL = "https://swgr.org/wiki/"
 OUTPUT_DIR = os.path.join("android_ms11", "data", "professions")
@@ -25,33 +24,47 @@ def fetch_profession_html(name: str) -> str:
 
 
 def parse_profession_html(html: str) -> dict:
-    soup = BeautifulSoup(html, "html.parser")
+    """Return parsed profession data from ``html``.
 
-    prereqs: list[str] = []
-    skill_boxes: list[str] = []
-    xp_costs: dict[str, int] = {}
+    A minimal regex parser is used when ``BeautifulSoup`` isn't available.
+    """
+    if BeautifulSoup is None or isinstance(BeautifulSoup, type):
+        prereq_match = re.search(r"<h3>Prerequisites</h3>\s*<ul>(.*?)</ul>", html, re.S)
+        prereqs = re.findall(r"<li>(.*?)</li>", prereq_match.group(1)) if prereq_match else []
 
-    # find prerequisites list
-    pre = soup.find(string=lambda t: t and "Prerequisite" in t)
-    if pre:
-        ul = pre.find_parent().find_next("ul")
-        if ul:
-            prereqs = [li.get_text(strip=True) for li in ul.find_all("li")]
+        skill_match = re.search(r"<h3>Skill Tree</h3>\s*<ul>(.*?)</ul>", html, re.S)
+        skill_boxes = re.findall(r"<li>(.*?)</li>", skill_match.group(1)) if skill_match else []
+        xp_costs: dict[str, int] = {}
+        for item in skill_boxes:
+            m = re.search(r"([0-9,]+)\s*[A-Za-z]*\s*XP", item)
+            if m:
+                xp = int(m.group(1).replace(',', ''))
+                name = re.sub(r"\([^)]*\)", "", item).strip()
+                xp_costs[name] = xp
+    else:
+        soup = BeautifulSoup(html, "html.parser")
+        prereqs: list[str] = []
+        skill_boxes: list[str] = []
+        xp_costs: dict[str, int] = {}
 
-    # find skill tree/boxes
-    skill = soup.find(string=lambda t: t and "Skill" in t and ("Tree" in t or "Boxes" in t))
-    if skill:
-        ul = skill.find_parent().find_next("ul")
-        if ul:
-            for li in ul.find_all("li"):
-                text = li.get_text(strip=True)
-                skill_boxes.append(text)
-                m = re.search(r"([0-9,]+)\s*[A-Za-z]*\s*XP", text)
-                if m:
-                    xp = int(m.group(1).replace(",", ""))
-                    name = re.sub(r"\([^)]*\)", "", text).strip()
-                    xp_costs[name] = xp
+        pre = soup.find(string=lambda t: t and "Prerequisite" in t)
+        if pre:
+            ul = pre.find_parent().find_next("ul")
+            if ul:
+                prereqs = [li.get_text(strip=True) for li in ul.find_all("li")]
 
+        skill = soup.find(string=lambda t: t and "Skill" in t and ("Tree" in t or "Boxes" in t))
+        if skill:
+            ul = skill.find_parent().find_next("ul")
+            if ul:
+                for li in ul.find_all("li"):
+                    text = li.get_text(strip=True)
+                    skill_boxes.append(text)
+                    m = re.search(r"([0-9,]+)\s*[A-Za-z]*\s*XP", text)
+                    if m:
+                        xp = int(m.group(1).replace(',', ''))
+                        name = re.sub(r"\([^)]*\)", "", text).strip()
+                        xp_costs[name] = xp
     return {
         "prerequisites": prereqs,
         "skill_boxes": skill_boxes,

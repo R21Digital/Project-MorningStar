@@ -1,7 +1,10 @@
 import os
 import json
 from pathlib import Path
-from bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except Exception:  # pragma: no cover - optional dependency
+    BeautifulSoup = None
 
 from utils.source_verifier import file_changed
 
@@ -17,17 +20,41 @@ def parse_legacy_quest_html():
     with open(RAW_HTML_PATH, "r", encoding="utf-8") as f:
         html = f.read()
 
-    soup = BeautifulSoup(html, "html.parser")
+    if BeautifulSoup is not None and not isinstance(BeautifulSoup, type):
+        soup = BeautifulSoup(html, "html.parser")
+        content_div = soup.find("div", class_="mw-parser-output")
+        if not content_div:
+            raise ValueError("Could not find content section in legacy.html")
+        tags = content_div.find_all(["h2", "h3", "h4", "p", "ul", "ol"])
+    else:
+        # Minimal fallback parser using regex
+        import re
+        content_div = re.search(r'<div class="mw-parser-output">(.*)</div>', html, re.S)
+        if not content_div:
+            raise ValueError("Could not find content section in legacy.html")
+        raw = content_div.group(1)
+        # Split tags manually preserving order
+        # Build fake objects
+        class Tag:
+            def __init__(self, name, text):
+                self.name = name
+                self._text = text
 
-    # Extract content inside the main article
-    content_div = soup.find("div", class_="mw-parser-output")
-    if not content_div:
-        raise ValueError("Could not find content section in legacy.html")
+            def get_text(self, strip=False):
+                return self._text.strip() if strip else self._text
 
+        parsed = []
+        for match in re.finditer(r'<(h2|h3|h4|p|ul|ol)[^>]*>(.*?)</\1>', raw, re.S):
+            name, body = match.group(1), match.group(2)
+            if name in {"ul", "ol"}:
+                items = re.findall(r"<li>(.*?)</li>", body)
+                body = "|".join(items)
+            parsed.append(Tag(name, body))
+        tags = parsed
     quests = []
     current_quest = None
 
-    for tag in content_div.find_all(["h2", "h3", "h4", "p", "ul", "ol"]):
+    for tag in tags:
         # Main quest section headers
         if tag.name == "h2":
             if current_quest:
@@ -46,7 +73,10 @@ def parse_legacy_quest_html():
                     current_quest["steps"][-1]["description"] = tag.get_text(strip=True)
 
         elif tag.name in ["ul", "ol"]:
-            bullet_points = [li.get_text(strip=True) for li in tag.find_all("li")]
+            if hasattr(tag, "find_all"):
+                bullet_points = [li.get_text(strip=True) for li in tag.find_all("li")]
+            else:
+                bullet_points = tag.get_text().split("|") if tag.get_text() else []
             if current_quest and current_quest["steps"]:
                 current_quest["steps"][-1].setdefault("notes", []).extend(bullet_points)
 
