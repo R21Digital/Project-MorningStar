@@ -19,7 +19,7 @@ class WikiScraper:
 
     def fetch_page(self, page_path):
         url = self.BASE_URL + page_path
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         if response.status_code != 200:
             raise Exception(f"Failed to fetch {url}")
         return response.text

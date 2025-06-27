@@ -11,7 +11,7 @@ OUTPUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'pars
 def fetch_profession_html(profession: str) -> str:
     """Fetch the raw HTML for a profession page."""
     url = f"{BASE_URL}{profession}/"
-    resp = requests.get(url)
+    resp = requests.get(url, timeout=10)
     resp.raise_for_status()
     return resp.text
 
