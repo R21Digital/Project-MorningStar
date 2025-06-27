@@ -5,17 +5,21 @@ REQUIRED_SKILLS = {
     "marksman": ["Novice Marksman"],
 }
 
+from utils.load_trainers import load_trainers
+
+
+def _primary(entries):
+    if not entries:
+        return {}
+    first = entries[0]
+    return {
+        "planet": first.get("planet"),
+        "city": first.get("city"),
+        "coords": first.get("coords"),
+        "name": first.get("name"),
+    }
+
+
 TRAINER_BY_PROFESSION = {
-    "artisan": {
-        "planet": "tatooine",
-        "city": "mos_eisley",
-        "coords": [3432, -4795],
-        "name": "Artisan Trainer",
-    },
-    "marksman": {
-        "planet": "corellia",
-        "city": "coronet",
-        "coords": [-150, 60],
-        "name": "Marksman Trainer",
-    },
+    prof: _primary(entries) for prof, entries in load_trainers().items()
 }

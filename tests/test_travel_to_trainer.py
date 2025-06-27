@@ -22,7 +22,11 @@ def test_travel_to_trainer_invokes_navigation(monkeypatch):
     monkeypatch.setattr(trainer_travel, "walk_to_coords", fake_walk)
     monkeypatch.setattr(shuttle, "plan_route", lambda *a, **k: [{"city": "mos_eisley"}, {"city": "coronet"}])
 
-    data = {"artisan": {"tatooine": {"mos_eisley": {"name": "Trainer", "x": 1, "y": 2}}}}
+    data = {
+        "artisan": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Trainer", "coords": [1, 2]}
+        ]
+    }
     result = trainer_travel.travel_to_trainer("artisan", data, agent="A")
 
     assert result == "NAV"
@@ -37,7 +41,11 @@ def test_travel_to_trainer_logs_route(monkeypatch, capsys):
     monkeypatch.setattr(trainer_travel, "walk_to_coords", lambda *a, **k: None)
     monkeypatch.setattr(shuttle, "plan_route", lambda *a, **k: [{"city": "mos_eisley"}, {"city": "anchorhead"}])
 
-    data = {"brawler": {"tatooine": {"anchorhead": {"name": "Brawl", "x": 5, "y": 6}}}}
+    data = {
+        "brawler": [
+            {"planet": "tatooine", "city": "anchorhead", "name": "Brawl", "coords": [5, 6]}
+        ]
+    }
     trainer_travel.travel_to_trainer("brawler", data, agent="A")
 
     out = capsys.readouterr().out

@@ -5,7 +5,7 @@
 - **Mode runner**: `main.py` and `runner.py` provide CLI entry points to launch different automation modes.
 - **Quest database**: `src/db` holds SQLite schema, quest insertion helpers, and utilities for viewing quests.
 - **Training helpers**: `trainer_data_loader.py`, `trainer_visit.py`, and the `find_trainer.py` CLI locate NPC trainers and automate visits.
-- **Trainer navigator**: `scripts/logic/trainer_navigator.py` lists nearby trainers and records visits in `logs/training_log.txt`. It can also write JSON lines to `logs/training.json` using data from `data/trainers.yaml`.
+- **Trainer navigator**: `scripts/logic/trainer_navigator.py` lists nearby trainers and records visits in `logs/training_log.txt`. It can also write JSON lines to `logs/training.json` using data from `data/trainers.json`.
 
 ## Modules Needing Work
 - `quest_selector.py` – loads legacy quests and DB entries with filtering support; still needs scoring improvements.

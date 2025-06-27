@@ -35,11 +35,11 @@ def travel_to_trainer(profession: str, trainer_data: Dict[str, dict], agent=None
         print(f"[Travel] No trainer data for {profession}")
         return None
 
-    # Pick the first available planet/city entry
-    planet, cities = next(iter(prof_entry.items()))
-    city, entry = next(iter(cities.items()))
-    dest_x = entry.get("x", 0)
-    dest_y = entry.get("y", 0)
+    entry = prof_entry[0]
+    planet = entry.get("planet", DEFAULT_START_PLANET)
+    city = entry.get("city", DEFAULT_START_CITY)
+    coords = entry.get("coords") or [entry.get("x", 0), entry.get("y", 0)]
+    dest_x, dest_y = coords
 
     # Plan the shuttle route so we can log the chosen path
     route = shuttle.plan_route(

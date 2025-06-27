@@ -9,9 +9,11 @@ import src.main as main
 def test_check_and_train_triggers_travel(monkeypatch):
     calls = {}
 
-    monkeypatch.setattr(main, "load_trainers", lambda: {
-        "artisan": {"tatooine": {"mos_eisley": {"name": "Trainer", "x": 1, "y": 2}}}
-    })
+    monkeypatch.setattr(
+        main,
+        "load_trainers",
+        lambda: {"artisan": [{"planet": "tatooine", "city": "mos_eisley", "name": "Trainer", "coords": [1, 2]}]},
+    )
     monkeypatch.setattr(
         main, "get_trainable_skills", lambda skills, tree: [("artisan", 1)]
     )

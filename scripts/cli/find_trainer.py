@@ -21,7 +21,7 @@ def main(argv=None):
         print(
             f"No trainer found for {args.profession} in {args.city}, {args.planet}."
         )
-        print("Check trainers.yaml for available locations.")
+        print("Check trainers.json for available locations.")
         return None
 
 

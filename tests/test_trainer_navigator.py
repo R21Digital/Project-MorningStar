@@ -20,8 +20,12 @@ class DummyLoad:
 
 def test_find_nearby_trainers(monkeypatch):
     data = {
-        "artisan": {"tatooine": {"mos_eisley": {"name": "Art", "x": 0, "y": 0}}},
-        "marksman": {"tatooine": {"mos_eisley": {"name": "Mark", "x": 10, "y": 0}}},
+        "artisan": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Art", "coords": [0, 0]}
+        ],
+        "marksman": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Mark", "coords": [10, 0]}
+        ],
     }
     loader = DummyLoad(data)
     monkeypatch.setattr(tn, "load_trainers", loader)
@@ -36,7 +40,9 @@ def test_find_nearby_trainers(monkeypatch):
 
 def test_threshold(monkeypatch):
     data = {
-        "artisan": {"tatooine": {"mos_eisley": {"name": "Art", "x": 100, "y": 0}}}
+        "artisan": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Art", "coords": [100, 0]}
+        ]
     }
     loader = DummyLoad(data)
     monkeypatch.setattr(tn, "load_trainers", loader)
@@ -70,9 +76,15 @@ def test_log_training_event_json(tmp_path):
 
 def test_find_nearby_trainers_sorted(monkeypatch):
     data = {
-        "artisan": {"tatooine": {"mos_eisley": {"name": "Art", "x": 1, "y": 0}}},
-        "brawler": {"tatooine": {"mos_eisley": {"name": "Brawl", "x": 3, "y": 0}}},
-        "marksman": {"tatooine": {"mos_eisley": {"name": "Mark", "x": 5, "y": 0}}},
+        "artisan": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Art", "coords": [1, 0]}
+        ],
+        "brawler": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Brawl", "coords": [3, 0]}
+        ],
+        "marksman": [
+            {"planet": "tatooine", "city": "mos_eisley", "name": "Mark", "coords": [5, 0]}
+        ],
     }
     loader = DummyLoad(data)
     monkeypatch.setattr(tn, "load_trainers", loader)

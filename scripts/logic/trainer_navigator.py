@@ -4,7 +4,7 @@
 The module provides functions to locate trainers relative to the player's
 current position and log training interactions.  It relies on
 ``utils.load_trainers.load_trainers`` for loading the trainer location
-data from ``data/trainers.yaml`` or an overridden path.
+data from ``data/trainers.json`` or an overridden path.
 """
 
 from __future__ import annotations
@@ -53,23 +53,26 @@ def find_nearby_trainers(
     data = load_trainers(trainer_file)
     results: List[Dict[str, object]] = []
 
-    for profession, planets in data.items():
-        planet_data = planets.get(planet, {})
-        entry = planet_data.get(city)
-        if not entry:
-            continue
-        trainer_coords = (entry.get("x"), entry.get("y"))
-        dist = _distance(player_pos, trainer_coords)
-        if dist <= threshold:
-            results.append(
-                {
-                    "profession": profession,
-                    "name": entry.get("name", "Unknown"),
-                    "x": trainer_coords[0],
-                    "y": trainer_coords[1],
-                    "distance": dist,
-                }
-            )
+    for profession, entries in data.items():
+        for entry in entries:
+            if (
+                entry.get("planet", "").lower() != planet.lower()
+                or entry.get("city", "").lower() != city.lower()
+            ):
+                continue
+            coords = entry.get("coords") or [entry.get("x"), entry.get("y")]
+            trainer_coords = (coords[0], coords[1])
+            dist = _distance(player_pos, trainer_coords)
+            if dist <= threshold:
+                results.append(
+                    {
+                        "profession": profession,
+                        "name": entry.get("name", "Unknown"),
+                        "x": trainer_coords[0],
+                        "y": trainer_coords[1],
+                        "distance": dist,
+                    }
+                )
 
     results.sort(key=lambda r: r["distance"])  # closest first
     return results
@@ -134,15 +137,19 @@ def navigate_to_trainer(
     location = get_trainer_location(trainer_name, planet, city)
     if not location:
         data = load_trainers()
-        try:
-            entry = data[trainer_name][planet][city]
-            location = (
-                entry.get("name", f"{trainer_name} trainer"),
-                entry.get("x"),
-                entry.get("y"),
-            )
-        except KeyError:
-            location = None
+        location = None
+        for entry in data.get(trainer_name, []):
+            if (
+                entry.get("planet", "").lower() == planet.lower()
+                and entry.get("city", "").lower() == city.lower()
+            ):
+                coords = entry.get("coords") or [entry.get("x"), entry.get("y")]
+                location = (
+                    entry.get("name", f"{trainer_name} trainer"),
+                    coords[0],
+                    coords[1],
+                )
+                break
 
     visit_trainer(agent, trainer_name, planet=planet, city=city)
 

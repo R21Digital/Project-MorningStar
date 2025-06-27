@@ -14,6 +14,40 @@ TRAINER_JSON_FILE = (
 )
 
 
+def _normalize_entry(entry: dict) -> dict:
+    """Return entry with ``coords`` list and standard keys."""
+    coords = entry.get("coords")
+    if not coords:
+        coords = entry.get("coordinates")
+    if not coords and "x" in entry and "y" in entry:
+        coords = [entry.get("x"), entry.get("y")]
+    return {
+        "planet": entry.get("planet"),
+        "city": entry.get("city"),
+        "coords": coords,
+        "name": entry.get("name"),
+    }
+
+
+def _normalize(data: dict) -> dict:
+    """Normalize trainer mapping to lists of standard entries."""
+    normalized = {}
+    for profession, value in data.items():
+        entries = []
+        if isinstance(value, list):
+            for item in value:
+                entries.append(_normalize_entry(item))
+        elif isinstance(value, dict) and "planet" in value:
+            entries.append(_normalize_entry(value))
+        elif isinstance(value, dict):
+            for planet, cities in value.items():
+                for city, info in cities.items():
+                    entry = {"planet": planet, "city": city, **info}
+                    entries.append(_normalize_entry(entry))
+        normalized[profession] = entries
+    return normalized
+
+
 def load_trainers(trainer_file=None):
     """Return trainer location data.
 
@@ -37,8 +71,10 @@ def load_trainers(trainer_file=None):
     try:
         with open(trainer_path, "r") as fh:
             if trainer_path.suffix.lower() == ".json":
-                return json.load(fh)
-            return yaml.safe_load(fh)
+                raw = json.load(fh)
+            else:
+                raw = yaml.safe_load(fh)
+        return _normalize(raw)
     except FileNotFoundError:  # pragma: no cover - best effort logging
         logging.warning(
             f"Trainer file {trainer_path} not found. Returning empty dict."
