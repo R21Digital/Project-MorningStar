@@ -2,6 +2,19 @@ import os
 import sys
 import json
 import types
+from pathlib import Path
+
+# Provide a stub for the requests module if it's missing
+if "requests" not in sys.modules:
+    requests_mod = types.ModuleType("requests")
+    requests_mod.get = lambda *a, **k: None
+    sys.modules["requests"] = requests_mod
+
+# Stub out BeautifulSoup dependency if missing
+if "bs4" not in sys.modules:
+    bs4_mod = types.ModuleType("bs4")
+    bs4_mod.BeautifulSoup = object
+    sys.modules["bs4"] = bs4_mod
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -9,16 +22,8 @@ from scripts.importers import profession_importer
 
 
 def test_fetch_and_save(monkeypatch, tmp_path):
-    sample_html = (
-        "<h3>Prerequisites</h3>"
-        "<ul><li>Novice Artisan</li><li>Combat Level 5</li></ul>"
-        "<h3>Skill Tree</h3>"
-        "<ul>"
-        "<li>Novice Medic (General Crafting XP)</li>"
-        "<li>Advanced Medicine (1,000 Medicine XP)</li>"
-        "<li>Master Doctor (10,000 Medicine XP)</li>"
-        "</ul>"
-    )
+    fixture_path = Path("tests/fixtures/profession_snippet.html").resolve()
+    sample_html = fixture_path.read_text(encoding="utf-8")
 
     class DummyResponse:
         status_code = 200

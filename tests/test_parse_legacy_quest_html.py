@@ -1,7 +1,14 @@
 import os
 import sys
 import json
+import types
 from pathlib import Path
+
+import importlib.util
+if importlib.util.find_spec("bs4") is None:
+    bs4_mod = types.ModuleType("bs4")
+    bs4_mod.BeautifulSoup = object
+    sys.modules["bs4"] = bs4_mod
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -9,22 +16,9 @@ from src.importers import legacy_quest_parser
 
 
 def test_parse_legacy_quest_html(monkeypatch, tmp_path):
-    sample_html = (
-        '<div class="mw-parser-output">'
-        '<h2>Quest One</h2>'
-        '<h3>Step A</h3>'
-        '<p>Do something</p>'
-        '<ul><li>Note1</li><li>Note2</li></ul>'
-        '<h3>Step B</h3>'
-        '<p>Finish up</p>'
-        '<h2>Quest Two</h2>'
-        '<h3>Intro</h3>'
-        '<p>Talk to NPC</p>'
-        '</div>'
-    )
-
+    fixture_path = Path("tests/fixtures/legacy_snippet.html").resolve()
     html_path = tmp_path / "legacy.html"
-    html_path.write_text(sample_html, encoding="utf-8")
+    html_path.write_text(fixture_path.read_text(encoding="utf-8"), encoding="utf-8")
 
     output_path = Path("data/processed/test_legacy_output.json").resolve()
 
