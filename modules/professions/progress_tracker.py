@@ -1,12 +1,12 @@
 import json
-import os
 import re
+from pathlib import Path
 from typing import List, Optional, Dict
 
 from profession_logic.modules import xp_estimator
 
 # Default location for profession metadata JSON files
-DATA_DIR = os.path.join("android_ms11", "data", "professions")
+DATA_DIR = Path(__file__).resolve().parents[1] / "data" / "professions"
 
 
 def _skill_name(text: str) -> str:
@@ -16,7 +16,7 @@ def _skill_name(text: str) -> str:
 
 def load_profession(profession: str) -> Dict:
     """Load profession data from ``DATA_DIR``."""
-    path = os.path.join(DATA_DIR, f"{profession.lower()}.json")
+    path = DATA_DIR / f"{profession.lower()}.json"
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
 

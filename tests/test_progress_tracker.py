@@ -30,7 +30,7 @@ def setup_profession(tmp_path):
 
 def test_recommend_next_skill(monkeypatch, tmp_path):
     prof_dir = setup_profession(tmp_path)
-    monkeypatch.setattr(progress_tracker, "DATA_DIR", str(prof_dir))
+    monkeypatch.setattr(progress_tracker, "DATA_DIR", prof_dir)
 
     rec = progress_tracker.recommend_next_skill("medic", [])
     assert rec == {"skill": "Novice Artisan", "xp": 0}
@@ -62,7 +62,7 @@ def test_recommend_next_skill(monkeypatch, tmp_path):
 
 def test_estimate_hours_to_next_skill(monkeypatch, tmp_path):
     prof_dir = setup_profession(tmp_path)
-    monkeypatch.setattr(progress_tracker, "DATA_DIR", str(prof_dir))
+    monkeypatch.setattr(progress_tracker, "DATA_DIR", prof_dir)
     monkeypatch.setattr(progress_tracker.xp_estimator, "estimate_xp_per_hour", lambda p, a: 500)
 
     hours = progress_tracker.estimate_hours_to_next_skill(
