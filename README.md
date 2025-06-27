@@ -367,5 +367,14 @@ Once dependencies are installed you can run the tests directly with
 make test
 ```
 
+## Wiki Content and Licensing
+
+The file `data/raw/legacy.html` and the JSON files under `data/wiki_raw/` were
+exported from the SWG Wiki hosted on Fandom. This material is licensed under
+the Creative Commons Attribution-ShareAlike 3.0 license (CC-BY-SA 3.0). See
+<https://www.fandom.com/licensing> for the official licensing terms. The
+project uses these extracts solely to look up quest and item information and
+includes references back to the original pages via `data/metadata_index.json`.
+
 ## Disclaimer
 Android MS11 is an unofficial project, not affiliated with SWGR or LucasArts, and must be used in accordance with the game's terms of service.
