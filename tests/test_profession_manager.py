@@ -17,8 +17,8 @@ def test_train_missing_skills_travels(monkeypatch):
     def fake_travel(zone, coords):
         calls.setdefault("travel", []).append((zone, coords))
 
-    def fake_interact(name):
-        calls.setdefault("interact", []).append(name)
+    def fake_interact(name, skill):
+        calls.setdefault("interact", []).append((name, skill))
         return True
 
     monkeypatch.setattr("core.profession_manager.travel_to", fake_travel)
@@ -27,7 +27,7 @@ def test_train_missing_skills_travels(monkeypatch):
     pm.train_missing_skills()
 
     assert calls["travel"][0][0] == "tatooine"
-    assert calls["interact"][0] == "Artisan Trainer"
+    assert calls["interact"][0] == ("Artisan Trainer", "Novice Artisan")
 
 
 def test_train_missing_skills_no_action(monkeypatch):
@@ -44,7 +44,9 @@ def test_train_missing_skills_no_action(monkeypatch):
         called = True
 
     monkeypatch.setattr("core.profession_manager.travel_to", fake_travel)
-    monkeypatch.setattr("core.profession_manager.interact_with_trainer", lambda n: True)
+    monkeypatch.setattr(
+        "core.profession_manager.interact_with_trainer", lambda n, s: True
+    )
 
     pm.train_missing_skills()
 
