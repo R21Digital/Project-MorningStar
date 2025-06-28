@@ -44,11 +44,15 @@ class TravelManager:
             self.trainers = {}
 
     # --------------------------------------------------
-    def train_profession(self, profession: str) -> List[str]:
-        """Travel to the trainer for ``profession`` and return offered skills."""
+    def go_to_trainer(self, profession: str) -> None:
+        """Navigate to the trainer location for ``profession``.
+
+        This method performs waypoint travel and location verification only.
+        It does not invoke :class:`TrainerScanner`.
+        """
         trainer = self.trainers.get(profession)
         if not trainer:
-            return []
+            return
 
         coords = (
             trainer.get("waypoint")
@@ -61,5 +65,12 @@ class TravelManager:
         go_to_waypoint(coords, planet=planet, city=city)
         verify_location(coords, planet=planet, city=city)
 
+    # --------------------------------------------------
+    def train_profession(self, profession: str) -> List[str]:
+        """Travel to the trainer for ``profession`` and return offered skills."""
+        if profession not in self.trainers:
+            return []
+
+        self.go_to_trainer(profession)
         skills = self.trainer_scanner.scan()
         return skills
