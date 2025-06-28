@@ -36,6 +36,7 @@ from android_ms11.modes import (
     support_mode,
     bounty_farming_mode,
     entertainer_mode,
+    rls_mode,
 )
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
@@ -92,6 +93,7 @@ MODE_HANDLERS = {
     "support": support_mode.run,
     "bounty": bounty_farming_mode.run,
     "entertainer": entertainer_mode.run,
+    "rls": rls_mode.run,
 }
 
 
