@@ -22,5 +22,7 @@ once the requirements are installed:
 
 ```bash
 pytest -k support_mode -q
-pytest -k rls_mode -q
+pytest -k rls_mode -q  # only run RLS mode tests
 ```
+
+A placeholder test for the new OCR buff detector module will be introduced soon.
