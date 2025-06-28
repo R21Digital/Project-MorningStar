@@ -15,7 +15,7 @@ except Exception:  # pragma: no cover - optional dependency
 
 from core.session_manager import SessionManager
 from core import profile_loader, state_tracker, mode_selector
-from android_ms11.core.session_monitor import monitor_session
+from core.session_monitor import monitor_session
 from utils.load_trainers import load_trainers
 from utils.check_buff_status import update_buff_state
 from modules.skills.training_check import get_trainable_skills
@@ -129,6 +129,7 @@ def main(argv: list[str] | None = None) -> None:
     else:
         state_tracker.reset_state()
         mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
+    args.mode = mode
     if mode == "rls":
         config["iterations"] = args.loops
 
@@ -156,29 +157,30 @@ def main(argv: list[str] | None = None) -> None:
     session = SessionManager(mode=mode)
 
     handler = MODE_HANDLERS.get(mode)
-    perf_metrics = None
+    session_metrics: Dict[str, Any] = {}
     if handler:
         try:
-            perf_metrics = handler(config, session, profile=profile)
+            session_metrics = handler(config, session, profile=profile) or {}
         except TypeError:
-            perf_metrics = handler(config, session)
+            session_metrics = handler(config, session) or {}
     else:
         print(f"[MODE] Unknown mode '{mode}'")
         return
 
-    if args.smart:
-        state = monitor_session(perf_metrics or {})
+    if args.smart and "xp_rate" in session_metrics:
+        state = monitor_session(session_metrics)
         new_mode = state.get("mode")
-        if new_mode and new_mode != mode:
-            print(f"[MODE] Switching to '{new_mode}'")
-            new_handler = MODE_HANDLERS.get(new_mode)
+        if new_mode and new_mode != args.mode:
+            print(f"[Smart Switch] {args.mode} -> {new_mode}")
+            args.mode = new_mode
+            new_handler = MODE_HANDLERS.get(args.mode)
             if new_handler:
                 try:
                     new_handler(config, session, profile=profile)
                 except TypeError:
                     new_handler(config, session)
             else:
-                print(f"[MODE] Unknown mode '{new_mode}'")
+                print(f"[MODE] Unknown mode '{args.mode}'")
 
 
 if __name__ == "__main__":

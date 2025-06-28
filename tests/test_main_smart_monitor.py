@@ -27,7 +27,7 @@ def test_smart_mode_invokes_monitor(monkeypatch):
 
     def combat_handler(cfg, session, profile=None):
         calls["combat"] = True
-        return {"xp": 100}
+        return {"xp": 100, "xp_rate": 50.0}
 
     def support_handler(cfg, session, profile=None):
         calls["support"] = True
@@ -45,5 +45,5 @@ def test_smart_mode_invokes_monitor(monkeypatch):
     main_mod.main(["--smart"])
 
     assert calls["combat"] is True
-    assert calls["metrics"] == {"xp": 100}
+    assert calls["metrics"] == {"xp": 100, "xp_rate": 50.0}
     assert calls["support"] is True
