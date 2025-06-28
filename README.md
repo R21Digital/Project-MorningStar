@@ -235,6 +235,20 @@ Example profile snippet:
 This setup cycles through questing, crafting, and healing whenever fatigue rises
 above 50 while ``--loop`` is active.
 
+### 🔁 Repeat Mode
+
+To continuously run a single mode (like entertainer or farming), use:
+
+```bash
+python src/main.py --mode entertainer --repeat
+```
+
+You can also set a rest interval (in seconds) between loops:
+
+```bash
+python src/main.py --mode entertainer --repeat --rest 30
+```
+
 ## State Tracking and Profiles
 
 The `core.state_tracker` module persists simple game state between runs.

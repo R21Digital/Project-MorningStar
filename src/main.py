@@ -4,7 +4,8 @@ import argparse
 import json
 import os
 import threading
-from typing import Dict, Any
+import time
+from typing import Dict, Any, Mapping
 
 try:
     from discord.ext import commands
@@ -17,6 +18,7 @@ from core.session_manager import SessionManager
 from core import profile_loader, state_tracker, mode_selector
 from core.session_monitor import monitor_session, FATIGUE_THRESHOLD
 from core import mode_scheduler
+from core.repeat_utils import run_repeating_mode
 from utils.logging_utils import log_event
 from utils.load_trainers import load_trainers
 from utils.check_buff_status import update_buff_state
@@ -102,9 +104,8 @@ MODE_HANDLERS = {
 }
 
 
-def main(argv: list[str] | None = None) -> None:
-    """Run a demo session using the selected runtime profile."""
-
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Parse command line options for the demo runner."""
     parser = argparse.ArgumentParser(description="Android MS11 demo")
     parser.add_argument("--mode", type=str, help="Override session mode")
     parser.add_argument("--profile", type=str, help="Runtime profile name")
@@ -118,7 +119,41 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Run the selected mode continuously",
     )
-    args = parser.parse_args(argv)
+    parser.add_argument(
+        "--repeat",
+        action="store_true",
+        help="Repeat selected mode in an infinite loop",
+    )
+    parser.add_argument(
+        "--rest",
+        type=int,
+        default=10,
+        help="Rest time (in seconds) between loops when using --repeat",
+    )
+    return parser.parse_args(argv)
+
+
+def run_mode(
+    mode: str,
+    session: SessionManager,
+    profile: Mapping[str, Any],
+    config: Mapping[str, Any],
+) -> Dict[str, Any]:
+    """Execute a single iteration of ``mode`` and return metrics."""
+    handler = MODE_HANDLERS.get(mode)
+    if not handler:
+        print(f"[MODE] Unknown mode '{mode}'")
+        return {}
+    try:
+        return handler(config, session, profile=profile) or {}
+    except TypeError:
+        return handler(config, session) or {}
+
+
+def main(argv: list[str] | None = None) -> None:
+    """Run a demo session using the selected runtime profile."""
+
+    args = parse_args(argv)
 
     config = load_config()
     profile = profile_loader.load_profile(args.profile) if args.profile else {}
@@ -155,20 +190,19 @@ def main(argv: list[str] | None = None) -> None:
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
 
+    if args.repeat:
+        run_repeating_mode(
+            args.mode,
+            lambda: run_mode(args.mode, session, profile, config),
+            args.rest,
+        )
+        return
+
     current_mode = mode
     state = state_tracker.get_state()
 
     while True:
-        handler = MODE_HANDLERS.get(current_mode)
-        session_metrics: Dict[str, Any] = {}
-        if handler:
-            try:
-                session_metrics = handler(config, session, profile=profile) or {}
-            except TypeError:
-                session_metrics = handler(config, session) or {}
-        else:
-            print(f"[MODE] Unknown mode '{current_mode}'")
-            return
+        session_metrics = run_mode(current_mode, session, profile, config)
 
         if args.smart or args.loop:
             state = monitor_session(session_metrics)
@@ -190,14 +224,7 @@ def main(argv: list[str] | None = None) -> None:
             if new_mode and new_mode != current_mode:
                 print(f"[Smart Switch] {current_mode} -> {new_mode}")
                 current_mode = new_mode
-                handler = MODE_HANDLERS.get(current_mode)
-                if handler:
-                    try:
-                        handler(config, session, profile=profile)
-                    except TypeError:
-                        handler(config, session)
-                else:
-                    print(f"[MODE] Unknown mode '{current_mode}'")
+                run_mode(current_mode, session, profile, config)
         break
 
 
