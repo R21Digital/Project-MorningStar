@@ -16,3 +16,11 @@ make test
 ```
 
 The `test` target installs the dependencies and then runs `pytest` for you.
+
+For quick checks during development you can run just the mode specific tests
+once the requirements are installed:
+
+```bash
+pytest -k support_mode -q
+pytest -k rls_mode -q
+```
