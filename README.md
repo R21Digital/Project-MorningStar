@@ -317,6 +317,9 @@ below:
 - `expected_zone` – city or outpost where the trainer is found.
 - `expected_skill` – skill expected to be available when visiting.
 
+Coordinates may be stored under either `waypoint` or `coords` – both fields are
+treated interchangeably.
+
 An example file:
 
 ```json
@@ -336,9 +339,9 @@ An example file:
 }
 ```
 
-Add new professions to `profiles/trainers.json` using the same fields.  The
-waypoint can be stored as a `coords` list or separate `x`/`y` values &ndash;
-`core.TravelManager` accepts any of these forms.  `planet` and `city` are
+Add new professions to `profiles/trainers.json` using the same fields. The
+waypoint (or `coords`) can be stored as a list or as separate `x`/`y` values
+&ndash; `core.TravelManager` accepts any of these forms.  `planet` and `city` are
 optional but help navigation.
 
 ### Training with `TravelManager`

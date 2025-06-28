@@ -19,6 +19,8 @@ def _normalize_entry(entry: dict) -> dict:
     coords = entry.get("coords")
     if not coords:
         coords = entry.get("coordinates")
+    if not coords:
+        coords = entry.get("waypoint")
     if not coords and "x" in entry and "y" in entry:
         coords = [entry.get("x"), entry.get("y")]
     return {
