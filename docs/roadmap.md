@@ -2,20 +2,33 @@
 
 Android MS11 aims to be an advanced interface assistant for long-session open-world automation. The project is maintained by **Project Galactic Beholder** and builds on the archived MS11-Core code.
 
-## Phases
 
-### Questing 🚧
-Modules focus on selecting and running quests. Key pieces include:
-- `quest_selector.py` and `quest_executor.py` for quest flow
-- `quest_engine.py` plus movement helpers
+## Phase 1 Features
 
-Todo work recorded in `NOTES.md` includes scoring improvements and fleshing out step execution. Individual files also contain placeholders, such as the UI hook in `src/execution/dialogue.py` and the walking logic in `src/movement/movement_profiles.py`.
+The initial release focuses on reliable quest execution and basic session tracking.
 
-### Support 🚧
-Support scripts provide in-game assistance such as healing or training runs. Examples are `mode_medic.py`, `mode_buff_by_tell.py`, `trainer_seeker.py`, and travel helpers under `modules/travel`. XP tracking via `xp_manager.py`, `xp_session.py`, and `xp_tracker.py` is considered stable.
+- `quest_selector.py` and `quest_executor.py` provide the quest flow logic.
+- `quest_engine.py` plus movement helpers automate travel between objectives.
+- `xp_manager.py`, `xp_session.py`, and `xp_tracker.py` record XP and credit gains.
 
-### AI Interaction 🔮
-Early AI features integrate with Discord and text generation. `discord_relay.py` supplies placeholder AI replies while `story_generator.py` uses LangChain to generate short stories. More complete conversational loops are planned.
+Todo work recorded in `NOTES.md` includes improving scoring and fleshing out step execution. Some modules still contain placeholders &ndash; for example the UI hook in `src/execution/dialogue.py` and walking logic in `src/movement/movement_profiles.py`.
+
+## Phase 2 Plans
+
+The next phase expands support functionality. Planned work includes:
+
+- Finishing healer and buff modes such as `mode_medic.py` and `mode_buff_by_tell.py`.
+- Adding trainer automation via `trainer_seeker.py` and the travel helpers under `modules/travel`.
+- Integrating profession leveling data from `profession_logic` modules.
+
+## Phase 3 Vision
+
+Longer term development aims to incorporate AI-driven interaction. Early pieces already exist:
+
+- `discord_relay.py` can forward whispers to Discord with optional AI replies.
+- `story_generator.py` uses LangChain to produce short stories.
+
+Future work will expand conversational loops and add smarter behavior modules.
 
 Status markers used above:
 - ✅ stable
