@@ -14,6 +14,13 @@ REQUIRED_FIELDS = {
     "farming_targets": list,
 }
 
+# Optional fields and their expected types. If present in a profile file they
+# must match these types but absence is allowed.
+OPTIONAL_FIELDS = {
+    "mode_sequence": list,
+    "fatigue_threshold": int,
+}
+
 
 def load_profile(name: str) -> Dict[str, Any]:
     """Return profile data for ``name`` or an empty dict if unavailable."""
@@ -29,5 +36,11 @@ def load_profile(name: str) -> Dict[str, Any]:
             raise ValueError(f"Missing required field: {field}")
         if not isinstance(data[field], expected_type):
             raise ValueError(f"{field} must be of type {expected_type.__name__}")
+
+    for field, expected_type in OPTIONAL_FIELDS.items():
+        if field in data and not isinstance(data[field], expected_type):
+            raise ValueError(
+                f"{field} must be of type {expected_type.__name__}"
+            )
 
     return data
