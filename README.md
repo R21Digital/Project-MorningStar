@@ -203,24 +203,17 @@ An example runtime profile looks like this:
 
 ## Smart Mode Switching
 
-Pass the ``--smart`` flag to let Android MS11 adjust behavior on the fly.
-When smart mode is enabled, the initial handler runs and returns a
-performance summary (such as XP earned or loot gathered). These values are
-recorded through ``session_monitor.monitor_session`` which persists them via
-``core.state_tracker`` and returns an updated state dict. If the state
-specifies a new ``mode`` key, the main script invokes the corresponding
-handler, allowing runtime mode changes without restarting.
-
-The monitoring logic lives in
-``android_ms11/core/session_monitor.py`` and can be tuned to track custom
-metrics or to modify the conditions that trigger a mode switch.
+Phase 5 adds a session monitor that watches XP per minute, loot collected and
+fatigue. When the ``--smart`` flag is enabled these values are gathered by
+``session_monitor.monitor_session`` in ``core/session_monitor.py`` and used to
+determine if another mode would perform better.
 
 ```bash
-python src/main.py --smart --mode combat
+python src/main.py --profile hero.json --smart
 ```
 
-The example above starts in combat mode, records the metrics, and may switch
-to support or another handler depending on the values returned.
+This command launches using the ``hero.json`` profile and automatically adjusts
+behavior based on the tracked statistics.
 
 ## State Tracking and Profiles
 
