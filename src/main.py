@@ -125,12 +125,7 @@ def main(argv: list[str] | None = None) -> None:
 
     handler = MODE_HANDLERS.get(mode)
     if handler:
-        import inspect
-
-        if len(inspect.signature(handler).parameters) == 2:
-            handler(config, session)
-        else:
-            handler(config)
+        handler(config, session)
     else:
         print(f"[MODE] Unknown mode '{mode}'")
 
