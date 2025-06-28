@@ -138,12 +138,19 @@ that the provided modules function as expected.
 
 ## Automation Modes
 Select a runtime mode when starting the automation. The ``--mode`` option
-controls which behavior module is activated.
+controls which behavior module is activated. Available modes include:
+
+- ``quest``
+- ``profession``
+- ``combat``
+- ``dancer``
+- ``medic``
+- ``crafting``
+- ``whisper``
 
 ```bash
-python src/main.py --mode questing
 python src/main.py --mode medic
-python src/main.py --mode grinding
+python src/main.py --mode quest
 ```
 
 Runtime profiles stored in `profiles/runtime/` let you bundle these

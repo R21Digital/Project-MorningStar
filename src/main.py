@@ -14,12 +14,22 @@ except Exception:  # pragma: no cover - optional dependency
     discord_relay = None
 
 from core.session_manager import SessionManager
+from utils.load_trainers import load_trainers
+from modules.skills.training_check import get_trainable_skills
+from modules.travel.trainer_travel import travel_to_trainer
 from src.movement.agent_mover import MovementAgent
 from src.movement.movement_profiles import patrol_route
 from src.training.trainer_visit import visit_trainer
-from modules.skills.training_check import get_trainable_skills
-from modules.travel.trainer_travel import travel_to_trainer
-from utils.load_trainers import load_trainers
+
+from android_ms11.modes import (
+    quest_mode,
+    profession_mode,
+    combat_assist_mode,
+    dancer_mode,
+    medic_mode,
+    crafting_mode,
+    whisper_mode,
+)
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
 CONFIG_PATH = os.path.join("config", "config.json")
@@ -64,6 +74,17 @@ def check_and_train_skills(
         travel_to_trainer(profession, trainer_data, agent=agent)
 
 
+MODE_HANDLERS = {
+    "quest": quest_mode.run,
+    "profession": profession_mode.run,
+    "combat": combat_assist_mode.run,
+    "dancer": dancer_mode.run,
+    "medic": medic_mode.run,
+    "crafting": crafting_mode.run,
+    "whisper": whisper_mode.run,
+}
+
+
 def main(argv: list[str] | None = None) -> None:
     """Run a demo session using the selected runtime profile."""
 
@@ -96,36 +117,13 @@ def main(argv: list[str] | None = None) -> None:
         print("[DISCORD] discord.py not available; relay disabled")
 
     # Initialize new session using the mode from CLI or profile
-    session = SessionManager(mode=mode)
+    SessionManager(mode=mode)
 
-    location = profile.get("location")
-    objectives = profile.get("objectives", [])
-
-    if location:
-        session.add_action(f"Travel to {location}")
-    for obj in objectives:
-        session.add_action(obj)
-
-    # Simulated: retrieve credits before and after
-    session.set_start_credits(2000)
-    session.add_action("Entered Theed Medical Center")
-    session.add_action("Began healing nearby players")
-    session.set_end_credits(2300)
-
-    # Movement Test
-    agent = MovementAgent(session=session)
-    patrol_route(agent, "Anchorhead-Loop")
-
-    # Try visiting artisan trainer
-    visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
-
-    # Check for new skills after quest completion
-    sample_skills = {"artisan": 0}
-    skill_tree = {"artisan": [0, 1]}
-    check_and_train_skills(agent, sample_skills, skill_tree)
-
-    # End session and save log
-    session.end_session()
+    handler = MODE_HANDLERS.get(mode)
+    if handler:
+        handler(config)
+    else:
+        print(f"[MODE] Unknown mode '{mode}'")
 
 
 if __name__ == "__main__":
