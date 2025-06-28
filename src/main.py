@@ -15,7 +15,9 @@ except Exception:  # pragma: no cover - optional dependency
 
 from core.session_manager import SessionManager
 from core import profile_loader, state_tracker, mode_selector
-from core.session_monitor import monitor_session
+from core.session_monitor import monitor_session, FATIGUE_THRESHOLD
+from core import mode_scheduler
+from utils.logging_utils import log_event
 from utils.load_trainers import load_trainers
 from utils.check_buff_status import update_buff_state
 from modules.skills.training_check import get_trainable_skills
@@ -112,10 +114,9 @@ def main(argv: list[str] | None = None) -> None:
         help="Automatically select mode based on state",
     )
     parser.add_argument(
-        "--loops",
-        type=int,
-        default=1,
-        help="Number of iterations when running rls mode",
+        "--loop",
+        action="store_true",
+        help="Run the selected mode continuously",
     )
     args = parser.parse_args(argv)
 
@@ -130,8 +131,6 @@ def main(argv: list[str] | None = None) -> None:
         state_tracker.reset_state()
         mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
     args.mode = mode
-    if mode == "rls":
-        config["iterations"] = args.loops
 
     relay_enabled = config.get("enable_discord_relay", False)
     bot = None
@@ -156,31 +155,50 @@ def main(argv: list[str] | None = None) -> None:
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
 
-    handler = MODE_HANDLERS.get(mode)
-    session_metrics: Dict[str, Any] = {}
-    if handler:
-        try:
-            session_metrics = handler(config, session, profile=profile) or {}
-        except TypeError:
-            session_metrics = handler(config, session) or {}
-    else:
-        print(f"[MODE] Unknown mode '{mode}'")
-        return
+    current_mode = mode
+    state = state_tracker.get_state()
 
-    if args.smart and "xp_rate" in session_metrics:
-        state = monitor_session(session_metrics)
-        new_mode = state.get("mode")
-        if new_mode and new_mode != args.mode:
-            print(f"[Smart Switch] {args.mode} -> {new_mode}")
-            args.mode = new_mode
-            new_handler = MODE_HANDLERS.get(args.mode)
-            if new_handler:
-                try:
-                    new_handler(config, session, profile=profile)
-                except TypeError:
-                    new_handler(config, session)
-            else:
-                print(f"[MODE] Unknown mode '{args.mode}'")
+    while True:
+        handler = MODE_HANDLERS.get(current_mode)
+        session_metrics: Dict[str, Any] = {}
+        if handler:
+            try:
+                session_metrics = handler(config, session, profile=profile) or {}
+            except TypeError:
+                session_metrics = handler(config, session) or {}
+        else:
+            print(f"[MODE] Unknown mode '{current_mode}'")
+            return
+
+        if args.smart or args.loop:
+            state = monitor_session(session_metrics)
+
+        if args.loop:
+            fatigue = int(state.get("fatigue_level", 0))
+            if fatigue > FATIGUE_THRESHOLD:
+                next_mode = mode_scheduler.get_next_mode(profile, state)
+                log_event(
+                    f"[MODE LOOP] Fatigue {fatigue} > {FATIGUE_THRESHOLD}; switching {current_mode} -> {next_mode}"
+                )
+                state_tracker.update_state(mode=next_mode)
+                current_mode = next_mode
+                continue
+            continue
+
+        if args.smart:
+            new_mode = state.get("mode")
+            if new_mode and new_mode != current_mode:
+                print(f"[Smart Switch] {current_mode} -> {new_mode}")
+                current_mode = new_mode
+                handler = MODE_HANDLERS.get(current_mode)
+                if handler:
+                    try:
+                        handler(config, session, profile=profile)
+                    except TypeError:
+                        handler(config, session)
+                else:
+                    print(f"[MODE] Unknown mode '{current_mode}'")
+        break
 
 
 if __name__ == "__main__":

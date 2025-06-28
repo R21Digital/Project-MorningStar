@@ -170,11 +170,7 @@ python src/main.py --mode rls
 ```
 
 ### RLS Mode
-Rare Loot Scanner mode monitors loot messages and records rare item drops. Use the ``--loops`` option to control how many scans run:
-
-```bash
-python src/main.py --mode rls --loops 2
-```
+Rare Loot Scanner mode monitors loot messages and records rare item drops. The number of scans is controlled by the ``iterations`` value in ``config/config.json``.
 
 Runtime profiles stored in `profiles/runtime/` let you bundle these
 settings together. Use the ``--profile`` option to load one:
