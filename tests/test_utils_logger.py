@@ -33,3 +33,16 @@ def test_log_event(tmp_path):
     content = log_file.read_text()
     assert "hi" in content
 
+
+def test_log_performance_summary(tmp_path):
+    from src.utils import logger
+
+    csv_file = tmp_path / "perf.csv"
+    stats = {"quests": 1, "xp": 42}
+    logger.log_performance_summary(stats, csv_path=str(csv_file))
+
+    assert csv_file.exists(), "CSV file was not created"
+    lines = csv_file.read_text().strip().splitlines()
+    assert lines[0] == "quests,xp"
+    assert lines[1] == "1,42"
+
