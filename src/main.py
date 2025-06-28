@@ -14,6 +14,7 @@ except Exception:  # pragma: no cover - optional dependency
     discord_relay = None
 
 from core.session_manager import SessionManager
+from core import profile_loader, state_tracker
 from utils.load_trainers import load_trainers
 from modules.skills.training_check import get_trainable_skills
 from modules.travel.trainer_travel import travel_to_trainer
@@ -112,7 +113,9 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
 
     config = load_config()
-    profile = load_runtime_profile(args.profile) if args.profile else {}
+    profile = profile_loader.load_profile(args.profile) if args.profile else {}
+
+    state_tracker.reset_state()
 
     mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
     if mode == "rls":
@@ -141,7 +144,10 @@ def main(argv: list[str] | None = None) -> None:
 
     handler = MODE_HANDLERS.get(mode)
     if handler:
-        handler(config, session)
+        try:
+            handler(config, session, profile=profile)
+        except TypeError:
+            handler(config, session)
     else:
         print(f"[MODE] Unknown mode '{mode}'")
 
