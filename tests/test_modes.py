@@ -1,6 +1,7 @@
 import os
 import sys
 import importlib
+import inspect
 import pytest
 
 # Allow imports from project root
@@ -17,9 +18,24 @@ STUB_MAP = {
 }
 
 @pytest.mark.parametrize("module_name", STUB_MAP.values())
-def test_mode_stubs_run(module_name):
+def test_mode_stubs_run(module_name, monkeypatch):
     mod = importlib.import_module(f"android_ms11.modes.{module_name}")
-    mod.run({})
+
+    if module_name == "quest_mode":
+        monkeypatch.setattr(mod, "select_quest", lambda *a, **k: {"title": "Demo", "steps": []})
+        monkeypatch.setattr(mod, "execute_quest", lambda *a, **k: None)
+    if module_name == "combat_assist_mode":
+        monkeypatch.setattr(mod, "start_afk_combat", lambda *a, **k: None)
+
+    params = inspect.signature(mod.run).parameters
+    if len(params) == 2:
+        class DummySession:
+            def add_action(self, *a, **k):
+                pass
+
+        mod.run({}, DummySession())
+    else:
+        mod.run({})
 
 @pytest.mark.parametrize("mode", list(STUB_MAP.keys()))
 def test_main_selector_invokes_stub(monkeypatch, mode):
@@ -30,15 +46,26 @@ def test_main_selector_invokes_stub(monkeypatch, mode):
     monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
     monkeypatch.setattr(main_mod, "load_runtime_profile", lambda name: {})
 
+    class DummySession:
+        pass
+
     def fake_session(*a, **kw):
+        inst = DummySession()
         calls["session"] = kw.get("mode") if kw else a[0] if a else None
+        calls["instance"] = inst
+        return inst
+
     monkeypatch.setattr(main_mod, "SessionManager", fake_session)
 
-    def handler(cfg):
+    def handler(cfg, session):
         calls["handler"] = mode
+        calls["used_session"] = session
+
     monkeypatch.setitem(main_mod.MODE_HANDLERS, mode, handler)
 
     main_mod.main(["--mode", mode])
 
-    assert calls == {"session": mode, "handler": mode}
+    assert calls["session"] == mode
+    assert calls["handler"] == mode
+    assert calls["used_session"] is calls["instance"]
 

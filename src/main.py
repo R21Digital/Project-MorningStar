@@ -121,11 +121,16 @@ def main(argv: list[str] | None = None) -> None:
         print("[DISCORD] discord.py not available; relay disabled")
 
     # Initialize new session using the mode from CLI or profile
-    SessionManager(mode=mode)
+    session = SessionManager(mode=mode)
 
     handler = MODE_HANDLERS.get(mode)
     if handler:
-        handler(config)
+        import inspect
+
+        if len(inspect.signature(handler).parameters) == 2:
+            handler(config, session)
+        else:
+            handler(config)
     else:
         print(f"[MODE] Unknown mode '{mode}'")
 
