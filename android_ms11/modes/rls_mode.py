@@ -5,11 +5,32 @@ from __future__ import annotations
 from android_ms11.core import loot_session, ocr_loot_scanner, rls_logic
 
 
-def run(config: dict | None = None, session=None) -> None:
-    """Run the rare loot scanner using ``config`` options."""
+def run(
+    config: dict | None = None,
+    session=None,
+    *,
+    loop_count: int | None = None,
+) -> None:
+    """Run the rare loot scanner using ``config`` options.
+
+    Parameters
+    ----------
+    config:
+        Optional configuration mapping. When provided, the ``iterations`` value
+        controls the number of scanning loops.
+    session:
+        Unused session object placeholder for API parity with other modes.
+    loop_count:
+        Explicit iteration count which overrides the ``iterations`` value in the
+        ``config`` mapping. This parameter allows tests or callers to bypass the
+        configuration file and specify a loop count directly.
+    """
 
     config = config or {}
-    iterations = int(config.get("iterations", 1))
+    if loop_count is not None:
+        iterations = int(loop_count)
+    else:
+        iterations = int(config.get("iterations", 1))
 
     print("[RLS] Starting rare loot scanner")
     for idx in range(iterations):
