@@ -26,7 +26,7 @@ def run(session=None, max_loops: int | None = None) -> None:
     print(f"[SUPPORT] Assisting leader {leader}")
 
     # Perform pre-buff routine before starting the assist loop
-    pre_buff_manager.run_pre_buff()
+    pre_buff_manager.apply_pre_buffs()
 
     loops = 0
     while True:
