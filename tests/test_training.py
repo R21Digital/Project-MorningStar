@@ -173,7 +173,7 @@ def test_normalize_entry_waypoint_only():
     assert result["coords"] == [1, 2]
 
 
-def test_train_profession_uses_waypoint(monkeypatch):
+def test_go_to_trainer_uses_waypoint(monkeypatch):
     from core import TravelManager
 
     monkeypatch.setattr(TravelManager, "load_trainers", lambda self: None)
@@ -207,7 +207,29 @@ def test_train_profession_uses_waypoint(monkeypatch):
         ),
     )
 
-    skills = tm.train_profession("demo")
-    assert skills == ["Skill"]
+    tm.go_to_trainer("demo")
     assert calls["go"] == ([5, 6], "naboo", "theed")
     assert calls["verify"] == ([5, 6], "naboo", "theed")
+
+
+def test_train_profession_invokes_travel_and_scan(monkeypatch):
+    from core import TravelManager
+
+    monkeypatch.setattr(TravelManager, "load_trainers", lambda self: None)
+    tm = TravelManager(trainer_file="dummy.json")
+    tm.trainers = {"demo": {}}
+
+    calls = {}
+
+    monkeypatch.setattr(tm, "go_to_trainer", lambda prof: calls.setdefault("go", prof))
+    monkeypatch.setattr(tm.trainer_scanner, "scan", lambda: calls.setdefault("scan", ["Skill"]))
+
+    skills = tm.train_profession("demo")
+    assert skills == ["Skill"]
+    assert calls["go"] == "demo"
+    assert calls["scan"] == ["Skill"]
+
+    calls.clear()
+    skills = tm.train_profession("missing")
+    assert skills == []
+    assert calls == {}
