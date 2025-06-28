@@ -354,6 +354,25 @@ skills = tm.train_profession("artisan")
 print(skills)
 ```
 
+### Profession Leveler
+
+`core.ProfessionLeveler` can visit a sequence of trainers defined in
+`profiles/profession_plan.json`.
+
+```json
+[
+  "artisan",
+  "marksman"
+]
+```
+
+```python
+from core import ProfessionLeveler
+
+leveler = ProfessionLeveler()  # reads profession_plan.json by default
+leveler.level_all_professions()
+```
+
 ## Shuttle Travel Utilities
 Shuttle locations and connections are defined in `data/shuttles.json`. Each
 planet key contains a list of shuttles with NPC coordinates and destination

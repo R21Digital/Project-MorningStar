@@ -8,6 +8,7 @@ from .trainer_ocr import (
 )
 from .trainer_scanner import scan_trainer_skills, TrainerScanner
 from .travel_manager import TravelManager
+from .profession_leveler import ProfessionLeveler
 
 __all__ = [
     "preprocess_image",
@@ -17,4 +18,5 @@ __all__ = [
     "scan_trainer_skills",
     "TrainerScanner",
     "TravelManager",
+    "ProfessionLeveler",
 ]
