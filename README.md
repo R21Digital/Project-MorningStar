@@ -147,11 +147,14 @@ controls which behavior module is activated. Available modes include:
 - ``medic``
 - ``crafting``
 - ``whisper``
-- ``support`` – follows leader, joins party, assists target, reacts to commands.
+- ``support`` – enhanced support with a pre-buff routine, follows the leader, joins the party, assists the target, and reacts to commands.
+- ``rls`` – rare loot scanner mode.
 
 ```bash
 python src/main.py --mode medic
 python src/main.py --mode quest
+python src/main.py --mode support
+python src/main.py --mode rls
 ```
 
 Runtime profiles stored in `profiles/runtime/` let you bundle these
