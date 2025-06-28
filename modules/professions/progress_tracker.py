@@ -6,7 +6,11 @@ from typing import List, Optional, Dict
 from profession_logic.modules import xp_estimator
 
 # Default location for profession metadata JSON files
-DATA_DIR = Path(__file__).resolve().parents[1] / "data" / "professions"
+#
+# Profession JSON files are stored under ``android_ms11/data/professions``.
+# ``DATA_DIR`` points to that location by default so the tracker can load
+# profession info without additional configuration.
+DATA_DIR = Path(__file__).resolve().parents[2] / "android_ms11" / "data" / "professions"
 
 
 def _skill_name(text: str) -> str:
