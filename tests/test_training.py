@@ -157,3 +157,57 @@ def test_load_trainers_default_path(monkeypatch, tmp_path):
     )
     assert lt.TRAINER_JSON_FILE == expected
     assert calls["path"] == expected
+
+
+def test_normalize_entry_waypoint_only():
+    from utils import load_trainers as lt
+
+    entry = {
+        "planet": "corellia",
+        "city": "coronet",
+        "name": "Example",
+        "waypoint": [1, 2],
+    }
+
+    result = lt._normalize_entry(entry)
+    assert result["coords"] == [1, 2]
+
+
+def test_train_profession_uses_waypoint(monkeypatch):
+    from core import TravelManager
+
+    monkeypatch.setattr(TravelManager, "load_trainers", lambda self: None)
+    tm = TravelManager(trainer_file="dummy.json")
+    tm.trainers = {
+        "demo": {
+            "waypoint": [5, 6],
+            "planet": "naboo",
+            "city": "theed",
+        }
+    }
+
+    tm.trainer_scanner = type(
+        "S",
+        (),
+        {"scan": lambda self: ["Skill"]},
+    )()
+
+    calls = {}
+
+    monkeypatch.setattr(
+        "core.travel_manager.go_to_waypoint",
+        lambda coords, planet=None, city=None: calls.setdefault(
+            "go", (coords, planet, city)
+        ),
+    )
+    monkeypatch.setattr(
+        "core.travel_manager.verify_location",
+        lambda coords, planet=None, city=None: calls.setdefault(
+            "verify", (coords, planet, city)
+        ),
+    )
+
+    skills = tm.train_profession("demo")
+    assert skills == ["Skill"]
+    assert calls["go"] == ([5, 6], "naboo", "theed")
+    assert calls["verify"] == ([5, 6], "naboo", "theed")

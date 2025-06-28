@@ -50,7 +50,11 @@ class TravelManager:
         if not trainer:
             return []
 
-        coords = trainer.get("coords") or [trainer.get("x", 0), trainer.get("y", 0)]
+        coords = (
+            trainer.get("waypoint")
+            or trainer.get("coords")
+            or [trainer.get("x", 0), trainer.get("y", 0)]
+        )
         planet = trainer.get("planet")
         city = trainer.get("city")
 
