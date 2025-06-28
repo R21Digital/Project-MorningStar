@@ -201,6 +201,27 @@ An example runtime profile looks like this:
 }
 ```
 
+## Smart Mode Switching
+
+Pass the ``--smart`` flag to let Android MS11 adjust behavior on the fly.
+When smart mode is enabled, the initial handler runs and returns a
+performance summary (such as XP earned or loot gathered). These values are
+recorded through ``session_monitor.monitor_session`` which persists them via
+``core.state_tracker`` and returns an updated state dict. If the state
+specifies a new ``mode`` key, the main script invokes the corresponding
+handler, allowing runtime mode changes without restarting.
+
+The monitoring logic lives in
+``android_ms11/core/session_monitor.py`` and can be tuned to track custom
+metrics or to modify the conditions that trigger a mode switch.
+
+```bash
+python src/main.py --smart --mode combat
+```
+
+The example above starts in combat mode, records the metrics, and may switch
+to support or another handler depending on the values returned.
+
 ## State Tracking and Profiles
 
 The `core.state_tracker` module persists simple game state between runs.
