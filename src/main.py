@@ -14,7 +14,7 @@ except Exception:  # pragma: no cover - optional dependency
     discord_relay = None
 
 from core.session_manager import SessionManager
-from core import profile_loader, state_tracker
+from core import profile_loader, state_tracker, mode_selector
 from utils.load_trainers import load_trainers
 from modules.skills.training_check import get_trainable_skills
 from modules.travel.trainer_travel import travel_to_trainer
@@ -105,6 +105,11 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--mode", type=str, help="Override session mode")
     parser.add_argument("--profile", type=str, help="Runtime profile name")
     parser.add_argument(
+        "--smart",
+        action="store_true",
+        help="Automatically select mode based on state",
+    )
+    parser.add_argument(
         "--loops",
         type=int,
         default=1,
@@ -115,9 +120,12 @@ def main(argv: list[str] | None = None) -> None:
     config = load_config()
     profile = profile_loader.load_profile(args.profile) if args.profile else {}
 
-    state_tracker.reset_state()
-
-    mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
+    if args.smart:
+        state = state_tracker.get_state()
+        mode = mode_selector.select_mode(profile, state)
+    else:
+        state_tracker.reset_state()
+        mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
     if mode == "rls":
         config["iterations"] = args.loops
 
@@ -138,6 +146,8 @@ def main(argv: list[str] | None = None) -> None:
         ).start()
     elif relay_enabled:
         print("[DISCORD] discord.py not available; relay disabled")
+
+    print(f"[MODE] Selected mode '{mode}'")
 
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
