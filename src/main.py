@@ -16,6 +16,7 @@ except Exception:  # pragma: no cover - optional dependency
 from core.session_manager import SessionManager
 from core import profile_loader, state_tracker, mode_selector
 from utils.load_trainers import load_trainers
+from utils.check_buff_status import update_buff_state
 from modules.skills.training_check import get_trainable_skills
 from modules.travel.trainer_travel import travel_to_trainer
 from src.movement.agent_mover import MovementAgent  # noqa: F401
@@ -122,6 +123,7 @@ def main(argv: list[str] | None = None) -> None:
 
     if args.smart:
         state = state_tracker.get_state()
+        update_buff_state(state)
         mode = mode_selector.select_mode(profile, state)
     else:
         state_tracker.reset_state()
