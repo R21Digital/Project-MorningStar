@@ -147,6 +147,7 @@ controls which behavior module is activated. Available modes include:
 - ``medic``
 - ``crafting``
 - ``whisper``
+- ``support`` – follows leader, joins party, assists target, reacts to commands.
 
 ```bash
 python src/main.py --mode medic
