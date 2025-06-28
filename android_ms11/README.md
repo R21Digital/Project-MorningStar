@@ -13,6 +13,9 @@ function which is selected by `src.main` based on the chosen mode.
 - `profession_mode` – handles profession training tasks.
 - `quest_mode` – runs quest step sequences.
 - `whisper_mode` – monitors and relays whispers.
+- `support_mode` – coordinates following, supporting, and party joining.
+- `bounty_farming_mode` – stub for hunting bounties.
+- `entertainer_mode` – performs entertainer activities.
 
 ## Running a mode
 
