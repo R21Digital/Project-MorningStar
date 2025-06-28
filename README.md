@@ -25,6 +25,14 @@ xp = XPManager("Ezra")
 xp.record_action("quest_complete")
 xp.end_session()
 ```
+```python
+from core import profile_loader
+from core.state_tracker import update_state, get_state
+
+profile = profile_loader.load_profile("demo")
+update_state(mode=profile.get("default_mode"))
+print(get_state())
+```
 The modules under `src/` offer simple building blocks that you can integrate into larger systems.
 Utilities for planning professions and trainer routes live under `profession_logic/`.
 
@@ -191,6 +199,36 @@ An example runtime profile looks like this:
   ],
   "priority": 1
 }
+```
+
+## State Tracking and Profiles
+
+The `core.state_tracker` module persists simple game state between runs.
+Calls to `update_state()` write values to `logs/state.json`, which is loaded
+automatically on the next import. Use `get_state()` to inspect the stored data.
+
+Profiles under `profiles/` capture long-term preferences. Load one with
+`core.profile_loader.load_profile(name)` and combine it with the state tracker
+to initialize a session.
+
+Example profile:
+
+```json
+{
+  "support_target": "Leader",
+  "preferred_trainers": {"medic": "trainer"},
+  "default_mode": "medic",
+  "skip_modes": ["crafting"],
+  "farming_targets": ["Bandit"]
+}
+```
+
+```python
+from core import profile_loader
+from core.state_tracker import update_state
+
+profile = profile_loader.load_profile("demo")
+update_state(mode=profile.get("default_mode"))
 ```
 
 ## Discord Relay Bot
