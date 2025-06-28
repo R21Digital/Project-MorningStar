@@ -30,29 +30,22 @@ def monitor_session(perf_metrics: Dict[str, Any]) -> Dict[str, Any]:
     loot = perf_metrics.get("loot")
     xp_rate = float(perf_metrics.get("xp_rate", 0.0))
 
-    fatigue = int(state.get("fatigue", 0))
+    fatigue = int(state.get("fatigue_level", 0))
     if xp_rate < LOW_XP_RATE:
         fatigue += 1
-    else:
+        mode = "bounty_mode"
+    elif xp_rate > HIGH_XP_RATE:
         fatigue = max(fatigue - 1, 0)
+        mode = None
+    else:
+        mode = state.get("mode")
 
-    updates: Dict[str, Any] = {"fatigue": fatigue}
+    updates: Dict[str, Any] = {"fatigue_level": fatigue}
     if xp is not None:
         updates["xp"] = xp
     if loot is not None:
         updates["loot"] = loot
-
-    if fatigue >= FATIGUE_THRESHOLD:
-        mode = "support"
-    elif xp_rate < 50:
-        mode = "quest"
-    elif xp_rate > HIGH_XP_RATE:
-        mode = "combat"
-    else:
-        mode = state.get("mode")
-
-    if mode is not None:
-        updates["mode"] = mode
+    updates["mode"] = mode
 
     state_tracker.update_state(**updates)
 
