@@ -17,7 +17,7 @@ Todo work recorded in `NOTES.md` includes improving scoring and fleshing out ste
 
 The next phase expands support functionality. Planned work includes:
 
-- Finishing healer and buff modes such as `mode_medic.py` and `mode_buff_by_tell.py`.
+- Finishing healer and buff modes such as `medic_mode.py` and `whisper_mode.py`.
 - Adding trainer automation via `trainer_seeker.py` and the travel helpers under `modules/travel`.
 - Integrating profession leveling data from `profession_logic` modules.
 
