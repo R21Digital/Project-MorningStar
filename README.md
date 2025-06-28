@@ -336,6 +336,21 @@ An example file:
 }
 ```
 
+Add new professions to `profiles/trainers.json` using the same fields.  The
+waypoint can be stored as a `coords` list or separate `x`/`y` values &ndash;
+`core.TravelManager` accepts any of these forms.  `planet` and `city` are
+optional but help navigation.
+
+### Training with `TravelManager`
+
+```python
+from core import TravelManager
+
+tm = TravelManager()  # loads profiles/trainers.json by default
+skills = tm.train_profession("artisan")
+print(skills)
+```
+
 ## Shuttle Travel Utilities
 Shuttle locations and connections are defined in `data/shuttles.json`. Each
 planet key contains a list of shuttles with NPC coordinates and destination
