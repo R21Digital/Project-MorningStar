@@ -4,7 +4,7 @@
 - **XP tracking**: `xp_manager.py`, `xp_session.py`, and `xp_tracker.py` allow recording actions and saving session logs.
 - **Mode runner**: `main.py` and `runner.py` provide CLI entry points to launch different automation modes.
 - **Quest database**: `src/db` holds SQLite schema, quest insertion helpers, and utilities for viewing quests.
-- **Training helpers**: `trainer_data_loader.py`, `trainer_visit.py`, and the `find_trainer.py` CLI locate NPC trainers and automate visits.
+- **Training helpers**: `utils/load_trainers.py`, `trainer_visit.py`, and the `find_trainer.py` CLI load trainer data and automate visits.
 - **Trainer navigator**: `scripts/logic/trainer_navigator.py` lists nearby trainers and records visits in `logs/training_log.txt`. It can also write JSON lines to `logs/training.json` using data from `data/trainers.json`.
 
 ## Modules Needing Work
