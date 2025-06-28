@@ -103,12 +103,20 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Android MS11 demo")
     parser.add_argument("--mode", type=str, help="Override session mode")
     parser.add_argument("--profile", type=str, help="Runtime profile name")
+    parser.add_argument(
+        "--loops",
+        type=int,
+        default=1,
+        help="Number of iterations when running rls mode",
+    )
     args = parser.parse_args(argv)
 
     config = load_config()
     profile = load_runtime_profile(args.profile) if args.profile else {}
 
     mode = args.mode or profile.get("mode") or config.get("default_mode", "medic")
+    if mode == "rls":
+        config["iterations"] = args.loops
 
     relay_enabled = config.get("enable_discord_relay", False)
     bot = None
