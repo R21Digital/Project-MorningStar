@@ -211,6 +211,30 @@ python src/main.py --profile hero.json --smart
 This command launches using the ``hero.json`` profile and automatically adjusts
 behavior based on the tracked statistics.
 
+## Mode Looping
+
+Use the ``--loop`` flag to keep the runner active and rotate between modes. The
+rotation order is defined by ``mode_sequence`` in a runtime profile. Each time
+``session_monitor`` detects fatigue above the profile's threshold, the next mode
+is selected via ``core.mode_scheduler.get_next_mode``.
+
+```bash
+python src/main.py --profile hero.json --loop
+```
+
+Example profile snippet:
+
+```json
+{
+  "default_mode": "quest",
+  "mode_sequence": ["quest", "crafting", "medic"],
+  "fatigue_threshold": 50
+}
+```
+
+This setup cycles through questing, crafting, and healing whenever fatigue rises
+above 50 while ``--loop`` is active.
+
 ## State Tracking and Profiles
 
 The `core.state_tracker` module persists simple game state between runs.
