@@ -160,6 +160,24 @@ settings together. Use the ``--profile`` option to load one:
 python src/main.py --profile questing
 ```
 
+The ``--mode`` flag overrides the ``default_mode`` defined in `config/config.json`.
+Each runtime profile is a small JSON file describing the starting location,
+objectives, and priority for a task. See below for an example profile.
+
+An example runtime profile looks like this:
+
+```json
+{
+  "mode": "medic",
+  "location": "Naboo",
+  "objectives": [
+    "Heal players in Theed",
+    "Restock medical supplies"
+  ],
+  "priority": 1
+}
+```
+
 ## Discord Relay Bot
 The relay bot depends on the `discord.py` package. Enable it by editing
 `config/config.json` (set `enable_discord_relay`) and
@@ -205,6 +223,26 @@ Or start the demo with relay enabled:
 ```bash
 python src/main.py --mode medic
 ```
+
+## Credit and XP Tracking
+Session logs are managed by `core.session_manager.SessionManager`. When a session starts, it records the starting credit balance and XP value. Calling `end_session()` writes a JSON report under `logs/` showing credits earned and XP gained.
+
+You can track smaller actions with `XPManager`:
+
+```python
+from src.xp_manager import XPManager
+
+xp = XPManager("Ezra")
+xp.record_action("quest_complete")
+xp.end_session()
+```
+
+Each action adds an entry to `logs/xp_tracking/` so you can review progress later.
+
+## Whisper Relay Setup
+The optional Discord relay forwards in-game whispers to a Discord DM. Enable it in `config/config.json` and configure credentials in `config/discord_config.json`.
+
+When `relay_mode` is set to `auto` or `manual`, replies are sent back to the game via `game_bridge.GameBridge`. The helper `whisper_monitor.py` watches the screen and queues new whispers for dispatch.
 
 ## Legacy Quest Manager CLI
 Use the legacy quest tool to explore old mission data.
