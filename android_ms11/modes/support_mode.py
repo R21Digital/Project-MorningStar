@@ -1,6 +1,11 @@
 """Support mode implementation using core helpers."""
 
-from android_ms11.core import follow_manager, support_ai, party_monitor
+from android_ms11.core import (
+    pre_buff_manager,
+    follow_manager,
+    assist_manager,
+    party_manager,
+)
 
 
 def run(session=None, max_loops: int | None = None) -> None:
@@ -20,11 +25,14 @@ def run(session=None, max_loops: int | None = None) -> None:
 
     print(f"[SUPPORT] Assisting leader {leader}")
 
+    # Perform pre-buff routine before starting the assist loop
+    pre_buff_manager.run_pre_buff()
+
     loops = 0
     while True:
-        follow_manager.follow_target_loop()
-        support_ai.assist_party()
-        party_monitor.auto_join_party()
+        party_manager.check_and_join_party()
+        assist_manager.assist_leader(leader)
+        follow_manager.follow_leader(leader)
 
         loops += 1
         if max_loops is not None and loops >= max_loops:
