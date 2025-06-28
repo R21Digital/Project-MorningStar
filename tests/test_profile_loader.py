@@ -13,7 +13,9 @@ def test_load_profile_valid(tmp_path, monkeypatch):
         "preferred_trainers": {"medic": "trainer"},
         "default_mode": "medic",
         "skip_modes": ["crafting"],
-        "farming_targets": ["Bandit"]
+        "farming_targets": ["Bandit"],
+        "mode_sequence": ["medic", "quest"],
+        "fatigue_threshold": 5,
     }
     path = tmp_path / "demo.json"
     path.write_text(json.dumps(data))
