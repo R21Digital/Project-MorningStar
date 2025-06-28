@@ -131,6 +131,10 @@ This section walks through a fresh setup so you can try the project locally.
    pip install -r requirements.txt
    pytest
     # includes requests>=2.0, PyYAML, and pymongo>=3.0
+
+   # run a subset of the test suite
+   pytest -k support_mode -q
+   pytest -k rls_mode -q
    ```
 
 These steps should give you a working copy of Android MS11 and confidence
