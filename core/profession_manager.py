@@ -1,7 +1,7 @@
 """Utilities for managing profession skill training."""
 
 from __future__ import annotations
-from typing import List, Dict
+from typing import Dict
 
 from utils.movement_manager import travel_to
 from utils.npc_handler import interact_with_trainer

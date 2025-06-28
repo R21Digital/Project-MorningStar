@@ -7,7 +7,7 @@ run a training macro.
 
 from __future__ import annotations
 
-from typing import Iterable, List, Optional
+from typing import Iterable, Optional
 
 from modules.professions import progress_tracker
 from scripts.logic import trainer_navigator

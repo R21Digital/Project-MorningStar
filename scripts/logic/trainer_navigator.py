@@ -13,7 +13,7 @@ import math
 import os
 import json
 from datetime import datetime
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from utils.load_trainers import load_trainers
 from utils.get_trainer_location import get_trainer_location

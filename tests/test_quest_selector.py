@@ -7,7 +7,6 @@ import random
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src import quest_selector
-from src.db import database
 
 
 def make_db():

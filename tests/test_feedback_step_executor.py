@@ -1,6 +1,6 @@
 import os
 import sys
-from types import SimpleNamespace, ModuleType
+from types import ModuleType
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

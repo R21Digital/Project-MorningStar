@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict
 
 from scripts.travel import shuttle
 from src.movement.movement_profiles import walk_to_coords

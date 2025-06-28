@@ -5,7 +5,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from modules.travel import trainer_travel
 from scripts.travel import shuttle
-from src.movement import movement_profiles
 
 
 def test_travel_to_trainer_invokes_navigation(monkeypatch):
