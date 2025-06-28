@@ -1,0 +1,52 @@
+import os
+import sys
+import json
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from core.profession_leveler import ProfessionLeveler
+from core.travel_manager import TravelManager
+
+
+def test_level_all_professions_skips_unknown(monkeypatch, tmp_path):
+    plan = ["artisan", "missing"]
+    plan_file = tmp_path / "plan.json"
+    plan_file.write_text(json.dumps(plan))
+
+    monkeypatch.setattr(TravelManager, "load_trainers", lambda self: None)
+    lvl = ProfessionLeveler("dummy.json", str(plan_file))
+    lvl.travel_manager.trainers = {"artisan": {}}
+
+    calls = []
+    monkeypatch.setattr(lvl, "level_profession", lambda prof: calls.append(prof))
+
+    lvl.level_all_professions()
+    assert calls == ["artisan"]
+
+
+def test_level_profession_invokes_training(monkeypatch, tmp_path):
+    plan_file = tmp_path / "plan.json"
+    plan_file.write_text("[]")
+
+    monkeypatch.setattr(TravelManager, "load_trainers", lambda self: None)
+    lvl = ProfessionLeveler("dummy.json", str(plan_file))
+    lvl.travel_manager.trainers = {"artisan": {}}
+
+    tm_calls = {}
+
+    def fake_scan():
+        tm_calls.setdefault("scan", True)
+        return ["Skill"]
+
+    monkeypatch.setattr(lvl.travel_manager.trainer_scanner, "scan", fake_scan)
+    monkeypatch.setattr(
+        lvl.travel_manager,
+        "train_profession",
+        lambda prof: tm_calls.setdefault("train", prof),
+    )
+
+    skills = lvl.level_profession("artisan")
+
+    assert tm_calls["train"] == "artisan"
+    assert tm_calls["scan"] is True
+    assert skills == ["Skill"]
