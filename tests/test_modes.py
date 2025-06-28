@@ -2,6 +2,7 @@ import os
 import sys
 import importlib
 import pytest
+from core import profile_loader, state_tracker
 
 # Allow imports from project root
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -39,7 +40,8 @@ def test_main_selector_invokes_stub(monkeypatch, mode):
 
     calls = {}
     monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
-    monkeypatch.setattr(main_mod, "load_runtime_profile", lambda name: {})
+    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {})
+    monkeypatch.setattr(state_tracker, "reset_state", lambda: None)
 
     class DummySession:
         pass
@@ -52,9 +54,10 @@ def test_main_selector_invokes_stub(monkeypatch, mode):
 
     monkeypatch.setattr(main_mod, "SessionManager", fake_session)
 
-    def handler(cfg, session):
+    def handler(cfg, session, profile=None):
         calls["handler"] = mode
         calls["used_session"] = session
+        calls["profile"] = profile
 
     monkeypatch.setitem(main_mod.MODE_HANDLERS, mode, handler)
 
@@ -63,4 +66,41 @@ def test_main_selector_invokes_stub(monkeypatch, mode):
     assert calls["session"] == mode
     assert calls["handler"] == mode
     assert calls["used_session"] is calls["instance"]
+    assert calls["profile"] == {}
+
+
+def test_main_loads_profile_and_passes_to_handler(monkeypatch):
+    import src.main as main
+    main_mod = importlib.reload(main)
+
+    captured = {}
+    monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
+
+    def fake_load(name):
+        captured["profile_name"] = name
+        return {"setting": 1}
+
+    monkeypatch.setattr(profile_loader, "load_profile", fake_load)
+    monkeypatch.setattr(state_tracker, "reset_state", lambda: captured.setdefault("reset", True))
+
+    class DummySession:
+        pass
+
+    def fake_session(*a, **k):
+        captured["session_mode"] = k.get("mode") if k else a[0] if a else None
+        return DummySession()
+
+    monkeypatch.setattr(main_mod, "SessionManager", fake_session)
+
+    def handler(cfg, session, profile=None):
+        captured["profile"] = profile
+
+    monkeypatch.setitem(main_mod.MODE_HANDLERS, "combat", handler)
+
+    main_mod.main(["--mode", "combat", "--profile", "demo"])
+
+    assert captured["profile_name"] == "demo"
+    assert captured.get("reset") is True
+    assert captured["session_mode"] == "combat"
+    assert captured["profile"] == {"setting": 1}
 

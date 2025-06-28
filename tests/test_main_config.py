@@ -6,6 +6,7 @@ from importlib import reload
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import src.main as main
+from core import profile_loader, state_tracker
 
 
 def test_load_config(monkeypatch, tmp_path):
@@ -48,7 +49,8 @@ def test_main_uses_default_mode(monkeypatch, tmp_path):
     monkeypatch.setattr(main_mod, "patrol_route", lambda *a, **k: None)
     monkeypatch.setattr(main_mod, "visit_trainer", lambda *a, **k: None)
     monkeypatch.setattr(main_mod, "check_and_train_skills", lambda *a, **k: None)
-    monkeypatch.setattr(main_mod, "load_runtime_profile", lambda name: {})
+    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {})
+    monkeypatch.setattr(state_tracker, "reset_state", lambda: None)
     monkeypatch.setattr(sys, "argv", ["prog"])
 
     main_mod.main([])
