@@ -18,7 +18,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 from utils.load_trainers import load_trainers
 from utils.get_trainer_location import get_trainer_location
 from src.training.trainer_visit import visit_trainer
-from src.utils.logger import log_event
+from android_ms11.utils.logging_utils import log_event
 
 # Default log files under the project's ``logs`` directory.
 DEFAULT_LOG_PATH = os.path.join("logs", "training_log.txt")
