@@ -33,6 +33,9 @@ from android_ms11.modes import (
     medic_mode,
     crafting_mode,
     whisper_mode,
+    support_mode,
+    bounty_farming_mode,
+    entertainer_mode,
 )
 
 DEFAULT_PROFILE_DIR = os.path.join("profiles", "runtime")
@@ -86,6 +89,9 @@ MODE_HANDLERS = {
     "medic": medic_mode.run,
     "crafting": crafting_mode.run,
     "whisper": whisper_mode.run,
+    "support": support_mode.run,
+    "bounty": bounty_farming_mode.run,
+    "entertainer": entertainer_mode.run,
 }
 
 
