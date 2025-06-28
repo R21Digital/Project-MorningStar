@@ -3,13 +3,13 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from android_ms11.core.pre_buff_manager import run_pre_buff
+from android_ms11.core.pre_buff_manager import apply_pre_buffs
 
 
-def test_run_pre_buff_prints_messages(capsys):
-    run_pre_buff()
+def test_apply_pre_buffs_prints_messages(capsys):
+    apply_pre_buffs()
     captured = capsys.readouterr().out
-    assert "Starting pre-buff routine" in captured
-    assert "Applying defensive buffs" in captured
-    assert "Applying offensive buffs" in captured
+    assert "Checking required buffs" in captured
+    assert "Capturing screen for OCR" in captured
+    assert "Casting Might" in captured
     assert "Pre-buff complete" in captured
