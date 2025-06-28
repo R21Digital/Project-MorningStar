@@ -1,7 +1,6 @@
 import os
 import sys
 import importlib
-import inspect
 import pytest
 
 # Allow imports from project root
@@ -27,15 +26,11 @@ def test_mode_stubs_run(module_name, monkeypatch):
     if module_name == "combat_assist_mode":
         monkeypatch.setattr(mod, "start_afk_combat", lambda *a, **k: None)
 
-    params = inspect.signature(mod.run).parameters
-    if len(params) == 2:
-        class DummySession:
-            def add_action(self, *a, **k):
-                pass
+    class DummySession:
+        def add_action(self, *a, **k):
+            pass
 
-        mod.run({}, DummySession())
-    else:
-        mod.run({})
+    mod.run({}, DummySession())
 
 @pytest.mark.parametrize("mode", list(STUB_MAP.keys()))
 def test_main_selector_invokes_stub(monkeypatch, mode):
