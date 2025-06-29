@@ -22,6 +22,7 @@ from core.repeat_utils import run_repeating_mode
 from utils.logging_utils import log_event
 from utils.load_trainers import load_trainers
 from utils.check_buff_status import update_buff_state
+from utils.license_hooks import requires_license
 from modules.skills.training_check import get_trainable_skills
 from modules.travel.trainer_travel import travel_to_trainer
 from src.movement.agent_mover import MovementAgent
@@ -196,6 +197,7 @@ def run_mode(
         return {}
 
 
+@requires_license
 def main(argv: list[str] | None = None) -> None:
     """Run a demo session using the selected runtime profile."""
 

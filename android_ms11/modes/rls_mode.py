@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from android_ms11.core import loot_session, ocr_loot_scanner, rls_logic
+from utils.license_hooks import requires_license
 
 
+@requires_license
 def run(
     config: dict | None = None,
     session=None,

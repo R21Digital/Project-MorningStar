@@ -1,3 +1,6 @@
+from utils.license_hooks import requires_license
+
+
 def start_crafting(character_name: str) -> None:
     """Simulate a short crafting session for the given character."""
 
@@ -7,6 +10,7 @@ def start_crafting(character_name: str) -> None:
     print("🔧 Simulation: Crafted 2 Mineral Survey Devices.")
 
 
+@requires_license
 def run(config, session=None):
     """Main entry point for this mode."""
 

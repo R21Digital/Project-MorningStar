@@ -1,3 +1,6 @@
+from utils.license_hooks import requires_license
+
+
 def start_medic(character_name: str) -> None:
     """Simulate healing and buffing nearby allies."""
 
@@ -7,6 +10,7 @@ def start_medic(character_name: str) -> None:
     print("🧪 Simulation: Buffed 3 nearby players.")
 
 
+@requires_license
 def run(config, session=None):
     """Main entry point for this mode."""
 
