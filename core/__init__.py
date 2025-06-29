@@ -12,6 +12,7 @@ from .trainer_ocr import (
 from .trainer_scanner import TrainerScanner, scan_trainer_skills
 from .travel_manager import TravelManager
 from .waypoint_verifier import verify_waypoint_stability
+from .progress_tracker import load_session, save_session, record_skill
 
 __all__ = [
     "preprocess_image",
@@ -26,4 +27,7 @@ __all__ = [
     "travel_to_target",
     "locate_hotspot",
     "verify_waypoint_stability",
+    "load_session",
+    "save_session",
+    "record_skill",
 ]
