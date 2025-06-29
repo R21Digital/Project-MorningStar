@@ -1,15 +1,25 @@
 import os
 import sys
+import json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from android_ms11.modes import bounty_farming_mode
+from core import farm_profile_loader
 
 
-def test_run_travels_and_verifies(monkeypatch):
-    profile = {
-        "farming_target": {"planet": "tatooine", "city": "mos_eisley", "hotspot": "cantina"}
+def test_run_travels_and_verifies(monkeypatch, tmp_path):
+    data = {
+        "planet": "tatooine",
+        "city": "mos_eisley",
+        "quest_type": "bounty",
+        "preferred_directions": [],
+        "max_distance": 100,
     }
+    farm_dir = tmp_path / "farms"
+    farm_dir.mkdir()
+    (farm_dir / "demo.json").write_text(json.dumps(data))
+    monkeypatch.setattr(farm_profile_loader, "FARM_PROFILE_DIR", farm_dir)
     calls = []
 
     monkeypatch.setattr(
@@ -26,11 +36,11 @@ def test_run_travels_and_verifies(monkeypatch):
         lambda coords: calls.append(("verify", coords)),
     )
 
-    bounty_farming_mode.run(profile, session="S")
+    bounty_farming_mode.run("demo", session="S")
 
     assert calls == [
-        ("travel", profile["farming_target"]),
-        ("locate", "tatooine", "mos_eisley", "cantina"),
+        ("travel", {"planet": "tatooine", "city": "mos_eisley"}),
+        ("locate", "tatooine", "mos_eisley", ""),
         ("verify", (1, 2)),
     ]
 
