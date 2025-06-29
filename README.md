@@ -270,6 +270,27 @@ python src/main.py --mode bounty_farming \
 Omit `--train` or set `"auto_train": false` in a runtime profile to skip
 visiting trainers between loops.
 
+## Terminal Farming
+
+`TerminalFarmer` reads the on-screen mission board and accepts
+bounties within your desired distance. Adjust the defaults in
+`config/farming_profile.json` and call `execute_run()` to parse the
+terminal:
+
+```python
+from modules.farming import TerminalFarmer
+
+farmer = TerminalFarmer()
+farmer.execute_run()
+```
+
+Run the farming tests individually with:
+
+```bash
+pytest tests/farming/test_terminal_farm.py
+```
+or execute the full suite via `make test` once dependencies are installed.
+
 ## State Tracking and Profiles
 
 The `core.state_tracker` module persists simple game state between runs.
