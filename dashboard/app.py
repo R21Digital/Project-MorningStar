@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Optional
 
 from flask import Flask, render_template
+from core.session_tracker import load_session
 
 from core import progress_tracker
 from core.build_manager import BuildManager
@@ -69,10 +70,11 @@ def _get_progress(build_name: str | None) -> dict:
 
 @app.route("/")
 def index():
-    profile = session_state.get("profile", {})
-    build_name = profile.get("skill_build")
-    progress = _get_progress(build_name)
-    return render_template("status.html", build=build_name, progress=progress)
+    """Display basic session details."""
+    session = load_session()
+    build = session.get("current_build", "Unknown")
+    progress = len(session.get("skills_completed", []))
+    return render_template("index.html", build=build, progress=progress)
 
 
 @app.route("/builds")
