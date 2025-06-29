@@ -41,9 +41,8 @@ class BuildManager:
 
         self.xp_costs = {skill: int(xp_map.get(skill, 0)) for skill in self.skills}
 
-    # --------------------------------------------------------------
-    def get_next_skill(self, known_skills: Iterable[str]) -> Optional[str]:
-        """Return the next skill in the build not present in ``known_skills``."""
+    def _next_missing_skill(self, known_skills: Iterable[str]) -> Optional[str]:
+        """Return the next skill in :attr:`skills` not in ``known_skills``."""
 
         for skill in self.skills:
             if skill not in known_skills:
@@ -51,10 +50,28 @@ class BuildManager:
         return None
 
     # --------------------------------------------------------------
+    def get_next_skill(self, known_skills: Iterable[str]) -> Optional[str]:
+        """Return the next skill in the build not present in ``known_skills``."""
+
+        return self._next_missing_skill(known_skills)
+
+    # --------------------------------------------------------------
+    def get_next_trainable_skill(self, current_skills: Iterable[str]) -> Optional[str]:
+        """Return the next skill that has not yet been learned."""
+
+        return self._next_missing_skill(current_skills)
+
+    # --------------------------------------------------------------
     def is_skill_completed(self, skill: str, known_skills: Iterable[str]) -> bool:
         """Return ``True`` if ``skill`` is contained in ``known_skills``."""
 
         return skill in known_skills
+
+    # --------------------------------------------------------------
+    def is_build_complete(self, current_skills: Iterable[str]) -> bool:
+        """Return ``True`` if all skills for the build have been learned."""
+
+        return self.get_next_trainable_skill(current_skills) is None
 
     # --------------------------------------------------------------
     def get_required_xp(self, skill: str) -> int:

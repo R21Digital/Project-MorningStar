@@ -54,3 +54,18 @@ def test_build_progression(monkeypatch, tmp_path):
 
     assert bm.is_skill_completed("Novice Medic", ["Novice Medic"]) is True
     assert bm.is_skill_completed("Intermediate Medicine", ["Novice Medic"]) is False
+
+
+def test_next_trainable_and_completion(monkeypatch, tmp_path):
+    build_dir, _ = setup_build(tmp_path)
+    monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
+    monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
+
+    bm = BuildManager("basic")
+
+    # get_next_trainable_skill should mirror get_next_skill
+    assert bm.get_next_trainable_skill([]) == bm.get_next_skill([])
+    assert bm.get_next_trainable_skill(["Novice Medic"]) == bm.get_next_skill(["Novice Medic"])
+
+    assert not bm.is_build_complete(["Novice Medic"])
+    assert bm.is_build_complete(["Novice Medic", "Intermediate Medicine"])
