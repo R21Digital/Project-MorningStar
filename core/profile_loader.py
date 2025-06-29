@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 PROFILE_DIR = Path(__file__).resolve().parents[1] / "profiles"
+BUILD_DIR = PROFILE_DIR / "builds"
 
 REQUIRED_FIELDS = {
     "support_target": str,
@@ -12,6 +13,7 @@ REQUIRED_FIELDS = {
     "default_mode": str,
     "skip_modes": list,
     "farming_targets": list,
+    "skill_build": str,
 }
 
 # Optional fields and their expected types. If present in a profile file they
@@ -56,5 +58,19 @@ def load_profile(name: str) -> Dict[str, Any]:
                     raise ValueError("farming_target values must be strings")
 
     data.setdefault("auto_train", False)
+
+    build_name = data.get("skill_build")
+    build_path = BUILD_DIR / f"{build_name}.json"
+    if not build_path.exists():
+        raise ValueError(f"Build file not found: {build_name}")
+    try:
+        with open(build_path, "r", encoding="utf-8") as fh:
+            build_data = json.load(fh)
+    except Exception as exc:
+        raise ValueError(f"Invalid build file: {build_name}") from exc
+    if not isinstance(build_data, dict):
+        raise ValueError("Invalid build file structure")
+
+    data["build"] = build_data
 
     return data

@@ -294,9 +294,14 @@ Example profile:
     "city": "Theed",
     "hotspot": "Cantina"
   },
+  "skill_build": "basic",
   "auto_train": false
 }
 ```
+
+`skill_build` points to a JSON file under `profiles/builds/` describing the
+skills for that character. The loader will raise an error if this build file is
+missing or malformed.
 
 `farming_target` defines the planet, city and hotspot for farming sessions.
 The automation uses this information to travel back to the desired zone before

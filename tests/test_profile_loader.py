@@ -5,7 +5,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from core.profile_loader import load_profile, PROFILE_DIR
+from core.profile_loader import load_profile
 
 
 def test_load_profile_valid(tmp_path, monkeypatch):
@@ -20,15 +20,20 @@ def test_load_profile_valid(tmp_path, monkeypatch):
             "city": "Theed",
             "hotspot": "Cantina",
         },
+        "skill_build": "basic",
         "auto_train": True,
         "mode_sequence": ["medic", "quest"],
         "fatigue_threshold": 5,
     }
     path = tmp_path / "demo.json"
     path.write_text(json.dumps(data))
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
     prof = load_profile("demo")
-    assert prof == data
+    assert prof["build"] == {"skills": []}
 
 
 def test_auto_train_default(tmp_path, monkeypatch):
@@ -43,10 +48,15 @@ def test_auto_train_default(tmp_path, monkeypatch):
             "city": "Theed",
             "hotspot": "Cantina",
         },
+        "skill_build": "basic",
     }
     path = tmp_path / "demo.json"
     path.write_text(json.dumps(data))
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
     prof = load_profile("demo")
     assert prof["auto_train"] is False
 
@@ -62,10 +72,15 @@ def test_invalid_farming_target(tmp_path, monkeypatch):
             "planet": "Naboo",
             "city": "Theed",
         },
+        "skill_build": "basic",
     }
     path = tmp_path / "demo.json"
     path.write_text(json.dumps(data))
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
     with pytest.raises(ValueError):
         load_profile("demo")
 
@@ -74,3 +89,52 @@ def test_load_profile_missing(tmp_path, monkeypatch):
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     prof = load_profile("missing")
     assert prof == {}
+
+
+def test_missing_build_file(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "farming_target": {
+            "planet": "Naboo",
+            "city": "Theed",
+            "hotspot": "Cantina",
+        },
+        "skill_build": "missing",
+    }
+    path = tmp_path / "demo.json"
+    path.write_text(json.dumps(data))
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    with pytest.raises(ValueError):
+        load_profile("demo")
+
+
+def test_invalid_build_structure(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "farming_target": {
+            "planet": "Naboo",
+            "city": "Theed",
+            "hotspot": "Cantina",
+        },
+        "skill_build": "bad",
+    }
+    path = tmp_path / "demo.json"
+    path.write_text(json.dumps(data))
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "bad.json").write_text("[]")
+    monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    with pytest.raises(ValueError):
+        load_profile("demo")
