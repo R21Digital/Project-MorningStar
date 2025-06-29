@@ -4,10 +4,9 @@ from __future__ import annotations
 
 from typing import Dict, Optional
 
+from core.waypoint_verifier import verify_waypoint_stability
 from scripts.travel import shuttle
 from src.movement.movement_profiles import walk_to_coords
-from utils.waypoint_verifier import verify_waypoint
-
 
 DEFAULT_START_CITY = "mos_eisley"
 DEFAULT_START_PLANET = "tatooine"
@@ -64,5 +63,5 @@ def travel_to_trainer(profession: str, trainer_data: Dict[str, dict], agent=None
     )
 
     walk_to_coords(agent, dest_x, dest_y)
-    verify_waypoint((dest_x, dest_y))
+    verify_waypoint_stability((dest_x, dest_y))
     return result

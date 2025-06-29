@@ -1,14 +1,16 @@
 """Core runtime utilities."""
 
+from .location_selector import locate_hotspot, travel_to_target
+from .profession_leveler import ProfessionLeveler
 from .trainer_ocr import (
-    preprocess_image,
     extract_text_from_trainer_region,
     get_untrained_skills_from_text,
+    preprocess_image,
     scan_and_detect_untrained_skills,
 )
-from .trainer_scanner import scan_trainer_skills, TrainerScanner
+from .trainer_scanner import TrainerScanner, scan_trainer_skills
 from .travel_manager import TravelManager
-from .profession_leveler import ProfessionLeveler
+from .waypoint_verifier import verify_waypoint_stability
 
 __all__ = [
     "preprocess_image",
@@ -19,4 +21,7 @@ __all__ = [
     "TrainerScanner",
     "TravelManager",
     "ProfessionLeveler",
+    "travel_to_target",
+    "locate_hotspot",
+    "verify_waypoint_stability",
 ]
