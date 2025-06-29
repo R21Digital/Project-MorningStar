@@ -8,13 +8,19 @@
     <h1>Active Session Status</h1>
     {% if build %}
         <p>Current Build: {{ build }}</p>
-        <p>Build Progress: {{ progress.completed_skills | length if progress else 0 }}/{{ progress.total_skills if progress else 0 }}</p>
+    {% endif %}
+    {% if progress %}
+        <p>Completed Skills: {{ progress.completed_skills|join(', ') }}</p>
+        <p>Next Skill: {{ progress.next_skill or 'None' }}</p>
+        <p>Progress: {{ progress.percent }}%</p>
+        <p>Build Progress: {{ progress.completed_skills | length }}/{{ progress.total_skills }}</p>
     {% endif %}
     {% if log %}
         <pre>{{ log|tojson(indent=2) }}</pre>
     {% else %}
         <p>No session data found.</p>
     {% endif %}
+    <button onclick="window.location.reload()">Refresh</button>
     <p><a href="/">Back</a></p>
 </body>
 </html>

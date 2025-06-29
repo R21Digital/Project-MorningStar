@@ -33,3 +33,30 @@ def test_status_route(monkeypatch, tmp_path):
         resp = client.get("/status")
         assert resp.status_code == 200
         assert b"hello" in resp.data
+
+
+def test_status_progress_fields(monkeypatch, tmp_path):
+    log_file = tmp_path / "session_test.json"
+    log_file.write_text(json.dumps({}))
+    monkeypatch.setattr("dashboard.app.LOG_DIRS", [tmp_path])
+
+    progress_file = tmp_path / "session_state.json"
+    progress_file.write_text(json.dumps({"completed_skills": ["A"]}))
+    monkeypatch.setattr("dashboard.app.SESSION_STATE", progress_file)
+
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "demo.json").write_text(json.dumps({"profession": "Demo", "skills": ["A", "B"]}))
+    monkeypatch.setattr("dashboard.app.BUILD_DIR", build_dir)
+
+    monkeypatch.setattr("dashboard.app.session_state", {"profile": {"skill_build": "demo"}})
+
+    with app.test_client() as client:
+        resp = client.get("/status")
+        assert resp.status_code == 200
+        body = resp.data.decode()
+        assert "Completed Skills" in body
+        assert "A" in body
+        assert "Next Skill" in body
+        assert "B" in body
+        assert "Progress" in body

@@ -6,6 +6,10 @@ from typing import Optional
 
 from flask import Flask, render_template
 
+from core import progress_tracker
+from core.build_manager import BuildManager
+from core.profile_loader import SESSION_STATE
+
 # Runtime session data placeholder
 session_state: dict = {}
 
@@ -31,12 +35,44 @@ def _latest_session_log() -> Optional[Path]:
     return max(candidates, key=lambda p: p.stat().st_mtime)
 
 
+def _get_progress(build_name: str | None) -> dict:
+    """Return progress details for ``build_name`` using the tracker."""
+    progress_data = progress_tracker.load_session(SESSION_STATE)
+    completed = progress_data.get("completed_skills", [])
+
+    info = {"completed_skills": completed, "next_skill": None, "percent": 0}
+
+    if not build_name:
+        return info
+
+    try:
+        bm = BuildManager(build_name)
+    except Exception:
+        return info
+
+    total = len(bm.skills)
+    done = bm.get_completed_skills(completed)
+    next_skill = bm.get_next_skill(completed)
+
+    percent = (len(done) / total * 100) if total else 0
+
+    info.update(
+        {
+            "completed_skills": done,
+            "next_skill": next_skill,
+            "percent": round(percent, 2),
+            "total_skills": total,
+        }
+    )
+    return info
+
+
 @app.route("/")
 def index():
     profile = session_state.get("profile", {})
-    build = profile.get("skill_build")
-    progress = profile.get("build_progress", {})
-    return render_template("status.html", build=build, progress=progress)
+    build_name = profile.get("skill_build")
+    progress = _get_progress(build_name)
+    return render_template("status.html", build=build_name, progress=progress)
 
 
 @app.route("/builds")
@@ -59,10 +95,10 @@ def status():
         except Exception:
             data = None
     profile = session_state.get("profile", {})
-    build = profile.get("skill_build")
-    progress = profile.get("build_progress", {})
+    build_name = profile.get("skill_build")
+    progress = _get_progress(build_name)
     return render_template(
-        "status.html", log=data, build=build, progress=progress
+        "status.html", log=data, build=build_name, progress=progress
     )
 
 
