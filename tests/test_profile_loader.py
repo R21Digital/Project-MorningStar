@@ -5,7 +5,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from core.profile_loader import load_profile, ProfileValidationError
+from core.profile_loader import load_profile, validate_profile, ProfileValidationError
 
 
 def test_load_profile_valid(tmp_path, monkeypatch):
@@ -163,3 +163,25 @@ def test_invalid_build_structure(tmp_path, monkeypatch):
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
     with pytest.raises(ProfileValidationError):
         load_profile("demo")
+
+
+
+def test_validate_profile_missing_fields(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "skill_build": "basic",
+    }
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+
+    data_missing = data.copy()
+    data_missing.pop("default_mode")
+
+    with pytest.raises(ProfileValidationError):
+        validate_profile(data_missing)
