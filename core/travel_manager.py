@@ -44,7 +44,7 @@ class TravelManager:
             self.trainers = {}
 
     # --------------------------------------------------
-    def go_to_trainer(self, profession: str) -> None:
+    def go_to_trainer(self, profession: str, *, agent=None) -> None:
         """Navigate to the trainer location for ``profession``.
 
         This method performs waypoint travel and location verification only.
@@ -62,8 +62,12 @@ class TravelManager:
         planet = trainer.get("planet")
         city = trainer.get("city")
 
-        go_to_waypoint(coords, planet=planet, city=city)
-        verify_location(coords, planet=planet, city=city)
+        if agent is None:
+            go_to_waypoint(coords, planet=planet, city=city)
+            verify_location(coords, planet=planet, city=city)
+        else:
+            go_to_waypoint(coords, planet=planet, city=city, agent=agent)
+            verify_location(coords, planet=planet, city=city, agent=agent)
 
     # --------------------------------------------------
     def train_profession(self, profession: str) -> List[str]:
