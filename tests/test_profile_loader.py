@@ -185,3 +185,60 @@ def test_validate_profile_missing_fields(tmp_path, monkeypatch):
 
     with pytest.raises(ProfileValidationError):
         validate_profile(data_missing)
+
+
+def test_validate_profile_missing_skill_build(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+    }
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+
+    with pytest.raises(ProfileValidationError) as excinfo:
+        validate_profile(data)
+    assert "skill_build" in str(excinfo.value)
+
+
+def test_validate_profile_invalid_auto_train_type(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "skill_build": "basic",
+        "auto_train": "yes",
+    }
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+
+    with pytest.raises(ProfileValidationError) as excinfo:
+        validate_profile(data)
+    assert "auto_train" in str(excinfo.value)
+
+
+def test_validate_profile_invalid_fatigue_threshold(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "skill_build": "basic",
+        "fatigue_threshold": "high",
+    }
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+
+    with pytest.raises(ProfileValidationError) as excinfo:
+        validate_profile(data)
+    assert "fatigue_threshold" in str(excinfo.value)
