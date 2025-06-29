@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 from src.vision.ocr import screen_text
+from core.session_tracker import log_farming_result
 
 Mission = Dict[str, int | str | Tuple[int, int]]
 
@@ -53,6 +54,11 @@ class TerminalFarmer:
             coords = mission["coords"]
             print(
                 f"[TerminalFarmer] Mission {mission['name']} at {coords} {mission['distance']}m"
+            )
+        if accepted:
+            log_farming_result(
+                [m["name"] for m in accepted],
+                len(accepted),
             )
         return accepted
 
