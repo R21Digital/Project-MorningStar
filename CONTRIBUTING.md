@@ -17,6 +17,11 @@ make test
 
 The `test` target installs the dependencies and then runs `pytest` for you.
 
+Some test modules rely on optional dependencies. The dashboard tests, for
+example, require the `flask` package which is listed in
+`requirements-test.txt`. These tests will automatically be skipped if the
+package is not installed.
+
 For quick checks during development you can run just the mode specific tests
 once the requirements are installed:
 
