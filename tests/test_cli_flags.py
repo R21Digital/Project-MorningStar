@@ -25,3 +25,15 @@ def test_auto_train_alias(monkeypatch):
     monkeypatch.setattr("sys.argv", test_args)
     args = parse_args()
     assert args.train is True
+
+
+def test_farming_target_parsing(monkeypatch):
+    json_arg = '{"planet": "Tatooine", "city": "Mos Eisley", "hotspot": "Cantina"}'
+    test_args = ["src/main.py", "--farming_target", json_arg]
+    monkeypatch.setattr("sys.argv", test_args)
+    args = parse_args()
+    assert args.farming_target == {
+        "planet": "Tatooine",
+        "city": "Mos Eisley",
+        "hotspot": "Cantina",
+    }
