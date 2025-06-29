@@ -6,6 +6,7 @@ from typing import Any, Dict
 import json
 
 from . import progress_tracker
+from core.session_tracker import load_session
 
 
 class ProfileValidationError(Exception):
@@ -109,6 +110,7 @@ def load_profile(name: str) -> Dict[str, Any]:
         data = json.load(fh)
 
     profile = validate_profile(data)
+    profile["runtime"] = {"progress": load_session()}
 
     progress = progress_tracker.load_session(SESSION_STATE)
     profile["build_progress"] = {
