@@ -51,8 +51,8 @@ def _get_progress(build_name: str | None) -> dict:
         return info
 
     total = len(bm.skills)
-    done = bm.get_completed_skills(completed)
-    next_skill = bm.get_next_skill(completed)
+    done = bm.get_completed_skills()
+    next_skill = bm.get_next_skill(done)
 
     percent = (len(done) / total * 100) if total else 0
 
