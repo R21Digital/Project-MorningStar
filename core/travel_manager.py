@@ -44,30 +44,47 @@ class TravelManager:
             self.trainers = {}
 
     # --------------------------------------------------
-    def go_to_trainer(self, profession: str, *, agent=None) -> None:
+    def go_to_trainer(self, profession: str, *, agent=None) -> bool:
         """Navigate to the trainer location for ``profession``.
 
         This method performs waypoint travel and location verification only.
         It does not invoke :class:`TrainerScanner`.
+
+        The trainer profile may contain multiple possible locations.  Each entry
+        is attempted until one succeeds.  ``True`` is returned on success,
+        ``False`` otherwise.
         """
         trainer = self.trainers.get(profession)
         if not trainer:
-            return
+            return False
 
-        coords = (
-            trainer.get("waypoint")
-            or trainer.get("coords")
-            or [trainer.get("x", 0), trainer.get("y", 0)]
-        )
-        planet = trainer.get("planet")
-        city = trainer.get("city")
+        entries = trainer if isinstance(trainer, list) else [trainer]
 
-        if agent is None:
-            go_to_waypoint(coords, planet=planet, city=city)
-            verify_location(coords, planet=planet, city=city)
-        else:
-            go_to_waypoint(coords, planet=planet, city=city, agent=agent)
-            verify_location(coords, planet=planet, city=city, agent=agent)
+        for entry in entries:
+            coords = (
+                entry.get("waypoint")
+                or entry.get("coords")
+                or [entry.get("x", 0), entry.get("y", 0)]
+            )
+            planet = entry.get("planet")
+            city = entry.get("city")
+
+            try:
+                if agent is None:
+                    go_to_waypoint(coords, planet=planet, city=city)
+                    success = verify_location(coords, planet=planet, city=city)
+                else:
+                    go_to_waypoint(coords, planet=planet, city=city, agent=agent)
+                    success = verify_location(
+                        coords, planet=planet, city=city, agent=agent
+                    )
+            except Exception:
+                success = False
+
+            if success:
+                return True
+
+        return False
 
     # --------------------------------------------------
     def train_profession(self, profession: str) -> List[str]:

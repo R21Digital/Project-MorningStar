@@ -10,9 +10,8 @@ from __future__ import annotations
 from typing import Iterable, Optional
 
 from modules.professions import progress_tracker
-from core import BuildManager
+from core import BuildManager, TravelManager
 from scripts.logic import trainer_navigator
-from src.training.trainer_visit import visit_trainer
 from src.xp_tracker import read_xp_via_ocr
 
 
@@ -24,6 +23,14 @@ def _run_training_macro(skill: str) -> None:
     print(f"[TRAIN] Executing macro to learn {skill}")
 
 
+def _send_discord_alert(message: str) -> None:
+    """Send ``message`` through the Discord relay when available."""
+    try:
+        trainer_navigator.log_event(f"[DISCORD] {message}")
+    except Exception:
+        pass
+
+
 def seek_training(
     profession: str,
     skills: Iterable[str],
@@ -33,6 +40,7 @@ def seek_training(
     planet: str = DEFAULT_PLANET,
     city: str = DEFAULT_CITY,
     build_manager: Optional[BuildManager] = None,
+    travel_manager: Optional[TravelManager] = None,
 ) -> bool:
     """Train the next available skill if enough XP has been earned.
 
@@ -46,11 +54,13 @@ def seek_training(
         Current XP value. When ``None`` the value is read via OCR using
         :func:`src.xp_tracker.read_xp_via_ocr`.
     agent:
-        Optional automation agent passed to :func:`visit_trainer`.
+        Optional automation agent passed to :class:`core.TravelManager`.
     planet:
         Planet where the trainer resides.
     city:
         City where the trainer resides.
+    travel_manager:
+        Optional :class:`core.TravelManager` instance used for navigation.
 
     Returns
     -------
@@ -87,7 +97,19 @@ def seek_training(
     trainer_navigator.log_event(
         f"Travelling to {profession} trainer to learn {next_skill}"
     )
-    visit_trainer(agent, profession, planet=planet, city=city)
+    tm = travel_manager or TravelManager()
+    try:
+        success = tm.go_to_trainer(profession, agent=agent)
+    except Exception:
+        trainer_navigator.log_event("Player busy; will retry later")
+        return False
+
+    if not success:
+        trainer_navigator.log_event(f"Failed to reach any {profession} trainer")
+        trainer_navigator.log_training_event(profession, "Failed", -1.0)
+        _send_discord_alert(f"Training failed for {profession}")
+        return False
+
     trainer_navigator.log_training_event(profession, next_skill, 0.0)
     _run_training_macro(next_skill)
     trainer_navigator.log_event(
