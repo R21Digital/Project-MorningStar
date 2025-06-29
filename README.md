@@ -267,9 +267,19 @@ Example profile:
   "preferred_trainers": {"medic": "trainer"},
   "default_mode": "medic",
   "skip_modes": ["crafting"],
-  "farming_targets": ["Bandit"]
+  "farming_targets": ["Bandit"],
+  "farming_target": {
+    "planet": "Naboo",
+    "city": "Theed",
+    "hotspot": "Cantina"
+  },
+  "auto_train": false
 }
 ```
+
+`farming_target` defines the planet, city and hotspot for farming sessions.
+Setting `auto_train` to `true` will automatically check trainers after each
+loop.
 
 ```python
 from core import profile_loader
