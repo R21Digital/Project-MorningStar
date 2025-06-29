@@ -19,6 +19,8 @@ REQUIRED_FIELDS = {
 OPTIONAL_FIELDS = {
     "mode_sequence": list,
     "fatigue_threshold": int,
+    "farming_target": dict,
+    "auto_train": bool,
 }
 
 
@@ -38,9 +40,21 @@ def load_profile(name: str) -> Dict[str, Any]:
             raise ValueError(f"{field} must be of type {expected_type.__name__}")
 
     for field, expected_type in OPTIONAL_FIELDS.items():
-        if field in data and not isinstance(data[field], expected_type):
-            raise ValueError(
-                f"{field} must be of type {expected_type.__name__}"
-            )
+        if field in data:
+            if not isinstance(data[field], expected_type):
+                raise ValueError(
+                    f"{field} must be of type {expected_type.__name__}"
+                )
+            if field == "farming_target":
+                required_keys = {"planet", "city", "hotspot"}
+                missing = required_keys - data[field].keys()
+                if missing:
+                    raise ValueError(
+                        f"farming_target missing keys: {', '.join(sorted(missing))}"
+                    )
+                if not all(isinstance(data[field][k], str) for k in required_keys):
+                    raise ValueError("farming_target values must be strings")
+
+    data.setdefault("auto_train", False)
 
     return data
