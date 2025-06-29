@@ -26,17 +26,16 @@ class BuildManager:
     def load_build(self, name: str) -> None:
         """Load build ``name`` from :data:`BUILD_DIR`."""
 
-        json_path = BUILD_DIR / f"{name}.json"
-        txt_path = BUILD_DIR / f"{name}.txt"
-        if json_path.exists():
-            path = json_path
-        elif txt_path.exists():
-            path = txt_path
-        else:
+        extensions = [".json", ".txt"]
+        data = None
+        for ext in extensions:
+            path = BUILD_DIR / f"{name}{ext}"
+            if path.exists():
+                with open(path, "r", encoding="utf-8") as fh:
+                    data = json.load(fh)
+                break
+        if data is None:
             raise FileNotFoundError(f"Build file not found: {name}")
-
-        with open(path, "r", encoding="utf-8") as fh:
-            data = json.load(fh)
 
         self.profession = str(data.get("profession", ""))
         self.skills = list(data.get("skills", []))
