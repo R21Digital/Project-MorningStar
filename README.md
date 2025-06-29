@@ -257,6 +257,19 @@ profession trainers between loops.
 python src/main.py --mode entertainer --repeat --max_loops 5 --train
 ```
 
+## Targeted Farming Setup
+
+Use the `--farming_target` flag to define exactly where farming should occur.
+The value is a JSON string with `planet`, `city`, and `hotspot` keys:
+
+```bash
+python src/main.py --mode bounty_farming \
+  --farming_target '{"planet": "dantooine", "city": "imperial_outpost", "hotspot": "north_field"}'
+```
+
+Omit `--train` or set `"auto_train": false` in a runtime profile to skip
+visiting trainers between loops.
+
 ## State Tracking and Profiles
 
 The `core.state_tracker` module persists simple game state between runs.
