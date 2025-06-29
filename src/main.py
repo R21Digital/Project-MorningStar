@@ -190,6 +190,7 @@ def main(argv: list[str] | None = None) -> None:
 
     config = load_config()
     profile = profile_loader.load_profile(args.profile) if args.profile else {}
+    args.train = args.train or profile.get("auto_train", False)
 
     if args.smart:
         state = state_tracker.get_state()
