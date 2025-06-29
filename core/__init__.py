@@ -13,6 +13,11 @@ from .trainer_scanner import TrainerScanner, scan_trainer_skills
 from .travel_manager import TravelManager
 from .waypoint_verifier import verify_waypoint_stability
 from .progress_tracker import load_session, save_session, record_skill
+from .session_tracker import (
+    load_session as load_session_state,
+    save_session as save_session_state,
+    update_session_key,
+)
 
 __all__ = [
     "preprocess_image",
@@ -30,4 +35,7 @@ __all__ = [
     "load_session",
     "save_session",
     "record_skill",
+    "load_session_state",
+    "save_session_state",
+    "update_session_key",
 ]
