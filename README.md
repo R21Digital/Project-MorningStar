@@ -120,7 +120,7 @@ This section walks through a fresh setup so you can try the project locally.
    Launch the main script to see the questing demo:
 
    ```bash
-   python src/main.py
+   python src/main.py --mode quest --max_loops 3 --train
    ```
 
    You can also run the CLI runner directly and select a mode:
@@ -249,6 +249,14 @@ You can also set a rest interval (in seconds) between loops:
 python src/main.py --mode entertainer --repeat --rest 30
 ```
 
+You can limit how many times the selected mode runs by adding
+`--max_loops N`. Combine this with `--train` to automatically visit
+profession trainers between loops.
+
+```bash
+python src/main.py --mode entertainer --repeat --max_loops 5 --train
+```
+
 ## State Tracking and Profiles
 
 The `core.state_tracker` module persists simple game state between runs.
@@ -278,8 +286,10 @@ Example profile:
 ```
 
 `farming_target` defines the planet, city and hotspot for farming sessions.
-Setting `auto_train` to `true` will automatically check trainers after each
-loop.
+The automation uses this information to travel back to the desired zone before
+clearing mobs.  Setting `auto_train` to `true` will automatically check
+trainers after each loop.
+You can also enable this behavior at runtime with the `--train` flag.
 
 ```python
 from core import profile_loader
@@ -332,7 +342,7 @@ python discord_dm_bot.py
 Or start the demo with relay enabled:
 
 ```bash
-python src/main.py --mode medic
+python src/main.py --mode medic --train --max_loops 5
 ```
 
 ## Credit and XP Tracking
