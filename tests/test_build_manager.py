@@ -146,3 +146,46 @@ def test_load_repo_rifleman_build(monkeypatch):
     assert bm.skills == ["Novice Marksman", "Master Rifleman"]
     assert bm.get_required_xp("Master Rifleman") == 8000
 
+
+def test_load_build_updates_session(monkeypatch, tmp_path):
+    build_dir, _ = setup_build(tmp_path)
+    monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
+    monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
+
+    session = {"current_build": "old", "skills_completed": ["foo"]}
+    monkeypatch.setattr(session_tracker, "load_session", lambda: session)
+
+    saved = {}
+
+    def fake_save(data):
+        saved.update(data)
+
+    monkeypatch.setattr(session_tracker, "save_session", fake_save)
+
+    bm = BuildManager()
+    bm.load_build("basic")
+
+    assert saved["current_build"] == "basic"
+    assert saved["skills_completed"] == []
+
+
+def test_load_build_unchanged_session(monkeypatch, tmp_path):
+    build_dir, _ = setup_build(tmp_path)
+    monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
+    monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
+
+    session = {"current_build": "basic", "skills_completed": ["bar"]}
+    monkeypatch.setattr(session_tracker, "load_session", lambda: session)
+
+    called = {}
+
+    def fake_save(data):
+        called["saved"] = True
+
+    monkeypatch.setattr(session_tracker, "save_session", fake_save)
+
+    bm = BuildManager()
+    bm.load_build("basic")
+
+    assert "saved" not in called
+

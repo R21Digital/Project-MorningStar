@@ -48,6 +48,15 @@ class BuildManager:
 
         self.xp_costs = {skill: int(xp_map.get(skill, 0)) for skill in self.skills}
 
+        # Update session tracking for the loaded build
+        from core import session_tracker
+
+        session = session_tracker.load_session()
+        if session.get("current_build") != name:
+            session["current_build"] = name
+            session["skills_completed"] = []
+            session_tracker.save_session(session)
+
     def _next_missing_skill(self, known_skills: Iterable[str]) -> Optional[str]:
         """Return the next skill in :attr:`skills` not in ``known_skills``."""
 
