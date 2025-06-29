@@ -9,10 +9,13 @@ class XPManager:
     def __init__(self, character: str):
         self.session = XPSession(character, xp_start=int(datetime.now().timestamp()))
 
-    def record_action(self, action: str, use_ocr: bool = False):
+    def record_action(self, action: str, skill: str | None = None, use_ocr: bool = False):
         """Record a game action and its XP value."""
         xp = track_xp_sync(action=action, use_ocr=use_ocr)
-        self.session.log_action(action_type=action, xp_value=xp)
+        self.session.log_action(action_type=action, xp_value=xp, skill=skill)
+        if skill:
+            current = self.session.skills.get(skill, 0)
+            self.session.skills[skill] = current + xp
 
     def end_session(self):
         """Finalize the session and save the log."""
