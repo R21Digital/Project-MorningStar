@@ -2,6 +2,7 @@
 
 from .location_selector import locate_hotspot, travel_to_target
 from .profession_leveler import ProfessionLeveler
+from .build_manager import BuildManager
 from .trainer_ocr import (
     extract_text_from_trainer_region,
     get_untrained_skills_from_text,
@@ -21,6 +22,7 @@ __all__ = [
     "TrainerScanner",
     "TravelManager",
     "ProfessionLeveler",
+    "BuildManager",
     "travel_to_target",
     "locate_hotspot",
     "verify_waypoint_stability",
