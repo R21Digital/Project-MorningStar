@@ -4,11 +4,14 @@ from core.session_manager import SessionManager
 from src.quest_selector import select_quest
 from src.quest_executor import execute_quest
 from utils.license_hooks import requires_license
+from core.profile_loader import assert_profile_ready
 
 
 @requires_license
 def run(config: dict, session: SessionManager) -> None:
     """Run quest mode using ``session`` to track actions."""
+
+    assert_profile_ready(getattr(session, "profile", None))
 
     character = config.get("character_name", "Unknown")
     print(f"[QUEST] Starting quest mode for {character}")

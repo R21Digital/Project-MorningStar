@@ -1,4 +1,5 @@
 from utils.license_hooks import requires_license
+from core.profile_loader import assert_profile_ready
 
 
 def start_crafting(character_name: str) -> None:
@@ -13,6 +14,8 @@ def start_crafting(character_name: str) -> None:
 @requires_license
 def run(config, session=None):
     """Main entry point for this mode."""
+
+    assert_profile_ready(getattr(session, "profile", None))
 
     character = config.get("character_name", "Unknown") if config else "Unknown"
     start_crafting(character)

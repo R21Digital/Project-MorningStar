@@ -16,6 +16,7 @@ except Exception:  # pragma: no cover - optional dependency
 
 from core.session_manager import SessionManager
 from core import profile_loader, state_tracker, mode_selector
+from core.profile_loader import ProfileValidationError
 from core.session_monitor import monitor_session, FATIGUE_THRESHOLD
 from core import mode_scheduler
 from core.repeat_utils import run_repeating_mode
@@ -69,6 +70,22 @@ def load_json(path: str) -> Dict[str, Any]:
         except json.JSONDecodeError:
             return {}
     return {}
+
+
+def load_required_profile(profile_path: str) -> Dict[str, Any]:
+    """Load and validate a runtime profile or exit on failure."""
+    try:
+        prof = profile_loader.load_profile(profile_path)
+        print(
+            f"[\u2714] Loaded profile for: {prof.get('character_name', 'Unnamed Character')}"
+        )
+        return prof
+    except ProfileValidationError as e:
+        print(f"[\u2718] Profile validation failed: {e}")
+        exit(1)
+    except Exception as e:  # pragma: no cover - unexpected
+        print(f"[\u2718] Unexpected error loading profile: {e}")
+        exit(1)
 
 
 def load_config(path: str | None = None) -> Dict[str, Any]:
@@ -169,6 +186,7 @@ def run_mode(
     max_loops: int | None = None,
 ) -> Dict[str, Any]:
     """Execute a single iteration of ``mode`` and return metrics."""
+    profile_loader.assert_profile_ready(profile)
     handler = MODE_HANDLERS.get(mode)
     if not handler:
         print(f"[MODE] Unknown mode '{mode}'")
@@ -204,7 +222,10 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
 
     config = load_config()
-    profile = profile_loader.load_profile(args.profile) if args.profile else {}
+    if not args.profile:
+        print("[✘] --profile is required to start the bot")
+        return
+    profile = load_required_profile(args.profile)
     args.train = args.train or profile.get("auto_train", False)
     if getattr(args, "farming_target", None):
         profile["farming_target"] = args.farming_target
@@ -240,6 +261,7 @@ def main(argv: list[str] | None = None) -> None:
 
     # Initialize new session using the mode from CLI or profile
     session = SessionManager(mode=mode)
+    setattr(session, "profile", profile)
 
     if args.repeat:
         run_repeating_mode(

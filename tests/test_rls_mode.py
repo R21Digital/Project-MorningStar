@@ -18,7 +18,8 @@ def test_rls_mode_logs_loot(monkeypatch):
     monkeypatch.setattr(ocr_loot_scanner, "scan_for_loot", lambda: ["Artifact"])
     monkeypatch.setattr(loot_session, "export_log", lambda: "dummy.json")
 
-    rls_mode.run(loop_count=1)
+    dummy_session = type("S", (), {"profile": {"build": {"skills": []}}})()
+    rls_mode.run(loop_count=1, session=dummy_session)
 
     assert any(entry["item"] == "Artifact" for entry in loot_session._loot_log)
 

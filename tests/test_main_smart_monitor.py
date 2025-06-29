@@ -13,13 +13,14 @@ def test_smart_mode_invokes_monitor(monkeypatch):
     main_mod = importlib.reload(main)
 
     monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
-    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {})
+    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {"build": {"skills": []}})
     monkeypatch.setattr(state_tracker, "get_state", lambda: {})
     monkeypatch.setattr(main_mod, "update_buff_state", lambda state: None)
     monkeypatch.setattr(mode_selector, "select_mode", lambda profile, state: "combat")
 
     class DummySession:
-        pass
+        def __init__(self):
+            self.profile = {"build": {"skills": []}}
 
     monkeypatch.setattr(main_mod, "SessionManager", lambda mode: DummySession())
 
@@ -42,7 +43,7 @@ def test_smart_mode_invokes_monitor(monkeypatch):
 
     monkeypatch.setattr(main_mod, "monitor_session", fake_monitor)
 
-    main_mod.main(["--smart"])
+    main_mod.main(["--smart", "--profile", "demo"])
 
     assert calls["combat"] is True
     assert calls["metrics"] == {"xp": 100, "xp_rate": 50.0}

@@ -32,7 +32,11 @@ def test_cli_farming_target_overrides_profile(monkeypatch):
     monkeypatch.setattr(profile_loader, "load_profile", lambda name: base_profile.copy())
     monkeypatch.setattr(state_tracker, "reset_state", lambda: None)
     monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
-    monkeypatch.setattr(main_mod, "SessionManager", lambda mode: object())
+    monkeypatch.setattr(
+        main_mod,
+        "SessionManager",
+        lambda mode: type("S", (), {"profile": {"build": {"skills": []}}})(),
+    )
     monkeypatch.setattr(main_mod, "check_and_train_skills", lambda *a, **k: None)
     monkeypatch.setattr(main_mod, "MovementAgent", lambda session=None: None)
     monkeypatch.setattr(main_mod, "monitor_session", lambda *a, **k: {})

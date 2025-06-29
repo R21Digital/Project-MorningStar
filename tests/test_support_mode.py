@@ -4,7 +4,7 @@ from android_ms11.modes import support_mode
 
 
 def test_support_mode_prebuff_and_loop_limit(capsys):
-    dummy_session = SimpleNamespace(config={"support_leader_name": "Boss"})
+    dummy_session = SimpleNamespace(config={"support_leader_name": "Boss"}, profile={"build": {"skills": []}})
     support_mode.run(max_loops=2, session=dummy_session)
     output_lines = capsys.readouterr().out.splitlines()
 

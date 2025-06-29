@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Mapping, Any
 
 from core import farm_profile_loader
+from core.profile_loader import assert_profile_ready
 from utils.license_hooks import requires_license
 
 from core.location_selector import travel_to_target, locate_hotspot
@@ -24,6 +25,8 @@ def run(profile: Mapping[str, Any] | str | None = None, session=None) -> None:
     session:
         Optional session object passed through from :func:`src.main.run_mode`.
     """
+
+    assert_profile_ready(getattr(session, "profile", None) or profile)
 
     if isinstance(profile, str):
         profile = farm_profile_loader.load_farm_profile(profile)

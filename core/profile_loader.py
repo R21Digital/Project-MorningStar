@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-import json
 import logging
 from pathlib import Path
 from typing import Any, Dict
+import json
 
 
 class ProfileValidationError(Exception):
@@ -68,6 +68,7 @@ def validate_profile(data: Dict[str, Any]) -> Dict[str, Any]:
 
 PROFILE_DIR = Path(__file__).resolve().parents[1] / "profiles"
 BUILD_DIR = PROFILE_DIR / "builds"
+RUNTIME_PROFILE = Path("runtime") / "profile.runtime.json"
 
 REQUIRED_FIELDS = {
     "support_target": str,
@@ -88,6 +89,13 @@ OPTIONAL_FIELDS = {
 }
 
 
+def assert_profile_ready(profile: Dict[str, Any] | None) -> None:
+    """Ensure ``profile`` contains loaded build data."""
+
+    if not profile or not profile.get("build"):
+        raise RuntimeError("Build data not loaded in profile. Cannot continue.")
+
+
 def load_profile(name: str) -> Dict[str, Any]:
     """Return profile data for ``name`` or an empty dict if unavailable."""
     path = PROFILE_DIR / f"{name}.json"
@@ -97,4 +105,10 @@ def load_profile(name: str) -> Dict[str, Any]:
     with open(path, "r", encoding="utf-8") as fh:
         data = json.load(fh)
 
-    return validate_profile(data)
+    profile = validate_profile(data)
+
+    RUNTIME_PROFILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(RUNTIME_PROFILE, "w", encoding="utf-8") as f:
+        json.dump(profile, f, indent=2)
+
+    return profile

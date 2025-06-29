@@ -30,9 +30,13 @@ def test_profile_auto_train_sets_flag(monkeypatch):
 
     monkeypatch.setattr(main_mod, "parse_args", fake_parse_args)
     monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
-    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {"auto_train": True})
+    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {"auto_train": True, "build": {"skills": []}})
     monkeypatch.setattr(state_tracker, "reset_state", lambda: None)
-    monkeypatch.setattr(main_mod, "SessionManager", lambda mode: object())
+    monkeypatch.setattr(
+        main_mod,
+        "SessionManager",
+        lambda mode: type("S", (), {"profile": {"build": {"skills": []}}})(),
+    )
     monkeypatch.setattr(main_mod, "run_mode", lambda *a, **k: {})
     monkeypatch.setattr(main_mod, "check_and_train_skills", lambda *a, **k: None)
     monkeypatch.setattr(main_mod, "MovementAgent", lambda session=None: None)

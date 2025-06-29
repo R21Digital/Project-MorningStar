@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from android_ms11.core import loot_session, ocr_loot_scanner, rls_logic
 from utils.license_hooks import requires_license
+from core.profile_loader import assert_profile_ready
 
 
 @requires_license
@@ -27,6 +28,8 @@ def run(
         ``config`` mapping. This parameter allows tests or callers to bypass the
         configuration file and specify a loop count directly.
     """
+
+    assert_profile_ready(getattr(session, "profile", None))
 
     config = config or {}
     if loop_count is not None:
