@@ -7,9 +7,10 @@ run a training macro.
 
 from __future__ import annotations
 
-from typing import Iterable, List, Optional
+from typing import Iterable, Optional
 
 from modules.professions import progress_tracker
+from core import BuildManager
 from scripts.logic import trainer_navigator
 from src.training.trainer_visit import visit_trainer
 from src.xp_tracker import read_xp_via_ocr
@@ -17,17 +18,6 @@ from src.xp_tracker import read_xp_via_ocr
 
 DEFAULT_PLANET = "tatooine"
 DEFAULT_CITY = "mos_eisley"
-
-
-def _next_skill(profession: str, skills: Iterable[str]) -> Optional[dict]:
-    """Return the next skill recommendation from ``progress_tracker``."""
-    return progress_tracker.recommend_next_skill(profession, list(skills))
-
-
-def _enough_xp(required: int, current: int) -> bool:
-    """Return ``True`` if ``current`` XP meets or exceeds ``required``."""
-    return current >= required
-
 
 def _run_training_macro(skill: str) -> None:
     """Placeholder for executing the in game training macro."""
@@ -42,6 +32,7 @@ def seek_training(
     agent=None,
     planet: str = DEFAULT_PLANET,
     city: str = DEFAULT_CITY,
+    build_manager: Optional[BuildManager] = None,
 ) -> bool:
     """Train the next available skill if enough XP has been earned.
 
@@ -66,12 +57,23 @@ def seek_training(
     bool
         ``True`` if training was attempted, ``False`` otherwise.
     """
-    rec = _next_skill(profession, skills)
-    if not rec:
-        trainer_navigator.log_event(f"No further skills available for {profession}")
-        return False
-
-    required_xp = rec.get("xp", 0)
+    if build_manager is not None:
+        next_skill = build_manager.get_next_skill(skills)
+        if not next_skill:
+            trainer_navigator.log_event(
+                f"No further skills available for {profession}"
+            )
+            return False
+        required_xp = build_manager.get_required_xp(next_skill)
+    else:
+        rec = progress_tracker.recommend_next_skill(profession, list(skills))
+        if not rec:
+            trainer_navigator.log_event(
+                f"No further skills available for {profession}"
+            )
+            return False
+        next_skill = rec["skill"]
+        required_xp = rec.get("xp", 0)
     if available_xp is None:
         available_xp = read_xp_via_ocr()
 
@@ -79,16 +81,16 @@ def seek_training(
         f"Checking training for {profession}: need {required_xp} XP, have {available_xp}"
     )
 
-    if not _enough_xp(required_xp, available_xp):
+    if available_xp < required_xp:
         return False
 
     trainer_navigator.log_event(
-        f"Travelling to {profession} trainer to learn {rec['skill']}"
+        f"Travelling to {profession} trainer to learn {next_skill}"
     )
     visit_trainer(agent, profession, planet=planet, city=city)
-    trainer_navigator.log_training_event(profession, rec["skill"], 0.0)
-    _run_training_macro(rec["skill"])
+    trainer_navigator.log_training_event(profession, next_skill, 0.0)
+    _run_training_macro(next_skill)
     trainer_navigator.log_event(
-        f"Completed training for {profession}: {rec['skill']}"
+        f"Completed training for {profession}: {next_skill}"
     )
     return True
