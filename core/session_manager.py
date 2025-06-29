@@ -5,8 +5,10 @@ from datetime import datetime
 
 from core.xp_estimator import XPEstimator
 from utils.session_utils import track_xp_gain
+from utils.license_hooks import requires_license
 
 class SessionManager:
+    @requires_license
     def __init__(self, mode: str = "unknown"):
         self.session_id = str(uuid.uuid4())[:8]
         self.mode = mode

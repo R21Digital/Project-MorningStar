@@ -1,5 +1,6 @@
 import json
 from quest_engine import handle_quest_step
+from utils.license_hooks import requires_license
 
 
 def load_legacy_quest():
@@ -36,6 +37,7 @@ def run_questing_mode(character: str) -> None:
         print("[\u2713] All Legacy steps complete.")
 
 
+@requires_license
 def start() -> None:
     """Entry point for questing mode."""
     run_questing_mode("Player")

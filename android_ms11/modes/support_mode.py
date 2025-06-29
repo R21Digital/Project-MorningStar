@@ -6,8 +6,10 @@ from android_ms11.core import (
     assist_manager,
     party_manager,
 )
+from utils.license_hooks import requires_license
 
 
+@requires_license
 def run(session=None, max_loops: int | None = None) -> None:
     """Entry point for support mode.
 

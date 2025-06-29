@@ -619,7 +619,15 @@ make test
 ```
 Note: When running tests in headless CI, `pyautogui` requires a virtual display such as Xvfb.
 
+
 Launch the test suite with `xvfb-run -a pytest` or an equivalent wrapper.
+
+## License Hooks
+
+Several entry points are decorated with ``@requires_license`` from
+``utils.license_hooks``. When the ``ANDROID_MS11_LICENSE`` environment variable
+is absent the decorator issues a warning and continues execution. Future
+releases will replace this placeholder with real license validation.
 
 ## Wiki Content and Licensing
 

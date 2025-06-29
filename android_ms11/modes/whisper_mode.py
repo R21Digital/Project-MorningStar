@@ -1,3 +1,6 @@
+from utils.license_hooks import requires_license
+
+
 def start_buff_by_tell(character_name: str) -> None:
     """Simulate responding to buff requests sent via tell."""
 
@@ -7,6 +10,7 @@ def start_buff_by_tell(character_name: str) -> None:
     print("📨 Simulation: Responded to 2 buff requests.")
 
 
+@requires_license
 def run(config, session=None):
     """Main entry point for this mode."""
 

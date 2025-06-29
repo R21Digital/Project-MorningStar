@@ -5,11 +5,13 @@ from __future__ import annotations
 from typing import Mapping, Any
 
 from core import farm_profile_loader
+from utils.license_hooks import requires_license
 
 from core.location_selector import travel_to_target, locate_hotspot
 from core.waypoint_verifier import verify_waypoint_stability
 
 
+@requires_license
 def run(profile: Mapping[str, Any] | str | None = None, session=None) -> None:
     """Travel to the configured target and verify the mission waypoint.
 

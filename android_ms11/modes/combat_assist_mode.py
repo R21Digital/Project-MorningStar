@@ -1,6 +1,7 @@
 """Combat assist mode implementation."""
 
 from core.session_manager import SessionManager
+from utils.license_hooks import requires_license
 
 
 def start_afk_combat(character_name: str) -> None:
@@ -12,6 +13,7 @@ def start_afk_combat(character_name: str) -> None:
     print("⚔️ Simulation: Defeated 5 mobs at waypoint.")
 
 
+@requires_license
 def run(config: dict, session: SessionManager) -> None:
     """Run combat assist loop using ``session`` for tracking."""
 
