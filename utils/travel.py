@@ -6,7 +6,7 @@ from typing import Iterable, Sequence, Tuple, Any, Optional
 
 from modules.travel.location_selector import select_target
 from src.movement.movement_profiles import walk_to_coords
-from utils.waypoint_verifier import verify_waypoint as _verify_waypoint
+from core.waypoint_verifier import verify_waypoint_stability as _verify_waypoint
 
 Coords = Sequence[int]
 
