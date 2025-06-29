@@ -2,6 +2,7 @@
 
 from core.session_manager import SessionManager
 from utils.license_hooks import requires_license
+from core.profile_loader import assert_profile_ready
 
 
 def start_afk_combat(character_name: str) -> None:
@@ -16,6 +17,8 @@ def start_afk_combat(character_name: str) -> None:
 @requires_license
 def run(config: dict, session: SessionManager) -> None:
     """Run combat assist loop using ``session`` for tracking."""
+
+    assert_profile_ready(getattr(session, "profile", None))
 
     character = config.get("character_name", "Unknown")
     print(f"[COMBAT] Starting combat assist for {character}")

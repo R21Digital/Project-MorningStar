@@ -31,6 +31,7 @@ def test_main_uses_default_mode(monkeypatch, tmp_path):
     class DummySession:
         def __init__(self, mode):
             captured["mode"] = mode
+            self.profile = {"build": {"skills": []}}
 
         def add_action(self, *a, **k):
             pass
@@ -49,9 +50,9 @@ def test_main_uses_default_mode(monkeypatch, tmp_path):
     monkeypatch.setattr(main_mod, "patrol_route", lambda *a, **k: None)
     monkeypatch.setattr(main_mod, "visit_trainer", lambda *a, **k: None)
     monkeypatch.setattr(main_mod, "check_and_train_skills", lambda *a, **k: None)
-    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {})
+    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {"build": {"skills": []}})
     monkeypatch.setattr(state_tracker, "reset_state", lambda: None)
     monkeypatch.setattr(sys, "argv", ["prog"])
 
-    main_mod.main([])
+    main_mod.main(["--profile", "demo"])
     assert captured["mode"] == "questing"

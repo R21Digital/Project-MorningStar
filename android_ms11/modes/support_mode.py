@@ -7,6 +7,7 @@ from android_ms11.core import (
     party_manager,
 )
 from utils.license_hooks import requires_license
+from core.profile_loader import assert_profile_ready
 
 
 @requires_license
@@ -21,6 +22,8 @@ def run(session=None, max_loops: int | None = None) -> None:
         Number of cycles to run the support routines. If ``None``, run
         indefinitely.
     """
+
+    assert_profile_ready(getattr(session, "profile", None))
 
     cfg = getattr(session, "config", {})
     leader = cfg.get("support_leader_name", "LeaderBot")

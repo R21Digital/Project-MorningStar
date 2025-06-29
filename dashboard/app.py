@@ -6,6 +6,9 @@ from typing import Optional
 
 from flask import Flask, render_template
 
+# Runtime session data placeholder
+session_state: dict = {}
+
 # Directory containing build definitions
 BUILD_DIR = Path(__file__).resolve().parents[1] / "profiles" / "builds"
 
@@ -30,7 +33,10 @@ def _latest_session_log() -> Optional[Path]:
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    profile = session_state.get("profile", {})
+    build = profile.get("skill_build")
+    progress = profile.get("build_progress", {})
+    return render_template("status.html", build=build, progress=progress)
 
 
 @app.route("/builds")
@@ -52,7 +58,12 @@ def status():
                 data = json.load(fh)
         except Exception:
             data = None
-    return render_template("status.html", log=data)
+    profile = session_state.get("profile", {})
+    build = profile.get("skill_build")
+    progress = profile.get("build_progress", {})
+    return render_template(
+        "status.html", log=data, build=build, progress=progress
+    )
 
 
 if __name__ == "__main__":

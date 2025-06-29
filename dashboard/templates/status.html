@@ -6,6 +6,10 @@
 </head>
 <body>
     <h1>Active Session Status</h1>
+    {% if build %}
+        <p>Current Build: {{ build }}</p>
+        <p>Build Progress: {{ progress.completed_skills | length if progress else 0 }}/{{ progress.total_skills if progress else 0 }}</p>
+    {% endif %}
     {% if log %}
         <pre>{{ log|tojson(indent=2) }}</pre>
     {% else %}

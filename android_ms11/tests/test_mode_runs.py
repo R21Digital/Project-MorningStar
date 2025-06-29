@@ -9,6 +9,7 @@ from android_ms11.modes import quest_mode, combat_assist_mode
 class DummySession:
     def __init__(self):
         self.actions = []
+        self.profile = {"build": {"skills": []}}
 
     def add_action(self, action: str):
         self.actions.append(action)

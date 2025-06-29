@@ -28,6 +28,9 @@ def test_mode_stubs_run(module_name, monkeypatch):
         monkeypatch.setattr(mod, "start_afk_combat", lambda *a, **k: None)
 
     class DummySession:
+        def __init__(self):
+            self.profile = {"build": {"skills": []}}
+
         def add_action(self, *a, **k):
             pass
 
@@ -40,11 +43,12 @@ def test_main_selector_invokes_stub(monkeypatch, mode):
 
     calls = {}
     monkeypatch.setattr(main_mod, "load_config", lambda path=None: {})
-    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {})
+    monkeypatch.setattr(profile_loader, "load_profile", lambda name: {"build": {"skills": []}})
     monkeypatch.setattr(state_tracker, "reset_state", lambda: None)
 
     class DummySession:
-        pass
+        def __init__(self):
+            self.profile = {"build": {"skills": []}}
 
     def fake_session(*a, **kw):
         inst = DummySession()
@@ -61,12 +65,12 @@ def test_main_selector_invokes_stub(monkeypatch, mode):
 
     monkeypatch.setitem(main_mod.MODE_HANDLERS, mode, handler)
 
-    main_mod.main(["--mode", mode])
+    main_mod.main(["--mode", mode, "--profile", "demo"])
 
     assert calls["session"] == mode
     assert calls["handler"] == mode
     assert calls["used_session"] is calls["instance"]
-    assert calls["profile"] == {}
+    assert calls["profile"] == {"build": {"skills": []}}
 
 
 def test_main_loads_profile_and_passes_to_handler(monkeypatch):
@@ -78,13 +82,14 @@ def test_main_loads_profile_and_passes_to_handler(monkeypatch):
 
     def fake_load(name):
         captured["profile_name"] = name
-        return {"setting": 1}
+        return {"setting": 1, "build": {"skills": []}}
 
     monkeypatch.setattr(profile_loader, "load_profile", fake_load)
     monkeypatch.setattr(state_tracker, "reset_state", lambda: captured.setdefault("reset", True))
 
     class DummySession:
-        pass
+        def __init__(self):
+            self.profile = {"build": {"skills": []}}
 
     def fake_session(*a, **k):
         captured["session_mode"] = k.get("mode") if k else a[0] if a else None
@@ -102,5 +107,5 @@ def test_main_loads_profile_and_passes_to_handler(monkeypatch):
     assert captured["profile_name"] == "demo"
     assert captured.get("reset") is True
     assert captured["session_mode"] == "combat"
-    assert captured["profile"] == {"setting": 1}
+    assert captured["profile"] == {"setting": 1, "build": {"skills": []}}
 
