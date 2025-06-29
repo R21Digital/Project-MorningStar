@@ -24,7 +24,7 @@ from utils.load_trainers import load_trainers
 from utils.check_buff_status import update_buff_state
 from modules.skills.training_check import get_trainable_skills
 from modules.travel.trainer_travel import travel_to_trainer
-from src.movement.agent_mover import MovementAgent  # noqa: F401
+from src.movement.agent_mover import MovementAgent
 from src.movement.movement_profiles import patrol_route  # noqa: F401
 from src.training.trainer_visit import visit_trainer  # noqa: F401
 
@@ -130,6 +130,19 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=10,
         help="Rest time (in seconds) between loops when using --repeat",
     )
+    parser.add_argument(
+        "--max_loops",
+        type=int,
+        default=None,
+        help="Maximum iterations to run within a mode",
+    )
+    parser.add_argument(
+        "--train",
+        "--auto_train",
+        dest="train",
+        action="store_true",
+        help="Check for trainable skills after each iteration",
+    )
     return parser.parse_args(argv)
 
 
@@ -138,16 +151,36 @@ def run_mode(
     session: SessionManager,
     profile: Mapping[str, Any],
     config: Mapping[str, Any],
+    *,
+    max_loops: int | None = None,
 ) -> Dict[str, Any]:
     """Execute a single iteration of ``mode`` and return metrics."""
     handler = MODE_HANDLERS.get(mode)
     if not handler:
         print(f"[MODE] Unknown mode '{mode}'")
         return {}
+
+    import inspect
+
+    params = inspect.signature(handler).parameters
+    kwargs: Dict[str, Any] = {}
+    if "config" in params or "cfg" in params:
+        kwargs[next(p for p in params if p in ("config", "cfg"))] = config
+    if "session" in params:
+        kwargs["session"] = session
+    if "profile" in params:
+        kwargs["profile"] = profile
+    if max_loops is not None:
+        if "max_loops" in params:
+            kwargs["max_loops"] = max_loops
+        elif "loop_count" in params:
+            kwargs["loop_count"] = max_loops
+
     try:
-        return handler(config, session, profile=profile) or {}
-    except TypeError:
-        return handler(config, session) or {}
+        return handler(**kwargs) or {}
+    except TypeError as exc:
+        print(f"[MODE] Handler call failed: {exc}")
+        return {}
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -193,7 +226,13 @@ def main(argv: list[str] | None = None) -> None:
     if args.repeat:
         run_repeating_mode(
             args.mode,
-            lambda: run_mode(args.mode, session, profile, config),
+            lambda: run_mode(
+                args.mode,
+                session,
+                profile,
+                config,
+                max_loops=args.max_loops,
+            ),
             args.rest,
         )
         return
@@ -202,7 +241,20 @@ def main(argv: list[str] | None = None) -> None:
     state = state_tracker.get_state()
 
     while True:
-        session_metrics = run_mode(current_mode, session, profile, config)
+        session_metrics = run_mode(
+            current_mode,
+            session,
+            profile,
+            config,
+            max_loops=args.max_loops,
+        )
+
+        if args.train:
+            check_and_train_skills(
+                MovementAgent(session=session),
+                profile.get("character_skills", {}),
+                profile.get("profession_tree", {}),
+            )
 
         if args.smart or args.loop:
             state = monitor_session(session_metrics)
@@ -224,7 +276,13 @@ def main(argv: list[str] | None = None) -> None:
             if new_mode and new_mode != current_mode:
                 print(f"[Smart Switch] {current_mode} -> {new_mode}")
                 current_mode = new_mode
-                run_mode(current_mode, session, profile, config)
+                run_mode(
+                    current_mode,
+                    session,
+                    profile,
+                    config,
+                    max_loops=args.max_loops,
+                )
         break
 
 
