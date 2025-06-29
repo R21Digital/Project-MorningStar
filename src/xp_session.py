@@ -17,14 +17,19 @@ class XPSession:
         self.xp_end = None
         self.xp_gain = None
         self.actions = []
+        # Track accumulated XP per skill line
+        self.skills = {}
 
-    def log_action(self, action_type: str, xp_value: int):
+    def log_action(self, action_type: str, xp_value: int, skill: str | None = None):
         timestamp = datetime.now().isoformat()
-        self.actions.append({
+        entry = {
             "timestamp": timestamp,
             "type": action_type,
-            "xp": xp_value
-        })
+            "xp": xp_value,
+        }
+        if skill:
+            entry["skill"] = skill
+        self.actions.append(entry)
 
     def finalize(self, xp_end: int):
         self.xp_end = xp_end
@@ -36,4 +41,9 @@ class XPSession:
         path = os.path.join(LOG_DIR, f"session_{timestamp}.json")
         with open(path, "w") as f:
             json.dump(self.__dict__, f, indent=2)
+
+        if self.skills:
+            print("[XP] Totals by skill:")
+            for skill, xp in self.skills.items():
+                print(f" - {skill}: {xp}")
         return path
