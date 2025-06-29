@@ -143,7 +143,20 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Check for trainable skills after each iteration",
     )
-    return parser.parse_args(argv)
+    parser.add_argument(
+        "--farming_target",
+        type=str,
+        help="JSON string specifying planet, city and hotspot for farming runs",
+    )
+    args = parser.parse_args(argv)
+    if args.farming_target:
+        try:
+            args.farming_target = json.loads(args.farming_target)
+            if not isinstance(args.farming_target, dict):
+                raise ValueError("farming_target must be a JSON object")
+        except Exception as exc:  # pragma: no cover - arg parsing
+            parser.error(f"Invalid --farming_target value: {exc}")
+    return args
 
 
 def run_mode(
@@ -191,6 +204,8 @@ def main(argv: list[str] | None = None) -> None:
     config = load_config()
     profile = profile_loader.load_profile(args.profile) if args.profile else {}
     args.train = args.train or profile.get("auto_train", False)
+    if getattr(args, "farming_target", None):
+        profile["farming_target"] = args.farming_target
 
     if args.smart:
         state = state_tracker.get_state()
