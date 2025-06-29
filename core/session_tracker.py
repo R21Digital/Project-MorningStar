@@ -36,4 +36,28 @@ def update_session_key(key: str, value: Any) -> None:
     save_session(data)
 
 
-__all__ = ["load_session", "save_session", "update_session_key"]
+def log_farming_result(mobs: list[str], earned_credits: int) -> None:
+    """Update farming statistics in :data:`SESSION_FILE`.
+
+    Parameters
+    ----------
+    mobs:
+        Sequence of mob names defeated during a mission.
+    earned_credits:
+        Credits earned from the mission.
+    """
+
+    data = load_session()
+    data["missions_completed"] = int(data.get("missions_completed", 0)) + 1
+    data["total_credits_earned"] = (
+        int(data.get("total_credits_earned", 0)) + int(earned_credits)
+    )
+
+    mob_counts = data.setdefault("mob_counts", {})
+    for mob in mobs:
+        mob_counts[mob] = int(mob_counts.get(mob, 0)) + 1
+
+    save_session(data)
+
+
+__all__ = ["load_session", "save_session", "update_session_key", "log_farming_result"]

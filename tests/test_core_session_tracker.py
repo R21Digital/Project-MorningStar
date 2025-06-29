@@ -21,3 +21,19 @@ def test_save_and_load_roundtrip(tmp_path, monkeypatch):
     assert (tmp_path / session_tracker.SESSION_FILE).exists()
     loaded = session_tracker.load_session()
     assert loaded == payload
+
+
+def test_log_farming_result(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    session_tracker.log_farming_result(["bandit", "bandit", "thug"], 100)
+    data = session_tracker.load_session()
+    assert data["missions_completed"] == 1
+    assert data["total_credits_earned"] == 100
+    assert data["mob_counts"] == {"bandit": 2, "thug": 1}
+
+    session_tracker.log_farming_result(["bandit"], 50)
+    data = session_tracker.load_session()
+    assert data["missions_completed"] == 2
+    assert data["total_credits_earned"] == 150
+    assert data["mob_counts"] == {"bandit": 3, "thug": 1}
