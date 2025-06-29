@@ -25,8 +25,8 @@ def test_execute_run_logs_result(monkeypatch):
     farmer = TerminalFarmer()
     farmer.profile["max_distance"] = 60
     board_text = """
-    Close Target 10,10 50m
-    Far Target 20,20 100m
+    Close Target 10,10 50m 500c
+    Far Target 20,20 100m 2000c
     """
     calls = []
     def fake_log(mobs, credits):
@@ -34,7 +34,7 @@ def test_execute_run_logs_result(monkeypatch):
     monkeypatch.setattr("modules.farming.terminal_farm.log_farming_result", fake_log)
     accepted = farmer.execute_run(board_text=board_text)
     assert accepted == [
-        {"name": "Close Target", "coords": (10, 10), "distance": 50}
+        {"name": "Close Target", "coords": (10, 10), "distance": 50, "credits": 500}
     ]
-    assert calls == [(["Close Target"], 1)]
+    assert calls == [(["Close Target"], 500)]
 
