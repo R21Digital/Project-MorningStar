@@ -87,8 +87,12 @@ class BuildManager:
         return int(self.xp_costs.get(skill, 0))
 
     # --------------------------------------------------------------
-    def get_completed_skills(self, known_skills: Iterable[str]) -> list[str]:
-        """Return a list of build skills that are present in ``known_skills``."""
+    def get_completed_skills(self) -> list[str]:
+        """Return a list of build skills recorded as completed in the session."""
 
-        return [s for s in self.skills if s in known_skills]
+        from core.session_tracker import load_session
+
+        session = load_session()
+        completed = session.get("skills_completed", [])
+        return [s for s in self.skills if s in completed]
 
