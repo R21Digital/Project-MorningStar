@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, Dict
 
@@ -42,9 +43,17 @@ def validate_profile(data: Dict[str, Any]) -> Dict[str, Any]:
     data.setdefault("auto_train", False)
 
     build_name = data.get("skill_build")
-    build_path = BUILD_DIR / f"{build_name}.json"
-    if not build_path.exists():
+    json_path = BUILD_DIR / f"{build_name}.json"
+    txt_path = BUILD_DIR / f"{build_name}.txt"
+    if json_path.exists():
+        build_path = json_path
+    elif txt_path.exists():
+        build_path = txt_path
+    else:
         raise ProfileValidationError(f"Build file not found: {build_name}")
+
+    logging.info("Using build file %s", build_path)
+
     try:
         with open(build_path, "r", encoding="utf-8") as fh:
             build_data = json.load(fh)
