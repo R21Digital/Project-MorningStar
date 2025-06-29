@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Builds</title>
+</head>
+<body>
+    <h1>Available Builds</h1>
+    <ul>
+    {% for build in builds %}
+        <li>{{ build }}</li>
+    {% else %}
+        <li>No builds found.</li>
+    {% endfor %}
+    </ul>
+    <p><a href="/">Back</a></p>
+</body>
+</html>

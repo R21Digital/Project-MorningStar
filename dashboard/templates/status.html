@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Session Status</title>
+</head>
+<body>
+    <h1>Active Session Status</h1>
+    {% if log %}
+        <pre>{{ log|tojson(indent=2) }}</pre>
+    {% else %}
+        <p>No session data found.</p>
+    {% endif %}
+    <p><a href="/">Back</a></p>
+</body>
+</html>
