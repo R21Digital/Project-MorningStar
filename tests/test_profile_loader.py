@@ -31,10 +31,15 @@ def test_load_profile_valid(tmp_path, monkeypatch):
     build_dir = tmp_path / "builds"
     build_dir.mkdir()
     (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
+    progress_file = tmp_path / "session_state.json"
+    progress_file.write_text(json.dumps({"completed_skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
     prof = load_profile("demo")
     assert prof["build"] == {"skills": []}
+    assert prof["build_progress"] == {"completed_skills": [], "total_skills": 0}
+    assert prof["recovery_path"] == str(progress_file)
 
 
 def test_load_profile_txt_build(tmp_path, monkeypatch):
@@ -56,10 +61,18 @@ def test_load_profile_txt_build(tmp_path, monkeypatch):
     build_dir = tmp_path / "builds"
     build_dir.mkdir()
     (build_dir / "basic.txt").write_text(json.dumps({"skills": ["A"]}))
+    progress_file = tmp_path / "session_state.json"
+    progress_file.write_text(json.dumps({"completed_skills": ["A"]}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
     prof = load_profile("demo")
     assert prof["build"] == {"skills": ["A"]}
+    assert prof["build_progress"] == {
+        "completed_skills": ["A"],
+        "total_skills": 1,
+    }
+    assert prof["recovery_path"] == str(progress_file)
 
 
 def test_auto_train_default(tmp_path, monkeypatch):
@@ -270,5 +283,10 @@ def test_load_profile_from_repo_txt(tmp_path, monkeypatch):
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
 
+    progress_file = tmp_path / "session_state.json"
+    progress_file.write_text(json.dumps({"completed_skills": []}))
+    monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
+
     prof = load_profile("demo")
     assert prof["build"] == json.loads(src_path.read_text())
+    assert "build_progress" in prof

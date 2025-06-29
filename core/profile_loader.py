@@ -5,6 +5,8 @@ from pathlib import Path
 from typing import Any, Dict
 import json
 
+from . import progress_tracker
+
 
 class ProfileValidationError(Exception):
     """Raised when a profile file fails validation."""
@@ -69,6 +71,7 @@ def validate_profile(data: Dict[str, Any]) -> Dict[str, Any]:
 PROFILE_DIR = Path(__file__).resolve().parents[1] / "profiles"
 BUILD_DIR = PROFILE_DIR / "builds"
 RUNTIME_PROFILE = Path("runtime") / "profile.runtime.json"
+SESSION_STATE = Path("runtime") / "session_state.json"
 
 REQUIRED_FIELDS = {
     "support_target": str,
@@ -106,6 +109,13 @@ def load_profile(name: str) -> Dict[str, Any]:
         data = json.load(fh)
 
     profile = validate_profile(data)
+
+    progress = progress_tracker.load_session(SESSION_STATE)
+    profile["build_progress"] = {
+        "completed_skills": progress.get("completed_skills", []),
+        "total_skills": len(profile.get("build", {}).get("skills", [])),
+    }
+    profile["recovery_path"] = str(SESSION_STATE)
 
     RUNTIME_PROFILE.parent.mkdir(parents=True, exist_ok=True)
     with open(RUNTIME_PROFILE, "w", encoding="utf-8") as f:
