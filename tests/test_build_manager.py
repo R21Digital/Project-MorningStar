@@ -19,6 +19,17 @@ def setup_build(tmp_path):
     return build_dir, build_data
 
 
+def setup_txt_build(tmp_path):
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    build_data = {
+        "profession": "Medic",
+        "skills": ["Novice Medic", "Intermediate Medicine"],
+    }
+    (build_dir / "basic.txt").write_text(json.dumps(build_data))
+    return build_dir, build_data
+
+
 def mock_profession_data():
     return {
         "xp_costs": {
@@ -30,6 +41,19 @@ def mock_profession_data():
 
 def test_load_build(monkeypatch, tmp_path):
     build_dir, data = setup_build(tmp_path)
+    monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
+    monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
+
+    bm = BuildManager()
+    bm.load_build("basic")
+
+    assert bm.profession == "Medic"
+    assert bm.skills == data["skills"]
+    assert bm.get_required_xp("Intermediate Medicine") == 1000
+
+
+def test_load_txt_build(monkeypatch, tmp_path):
+    build_dir, data = setup_txt_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
 

@@ -37,8 +37,9 @@ def index():
 def list_builds():
     builds = []
     if BUILD_DIR.exists():
-        builds = [p.stem for p in BUILD_DIR.glob("*.json")]
-    return render_template("builds.html", builds=sorted(builds))
+        builds.extend(p.stem for p in BUILD_DIR.glob("*.json"))
+        builds.extend(p.stem for p in BUILD_DIR.glob("*.txt"))
+    return render_template("builds.html", builds=sorted(set(builds)))
 
 
 @app.route("/status")
