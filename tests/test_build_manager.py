@@ -113,3 +113,22 @@ def test_load_repo_txt_build(monkeypatch, tmp_path):
         assert bm.skills == ["Novice Medic"]
     finally:
         backup.rename(src_json)
+
+def test_load_repo_rifleman_build(monkeypatch):
+    monkeypatch.setattr(
+        progress_tracker,
+        "load_profession",
+        lambda p: {
+            "xp_costs": {
+                "Novice Marksman": 0,
+                "Master Rifleman": 8000,
+            }
+        },
+    )
+
+    bm = BuildManager("rifleman")
+
+    assert bm.profession == "Rifleman"
+    assert bm.skills == ["Novice Marksman", "Master Rifleman"]
+    assert bm.get_required_xp("Master Rifleman") == 8000
+
