@@ -86,3 +86,9 @@ class BuildManager:
 
         return int(self.xp_costs.get(skill, 0))
 
+    # --------------------------------------------------------------
+    def get_completed_skills(self, known_skills: Iterable[str]) -> list[str]:
+        """Return a list of build skills that are present in ``known_skills``."""
+
+        return [s for s in self.skills if s in known_skills]
+
