@@ -1,0 +1,5 @@
+{
+  "bounty_hunter": ["bandit", "smuggler"],
+  "ranger": ["beast", "creature"],
+  "medic": ["mutant"]
+}
