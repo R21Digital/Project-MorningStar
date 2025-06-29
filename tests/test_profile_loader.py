@@ -36,6 +36,31 @@ def test_load_profile_valid(tmp_path, monkeypatch):
     assert prof["build"] == {"skills": []}
 
 
+def test_load_profile_txt_build(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "farming_target": {
+            "planet": "Naboo",
+            "city": "Theed",
+            "hotspot": "Cantina",
+        },
+        "skill_build": "basic",
+    }
+    path = tmp_path / "demo.json"
+    path.write_text(json.dumps(data))
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    (build_dir / "basic.txt").write_text(json.dumps({"skills": ["A"]}))
+    monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    prof = load_profile("demo")
+    assert prof["build"] == {"skills": ["A"]}
+
+
 def test_auto_train_default(tmp_path, monkeypatch):
     data = {
         "support_target": "Leader",
