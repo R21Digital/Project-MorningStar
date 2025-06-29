@@ -9,6 +9,11 @@ import core.profile_loader as profile_loader
 from core.profile_loader import load_profile, validate_profile, ProfileValidationError
 
 
+def _patch_runtime(monkeypatch, path):
+    monkeypatch.setattr("core.profile_loader.RUNTIME_PROFILE", path / "profile.runtime.json")
+    monkeypatch.setattr("core.profile_loader.load_session", lambda: {"loops": 1})
+
+
 def test_load_profile_valid(tmp_path, monkeypatch):
     data = {
         "support_target": "Leader",
@@ -36,10 +41,14 @@ def test_load_profile_valid(tmp_path, monkeypatch):
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
     monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
+    _patch_runtime(monkeypatch, tmp_path)
     prof = load_profile("demo")
     assert prof["build"] == {"skills": []}
     assert prof["build_progress"] == {"completed_skills": [], "total_skills": 0}
     assert prof["recovery_path"] == str(progress_file)
+    assert prof["runtime"] == {"progress": {"loops": 1}}
+    saved = json.loads((tmp_path / "profile.runtime.json").read_text())
+    assert saved["runtime"] == {"progress": {"loops": 1}}
 
 
 def test_load_profile_txt_build(tmp_path, monkeypatch):
@@ -66,6 +75,7 @@ def test_load_profile_txt_build(tmp_path, monkeypatch):
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
     monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
+    _patch_runtime(monkeypatch, tmp_path)
     prof = load_profile("demo")
     assert prof["build"] == {"skills": ["A"]}
     assert prof["build_progress"] == {
@@ -73,6 +83,7 @@ def test_load_profile_txt_build(tmp_path, monkeypatch):
         "total_skills": 1,
     }
     assert prof["recovery_path"] == str(progress_file)
+    assert prof["runtime"] == {"progress": {"loops": 1}}
 
 
 def test_auto_train_default(tmp_path, monkeypatch):
@@ -96,6 +107,7 @@ def test_auto_train_default(tmp_path, monkeypatch):
     (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    _patch_runtime(monkeypatch, tmp_path)
     prof = load_profile("demo")
     assert prof["auto_train"] is False
 
@@ -120,6 +132,7 @@ def test_invalid_farming_target(tmp_path, monkeypatch):
     (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    _patch_runtime(monkeypatch, tmp_path)
     with pytest.raises(ProfileValidationError):
         load_profile("demo")
 
@@ -150,6 +163,7 @@ def test_missing_build_file(tmp_path, monkeypatch):
     build_dir.mkdir()
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    _patch_runtime(monkeypatch, tmp_path)
     with pytest.raises(ProfileValidationError):
         load_profile("demo")
 
@@ -175,6 +189,7 @@ def test_invalid_build_structure(tmp_path, monkeypatch):
     (build_dir / "bad.json").write_text("[]")
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+    _patch_runtime(monkeypatch, tmp_path)
     with pytest.raises(ProfileValidationError):
         load_profile("demo")
 
@@ -283,6 +298,8 @@ def test_load_profile_from_repo_txt(tmp_path, monkeypatch):
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
 
+    _patch_runtime(monkeypatch, tmp_path)
+
     progress_file = tmp_path / "session_state.json"
     progress_file.write_text(json.dumps({"completed_skills": []}))
     monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
@@ -290,3 +307,4 @@ def test_load_profile_from_repo_txt(tmp_path, monkeypatch):
     prof = load_profile("demo")
     assert prof["build"] == json.loads(src_path.read_text())
     assert "build_progress" in prof
+    assert prof["runtime"] == {"progress": {"loops": 1}}
