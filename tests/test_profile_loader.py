@@ -5,6 +5,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+import core.profile_loader as profile_loader
 from core.profile_loader import load_profile, validate_profile, ProfileValidationError
 
 
@@ -242,3 +243,32 @@ def test_validate_profile_invalid_fatigue_threshold(tmp_path, monkeypatch):
     with pytest.raises(ProfileValidationError) as excinfo:
         validate_profile(data)
     assert "fatigue_threshold" in str(excinfo.value)
+
+
+def test_load_profile_from_repo_txt(tmp_path, monkeypatch):
+    data = {
+        "support_target": "Leader",
+        "preferred_trainers": {"medic": "trainer"},
+        "default_mode": "medic",
+        "skip_modes": ["crafting"],
+        "farming_targets": ["Bandit"],
+        "farming_target": {
+            "planet": "Naboo",
+            "city": "Theed",
+            "hotspot": "Cantina",
+        },
+        "skill_build": "basic",
+    }
+    path = tmp_path / "demo.json"
+    path.write_text(json.dumps(data))
+
+    build_dir = tmp_path / "builds"
+    build_dir.mkdir()
+    src_path = profile_loader.BUILD_DIR / "basic.txt"
+    build_dir.joinpath("basic.txt").write_text(src_path.read_text())
+
+    monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+    monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
+
+    prof = load_profile("demo")
+    assert prof["build"] == json.loads(src_path.read_text())

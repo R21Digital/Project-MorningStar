@@ -4,6 +4,7 @@ import json
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+import core.build_manager as build_manager
 from core.build_manager import BuildManager
 from modules.professions import progress_tracker
 
@@ -93,3 +94,22 @@ def test_next_trainable_and_completion(monkeypatch, tmp_path):
 
     assert not bm.is_build_complete(["Novice Medic"])
     assert bm.is_build_complete(["Novice Medic", "Intermediate Medicine"])
+
+
+def test_load_repo_txt_build(monkeypatch, tmp_path):
+    src_json = build_manager.BUILD_DIR / "basic.json"
+    src_txt = build_manager.BUILD_DIR / "basic.txt"
+    assert src_json.exists()
+    assert src_txt.exists()
+    backup = tmp_path / "basic.json.bak"
+    src_json.rename(backup)
+    try:
+        monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
+
+        bm = BuildManager()
+        bm.load_build("basic")
+
+        assert bm.profession == "Combat Medic"
+        assert bm.skills == ["Novice Medic"]
+    finally:
+        backup.rename(src_json)
