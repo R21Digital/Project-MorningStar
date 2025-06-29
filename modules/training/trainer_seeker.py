@@ -99,7 +99,12 @@ def seek_training(
     )
     tm = travel_manager or TravelManager()
     try:
-        success = tm.go_to_trainer(profession, agent=agent)
+        success = tm.go_to_trainer(
+            profession,
+            agent=agent,
+            planet=planet,
+            city=city,
+        )
     except Exception:
         trainer_navigator.log_event("Player busy; will retry later")
         return False

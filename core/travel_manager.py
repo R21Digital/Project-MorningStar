@@ -44,7 +44,14 @@ class TravelManager:
             self.trainers = {}
 
     # --------------------------------------------------
-    def go_to_trainer(self, profession: str, *, agent=None) -> bool:
+    def go_to_trainer(
+        self,
+        profession: str,
+        *,
+        agent=None,
+        planet: str | None = None,
+        city: str | None = None,
+    ) -> bool:
         """Navigate to the trainer location for ``profession``.
 
         This method performs waypoint travel and location verification only.
@@ -66,18 +73,16 @@ class TravelManager:
                 or entry.get("coords")
                 or [entry.get("x", 0), entry.get("y", 0)]
             )
-            planet = entry.get("planet")
-            city = entry.get("city")
+            p = planet or entry.get("planet")
+            c = city or entry.get("city")
 
             try:
                 if agent is None:
-                    go_to_waypoint(coords, planet=planet, city=city)
-                    success = verify_location(coords, planet=planet, city=city)
+                    go_to_waypoint(coords, planet=p, city=c)
+                    success = verify_location(coords, planet=p, city=c)
                 else:
-                    go_to_waypoint(coords, planet=planet, city=city, agent=agent)
-                    success = verify_location(
-                        coords, planet=planet, city=city, agent=agent
-                    )
+                    go_to_waypoint(coords, planet=p, city=c, agent=agent)
+                    success = verify_location(coords, planet=p, city=c, agent=agent)
             except Exception:
                 success = False
 

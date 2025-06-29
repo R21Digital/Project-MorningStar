@@ -43,7 +43,7 @@ def test_seek_training_success(monkeypatch):
     monkeypatch.setattr(trainer_seeker, "read_xp_via_ocr", lambda: 1000)
     calls = {}
     tm = MagicMock()
-    tm.go_to_trainer = lambda prof, agent=None: calls.setdefault("go", (prof, agent)) or True
+    tm.go_to_trainer = lambda prof, agent=None, planet=None, city=None: calls.setdefault("go", (prof, agent, planet, city)) or True
     monkeypatch.setattr(trainer_seeker.trainer_navigator, "log_event", lambda msg: calls.setdefault("log", []).append(msg))
     monkeypatch.setattr(trainer_seeker.trainer_navigator, "log_training_event", lambda *a, **k: calls.setdefault("train", True))
     monkeypatch.setattr(trainer_seeker, "_run_training_macro", lambda skill: calls.setdefault("macro", skill))
@@ -51,7 +51,7 @@ def test_seek_training_success(monkeypatch):
     result = trainer_seeker.seek_training("medic", ["Novice Artisan"], agent="A", planet="corellia", city="coronet", build_manager=bm, travel_manager=tm)
 
     assert result is True
-    assert calls["go"] == ("medic", "A")
+    assert calls["go"] == ("medic", "A", "corellia", "coronet")
     assert calls["macro"] == "Intermediate"
     assert calls.get("train") is True
 
@@ -60,7 +60,7 @@ def test_seek_training_busy_defers(monkeypatch):
     bm = DummyBuild("Intermediate", 500)
     monkeypatch.setattr(trainer_seeker, "read_xp_via_ocr", lambda: 1000)
     tm = MagicMock()
-    def raise_busy(prof, agent=None):
+    def raise_busy(prof, agent=None, planet=None, city=None):
         raise Exception("busy")
     tm.go_to_trainer = raise_busy
     called = []
@@ -76,7 +76,7 @@ def test_seek_training_all_fail(monkeypatch, tmp_path):
     bm = DummyBuild("Intermediate", 500)
     monkeypatch.setattr(trainer_seeker, "read_xp_via_ocr", lambda: 1000)
     tm = MagicMock()
-    tm.go_to_trainer = lambda prof, agent=None: False
+    tm.go_to_trainer = lambda prof, agent=None, planet=None, city=None: False
     calls = {}
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(trainer_seeker.trainer_navigator, "log_event", lambda msg: calls.setdefault("log", msg))
