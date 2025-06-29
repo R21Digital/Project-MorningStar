@@ -5,7 +5,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from core.profile_loader import load_profile
+from core.profile_loader import load_profile, ProfileValidationError
 
 
 def test_load_profile_valid(tmp_path, monkeypatch):
@@ -81,7 +81,7 @@ def test_invalid_farming_target(tmp_path, monkeypatch):
     (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
-    with pytest.raises(ValueError):
+    with pytest.raises(ProfileValidationError):
         load_profile("demo")
 
 
@@ -111,7 +111,7 @@ def test_missing_build_file(tmp_path, monkeypatch):
     build_dir.mkdir()
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
-    with pytest.raises(ValueError):
+    with pytest.raises(ProfileValidationError):
         load_profile("demo")
 
 
@@ -136,5 +136,5 @@ def test_invalid_build_structure(tmp_path, monkeypatch):
     (build_dir / "bad.json").write_text("[]")
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
-    with pytest.raises(ValueError):
+    with pytest.raises(ProfileValidationError):
         load_profile("demo")
