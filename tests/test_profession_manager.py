@@ -27,14 +27,14 @@ def test_train_missing_skills_travels(monkeypatch):
 
     assert calls["travel"][0][1] == "tatooine"
     assert calls["travel"][0][0] == [3432, -4795]
-    assert calls["interact"][0] == ("Artisan Trainer", "Novice Artisan")
+    assert calls["interact"][0] == ("Artisan Trainer", "crafting_artisan_novice")
 
 
 def test_train_missing_skills_no_action(monkeypatch):
     pm = ProfessionManager()
     monkeypatch.setattr(
         "core.profession_manager.scan_skills_ui",
-        lambda: ["Novice Artisan", "Novice Marksman"],
+        lambda: ["crafting_artisan_novice", "combat_marksman_novice"],
     )
 
     called = False

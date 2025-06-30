@@ -1,8 +1,15 @@
 """Default profession skill requirements and trainer locations."""
 
 REQUIRED_SKILLS = {
-    "artisan": ["Novice Artisan"],
-    "marksman": ["Novice Marksman"],
+    "Artisan": ["crafting_artisan_novice"],
+    "Marksman": ["combat_marksman_novice"],
+    "Medic": ["science_medic_novice"],
+    "Scout": ["outdoors_scout_novice"],
+    "Brawler": ["combat_brawler_novice"],
+    "Entertainer": ["social_entertainer_novice"],
+    "Rifleman": ["combat_rifleman_novice"],
+    "Pistoleer": ["combat_pistoleer_novice"],
+    "Carbineer": ["combat_carbineer_novice"],
 }
 
 from utils.load_trainers import load_trainers
