@@ -14,6 +14,7 @@ Return a suggested action string from two dictionaries:
   Missing keys default to `hp=100`, `has_heal=False`, `is_buffed=False`.
 - **`target_state`** – only the `hp` key is consulted and defaults to `100`.
 - **`difficulty`** – optional string: "easy", "normal" (default), or "hard".
+- **`behavior`** – optional string: "aggressive", "defensive", or "tactical" (default).
 
 Possible results:
 
@@ -35,6 +36,8 @@ print(action)  # "heal"
 action = evaluate_state({"hp": 25, "has_heal": True}, {"hp": 50}, debug=True)
 # Difficulty can be tuned as well
 hard_action = evaluate_state({"hp": 25, "has_heal": False}, {"hp": 50}, difficulty="hard")
+# Behavior can be adjusted as well
+aggressive_action = evaluate_state({"hp": 45, "has_heal": True}, {"hp": 50}, behavior="aggressive")
 # Prints "Decision: heal ..." to stdout
 ```
 

@@ -3,6 +3,7 @@ from typing import Dict
 from .strategies import (
     should_buff,
     should_idle,
+    should_attack,
 )
 
 
@@ -11,6 +12,7 @@ def evaluate_state(
     target_state: Dict,
     debug: bool = False,
     difficulty: str = "normal",
+    behavior: str = "tactical",
 ) -> str:
     """Evaluate the current combat state and return a suggested action.
 
@@ -26,6 +28,9 @@ def evaluate_state(
     target_state:
         Dictionary with the enemy's status. Only ``hp`` is currently
         consulted and it defaults to ``100`` when absent.
+    behavior:
+        Combat style string. One of ``"aggressive"``, ``"defensive"``, or
+        ``"tactical"`` (default).
 
     Returns
     -------
@@ -48,6 +53,8 @@ def evaluate_state(
             No specific action is required because the encounter is over and
             the player is already buffed.
     """
+
+    behavior = behavior.lower()
 
     # Difficulty-based HP threshold for low health decisions
     low_hp = player_state.get("hp", 100) < {
@@ -82,6 +89,29 @@ def evaluate_state(
             print(f"[{difficulty.upper()}] Decision: idle")
         return "idle"
 
+    if behavior == "aggressive":
+        if should_attack(player_state, target_state):
+            if debug:
+                print(f"[{behavior.upper()}] Chose aggressive attack")
+            return "attack"
+        elif should_buff(player_state, target_state):
+            if debug:
+                print(f"[{behavior.upper()}] Chose aggressive buff")
+            return "buff"
+        elif player_state.get("has_heal", False):
+            return "heal"
+    elif behavior == "defensive":
+        if player_state.get("hp", 100) < 40 and player_state.get("has_heal", False):
+            if debug:
+                print(f"[{behavior.upper()}] Chose defensive heal")
+            return "heal"
+        elif player_state.get("hp", 100) < 25:
+            if debug:
+                print(f"[{behavior.upper()}] Chose defensive retreat")
+            return "retreat"
+        elif should_buff(player_state, target_state):
+            return "buff"
+    
     if debug:
         print(f"[{difficulty.upper()}] Decision: idle (fallback)")
     return "idle"
