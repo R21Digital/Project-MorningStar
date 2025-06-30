@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Coronet Marksman Trainer",
+    "skills": ["combat_marksman_novice"],
+    "planet": "corellia",
+    "city": "coronet",
+    "coords": [ -145, -3556 ]
+  },
+  {
+    "name": "Mos Eisley Medic Trainer",
+    "skills": ["science_medic_novice"],
+    "planet": "tatooine",
+    "city": "mos_eisley",
+    "coords": [ 3523, -4801 ]
+  },
+  {
+    "name": "Theed Rifleman Trainer",
+    "skills": ["combat_rifleman_novice"],
+    "planet": "naboo",
+    "city": "theed",
+    "coords": [ 3322, 555 ]
+  }
+]

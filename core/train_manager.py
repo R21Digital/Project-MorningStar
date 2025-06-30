@@ -4,7 +4,7 @@ from utils.travel import travel_to
 from utils.skills import get_player_skills
 
 class TrainManager:
-    def __init__(self, build_path='config/builds/rifleman_medic.json', trainer_db='data/trainers.json'):
+    def __init__(self, build_path='config/builds/rifleman_medic.json', trainer_db='data/trainers_simple.json'):
         self.build_path = build_path
         self.trainer_db = trainer_db
         self.trained_skills = set()
