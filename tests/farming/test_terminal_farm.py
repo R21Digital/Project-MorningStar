@@ -7,6 +7,7 @@ from modules.farming.terminal_farm import TerminalFarmer
 import core.session_tracker as session_tracker
 
 
+
 def test_parse_missions_filters_invalid_lines():
     farmer = TerminalFarmer()
     text = """
@@ -32,9 +33,21 @@ def test_execute_run_logs_result(monkeypatch):
     def fake_log(mobs, credits):
         calls.append((mobs, credits))
     monkeypatch.setattr("modules.farming.terminal_farm.log_farming_result", fake_log)
+
+    logs = []
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.logger",
+        DummyLogger(),
+    )
+
     accepted = farmer.execute_run(board_text=board_text)
     assert accepted == [
         {"name": "Close Target", "coords": (10, 10), "distance": 50, "credits": 500}
     ]
     assert calls == [(["Close Target"], 500)]
+    assert logs == ["[TerminalFarmer] Mission Close Target at (10, 10) 50m"]
 
