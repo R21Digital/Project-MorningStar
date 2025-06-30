@@ -100,6 +100,8 @@ def test_load_trainers_env_override(monkeypatch, tmp_path):
 
     monkeypatch.setenv("TRAINER_FILE", str(custom))
     monkeypatch.setattr("builtins.open", fake_open)
+    load_trainers._CACHED_MAPPING = None
+    load_trainers._CACHED_PATH = None
     load_trainers()
     assert calls["path"] == custom
 
@@ -115,6 +117,8 @@ def test_load_trainers_arg_override(monkeypatch, tmp_path):
 
     monkeypatch.setenv("TRAINER_FILE", "ignored")
     monkeypatch.setattr("builtins.open", fake_open)
+    load_trainers._CACHED_MAPPING = None
+    load_trainers._CACHED_PATH = None
     load_trainers(trainer_file=custom)
     assert calls["path"] == custom
 
@@ -133,6 +137,8 @@ def test_load_trainers_resolves_default(monkeypatch, tmp_path):
     monkeypatch.delenv("TRAINER_FILE", raising=False)
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr("builtins.open", fake_open)
+    lt._CACHED_MAPPING = None
+    lt._CACHED_PATH = None
     lt.load_trainers()
     assert calls["path"] == lt.TRAINER_JSON_FILE
 
@@ -152,6 +158,8 @@ def test_load_trainers_default_path(monkeypatch, tmp_path):
     monkeypatch.delenv("TRAINER_FILE", raising=False)
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr("builtins.open", fake_open)
+    lt._CACHED_MAPPING = None
+    lt._CACHED_PATH = None
     lt.load_trainers()
     expected = (
         Path(__file__).resolve().parents[1]
