@@ -7,12 +7,12 @@ def evaluate_state(player_state: Dict, target_state: Dict) -> str:
     Parameters
     ----------
     player_state:
-        Dictionary describing the player's status. Expected keys are
-        ``hp`` (hit points), ``has_heal`` to signal a healing item is
-        available and ``is_buffed`` for whether a buff is active.
+        Dictionary describing the player's status. ``hp`` (hit points)
+        defaults to ``100`` when not provided. ``has_heal`` and
+        ``is_buffed`` default to ``False`` if missing.
     target_state:
         Dictionary with the enemy's status. Only ``hp`` is currently
-        consulted.
+        consulted and it defaults to ``100`` when absent.
 
     Returns
     -------
