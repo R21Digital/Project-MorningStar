@@ -107,7 +107,10 @@ def load_profile(name: str) -> Dict[str, Any]:
         return {}
 
     with open(path, "r", encoding="utf-8") as fh:
-        data = json.load(fh)
+        try:
+            data = json.load(fh)
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"Invalid profile file: {path}") from exc
 
     profile = validate_profile(data)
     profile["runtime"] = {"progress": load_session()}
