@@ -11,7 +11,8 @@ from core.session_tracker import log_farming_result
 Mission = Dict[str, int | str | Tuple[int, int]]
 
 _MISSION_RE = re.compile(
-    r"(?P<name>[\w '\-]+)\s+(?P<x>-?\d+)\s*[,:]?\s*(?P<y>-?\d+)\s+(?P<distance>\d+)m",
+    r"(?P<name>[\w '\-]+)\s+(?P<x>-?\d+)\s*[,:]?\s*(?P<y>-?\d+)\s+"
+    r"(?P<distance>\d+)m(?:\s+(?P<credits>\d+)c)?",
     re.IGNORECASE,
 )
 
@@ -39,6 +40,8 @@ class TerminalFarmer:
                 "coords": (int(match.group("x")), int(match.group("y"))),
                 "distance": int(match.group("distance")),
             }
+            if match.group("credits"):
+                mission["credits"] = int(match.group("credits"))
             missions.append(mission)
         return missions
 
@@ -56,9 +59,10 @@ class TerminalFarmer:
                 f"[TerminalFarmer] Mission {mission['name']} at {coords} {mission['distance']}m"
             )
         if accepted:
+            earned = sum(int(m.get("credits", 0)) for m in accepted)
             log_farming_result(
                 [m["name"] for m in accepted],
-                len(accepted),
+                earned,
             )
         return accepted
 
