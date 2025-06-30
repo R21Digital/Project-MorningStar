@@ -54,3 +54,12 @@ def test_defaults_when_is_buffed_missing():
     player = {"hp": 100}
     target = {"hp": 0}
     assert evaluate_state(player, target) == "buff"
+
+
+def test_debug_output(capsys):
+    player = {"hp": 10, "has_heal": True}
+    target = {"hp": 100}
+    action = evaluate_state(player, target, debug=True)
+    captured = capsys.readouterr()
+    assert "Decision: heal" in captured.out
+    assert action == "heal"

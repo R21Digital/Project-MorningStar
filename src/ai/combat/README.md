@@ -29,6 +29,10 @@ from ai.combat import evaluate_state
 
 action = evaluate_state({"hp": 25, "has_heal": True}, {"hp": 50})
 print(action)  # "heal"
+
+# Enable debug logging to understand why a choice was made
+action = evaluate_state({"hp": 25, "has_heal": True}, {"hp": 50}, debug=True)
+# Prints "Decision: heal ..." to stdout
 ```
 
 ## `CombatRunner`
