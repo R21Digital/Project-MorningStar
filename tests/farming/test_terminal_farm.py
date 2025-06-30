@@ -79,3 +79,36 @@ def test_filter_missions_by_class_affinity(monkeypatch):
         {"name": "Bandit Camp", "coords": (1, 1), "distance": 100},
         {"name": "Smuggler Base", "coords": (3, 3), "distance": 120},
     ]
+
+def test_execute_run_affinity_logging(monkeypatch):
+    farmer = TerminalFarmer()
+    farmer.profile["class_requirements"] = ["bounty_hunter"]
+    board = """
+    Bandit Camp 1,1 100m 100c
+    Creature Den 2,2 90m 80c
+    Smuggler Base 3,3 110m 120c
+    Mutant Nest 4,4 70m 60c
+    """
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.AFFINITY_MAP",
+        {"bounty_hunter": ["bandit", "smuggler"]},
+    )
+    calls = []
+
+    def fake_log(mobs, credits):
+        calls.append((mobs, credits))
+
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.log_farming_result",
+        fake_log,
+    )
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.logger",
+        type("L", (), {"info": lambda *a, **k: None})(),
+    )
+    accepted = farmer.execute_run(board_text=board)
+    assert accepted == [
+        {"name": "Bandit Camp", "coords": (1, 1), "distance": 100, "credits": 100},
+        {"name": "Smuggler Base", "coords": (3, 3), "distance": 110, "credits": 120},
+    ]
+    assert calls == [(["Bandit Camp", "Smuggler Base"], 220)]
