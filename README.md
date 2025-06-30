@@ -277,6 +277,8 @@ bounties within your desired distance. Adjust the defaults in
 `config/farming_profile.json` and call `execute_run()` to parse the
 terminal:
 
+For complete configuration details see [docs/modes/farming_mode.md](docs/modes/farming_mode.md).
+
 ```python
 from modules.farming import TerminalFarmer
 
