@@ -13,6 +13,10 @@ TRAINER_JSON_FILE = (
     Path(__file__).resolve().parents[1] / "data" / "trainers.json"
 )
 
+# Cache for loaded trainer data
+_CACHED_MAPPING = None
+_CACHED_PATH = None
+
 
 def _normalize_entry(entry: dict) -> dict:
     """Return entry with ``coords`` list and standard keys."""
@@ -53,6 +57,10 @@ def _normalize(data: dict) -> dict:
 def load_trainers(trainer_file=None):
     """Return trainer location data.
 
+    The parsed trainer mapping is cached after the first successful load.
+    Subsequent calls reuse the cached data unless ``trainer_file`` points to a
+    different path, in which case the file is reloaded.
+
     The path to the trainer file is determined using the following
     precedence:
 
@@ -83,15 +91,23 @@ def load_trainers(trainer_file=None):
         # Prefer the JSON file when it exists.
         trainer_path = TRAINER_JSON_FILE if TRAINER_JSON_FILE.exists() else TRAINER_FILE
 
+    global _CACHED_MAPPING, _CACHED_PATH
+    if _CACHED_MAPPING is not None and _CACHED_PATH == trainer_path:
+        return _CACHED_MAPPING
+
     try:
         with open(trainer_path, "r") as fh:
             if trainer_path.suffix.lower() == ".json":
                 raw = json.load(fh)
             else:
                 raw = yaml.safe_load(fh)
-        return _normalize(raw)
+        _CACHED_PATH = trainer_path
+        _CACHED_MAPPING = _normalize(raw)
+        return _CACHED_MAPPING
     except FileNotFoundError:  # pragma: no cover - best effort logging
         logging.warning(
             f"Trainer file {trainer_path} not found. Returning empty dict."
         )
+        _CACHED_PATH = trainer_path
+        _CACHED_MAPPING = {}
         return {}
