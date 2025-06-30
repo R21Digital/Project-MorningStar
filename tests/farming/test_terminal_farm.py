@@ -24,7 +24,7 @@ def test_parse_missions_filters_invalid_lines():
 
 def test_execute_run_logs_result(monkeypatch):
     farmer = TerminalFarmer()
-    farmer.profile["max_distance"] = 60
+    farmer.profile["distance_limit"] = 60
     board_text = """
     Close Target 10,10 50m 500c
     Far Target 20,20 100m 2000c

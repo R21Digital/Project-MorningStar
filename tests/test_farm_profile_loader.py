@@ -14,7 +14,7 @@ def test_load_farm_profile_valid(tmp_path, monkeypatch):
         "city": "mos_eisley",
         "quest_type": "bounty",
         "preferred_directions": ["north"],
-        "max_distance": 500,
+        "distance_limit": 500,
     }
     farm_dir = tmp_path / "farms"
     farm_dir.mkdir()
@@ -31,7 +31,7 @@ def test_load_farm_profile_missing_field(tmp_path, monkeypatch):
         "city": "mos_eisley",
         "quest_type": "bounty",
         "preferred_directions": ["north"],
-        # max_distance missing
+        # distance_limit missing
     }
     farm_dir = tmp_path / "farms"
     farm_dir.mkdir()
