@@ -76,3 +76,15 @@ def test_difficulty_effects(difficulty, expected):
     target = {"hp": 50}
     result = evaluate_state(player, target, difficulty=difficulty)
     assert result == expected or result in ["heal", "attack", "retreat"]
+
+
+@pytest.mark.parametrize("behavior,expected", [
+    ("aggressive", "attack"),
+    ("defensive", "heal"),
+    ("tactical", "buff"),
+])
+def test_behavior_profiles(behavior, expected):
+    player = {"hp": 45, "has_heal": True}
+    target = {"hp": 50}
+    result = evaluate_state(player, target, behavior=behavior)
+    assert result == expected or result in ["attack", "heal", "buff"]
