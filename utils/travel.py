@@ -11,6 +11,11 @@ from core.waypoint_verifier import verify_waypoint_stability as _verify_waypoint
 Coords = Sequence[int]
 
 
+def travel_to(planet: str, city: str, coords: Sequence[int]) -> None:
+    print(f"[TRAVEL] Heading to {city}, {planet} at {coords}")
+    # later: inject waypoints, trigger macro, interact with shuttle terminal
+
+
 def go_to_waypoint(
     coords: Iterable[int], *, planet: str | None = None, city: str | None = None, agent: Any = None
 ) -> Optional[dict]:

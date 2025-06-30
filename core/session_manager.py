@@ -7,6 +7,9 @@ from core.xp_estimator import XPEstimator
 from utils.session_utils import track_xp_gain
 from utils.license_hooks import requires_license
 from utils.logger import logger
+from core.train_manager import TrainManager
+
+trainer = TrainManager()
 
 class SessionManager:
     @requires_license
@@ -88,4 +91,9 @@ class SessionManager:
             json.dump(log_data, f, indent=4)
 
         logger.info("[LOG SAVED] \u2192 %s", log_path)
+
+
+def run_downtime_tasks(current_planet: str) -> None:
+    print("[IDLE] Checking for skill training opportunities...")
+    trainer.train_missing_skills(current_planet)
 
