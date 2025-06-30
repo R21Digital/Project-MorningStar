@@ -45,6 +45,14 @@ def test_run_travels_and_verifies(monkeypatch, tmp_path):
         lambda coords: calls.append(("verify", coords)),
     )
 
+    logs = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    monkeypatch.setattr(bounty_farming_mode, "logger", DummyLogger())
+
     dummy_session = type("S", (), {"profile": {"build": {"skills": []}}})()
     bounty_farming_mode.run("demo", session=dummy_session)
 
@@ -57,7 +65,7 @@ def test_run_travels_and_verifies(monkeypatch, tmp_path):
     ]
 
 
-def test_run_no_target(monkeypatch, capsys):
+def test_run_no_target(monkeypatch):
     monkeypatch.setattr(bounty_farming_mode, "travel_to_target", lambda *a, **k: 1)
     called = {}
 
@@ -70,9 +78,16 @@ def test_run_no_target(monkeypatch, capsys):
 
     monkeypatch.setattr(bounty_farming_mode, "TerminalFarmer", DummyFarmer)
 
+    logs = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    monkeypatch.setattr(bounty_farming_mode, "logger", DummyLogger())
+
     dummy_session = type("S", (), {"profile": {"build": {"skills": []}}})()
     bounty_farming_mode.run({}, session=dummy_session)
-    out = capsys.readouterr().out
-    assert "No farming_target" in out
+    assert any("No farming_target" in m for m in logs)
     assert called == {}
 

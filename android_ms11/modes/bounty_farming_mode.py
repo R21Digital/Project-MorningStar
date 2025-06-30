@@ -11,6 +11,7 @@ from utils.license_hooks import requires_license
 from core.location_selector import travel_to_target, locate_hotspot
 from core.waypoint_verifier import verify_waypoint_stability
 from modules import TerminalFarmer
+from utils.logger import logger
 
 
 @requires_license
@@ -39,11 +40,13 @@ def run(profile: Mapping[str, Any] | str | None = None, session=None) -> None:
         target = {k: profile.get(k) for k in ("planet", "city", "hotspot") if profile.get(k)}
 
     if not target:
-        print("[Bounty] No farming_target configured.")
+        logger.info("[Bounty] No farming_target configured.")
         return
 
-    print(
-        f"[Bounty] Traveling to {target.get('city', 'unknown')} on {target.get('planet', 'unknown')}"
+    logger.info(
+        "[Bounty] Traveling to %s on %s",
+        target.get("city", "unknown"),
+        target.get("planet", "unknown"),
     )
     travel_to_target(target, agent=session)
 
@@ -51,10 +54,10 @@ def run(profile: Mapping[str, Any] | str | None = None, session=None) -> None:
         target.get("planet", ""), target.get("city", ""), target.get("hotspot", "")
     )
 
-    print("[Bounty] Accepting missions...")
+    logger.info("[Bounty] Accepting missions...")
     farmer = TerminalFarmer()
     farmer.execute_run()
-    print("[Bounty] Missions accepted.")
+    logger.info("[Bounty] Missions accepted.")
 
     if coords:
         verify_waypoint_stability(coords)
