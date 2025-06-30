@@ -1,18 +1,19 @@
 """Example script demonstrating the ``StateManager``."""
 
 from src.state import StateManager
+from utils.logger import logger
 
 
 def on_mission_board():
-    print("Mission Board detected")
+    logger.info("Mission Board detected")
 
 
 def on_quest_completed():
-    print("Quest completed!")
+    logger.info("Quest completed!")
 
 
 def on_error():
-    print("Error detected!")
+    logger.info("Error detected!")
 
 
 if __name__ == "__main__":

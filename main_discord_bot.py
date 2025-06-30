@@ -4,6 +4,7 @@ import json
 from discord.ext import commands
 
 from discord_relay import DiscordRelay
+from utils.logger import logger
 
 
 def main() -> None:
@@ -16,7 +17,7 @@ def main() -> None:
 
     @bot.event
     async def on_ready() -> None:
-        print(f"[Bot] Logged in as {bot.user}")
+        logger.info("[Bot] Logged in as %s", bot.user)
 
     bot.run(config["discord_token"])
 

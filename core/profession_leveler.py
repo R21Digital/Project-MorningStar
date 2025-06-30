@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List
 
 from .travel_manager import TravelManager
+from utils.logger import logger
 try:  # pragma: no cover - optional dependency
     from modules.professions import progress_tracker
 except Exception:  # pragma: no cover
@@ -42,7 +43,7 @@ class ProfessionLeveler:
     def level_all_professions(self) -> None:
         for profession in self.profession_plan:
             if profession not in self.travel_manager.trainers:
-                print(f"[Leveler] No trainer entry for {profession}")
+                logger.info("[Leveler] No trainer entry for %s", profession)
                 continue
             self.level_profession(profession)
 
@@ -54,16 +55,19 @@ class ProfessionLeveler:
         self.travel_manager.train_profession(profession_name)
         skills = self.travel_manager.trainer_scanner.scan()
         if skills:
-            print(f"[Leveler] {profession_name} trainer offers: {skills}")
+            logger.info("[Leveler] %s trainer offers: %s", profession_name, skills)
         else:
-            print(f"[Leveler] No skills detected for {profession_name}")
+            logger.info("[Leveler] No skills detected for %s", profession_name)
 
         if progress_tracker and skills:
             try:
                 rec = progress_tracker.recommend_next_skill(profession_name, skills)
                 if rec:
-                    print(
-                        f"[Leveler] Next skill for {profession_name}: {rec['skill']} ({rec.get('xp', 0)} XP)"
+                    logger.info(
+                        "[Leveler] Next skill for %s: %s (%s XP)",
+                        profession_name,
+                        rec["skill"],
+                        rec.get("xp", 0),
                     )
             except Exception:
                 pass

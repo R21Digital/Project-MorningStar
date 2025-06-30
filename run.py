@@ -6,20 +6,21 @@ sys.path.insert(0, os.path.abspath("."))
 from src.main import main
 from src.db.models import create_schema
 from src.db.queries import select_best_quest
+from utils.logger import logger
 
 if "--init-db" in sys.argv:
-    print("🗃️ Creating database schema...")
+    logger.info("🗃️ Creating database schema...")
     create_schema()
-    print("✅ Database initialized.")
+    logger.info("✅ Database initialized.")
     sys.exit(0)
 
 quest = select_best_quest("Vornax")
 if quest:
-    print("✅ Loaded quest from DB:")
-    print(f"ID: {quest[0]}, Title: {quest[1]}")
-    print(f"Steps: {quest[2]}")
+    logger.info("✅ Loaded quest from DB:")
+    logger.info("ID: %s, Title: %s", quest[0], quest[1])
+    logger.info("Steps: %s", quest[2])
 else:
-    print("⚠️ No suitable quest found.")
+    logger.info("⚠️ No suitable quest found.")
 
 if __name__ == "__main__":
     main()

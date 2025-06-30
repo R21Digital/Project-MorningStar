@@ -9,6 +9,7 @@ import yaml
 sys.path.insert(0, os.path.abspath("."))
 
 from src.execution.quest_executor import QuestExecutor
+from utils.logger import logger
 
 
 def load_steps(path: str) -> list[dict]:
@@ -29,7 +30,7 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
 
     steps = load_steps(args.quest_file)
-    print(f"[RUN QUEST] Loaded {len(steps)} steps from {args.quest_file}")
+    logger.info("[RUN QUEST] Loaded %d steps from %s", len(steps), args.quest_file)
 
     executor = QuestExecutor(args.quest_file)
     executor.steps = steps

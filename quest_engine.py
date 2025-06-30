@@ -1,6 +1,7 @@
 """Simple quest step executor."""
 
 from src.execution.action_router import get_handler
+from utils.logger import logger
 
 
 def handle_quest_step(step: dict) -> bool:
@@ -8,11 +9,11 @@ def handle_quest_step(step: dict) -> bool:
     step_type = step.get("type")
     data = step.get("data", {})
 
-    print(f"[ENGINE] Handling step type: {step_type} with data: {data}")
+    logger.info("[ENGINE] Handling step type: %s with data: %s", step_type, data)
 
     handler = get_handler(step_type)
     if not handler:
-        print(f"[!] Unknown action type: {step_type}")
+        logger.warning("[!] Unknown action type: %s", step_type)
         return False
 
     handler(**data)

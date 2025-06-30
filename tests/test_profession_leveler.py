@@ -20,8 +20,17 @@ def test_level_all_professions_skips_unknown(monkeypatch, tmp_path):
     calls = []
     monkeypatch.setattr(lvl, "level_profession", lambda prof: calls.append(prof))
 
+    logs = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    monkeypatch.setattr("core.profession_leveler.logger", DummyLogger())
+
     lvl.level_all_professions()
     assert calls == ["artisan"]
+    assert "[Leveler] No trainer entry for missing" in logs
 
 
 def test_level_profession_invokes_training(monkeypatch, tmp_path):
@@ -45,8 +54,17 @@ def test_level_profession_invokes_training(monkeypatch, tmp_path):
         lambda prof: tm_calls.setdefault("train", prof),
     )
 
+    logs = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    monkeypatch.setattr("core.profession_leveler.logger", DummyLogger())
+
     skills = lvl.level_profession("artisan")
 
     assert tm_calls["train"] == "artisan"
     assert tm_calls["scan"] is True
     assert skills == ["Skill"]
+    assert "[Leveler] artisan trainer offers: ['Skill']" in logs

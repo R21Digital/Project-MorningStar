@@ -10,6 +10,14 @@ from core.session_manager import SessionManager
 
 def test_session_manager_log_creation(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    log_messages = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            log_messages.append(msg % args)
+
+    monkeypatch.setattr("core.session_manager.logger", DummyLogger())
+
     session = SessionManager(mode="test")
     session.set_start_credits(100)
     session.add_action("start")
@@ -22,3 +30,6 @@ def test_session_manager_log_creation(tmp_path, monkeypatch):
     assert data["credits_earned"] == 50
     assert data["actions"][0]["action"] == "start"
     assert data["mode"] == "test"
+    assert any("[SESSION STARTED]" in m for m in log_messages)
+    assert any("[SESSION ENDED]" in m for m in log_messages)
+    assert any("[LOG SAVED]" in m for m in log_messages)
