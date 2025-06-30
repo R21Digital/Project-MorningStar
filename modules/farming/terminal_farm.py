@@ -52,8 +52,8 @@ class TerminalFarmer:
         if board_text is None:
             board_text = screen_text()
         missions = self.parse_missions(board_text)
-        max_distance = int(self.profile.get("max_distance", 9999))
-        accepted = [m for m in missions if m["distance"] <= max_distance]
+        distance_limit = int(self.profile.get("distance_limit", 9999))
+        accepted = [m for m in missions if m["distance"] <= distance_limit]
         for mission in accepted:
             coords = mission["coords"]
             logger.info(

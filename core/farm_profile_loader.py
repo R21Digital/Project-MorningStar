@@ -11,7 +11,7 @@ REQUIRED_FIELDS = {
     "city": str,
     "quest_type": str,
     "preferred_directions": list,
-    "max_distance": int,
+    "distance_limit": int,
 }
 
 

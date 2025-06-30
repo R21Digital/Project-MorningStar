@@ -9,7 +9,7 @@ The default profile lives at `config/farming_profile.json` and supports the keys
 - `preferred_terminal` – name of the terminal to use for missions.
 - `preferred_direction` – cardinal direction your character should face before scanning.
 - `mob_priority` – ordered list of mob names to prioritize when multiple matches are found.
-- `max_distance` – only accept missions within this distance in meters.
+- `distance_limit` – only accept missions within this distance in meters.
 - `blacklist_mobs` – list of mobs to always ignore.
 
 ## Expected Output
@@ -42,7 +42,7 @@ Bandit Camp 100,200 300m 500c
 Rebel Hideout -50,-75 500m
 """
 farmer = TerminalFarmer()
-farmer.profile["max_distance"] = 400
+farmer.profile["distance_limit"] = 400
 accepted = farmer.execute_run(board_text=sample)
 ```
 

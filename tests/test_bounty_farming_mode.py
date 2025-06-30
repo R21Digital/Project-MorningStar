@@ -14,7 +14,7 @@ def test_run_travels_and_verifies(monkeypatch, tmp_path):
         "city": "mos_eisley",
         "quest_type": "bounty",
         "preferred_directions": [],
-        "max_distance": 100,
+        "distance_limit": 100,
     }
     farm_dir = tmp_path / "farms"
     farm_dir.mkdir()
