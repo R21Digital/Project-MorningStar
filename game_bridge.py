@@ -1,6 +1,8 @@
 import asyncio
 from typing import Any
 
+from utils.logger import logger
+
 
 class GameBridge:
     """Simple bridge between the game and the Discord relay."""
@@ -29,6 +31,6 @@ class GameBridge:
 
     def _send_in_game_whisper(self, target: str, text: str) -> None:
         """Placeholder for sending a whisper in-game."""
-        print(f"[GAME] whisper to {target}: {text}")
+        logger.info("[GAME] whisper to %s: %s", target, text)
 
 

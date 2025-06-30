@@ -1,6 +1,7 @@
 import asyncio
 import discord
 from discord.ext import commands
+from utils.logger import logger
 
 
 def generate_ai_reply(sender: str, message: str) -> str:
@@ -22,7 +23,7 @@ class DiscordRelay(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self) -> None:
-        print(f"[DiscordRelay] Connected as {self.bot.user}")
+        logger.info("[DiscordRelay] Connected as %s", self.bot.user)
 
     async def safe_send_user(self, message: str) -> None:
         """Send a DM to the configured user."""
@@ -30,14 +31,14 @@ class DiscordRelay(commands.Cog):
             user = await self.bot.fetch_user(self.target_user_id)
             await user.send(message)
         except discord.HTTPException as e:
-            print(f"[Error] Failed to send DM: {e}")
+            logger.error("[Error] Failed to send DM: %s", e)
 
     async def relay_to_discord(self, sender: str, message: str) -> str | None:
         """Send a whisper to Discord based on the active mode."""
         try:
             user = await self.bot.fetch_user(self.target_user_id)
         except Exception as e:
-            print(f"[Error] Could not fetch user: {e}")
+            logger.error("[Error] Could not fetch user: %s", e)
             return None
 
         if self.mode == "notify":

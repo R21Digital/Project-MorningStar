@@ -7,6 +7,7 @@ import time
 from typing import Tuple
 
 from src.vision import screen_text
+from utils.logger import logger
 
 _COORD_RE = re.compile(r"(-?\d+)\s*[,:]?\s*(-?\d+)")
 
@@ -35,9 +36,11 @@ def verify_waypoint_stability(coords: Coords, delay: float = 1.0) -> bool:
     end = _detect_position()
     end_dist = _distance(end, coords)
     if end_dist > start_dist:
-        print(
-            f"[WaypointVerifier] Player moved from {start} to {end}; distance increased."
+        logger.info(
+            "[WaypointVerifier] Player moved from %s to %s; distance increased.",
+            start,
+            end,
         )
         return False
-    print(f"[WaypointVerifier] Position stable at {start}.")
+    logger.info("[WaypointVerifier] Position stable at %s.", start)
     return True

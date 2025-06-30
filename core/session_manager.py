@@ -6,6 +6,7 @@ from datetime import datetime
 from core.xp_estimator import XPEstimator
 from utils.session_utils import track_xp_gain
 from utils.license_hooks import requires_license
+from utils.logger import logger
 
 class SessionManager:
     @requires_license
@@ -22,8 +23,11 @@ class SessionManager:
         self.actions_log = []
 
         os.makedirs("logs", exist_ok=True)
-        print(
-            f"[SESSION STARTED] ID: {self.session_id} | Mode: {self.mode} | Time: {self.start_time}"
+        logger.info(
+            "[SESSION STARTED] ID: %s | Mode: %s | Time: %s",
+            self.session_id,
+            self.mode,
+            self.start_time,
         )
 
     def set_start_credits(self, credits: int) -> None:
@@ -56,8 +60,10 @@ class SessionManager:
             self.end_xp,
             estimator,
         )
-        print(
-            f"[SESSION ENDED] ID: {self.session_id} | Duration: {self.duration:.2f} mins"
+        logger.info(
+            "[SESSION ENDED] ID: %s | Duration: %.2f mins",
+            self.session_id,
+            self.duration,
         )
         self.save_log()
 
@@ -81,5 +87,5 @@ class SessionManager:
         with open(log_path, "w", encoding="utf-8") as f:
             json.dump(log_data, f, indent=4)
 
-        print(f"[LOG SAVED] \u2192 {log_path}")
+        logger.info("[LOG SAVED] \u2192 %s", log_path)
 
