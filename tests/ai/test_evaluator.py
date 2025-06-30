@@ -1,4 +1,5 @@
-from src.ai.combat import evaluate_state
+# Import from the ``ai`` package so tests exercise the installed package path
+from ai.combat import evaluate_state
 
 
 def test_attack_when_healthy():

@@ -1,4 +1,5 @@
-from src.ai.combat import CombatRunner
+# Import from the ``ai`` package for consistency with production usage
+from ai.combat import CombatRunner
 
 
 def test_tick_attack_action():
