@@ -286,6 +286,15 @@ farmer = TerminalFarmer()
 farmer.execute_run()
 ```
 
+The farming profile uses a `distance_limit` key to restrict how far the
+farmer will travel:
+
+```json
+{
+  "distance_limit": 600
+}
+```
+
 Run the farming tests individually with:
 
 ```bash

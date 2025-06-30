@@ -14,6 +14,15 @@ The default profile lives at `config/farming_profile.json` and supports the keys
 - `class_requirements` – list of professions used to filter missions by
   affinity keywords.
 
+Example farming profile:
+
+```json
+{
+  "preferred_terminal": "mission_terminal",
+  "distance_limit": 800
+}
+```
+
 ## Expected Output
 
 `execute_run(board_text=None)` returns a list of missions sorted from the parsed screen text. Each mission is a dictionary with at least:
