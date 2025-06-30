@@ -21,8 +21,11 @@ def _skill_name(text: str) -> str:
 def load_profession(profession: str) -> Dict:
     """Load profession data from ``DATA_DIR``."""
     path = DATA_DIR / f"{profession.lower()}.json"
-    with open(path, "r", encoding="utf-8") as fh:
-        return json.load(fh)
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            return json.load(fh)
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"Profession data file not found: {path}") from e
 
 
 def has_prerequisites(profession: str, skills: List[str]) -> bool:

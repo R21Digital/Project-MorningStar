@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -69,3 +70,12 @@ def test_estimate_hours_to_next_skill(monkeypatch, tmp_path):
         "medic", ["Novice Artisan", "Novice Medic"], "healing"
     )
     assert hours == 1000 / 500
+
+
+def test_load_profession_missing(monkeypatch, tmp_path):
+    """load_profession should raise FileNotFoundError with a helpful message."""
+    monkeypatch.setattr(progress_tracker, "DATA_DIR", tmp_path)
+    expected = tmp_path / "unknown.json"
+    with pytest.raises(FileNotFoundError) as exc:
+        progress_tracker.load_profession("unknown")
+    assert str(exc.value) == f"Profession data file not found: {expected}"
