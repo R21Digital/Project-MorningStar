@@ -41,7 +41,8 @@ def test_load_profile_valid(tmp_path, monkeypatch):
     build_dir = tmp_path / "builds"
     build_dir.mkdir()
     (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
-    progress_file = ARTIFACTS_DIR / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "runtime" / "session_state.json"
+    progress_file.parent.mkdir(parents=True, exist_ok=True)
     if progress_file.exists():
         progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": []}))
@@ -77,7 +78,8 @@ def test_load_profile_txt_build(tmp_path, monkeypatch):
     build_dir = tmp_path / "builds"
     build_dir.mkdir()
     (build_dir / "basic.txt").write_text(json.dumps({"skills": ["A"]}))
-    progress_file = ARTIFACTS_DIR / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "runtime" / "session_state.json"
+    progress_file.parent.mkdir(parents=True, exist_ok=True)
     if progress_file.exists():
         progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": ["A"]}))
@@ -309,7 +311,8 @@ def test_load_profile_from_repo_txt(tmp_path, monkeypatch):
 
     _patch_runtime(monkeypatch, tmp_path)
 
-    progress_file = ARTIFACTS_DIR / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "runtime" / "session_state.json"
+    progress_file.parent.mkdir(parents=True, exist_ok=True)
     if progress_file.exists():
         progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": []}))

@@ -349,6 +349,9 @@ profile = profile_loader.load_profile("demo")
 update_state(mode=profile.get("default_mode"))
 ```
 
+Session progress defaults to ``runtime/session_state.json``. Set the
+``SESSION_FILE_PATH`` environment variable to use a different location.
+
 ## Discord Relay Bot
 The relay bot depends on the `discord.py` package. Enable it by editing
 `config/config.json` (set `enable_discord_relay`) and

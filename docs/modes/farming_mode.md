@@ -33,7 +33,7 @@ Example farming profile:
 - `credits` – optional credit reward if present on the board.
 
 Accepted missions are logged via `core.session_tracker.log_farming_result`,
-updating the session state file (``session_state.json`` by default).
+updating the session state file (``runtime/session_state.json`` by default).
 Set the ``SESSION_FILE_PATH`` environment variable to override this location.
 
 ## Usage Example

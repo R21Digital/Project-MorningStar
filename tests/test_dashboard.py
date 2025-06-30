@@ -45,7 +45,8 @@ def test_status_progress_fields(monkeypatch, tmp_path):
     log_file.write_text(json.dumps({}))
     monkeypatch.setattr("dashboard.app.LOG_DIRS", [tmp_path])
 
-    progress_file = ARTIFACTS_DIR / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "runtime" / "session_state.json"
+    progress_file.parent.mkdir(parents=True, exist_ok=True)
     if progress_file.exists():
         progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": ["A"]}))
