@@ -7,25 +7,30 @@ from src.ai.combat.evaluator import evaluate_state
 
 
 def test_attack_when_healthy():
-    state = {"player_hp": 80, "target_hp": 50}
-    assert evaluate_state(state) == "attack"
+    player = {"hp": 80}
+    target = {"hp": 50}
+    assert evaluate_state(player, target) == "attack"
 
 
 def test_heal_when_low_hp_and_heal_item():
-    state = {"player_hp": 20, "target_hp": 50, "has_heal": True}
-    assert evaluate_state(state) == "heal"
+    player = {"hp": 20, "has_heal": True}
+    target = {"hp": 50}
+    assert evaluate_state(player, target) == "heal"
 
 
 def test_retreat_when_low_hp_and_no_heal():
-    state = {"player_hp": 20, "target_hp": 50, "has_heal": False}
-    assert evaluate_state(state) == "retreat"
+    player = {"hp": 20, "has_heal": False}
+    target = {"hp": 50}
+    assert evaluate_state(player, target) == "retreat"
 
 
 def test_buff_when_no_target_and_not_buffed():
-    state = {"player_hp": 100, "target_hp": 0, "is_buffed": False}
-    assert evaluate_state(state) == "buff"
+    player = {"hp": 100, "is_buffed": False}
+    target = {"hp": 0}
+    assert evaluate_state(player, target) == "buff"
 
 
 def test_idle_when_no_conditions_met():
-    state = {"player_hp": 100, "target_hp": 0, "is_buffed": True}
-    assert evaluate_state(state) == "idle"
+    player = {"hp": 100, "is_buffed": True}
+    target = {"hp": 0}
+    assert evaluate_state(player, target) == "idle"
