@@ -7,6 +7,13 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
+# Also include the project's ``src`` directory so ``ai`` and other packages
+# resolve the same way they do in production installs.
+SRC_ROOT = os.path.join(ROOT, "src")
+if SRC_ROOT not in sys.path:
+    # Prepend to ensure it takes precedence over any top-level packages
+    sys.path.insert(0, SRC_ROOT)
+
 # Ensure the top-level ``ai`` package resolves during tests
 AI_ROOT = os.path.join(ROOT, "ai")
 if AI_ROOT not in sys.path:
