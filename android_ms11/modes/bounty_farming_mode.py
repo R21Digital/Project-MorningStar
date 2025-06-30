@@ -10,6 +10,7 @@ from utils.license_hooks import requires_license
 
 from core.location_selector import travel_to_target, locate_hotspot
 from core.waypoint_verifier import verify_waypoint_stability
+from modules import TerminalFarmer
 
 
 @requires_license
@@ -51,6 +52,8 @@ def run(profile: Mapping[str, Any] | str | None = None, session=None) -> None:
     )
 
     print("[Bounty] Accepting missions...")
+    farmer = TerminalFarmer()
+    farmer.execute_run()
     print("[Bounty] Missions accepted.")
 
     if coords:

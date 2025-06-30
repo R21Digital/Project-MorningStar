@@ -22,6 +22,15 @@ def test_run_travels_and_verifies(monkeypatch, tmp_path):
     monkeypatch.setattr(farm_profile_loader, "FARM_PROFILE_DIR", farm_dir)
     calls = []
 
+    class DummyFarmer:
+        def __init__(self):
+            calls.append("farmer_init")
+
+        def execute_run(self):
+            calls.append("farmer_execute")
+
+    monkeypatch.setattr(bounty_farming_mode, "TerminalFarmer", DummyFarmer)
+
     monkeypatch.setattr(
         bounty_farming_mode, "travel_to_target", lambda target, agent=None: calls.append(("travel", target))
     )
@@ -42,14 +51,28 @@ def test_run_travels_and_verifies(monkeypatch, tmp_path):
     assert calls == [
         ("travel", {"planet": "tatooine", "city": "mos_eisley"}),
         ("locate", "tatooine", "mos_eisley", ""),
+        "farmer_init",
+        "farmer_execute",
         ("verify", (1, 2)),
     ]
 
 
 def test_run_no_target(monkeypatch, capsys):
     monkeypatch.setattr(bounty_farming_mode, "travel_to_target", lambda *a, **k: 1)
+    called = {}
+
+    class DummyFarmer:
+        def __init__(self):
+            called["init"] = True
+
+        def execute_run(self):
+            called["exec"] = True
+
+    monkeypatch.setattr(bounty_farming_mode, "TerminalFarmer", DummyFarmer)
+
     dummy_session = type("S", (), {"profile": {"build": {"skills": []}}})()
     bounty_farming_mode.run({}, session=dummy_session)
     out = capsys.readouterr().out
     assert "No farming_target" in out
+    assert called == {}
 
