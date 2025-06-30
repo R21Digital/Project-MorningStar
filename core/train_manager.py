@@ -36,6 +36,13 @@ class TrainManager:
                 entry.setdefault('planet', entry.get('zone', 'unknown'))
                 entry.setdefault('city', entry.get('zone', 'unknown'))
                 entry.setdefault('zone', entry.get('city', 'unknown'))
+                if 'distance_to_city' in entry and entry['distance_to_city'] is not None:
+                    try:
+                        entry['distance_to_city'] = float(entry['distance_to_city'])
+                    except (TypeError, ValueError):
+                        entry['distance_to_city'] = 0.0
+                else:
+                    entry.setdefault('distance_to_city', 0.0)
             return data
         return []
 
