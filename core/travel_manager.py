@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Dict, List, Any
 
+from utils.logger import logger
+
 from .trainer_scanner import TrainerScanner
 
 # Placeholder imports until real utilities are available
@@ -97,6 +99,10 @@ class TravelManager:
         if profession not in self.trainers:
             return []
 
-        self.go_to_trainer(profession)
+        success = self.go_to_trainer(profession)
+        if not success:
+            logger.info("[TravelManager] Failed to reach %s trainer", profession)
+            return []
+
         skills = self.trainer_scanner.scan()
         return skills

@@ -244,3 +244,30 @@ def test_train_profession_invokes_travel_and_scan(monkeypatch):
     skills = tm.train_profession("missing")
     assert skills == []
     assert calls == {}
+
+
+def test_train_profession_logs_failure(monkeypatch):
+    from core import TravelManager
+
+    monkeypatch.setattr(TravelManager, "load_trainers", lambda self: None)
+    tm = TravelManager(trainer_file="dummy.json")
+    tm.trainers = {"demo": {}}
+
+    calls = {}
+
+    monkeypatch.setattr(tm, "go_to_trainer", lambda prof: False)
+    monkeypatch.setattr(tm.trainer_scanner, "scan", lambda: calls.setdefault("scan", True))
+
+    logs = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    monkeypatch.setattr("core.travel_manager.logger", DummyLogger())
+
+    skills = tm.train_profession("demo")
+
+    assert skills == []
+    assert calls == {}
+    assert any("Failed to reach" in m for m in logs)
