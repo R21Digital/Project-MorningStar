@@ -42,6 +42,7 @@ def mock_profession_data():
 
 
 def test_load_build(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     build_dir, data = setup_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
@@ -55,6 +56,7 @@ def test_load_build(monkeypatch, tmp_path):
 
 
 def test_load_txt_build(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     build_dir, data = setup_txt_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
@@ -68,6 +70,7 @@ def test_load_txt_build(monkeypatch, tmp_path):
 
 
 def test_build_progression(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     build_dir, _ = setup_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
@@ -85,6 +88,7 @@ def test_build_progression(monkeypatch, tmp_path):
 
 
 def test_next_trainable_and_completion(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     build_dir, _ = setup_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
@@ -111,6 +115,7 @@ def test_next_trainable_and_completion(monkeypatch, tmp_path):
 
 
 def test_load_repo_txt_build(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     src_json = build_manager.BUILD_DIR / "basic.json"
     src_txt = build_manager.BUILD_DIR / "basic.txt"
     assert src_json.exists()
@@ -128,7 +133,8 @@ def test_load_repo_txt_build(monkeypatch, tmp_path):
     finally:
         backup.rename(src_json)
 
-def test_load_repo_rifleman_build(monkeypatch):
+def test_load_repo_rifleman_build(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(
         progress_tracker,
         "load_profession",
@@ -148,6 +154,7 @@ def test_load_repo_rifleman_build(monkeypatch):
 
 
 def test_load_build_updates_session(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     build_dir, _ = setup_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
@@ -170,6 +177,7 @@ def test_load_build_updates_session(monkeypatch, tmp_path):
 
 
 def test_load_build_unchanged_session(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
     build_dir, _ = setup_build(tmp_path)
     monkeypatch.setattr("core.build_manager.BUILD_DIR", build_dir)
     monkeypatch.setattr(progress_tracker, "load_profession", lambda p: mock_profession_data())
