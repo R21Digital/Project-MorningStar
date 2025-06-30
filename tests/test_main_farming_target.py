@@ -3,7 +3,6 @@ import os
 import sys
 from importlib import reload
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import src.main as main
 from core import profile_loader, state_tracker

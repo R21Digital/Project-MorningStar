@@ -2,7 +2,6 @@ import os
 import sys
 import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from core.mode_scheduler import get_next_mode
 from core.session_monitor import monitor_session, FATIGUE_THRESHOLD

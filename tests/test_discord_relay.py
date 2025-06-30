@@ -36,7 +36,6 @@ if "discord" not in sys.modules:
     sys.modules["discord.ext"] = ext_mod
     sys.modules["discord.ext.commands"] = commands_mod
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import discord_relay
 
 from discord_relay import generate_ai_reply, DiscordRelay

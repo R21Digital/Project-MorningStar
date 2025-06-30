@@ -3,7 +3,6 @@ import sys
 import random
 import time
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.execution.dialogue import execute_dialogue
 

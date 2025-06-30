@@ -2,7 +2,6 @@ import os
 import sys
 from unittest.mock import MagicMock
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.db import quest_utils
 

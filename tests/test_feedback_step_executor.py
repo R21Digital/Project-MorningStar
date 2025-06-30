@@ -2,7 +2,6 @@ import os
 import sys
 from types import SimpleNamespace, ModuleType
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.game_state.feedback import watch_text
 from src.engine.step_executor import run_validated_step

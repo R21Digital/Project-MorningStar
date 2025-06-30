@@ -3,7 +3,6 @@ import sys
 import types
 from importlib import reload
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
 def test_save_screenshot_creates_file(tmp_path, monkeypatch):

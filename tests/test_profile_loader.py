@@ -4,7 +4,6 @@ import sys
 from pathlib import Path
 import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import core.profile_loader as profile_loader
 from core.profile_loader import load_profile, validate_profile, ProfileValidationError

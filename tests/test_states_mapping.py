@@ -1,7 +1,6 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.vision import register_state, detect_state, handle_state
 from src.vision import states as states_module

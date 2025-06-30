@@ -15,7 +15,6 @@ if "bs4" not in sys.modules:
     bs4_mod.BeautifulSoup = object
     sys.modules["bs4"] = bs4_mod
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from utils import wiki_scraper
 
