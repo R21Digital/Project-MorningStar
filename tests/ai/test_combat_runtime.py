@@ -18,3 +18,10 @@ def test_tick_heal_action_when_low_hp():
     player = {"hp": 15, "has_heal": True}
     target = {"hp": 60}
     assert runner.tick(player, target) == "heal"
+
+
+def test_tick_retreat_action_when_low_hp_no_heal():
+    runner = CombatRunner()
+    player = {"hp": 15, "has_heal": False}
+    target = {"hp": 60}
+    assert runner.tick(player, target) == "retreat"
