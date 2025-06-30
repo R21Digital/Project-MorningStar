@@ -1,7 +1,6 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.state.character import update_location, log_quest_progress, character_state
 

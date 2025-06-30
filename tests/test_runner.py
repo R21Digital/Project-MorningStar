@@ -2,7 +2,6 @@ import os
 import sys
 from importlib import reload
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src import runner
 from src.runner.step_runner import run_step_list

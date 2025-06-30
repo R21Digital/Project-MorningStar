@@ -10,7 +10,6 @@ def fake_run_coroutine_threadsafe(coro, loop):
     fut.result.return_value = result
     return fut
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from game_bridge import GameBridge
 

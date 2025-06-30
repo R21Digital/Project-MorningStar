@@ -12,7 +12,6 @@ sys.modules['langchain'].PromptTemplate = types.SimpleNamespace(from_template=la
 sys.modules['langchain.llms'] = types.ModuleType('langchain.llms')
 sys.modules['langchain.llms'].HuggingFacePipeline = object
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.story_generator import generate_story
 

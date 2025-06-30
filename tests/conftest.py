@@ -1,5 +1,11 @@
+import os
 import sys
 import types
+
+# Ensure project root is on the import path for tests
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
 
 # Provide stub modules for optional dependencies
 if 'pytesseract' not in sys.modules:

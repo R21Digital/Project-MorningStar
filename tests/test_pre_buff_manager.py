@@ -1,7 +1,6 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from android_ms11.core.pre_buff_manager import apply_pre_buffs
 

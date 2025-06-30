@@ -2,7 +2,6 @@ import os
 import sys
 import types
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Provide a stub for the playwright module before importing the target module
 if "playwright" not in sys.modules:

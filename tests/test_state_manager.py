@@ -3,7 +3,6 @@ import sys
 import time
 from types import ModuleType
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Provide fake OCR module before importing StateManager
 fake_ocr = ModuleType("src.vision.ocr")

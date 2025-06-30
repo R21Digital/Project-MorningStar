@@ -9,7 +9,6 @@ fake_np.array = lambda x: x
 fake_np.ndarray = object
 sys.modules['numpy'] = fake_np
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Provide a dummy pyautogui module for headless testing
 sys.modules['pyautogui'] = types.SimpleNamespace(

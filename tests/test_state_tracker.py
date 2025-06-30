@@ -3,7 +3,6 @@ import sys
 import json
 from importlib import reload
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import core.state_tracker as state_tracker
 

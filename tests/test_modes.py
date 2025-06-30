@@ -5,7 +5,6 @@ import pytest
 from core import profile_loader, state_tracker
 
 # Allow imports from project root
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 STUB_MAP = {
     "combat": "combat_assist_mode",

@@ -2,7 +2,6 @@ import os
 import sys
 from PIL import Image
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from core.trainer_scanner import scan_trainer_skills
 import pyautogui

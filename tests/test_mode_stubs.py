@@ -1,7 +1,6 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from android_ms11.modes.medic_mode import start_medic
 from android_ms11.modes.combat_assist_mode import start_afk_combat
