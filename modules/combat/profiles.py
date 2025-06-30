@@ -15,3 +15,8 @@ def load_combat_profile(name: str) -> Dict:
     with open(path, "r", encoding="utf-8") as fh:
         return json.load(fh)
 
+
+def load_profile(name: str) -> Dict:
+    """Alias for :func:`load_combat_profile`."""
+    return load_combat_profile(name)
+
