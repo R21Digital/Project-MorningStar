@@ -1,5 +1,5 @@
 """AI utilities."""
 
-from .combat import CombatRunner
+from .combat import CombatRunner, evaluate_state
 
-__all__ = ["CombatRunner"]
+__all__ = ["CombatRunner", "evaluate_state"]
