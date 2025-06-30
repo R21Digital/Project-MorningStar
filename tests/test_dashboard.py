@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+from pathlib import Path
 import pytest
 
 pytest.importorskip("flask")
@@ -8,6 +9,10 @@ pytest.importorskip("flask")
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from dashboard.app import app
+
+# Directory for persistent test artifacts
+ARTIFACTS_DIR = Path("tests/artifacts")
+ARTIFACTS_DIR.mkdir(exist_ok=True)
 
 
 def test_builds_route(monkeypatch, tmp_path):
@@ -40,7 +45,9 @@ def test_status_progress_fields(monkeypatch, tmp_path):
     log_file.write_text(json.dumps({}))
     monkeypatch.setattr("dashboard.app.LOG_DIRS", [tmp_path])
 
-    progress_file = tmp_path / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "session_state.json"
+    if progress_file.exists():
+        progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": ["A"]}))
     monkeypatch.setattr("dashboard.app.SESSION_STATE", progress_file)
 
