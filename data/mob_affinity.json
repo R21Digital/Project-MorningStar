@@ -1,5 +1,8 @@
 {
   "bounty_hunter": ["bandit", "smuggler"],
   "ranger": ["beast", "creature"],
-  "medic": ["mutant"]
+  "scout": ["critter", "wild"],
+  "medic": ["mutant", "infected"],
+  "bio_engineer": ["specimen", "creature"],
+  "smuggler": ["contraband", "smuggler"]
 }
