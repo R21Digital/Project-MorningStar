@@ -13,12 +13,12 @@ class CombatRunner:
     def __init__(self) -> None:
         self.last_action: str | None = None
 
-    def tick(self, player_status: Dict, target_status: Dict) -> str:
-        """Return the next action given player and target status.
+    def tick(self, player_state: Dict, target_state: Dict) -> str:
+        """Return the next action given player and target state.
 
         The returned value is stored on :pyattr:`last_action` for later
         inspection.
         """
 
-        self.last_action = evaluate_state(player_status, target_status)
+        self.last_action = evaluate_state(player_state, target_state)
         return self.last_action
