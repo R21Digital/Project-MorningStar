@@ -66,3 +66,21 @@ def test_plan_travel_to_trainer_different_planet(monkeypatch):
         "Fly to Dantooine",
         "Waypoint to Trainer",
     ]
+
+
+def test_plan_travel_to_trainer_same_planet_returns_waypoint_macro(monkeypatch):
+    monkeypatch.setattr("core.trainer_travel.is_same_planet", lambda t: True)
+    trainer = {"coords": [12, 34], "name": "Ranged Trainer", "planet": "tatooine"}
+    steps = plan_travel_to_trainer(trainer)
+    assert steps == [get_travel_macro(trainer)]
+
+
+def test_plan_travel_to_trainer_different_planet_lists_shuttle_steps(monkeypatch):
+    monkeypatch.setattr("core.trainer_travel.is_same_planet", lambda t: False)
+    trainer = {"coords": [45, 56], "name": "Remote Trainer", "planet": "corellia"}
+    steps = plan_travel_to_trainer(trainer)
+    assert steps == [
+        "Travel to shuttleport",
+        "Fly to Corellia",
+        "Waypoint to Trainer",
+    ]
