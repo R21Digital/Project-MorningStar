@@ -1,5 +1,13 @@
 from typing import Dict
 
+from .strategies import (
+    should_attack,
+    should_buff,
+    should_heal,
+    should_idle,
+    should_retreat,
+)
+
 
 def evaluate_state(player_state: Dict, target_state: Dict) -> str:
     """Evaluate the current combat state and return a suggested action.
@@ -36,17 +44,14 @@ def evaluate_state(player_state: Dict, target_state: Dict) -> str:
             the player is already buffed.
     """
 
-    hp = player_state.get("hp", 100)
-    target_hp = target_state.get("hp", 100)
-    has_healing_item = player_state.get("has_heal", False)
-    is_buffed = player_state.get("is_buffed", False)
-
-    if hp < 30 and has_healing_item:
+    if should_heal(player_state):
         return "heal"
-    if hp < 30:
+    elif should_retreat(player_state):
         return "retreat"
-    if target_hp > 0:
+    elif should_attack(player_state, target_state):
         return "attack"
-    if not is_buffed:
+    elif should_buff(player_state, target_state):
         return "buff"
+    elif should_idle(player_state, target_state):
+        return "idle"
     return "idle"
