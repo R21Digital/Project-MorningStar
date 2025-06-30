@@ -25,7 +25,8 @@ class ProfessionManager:
             if not entries:
                 continue
             entry = entries[0]
-            mapping[profession] = {
+            key = profession.title()
+            mapping[key] = {
                 "planet": entry.get("planet"),
                 "city": entry.get("city"),
                 "coords": entry.get("coords"),
