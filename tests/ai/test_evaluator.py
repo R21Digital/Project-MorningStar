@@ -33,3 +33,27 @@ def test_idle_when_no_conditions_met():
     player = {"hp": 100, "is_buffed": True}
     target = {"hp": 0}
     assert evaluate_state(player, target) == "idle"
+
+
+def test_defaults_when_player_hp_missing():
+    player = {}
+    target = {"hp": 50}
+    assert evaluate_state(player, target) == "attack"
+
+
+def test_defaults_when_target_hp_missing():
+    player = {"hp": 80}
+    target = {}
+    assert evaluate_state(player, target) == "attack"
+
+
+def test_defaults_when_has_heal_missing():
+    player = {"hp": 20}
+    target = {"hp": 50}
+    assert evaluate_state(player, target) == "retreat"
+
+
+def test_defaults_when_is_buffed_missing():
+    player = {"hp": 100}
+    target = {"hp": 0}
+    assert evaluate_state(player, target) == "buff"
