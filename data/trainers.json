@@ -1,12 +1,23 @@
-{
-  "artisan": [
-    {"planet": "tatooine", "city": "mos_eisley", "coords": [3432, -4795], "name": "Artisan Trainer"},
-    {"planet": "corellia", "city": "coronet", "coords": [-123, 44], "name": "Artisan Trainer"}
-  ],
-  "marksman": [
-    {"planet": "corellia", "city": "coronet", "coords": [-150, 60], "name": "Marksman Trainer"}
-  ],
-  "Master Combat Medic": [
-    {"planet": "Corellia", "city": "Coronet", "coords": [125, -3421], "name": "Master Combat Medic"}
-  ]
-}
+[
+  {
+    "name": "Coronet Marksman Trainer",
+    "skills": ["combat_marksman_novice"],
+    "planet": "corellia",
+    "city": "coronet",
+    "coords": [ -145, -3556 ]
+  },
+  {
+    "name": "Mos Eisley Medic Trainer",
+    "skills": ["science_medic_novice"],
+    "planet": "tatooine",
+    "city": "mos_eisley",
+    "coords": [ 3523, -4801 ]
+  },
+  {
+    "name": "Theed Rifleman Trainer",
+    "skills": ["combat_rifleman_novice"],
+    "planet": "naboo",
+    "city": "theed",
+    "coords": [ 3322, 555 ]
+  }
+]
