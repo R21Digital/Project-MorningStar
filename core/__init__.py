@@ -12,6 +12,7 @@ from .trainer_ocr import (
 from .trainer_scanner import TrainerScanner, scan_trainer_skills
 from .travel_manager import TravelManager
 from .waypoint_verifier import verify_waypoint_stability
+from .trainer_travel import get_travel_macro, start_travel_to_trainer
 from .progress_tracker import load_session, save_session, record_skill
 from .session_tracker import (
     load_session as load_session_state,
@@ -32,6 +33,8 @@ __all__ = [
     "travel_to_target",
     "locate_hotspot",
     "verify_waypoint_stability",
+    "get_travel_macro",
+    "start_travel_to_trainer",
     "load_session",
     "save_session",
     "record_skill",
