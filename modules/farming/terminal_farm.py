@@ -7,6 +7,7 @@ from typing import Dict, List, Tuple
 
 from src.vision.ocr import screen_text
 from core.session_tracker import log_farming_result
+from utils.logger import logger
 
 Mission = Dict[str, int | str | Tuple[int, int]]
 
@@ -55,8 +56,11 @@ class TerminalFarmer:
         accepted = [m for m in missions if m["distance"] <= max_distance]
         for mission in accepted:
             coords = mission["coords"]
-            print(
-                f"[TerminalFarmer] Mission {mission['name']} at {coords} {mission['distance']}m"
+            logger.info(
+                "[TerminalFarmer] Mission %s at %s %dm",
+                mission["name"],
+                coords,
+                mission["distance"],
             )
         if accepted:
             earned = sum(int(m.get("credits", 0)) for m in accepted)
