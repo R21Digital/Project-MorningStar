@@ -154,6 +154,15 @@ def test_load_profile_missing(tmp_path, monkeypatch):
     assert prof == {}
 
 
+def test_load_profile_invalid_json(tmp_path, monkeypatch):
+    path = tmp_path / "bad.json"
+    path.write_text("{bad json]")
+    monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
+
+    with pytest.raises(ValueError):
+        load_profile("bad")
+
+
 def test_missing_build_file(tmp_path, monkeypatch):
     data = {
         "support_target": "Leader",
