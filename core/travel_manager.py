@@ -106,3 +106,18 @@ class TravelManager:
 
         skills = self.trainer_scanner.scan()
         return skills
+
+    # --------------------------------------------------
+    def plan_multi_hop_route(
+        self,
+        start_city: str,
+        dest_city: str,
+        *,
+        start_planet: str = "tatooine",
+        dest_planet: str | None = None,
+    ) -> list[dict]:
+        """Placeholder for future pathfinding between cities."""
+        logger.info(
+            "[TravelManager] Multi-hop route planning not implemented yet"
+        )
+        return []
