@@ -1,4 +1,4 @@
-from src.ai.combat.evaluator import evaluate_state
+from src.ai.combat import evaluate_state
 
 
 def test_attack_when_healthy():
