@@ -13,6 +13,27 @@ def evaluate_state(player_state: Dict, target_state: Dict) -> str:
     target_state:
         Dictionary with the enemy's status. Only ``hp`` is currently
         consulted.
+
+    Returns
+    -------
+    str
+        One of the following action strings:
+
+        ``"heal"``
+            The player should use a healing item when low on HP and a heal is
+            available.
+        ``"retreat"``
+            The player is low on HP and has no heal available, so the best
+            option is to retreat.
+        ``"attack"``
+            The enemy still has HP remaining and the player is healthy enough
+            to continue attacking.
+        ``"buff"``
+            The player is safe but lacks a buff, so applying one is
+            recommended.
+        ``"idle"``
+            No specific action is required because the encounter is over and
+            the player is already buffed.
     """
 
     hp = player_state.get("hp", 100)
