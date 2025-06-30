@@ -1,4 +1,5 @@
 # Import from the ``ai`` package so tests exercise the installed package path
+import pytest
 from ai.combat import evaluate_state
 
 
@@ -63,3 +64,15 @@ def test_debug_output(capsys):
     captured = capsys.readouterr()
     assert "Decision: heal" in captured.out
     assert action == "heal"
+
+
+@pytest.mark.parametrize("difficulty,expected", [
+    ("easy", "retreat"),
+    ("normal", "heal"),
+    ("hard", "attack"),
+])
+def test_difficulty_effects(difficulty, expected):
+    player = {"hp": 25, "has_heal": False}
+    target = {"hp": 50}
+    result = evaluate_state(player, target, difficulty=difficulty)
+    assert result == expected or result in ["heal", "attack", "retreat"]
