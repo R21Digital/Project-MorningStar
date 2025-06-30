@@ -23,7 +23,9 @@ The default profile lives at `config/farming_profile.json` and supports the keys
 - `distance` – distance to the target in meters.
 - `credits` – optional credit reward if present on the board.
 
-Accepted missions are logged via `core.session_tracker.log_farming_result`, updating `session_state.json` with the total credits and counts.
+Accepted missions are logged via `core.session_tracker.log_farming_result`,
+updating the session state file (``session_state.json`` by default).
+Set the ``SESSION_FILE_PATH`` environment variable to override this location.
 
 ## Usage Example
 

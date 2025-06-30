@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+from pathlib import Path
 from typing import Any, Dict
 
 from utils.load_mob_affinity import load_mob_affinity
@@ -13,14 +14,27 @@ from utils.load_mob_affinity import load_mob_affinity
 AFFINITY_MAP = load_mob_affinity()
 
 SESSION_FILE = "session_state.json"
+SESSION_FILE_ENV = "SESSION_FILE_PATH"
 DEFAULT_SESSION: Dict[str, Any] = {}
 
 
-def load_session() -> Dict[str, Any]:
-    """Return data from :data:`SESSION_FILE` or defaults."""
-    if os.path.exists(SESSION_FILE):
+def _resolve_session_file(session_file: str | Path | None = None) -> Path:
+    env_override = os.environ.get(SESSION_FILE_ENV)
+    if session_file:
+        path = Path(session_file)
+    elif env_override:
+        path = Path(env_override)
+    else:
+        path = Path(SESSION_FILE)
+    return path
+
+
+def load_session(session_file: str | Path | None = None) -> Dict[str, Any]:
+    """Return data from ``session_file`` or defaults."""
+    path = _resolve_session_file(session_file)
+    if path.exists():
         try:
-            with open(SESSION_FILE, "r", encoding="utf-8") as fh:
+            with path.open("r", encoding="utf-8") as fh:
                 data = json.load(fh)
             if isinstance(data, dict):
                 return data
@@ -29,20 +43,21 @@ def load_session() -> Dict[str, Any]:
     return DEFAULT_SESSION.copy()
 
 
-def save_session(session_data: Dict[str, Any]) -> None:
-    """Write ``session_data`` to :data:`SESSION_FILE`."""
-    with open(SESSION_FILE, "w", encoding="utf-8") as fh:
+def save_session(session_data: Dict[str, Any], session_file: str | Path | None = None) -> None:
+    """Write ``session_data`` to ``session_file``."""
+    path = _resolve_session_file(session_file)
+    with path.open("w", encoding="utf-8") as fh:
         json.dump(session_data, fh, indent=2)
 
 
-def update_session_key(key: str, value: Any) -> None:
+def update_session_key(key: str, value: Any, session_file: str | Path | None = None) -> None:
     """Update ``key`` in the saved session."""
-    data = load_session()
+    data = load_session(session_file)
     data[key] = value
-    save_session(data)
+    save_session(data, session_file)
 
 
-def log_farming_result(mobs: list[str], earned_credits: int) -> None:
+def log_farming_result(mobs: list[str], earned_credits: int, session_file: str | Path | None = None) -> None:
     """Update farming statistics in :data:`SESSION_FILE`.
 
     Parameters
@@ -53,7 +68,7 @@ def log_farming_result(mobs: list[str], earned_credits: int) -> None:
         Credits earned from the mission.
     """
 
-    data = load_session()
+    data = load_session(session_file)
     data["missions_completed"] = int(data.get("missions_completed", 0)) + 1
     data["total_credits_earned"] = int(data.get("total_credits_earned", 0)) + int(
         earned_credits
@@ -71,7 +86,7 @@ def log_farming_result(mobs: list[str], earned_credits: int) -> None:
                     int(affinity_counts.get(profession, 0)) + 1
                 )
 
-    save_session(data)
+    save_session(data, session_file)
 
 
 __all__ = [

@@ -7,24 +7,26 @@ import core.session_tracker as session_tracker
 
 
 def test_load_session_default(tmp_path, monkeypatch):
-    monkeypatch.chdir(tmp_path)
     session_file = tmp_path / session_tracker.SESSION_FILE
+    monkeypatch.setenv(session_tracker.SESSION_FILE_ENV, str(session_file))
     assert not session_file.exists()
     data = session_tracker.load_session()
     assert data == session_tracker.DEFAULT_SESSION
 
 
 def test_save_and_load_roundtrip(tmp_path, monkeypatch):
-    monkeypatch.chdir(tmp_path)
+    session_file = tmp_path / session_tracker.SESSION_FILE
+    monkeypatch.setenv(session_tracker.SESSION_FILE_ENV, str(session_file))
     payload = {"foo": 1, "bar": [1, 2, 3]}
     session_tracker.save_session(payload)
-    assert (tmp_path / session_tracker.SESSION_FILE).exists()
+    assert session_file.exists()
     loaded = session_tracker.load_session()
     assert loaded == payload
 
 
 def test_log_farming_result(tmp_path, monkeypatch):
-    monkeypatch.chdir(tmp_path)
+    session_file = tmp_path / session_tracker.SESSION_FILE
+    monkeypatch.setenv(session_tracker.SESSION_FILE_ENV, str(session_file))
 
     monkeypatch.setattr(
         session_tracker,
