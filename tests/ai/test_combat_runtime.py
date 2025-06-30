@@ -1,4 +1,4 @@
-from src.ai.combat.combat_runtime import CombatRunner
+from src.ai.combat import CombatRunner
 
 
 def test_tick_attack_action():
