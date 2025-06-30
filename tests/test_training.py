@@ -30,7 +30,10 @@ def test_get_trainer_location():
     assert result == ("Artisan Trainer", 3432, -4795)
 
 
-def test_visit_trainer_found(monkeypatch, capsys):
+import logging
+
+
+def test_visit_trainer_found(monkeypatch, caplog):
     agent = DummyAgent()
 
     called = {}
@@ -46,14 +49,14 @@ def test_visit_trainer_found(monkeypatch, capsys):
         "src.training.trainer_visit.walk_to_coords",
         fake_coords,
     )
-    visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
-    out = capsys.readouterr().out
-    assert "Artisan Trainer" in out
+    with caplog.at_level(logging.INFO, logger="ms11"):
+        visit_trainer(agent, "artisan", planet="tatooine", city="mos_eisley")
+    assert any("Artisan Trainer" in record.message for record in caplog.records)
     assert called["dest"] == "mos_eisley"
     assert called["coords"] == (3432, -4795)
 
 
-def test_visit_trainer_missing(monkeypatch, capsys):
+def test_visit_trainer_missing(monkeypatch, caplog):
     from src.training import trainer_visit
 
     agent = DummyAgent()
@@ -67,10 +70,10 @@ def test_visit_trainer_missing(monkeypatch, capsys):
 
     trainer_visit.visited_npcs.clear()
 
-    visit_trainer(agent, "medic", planet="naboo", city="theed")
-    out = capsys.readouterr().out
-    assert "Trainer not found" in out
-    assert "/find medic trainer" in out
+    with caplog.at_level(logging.INFO, logger="ms11"):
+        visit_trainer(agent, "medic", planet="naboo", city="theed")
+    assert any("Trainer not found" in rec.message for rec in caplog.records)
+    assert any("/find medic trainer" in rec.message for rec in caplog.records)
     assert (0, 0) in walk_calls
     assert (10, 10) in walk_calls
     assert "medic trainer" in trainer_visit.visited_npcs
