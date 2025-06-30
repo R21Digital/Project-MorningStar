@@ -9,8 +9,11 @@ from .strategies import (
 )
 
 
-def evaluate_state(player_state: Dict, target_state: Dict) -> str:
+def evaluate_state(player_state: Dict, target_state: Dict, debug: bool = False) -> str:
     """Evaluate the current combat state and return a suggested action.
+
+    Set ``debug`` to ``True`` to print the chosen decision and relevant
+    state information. This can help when troubleshooting combat logic.
 
     Parameters
     ----------
@@ -45,13 +48,38 @@ def evaluate_state(player_state: Dict, target_state: Dict) -> str:
     """
 
     if should_heal(player_state):
+        if debug:
+            print(
+                f"Decision: heal (HP low and healing available) | player={player_state} | target={target_state}"
+            )
         return "heal"
     elif should_retreat(player_state):
+        if debug:
+            print(
+                f"Decision: retreat (HP low and no healing available) | player={player_state} | target={target_state}"
+            )
         return "retreat"
     elif should_attack(player_state, target_state):
+        if debug:
+            print(
+                f"Decision: attack (Target alive and player HP sufficient) | player={player_state} | target={target_state}"
+            )
         return "attack"
     elif should_buff(player_state, target_state):
+        if debug:
+            print(
+                f"Decision: buff (Player not buffed and target alive) | player={player_state} | target={target_state}"
+            )
         return "buff"
     elif should_idle(player_state, target_state):
+        if debug:
+            print(
+                f"Decision: idle (Target is dead) | player={player_state} | target={target_state}"
+            )
         return "idle"
+
+    if debug:
+        print(
+            f"Decision: idle (Default/fallback) | player={player_state} | target={target_state}"
+        )
     return "idle"
