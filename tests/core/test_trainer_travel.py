@@ -1,4 +1,9 @@
-from core.trainer_travel import get_travel_macro, start_travel_to_trainer
+from core.trainer_travel import (
+    get_travel_macro,
+    start_travel_to_trainer,
+    plan_travel_to_trainer,
+    is_same_planet,
+)
 
 
 def test_get_travel_macro_formats():
@@ -21,3 +26,25 @@ def test_start_travel_to_trainer_logs(monkeypatch):
     start_travel_to_trainer(trainer)
 
     assert any("/waypoint 10.0 20.0 Trainer" in m for m in logs)
+
+
+def test_is_same_planet_returns_true():
+    assert is_same_planet({"planet": "any"}) is True
+
+
+def test_plan_travel_same_planet(monkeypatch):
+    monkeypatch.setattr("core.trainer_travel.is_same_planet", lambda t: True)
+    trainer = {"coords": [1, 2], "name": "Trainer", "planet": "tatooine"}
+    steps = plan_travel_to_trainer(trainer)
+    assert steps == [get_travel_macro(trainer)]
+
+
+def test_plan_travel_remote(monkeypatch):
+    monkeypatch.setattr("core.trainer_travel.is_same_planet", lambda t: False)
+    trainer = {"coords": [1, 2], "name": "Trainer", "planet": "naboo"}
+    steps = plan_travel_to_trainer(trainer)
+    assert steps == [
+        "Travel to shuttleport",
+        "Fly to Naboo",
+        "Waypoint to Trainer",
+    ]

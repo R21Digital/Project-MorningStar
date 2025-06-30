@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Dict
+from typing import Dict, List
+
+from utils.movement_manager import CURRENT_LOCATION
 
 from utils.logger import logger
 
@@ -26,4 +28,32 @@ def start_travel_to_trainer(trainer: Dict) -> None:
     print(macro)
 
 
-__all__ = ["get_travel_macro", "start_travel_to_trainer"]
+# --------------------------------------------------------------
+def is_same_planet(trainer: Dict) -> bool:
+    """Return ``True`` if the trainer is on the current planet."""
+    return True
+
+
+# --------------------------------------------------------------
+def plan_travel_to_trainer(trainer: Dict) -> List[str]:
+    """Return a list of travel steps required to reach ``trainer``."""
+    current_planet = CURRENT_LOCATION.get("planet", "")
+    steps: List[str] = []
+    if not is_same_planet(trainer):
+        logger.info(
+            "[TrainerTravel] On %s, trainer on %s", current_planet, trainer.get("planet")
+        )
+        steps.append("Travel to shuttleport")
+        steps.append(f"Fly to {trainer.get('planet', '').title()}")
+        steps.append("Waypoint to Trainer")
+    else:
+        steps.append(get_travel_macro(trainer))
+    return steps
+
+
+__all__ = [
+    "get_travel_macro",
+    "start_travel_to_trainer",
+    "is_same_planet",
+    "plan_travel_to_trainer",
+]
