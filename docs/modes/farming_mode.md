@@ -11,6 +11,8 @@ The default profile lives at `config/farming_profile.json` and supports the keys
 - `mob_priority` – ordered list of mob names to prioritize when multiple matches are found.
 - `distance_limit` – only accept missions within this distance in meters.
 - `blacklist_mobs` – list of mobs to always ignore.
+- `class_requirements` – list of professions used to filter missions by
+  affinity keywords.
 
 ## Expected Output
 

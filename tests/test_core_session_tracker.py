@@ -28,8 +28,8 @@ def test_log_farming_result(tmp_path, monkeypatch):
 
     monkeypatch.setattr(
         session_tracker,
-        "load_mob_affinity",
-        lambda: {"bounty_hunter": ["bandit"], "medic": ["thug"]},
+        "AFFINITY_MAP",
+        {"bounty_hunter": ["bandit"], "medic": ["thug"]},
     )
 
     session_tracker.log_farming_result(["bandit", "bandit", "thug"], 100)

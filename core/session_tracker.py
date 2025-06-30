@@ -8,6 +8,10 @@ from typing import Any, Dict
 
 from utils.load_mob_affinity import load_mob_affinity
 
+# Load mob affinity data once on import to avoid re-reading the file on every
+# farming result log.
+AFFINITY_MAP = load_mob_affinity()
+
 SESSION_FILE = "session_state.json"
 DEFAULT_SESSION: Dict[str, Any] = {}
 
@@ -51,8 +55,8 @@ def log_farming_result(mobs: list[str], earned_credits: int) -> None:
 
     data = load_session()
     data["missions_completed"] = int(data.get("missions_completed", 0)) + 1
-    data["total_credits_earned"] = (
-        int(data.get("total_credits_earned", 0)) + int(earned_credits)
+    data["total_credits_earned"] = int(data.get("total_credits_earned", 0)) + int(
+        earned_credits
     )
 
     mob_counts = data.setdefault("mob_counts", {})
@@ -60,13 +64,20 @@ def log_farming_result(mobs: list[str], earned_credits: int) -> None:
         mob_counts[mob] = int(mob_counts.get(mob, 0)) + 1
 
     affinity_counts = data.setdefault("affinity_counts", {})
-    affinity_map = load_mob_affinity()
-    for profession, keywords in affinity_map.items():
+    for profession, keywords in AFFINITY_MAP.items():
         for mob in mobs:
             if any(k.lower() in mob.lower() for k in keywords):
-                affinity_counts[profession] = int(affinity_counts.get(profession, 0)) + 1
+                affinity_counts[profession] = (
+                    int(affinity_counts.get(profession, 0)) + 1
+                )
 
     save_session(data)
 
 
-__all__ = ["load_session", "save_session", "update_session_key", "log_farming_result"]
+__all__ = [
+    "load_session",
+    "save_session",
+    "update_session_key",
+    "log_farming_result",
+    "AFFINITY_MAP",
+]
