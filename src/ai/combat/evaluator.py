@@ -1,15 +1,17 @@
 from typing import Dict
 
 from .strategies import (
-    should_attack,
     should_buff,
-    should_heal,
     should_idle,
-    should_retreat,
 )
 
 
-def evaluate_state(player_state: Dict, target_state: Dict, debug: bool = False) -> str:
+def evaluate_state(
+    player_state: Dict,
+    target_state: Dict,
+    debug: bool = False,
+    difficulty: str = "normal",
+) -> str:
     """Evaluate the current combat state and return a suggested action.
 
     Set ``debug`` to ``True`` to print the chosen decision and relevant
@@ -47,39 +49,39 @@ def evaluate_state(player_state: Dict, target_state: Dict, debug: bool = False) 
             the player is already buffed.
     """
 
-    if should_heal(player_state):
+    # Difficulty-based HP threshold for low health decisions
+    low_hp = player_state.get("hp", 100) < {
+        "easy": 50,
+        "normal": 30,
+        "hard": 20,
+    }.get(difficulty, 30)
+
+    has_heal = player_state.get("has_heal", False)
+
+    attack_threshold = {"easy": 30, "normal": 30, "hard": 20}.get(difficulty, 30)
+    attack_ready = target_state.get("hp", 100) > 0 and player_state.get("hp", 100) >= attack_threshold
+
+    if low_hp and has_heal:
         if debug:
-            print(
-                f"Decision: heal (HP low and healing available) | player={player_state} | target={target_state}"
-            )
+            print(f"[{difficulty.upper()}] Decision: heal")
         return "heal"
-    elif should_retreat(player_state):
+    elif low_hp and not has_heal and difficulty != "hard":
         if debug:
-            print(
-                f"Decision: retreat (HP low and no healing available) | player={player_state} | target={target_state}"
-            )
+            print(f"[{difficulty.upper()}] Decision: retreat")
         return "retreat"
-    elif should_attack(player_state, target_state):
+    elif attack_ready:
         if debug:
-            print(
-                f"Decision: attack (Target alive and player HP sufficient) | player={player_state} | target={target_state}"
-            )
+            print(f"[{difficulty.upper()}] Decision: attack")
         return "attack"
-    elif should_buff(player_state, target_state):
+    elif difficulty != "easy" and should_buff(player_state, target_state):
         if debug:
-            print(
-                f"Decision: buff (Player not buffed and target alive) | player={player_state} | target={target_state}"
-            )
+            print(f"[{difficulty.upper()}] Decision: buff")
         return "buff"
     elif should_idle(player_state, target_state):
         if debug:
-            print(
-                f"Decision: idle (Target is dead) | player={player_state} | target={target_state}"
-            )
+            print(f"[{difficulty.upper()}] Decision: idle")
         return "idle"
 
     if debug:
-        print(
-            f"Decision: idle (Default/fallback) | player={player_state} | target={target_state}"
-        )
+        print(f"[{difficulty.upper()}] Decision: idle (fallback)")
     return "idle"

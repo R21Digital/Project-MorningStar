@@ -13,6 +13,7 @@ Return a suggested action string from two dictionaries:
 - **`player_state`** – recognizes `hp`, `has_heal`, and `is_buffed`.
   Missing keys default to `hp=100`, `has_heal=False`, `is_buffed=False`.
 - **`target_state`** – only the `hp` key is consulted and defaults to `100`.
+- **`difficulty`** – optional string: "easy", "normal" (default), or "hard".
 
 Possible results:
 
@@ -32,6 +33,8 @@ print(action)  # "heal"
 
 # Enable debug logging to understand why a choice was made
 action = evaluate_state({"hp": 25, "has_heal": True}, {"hp": 50}, debug=True)
+# Difficulty can be tuned as well
+hard_action = evaluate_state({"hp": 25, "has_heal": False}, {"hp": 50}, difficulty="hard")
 # Prints "Decision: heal ..." to stdout
 ```
 
