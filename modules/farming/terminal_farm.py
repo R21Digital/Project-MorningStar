@@ -8,6 +8,10 @@ from typing import Dict, List, Tuple
 from src.vision.ocr import screen_text
 from core.session_tracker import log_farming_result
 from utils.logger import logger
+from utils.load_mob_affinity import load_mob_affinity
+
+# Load mob affinity mapping once so filtering does not repeatedly read the file.
+AFFINITY_MAP = load_mob_affinity()
 
 Mission = Dict[str, int | str | Tuple[int, int]]
 
@@ -47,13 +51,36 @@ class TerminalFarmer:
         return missions
 
     # --------------------------------------------------
+    def filter_missions(self, missions: List[Mission]) -> List[Mission]:
+        """Return missions matching distance and class requirements."""
+        distance_limit = int(self.profile.get("distance_limit", 9999))
+        filtered = [m for m in missions if m["distance"] <= distance_limit]
+
+        requirements = self.profile.get("class_requirements", [])
+        if not requirements:
+            return filtered
+
+        keywords: list[str] = []
+        for prof in requirements:
+            keywords.extend(AFFINITY_MAP.get(prof, []))
+
+        if not keywords:
+            return filtered
+
+        result: List[Mission] = []
+        for mission in filtered:
+            name = str(mission.get("name", "")).lower()
+            if any(k.lower() in name for k in keywords):
+                result.append(mission)
+        return result
+
+    # --------------------------------------------------
     def execute_run(self, *, board_text: str | None = None) -> List[Mission]:
         """Parse and filter missions from the terminal screen."""
         if board_text is None:
             board_text = screen_text()
         missions = self.parse_missions(board_text)
-        distance_limit = int(self.profile.get("distance_limit", 9999))
-        accepted = [m for m in missions if m["distance"] <= distance_limit]
+        accepted = self.filter_missions(missions)
         for mission in accepted:
             coords = mission["coords"]
             logger.info(

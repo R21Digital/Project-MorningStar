@@ -7,7 +7,6 @@ from modules.farming.terminal_farm import TerminalFarmer
 import core.session_tracker as session_tracker
 
 
-
 def test_parse_missions_filters_invalid_lines():
     farmer = TerminalFarmer()
     text = """
@@ -30,11 +29,14 @@ def test_execute_run_logs_result(monkeypatch):
     Far Target 20,20 100m 2000c
     """
     calls = []
+
     def fake_log(mobs, credits):
         calls.append((mobs, credits))
+
     monkeypatch.setattr("modules.farming.terminal_farm.log_farming_result", fake_log)
 
     logs = []
+
     class DummyLogger:
         def info(self, msg, *args):
             logs.append(msg % args)
@@ -51,3 +53,29 @@ def test_execute_run_logs_result(monkeypatch):
     assert calls == [(["Close Target"], 500)]
     assert logs == ["[TerminalFarmer] Mission Close Target at (10, 10) 50m"]
 
+
+def test_filter_missions_by_class_affinity(monkeypatch):
+    farmer = TerminalFarmer()
+    farmer.profile["class_requirements"] = ["bounty_hunter"]
+    board = """
+    Bandit Camp 1,1 100m
+    Mutant Nest 2,2 150m
+    Smuggler Base 3,3 120m
+    """
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.AFFINITY_MAP",
+        {"bounty_hunter": ["bandit", "smuggler"]},
+    )
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.log_farming_result",
+        lambda *a, **k: None,
+    )
+    monkeypatch.setattr(
+        "modules.farming.terminal_farm.logger",
+        type("L", (), {"info": lambda *a, **k: None})(),
+    )
+    accepted = farmer.execute_run(board_text=board)
+    assert accepted == [
+        {"name": "Bandit Camp", "coords": (1, 1), "distance": 100},
+        {"name": "Smuggler Base", "coords": (3, 3), "distance": 120},
+    ]
