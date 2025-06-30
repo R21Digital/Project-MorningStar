@@ -7,6 +7,11 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
+# Ensure the top-level ``ai`` package resolves during tests
+AI_ROOT = os.path.join(ROOT, "ai")
+if AI_ROOT not in sys.path:
+    sys.path.insert(0, AI_ROOT)
+
 # Provide stub modules for optional dependencies
 if 'pytesseract' not in sys.modules:
     sys.modules['pytesseract'] = types.SimpleNamespace(image_to_string=lambda *a, **k: '')
