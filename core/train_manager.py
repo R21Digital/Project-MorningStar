@@ -2,7 +2,8 @@ import json
 import os
 from utils.travel import travel_to
 from utils.skills import get_player_skills
-from .trainer_travel import start_travel_to_trainer
+from utils.logger import logger
+from .trainer_travel import start_travel_to_trainer, plan_travel_to_trainer
 
 class TrainManager:
     def __init__(
@@ -58,10 +59,17 @@ class TrainManager:
         for skill in missing:
             trainer = self.find_trainer_for_skill(skill, current_planet)
             if trainer:
+                steps = plan_travel_to_trainer(trainer)
+                logger.info("[TRAIN] Route plan: %s", steps)
                 if self.auto_travel:
                     start_travel_to_trainer(trainer)
                 travel_to(trainer['planet'], trainer['city'], trainer['coords'])
-                print(f"[TRAIN] Training {skill} at {trainer['name']} in {trainer['city']}")
+                logger.info(
+                    "[TRAIN] Training %s at %s in %s",
+                    skill,
+                    trainer['name'],
+                    trainer['city'],
+                )
                 self.trained_skills.add(skill)
             else:
-                print(f"[TRAIN] No trainer found for skill: {skill}")
+                logger.info("[TRAIN] No trainer found for skill: %s", skill)
