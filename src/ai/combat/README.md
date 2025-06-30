@@ -1,32 +1,49 @@
-# Combat Module
+# ai.combat
 
-This package bundles a minimal combat AI. The helper function
-`evaluate_state` inspects a player dictionary and a target dictionary and
-returns a recommended action string. `CombatRunner` provides a thin wrapper
-that records the last suggested action.
+`ai.combat` packages a minimal combat decision helper and a runtime wrapper.
 
 ## `evaluate_state`
 
-### Parameters
-- **`player_state`** – mapping describing the player. The keys `hp`,
-  `has_heal`, and `is_buffed` are recognized. Missing values default to
-  `hp=100`, `has_heal=False`, and `is_buffed=False`.
-- **`target_state`** – mapping describing the target. Only the `hp` field is
-  consulted and defaults to `100` if absent.
+```python
+from ai.combat import evaluate_state
+```
 
-### Returns
-One of the following strings:
+Return a suggested action string from two dictionaries:
 
-- `"heal"` – player HP below 30 and a heal item is available.
-- `"retreat"` – low HP with no heal available.
-- `"attack"` – enemy still has HP remaining.
-- `"buff"` – encounter over but the player lacks a buff.
-- `"idle"` – nothing to do once buffed and the target is defeated.
+- **`player_state`** – recognizes `hp`, `has_heal`, and `is_buffed`.
+  Missing keys default to `hp=100`, `has_heal=False`, `is_buffed=False`.
+- **`target_state`** – only the `hp` key is consulted and defaults to `100`.
 
-## Example: `CombatRunner`
+Possible results:
+
+- `"heal"` – low HP with a heal item available.
+- `"retreat"` – low HP and no heal item.
+- `"attack"` – target still has HP.
+- `"buff"` – target defeated but player lacks a buff.
+- `"idle"` – target defeated and player already buffed.
+
+### Example
 
 ```python
-from src.ai.combat import CombatRunner
+from ai.combat import evaluate_state
+
+action = evaluate_state({"hp": 25, "has_heal": True}, {"hp": 50})
+print(action)  # "heal"
+```
+
+## `CombatRunner`
+
+```python
+from ai.combat import CombatRunner
+```
+
+A thin wrapper exposing `tick(player_state, target_state)` and storing the
+last returned action on `last_action`.
+
+### Usage Example
+
+```python
+from ai.combat import evaluate_state, CombatRunner
 
 runner = CombatRunner()
 player = {"hp": 80}
