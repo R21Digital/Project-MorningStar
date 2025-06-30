@@ -1,13 +1,20 @@
 import os
 import sys
+from pathlib import Path
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import core.session_tracker as session_tracker
 
+# Directory for persistent test artifacts
+ARTIFACTS_DIR = Path("tests/artifacts")
+ARTIFACTS_DIR.mkdir(exist_ok=True)
+
 
 def test_load_session_default(tmp_path, monkeypatch):
-    session_file = tmp_path / session_tracker.SESSION_FILE
+    session_file = ARTIFACTS_DIR / session_tracker.SESSION_FILE
+    if session_file.exists():
+        session_file.unlink()
     monkeypatch.setenv(session_tracker.SESSION_FILE_ENV, str(session_file))
     assert not session_file.exists()
     data = session_tracker.load_session()
@@ -15,7 +22,9 @@ def test_load_session_default(tmp_path, monkeypatch):
 
 
 def test_save_and_load_roundtrip(tmp_path, monkeypatch):
-    session_file = tmp_path / session_tracker.SESSION_FILE
+    session_file = ARTIFACTS_DIR / session_tracker.SESSION_FILE
+    if session_file.exists():
+        session_file.unlink()
     monkeypatch.setenv(session_tracker.SESSION_FILE_ENV, str(session_file))
     payload = {"foo": 1, "bar": [1, 2, 3]}
     session_tracker.save_session(payload)
@@ -25,7 +34,9 @@ def test_save_and_load_roundtrip(tmp_path, monkeypatch):
 
 
 def test_log_farming_result(tmp_path, monkeypatch):
-    session_file = tmp_path / session_tracker.SESSION_FILE
+    session_file = ARTIFACTS_DIR / session_tracker.SESSION_FILE
+    if session_file.exists():
+        session_file.unlink()
     monkeypatch.setenv(session_tracker.SESSION_FILE_ENV, str(session_file))
 
     monkeypatch.setattr(

@@ -1,12 +1,17 @@
 import json
 import os
 import sys
+from pathlib import Path
 import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import core.profile_loader as profile_loader
 from core.profile_loader import load_profile, validate_profile, ProfileValidationError
+
+# Directory for persistent test artifacts
+ARTIFACTS_DIR = Path("tests/artifacts")
+ARTIFACTS_DIR.mkdir(exist_ok=True)
 
 
 def _patch_runtime(monkeypatch, path):
@@ -36,7 +41,9 @@ def test_load_profile_valid(tmp_path, monkeypatch):
     build_dir = tmp_path / "builds"
     build_dir.mkdir()
     (build_dir / "basic.json").write_text(json.dumps({"skills": []}))
-    progress_file = tmp_path / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "session_state.json"
+    if progress_file.exists():
+        progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": []}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
@@ -70,7 +77,9 @@ def test_load_profile_txt_build(tmp_path, monkeypatch):
     build_dir = tmp_path / "builds"
     build_dir.mkdir()
     (build_dir / "basic.txt").write_text(json.dumps({"skills": ["A"]}))
-    progress_file = tmp_path / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "session_state.json"
+    if progress_file.exists():
+        progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": ["A"]}))
     monkeypatch.setattr("core.profile_loader.PROFILE_DIR", tmp_path)
     monkeypatch.setattr("core.profile_loader.BUILD_DIR", build_dir)
@@ -300,7 +309,9 @@ def test_load_profile_from_repo_txt(tmp_path, monkeypatch):
 
     _patch_runtime(monkeypatch, tmp_path)
 
-    progress_file = tmp_path / "session_state.json"
+    progress_file = ARTIFACTS_DIR / "session_state.json"
+    if progress_file.exists():
+        progress_file.unlink()
     progress_file.write_text(json.dumps({"completed_skills": []}))
     monkeypatch.setattr("core.profile_loader.SESSION_STATE", progress_file)
 

@@ -202,3 +202,7 @@ data/raw/*.html
 archive/*.html
 
 runtime/
+
+tests/artifacts/
+!tests/artifacts/
+!tests/artifacts/.gitignore
