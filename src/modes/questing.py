@@ -1,5 +1,5 @@
 import json
-from quest_engine import handle_quest_step
+from src.execution.quest_engine import execute_quest_step
 from utils.license_hooks import requires_license
 
 
@@ -16,7 +16,7 @@ def run_questing_mode(character: str) -> None:
         print(f"\n[STEP {raw['id']}] {raw['title']}")
         # movement step to coordinates
         move = {"type": "move", "data": {"coords": raw["coords"], "planet": raw["zone"]}}
-        handle_quest_step(move)
+        execute_quest_step(move)
 
         if raw["action"] == "talk":
             step = {"type": "npc", "data": {"npc_name": raw["npc"]}}
@@ -29,7 +29,7 @@ def run_questing_mode(character: str) -> None:
             print(f"[!] Unknown legacy action: {raw['action']}")
             continue
 
-        success = handle_quest_step(step)
+        success = execute_quest_step(step)
         if not success:
             print(f"[!] Failed to complete step: {raw['id']}")
             break
