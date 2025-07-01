@@ -20,6 +20,8 @@ from .session_tracker import (
     save_session as save_session_state,
     update_session_key,
 )
+from . import legacy_tracker
+from src.execution import quest_engine
 
 __all__ = [
     "preprocess_image",
@@ -43,4 +45,6 @@ __all__ = [
     "load_session_state",
     "save_session_state",
     "update_session_key",
+    "legacy_tracker",
+    "quest_engine",
 ]
