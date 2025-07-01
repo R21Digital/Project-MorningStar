@@ -8,7 +8,7 @@ Android MS11 aims to be an advanced interface assistant for long-session open-wo
 The initial release focuses on reliable quest execution and basic session tracking.
 
 - `quest_selector.py` and `quest_executor.py` provide the quest flow logic.
-- `quest_engine.py` plus movement helpers automate travel between objectives.
+- Movement helpers and the step executor automate travel between objectives.
 - `xp_manager.py`, `xp_session.py`, and `xp_tracker.py` record XP and credit gains.
 
 Todo work recorded in `NOTES.md` includes improving scoring and fleshing out step execution. Some modules still contain placeholders &ndash; for example the UI hook in `src/execution/dialogue.py` and walking logic in `src/movement/movement_profiles.py`.
