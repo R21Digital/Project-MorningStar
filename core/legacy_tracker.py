@@ -6,6 +6,8 @@ import json
 from pathlib import Path
 from typing import Any, List, Dict
 
+from .quest_state import read_saved_quest_log
+
 LEGACY_FILE = Path(__file__).resolve().parents[1] / "data" / "legacy_steps.json"
 
 
@@ -23,12 +25,8 @@ def load_legacy_steps() -> List[Dict[str, Any]]:
 
 
 def read_quest_log() -> List[str]:
-    """Return IDs of completed quest steps from ``logs/quest_log.txt``."""
-    try:
-        with open("logs/quest_log.txt", "r", encoding="utf-8") as f:
-            return [line.strip() for line in f.readlines()]
-    except FileNotFoundError:
-        return []
+    """Alias for :func:`core.quest_state.read_saved_quest_log`."""
+    return read_saved_quest_log()
 
 
 __all__ = ["load_steps", "load_legacy_steps", "read_quest_log", "LEGACY_FILE"]
