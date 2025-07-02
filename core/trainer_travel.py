@@ -21,11 +21,17 @@ def get_travel_macro(trainer: Dict) -> str:
 
 
 # --------------------------------------------------------------
+def execute_travel_macro(macro: str) -> None:
+    """Log and execute the travel macro (placeholder)."""
+    logger.info("[TrainerTravel] Executing macro: %s", macro)
+    print(macro)
+
+
+# --------------------------------------------------------------
 def start_travel_to_trainer(trainer: Dict) -> None:
     """Log the travel macro and simulate execution (placeholder)."""
     macro = get_travel_macro(trainer)
-    logger.info("[TrainerTravel] Executing macro: %s", macro)
-    print(macro)
+    execute_travel_macro(macro)
 
 
 # --------------------------------------------------------------
@@ -59,6 +65,7 @@ def plan_travel_to_trainer(trainer: Dict) -> List[str]:
 
 __all__ = [
     "get_travel_macro",
+    "execute_travel_macro",
     "start_travel_to_trainer",
     "is_same_planet",
     "plan_travel_to_trainer",
