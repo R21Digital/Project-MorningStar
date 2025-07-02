@@ -80,6 +80,14 @@ manager = StateManager({"quest accepted": on_accept}, interval=0.5)
 manager.run(duration=10)
 ```
 
+## Quest State Detection
+
+Use `core.quest_state.is_step_completed(log_text, step_text)` to check whether a
+quest objective appears in captured log text.  The helper works with raw strings
+or can scan files using `scan_log_file_for_step()`.  For screenshot workflows,
+`extract_quest_log_from_screenshot()` first runs OCR so the text can be passed to
+`is_step_completed`.
+
 ## Getting Started
 
 This section walks through a fresh setup so you can try the project locally.
