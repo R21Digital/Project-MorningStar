@@ -31,6 +31,7 @@ from src.execution import quest_engine
 from .quest_engine import execute_quest_step
 from .legacy_tracker import load_legacy_steps, read_quest_log
 from .legacy_loop import run_full_legacy_quest
+from .legacy_dashboard import display_legacy_progress
 from .quest_state import (
     parse_quest_log,
     is_step_completed,
@@ -69,6 +70,7 @@ __all__ = [
     "load_legacy_steps",
     "read_quest_log",
     "run_full_legacy_quest",
+    "display_legacy_progress",
     "parse_quest_log",
     "is_step_completed",
     "scan_log_file_for_step",
