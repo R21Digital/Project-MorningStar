@@ -1,4 +1,5 @@
 import core.legacy_dashboard as legacy_dashboard
+import core.quest_state as qs
 
 
 def test_display_legacy_progress(monkeypatch, capsys):
@@ -10,8 +11,8 @@ def test_display_legacy_progress(monkeypatch, capsys):
             {"id": 2, "title": "Second"},
         ],
     )
-    monkeypatch.setattr(legacy_dashboard, "read_quest_log", lambda: ["1"])
+    monkeypatch.setattr(qs, "read_saved_quest_log", lambda: ["1"])
     legacy_dashboard.display_legacy_progress()
     captured = capsys.readouterr()
-    assert "Yes" in captured.out
-    assert "No" in captured.out
+    assert "✅ Completed" in captured.out
+    assert "⏭️ Pending" in captured.out
