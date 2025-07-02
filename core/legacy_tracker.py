@@ -17,4 +17,18 @@ def load_steps() -> List[Dict[str, Any]]:
         return list(data["steps"])
     return list(data)
 
-__all__ = ["load_steps", "LEGACY_FILE"]
+def load_legacy_steps() -> List[Dict[str, Any]]:
+    """Alias for :func:`load_steps` for backward compatibility."""
+    return load_steps()
+
+
+def read_quest_log() -> List[str]:
+    """Return IDs of completed quest steps from ``logs/quest_log.txt``."""
+    try:
+        with open("logs/quest_log.txt", "r", encoding="utf-8") as f:
+            return [line.strip() for line in f.readlines()]
+    except FileNotFoundError:
+        return []
+
+
+__all__ = ["load_steps", "load_legacy_steps", "read_quest_log", "LEGACY_FILE"]
