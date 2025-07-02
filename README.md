@@ -4,6 +4,9 @@ Android MS11 is an advanced interface assistant for long-session open-world auto
 
 The original MS11-Core implementation has been archived under `archive/ms11-core` to preserve legacy code.
 
+## Features
+- 🧭 Legacy Quest Dashboard: View progress with `--show-legacy-status`
+
 ## Lore
 In the world of **Argent**, legendary guilds compete to recover ancient relics. Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. Android MS11 provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.
 
@@ -435,6 +438,13 @@ python -m src.data.legacy_quest_manager --search Corellia
 python -m src.data.legacy_quest_manager --npc "Rebel Trainer"
 python -m src.data.legacy_quest_manager --list --planet Naboo
 python -m src.data.legacy_quest_manager --list --status completed
+```
+
+Launch the legacy quest loop directly or just display progress with:
+
+```bash
+python main.py --legacy
+python main.py --show-legacy-status
 ```
 
 ## Quest Selection CLI
