@@ -31,7 +31,13 @@ def start_travel_to_trainer(trainer: Dict) -> None:
 # --------------------------------------------------------------
 def is_same_planet(trainer: Dict) -> bool:
     """Return ``True`` if the trainer is on the current planet."""
-    return True
+    trainer_planet = trainer.get("planet")
+    current_planet = CURRENT_LOCATION["planet"]
+
+    if not trainer_planet:
+        return False
+
+    return str(trainer_planet).lower() == str(current_planet).lower()
 
 
 # --------------------------------------------------------------
