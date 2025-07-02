@@ -1,4 +1,4 @@
-from core.trainer_travel import (
+from core import (
     get_travel_macro,
     execute_travel_macro,
     start_travel_to_trainer,
