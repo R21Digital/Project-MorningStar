@@ -22,6 +22,9 @@ from .session_tracker import (
 )
 from . import legacy_tracker
 from src.execution import quest_engine
+from .quest_engine import execute_quest_step
+from .legacy_tracker import load_legacy_steps, read_quest_log
+from .legacy_loop import run_full_legacy_quest
 
 __all__ = [
     "preprocess_image",
@@ -47,4 +50,8 @@ __all__ = [
     "update_session_key",
     "legacy_tracker",
     "quest_engine",
+    "execute_quest_step",
+    "load_legacy_steps",
+    "read_quest_log",
+    "run_full_legacy_quest",
 ]
