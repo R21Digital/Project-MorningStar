@@ -36,3 +36,13 @@ def test_main_show_status_only(monkeypatch):
     legacy_main_mod.main(["--show-legacy-status"])
     assert called == ["status"]
 
+
+def test_main_legacy_flag(monkeypatch):
+    legacy_main_mod = importlib.reload(legacy_main)
+    called = {}
+    monkeypatch.setattr(legacy_main_mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True))
+    monkeypatch.setattr(legacy_main_mod, "display_legacy_progress", lambda: called.setdefault("status", True))
+    legacy_main_mod.main(["--legacy"])
+    assert called.get("legacy") is True
+    assert "status" not in called
+
