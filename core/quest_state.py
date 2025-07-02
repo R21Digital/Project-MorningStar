@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List
+from typing import List, Dict
 
 
 def parse_quest_log(log_text: str) -> List[str]:
@@ -39,9 +39,32 @@ def extract_quest_log_from_screenshot(image_path: str) -> str:
     return ""
 
 
+def read_saved_quest_log() -> List[str]:
+    """Return cleaned quest log lines from ``logs/quest_log.txt``."""
+    path = Path("logs") / "quest_log.txt"
+    try:
+        data = path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return []
+    return parse_quest_log(data)
+
+
+def get_step_status(step: Dict) -> str:
+    """Return a status string for ``step`` based on the saved quest log."""
+    completed = set(read_saved_quest_log())
+    step_id = step.get("id")
+    if step_id is not None and str(step_id) in completed:
+        return "✅ Completed"
+    if step.get("active"):
+        return "🕒 Active"
+    return "⏭️ Pending"
+
+
 __all__ = [
     "parse_quest_log",
     "is_step_completed",
     "scan_log_file_for_step",
     "extract_quest_log_from_screenshot",
+    "read_saved_quest_log",
+    "get_step_status",
 ]

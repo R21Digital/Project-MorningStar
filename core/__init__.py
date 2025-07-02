@@ -37,6 +37,8 @@ from .quest_state import (
     is_step_completed,
     scan_log_file_for_step,
     extract_quest_log_from_screenshot,
+    read_saved_quest_log,
+    get_step_status,
 )
 
 __all__ = [
@@ -75,4 +77,6 @@ __all__ = [
     "is_step_completed",
     "scan_log_file_for_step",
     "extract_quest_log_from_screenshot",
+    "read_saved_quest_log",
+    "get_step_status",
 ]
