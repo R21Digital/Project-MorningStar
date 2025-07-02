@@ -12,7 +12,13 @@ from .trainer_ocr import (
 from .trainer_scanner import TrainerScanner, scan_trainer_skills
 from .travel_manager import TravelManager
 from .waypoint_verifier import verify_waypoint_stability
-from .trainer_travel import get_travel_macro, execute_travel_macro, start_travel_to_trainer
+from .trainer_travel import (
+    get_travel_macro,
+    execute_travel_macro,
+    start_travel_to_trainer,
+    plan_travel_to_trainer,
+    is_same_planet,
+)
 from .shuttle_travel import get_shuttle_path
 from .progress_tracker import load_session, save_session, record_skill
 from .session_tracker import (
@@ -42,6 +48,8 @@ __all__ = [
     "get_travel_macro",
     "execute_travel_macro",
     "start_travel_to_trainer",
+    "plan_travel_to_trainer",
+    "is_same_planet",
     "get_shuttle_path",
     "load_session",
     "save_session",
