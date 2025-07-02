@@ -4,6 +4,7 @@ from core.trainer_travel import (
     plan_travel_to_trainer,
     is_same_planet,
 )
+from utils.movement_manager import CURRENT_LOCATION
 
 
 def test_get_travel_macro_formats():
@@ -28,8 +29,14 @@ def test_start_travel_to_trainer_logs(monkeypatch):
     assert any("/waypoint 10.0 20.0 Trainer" in m for m in logs)
 
 
-def test_is_same_planet_returns_true():
-    assert is_same_planet({"planet": "any"}) is True
+def test_is_same_planet_matching(monkeypatch):
+    monkeypatch.setitem(CURRENT_LOCATION, "planet", "tatooine")
+    assert is_same_planet({"planet": "Tatooine"}) is True
+
+
+def test_is_same_planet_nonmatching(monkeypatch):
+    monkeypatch.setitem(CURRENT_LOCATION, "planet", "tatooine")
+    assert is_same_planet({"planet": "naboo"}) is False
 
 
 def test_plan_travel_same_planet(monkeypatch):
