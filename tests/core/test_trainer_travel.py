@@ -1,5 +1,6 @@
 from core.trainer_travel import (
     get_travel_macro,
+    execute_travel_macro,
     start_travel_to_trainer,
     plan_travel_to_trainer,
     is_same_planet,
@@ -27,6 +28,22 @@ def test_start_travel_to_trainer_logs(monkeypatch):
     start_travel_to_trainer(trainer)
 
     assert any("/waypoint 10.0 20.0 Trainer" in m for m in logs)
+
+
+def test_execute_travel_macro_logs(monkeypatch):
+    logs = []
+
+    class DummyLogger:
+        def info(self, msg, *args):
+            logs.append(msg % args)
+
+    import core.trainer_travel as tt
+    monkeypatch.setattr(tt, "logger", DummyLogger())
+    monkeypatch.setattr("builtins.print", lambda *a, **k: None)
+
+    execute_travel_macro("/waypoint 1 2 Trainer")
+
+    assert any("/waypoint 1 2 Trainer" in m for m in logs)
 
 
 def test_is_same_planet_matching(monkeypatch):
