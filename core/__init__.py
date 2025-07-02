@@ -31,6 +31,12 @@ from src.execution import quest_engine
 from .quest_engine import execute_quest_step
 from .legacy_tracker import load_legacy_steps, read_quest_log
 from .legacy_loop import run_full_legacy_quest
+from .quest_state import (
+    parse_quest_log,
+    is_step_completed,
+    scan_log_file_for_step,
+    extract_quest_log_from_screenshot,
+)
 
 __all__ = [
     "preprocess_image",
@@ -63,4 +69,8 @@ __all__ = [
     "load_legacy_steps",
     "read_quest_log",
     "run_full_legacy_quest",
+    "parse_quest_log",
+    "is_step_completed",
+    "scan_log_file_for_step",
+    "extract_quest_log_from_screenshot",
 ]
