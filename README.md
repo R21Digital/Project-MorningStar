@@ -617,6 +617,30 @@ Utilities under `scripts/travel/` read this file to determine the nearest
 shuttle and to plan multi-hop routes. After traveling, `navigate_to(city, agent)`
 walks the agent from the shuttle to the destination coordinates.
 
+### Trainer Travel
+
+`core.trainer_travel` provides helpers for creating waypoint macros and
+outlining the steps needed to reach a profession trainer. Use
+`get_travel_macro()` to build the `/waypoint` string, or call
+`start_travel_to_trainer()` to log and print it for manual execution.  When the
+trainer is on another planet, `plan_travel_to_trainer()` lists the shuttle hops
+and final waypoint.
+
+```python
+from core import plan_travel_to_trainer, start_travel_to_trainer
+
+trainer = {
+    "name": "Marksman Trainer",
+    "coords": [1234, -567],
+    "planet": "tatooine",
+}
+
+steps = plan_travel_to_trainer(trainer)
+print(steps)
+
+start_travel_to_trainer(trainer)
+```
+
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
