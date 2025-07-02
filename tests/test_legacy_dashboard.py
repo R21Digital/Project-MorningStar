@@ -1,7 +1,7 @@
 import core.legacy_dashboard as legacy_dashboard
 
 
-def test_display_legacy_progress(monkeypatch):
+def test_display_legacy_progress(monkeypatch, capsys):
     monkeypatch.setattr(
         legacy_dashboard,
         "load_legacy_steps",
@@ -12,3 +12,6 @@ def test_display_legacy_progress(monkeypatch):
     )
     monkeypatch.setattr(legacy_dashboard, "read_quest_log", lambda: ["1"])
     legacy_dashboard.display_legacy_progress()
+    captured = capsys.readouterr()
+    assert "Yes" in captured.out
+    assert "No" in captured.out
