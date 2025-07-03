@@ -3,7 +3,7 @@ from typing import List
 
 from utils.logger import logger
 from core.legacy_tracker import load_legacy_steps, read_quest_log
-from core.quest_engine import execute_quest_step
+from core.quest_engine import execute_with_retry
 
 
 def run_full_legacy_quest() -> None:
@@ -18,7 +18,7 @@ def run_full_legacy_quest() -> None:
         logger.info(
             f"[Legacy Loop] Executing step: {step.get('id')} - {step.get('description')}"
         )
-        success = execute_quest_step(step)
+        success = execute_with_retry(step, max_retries=3)
 
         if not success:
             logger.warning(
