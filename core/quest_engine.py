@@ -12,13 +12,16 @@ RETRY_LOG_PATH = os.path.join("logs", "retry_log.txt")
 
 
 def log_retry(step_id: str, attempt: int, error: Exception | str) -> None:
-    """Append a retry event to :data:`RETRY_LOG_PATH`."""
+    """Append a retry event to :data:`RETRY_LOG_PATH`.
+
+    The log file uses a simple CSV format: ``timestamp, step_id, attempt, error``.
+    """
 
     os.makedirs(os.path.dirname(RETRY_LOG_PATH), exist_ok=True)
     timestamp = datetime.utcnow().isoformat()
     message = str(error)
     with open(RETRY_LOG_PATH, "a", encoding="utf-8") as fh:
-        fh.write(f"{timestamp} | {step_id} | attempt {attempt} | {message}\n")
+        fh.write(f"{timestamp}, {step_id}, {attempt}, {message}\n")
 
 
 def execute_with_retry(
