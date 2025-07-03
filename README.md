@@ -91,25 +91,22 @@ or can scan files using `scan_log_file_for_step()`.  For screenshot workflows,
 `extract_quest_log_from_screenshot()` first runs OCR so the text can be passed to
 `is_step_completed`.
 
-## Quest Automation
+## 🛠️ Smart Retry Logic
 
-The quest engine now exposes `execute_with_retry(step_id, max_retries=3, fallback=None)`.
-Use this helper when a quest step might intermittently fail. It repeatedly calls
-`execute_quest_step(step_id)` until the step succeeds or the maximum number of
-retries is reached.
+Use `execute_with_retry(step, max_retries=3)` whenever a quest step might
+intermittently fail. The helper calls `execute_quest_step(step)` until it
+returns ``True`` or the retry limit is reached. By default the step is tried
+three times. If every attempt fails, the function returns ``False`` (or invokes
+the optional ``fallback`` callback when provided).
 
-If all attempts fail and a `fallback` function is provided, that callable is
-invoked with the step identifier. The return value of the fallback determines if
-execution should continue.
-
-Retry events are written to `logs/retry_log.txt` in CSV format. Each line
-contains the timestamp, step id, attempt number, and the error message:
+All retry attempts are logged to `logs/retry_log.txt` in CSV format. Each line
+records the timestamp, step id, attempt number and error message:
 
 ```
 2023-01-01T00:00:00, open_door, 1, false result
 ```
 
-The log file lets you monitor repeated failures and refine your fallback
+Review this file to identify repeated failures and refine your fallback
 strategies.
 
 ## Getting Started
