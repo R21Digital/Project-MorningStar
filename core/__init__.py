@@ -28,7 +28,7 @@ from .session_tracker import (
 )
 from . import legacy_tracker
 from src.execution import quest_engine
-from .quest_engine import execute_quest_step
+from .quest_engine import execute_quest_step, execute_with_retry
 from .legacy_tracker import load_legacy_steps, read_quest_log
 from .legacy_loop import run_full_legacy_quest
 from .legacy_dashboard import display_legacy_progress
@@ -69,6 +69,7 @@ __all__ = [
     "legacy_tracker",
     "quest_engine",
     "execute_quest_step",
+    "execute_with_retry",
     "load_legacy_steps",
     "read_quest_log",
     "run_full_legacy_quest",
