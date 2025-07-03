@@ -25,8 +25,8 @@ def _read_log_lines():
 def test_success_first_try(monkeypatch):
     calls = []
 
-    def fake_step(step_id):
-        calls.append(step_id)
+    def fake_step(step):
+        calls.append(step)
         return True
 
     monkeypatch.setattr(quest_engine, "execute_quest_step", fake_step)
@@ -41,8 +41,8 @@ def test_success_first_try(monkeypatch):
 def test_fail_once_then_success(monkeypatch):
     calls = []
 
-    def fake_step(step_id):
-        calls.append(step_id)
+    def fake_step(step):
+        calls.append(step)
         return len(calls) >= 2
 
     monkeypatch.setattr(quest_engine, "execute_quest_step", fake_step)
@@ -57,8 +57,8 @@ def test_fail_once_then_success(monkeypatch):
 def test_always_fail(monkeypatch):
     calls = []
 
-    def fake_step(step_id):
-        calls.append(step_id)
+    def fake_step(step):
+        calls.append(step)
         return False
 
     monkeypatch.setattr(quest_engine, "execute_quest_step", fake_step)
