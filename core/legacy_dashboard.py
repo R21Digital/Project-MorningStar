@@ -21,7 +21,7 @@ def display_legacy_progress() -> None:
     for step in steps:
         step_id = str(step.get("id"))
         title = step.get("title") or step.get("description", "")
-        status = get_step_status(step)
+        status = get_step_status(step_id)
         table.add_row(step_id, title, status)
 
     Console().print(table)

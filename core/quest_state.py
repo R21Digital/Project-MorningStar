@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Optional
+
+# Default path for the saved quest log
+QUEST_LOG_PATH = "logs/quest_log.txt"
 
 
 def parse_quest_log(log_text: str) -> List[str]:
@@ -40,8 +43,8 @@ def extract_quest_log_from_screenshot(image_path: str) -> str:
 
 
 def read_saved_quest_log() -> List[str]:
-    """Return cleaned quest log lines from ``logs/quest_log.txt``."""
-    path = Path("logs") / "quest_log.txt"
+    """Return cleaned quest log lines from ``QUEST_LOG_PATH``."""
+    path = Path(QUEST_LOG_PATH)
     try:
         data = path.read_text(encoding="utf-8")
     except FileNotFoundError:
@@ -49,15 +52,22 @@ def read_saved_quest_log() -> List[str]:
     return parse_quest_log(data)
 
 
-def get_step_status(step: Dict) -> str:
-    """Return a status string for ``step`` based on the saved quest log."""
-    completed = set(read_saved_quest_log())
-    step_id = step.get("id")
-    if step_id is not None and str(step_id) in completed:
-        return "✅ Completed"
-    if step.get("active"):
-        return "🕒 Active"
-    return "⏭️ Pending"
+def get_step_status(step_id: str, log_lines: Optional[List[str]] = None) -> str:
+    """Return a status string for ``step_id`` by scanning quest log lines."""
+    if log_lines is None:
+        log_lines = read_saved_quest_log()
+
+    step_id = str(step_id).lower()
+    for line in log_lines:
+        lowered = line.lower()
+        if step_id in lowered:
+            if "failed" in lowered:
+                return "❌ Failed"
+            if "complete" in lowered:
+                return "✅ Completed"
+            if "progress" in lowered or "started" in lowered or "in progress" in lowered:
+                return "⏳ In Progress"
+    return "❓ Unknown"
 
 
 __all__ = [
