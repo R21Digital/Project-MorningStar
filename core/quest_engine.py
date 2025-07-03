@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import os
 from datetime import datetime
-from typing import Callable
+from typing import Any, Callable
 
 from src.execution.quest_engine import execute_quest_step
 
@@ -25,20 +25,20 @@ def log_retry(step_id: str, attempt: int, error: Exception | str) -> None:
 
 
 def execute_with_retry(
-    step_id: str, max_retries: int = 3, fallback: Callable | None = None
+    step: Any, max_retries: int = 3, fallback: Callable | None = None
 ) -> bool:
-    """Execute ``step_id`` with retry logic via :func:`execute_quest_step`.
+    """Execute ``step`` with retry logic via :func:`execute_quest_step`.
 
     Parameters
     ----------
-    step_id:
-        Identifier of the quest step to execute. This object is passed directly
-        to :func:`execute_quest_step`.
+    step:
+        Quest step object to execute. This object is passed directly to
+        :func:`execute_quest_step`.
     max_retries:
         Maximum number of retry attempts before falling back.
     fallback:
         Optional callable executed when all retries fail. If provided, it will
-        be called with ``step_id`` as its only argument.
+        be called with ``step`` as its only argument.
 
     Returns
     -------
@@ -51,16 +51,16 @@ def execute_with_retry(
     while attempt < max_retries:
         attempt += 1
         try:
-            if execute_quest_step(step_id):
+            if execute_quest_step(step):
                 return True
-            log_retry(step_id, attempt, "false result")
+            log_retry(str(step), attempt, "false result")
         except Exception as exc:  # pragma: no cover - best effort logging
-            log_retry(step_id, attempt, exc)
+            log_retry(str(step), attempt, exc)
     if fallback is not None:
         try:
-            return bool(fallback(step_id))
+            return bool(fallback(step))
         except Exception as exc:  # pragma: no cover - best effort logging
-            log_retry(step_id, attempt + 1, exc)
+            log_retry(str(step), attempt + 1, exc)
     return False
 
 
