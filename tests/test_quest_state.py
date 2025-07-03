@@ -23,13 +23,10 @@ def test_read_saved_quest_log(tmp_path, monkeypatch):
 def test_get_step_status(tmp_path, monkeypatch):
     log_file = tmp_path / "logs" / "quest_log.txt"
     log_file.parent.mkdir()
-    log_file.write_text("1\n")
+    log_file.write_text("Step 1 completed\nStep 2 failed\nStep 3 in progress\n")
     monkeypatch.chdir(tmp_path)
 
-    step_completed = {"id": "1"}
-    step_active = {"id": "2", "active": True}
-    step_pending = {"id": "3"}
-
-    assert qs.get_step_status(step_completed) == "✅ Completed"
-    assert qs.get_step_status(step_active) == "🕒 Active"
-    assert qs.get_step_status(step_pending) == "⏭️ Pending"
+    assert qs.get_step_status("1") == "✅ Completed"
+    assert qs.get_step_status("2") == "❌ Failed"
+    assert qs.get_step_status("3") == "⏳ In Progress"
+    assert qs.get_step_status("4") == "❓ Unknown"
