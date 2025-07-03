@@ -68,3 +68,27 @@ def test_always_fail(monkeypatch):
     assert result is False
     assert len(calls) == 3
     assert len(_read_log_lines()) == 3
+
+
+def test_always_fail_with_fallback(monkeypatch):
+    """Fallback should run once after all retries fail."""
+    step_calls = []
+    fallback_calls = []
+
+    def fake_step(step):
+        step_calls.append(step)
+        return False
+
+    def fake_fallback(step):
+        fallback_calls.append(step)
+        return True
+
+    monkeypatch.setattr(quest_engine, "execute_quest_step", fake_step)
+
+    result = quest_engine.execute_with_retry(
+        "step", max_retries=3, fallback=fake_fallback
+    )
+
+    assert result is True
+    assert len(step_calls) == 3
+    assert fallback_calls == ["step"]
