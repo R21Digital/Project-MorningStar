@@ -40,6 +40,12 @@ from .quest_state import (
     read_saved_quest_log,
     get_step_status,
 )
+from .themepark_tracker import (
+    read_themepark_log,
+    is_themepark_quest_active,
+    get_themepark_status,
+)
+from .themepark_dashboard import display_themepark_progress
 
 __all__ = [
     "preprocess_image",
@@ -80,4 +86,8 @@ __all__ = [
     "extract_quest_log_from_screenshot",
     "read_saved_quest_log",
     "get_step_status",
+    "read_themepark_log",
+    "is_themepark_quest_active",
+    "get_themepark_status",
+    "display_themepark_progress",
 ]
