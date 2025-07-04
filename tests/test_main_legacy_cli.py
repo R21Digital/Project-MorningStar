@@ -18,6 +18,13 @@ def test_parse_args_show_status(monkeypatch):
     assert args.legacy is False
 
 
+def test_parse_args_show_themepark_status(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["prog", "--show-themepark-status"])
+    args = legacy_main.parse_args()
+    assert args.show_themepark_status is True
+    assert args.legacy is False
+
+
 def test_main_runs_legacy_by_default(monkeypatch):
     legacy_main_mod = importlib.reload(legacy_main)
     called = {}
@@ -46,4 +53,19 @@ def test_main_legacy_flag(monkeypatch):
     legacy_main_mod.main(["--legacy"])
     assert called.get("legacy") is True
     assert "status" not in called
+
+
+def test_main_themepark_status(monkeypatch):
+    legacy_main_mod = importlib.reload(legacy_main)
+    called = []
+    monkeypatch.setattr(
+        legacy_main_mod,
+        "display_themepark_progress",
+        lambda quests: called.append("themepark"),
+    )
+    monkeypatch.setattr(
+        legacy_main_mod, "run_full_legacy_quest", lambda: called.append("legacy")
+    )
+    legacy_main_mod.main(["--show-themepark-status"])
+    assert called == ["themepark"]
 

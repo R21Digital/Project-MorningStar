@@ -7,6 +7,14 @@ import argparse
 from core.legacy_loop import run_full_legacy_quest
 from core.legacy_dashboard import display_legacy_progress
 from core.legacy_tracker import load_legacy_steps
+from core.themepark_dashboard import display_themepark_progress
+
+# Names of theme park quest lines to show in status output
+THEMEPARK_CHAINS = [
+    "Jabba",
+    "Rebel",
+    "Imperial",
+]
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -23,6 +31,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Display current legacy quest progress",
     )
+    parser.add_argument(
+        "--show-themepark-status",
+        dest="show_themepark_status",
+        action="store_true",
+        help="Display current theme park quest progress",
+    )
     return parser.parse_args(argv)
 
 
@@ -34,7 +48,10 @@ def main(argv: list[str] | None = None) -> None:
         steps = load_legacy_steps()
         display_legacy_progress(steps)
 
-    if args.legacy or not (args.legacy or args.show_legacy_status):
+    if args.show_themepark_status:
+        display_themepark_progress(THEMEPARK_CHAINS)
+
+    if args.legacy or not (args.legacy or args.show_legacy_status or args.show_themepark_status):
         run_full_legacy_quest()
 
 
