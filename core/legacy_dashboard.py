@@ -8,8 +8,8 @@ from rich.table import Table
 from .quest_state import get_step_status
 
 
-def display_legacy_progress(quest_steps: list) -> None:
-    """Print a table of ``quest_steps`` and completion status."""
+def build_legacy_progress_table(quest_steps: list) -> Table:
+    """Return a ``rich`` table showing ``quest_steps`` progress."""
 
     table = Table(title="Legacy Quest Progress", show_lines=True)
     table.add_column("Step ID", style="bold", no_wrap=True)
@@ -22,7 +22,13 @@ def display_legacy_progress(quest_steps: list) -> None:
         status = get_step_status(step_id)
         table.add_row(step_id, title, status)
 
-    Console().print(table)
+    return table
 
 
-__all__ = ["display_legacy_progress"]
+def display_legacy_progress(quest_steps: list) -> None:
+    """Print a table of ``quest_steps`` and completion status."""
+
+    Console().print(build_legacy_progress_table(quest_steps))
+
+
+__all__ = ["build_legacy_progress_table", "display_legacy_progress"]
