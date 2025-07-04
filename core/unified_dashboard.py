@@ -11,8 +11,12 @@ from .themepark_tracker import load_themepark_chains
 from .themepark_dashboard import render_themepark_table
 
 
-def show_unified_dashboard(themepark_quests: list[str] | None = None) -> None:
-    """Print a dashboard with legacy and theme park progress."""
+def show_unified_dashboard(
+    themepark_quests: list[str] | None = None,
+    *,
+    mode: str = "all",
+) -> None:
+    """Print a dashboard with quest progress based on ``mode``."""
 
     steps = load_legacy_steps()
     if themepark_quests is None:
@@ -20,6 +24,13 @@ def show_unified_dashboard(themepark_quests: list[str] | None = None) -> None:
 
     legacy_table = render_legacy_table(steps)
     themepark_table = render_themepark_table(themepark_quests)
+
+    if mode == "legacy":
+        Console().print(legacy_table)
+        return
+    if mode == "themepark":
+        Console().print(themepark_table)
+        return
 
     layout = Layout()
     layout.split_column(
