@@ -94,4 +94,5 @@ __all__ = [
     "load_themepark_chains",
     "display_themepark_progress",
     "render_themepark_table",
+    "show_unified_dashboard",
 ]
