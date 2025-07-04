@@ -11,7 +11,8 @@ def read_themepark_log() -> list[str]:
     """Return cleaned lines from :data:`THEMEPARK_LOG_PATH` if it exists."""
     if not THEMEPARK_LOG_PATH.exists():
         return []
-    with THEMEPARK_LOG_PATH.open("r", encoding="utf-8") as fh:
+    # Explicitly pass an encoding to avoid platform-dependent defaults
+    with open(THEMEPARK_LOG_PATH, "r", encoding="utf-8") as fh:
         return [line.strip() for line in fh.readlines()]
 
 
