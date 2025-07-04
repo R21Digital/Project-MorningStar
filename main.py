@@ -6,6 +6,7 @@ import argparse
 
 from core.legacy_loop import run_full_legacy_quest
 from core.legacy_dashboard import display_legacy_progress
+from core.legacy_tracker import load_legacy_steps
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -30,7 +31,8 @@ def main(argv: list[str] | None = None) -> None:
     args = parse_args(argv)
 
     if args.show_legacy_status:
-        display_legacy_progress()
+        steps = load_legacy_steps()
+        display_legacy_progress(steps)
 
     if args.legacy or not (args.legacy or args.show_legacy_status):
         run_full_legacy_quest()
