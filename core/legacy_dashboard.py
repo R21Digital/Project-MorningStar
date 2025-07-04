@@ -5,6 +5,8 @@ from __future__ import annotations
 from rich.console import Console
 from rich.table import Table
 
+from .legacy_tracker import load_legacy_steps
+
 from .quest_state import get_step_status
 
 
@@ -25,10 +27,18 @@ def build_legacy_progress_table(quest_steps: list) -> Table:
     return table
 
 
+def render_legacy_table(quest_steps: list | None = None) -> Table:
+    """Return a table for ``quest_steps`` or all legacy steps when ``None``."""
+
+    if quest_steps is None:
+        quest_steps = load_legacy_steps()
+    return build_legacy_progress_table(quest_steps)
+
+
 def display_legacy_progress(quest_steps: list) -> None:
     """Print a table of ``quest_steps`` and completion status."""
 
     Console().print(build_legacy_progress_table(quest_steps))
 
 
-__all__ = ["build_legacy_progress_table", "display_legacy_progress"]
+__all__ = ["build_legacy_progress_table", "display_legacy_progress", "render_legacy_table"]

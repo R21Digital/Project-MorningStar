@@ -3,8 +3,17 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import List
 
 THEMEPARK_LOG_PATH = Path("logs/themepark_log.txt")
+
+# Names of supported Theme Park quest lines
+THEMEPARK_CHAINS = ["Jabba", "Rebel", "Imperial"]
+
+
+def load_themepark_chains() -> List[str]:
+    """Return a list of available theme park quest lines."""
+    return list(THEMEPARK_CHAINS)
 
 
 def read_themepark_log() -> list[str]:
