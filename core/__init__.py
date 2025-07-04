@@ -31,7 +31,7 @@ from src.execution import quest_engine
 from .quest_engine import execute_quest_step, execute_with_retry
 from .legacy_tracker import load_legacy_steps, read_quest_log
 from .legacy_loop import run_full_legacy_quest
-from .legacy_dashboard import display_legacy_progress
+from .legacy_dashboard import display_legacy_progress, render_legacy_table
 from .quest_state import (
     parse_quest_log,
     is_step_completed,
@@ -44,8 +44,9 @@ from .themepark_tracker import (
     read_themepark_log,
     is_themepark_quest_active,
     get_themepark_status,
+    load_themepark_chains,
 )
-from .themepark_dashboard import display_themepark_progress
+from .themepark_dashboard import display_themepark_progress, render_themepark_table
 
 __all__ = [
     "preprocess_image",
@@ -80,6 +81,7 @@ __all__ = [
     "read_quest_log",
     "run_full_legacy_quest",
     "display_legacy_progress",
+    "render_legacy_table",
     "parse_quest_log",
     "is_step_completed",
     "scan_log_file_for_step",
@@ -89,5 +91,7 @@ __all__ = [
     "read_themepark_log",
     "is_themepark_quest_active",
     "get_themepark_status",
+    "load_themepark_chains",
     "display_themepark_progress",
+    "render_themepark_table",
 ]
