@@ -9,6 +9,7 @@ from core.legacy_dashboard import display_legacy_progress
 from core.legacy_tracker import load_legacy_steps
 from core.themepark_dashboard import display_themepark_progress
 from core.themepark_tracker import load_themepark_chains
+from core.unified_dashboard import show_unified_dashboard
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -31,6 +32,18 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Display current theme park quest progress",
     )
+    parser.add_argument(
+        "--show-dashboard",
+        dest="show_dashboard",
+        action="store_true",
+        help="Display a unified quest progress dashboard",
+    )
+    parser.add_argument(
+        "--dashboard-mode",
+        choices=["legacy", "themepark", "all"],
+        default="all",
+        help="Select sections to display in the dashboard",
+    )
     return parser.parse_args(argv)
 
 
@@ -44,6 +57,10 @@ def main(argv: list[str] | None = None) -> None:
 
     if args.show_themepark_status:
         display_themepark_progress(load_themepark_chains())
+
+    if args.show_dashboard:
+        show_unified_dashboard(mode=args.dashboard_mode)
+        return
 
     if args.legacy or not (args.legacy or args.show_legacy_status or args.show_themepark_status):
         run_full_legacy_quest()

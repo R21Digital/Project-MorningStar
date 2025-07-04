@@ -69,3 +69,32 @@ def test_main_themepark_status(monkeypatch):
     legacy_main_mod.main(["--show-themepark-status"])
     assert called == ["themepark"]
 
+
+def test_parse_args_show_dashboard(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["prog", "--show-dashboard"])
+    args = legacy_main.parse_args()
+    assert args.show_dashboard is True
+    assert args.dashboard_mode == "all"
+
+
+def test_parse_args_dashboard_mode(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["prog", "--dashboard-mode", "legacy"])
+    args = legacy_main.parse_args()
+    assert args.dashboard_mode == "legacy"
+    assert args.show_dashboard is False
+
+
+def test_main_show_dashboard(monkeypatch):
+    legacy_main_mod = importlib.reload(legacy_main)
+    called = {}
+    monkeypatch.setattr(
+        legacy_main_mod,
+        "show_unified_dashboard",
+        lambda *, mode="all": called.setdefault("dashboard", mode),
+    )
+    monkeypatch.setattr(
+        legacy_main_mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True)
+    )
+    legacy_main_mod.main(["--show-dashboard", "--dashboard-mode", "legacy"])
+    assert called == {"dashboard": "legacy"}
+
