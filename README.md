@@ -6,6 +6,7 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 
 ## Features
 - 🧭 Legacy Quest Dashboard: View progress with `--show-legacy-status`
+- 🎡 Theme Park Dashboard: View progress with `--show-themepark-status`
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
 
@@ -465,6 +466,7 @@ Launch the legacy quest loop directly or just display progress with:
 ```bash
 python main.py --legacy
 python main.py --show-legacy-status
+python main.py --show-themepark-status
 ```
 
 ## Quest Selection CLI
