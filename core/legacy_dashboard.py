@@ -5,20 +5,18 @@ from __future__ import annotations
 from rich.console import Console
 from rich.table import Table
 
-from .legacy_tracker import load_legacy_steps
 from .quest_state import get_step_status
 
 
-def display_legacy_progress() -> None:
-    """Print a table of legacy quest steps and completion status."""
-    steps = load_legacy_steps()
+def display_legacy_progress(quest_steps: list) -> None:
+    """Print a table of ``quest_steps`` and completion status."""
 
-    table = Table(title="Legacy Quest Progress")
-    table.add_column("ID", style="bold", no_wrap=True)
-    table.add_column("Title")
+    table = Table(title="Legacy Quest Progress", show_lines=True)
+    table.add_column("Step ID", style="bold", no_wrap=True)
+    table.add_column("Step Name")
     table.add_column("Status", justify="center")
 
-    for step in steps:
+    for step in quest_steps:
         step_id = str(step.get("id"))
         title = step.get("title") or step.get("description", "")
         status = get_step_status(step_id)
