@@ -7,6 +7,7 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 ## Features
 - 🧭 Legacy Quest Dashboard: View progress with `--show-legacy-status`
 - 🎡 Theme Park Dashboard: View progress with `--show-themepark-status`
+- 🖥️ Unified Dashboard CLI: view both dashboards with `--show-dashboard`
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
 
@@ -518,6 +519,23 @@ python cli/trainer/find_trainer.py --trainer "Master Combat Medic"
 
 The command accepts the same `--planet` and `--city` options as the lookup
 script, defaulting to `tatooine` and `mos_eisley`.
+
+## Unified Dashboard CLI
+Display quest progress from both legacy and theme park quests. By default the
+tables are shown in a split-pane layout:
+
+```bash
+python main.py --show-dashboard
+```
+
+Limit the output to one table with `--dashboard-mode`:
+
+```bash
+python main.py --show-dashboard --dashboard-mode legacy
+```
+
+The split layout places the legacy table above the theme park table using Rich's
+`Layout` class.
 
 ## Trainer Navigator Script
 `scripts/logic/trainer_navigator.py` exposes helper functions for locating
