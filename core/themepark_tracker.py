@@ -5,6 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List
 
+from .quest_state import (
+    STATUS_COMPLETED,
+    STATUS_FAILED,
+    STATUS_IN_PROGRESS,
+    STATUS_UNKNOWN,
+)
+
 THEMEPARK_LOG_PATH = Path("logs/themepark_log.txt")
 
 # Names of supported Theme Park quest lines
@@ -38,9 +45,9 @@ def get_themepark_status(quest_name: str) -> str:
         if quest_name.lower() in line.lower():
             lowered = line.lower()
             if "completed" in lowered:
-                return "Completed"
+                return STATUS_COMPLETED
             if "in progress" in lowered:
-                return "In Progress"
+                return STATUS_IN_PROGRESS
             if "failed" in lowered:
-                return "Failed"
-    return "Unknown"
+                return STATUS_FAILED
+    return STATUS_UNKNOWN

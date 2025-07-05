@@ -26,7 +26,7 @@ def test_get_step_status(tmp_path, monkeypatch):
     log_file.write_text("Step 1 completed\nStep 2 failed\nStep 3 in progress\n")
     monkeypatch.chdir(tmp_path)
 
-    assert qs.get_step_status("1") == "✅ Completed"
-    assert qs.get_step_status("2") == "❌ Failed"
-    assert qs.get_step_status("3") == "⏳ In Progress"
-    assert qs.get_step_status("4") == "❓ Unknown"
+    assert qs.get_step_status("1") == qs.STATUS_COMPLETED
+    assert qs.get_step_status("2") == qs.STATUS_FAILED
+    assert qs.get_step_status("3") == qs.STATUS_IN_PROGRESS
+    assert qs.get_step_status("4") == qs.STATUS_UNKNOWN
