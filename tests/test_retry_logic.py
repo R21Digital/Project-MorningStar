@@ -14,6 +14,13 @@ def clear_retry_log():
         os.remove(path)
 
 
+@pytest.fixture(autouse=True)
+def no_sleep(monkeypatch):
+    """Disable sleep calls during tests for speed."""
+    monkeypatch.setattr(quest_engine.time, "sleep", lambda *_: None)
+    yield
+
+
 def _read_log_lines():
     path = quest_engine.RETRY_LOG_PATH
     if not os.path.exists(path):
