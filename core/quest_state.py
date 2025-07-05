@@ -8,6 +8,12 @@ from typing import List, Optional
 # Default path for the saved quest log
 QUEST_LOG_PATH = "logs/quest_log.txt"
 
+# Standardized status constants
+STATUS_COMPLETED = "✅ Completed"
+STATUS_FAILED = "❌ Failed"
+STATUS_IN_PROGRESS = "⏳ In Progress"
+STATUS_UNKNOWN = "❓ Unknown"
+
 
 def parse_quest_log(log_text: str) -> List[str]:
     """Return cleaned lines from a quest log ``log_text``."""
@@ -62,12 +68,12 @@ def get_step_status(step_id: str, log_lines: Optional[List[str]] = None) -> str:
         lowered = line.lower()
         if step_id in lowered:
             if "failed" in lowered:
-                return "❌ Failed"
+                return STATUS_FAILED
             if "complete" in lowered:
-                return "✅ Completed"
+                return STATUS_COMPLETED
             if "progress" in lowered or "started" in lowered or "in progress" in lowered:
-                return "⏳ In Progress"
-    return "❓ Unknown"
+                return STATUS_IN_PROGRESS
+    return STATUS_UNKNOWN
 
 
 __all__ = [
@@ -77,4 +83,8 @@ __all__ = [
     "extract_quest_log_from_screenshot",
     "read_saved_quest_log",
     "get_step_status",
+    "STATUS_COMPLETED",
+    "STATUS_FAILED",
+    "STATUS_IN_PROGRESS",
+    "STATUS_UNKNOWN",
 ]
