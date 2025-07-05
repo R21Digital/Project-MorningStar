@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import os
+import time
 from datetime import datetime
 from typing import Any, Callable
 
 from src.execution.quest_engine import execute_quest_step
 
 RETRY_LOG_PATH = os.path.join("logs", "retry_log.txt")
+DEFAULT_RETRY_DELAY = 1.0
 
 
 def log_retry(step_label: str, attempt: int, error: Exception | str) -> None:
@@ -25,7 +27,10 @@ def log_retry(step_label: str, attempt: int, error: Exception | str) -> None:
 
 
 def execute_with_retry(
-    step: Any, max_retries: int = 3, fallback: Callable | None = None
+    step: Any,
+    max_retries: int = 3,
+    fallback: Callable | None = None,
+    delay: float = DEFAULT_RETRY_DELAY,
 ) -> bool:
     """Execute ``step`` with retry logic via :func:`execute_quest_step`.
 
@@ -39,6 +44,9 @@ def execute_with_retry(
     fallback:
         Optional callable executed when all retries fail. If provided, it will
         be called with ``step`` as its only argument.
+    delay:
+        Seconds to wait after each failed attempt. Defaults to
+        :data:`DEFAULT_RETRY_DELAY`.
 
     Returns
     -------
@@ -54,13 +62,16 @@ def execute_with_retry(
             if execute_quest_step(step):
                 return True
             log_retry(str(step), attempt, "false result")
+            time.sleep(delay)
         except Exception as exc:  # pragma: no cover - best effort logging
             log_retry(str(step), attempt, exc)
+            time.sleep(delay)
     if fallback is not None:
         try:
             return bool(fallback(step))
         except Exception as exc:  # pragma: no cover - best effort logging
             log_retry(str(step), attempt + 1, exc)
+            time.sleep(delay)
     return False
 
 
