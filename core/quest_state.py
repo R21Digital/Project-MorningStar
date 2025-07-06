@@ -5,14 +5,17 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Optional
 
+from .constants import (
+    STATUS_COMPLETED,
+    STATUS_FAILED,
+    STATUS_IN_PROGRESS,
+    STATUS_UNKNOWN,
+)
+
 # Default path for the saved quest log
 QUEST_LOG_PATH = "logs/quest_log.txt"
 
-# Standardized status constants
-STATUS_COMPLETED = "✅ Completed"
-STATUS_FAILED = "❌ Failed"
-STATUS_IN_PROGRESS = "⏳ In Progress"
-STATUS_UNKNOWN = "❓ Unknown"
+# Standardized status constants are imported for re-export
 
 
 def parse_quest_log(log_text: str) -> List[str]:

@@ -47,6 +47,12 @@ from .themepark_tracker import (
     load_themepark_chains,
 )
 from .themepark_dashboard import display_themepark_progress, render_themepark_table
+from .constants import (
+    STATUS_COMPLETED,
+    STATUS_FAILED,
+    STATUS_IN_PROGRESS,
+    STATUS_UNKNOWN,
+)
 
 __all__ = [
     "preprocess_image",
@@ -94,5 +100,9 @@ __all__ = [
     "load_themepark_chains",
     "display_themepark_progress",
     "render_themepark_table",
+    "STATUS_COMPLETED",
+    "STATUS_FAILED",
+    "STATUS_IN_PROGRESS",
+    "STATUS_UNKNOWN",
     "show_unified_dashboard",
 ]
