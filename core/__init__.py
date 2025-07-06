@@ -100,9 +100,15 @@ __all__ = [
     "load_themepark_chains",
     "display_themepark_progress",
     "render_themepark_table",
-    "STATUS_COMPLETED",
-    "STATUS_FAILED",
-    "STATUS_IN_PROGRESS",
-    "STATUS_UNKNOWN",
     "show_unified_dashboard",
 ]
+
+# Export status constants for ``from core import *`` usage
+__all__.extend(
+    [
+        "STATUS_COMPLETED",
+        "STATUS_FAILED",
+        "STATUS_IN_PROGRESS",
+        "STATUS_UNKNOWN",
+    ]
+)
