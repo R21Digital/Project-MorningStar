@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List
 
-from .quest_state import (
+from .constants import (
     STATUS_COMPLETED,
     STATUS_FAILED,
     STATUS_IN_PROGRESS,
