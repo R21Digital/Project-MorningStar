@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 from typing import Any, Callable
 
-from src.execution.quest_engine import execute_quest_step
+from src.engine.quest_executor import run_step_with_feedback as execute_quest_step
 
 RETRY_LOG_PATH = os.path.join("logs", "retry_log.txt")
 DEFAULT_RETRY_DELAY = 1.0
