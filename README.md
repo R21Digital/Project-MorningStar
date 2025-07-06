@@ -164,14 +164,14 @@ This section walks through a fresh setup so you can try the project locally.
 
 6. **Run the tests**
 
-   The repository contains a small test suite powered by `pytest`. The
-   tests rely on packages such as `langchain` and `transformers`, so
-   make sure all dependencies are installed first:
+   The repository contains a small test suite powered by `pytest`. Some
+   tests depend on additional packages such as `langchain` and
+   `transformers`, so make sure all dependencies are installed first:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements.txt -r requirements-test.txt
    pytest
-    # includes requests>=2.0, PyYAML, and pymongo>=3.0
+    # test requirements include requests>=2.0, PyYAML, and pymongo>=3.0
 
    # run a subset of the test suite
    pytest -k support_mode -q
