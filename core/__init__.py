@@ -27,7 +27,7 @@ from .session_tracker import (
     update_session_key,
 )
 from . import legacy_tracker
-from src.execution import quest_engine
+from src.engine import quest_executor as quest_engine
 from .quest_engine import execute_quest_step, execute_with_retry
 from .legacy_tracker import load_legacy_steps, read_quest_log
 from .legacy_loop import run_full_legacy_quest
