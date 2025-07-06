@@ -9,6 +9,9 @@ _spec = importlib.util.spec_from_file_location("core.constants", _constants_path
 _constants = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_constants)  # type: ignore[attr-defined]
 
+_prev_core = sys.modules.get("core")
+_prev_constants = sys.modules.get("core.constants")
+
 _core_pkg = types.ModuleType("core")
 _core_pkg.__path__ = []
 _core_pkg.constants = _constants
@@ -23,8 +26,15 @@ from core.constants import (
 )
 
 # Clean up our temporary stubs so other tests use the real package
-sys.modules.pop("core.constants", None)
-sys.modules.pop("core", None)
+if _prev_constants is not None:
+    sys.modules["core.constants"] = _prev_constants
+else:
+    sys.modules.pop("core.constants", None)
+
+if _prev_core is not None:
+    sys.modules["core"] = _prev_core
+else:
+    sys.modules.pop("core", None)
 
 
 def test_constants_values():
