@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+import os
+
 from src.execution.core import execute_step
 from .step_executor import run_validated_step
+
+# Path to the retry log used by :mod:`core.quest_engine`
+RETRY_LOG_PATH = os.path.join("logs", "retry_log.txt")
 
 
 def run_step_with_feedback(step: dict) -> bool:
