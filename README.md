@@ -162,21 +162,6 @@ This section walks through a fresh setup so you can try the project locally.
    python -m src.runner --mode quest
    ```
 
-6. **Run the tests**
-
-   The repository contains a small test suite powered by `pytest`. Some
-   tests depend on additional packages such as `langchain` and
-   `transformers`, so make sure all dependencies are installed first:
-
-   ```bash
-   pip install -r requirements.txt -r requirements-test.txt
-   pytest
-    # test requirements include requests>=2.0, PyYAML, and pymongo>=3.0
-
-   # run a subset of the test suite
-   pytest -k support_mode -q
-   pytest -k rls_mode -q
-   ```
 
 These steps should give you a working copy of Android MS11 and confidence
 that the provided modules function as expected.
@@ -333,7 +318,6 @@ Run the farming tests individually with:
 ```bash
 pytest tests/farming/test_terminal_farm.py
 ```
-or execute the full suite via `make test` once dependencies are installed.
 
 ## State Tracking and Profiles
 
@@ -712,32 +696,12 @@ Running the test suite also writes logs to this directory.
 
 ## Running Tests
 
-Before executing the test suite, ensure all dependencies are installed.
-You can run the helper script below or manually install the packages.
+Install the test requirements and run the suite with:
 
 ```bash
-./scripts/setup_test_env.sh
-```
-
-If you prefer to install manually, install the system packages and
-then the Python requirements:
-
-```bash
-sudo apt-get install tesseract-ocr libtesseract-dev
-# then install Python packages
 pip install -r requirements.txt -r requirements-test.txt
+pytest
 ```
-
-Once dependencies are installed you can run the tests directly with
-`pytest` or use the convenience target:
-
-```bash
-make test
-```
-Note: When running tests in headless CI, `pyautogui` requires a virtual display such as Xvfb.
-
-
-Launch the test suite with `xvfb-run -a pytest` or an equivalent wrapper.
 
 ## License Hooks
 
