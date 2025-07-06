@@ -27,6 +27,7 @@ except Exception:
     class _Table:
         def __init__(self, *args, **kwargs):
             self.rows = []
+            self.title = kwargs.get('title')
 
         def add_column(self, *args, **kwargs):
             pass
@@ -35,21 +36,30 @@ except Exception:
             self.rows.append(args)
 
         def __str__(self) -> str:  # pragma: no cover - trivial
-            return "\n".join(" | ".join(str(c) for c in r) for r in self.rows)
+            lines = []
+            if self.title:
+                lines.append(self.title)
+            lines.extend(" | ".join(str(c) for c in r) for r in self.rows)
+            return "\n".join(lines)
 
     table = types.ModuleType("table")
     table.Table = _Table
     _rich.table = table
 
     class _Layout:
-        def __init__(self, *args, **kwargs):
+        def __init__(self, content=None, *args, **kwargs):
+            self.content = content
             self.children = []
 
         def split_column(self, *layouts):
             self.children.extend(layouts)
 
         def __str__(self) -> str:  # pragma: no cover - trivial
-            return "\n".join(str(c) for c in self.children)
+            if self.children:
+                return "\n".join(str(c) for c in self.children)
+            if self.content is not None:
+                return str(self.content)
+            return ""
 
     layout = types.ModuleType("layout")
     layout.Layout = _Layout
