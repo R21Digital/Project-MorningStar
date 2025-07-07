@@ -5,6 +5,7 @@ import core.legacy_tracker as legacy_tracker
 import core.quest_state as qs
 import core.themepark_tracker as tp
 from core.constants import STATUS_EMOJI_MAP
+from core.utils import render_progress_bar
 from rich.console import Console
 
 
@@ -76,3 +77,23 @@ def test_show_unified_dashboard_invalid_mode():
 
     with pytest.raises(ValueError):
         unified.show_unified_dashboard(mode="bogus")
+
+
+def test_show_unified_dashboard_summary(monkeypatch, capsys):
+    Console.printed.clear() if hasattr(Console, "printed") else None
+
+    steps = [
+        {"id": 1, "title": "Intro", "category": "Tutorial", "completed": True},
+        {"id": 2, "title": "Next", "category": "Legacy"},
+    ]
+
+    monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: steps)
+    monkeypatch.setattr(tp, "load_themepark_chains", lambda: ["Jabba"])
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
+
+    unified.show_unified_dashboard(summary=True, legacy_steps=steps)
+    out = capsys.readouterr().out
+    assert "Tutorial" in out
+    assert "Legacy" in out
+    assert "Theme Parks" in out
+    assert render_progress_bar([STATUS_EMOJI_MAP["completed"]]) in out

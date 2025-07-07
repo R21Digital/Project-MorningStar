@@ -4,11 +4,14 @@ from __future__ import annotations
 
 from rich.console import Console
 from rich.layout import Layout
+from rich.table import Table
 
 from .legacy_tracker import load_legacy_steps
 from .legacy_dashboard import render_legacy_table
-from .themepark_tracker import load_themepark_chains
+from .themepark_tracker import load_themepark_chains, get_themepark_status
 from .themepark_dashboard import render_themepark_table
+from .quest_state import get_step_status
+from .utils import render_progress_bar
 
 
 def show_unified_dashboard(
@@ -16,6 +19,7 @@ def show_unified_dashboard(
     *,
     mode: str = "all",
     legacy_steps: list | None = None,
+    summary: bool = False,
 ) -> None:
     """Print a dashboard with quest progress based on ``mode``."""
 
@@ -30,7 +34,25 @@ def show_unified_dashboard(
     if themepark_quests is None:
         themepark_quests = load_themepark_chains()
 
-    legacy_table = render_legacy_table(legacy_steps)
+    if summary:
+        categories: dict[str, list[str]] = {}
+        if mode in {"legacy", "all"}:
+            for step in legacy_steps:
+                cat = step.get("category", "Legacy")
+                categories.setdefault(cat, []).append(get_step_status(step))
+        if mode in {"themepark", "all"}:
+            statuses = [get_themepark_status(q) for q in themepark_quests]
+            categories["Theme Parks"] = statuses
+
+        table = Table(title="Quest Progress Summary")
+        table.add_column("Category", style="bold")
+        table.add_column("Progress")
+        for cat, statuses in categories.items():
+            table.add_row(cat, render_progress_bar(statuses))
+        Console().print(table)
+        return
+
+    legacy_table = render_legacy_table(legacy_steps, summary=summary)
     themepark_table = render_themepark_table(themepark_quests)
 
     if mode == "legacy":

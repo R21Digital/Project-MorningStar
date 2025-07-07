@@ -5,13 +5,33 @@ from __future__ import annotations
 from rich.console import Console
 from rich.table import Table
 
+from .utils import render_progress_bar
+
 from .legacy_tracker import load_legacy_steps
 
 from .quest_state import get_step_status
 
 
-def build_legacy_progress_table(quest_steps: list) -> Table:
-    """Return a ``rich`` table showing ``quest_steps`` progress."""
+def build_legacy_progress_table(quest_steps: list, *, summary: bool = False) -> Table:
+    """Return a ``rich`` table showing ``quest_steps`` progress.
+
+    When ``summary`` is ``True`` quest steps are grouped by their ``category``
+    key and rendered using :func:`render_progress_bar`.
+    """
+
+    if summary:
+        table = Table(title="Legacy Quest Progress")
+        table.add_column("Category", style="bold")
+        table.add_column("Progress")
+
+        categories: dict[str, list[str]] = {}
+        for step in quest_steps:
+            category = step.get("category", "Legacy")
+            categories.setdefault(category, []).append(get_step_status(step))
+
+        for cat, statuses in categories.items():
+            table.add_row(cat, render_progress_bar(statuses))
+        return table
 
     table = Table(title="Legacy Quest Progress", show_lines=True)
     table.add_column("Step ID", style="bold", no_wrap=True)
@@ -27,18 +47,18 @@ def build_legacy_progress_table(quest_steps: list) -> Table:
     return table
 
 
-def render_legacy_table(quest_steps: list | None = None) -> Table:
+def render_legacy_table(quest_steps: list | None = None, *, summary: bool = False) -> Table:
     """Return a table for ``quest_steps`` or all legacy steps when ``None``."""
 
     if quest_steps is None:
         quest_steps = load_legacy_steps()
-    return build_legacy_progress_table(quest_steps)
+    return build_legacy_progress_table(quest_steps, summary=summary)
 
 
-def display_legacy_progress(quest_steps: list) -> None:
+def display_legacy_progress(quest_steps: list, *, summary: bool = False) -> None:
     """Print a table of ``quest_steps`` and completion status."""
 
-    Console().print(build_legacy_progress_table(quest_steps))
+    Console().print(build_legacy_progress_table(quest_steps, summary=summary))
 
 
 __all__ = ["build_legacy_progress_table", "display_legacy_progress", "render_legacy_table"]
