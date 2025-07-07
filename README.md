@@ -7,7 +7,9 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 ## Features
 - 🧭 Legacy Quest Dashboard: View progress with `--show-legacy-status`
 - 🎡 Theme Park Dashboard: View progress with `--show-themepark-status`
-- 🖥️ Unified Dashboard CLI: view both dashboards with `--show-dashboard`
+- 🖥️ Unified Dashboard CLI: view both dashboards with `--show-dashboard`, switch
+  tables with `--dashboard-mode`, toggle `--summary`/`--detailed`, and filter
+  by status using `--filter`
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
 
@@ -512,19 +514,18 @@ tables are shown in a split-pane layout:
 python main.py --show-dashboard
 ```
 
-Limit the output to one table with `--dashboard-mode`:
+Limit the output to one table with `--dashboard-mode`. Combine it with `--summary`
+or `--detailed` to control verbosity:
 
 ```bash
-python main.py --show-dashboard --dashboard-mode legacy
+python main.py --show-dashboard --dashboard-mode legacy --summary
+python main.py --show-dashboard --dashboard-mode themepark --detailed
 ```
 
-Use `--summary` for a condensed view or `--detailed` for full metrics. These
-flags are mutually exclusive. You can also limit rows to a single emoji with
-`--filter <emoji>`.
+Filter rows by status emoji with `--filter`:
 
 ```bash
-python main.py --show-dashboard --summary
-python main.py --show-dashboard --dashboard-mode themepark --detailed --filter 🏆
+python main.py --show-dashboard --filter ✅
 ```
 
 The split layout places the legacy table above the theme park table using Rich's
