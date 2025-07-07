@@ -17,6 +17,7 @@ def register_rich_stub():
     class _Table:
         def __init__(self, *args, **kwargs):
             self.rows = []
+            self.title = kwargs.get("title", "")
 
         def add_column(self, *args, **kwargs):
             pass
@@ -25,7 +26,10 @@ def register_rich_stub():
             self.rows.append(args)
 
         def __str__(self) -> str:  # pragma: no cover - trivial
-            return "\n".join(" | ".join(str(c) for c in r) for r in self.rows)
+            table_str = "\n".join(" | ".join(str(c) for c in r) for r in self.rows)
+            if self.title:
+                return f"{self.title}\n{table_str}" if table_str else self.title
+            return table_str
 
     table = types.ModuleType("table")
     table.Table = _Table
@@ -33,7 +37,7 @@ def register_rich_stub():
 
     class _Layout:
         def __init__(self, *args, **kwargs):
-            self.children = []
+            self.children = list(args)
 
         def split_column(self, *layouts):
             self.children.extend(layouts)
