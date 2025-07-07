@@ -1,4 +1,4 @@
-.PHONY: install test validate
+.PHONY: install test validate validate-batch-044
 
 install:
 	pip install -r requirements.txt
@@ -8,7 +8,10 @@ test:
 	pytest -q --tb=short
 
 validate:
-	@echo "\n🔍 Running QA validation script..."
-	@python codex_validation_check.py
-	@echo "\n🧪 Running full test suite..."
-	@pytest -q --tb=short
+        @echo "\n🔍 Running QA validation script..."
+        @python codex_validation_check.py
+        @echo "\n🧪 Running full test suite..."
+        @pytest -q --tb=short
+
+validate-batch-044:
+	python codex_validation_batch_044.py

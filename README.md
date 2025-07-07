@@ -713,6 +713,16 @@ pip install -r requirements.txt -r requirements-test.txt
 pytest
 ```
 
+### Makefile Commands
+
+The repository includes a small `Makefile` for running development tasks.
+Use the `validate-batch-044` target to execute the Codex batch validation
+script:
+
+```bash
+make validate-batch-044
+```
+
 ## License Hooks
 
 Several entry points are decorated with ``@requires_license`` from
