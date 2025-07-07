@@ -5,10 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Optional
 
-STATUS_COMPLETED = "✅"
-STATUS_FAILED = "❌"
-STATUS_IN_PROGRESS = "🕒"
-STATUS_NOT_STARTED = "🕓"  # updated to match summary
+from .constants import (
+    STATUS_COMPLETED,
+    STATUS_FAILED,
+    STATUS_IN_PROGRESS,
+    STATUS_NOT_STARTED,
+    STATUS_EMOJI_MAP,
+)
 
 # Default path for the saved quest log
 QUEST_LOG_PATH = "logs/quest_log.txt"
@@ -60,19 +63,15 @@ def read_saved_quest_log() -> List[str]:
 
 
 def get_step_status(step):
+    """Return the emoji representing the status of ``step``."""
     if not step or not isinstance(step, dict):
-        return STATUS_NOT_STARTED
+        return STATUS_EMOJI_MAP["not_started"]
 
-    if step.get("completed"):
-        return STATUS_COMPLETED
-    if step.get("failed"):
-        return STATUS_FAILED
-    if step.get("in_progress"):
-        return STATUS_IN_PROGRESS
-    if step.get("skipped"):
-        return STATUS_NOT_STARTED
+    for key in ("completed", "failed", "in_progress"):
+        if step.get(key):
+            return STATUS_EMOJI_MAP[key]
 
-    return STATUS_NOT_STARTED
+    return STATUS_EMOJI_MAP["not_started"]
 
 
 __all__ = [

@@ -9,8 +9,8 @@ def test_display_legacy_progress(capsys):
     ]
     legacy_dashboard.display_legacy_progress(steps)
     captured = capsys.readouterr()
-    assert "✅" in captured.out
-    assert "🕓" in captured.out
+    assert qs.STATUS_COMPLETED in captured.out
+    assert qs.STATUS_NOT_STARTED in captured.out
 
 
 def test_enriched_status_output(capsys):
@@ -21,6 +21,6 @@ def test_enriched_status_output(capsys):
     ]
     legacy_dashboard.display_legacy_progress(steps)
     captured = capsys.readouterr()
-    assert "✅" in captured.out
-    assert "❌" in captured.out
-    assert "🕒" in captured.out
+    assert qs.STATUS_COMPLETED in captured.out
+    assert qs.STATUS_FAILED in captured.out
+    assert qs.STATUS_IN_PROGRESS in captured.out
