@@ -12,6 +12,7 @@ from .themepark_tracker import load_themepark_chains, get_themepark_status
 from .themepark_dashboard import render_themepark_table
 from .quest_state import get_step_status
 from .utils import render_progress_bar
+from .constants import VALID_STATUS_EMOJIS
 
 
 def show_unified_dashboard(
@@ -20,8 +21,13 @@ def show_unified_dashboard(
     mode: str = "all",
     legacy_steps: list | None = None,
     summary: bool = False,
+    filter_emoji: str | None = None,
 ) -> None:
-    """Print a dashboard with quest progress based on ``mode``."""
+    """Print a dashboard with quest progress based on ``mode``.
+
+    ``filter_emoji`` may be one of :data:`core.constants.VALID_STATUS_EMOJIS` to
+    display only steps with that status.
+    """
 
     allowed_modes = {"legacy", "themepark", "all"}
     if mode not in allowed_modes:
@@ -33,6 +39,16 @@ def show_unified_dashboard(
         legacy_steps = load_legacy_steps()
     if themepark_quests is None:
         themepark_quests = load_themepark_chains()
+
+    if filter_emoji:
+        if filter_emoji not in VALID_STATUS_EMOJIS:
+            raise ValueError(
+                f"Invalid status emoji '{filter_emoji}'. Expected one of {', '.join(sorted(VALID_STATUS_EMOJIS))}"
+            )
+        if mode in {"legacy", "all"}:
+            legacy_steps = [s for s in legacy_steps if get_step_status(s) == filter_emoji]
+        if mode in {"themepark", "all"}:
+            themepark_quests = [q for q in themepark_quests if get_themepark_status(q) == filter_emoji]
 
     if summary:
         categories: dict[str, list[str]] = {}

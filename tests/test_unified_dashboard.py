@@ -5,6 +5,8 @@ import core.legacy_tracker as legacy_tracker
 import core.quest_state as qs
 import core.themepark_tracker as tp
 from core.constants import STATUS_EMOJI_MAP
+import main as legacy_main
+import sys
 from core.utils import render_progress_bar
 from rich.console import Console
 
@@ -88,6 +90,7 @@ def test_show_unified_dashboard_summary(monkeypatch, capsys):
     ]
 
     monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: steps)
+    monkeypatch.setattr(unified, "load_legacy_steps", lambda: steps)
     monkeypatch.setattr(tp, "load_themepark_chains", lambda: ["Jabba"])
     monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
 
@@ -97,3 +100,50 @@ def test_show_unified_dashboard_summary(monkeypatch, capsys):
     assert "Legacy" in out
     assert "Theme Parks" in out
     assert render_progress_bar([STATUS_EMOJI_MAP["completed"]]) in out
+
+
+def test_parse_args_summary(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["prog", "--summary"])
+    args = legacy_main.parse_args()
+    assert args.summary is True
+
+
+def test_parse_args_filter(monkeypatch):
+    emoji = STATUS_EMOJI_MAP["completed"]
+    monkeypatch.setattr(sys, "argv", ["prog", "--filter", emoji])
+    args = legacy_main.parse_args()
+    assert args.filter == emoji
+
+
+def test_show_unified_dashboard_filter(monkeypatch, capsys):
+    Console.printed.clear() if hasattr(Console, "printed") else None
+
+    steps = [
+        {"id": 1, "title": "Intro"},
+        {"id": 2, "title": "Second"},
+    ]
+    legacy_status = {
+        1: STATUS_EMOJI_MAP["completed"],
+        2: STATUS_EMOJI_MAP["failed"],
+    }
+    monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: steps)
+    monkeypatch.setattr(unified, "load_legacy_steps", lambda: steps)
+    monkeypatch.setattr(qs, "get_step_status", lambda step, log_lines=None: legacy_status[step["id"]])
+    monkeypatch.setattr(unified, "get_step_status", lambda step: legacy_status[step["id"]])
+
+    quests = ["Jabba", "Rebel"]
+    tp_status = {
+        "Jabba": STATUS_EMOJI_MAP["failed"],
+        "Rebel": STATUS_EMOJI_MAP["completed"],
+    }
+    monkeypatch.setattr(tp, "load_themepark_chains", lambda: quests)
+    monkeypatch.setattr(unified, "load_themepark_chains", lambda: quests)
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: tp_status[q])
+    monkeypatch.setattr(unified, "get_themepark_status", lambda q: tp_status[q])
+
+    unified.show_unified_dashboard(filter_emoji=STATUS_EMOJI_MAP["completed"])
+    out = capsys.readouterr().out
+    assert "Intro" in out
+    assert "Second" not in out
+    assert "Rebel" in out
+    assert "Jabba" not in out

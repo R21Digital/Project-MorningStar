@@ -10,6 +10,7 @@ from core.legacy_tracker import load_legacy_steps
 from core.themepark_dashboard import display_themepark_progress
 from core.themepark_tracker import load_themepark_chains
 from core.unified_dashboard import show_unified_dashboard
+from core.constants import VALID_STATUS_EMOJIS
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -44,7 +45,32 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default="all",
         help="Select sections to display in the dashboard",
     )
-    return parser.parse_args(argv)
+    view_group = parser.add_mutually_exclusive_group()
+    view_group.add_argument(
+        "--summary",
+        dest="summary",
+        action="store_true",
+        help="Show a summarized dashboard view",
+    )
+    view_group.add_argument(
+        "--detailed",
+        dest="summary",
+        action="store_false",
+        help="Show a detailed dashboard view (default)",
+    )
+    parser.set_defaults(summary=False)
+    parser.add_argument(
+        "--filter",
+        dest="filter",
+        metavar="EMOJI",
+        help="Only show quest steps with the given status emoji",
+    )
+    args = parser.parse_args(argv)
+    if args.filter and args.filter not in VALID_STATUS_EMOJIS:
+        parser.error(
+            f"Invalid emoji {args.filter!r}. Expected one of {', '.join(sorted(VALID_STATUS_EMOJIS))}"
+        )
+    return args
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -59,7 +85,11 @@ def main(argv: list[str] | None = None) -> None:
         display_themepark_progress(load_themepark_chains())
 
     if args.show_dashboard:
-        show_unified_dashboard(mode=args.dashboard_mode)
+        show_unified_dashboard(
+            mode=args.dashboard_mode,
+            summary=args.summary,
+            filter_emoji=args.filter,
+        )
         return
 
     if args.legacy or not (args.legacy or args.show_legacy_status or args.show_themepark_status):
