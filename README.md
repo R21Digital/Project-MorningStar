@@ -518,6 +518,15 @@ Limit the output to one table with `--dashboard-mode`:
 python main.py --show-dashboard --dashboard-mode legacy
 ```
 
+Use `--summary` for a condensed view or `--detailed` for full metrics. These
+flags are mutually exclusive. You can also limit rows to a single emoji with
+`--filter <emoji>`.
+
+```bash
+python main.py --show-dashboard --summary
+python main.py --show-dashboard --dashboard-mode themepark --detailed --filter 🏆
+```
+
 The split layout places the legacy table above the theme park table using Rich's
 `Layout` class.
 
