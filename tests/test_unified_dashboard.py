@@ -4,14 +4,15 @@ import core.unified_dashboard as unified
 import core.legacy_tracker as legacy_tracker
 import core.quest_state as qs
 import core.themepark_tracker as tp
+from core.constants import STATUS_EMOJI_MAP
 from rich.console import Console
 
 
 def test_show_unified_dashboard(monkeypatch, capsys):
     Console.printed.clear() if hasattr(Console, "printed") else None
     monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: [{"id": 1, "title": "First"}])
-    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: qs.STATUS_COMPLETED)
-    monkeypatch.setattr(tp, "get_themepark_status", lambda q: qs.STATUS_COMPLETED)
+    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: STATUS_EMOJI_MAP["completed"])
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
 
     unified.show_unified_dashboard(["Jabba"])
     out = capsys.readouterr().out
@@ -24,8 +25,8 @@ def test_show_unified_dashboard_modes(monkeypatch, capsys, mode):
     Console.printed.clear() if hasattr(Console, "printed") else None
     monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: [{"id": 1, "title": "First"}])
     monkeypatch.setattr(tp, "load_themepark_chains", lambda: ["Jabba"])
-    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: qs.STATUS_COMPLETED)
-    monkeypatch.setattr(tp, "get_themepark_status", lambda q: qs.STATUS_COMPLETED)
+    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: STATUS_EMOJI_MAP["completed"])
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
 
     unified.show_unified_dashboard(mode=mode)
     # Ensure some output was produced for sanity
@@ -41,8 +42,8 @@ def test_show_unified_dashboard_custom_steps(monkeypatch, capsys):
         raise AssertionError("load_legacy_steps should not be called")
 
     monkeypatch.setattr(legacy_tracker, "load_legacy_steps", fail)
-    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: qs.STATUS_COMPLETED)
-    monkeypatch.setattr(tp, "get_themepark_status", lambda q: qs.STATUS_COMPLETED)
+    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: STATUS_EMOJI_MAP["completed"])
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
 
     steps = [{"id": 1, "title": "First"}]
     unified.show_unified_dashboard(["Jabba"], legacy_steps=steps)
@@ -61,8 +62,8 @@ def test_show_unified_dashboard_custom_themepark(monkeypatch, capsys):
 
     monkeypatch.setattr(tp, "load_themepark_chains", fail)
     monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: [{"id": 1, "title": "First"}])
-    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: qs.STATUS_COMPLETED)
-    monkeypatch.setattr(tp, "get_themepark_status", lambda q: qs.STATUS_COMPLETED)
+    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: STATUS_EMOJI_MAP["completed"])
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
 
     unified.show_unified_dashboard(themepark_quests=["Jabba"])
     out = capsys.readouterr().out

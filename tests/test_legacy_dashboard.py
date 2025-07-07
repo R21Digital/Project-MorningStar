@@ -1,5 +1,5 @@
 import core.legacy_dashboard as legacy_dashboard
-import core.quest_state as qs
+from core.constants import STATUS_EMOJI_MAP
 
 
 def test_display_legacy_progress(capsys):
@@ -9,8 +9,8 @@ def test_display_legacy_progress(capsys):
     ]
     legacy_dashboard.display_legacy_progress(steps)
     captured = capsys.readouterr()
-    assert qs.STATUS_COMPLETED in captured.out
-    assert qs.STATUS_NOT_STARTED in captured.out
+    assert STATUS_EMOJI_MAP["completed"] in captured.out
+    assert STATUS_EMOJI_MAP["not_started"] in captured.out
 
 
 def test_enriched_status_output(capsys):
@@ -21,6 +21,6 @@ def test_enriched_status_output(capsys):
     ]
     legacy_dashboard.display_legacy_progress(steps)
     captured = capsys.readouterr()
-    assert qs.STATUS_COMPLETED in captured.out
-    assert qs.STATUS_FAILED in captured.out
-    assert qs.STATUS_IN_PROGRESS in captured.out
+    assert STATUS_EMOJI_MAP["completed"] in captured.out
+    assert STATUS_EMOJI_MAP["failed"] in captured.out
+    assert STATUS_EMOJI_MAP["in_progress"] in captured.out
