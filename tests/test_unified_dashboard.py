@@ -49,3 +49,10 @@ def test_show_unified_dashboard_custom_steps(monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "Legacy Quest Progress" in out
     assert "Theme Park Quest" in out
+
+
+def test_show_unified_dashboard_invalid_mode():
+    """Invalid modes should raise a ValueError."""
+
+    with pytest.raises(ValueError):
+        unified.show_unified_dashboard(mode="bogus")
