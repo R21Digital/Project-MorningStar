@@ -22,6 +22,7 @@ from core.constants import (
     STATUS_COMPLETED,
     STATUS_FAILED,
     STATUS_IN_PROGRESS,
+    STATUS_NOT_STARTED,
     STATUS_UNKNOWN,
     __all__,
 )
@@ -42,11 +43,13 @@ def test_constants_values():
     assert STATUS_COMPLETED == "✅ Completed"
     assert STATUS_FAILED == "❌ Failed"
     assert STATUS_IN_PROGRESS == "⏳ In Progress"
+    assert STATUS_NOT_STARTED == "📝 Not Started"
     assert STATUS_UNKNOWN == "❓ Unknown"
     for name in (
         "STATUS_COMPLETED",
         "STATUS_FAILED",
         "STATUS_IN_PROGRESS",
+        "STATUS_NOT_STARTED",
         "STATUS_UNKNOWN",
     ):
         assert name in __all__

@@ -9,6 +9,7 @@ from .constants import (
     STATUS_COMPLETED,
     STATUS_FAILED,
     STATUS_IN_PROGRESS,
+    STATUS_NOT_STARTED,
     STATUS_UNKNOWN,
 )
 
@@ -89,5 +90,6 @@ __all__ = [
     "STATUS_COMPLETED",
     "STATUS_FAILED",
     "STATUS_IN_PROGRESS",
+    "STATUS_NOT_STARTED",
     "STATUS_UNKNOWN",
 ]
