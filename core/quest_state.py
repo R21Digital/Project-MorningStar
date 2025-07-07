@@ -5,13 +5,10 @@ from __future__ import annotations
 from pathlib import Path
 from typing import List, Optional
 
-from .constants import (
-    STATUS_COMPLETED,
-    STATUS_FAILED,
-    STATUS_IN_PROGRESS,
-    STATUS_NOT_STARTED,
-    STATUS_UNKNOWN,
-)
+STATUS_COMPLETED = "✅"
+STATUS_FAILED = "❌"
+STATUS_IN_PROGRESS = "🕒"
+STATUS_NOT_STARTED = "🕓"  # updated to match summary
 
 # Default path for the saved quest log
 QUEST_LOG_PATH = "logs/quest_log.txt"
@@ -62,39 +59,19 @@ def read_saved_quest_log() -> List[str]:
     return parse_quest_log(data)
 
 
-def get_step_status(step: str | dict, log_lines: Optional[List[str]] = None) -> str:
-    """Return a status string for ``step``.
+def get_step_status(step):
+    if not step or not isinstance(step, dict):
+        return STATUS_NOT_STARTED
 
-    ``step`` may be an identifier string or a dictionary containing boolean
-    status flags (``completed``, ``in_progress``, ``failed`` or ``skipped``).
-    When a dictionary is provided the flags are checked before scanning the
-    quest log.
-    """
-    if log_lines is None:
-        log_lines = read_saved_quest_log()
+    if step.get("completed"):
+        return STATUS_COMPLETED
+    if step.get("failed"):
+        return STATUS_FAILED
+    if step.get("in_progress"):
+        return STATUS_IN_PROGRESS
+    if step.get("skipped"):
+        return STATUS_NOT_STARTED
 
-    if isinstance(step, dict):
-        if step.get("completed"):
-            return STATUS_COMPLETED
-        if step.get("failed"):
-            return STATUS_FAILED
-        if step.get("skipped"):
-            return STATUS_NOT_STARTED
-        if step.get("in_progress"):
-            return STATUS_IN_PROGRESS
-        step_id = str(step.get("id") or step.get("title") or step.get("name") or step)
-    else:
-        step_id = str(step)
-    step_id = step_id.lower()
-    for line in log_lines:
-        lowered = line.lower()
-        if step_id in lowered:
-            if "failed" in lowered:
-                return STATUS_FAILED
-            if "complete" in lowered:
-                return STATUS_COMPLETED
-            if "progress" in lowered or "started" in lowered or "in progress" in lowered:
-                return STATUS_IN_PROGRESS
     return STATUS_NOT_STARTED
 
 
@@ -109,5 +86,4 @@ __all__ = [
     "STATUS_FAILED",
     "STATUS_IN_PROGRESS",
     "STATUS_NOT_STARTED",
-    "STATUS_UNKNOWN",
 ]
