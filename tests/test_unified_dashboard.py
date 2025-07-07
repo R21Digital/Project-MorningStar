@@ -97,3 +97,20 @@ def test_show_unified_dashboard_summary(monkeypatch, capsys):
     assert "Legacy" in out
     assert "Theme Parks" in out
     assert render_progress_bar([STATUS_EMOJI_MAP["completed"]]) in out
+
+
+def test_show_unified_dashboard_filter(monkeypatch, capsys):
+    Console.printed.clear() if hasattr(Console, "printed") else None
+
+    steps = [
+        {"id": 1, "title": "Intro", "completed": True},
+        {"id": 2, "title": "Next"},
+    ]
+
+    monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: steps)
+    monkeypatch.setattr(tp, "load_themepark_chains", lambda: ["Jabba"])
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: STATUS_EMOJI_MAP["completed"])
+
+    unified.show_unified_dashboard(filter_status=STATUS_EMOJI_MAP["completed"])
+    out = capsys.readouterr().out
+    assert "Next" not in out

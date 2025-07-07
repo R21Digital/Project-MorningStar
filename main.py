@@ -44,6 +44,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default="all",
         help="Select sections to display in the dashboard",
     )
+    parser.add_argument(
+        "--filter-status",
+        dest="filter_status",
+        help="Only display rows matching the given status emoji",
+    )
     return parser.parse_args(argv)
 
 
@@ -59,7 +64,9 @@ def main(argv: list[str] | None = None) -> None:
         display_themepark_progress(load_themepark_chains())
 
     if args.show_dashboard:
-        show_unified_dashboard(mode=args.dashboard_mode)
+        show_unified_dashboard(
+            mode=args.dashboard_mode, filter_status=args.filter_status
+        )
         return
 
     if args.legacy or not (args.legacy or args.show_legacy_status or args.show_themepark_status):

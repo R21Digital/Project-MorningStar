@@ -20,6 +20,7 @@ def show_unified_dashboard(
     mode: str = "all",
     legacy_steps: list | None = None,
     summary: bool = False,
+    filter_status: str | None = None,
 ) -> None:
     """Print a dashboard with quest progress based on ``mode``."""
 
@@ -33,6 +34,16 @@ def show_unified_dashboard(
         legacy_steps = load_legacy_steps()
     if themepark_quests is None:
         themepark_quests = load_themepark_chains()
+
+    if filter_status:
+        if mode in {"legacy", "all"}:
+            legacy_steps = [
+                s for s in legacy_steps if get_step_status(s) == filter_status
+            ]
+        if mode in {"themepark", "all"}:
+            themepark_quests = [
+                q for q in themepark_quests if get_themepark_status(q) == filter_status
+            ]
 
     if summary:
         categories: dict[str, list[str]] = {}

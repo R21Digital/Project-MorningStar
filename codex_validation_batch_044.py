@@ -60,7 +60,7 @@ def main() -> None:
         "--dashboard-mode",
         "--summary",
         "--detailed",
-        "--filter",
+        "--filter-status",
     ]
 
     dashboard_funcs = [
