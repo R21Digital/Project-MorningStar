@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.log_manager import start_log

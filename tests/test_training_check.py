@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from modules.skills import training_check

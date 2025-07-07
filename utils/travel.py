@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Sequence, Tuple, Any, Optional
+from typing import Iterable, Sequence, Any, Optional
 
 from modules.travel.location_selector import select_target
 from src.movement.movement_profiles import walk_to_coords

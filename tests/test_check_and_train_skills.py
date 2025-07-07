@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 import src.main as main

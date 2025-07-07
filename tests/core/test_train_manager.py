@@ -1,5 +1,4 @@
 import logging
-import pytest
 from core.train_manager import TrainManager
 
 

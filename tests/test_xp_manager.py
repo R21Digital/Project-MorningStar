@@ -1,7 +1,4 @@
-import os
-import sys
 from unittest.mock import MagicMock
-import pytest
 
 
 from src.xp_manager import XPManager

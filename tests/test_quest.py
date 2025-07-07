@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.execution.quest import execute_quest

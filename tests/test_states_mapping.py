@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.vision import register_state, detect_state, handle_state

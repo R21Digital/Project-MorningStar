@@ -1,6 +1,5 @@
-import os
 import sys
-from types import SimpleNamespace, ModuleType
+from types import ModuleType
 
 
 from src.game_state.feedback import watch_text

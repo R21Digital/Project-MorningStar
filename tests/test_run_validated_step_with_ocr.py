@@ -1,4 +1,3 @@
-import os
 import sys
 import time
 from types import ModuleType

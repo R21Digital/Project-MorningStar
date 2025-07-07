@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from scripts.data import extract_trainers

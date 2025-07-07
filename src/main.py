@@ -4,8 +4,7 @@ import argparse
 import json
 import os
 import threading
-import time
-from typing import Dict, Any, Mapping, List
+from typing import Dict, Any, Mapping
 
 try:
     from discord.ext import commands

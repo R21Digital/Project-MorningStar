@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from android_ms11.modes.medic_mode import start_medic

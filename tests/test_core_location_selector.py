@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from core import location_selector

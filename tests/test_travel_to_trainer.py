@@ -1,10 +1,7 @@
-import os
-import sys
 
 
 from modules.travel import trainer_travel
 from scripts.travel import shuttle
-from src.movement import movement_profiles
 
 
 def test_travel_to_trainer_invokes_navigation(monkeypatch):

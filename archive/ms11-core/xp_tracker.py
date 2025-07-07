@@ -3,7 +3,6 @@ XP Tracker module for Android MS11.
 Combines OCR and heuristic estimation to track character progression.
 """
 
-import time
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 

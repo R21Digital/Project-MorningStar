@@ -1,5 +1,4 @@
 import time
-from typing import List
 
 from utils.logger import logger
 from core.legacy_tracker import load_legacy_steps, read_quest_log

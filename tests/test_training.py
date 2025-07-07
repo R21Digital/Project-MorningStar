@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.automation.training import train_with_npc

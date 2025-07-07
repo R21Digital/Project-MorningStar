@@ -1,6 +1,4 @@
-import os
 import sys
-import pytest
 
 
 from core.mode_scheduler import get_next_mode

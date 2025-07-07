@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from modules.grinding import grind_mode

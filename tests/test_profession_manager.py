@@ -1,10 +1,6 @@
-import os
-import sys
-import bs4
 
 
 from core.profession_manager import ProfessionManager
-import utils.ocr_scanner as ocr_scanner
 
 
 def test_train_missing_skills_travels(monkeypatch):

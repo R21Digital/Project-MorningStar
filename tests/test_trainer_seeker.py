@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from modules.training import trainer_seeker

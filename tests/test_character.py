@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.state.character import update_location, log_quest_progress, character_state
