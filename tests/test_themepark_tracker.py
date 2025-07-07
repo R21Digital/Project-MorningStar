@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+from core.constants import STATUS_EMOJI_MAP, STATUS_UNKNOWN
 
 # Load the module directly to avoid running core.__init__
 spec = importlib.util.spec_from_file_location(
@@ -18,10 +19,10 @@ def test_get_themepark_status(monkeypatch):
     ]
     monkeypatch.setattr(themepark_tracker, "read_themepark_log", lambda: logs)
 
-    assert themepark_tracker.get_themepark_status("Imperial Museum") == themepark_tracker.STATUS_COMPLETED
-    assert themepark_tracker.get_themepark_status("Rebel Adventure") == themepark_tracker.STATUS_IN_PROGRESS
-    assert themepark_tracker.get_themepark_status("Science Quest") == themepark_tracker.STATUS_FAILED
-    assert themepark_tracker.get_themepark_status("Unknown Quest") == themepark_tracker.STATUS_UNKNOWN
+    assert themepark_tracker.get_themepark_status("Imperial Museum") == STATUS_EMOJI_MAP["completed"]
+    assert themepark_tracker.get_themepark_status("Rebel Adventure") == STATUS_EMOJI_MAP["in_progress"]
+    assert themepark_tracker.get_themepark_status("Science Quest") == STATUS_EMOJI_MAP["failed"]
+    assert themepark_tracker.get_themepark_status("Unknown Quest") == STATUS_UNKNOWN
 
 
 def test_is_themepark_quest_active(monkeypatch):
