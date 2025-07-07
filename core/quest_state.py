@@ -77,7 +77,7 @@ def get_step_status(step_id: str, log_lines: Optional[List[str]] = None) -> str:
                 return STATUS_COMPLETED
             if "progress" in lowered or "started" in lowered or "in progress" in lowered:
                 return STATUS_IN_PROGRESS
-    return STATUS_UNKNOWN
+    return STATUS_NOT_STARTED
 
 
 __all__ = [

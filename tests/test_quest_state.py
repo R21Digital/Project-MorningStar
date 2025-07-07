@@ -29,4 +29,4 @@ def test_get_step_status(tmp_path, monkeypatch):
     assert qs.get_step_status("1") == qs.STATUS_COMPLETED
     assert qs.get_step_status("2") == qs.STATUS_FAILED
     assert qs.get_step_status("3") == qs.STATUS_IN_PROGRESS
-    assert qs.get_step_status("4") == qs.STATUS_UNKNOWN
+    assert qs.get_step_status("4") == qs.STATUS_NOT_STARTED
