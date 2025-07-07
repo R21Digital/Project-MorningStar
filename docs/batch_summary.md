@@ -1,4 +1,4 @@
-# Galactic Beholder – Batch Summary (030–039)
+# Galactic Beholder – Batch Summary (030–040)
 
 ## ✅ Batch 030
 - Introduced the unified dashboard and theme park tracker.
@@ -40,6 +40,11 @@
 - Added basic execution fallbacks stub for quest steps.
 - Refactored dashboard helpers and rich stubs for cleaner output.
 - Expanded validation script coverage.
+
+## ✅ Batch 040
+- Added a new quest status constant.
+- Validated dashboard mode options at runtime.
+- Cleaned up linting via ruff.
 
 ---
 
