@@ -9,7 +9,7 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 - 🎡 Theme Park Dashboard: View progress with `--show-themepark-status`
 - 🖥️ Unified Dashboard CLI: view both dashboards with `--show-dashboard`, switch
   tables with `--dashboard-mode`, toggle `--summary`/`--detailed`, and filter
-  by status using `--filter`
+  by status using `--filter-status`
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
 
@@ -522,10 +522,10 @@ python main.py --show-dashboard --dashboard-mode legacy --summary
 python main.py --show-dashboard --dashboard-mode themepark --detailed
 ```
 
-Filter rows by status emoji with `--filter`:
+Filter rows by status emoji with `--filter-status`:
 
 ```bash
-python main.py --show-dashboard --filter ✅
+python main.py --show-dashboard --filter-status ✅
 ```
 
 The split layout places the legacy table above the theme park table using Rich's
