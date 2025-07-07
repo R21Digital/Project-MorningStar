@@ -11,7 +11,7 @@ def test_display_legacy_progress(monkeypatch, capsys):
     legacy_dashboard.display_legacy_progress(steps)
     captured = capsys.readouterr()
     assert "✅ Completed" in captured.out
-    assert "❓ Unknown" in captured.out
+    assert "🕒 Not Started" in captured.out
 
 
 def test_enriched_status_output(monkeypatch, capsys):
