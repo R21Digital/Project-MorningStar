@@ -723,6 +723,12 @@ script:
 make validate-batch-044
 ```
 
+Use the `validate-batch-045` target to run the next batch's validation script:
+
+```bash
+make validate-batch-045
+```
+
 ## License Hooks
 
 Several entry points are decorated with ``@requires_license`` from
