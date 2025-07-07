@@ -30,3 +30,10 @@ def test_get_step_status(tmp_path, monkeypatch):
     assert qs.get_step_status("2") == qs.STATUS_FAILED
     assert qs.get_step_status("3") == qs.STATUS_IN_PROGRESS
     assert qs.get_step_status("4") == qs.STATUS_NOT_STARTED
+
+
+def test_get_step_status_returns_not_started():
+    from core.quest_state import get_step_status, STATUS_NOT_STARTED
+
+    assert get_step_status({}) == STATUS_NOT_STARTED
+    assert get_step_status(None) == STATUS_NOT_STARTED
