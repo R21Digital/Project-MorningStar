@@ -11,6 +11,7 @@ def test_parse_args_defaults(monkeypatch):
     assert args.show_legacy_status is False
     assert args.show_dashboard is False
     assert args.dashboard_mode == "all"
+    assert args.filter_status is None
 
 
 def test_main_runs_legacy_by_default(monkeypatch):
@@ -26,10 +27,16 @@ def test_main_runs_legacy_by_default(monkeypatch):
 def test_main_show_dashboard(monkeypatch):
     mod = importlib.reload(legacy_main)
     called = {}
-    monkeypatch.setattr(mod, "show_unified_dashboard", lambda *, mode="all": called.setdefault("dash", mode))
+    monkeypatch.setattr(
+        mod,
+        "show_unified_dashboard",
+        lambda *, mode="all", filter_status=None: called.setdefault(
+            "dash", (mode, filter_status)
+        ),
+    )
     monkeypatch.setattr(mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True))
     mod.main(["--show-dashboard", "--dashboard-mode", "legacy"])
-    assert called == {"dash": "legacy"}
+    assert called == {"dash": ("legacy", None)}
 
 
 def test_main_show_legacy_status(monkeypatch):
@@ -40,3 +47,24 @@ def test_main_show_legacy_status(monkeypatch):
     monkeypatch.setattr(mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True))
     mod.main(["--show-legacy-status"])
     assert called == {"steps": [1]}
+
+
+def test_parse_args_filter_status(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["prog", "--filter-status", "✅"])
+    args = legacy_main.parse_args()
+    assert args.filter_status == "✅"
+
+
+def test_main_show_dashboard_filter(monkeypatch):
+    mod = importlib.reload(legacy_main)
+    called = {}
+    monkeypatch.setattr(
+        mod,
+        "show_unified_dashboard",
+        lambda *, mode="all", filter_status=None: called.setdefault(
+            "dash", (mode, filter_status)
+        ),
+    )
+    monkeypatch.setattr(mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True))
+    mod.main(["--show-dashboard", "--filter-status", "✅"])
+    assert called == {"dash": ("all", "✅")}

@@ -9,7 +9,7 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 - 🎡 Theme Park Dashboard: View progress with `--show-themepark-status`
 - 🖥️ Unified Dashboard CLI: view both dashboards with `--show-dashboard`, switch
   tables with `--dashboard-mode`, toggle `--summary`/`--detailed`, and filter
-  by status using `--filter-status`
+  quest rows using `--filter-status`
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
 

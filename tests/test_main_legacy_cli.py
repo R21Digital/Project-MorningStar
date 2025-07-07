@@ -84,14 +84,20 @@ def test_parse_args_dashboard_mode(monkeypatch):
     assert args.show_dashboard is False
 
 
+def test_parse_args_filter_status(monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["prog", "--filter-status", "✅"])
+    args = legacy_main.parse_args()
+    assert args.filter_status == "✅"
+
+
 def test_main_show_dashboard(monkeypatch):
     legacy_main_mod = importlib.reload(legacy_main)
     called = {}
     monkeypatch.setattr(
         legacy_main_mod,
         "show_unified_dashboard",
-        lambda *, mode="all", summary=False, filter_emoji=None: called.setdefault(
-            "dashboard", (mode, summary, filter_emoji)
+        lambda *, mode="all", summary=False, filter_status=None: called.setdefault(
+            "dashboard", (mode, summary, filter_status)
         ),
     )
     monkeypatch.setattr(
