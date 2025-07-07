@@ -15,14 +15,16 @@ def show_unified_dashboard(
     themepark_quests: list[str] | None = None,
     *,
     mode: str = "all",
+    legacy_steps: list | None = None,
 ) -> None:
     """Print a dashboard with quest progress based on ``mode``."""
 
-    steps = load_legacy_steps()
+    if legacy_steps is None:
+        legacy_steps = load_legacy_steps()
     if themepark_quests is None:
         themepark_quests = load_themepark_chains()
 
-    legacy_table = render_legacy_table(steps)
+    legacy_table = render_legacy_table(legacy_steps)
     themepark_table = render_themepark_table(themepark_quests)
 
     if mode == "legacy":

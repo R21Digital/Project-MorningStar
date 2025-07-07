@@ -30,3 +30,22 @@ def test_show_unified_dashboard_modes(monkeypatch, capsys, mode):
     unified.show_unified_dashboard(mode=mode)
     # Ensure some output was produced for sanity
     assert capsys.readouterr().out
+
+
+def test_show_unified_dashboard_custom_steps(monkeypatch, capsys):
+    """Providing ``legacy_steps`` should bypass ``load_legacy_steps``."""
+
+    Console.printed.clear() if hasattr(Console, "printed") else None
+
+    def fail():
+        raise AssertionError("load_legacy_steps should not be called")
+
+    monkeypatch.setattr(legacy_tracker, "load_legacy_steps", fail)
+    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: qs.STATUS_COMPLETED)
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: qs.STATUS_COMPLETED)
+
+    steps = [{"id": 1, "title": "First"}]
+    unified.show_unified_dashboard(["Jabba"], legacy_steps=steps)
+    out = capsys.readouterr().out
+    assert "Legacy Quest Progress" in out
+    assert "Theme Park Quest" in out
