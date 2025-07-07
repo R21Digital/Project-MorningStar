@@ -51,6 +51,25 @@ def test_show_unified_dashboard_custom_steps(monkeypatch, capsys):
     assert "Theme Park Quest" in out
 
 
+def test_show_unified_dashboard_custom_themepark(monkeypatch, capsys):
+    """Providing ``themepark_quests`` should bypass ``load_themepark_chains``."""
+
+    Console.printed.clear() if hasattr(Console, "printed") else None
+
+    def fail():
+        raise AssertionError("load_themepark_chains should not be called")
+
+    monkeypatch.setattr(tp, "load_themepark_chains", fail)
+    monkeypatch.setattr(legacy_tracker, "load_legacy_steps", lambda: [{"id": 1, "title": "First"}])
+    monkeypatch.setattr(qs, "get_step_status", lambda step_id, log_lines=None: qs.STATUS_COMPLETED)
+    monkeypatch.setattr(tp, "get_themepark_status", lambda q: qs.STATUS_COMPLETED)
+
+    unified.show_unified_dashboard(themepark_quests=["Jabba"])
+    out = capsys.readouterr().out
+    assert "Legacy Quest Progress" in out
+    assert "Theme Park Quest" in out
+
+
 def test_show_unified_dashboard_invalid_mode():
     """Invalid modes should raise a ValueError."""
 
