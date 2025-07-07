@@ -91,12 +91,12 @@ def test_main_show_dashboard(monkeypatch):
         legacy_main_mod,
         "show_unified_dashboard",
         lambda *, mode="all", summary=False, filter_emoji=None: called.setdefault(
-            "dashboard", mode
+            "dashboard", (mode, summary, filter_emoji)
         ),
     )
     monkeypatch.setattr(
         legacy_main_mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True)
     )
     legacy_main_mod.main(["--show-dashboard", "--dashboard-mode", "legacy"])
-    assert called == {"dashboard": "legacy"}
+    assert called == {"dashboard": ("legacy", False, None)}
 
