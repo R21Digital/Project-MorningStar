@@ -1,9 +1,6 @@
-import os
-import sys
 
 
 from core import trainer_ocr
-import pytesseract
 
 
 def test_get_untrained_skills_from_text():

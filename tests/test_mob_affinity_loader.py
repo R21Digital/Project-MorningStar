@@ -1,10 +1,8 @@
 import json
-import os
-import sys
 from pathlib import Path
 
 
-from utils.load_mob_affinity import load_mob_affinity, MOB_AFFINITY_FILE
+from utils.load_mob_affinity import load_mob_affinity
 
 
 def test_load_mob_affinity_missing(monkeypatch):

@@ -1,5 +1,4 @@
 import os
-import sys
 
 
 from src.logging.session_log import log_step

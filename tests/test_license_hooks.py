@@ -1,6 +1,4 @@
-import os
 import warnings
-import sys
 
 
 from utils.license_hooks import requires_license

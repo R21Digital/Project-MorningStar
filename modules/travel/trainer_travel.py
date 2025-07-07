@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict
 
 from core.waypoint_verifier import verify_waypoint_stability
 from scripts.travel import shuttle

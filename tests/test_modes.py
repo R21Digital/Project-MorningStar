@@ -1,5 +1,3 @@
-import os
-import sys
 import importlib
 import pytest
 from core import profile_loader, state_tracker

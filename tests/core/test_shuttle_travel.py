@@ -1,4 +1,3 @@
-import pytest
 
 from core.shuttle_travel import get_shuttle_path
 

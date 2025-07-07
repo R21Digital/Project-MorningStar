@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from modules.travel import location_selector

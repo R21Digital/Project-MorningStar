@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from core.session_monitor import monitor_session

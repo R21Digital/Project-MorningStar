@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.main import parse_args

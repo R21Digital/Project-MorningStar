@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Tuple, Optional
+from typing import Tuple
 
 import pyautogui
 

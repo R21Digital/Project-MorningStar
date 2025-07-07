@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from utils.source_verifier import file_changed, verify_source

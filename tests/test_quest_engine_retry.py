@@ -1,4 +1,3 @@
-import os
 from core import quest_engine
 
 def test_log_retry_creates_csv(tmp_path, monkeypatch):

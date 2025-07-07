@@ -1,9 +1,6 @@
-import os
-import sys
 
 
 from modules.farming.terminal_farm import TerminalFarmer
-import core.session_tracker as session_tracker
 
 
 def test_parse_missions_filters_invalid_lines():

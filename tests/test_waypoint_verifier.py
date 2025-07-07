@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from core.waypoint_verifier import verify_waypoint_stability

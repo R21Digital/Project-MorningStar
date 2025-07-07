@@ -1,6 +1,4 @@
 import importlib
-import os
-import sys
 
 
 from core import profile_loader, state_tracker, mode_selector

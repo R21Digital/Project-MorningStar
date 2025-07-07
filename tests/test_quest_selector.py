@@ -1,12 +1,9 @@
-import os
-import sys
 import sqlite3
 import json
 import random
 
 
 from src import quest_selector
-from src.db import database
 
 
 def make_db():

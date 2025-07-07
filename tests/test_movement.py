@@ -1,5 +1,3 @@
-import os
-import sys
 
 
 from src.execution.movement import execute_movement
