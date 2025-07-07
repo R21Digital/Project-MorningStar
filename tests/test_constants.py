@@ -24,6 +24,9 @@ from core.constants import (
     STATUS_IN_PROGRESS,
     STATUS_NOT_STARTED,
     STATUS_UNKNOWN,
+    STATUS_EMOJI_MAP,
+    STATUS_NAME_FROM_EMOJI,
+    VALID_STATUS_EMOJIS,
     __all__,
 )
 
@@ -40,17 +43,30 @@ else:
 
 
 def test_constants_values():
-    assert STATUS_COMPLETED == "✅ Completed"
-    assert STATUS_FAILED == "❌ Failed"
-    assert STATUS_IN_PROGRESS == "⏳ In Progress"
-    assert STATUS_NOT_STARTED == "🕒 Not Started"
-    assert STATUS_UNKNOWN == "❓ Unknown"
+    assert STATUS_COMPLETED == "✅"
+    assert STATUS_FAILED == "❌"
+    assert STATUS_IN_PROGRESS == "⏳"
+    assert STATUS_NOT_STARTED == "🕒"
+    assert STATUS_UNKNOWN == "❓"
     for name in (
         "STATUS_COMPLETED",
         "STATUS_FAILED",
         "STATUS_IN_PROGRESS",
         "STATUS_NOT_STARTED",
         "STATUS_UNKNOWN",
+        "STATUS_EMOJI_MAP",
+        "STATUS_NAME_FROM_EMOJI",
+        "VALID_STATUS_EMOJIS",
     ):
         assert name in __all__
+
+    expected_map = {
+        "completed": STATUS_COMPLETED,
+        "failed": STATUS_FAILED,
+        "in_progress": STATUS_IN_PROGRESS,
+        "not_started": STATUS_NOT_STARTED,
+    }
+    assert STATUS_EMOJI_MAP == expected_map
+    assert STATUS_NAME_FROM_EMOJI == {v: k for k, v in expected_map.items()}
+    assert VALID_STATUS_EMOJIS == set(expected_map.values())
 
