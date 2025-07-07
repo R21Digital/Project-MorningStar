@@ -92,6 +92,7 @@ __all__ = [
     "run_full_legacy_quest",
     "display_legacy_progress",
     "render_legacy_table",
+    "show_legacy_dashboard",
     "parse_quest_log",
     "is_step_completed",
     "scan_log_file_for_step",

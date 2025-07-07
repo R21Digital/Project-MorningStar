@@ -24,3 +24,20 @@ def test_enriched_status_output(capsys):
     assert STATUS_EMOJI_MAP["completed"] in captured.out
     assert STATUS_EMOJI_MAP["failed"] in captured.out
     assert STATUS_EMOJI_MAP["in_progress"] in captured.out
+
+
+def test_show_legacy_dashboard(monkeypatch):
+    """Ensure ``show_legacy_dashboard`` loads steps and displays them."""
+
+    called = {}
+
+    monkeypatch.setattr(legacy_dashboard, "load_legacy_steps", lambda: [1])
+    monkeypatch.setattr(
+        legacy_dashboard,
+        "display_legacy_progress",
+        lambda steps, summary=False: called.setdefault("steps", steps),
+    )
+
+    legacy_dashboard.show_legacy_dashboard()
+
+    assert called.get("steps") == [1]

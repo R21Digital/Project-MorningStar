@@ -61,4 +61,16 @@ def display_legacy_progress(quest_steps: list, *, summary: bool = False) -> None
     Console().print(build_legacy_progress_table(quest_steps, summary=summary))
 
 
-__all__ = ["build_legacy_progress_table", "display_legacy_progress", "render_legacy_table"]
+def show_legacy_dashboard(*, summary: bool = False) -> None:
+    """Load legacy quest steps and display them."""
+
+    steps = load_legacy_steps()
+    display_legacy_progress(steps, summary=summary)
+
+
+__all__ = [
+    "build_legacy_progress_table",
+    "display_legacy_progress",
+    "render_legacy_table",
+    "show_legacy_dashboard",
+]
