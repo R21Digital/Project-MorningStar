@@ -23,6 +23,7 @@ from core.constants import (
     STATUS_FAILED,
     STATUS_IN_PROGRESS,
     STATUS_UNKNOWN,
+    __all__,
 )
 
 # Clean up our temporary stubs so other tests use the real package
@@ -42,4 +43,11 @@ def test_constants_values():
     assert STATUS_FAILED == "❌ Failed"
     assert STATUS_IN_PROGRESS == "⏳ In Progress"
     assert STATUS_UNKNOWN == "❓ Unknown"
+    for name in (
+        "STATUS_COMPLETED",
+        "STATUS_FAILED",
+        "STATUS_IN_PROGRESS",
+        "STATUS_UNKNOWN",
+    ):
+        assert name in __all__
 
