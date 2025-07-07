@@ -45,6 +45,9 @@
 - Added a new quest status constant.
 - Validated dashboard mode options at runtime.
 - Cleaned up linting via ruff.
+- Added support for step dictionaries in quest status retrieval.
+- Updated tests to bypass themepark chain loading when custom themepark quests are provided.
+- ✅ 312 passed, 1 skipped.
 
 ---
 
