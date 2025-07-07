@@ -43,7 +43,7 @@ def test_constants_values():
     assert STATUS_COMPLETED == "✅ Completed"
     assert STATUS_FAILED == "❌ Failed"
     assert STATUS_IN_PROGRESS == "⏳ In Progress"
-    assert STATUS_NOT_STARTED == "📝 Not Started"
+    assert STATUS_NOT_STARTED == "🕒 Not Started"
     assert STATUS_UNKNOWN == "❓ Unknown"
     for name in (
         "STATUS_COMPLETED",

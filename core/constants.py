@@ -3,7 +3,7 @@
 STATUS_COMPLETED = "✅ Completed"
 STATUS_FAILED = "❌ Failed"
 STATUS_IN_PROGRESS = "⏳ In Progress"
-STATUS_NOT_STARTED = "📝 Not Started"
+STATUS_NOT_STARTED = "🕒 Not Started"
 STATUS_UNKNOWN = "❓ Unknown"
 
 __all__ = [
