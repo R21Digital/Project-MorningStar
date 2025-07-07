@@ -1,5 +1,5 @@
-import os
 from pathlib import Path
+import sys
 
 
 def check_file(path: str) -> bool:
@@ -36,7 +36,9 @@ def main() -> None:
         print(f"\nMissing {len(missing)} file(s):")
         for m in missing:
             print(f"  - {m}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
     main()
+
