@@ -61,6 +61,12 @@
 ## ✅ Batch 043
 - Enhanced dashboard visuals for clearer status displays.
 
+## ✅ Batch 044
+- Introduced progress bar summaries for quest categories.
+- Added CLI options like `--dashboard-mode`, `--summary`, and `--filter-status`.
+- Expanded tests and README to cover the new dashboard features.
+- Added `codex_validation_batch_044.py` to validate required files and flags.
+
 ---
 
 To install dependencies and run validation:
