@@ -90,7 +90,9 @@ def test_main_show_dashboard(monkeypatch):
     monkeypatch.setattr(
         legacy_main_mod,
         "show_unified_dashboard",
-        lambda *, mode="all": called.setdefault("dashboard", mode),
+        lambda *, mode="all", summary=False, filter_emoji=None: called.setdefault(
+            "dashboard", mode
+        ),
     )
     monkeypatch.setattr(
         legacy_main_mod, "run_full_legacy_quest", lambda: called.setdefault("legacy", True)
