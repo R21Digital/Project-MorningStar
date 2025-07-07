@@ -7,29 +7,44 @@ def register_rich_stub():
     _rich = types.ModuleType("rich")
 
     class _Console:
+        """Very small stub of :class:`rich.console.Console`."""
+
+        printed: list[str] = []
+
         def print(self, *args, **kwargs):
-            print(*args)
+            rendered = " ".join(str(a) for a in args)
+            self.printed.append(rendered)
+            print(rendered)
 
     console = types.ModuleType("console")
     console.Console = _Console
     _rich.console = console
 
     class _Table:
+        """Minimal ``Table`` implementation for tests."""
+
         def __init__(self, *args, **kwargs):
             self.rows = []
+            self.columns = []
             self.title = kwargs.get("title", "")
 
-        def add_column(self, *args, **kwargs):
-            pass
+        def add_column(self, name, *args, **kwargs):
+            self.columns.append(name)
 
         def add_row(self, *args, **kwargs):
             self.rows.append(args)
 
         def __str__(self) -> str:  # pragma: no cover - trivial
-            table_str = "\n".join(" | ".join(str(c) for c in r) for r in self.rows)
+            rows = [" | ".join(str(c) for c in r) for r in self.rows]
+            header = " | ".join(self.columns)
+            parts = []
             if self.title:
-                return f"{self.title}\n{table_str}" if table_str else self.title
-            return table_str
+                parts.append(self.title)
+            if header:
+                parts.append(header)
+            if rows:
+                parts.append("\n".join(rows))
+            return "\n".join(parts)
 
     table = types.ModuleType("table")
     table.Table = _Table
