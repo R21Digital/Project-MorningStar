@@ -62,12 +62,30 @@ def read_saved_quest_log() -> List[str]:
     return parse_quest_log(data)
 
 
-def get_step_status(step_id: str, log_lines: Optional[List[str]] = None) -> str:
-    """Return a status string for ``step_id`` by scanning quest log lines."""
+def get_step_status(step: str | dict, log_lines: Optional[List[str]] = None) -> str:
+    """Return a status string for ``step``.
+
+    ``step`` may be an identifier string or a dictionary containing boolean
+    status flags (``completed``, ``in_progress``, ``failed`` or ``skipped``).
+    When a dictionary is provided the flags are checked before scanning the
+    quest log.
+    """
     if log_lines is None:
         log_lines = read_saved_quest_log()
 
-    step_id = str(step_id).lower()
+    if isinstance(step, dict):
+        if step.get("completed"):
+            return STATUS_COMPLETED
+        if step.get("failed"):
+            return STATUS_FAILED
+        if step.get("skipped"):
+            return STATUS_NOT_STARTED
+        if step.get("in_progress"):
+            return STATUS_IN_PROGRESS
+        step_id = str(step.get("id") or step.get("title") or step.get("name") or step)
+    else:
+        step_id = str(step)
+    step_id = step_id.lower()
     for line in log_lines:
         lowered = line.lower()
         if step_id in lowered:

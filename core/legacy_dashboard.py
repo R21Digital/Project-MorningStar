@@ -21,7 +21,7 @@ def build_legacy_progress_table(quest_steps: list) -> Table:
     for step in quest_steps:
         step_id = str(step.get("id"))
         title = step.get("title") or step.get("description", "")
-        status = get_step_status(step_id)
+        status = get_step_status(step)
         table.add_row(step_id, title, status)
 
     return table
