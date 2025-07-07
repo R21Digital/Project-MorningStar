@@ -19,6 +19,12 @@ def show_unified_dashboard(
 ) -> None:
     """Print a dashboard with quest progress based on ``mode``."""
 
+    allowed_modes = {"legacy", "themepark", "all"}
+    if mode not in allowed_modes:
+        raise ValueError(
+            f"Invalid mode '{mode}'. Expected one of {', '.join(sorted(allowed_modes))}"
+        )
+
     if legacy_steps is None:
         legacy_steps = load_legacy_steps()
     if themepark_quests is None:
