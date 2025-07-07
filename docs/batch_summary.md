@@ -1,4 +1,4 @@
-# Galactic Beholder – Batch Summary (030–040)
+# Galactic Beholder – Batch Summary (030–041)
 
 ## ✅ Batch 030
 - Introduced the unified dashboard and theme park tracker.
@@ -48,6 +48,12 @@
 - Added support for step dictionaries in quest status retrieval.
 - Updated tests to bypass themepark chain loading when custom themepark quests are provided.
 - ✅ 312 passed, 1 skipped.
+
+## ✅ Batch 041
+- Centralized status emoji mapping for consistent output.
+- Added ``STATUS_NAME_FROM_EMOJI`` for reverse lookups.
+- Dashboards now reference the shared status constants.
+- New tests cover the emoji mapping and dashboard integration.
 
 ---
 
