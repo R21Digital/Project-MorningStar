@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict, Iterable
+from typing import Any, Callable, Dict, Iterable
+import time
 
 from .engine.quest_executor import run_step_with_feedback
 
@@ -13,6 +14,46 @@ def _iter_steps(quest: Any) -> Iterable[dict]:
     else:
         steps = getattr(quest, "steps", [])
     return steps or []
+
+
+def run_steps(
+    steps: Iterable[dict],
+    *,
+    dry_run: bool = False,
+    delay: float = 0.0,
+    log_fn: Callable[[str], None] = print,
+    formatter: Callable[[int, dict], str] | None = None,
+) -> None:
+    """Execute a sequence of quest ``steps``.
+
+    Parameters
+    ----------
+    steps:
+        Iterable of step dictionaries.
+    dry_run:
+        When ``True`` step handlers are not invoked.
+    delay:
+        Optional delay between step executions.
+    log_fn:
+        Logging function used for step messages.
+    formatter:
+        Optional callable to format log messages given ``index`` and ``step``.
+    """
+
+    if formatter is None:
+        formatter = lambda i, s: f"\u27A1\uFE0F Step {i}: {s.get('type') if isinstance(s, dict) else s}"
+
+    for i, step in enumerate(steps, start=1):
+        log_fn(formatter(i, step))
+        if dry_run:
+            continue
+        if not run_step_with_feedback(step):
+            action = step.get("type") if isinstance(step, dict) else None
+            log_fn(f"\u26A0\uFE0F Step validation failed: {action}")
+            continue
+        
+        if delay:
+            time.sleep(delay)
 
 
 def execute_quest(quest: Any, *, dry_run: bool = False) -> Dict[str, bool]:
@@ -33,14 +74,7 @@ def execute_quest(quest: Any, *, dry_run: bool = False) -> Dict[str, bool]:
     status = {"in_progress": True, "completed": False, "failed": False}
 
     try:
-        for idx, step in enumerate(_iter_steps(quest), start=1):
-            action = step.get("type") if isinstance(step, dict) else None
-            print(f"\u27A1\uFE0F Step {idx}: {action or step}")
-            if dry_run:
-                continue
-            if not run_step_with_feedback(step):
-                print(f"\u26A0\uFE0F Step validation failed: {action}")
-
+        run_steps(_iter_steps(quest), dry_run=dry_run)
         status["completed"] = True
     except Exception as exc:  # pragma: no cover - unexpected failures
         print(f"\u26A0\uFE0F Error executing quest: {exc}")
