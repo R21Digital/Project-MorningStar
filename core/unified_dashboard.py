@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from rich.console import Console
 
+from utils.logger import log_info
+
 
 from .legacy_tracker import load_legacy_steps
 from .legacy_dashboard import render_legacy_table
@@ -35,6 +37,10 @@ def show_unified_dashboard(
             f"Invalid mode '{mode}'. Expected one of {', '.join(sorted(allowed_modes))}"
         )
 
+    log_info(
+        f"[Dashboard] mode={mode} summary={summary} filter={filter_status or 'none'}"
+    )
+
     if legacy_steps is None:
         legacy_steps = load_legacy_steps()
     if themepark_quests is None:
@@ -63,6 +69,7 @@ def show_unified_dashboard(
     for cat, steps in step_groups.items():
         status_list = categories.get(cat, [])
         counts = summarize_status_counts(status_list)
+        log_info(f"[Dashboard] {cat} counts={counts} steps={len(steps)}")
         summary_line = " ".join(
             f"{emoji}{count}" for emoji, count in counts.items() if count
         )

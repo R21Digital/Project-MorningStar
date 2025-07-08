@@ -91,6 +91,12 @@
 - Extended tests and a validation script for the new utilities.
 - Included `codex_validation_batch_048.py` and Makefile target.
 
+## ✅ Batch 049
+- Introduced `log_info` helper for centralized dashboard logging.
+- Unified dashboard now records mode, filters, and category details.
+- Added tests verifying the new logger functionality.
+- Included `codex_validation_batch_049.py` and Makefile target.
+
 ---
 
 To install dependencies and run validation:
