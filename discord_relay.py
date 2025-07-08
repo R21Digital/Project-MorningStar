@@ -35,7 +35,7 @@ class DiscordRelay(commands.Cog):
     async def relay_to_discord(self, sender: str, message: str) -> str | None:
         """Send a whisper to Discord based on the active mode."""
         try:
-            user = await self.bot.fetch_user(self.target_user_id)
+            await self.bot.fetch_user(self.target_user_id)
         except Exception as e:
             logger.error("[Error] Could not fetch user: %s", e)
             return None
