@@ -41,6 +41,8 @@ def main() -> None:
         "calculate_completion_percentage",
     ]
 
+    test_marker = "test_calculate_completion_percentage"
+
     print("Validating required files:\n")
     missing_files = [f for f in required_files if not check_exists(f)]
 
@@ -50,15 +52,26 @@ def main() -> None:
     print("\nChecking unified dashboard usage:\n")
     missing_usage = [f for f in functions if not check_contains("core/unified_dashboard.py", f)]
 
+    print("\nChecking for calculate completion test:\n")
+    test_present = check_contains("tests/test_dashboard_utils.py", test_marker)
+    missing_test = 0 if test_present else 1
+
     print("\nChecking batch summary for entry:\n")
     summary_missing = 0 if check_contains("docs/batch_summary.md", "Batch 048") else 1
 
-    total_missing = len(missing_files) + len(missing_defs) + len(missing_usage) + summary_missing
+    total_missing = (
+        len(missing_files)
+        + len(missing_defs)
+        + len(missing_usage)
+        + missing_test
+        + summary_missing
+    )
 
     print("\nValidation summary:")
     print(f"  Missing files: {len(missing_files)}")
     print(f"  Missing definitions: {len(missing_defs)}")
     print(f"  Missing usage: {len(missing_usage)}")
+    print(f"  Missing test: {missing_test}")
     print(f"  Missing summary entry: {summary_missing}")
 
     if total_missing:
