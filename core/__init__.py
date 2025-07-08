@@ -57,6 +57,11 @@ from .constants import (
     STATUS_NAME_FROM_EMOJI,
     VALID_STATUS_EMOJIS,
 )
+from .dashboard_utils import (
+    group_quests_by_category,
+    build_summary_table,
+    print_summary_counts,
+)
 
 __all__ = [
     "preprocess_image",
@@ -106,6 +111,9 @@ __all__ = [
     "display_themepark_progress",
     "render_themepark_table",
     "show_unified_dashboard",
+    "group_quests_by_category",
+    "build_summary_table",
+    "print_summary_counts",
     "STATUS_COMPLETED",
     "STATUS_FAILED",
     "STATUS_IN_PROGRESS",

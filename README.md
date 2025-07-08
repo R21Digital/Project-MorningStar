@@ -12,6 +12,7 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
   quest rows using `--filter-status`
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
+- 🔗 Dashboard Utils for grouping quests and summary counts
 
 ## Lore
 In the world of **Argent**, legendary guilds compete to recover ancient relics. Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. Android MS11 provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.
@@ -527,6 +528,7 @@ Filter rows by status emoji with `--filter-status`:
 ```bash
 python main.py --show-dashboard --filter-status ✅
 ```
+Summary mode displays total quest counts per category when filtering.
 
 The split layout places the legacy table above the theme park table using Rich's
 `Layout` class.

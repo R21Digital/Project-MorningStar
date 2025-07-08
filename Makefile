@@ -1,4 +1,4 @@
-.PHONY: install test validate validate-batch-044 validate-batch-045
+.PHONY: install test validate validate-batch-044 validate-batch-045 validate-batch-046
 
 install:
 	pip install -r requirements.txt
@@ -17,4 +17,7 @@ validate-batch-044:
 	python codex_validation_batch_044.py
 
 validate-batch-045:
-	python codex_validation_batch_045.py
+        python codex_validation_batch_045.py
+
+validate-batch-046:
+        python codex_validation_batch_046.py
