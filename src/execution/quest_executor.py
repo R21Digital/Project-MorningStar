@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import time
 
+from utils.logger import log_info
 from src.engine.quest_executor import run_step_with_feedback
 
 
@@ -27,9 +28,9 @@ class QuestExecutor:
 
     def run(self) -> None:
         """Run the quest, executing each step in order."""
-        print("[QUEST EXECUTOR] Starting quest sequence...")
+        log_info("[QUEST EXECUTOR] Starting quest sequence...")
         for i, step in enumerate(self.steps, start=1):
-            print(f"[QUEST EXECUTOR] Executing step {i}: {step}")
+            log_info(f"[QUEST EXECUTOR] Executing step {i}: {step}")
             run_step_with_feedback(step)
             time.sleep(1)  # simulate delay between steps
 
