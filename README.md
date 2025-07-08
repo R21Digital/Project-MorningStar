@@ -13,6 +13,9 @@ The original MS11-Core implementation has been archived under `archive/ms11-core
 - ✅ Smart Retry Logic: automatically retries failed quest steps up to 3 times, writing details to `logs/retry_log.txt`
 - 📊 Quest Step Enrichment (Completed / Failed / In Progress / Unknown)
 - 🔗 Dashboard Utils for grouping quests and summary counts
+- ✅ Modular Quest Loader and Executor
+- ✅ Screenshot-based Logging
+- ✅ Batch-based Development System
 
 ## Lore
 In the world of **Argent**, legendary guilds compete to recover ancient relics. Adventurers take on perilous quests to gain favor with their faction and earn the power needed to reunite the shards. Android MS11 provides the tooling to script and observe these journeys, whether you are tracking combat victories or following a sprawling roleplay narrative.

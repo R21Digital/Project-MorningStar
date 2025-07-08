@@ -9,7 +9,7 @@
 
 ## Modules Needing Work
 - `quest_selector.py` – loads legacy quests and DB entries with filtering support; still needs scoring improvements.
-- `quest_executor.py` – provides `execute_quest()` placeholder; expand with automation steps.
+- `src/execution/quest_executor.py` – use this module to run quests sequentially.
 - `utils/source_verifier.py` – provides helpers for verifying quest data and detecting file changes.
 
 ## Planned Improvements
