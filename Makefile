@@ -23,7 +23,7 @@ validate-batch-046:
 	python codex_validation_batch_046.py
 
 validate-batch-047:
-        python codex_validation_batch_047.py
+	python codex_validation_batch_047.py
 
 validate-048:
-        python scripts/codex_validation_batch_048.py
+	python scripts/codex_validation_batch_048.py
