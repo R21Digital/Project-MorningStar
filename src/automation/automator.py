@@ -15,7 +15,7 @@ def _questing_behavior() -> None:
 
     if state:
         print(f"[MATCHED STATE] {state}")
-        save_screenshot(image)
+        save_screenshot()
         log_ocr_text(text)
         handle_state(state)
     else:

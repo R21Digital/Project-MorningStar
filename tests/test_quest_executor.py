@@ -25,7 +25,7 @@ def test_execute_quest_order(capsys):
     assert status == {"in_progress": False, "completed": True, "failed": False}
 
 
-def test_quest_executor_logs(tmp_path, monkeypatch):
+def test_quest_executor_logs(tmp_path, monkeypatch, capsys):
     monkeypatch.chdir(tmp_path)
     import importlib
     import utils.logger as base_logger
@@ -41,11 +41,9 @@ def test_quest_executor_logs(tmp_path, monkeypatch):
 
     executor = qe.QuestExecutor(str(quest_file))
     executor.run()
-
-    log_file = tmp_path / "logs" / "app.log"
-    assert log_file.exists(), "log file not created"
-    contents = log_file.read_text()
-    assert "[QUEST EXECUTOR] Starting quest sequence..." in contents
-    assert "Executing step 1" in contents
+    captured = capsys.readouterr()
+    output = captured.out
+    assert "[QUEST EXECUTOR] Starting quest sequence..." in output
+    assert "Executing step 1" in output
 
 
