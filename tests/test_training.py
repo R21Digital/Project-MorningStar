@@ -5,6 +5,7 @@ from pathlib import Path
 from utils.get_trainer_location import get_trainer_location
 from utils.load_trainers import load_trainers
 from src.training.trainer_visit import visit_trainer
+import logging
 
 
 class DummyAgent:
@@ -25,9 +26,6 @@ def test_train_with_npc(capfd):
 def test_get_trainer_location():
     result = get_trainer_location("artisan", "tatooine", "mos_eisley")
     assert result == ("Artisan Trainer", 3432, -4795)
-
-
-import logging
 
 
 def test_visit_trainer_found(monkeypatch, caplog):

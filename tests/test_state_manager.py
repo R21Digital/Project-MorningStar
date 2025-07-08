@@ -1,6 +1,7 @@
 import sys
 import time
 from types import ModuleType
+import importlib
 
 
 # Provide fake OCR module before importing StateManager
@@ -13,7 +14,7 @@ sys.modules["src.vision.ocr"] = fake_ocr
 if "src.vision" in sys.modules:
     sys.modules["src.vision"].ocr = fake_ocr
 
-from src.state.state_manager import StateManager
+StateManager = importlib.import_module("src.state.state_manager").StateManager
 
 
 def test_state_manager_callbacks(monkeypatch):

@@ -1,4 +1,5 @@
 import importlib.util
+import importlib
 import sys
 import types
 from pathlib import Path
@@ -18,17 +19,16 @@ _core_pkg.constants = _constants
 sys.modules["core"] = _core_pkg
 sys.modules["core.constants"] = _constants
 
-from core.constants import (
-    STATUS_COMPLETED,
-    STATUS_FAILED,
-    STATUS_IN_PROGRESS,
-    STATUS_NOT_STARTED,
-    STATUS_UNKNOWN,
-    STATUS_EMOJI_MAP,
-    STATUS_NAME_FROM_EMOJI,
-    VALID_STATUS_EMOJIS,
-    __all__,
-)
+constants = importlib.import_module("core.constants")
+STATUS_COMPLETED = constants.STATUS_COMPLETED
+STATUS_FAILED = constants.STATUS_FAILED
+STATUS_IN_PROGRESS = constants.STATUS_IN_PROGRESS
+STATUS_NOT_STARTED = constants.STATUS_NOT_STARTED
+STATUS_UNKNOWN = constants.STATUS_UNKNOWN
+STATUS_EMOJI_MAP = constants.STATUS_EMOJI_MAP
+STATUS_NAME_FROM_EMOJI = constants.STATUS_NAME_FROM_EMOJI
+VALID_STATUS_EMOJIS = constants.VALID_STATUS_EMOJIS
+__all__ = constants.__all__
 
 # Clean up our temporary stubs so other tests use the real package
 if _prev_constants is not None:

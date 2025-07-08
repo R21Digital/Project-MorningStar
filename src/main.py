@@ -29,10 +29,6 @@ from src.movement.agent_mover import MovementAgent
 from src.movement.movement_profiles import patrol_route  # noqa: F401
 from src.training.trainer_visit import visit_trainer  # noqa: F401
 
-MovementAgent
-patrol_route
-visit_trainer
-
 from android_ms11.modes import (
     quest_mode,
     profession_mode,

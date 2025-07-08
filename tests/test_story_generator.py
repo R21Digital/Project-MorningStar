@@ -1,6 +1,7 @@
 import sys
 from unittest.mock import MagicMock, patch, ANY
 import types
+import importlib
 
 sys.modules['transformers'] = types.ModuleType('transformers')
 sys.modules['transformers'].pipeline = lambda *a, **k: None
@@ -11,7 +12,7 @@ sys.modules['langchain.llms'] = types.ModuleType('langchain.llms')
 sys.modules['langchain.llms'].HuggingFacePipeline = object
 
 
-from src.story_generator import generate_story
+generate_story = importlib.import_module("src.story_generator").generate_story
 
 
 @patch('src.story_generator.LLMChain')

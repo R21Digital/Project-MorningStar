@@ -1,5 +1,6 @@
 import asyncio
 from unittest.mock import AsyncMock, MagicMock, patch
+from game_bridge import GameBridge
 
 
 def fake_run_coroutine_threadsafe(coro, loop):
@@ -7,10 +8,6 @@ def fake_run_coroutine_threadsafe(coro, loop):
     fut = MagicMock()
     fut.result.return_value = result
     return fut
-
-
-from game_bridge import GameBridge
-
 
 def _setup_relay():
     relay = MagicMock()
