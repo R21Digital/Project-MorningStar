@@ -22,7 +22,7 @@ class QuestExecutor:
 
     def load_steps(self) -> list[dict]:
         """Load quest step dictionaries from ``quest_path``."""
-        with open(self.quest_path, "r") as file:
+        with open(self.quest_path, "r", encoding="utf-8") as file:
             return json.load(file)
 
     def run(self) -> None:
