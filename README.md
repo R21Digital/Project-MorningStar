@@ -51,20 +51,20 @@ Utilities for planning professions and trainer routes live under `profession_log
 Three lightweight helpers provide a basic quest pipeline:
 
 - `quest_selector.select_quest` picks the next mission for a character.
-- `quest_executor.execute_quest` iterates through the quest steps.
+- `execution.quest_executor.QuestExecutor` runs quests step-by-step.
+- `core.quest_loader.load_quest_steps` reads quest JSON files.
 - `utils.source_verifier.verify_source` checks that the data you loaded is trustworthy.
 
 ```python
 from src.quest_selector import select_quest
-from src.quest_executor import execute_quest
+from src.execution.quest_executor import QuestExecutor
+from core.quest_loader import load_quest_steps
 from utils.source_verifier import verify_source
 
-quest = select_quest("Ezra") or {
-    "title": "Tutorial",
-    "steps": ["Talk to trainer", "Complete objectives"],
-}
+path = "quests/tutorial.json"
+quest = select_quest("Ezra") or load_quest_steps(path)
 if verify_source(quest):
-    execute_quest(quest)
+    QuestExecutor(path).run()
 ```
 
 ## Monitoring On-Screen Events
