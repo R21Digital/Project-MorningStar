@@ -67,6 +67,12 @@
 - Expanded tests and README to cover the new dashboard features.
 - Added `codex_validation_batch_044.py` to validate required files and flags.
 
+## ✅ Batch 045
+- Finalized the unified dashboard CLI with filter and summary options.
+- Added fallback helpers under `core.execution`.
+- Expanded tests covering CLI parsing and dashboard output.
+- Included `codex_validation_batch_045.py` and a Makefile target.
+
 ## ✅ Batch 046
 - Factored common summary helpers into `core.dashboard_utils`.
 - Refactored dashboards to use the shared grouping logic.
