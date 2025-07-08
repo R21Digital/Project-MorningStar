@@ -7,8 +7,7 @@ in-game actions.
 
 from __future__ import annotations
 
-import json
-
+from core.quest_loader import load_quest_steps
 from utils.logger import log_info
 from src.quest_executor import run_steps
 
@@ -18,12 +17,7 @@ class QuestExecutor:
 
     def __init__(self, quest_path: str) -> None:
         self.quest_path = quest_path
-        self.steps = self.load_steps()
-
-    def load_steps(self) -> list[dict]:
-        """Load quest step dictionaries from ``quest_path``."""
-        with open(self.quest_path, "r", encoding="utf-8") as file:
-            return json.load(file)
+        self.steps = load_quest_steps(self.quest_path)
 
     def run(self) -> None:
         """Run the quest, executing each step in order."""

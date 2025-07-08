@@ -97,6 +97,12 @@
 - Added tests verifying the new logger functionality.
 - Included `codex_validation_batch_049.py` and Makefile target.
 
+## ✅ Batch 051
+- Added `core.quest_loader.load_quest_steps` for reading quest files.
+- `QuestExecutor` now uses the loader and `log_info` for step output.
+- Tests cover quest loading and execution logging.
+- Added `codex_validation_batch_051.py` and Makefile target.
+
 ---
 
 To install dependencies and run validation:
