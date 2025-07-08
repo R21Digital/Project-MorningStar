@@ -49,6 +49,20 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         dest="filter_status",
         help="Only display rows matching the given status emoji",
     )
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument(
+        "--summary",
+        dest="summary",
+        action="store_true",
+        help="Display a summarized dashboard",
+    )
+    group.add_argument(
+        "--detailed",
+        dest="summary",
+        action="store_false",
+        help="Display a detailed dashboard",
+    )
+    parser.set_defaults(summary=False)
     return parser.parse_args(argv)
 
 
@@ -65,7 +79,9 @@ def main(argv: list[str] | None = None) -> None:
 
     if args.show_dashboard:
         show_unified_dashboard(
-            mode=args.dashboard_mode, filter_status=args.filter_status
+            mode=args.dashboard_mode,
+            summary=args.summary,
+            filter_status=args.filter_status,
         )
         return
 

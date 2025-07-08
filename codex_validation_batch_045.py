@@ -57,6 +57,8 @@ def main() -> None:
         "--show-themepark-status",
         "--show-dashboard",
         "--dashboard-mode",
+        "--summary",
+        "--detailed",
         "--filter-status",
     ]
 
