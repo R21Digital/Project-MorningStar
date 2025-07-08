@@ -139,5 +139,5 @@ def test_navigate_to_trainer_logs_events(monkeypatch, tmp_path):
     log_file = tmp_path / "logs" / "session.log"
     assert log_file.exists()
     lines = log_file.read_text().splitlines()
-    assert any("Starting trainer visit" in l for l in lines)
-    assert any("Completed trainer visit" in l for l in lines)
+    assert any("Starting trainer visit" in line for line in lines)
+    assert any("Completed trainer visit" in line for line in lines)
