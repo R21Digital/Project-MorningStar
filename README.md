@@ -533,6 +533,19 @@ Summary mode displays total quest counts per category when filtering.
 The split layout places the legacy table above the theme park table using Rich's
 `Layout` class.
 
+### Status Emoji Legend
+The dashboards use a small set of emoji to represent quest state:
+
+- ✅ ``completed``
+- ❌ ``failed``
+- ⏳ ``in_progress``
+- 🕒 ``not_started``
+- ❓ ``unknown``
+
+Quest summaries group legacy steps by their ``category`` key with all theme park
+quests collected under **Theme Parks**. Each category row shows a progress bar
+and the total quest count when ``--summary`` is enabled.
+
 ## Trainer Navigator Script
 `scripts/logic/trainer_navigator.py` exposes helper functions for locating
 nearby trainers and logging training sessions. Trainer locations are stored in
