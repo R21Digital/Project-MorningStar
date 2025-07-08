@@ -34,6 +34,7 @@ def main() -> None:
         "tests/rich_stub.py",
         "docs/batch_summary.md",
         "Makefile",
+        "scripts/codex_validation_batch_051.py",
     ]
 
     print("Validating required files:\n")
