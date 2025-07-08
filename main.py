@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 
 from core.legacy_loop import run_full_legacy_quest
-from core.legacy_dashboard import display_legacy_progress, show_legacy_dashboard
+from core.legacy_dashboard import display_legacy_progress
 from core.legacy_tracker import load_legacy_steps
 from core.themepark_dashboard import display_themepark_progress
 from core.themepark_tracker import load_themepark_chains
