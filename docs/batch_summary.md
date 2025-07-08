@@ -83,6 +83,7 @@
 - Enhanced dashboard filters with grouped counts for each status.
 - Added CLI flags for toggling summary output and applying status filters.
 - Introduced a new validation script to check the dashboard options.
+- Included `codex_validation_batch_047.py` and Makefile target.
 
 ---
 
