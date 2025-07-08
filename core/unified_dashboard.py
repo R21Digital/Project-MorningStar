@@ -11,7 +11,7 @@ from .legacy_dashboard import render_legacy_table
 from .themepark_tracker import load_themepark_chains, get_themepark_status
 from .themepark_dashboard import render_themepark_table
 from .quest_state import get_step_status
-from .utils import render_progress_bar
+from .dashboard_utils import build_summary_table, group_quests_by_category
 
 
 def show_unified_dashboard(
@@ -46,21 +46,11 @@ def show_unified_dashboard(
             ]
 
     if summary:
-        categories: dict[str, list[str]] = {}
-        if mode in {"legacy", "all"}:
-            for step in legacy_steps:
-                cat = step.get("category", "Legacy")
-                categories.setdefault(cat, []).append(get_step_status(step))
-        if mode in {"themepark", "all"}:
-            statuses = [get_themepark_status(q) for q in themepark_quests]
-            categories["Theme Parks"] = statuses
-
-        table = Table(title="Quest Progress Summary")
-        table.add_column("Category", style="bold")
-        table.add_column("Progress")
-        for cat, statuses in categories.items():
-            table.add_row(cat, render_progress_bar(statuses))
-        Console().print(table)
+        categories = group_quests_by_category(
+            legacy_steps if mode in {"legacy", "all"} else [],
+            themepark_quests if mode in {"themepark", "all"} else [],
+        )
+        Console().print(build_summary_table(categories))
         return
 
     legacy_table = render_legacy_table(legacy_steps, summary=summary)

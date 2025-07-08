@@ -5,7 +5,7 @@ from __future__ import annotations
 from rich.console import Console
 from rich.table import Table
 
-from .utils import render_progress_bar
+from .dashboard_utils import build_summary_table, group_quests_by_category
 
 from .legacy_tracker import load_legacy_steps
 
@@ -20,18 +20,8 @@ def build_legacy_progress_table(quest_steps: list, *, summary: bool = False) -> 
     """
 
     if summary:
-        table = Table(title="Legacy Quest Progress")
-        table.add_column("Category", style="bold")
-        table.add_column("Progress")
-
-        categories: dict[str, list[str]] = {}
-        for step in quest_steps:
-            category = step.get("category", "Legacy")
-            categories.setdefault(category, []).append(get_step_status(step))
-
-        for cat, statuses in categories.items():
-            table.add_row(cat, render_progress_bar(statuses))
-        return table
+        categories = group_quests_by_category(quest_steps)
+        return build_summary_table(categories)
 
     table = Table(title="Legacy Quest Progress", show_lines=True)
     table.add_column("Step ID", style="bold", no_wrap=True)

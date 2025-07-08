@@ -67,6 +67,12 @@
 - Expanded tests and README to cover the new dashboard features.
 - Added `codex_validation_batch_044.py` to validate required files and flags.
 
+## ✅ Batch 046
+- Factored common summary helpers into `core.dashboard_utils`.
+- Refactored dashboards to use the shared grouping logic.
+- Added tests covering filtered summaries and count output.
+- Included `codex_validation_batch_046.py` and Makefile target.
+
 ---
 
 To install dependencies and run validation:
