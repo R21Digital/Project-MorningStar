@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 from typing import Iterable, Dict, List
+from collections import Counter
+
+from .constants import STATUS_COMPLETED, VALID_STATUS_EMOJIS
 from rich.console import Console
 from rich.table import Table
 
@@ -42,4 +45,41 @@ def print_summary_counts(categories: Dict[str, List[str]]) -> None:
     Console().print(build_summary_table(categories))
 
 
-__all__ = ["group_quests_by_category", "build_summary_table", "print_summary_counts"]
+def group_steps_by_category(
+    legacy_steps: Iterable[dict] | None = None,
+    themepark_quests: Iterable[str] | None = None,
+) -> Dict[str, List]:
+    """Return a mapping of category name to quest step objects."""
+    categories: Dict[str, List] = {}
+    if legacy_steps:
+        for step in legacy_steps:
+            cat = step.get("category", "Legacy")
+            categories.setdefault(cat, []).append(step)
+    if themepark_quests:
+        categories["Theme Parks"] = list(themepark_quests)
+    return categories
+
+
+def summarize_status_counts(statuses: Iterable[str]) -> Dict[str, int]:
+    """Return a count of each status emoji in ``statuses``."""
+    counts = Counter(statuses)
+    return {emoji: counts.get(emoji, 0) for emoji in VALID_STATUS_EMOJIS}
+
+
+def calculate_completion_percentage(status_counts: Dict[str, int]) -> float:
+    """Return percent of steps marked completed in ``status_counts``."""
+    total = sum(status_counts.values())
+    if total == 0:
+        return 0.0
+    completed = status_counts.get(STATUS_COMPLETED, 0)
+    return round(completed * 100 / total, 2)
+
+
+__all__ = [
+    "group_quests_by_category",
+    "build_summary_table",
+    "print_summary_counts",
+    "group_steps_by_category",
+    "summarize_status_counts",
+    "calculate_completion_percentage",
+]

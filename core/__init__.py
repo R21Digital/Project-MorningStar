@@ -61,6 +61,9 @@ from .dashboard_utils import (
     group_quests_by_category,
     build_summary_table,
     print_summary_counts,
+    group_steps_by_category,
+    summarize_status_counts,
+    calculate_completion_percentage,
 )
 
 __all__ = [
@@ -114,6 +117,9 @@ __all__ = [
     "group_quests_by_category",
     "build_summary_table",
     "print_summary_counts",
+    "group_steps_by_category",
+    "summarize_status_counts",
+    "calculate_completion_percentage",
     "STATUS_COMPLETED",
     "STATUS_FAILED",
     "STATUS_IN_PROGRESS",

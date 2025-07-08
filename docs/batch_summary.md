@@ -85,6 +85,12 @@
 - Introduced a new validation script to check the dashboard options.
 - Included `codex_validation_batch_047.py` and Makefile target.
 
+## ✅ Batch 048
+- Added helpers for grouping steps and computing completion percentages.
+- Dashboards now print per-category emoji summaries with completion rates.
+- Extended tests and a validation script for the new utilities.
+- Included `codex_validation_batch_048.py` and Makefile target.
+
 ---
 
 To install dependencies and run validation:
