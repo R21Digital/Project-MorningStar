@@ -27,10 +27,23 @@ def check_contains(path: str, text: str) -> bool:
 
 def main() -> None:
     required_files = [
+        "core/constants.py",
+        "core/quest_state.py",
+        "core/unified_dashboard.py",
+        "core/legacy_dashboard.py",
+        "core/themepark_dashboard.py",
+        "core/themepark_tracker.py",
         "core/quest_loader.py",
         "src/execution/quest_executor.py",
+        "core/execution/fallbacks.py",
+        "tests/test_constants.py",
+        "tests/test_quest_state.py",
+        "tests/test_unified_dashboard.py",
+        "tests/test_legacy_dashboard.py",
+        "tests/test_themepark_tracker.py",
         "tests/test_quest_loader.py",
         "tests/test_quest_executor.py",
+        "tests/rich_stub.py",
         "docs/batch_summary.md",
         "Makefile",
     ]
