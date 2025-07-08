@@ -41,7 +41,11 @@ def run_steps(
     """
 
     if formatter is None:
-        formatter = lambda i, s: f"\u27A1\uFE0F Step {i}: {s.get('type') if isinstance(s, dict) else s}"
+        def _default_formatter(index: int, step: dict) -> str:
+            action = step.get('type') if isinstance(step, dict) else step
+            return f"\u27A1\uFE0F Step {index}: {action}"
+
+        formatter = _default_formatter
 
     for i, step in enumerate(steps, start=1):
         log_fn(formatter(i, step))

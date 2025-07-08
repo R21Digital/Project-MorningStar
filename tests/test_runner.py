@@ -28,8 +28,8 @@ def test_debug_mode_replays_logs(monkeypatch, capsys):
     monkeypatch.setattr(runner, "DEFAULT_LOG_PATH", "ams11.log", raising=False)
     runner.main()
     captured = capsys.readouterr()
-    for l in lines:
-        assert l in captured.out
+    for line in lines:
+        assert line in captured.out
 
 
 def test_run_mode_dispatches(monkeypatch):

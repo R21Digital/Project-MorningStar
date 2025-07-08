@@ -1,6 +1,8 @@
 import os
 import sys
 import types
+from pathlib import Path
+import pytest
 
 try:
     import rich  # noqa: F401
@@ -74,9 +76,6 @@ if 'yaml' not in sys.modules:
     yaml_module.safe_load = safe_load
     sys.modules['yaml'] = yaml_module
 
-import os
-from pathlib import Path
-import pytest
 
 
 @pytest.fixture(autouse=True)

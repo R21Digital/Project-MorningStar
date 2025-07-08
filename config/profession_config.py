@@ -1,5 +1,7 @@
 """Default profession skill requirements and trainer locations."""
 
+from utils.load_trainers import load_trainers
+
 REQUIRED_SKILLS = {
     "Artisan": ["crafting_artisan_novice"],
     "Marksman": ["combat_marksman_novice"],
@@ -11,8 +13,6 @@ REQUIRED_SKILLS = {
     "Pistoleer": ["combat_pistoleer_novice"],
     "Carbineer": ["combat_carbineer_novice"],
 }
-
-from utils.load_trainers import load_trainers
 
 
 def _primary(entries):

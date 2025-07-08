@@ -2,8 +2,6 @@ import pytest
 
 import core.legacy_dashboard as legacy_dashboard
 import core.unified_dashboard as unified_dashboard
-import core.quest_state as qs
-import core.themepark_tracker as tp
 from core.constants import STATUS_EMOJI_MAP
 from core.utils.render_progress_bar import render_progress_bar
 from rich.console import Console
