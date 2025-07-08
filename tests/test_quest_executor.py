@@ -24,3 +24,28 @@ def test_execute_quest_order(capsys):
     assert lines == expected_lines
     assert status == {"in_progress": False, "completed": True, "failed": False}
 
+
+def test_quest_executor_logs(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    import importlib
+    import utils.logger as base_logger
+
+    base_logger.logger.handlers.clear()
+    importlib.reload(base_logger)
+
+    import src.execution.quest_executor as qe
+    importlib.reload(qe)
+
+    quest_file = tmp_path / "quest.json"
+    quest_file.write_text("[{\"type\": \"dialogue\"}]")
+
+    executor = qe.QuestExecutor(str(quest_file))
+    executor.run()
+
+    log_file = tmp_path / "logs" / "app.log"
+    assert log_file.exists(), "log file not created"
+    contents = log_file.read_text()
+    assert "[QUEST EXECUTOR] Starting quest sequence..." in contents
+    assert "Executing step 1" in contents
+
+
