@@ -6,7 +6,7 @@ import datetime
 import os
 
 try:
-    from src.utils.logger import log_event as _src_log_event
+    from utils.logger import log_event as _src_log_event
 except Exception:  # pragma: no cover - optional dependency
     _src_log_event = None
 
