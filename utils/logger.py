@@ -2,10 +2,10 @@ import logging
 import os
 import datetime
 import csv
+from pathlib import Path
 
 DEFAULT_LOG_PATH = os.path.join("logs", "app.log")
 DASHBOARD_LOG_PATH = os.path.join("logs", "dashboard_usage.log")
-SCREENSHOT_DIR = os.path.join("logs", "screenshots")
 OCR_LOG_PATH = os.path.join("logs", "ocr_text.log")
 SESSION_LOG_PATH = os.path.join("logs", "session.log")
 PERFORMANCE_CSV_PATH = os.path.join("logs", "performance.csv")
@@ -34,27 +34,33 @@ if not logger.handlers:
 
 
 def log_info(message: str) -> None:
-    """Log ``message`` at INFO level to all configured handlers."""
-    logger.info(message)
+    """Print ``message`` with a timestamp."""
+    timestamp = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+    print(f"{timestamp} {message}")
 
 
-def save_screenshot(image, *, directory: str = SCREENSHOT_DIR) -> str:
-    """Save ``image`` to ``directory`` with a timestamped filename."""
-    os.makedirs(directory, exist_ok=True)
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    path = os.path.join(directory, f"{timestamp}.png")
+def save_screenshot(name: str = "screenshot") -> str:
+    """Capture the current screen and save it under ``logs/screenshots``."""
     try:
         import cv2
-    except Exception as e:  # pragma: no cover - import may fail
-        logger.warning(f"[LOGGER] OpenCV not available: {e}; skipping screenshot save")
+        from PIL import ImageGrab
+        import numpy as np
+    except ImportError:
+        log_info("OpenCV not installed, skipping screenshot.")
         return ""
 
     try:
-        cv2.imwrite(path, image)
+        screenshot = ImageGrab.grab()
+        screenshot_np = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+        path = Path("logs/screenshots")
+        path.mkdir(parents=True, exist_ok=True)
+        filename = f"{name}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+        cv2.imwrite(str(path / filename), screenshot_np)
+        log_info(f"Screenshot saved: {filename}")
+        return str(path / filename)
     except Exception as e:  # pragma: no cover - best effort logging
-        logger.warning(f"[LOGGER] Failed to save screenshot: {e}")
+        log_info(f"Screenshot failed: {e}")
         return ""
-    return path
 
 
 def log_ocr_text(text: str, *, log_path: str = OCR_LOG_PATH) -> str:

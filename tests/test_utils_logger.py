@@ -2,18 +2,34 @@ import os
 import sys
 import types
 from importlib import reload
+from pathlib import Path
 
 
 
 def test_save_screenshot_creates_file(tmp_path, monkeypatch):
-    fake_cv2 = types.SimpleNamespace(imwrite=lambda p, img: open(p, "wb").close())
+    fake_cv2 = types.SimpleNamespace(
+        imwrite=lambda p, img: Path(p).open("wb").close(),
+        cvtColor=lambda arr, flag: arr,
+        COLOR_RGB2BGR=1,
+    )
+    fake_np = types.SimpleNamespace(array=lambda x: x)
     monkeypatch.setitem(sys.modules, "cv2", fake_cv2)
+    monkeypatch.setitem(sys.modules, "numpy", fake_np)
+    if "PIL.ImageGrab" not in sys.modules:
+        pil_mod = sys.modules.setdefault("PIL", types.ModuleType("PIL"))
+        grab_mod = types.ModuleType("PIL.ImageGrab")
+        grab_mod.grab = lambda: object()
+        sys.modules["PIL.ImageGrab"] = grab_mod
+        pil_mod.ImageGrab = grab_mod
+    else:
+        monkeypatch.setattr("PIL.ImageGrab.grab", lambda: object())
+
     import utils.logger as logger
     reload(logger)
 
-    out_dir = tmp_path / "shots"
-    file_path = logger.save_screenshot(object(), directory=str(out_dir))
-    assert os.path.exists(file_path)
+    monkeypatch.chdir(tmp_path)
+    file_path = logger.save_screenshot("shot")
+    assert Path(file_path).exists()
 
 
 def test_log_ocr_text(tmp_path):

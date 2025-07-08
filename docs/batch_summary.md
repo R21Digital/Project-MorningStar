@@ -104,6 +104,12 @@
 - Added tests for loader and executor.
 - Introduced `scripts/codex_validation_batch_051.py`.
 
+### Batch 052 – Logger Enhancements + Screenshot Fallback
+
+- Logger updated with lazy `cv2` import and screenshot fallback
+- Added tests covering no-`cv2` and failure scenarios
+- Added `scripts/codex_validation_batch_052.py` and Makefile target
+
 ---
 
 To install dependencies and run validation:
