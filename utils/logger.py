@@ -2,7 +2,6 @@ import logging
 import os
 import datetime
 import csv
-import cv2
 
 DEFAULT_LOG_PATH = os.path.join("logs", "app.log")
 DASHBOARD_LOG_PATH = os.path.join("logs", "dashboard_usage.log")
@@ -45,9 +44,16 @@ def save_screenshot(image, *, directory: str = SCREENSHOT_DIR) -> str:
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     path = os.path.join(directory, f"{timestamp}.png")
     try:
+        import cv2
+    except Exception as e:  # pragma: no cover - import may fail
+        logger.warning(f"[LOGGER] OpenCV not available: {e}; skipping screenshot save")
+        return ""
+
+    try:
         cv2.imwrite(path, image)
     except Exception as e:  # pragma: no cover - best effort logging
-        print(f"[LOGGER] Failed to save screenshot: {e}")
+        logger.warning(f"[LOGGER] Failed to save screenshot: {e}")
+        return ""
     return path
 
 
