@@ -7,7 +7,7 @@ from utils import logger
 def test_log_info(capsys):
     logger.log_info("Test message")
     captured = capsys.readouterr()
-    assert "Test message" in captured.out
+    assert "Test message" in captured.err
 
 
 def test_save_screenshot_without_cv2(monkeypatch):

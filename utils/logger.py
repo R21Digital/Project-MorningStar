@@ -2,6 +2,7 @@ import logging
 import os
 import datetime
 import csv
+import sys
 from pathlib import Path
 
 DEFAULT_LOG_PATH = os.path.join("logs", "app.log")
@@ -34,9 +35,9 @@ if not logger.handlers:
 
 
 def log_info(message: str) -> None:
-    """Print ``message`` with a timestamp."""
+    """Print ``message`` with a timestamp to ``stderr``."""
     timestamp = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
-    print(f"{timestamp} {message}")
+    print(f"{timestamp} {message}", file=sys.stderr)
 
 
 def save_screenshot(name: str = "screenshot") -> str:
