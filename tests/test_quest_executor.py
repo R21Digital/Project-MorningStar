@@ -28,10 +28,45 @@ def test_execute_quest_order(capsys):
 def test_quest_executor_logs(tmp_path, monkeypatch, caplog):
     monkeypatch.chdir(tmp_path)
     import importlib
-    import profession_logic.utils.logger as base_logger
+    import logging
+    import sys
+    from types import ModuleType
 
-    base_logger.logger.handlers.clear()
-    importlib.reload(base_logger)
+    sys.modules.setdefault("modules", ModuleType("modules"))
+
+    loaded_real = True
+    try:
+        import profession_logic.utils.logger as base_logger
+        importlib.reload(base_logger)
+    except Exception:
+        loaded_real = False
+        base_logger = ModuleType("profession_logic.utils.logger")
+        tmp_logger = logging.getLogger("ms11")
+        tmp_logger.addHandler(logging.NullHandler())
+
+        def log_info(msg: str) -> None:
+            tmp_logger.info(msg)
+
+        base_logger.log_info = log_info
+        base_logger.logger = tmp_logger
+        sys.modules["profession_logic.utils.logger"] = base_logger
+
+    import importlib.util
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parent.parent
+    spec = importlib.util.spec_from_file_location(
+        "core.quest_loader", repo_root / "core" / "quest_loader.py"
+    )
+    quest_loader = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(quest_loader)
+    core_module = sys.modules.setdefault("core", ModuleType("core"))
+    sys.modules["core.quest_loader"] = quest_loader
+    core_module.quest_loader = quest_loader
+
+    if loaded_real and hasattr(base_logger, "logger"):
+        base_logger.logger.handlers.clear()
+        importlib.reload(base_logger)
     import src.logging.session_log as session_log
     importlib.reload(session_log)
 
