@@ -38,6 +38,7 @@ def main() -> None:
         "scripts/codex_validation_batch_055.py",
         "scripts/codex_validation_batch_056.py",
         "scripts/codex_validation_batch_058.py",
+        "scripts/codex_validation_batch_059.py",
     ]
 
     print("Validating required files:\n")
