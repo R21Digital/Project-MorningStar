@@ -41,4 +41,7 @@ validate-batch-055:
 	python scripts/codex_validation_batch_055.py
 
 validate-batch-056:
-	python scripts/codex_validation_batch_056.py
+        python scripts/codex_validation_batch_056.py
+
+validate-batch-058:
+        python scripts/codex_validation_batch_058.py

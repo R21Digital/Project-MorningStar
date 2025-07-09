@@ -25,7 +25,7 @@ def test_execute_quest_order(capsys):
     assert status == {"in_progress": False, "completed": True, "failed": False}
 
 
-def test_quest_executor_logs(tmp_path, monkeypatch, capsys):
+def test_quest_executor_logs(tmp_path, monkeypatch, caplog):
     monkeypatch.chdir(tmp_path)
     import importlib
     import utils.logger as base_logger
@@ -40,9 +40,9 @@ def test_quest_executor_logs(tmp_path, monkeypatch, capsys):
     quest_file.write_text("[{\"type\": \"dialogue\"}]")
 
     executor = qe.QuestExecutor(str(quest_file))
-    executor.run()
-    captured = capsys.readouterr()
-    output = captured.err
+    with caplog.at_level("INFO", logger="ms11"):
+        executor.run()
+    output = caplog.text
     assert "[QUEST EXECUTOR] Starting quest sequence..." in output
     assert "Executing step 1" in output
 
