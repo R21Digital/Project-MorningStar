@@ -1,13 +1,13 @@
 import builtins
 import sys
 import types
-from utils import logger
+from utils.logger import log_info, save_screenshot
 
 
-def test_log_info(capsys):
-    logger.log_info("Test message")
-    captured = capsys.readouterr()
-    assert "Test message" in captured.err
+def test_log_info_caplog(caplog):
+    with caplog.at_level("INFO", logger="ms11"):
+        log_info("Logged via log_info()")
+        assert "Logged via log_info()" in caplog.text
 
 
 def test_save_screenshot_without_cv2(monkeypatch):
@@ -26,7 +26,7 @@ def test_save_screenshot_without_cv2(monkeypatch):
         return orig_import(name, *args, **kwargs)
 
     monkeypatch.setitem(builtins.__dict__, "__import__", fake_import)
-    logger.save_screenshot("test_no_cv2")
+    save_screenshot("test_no_cv2")
 
 
 def test_save_screenshot_failure(monkeypatch):
@@ -40,4 +40,4 @@ def test_save_screenshot_failure(monkeypatch):
         raise RuntimeError("Test grab failure")
 
     monkeypatch.setattr("PIL.ImageGrab.grab", fake_grab)
-    logger.save_screenshot("test_fail_grab")
+    save_screenshot("test_fail_grab")
