@@ -164,3 +164,9 @@ make validate-batch-058
 - Replaced stdout-based test assertions with `caplog` to correctly capture structured logger output.
 - Ensured compatibility between old logger calls and new unified logger infrastructure.
 - Included `scripts/codex_validation_batch_058.py` and `validate-batch-058` Makefile target.
+
+### Batch 059 – Logger Consolidation
+
+- Removed `utils/logger.py` after migrating to centralized logging.
+- Updated imports across the project to use `profession_logic.utils.logger`.
+- Added `scripts/codex_validation_batch_059.py` and a `validate-batch-059` Makefile target.
