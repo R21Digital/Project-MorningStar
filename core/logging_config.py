@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import os
-import warnings
 
 
 DEFAULT_LOG_FILE = os.path.join("logs", "app.log")
@@ -23,9 +22,8 @@ def configure_logger(
     os.makedirs(os.path.dirname(warning_file), exist_ok=True)
 
     logger = logging.getLogger("ms11")
-    if logger.handlers:
-        return logger
-    logger.setLevel(logging.INFO)
+    if logger.level == logging.NOTSET:
+        logger.setLevel(logging.INFO)
 
     formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
 
