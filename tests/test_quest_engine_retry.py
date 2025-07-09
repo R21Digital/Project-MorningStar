@@ -1,6 +1,7 @@
 from core import quest_engine
 
 def test_log_retry_creates_csv(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
     log_dir = tmp_path / "logs"
     log_file = log_dir / "retry_log.txt"
     monkeypatch.setattr(quest_engine, "RETRY_LOG_PATH", str(log_file))
