@@ -130,6 +130,7 @@
 - Tests verify log creation and warning capture
 - Added `scripts/codex_validation_batch_055.py`
 - Updated the validation check script
+- Added `validate-batch-055` Makefile target
 
 ---
 
@@ -138,4 +139,5 @@ To install dependencies and run validation:
 ```bash
 make install
 make validate
+make validate-batch-055
 ```
