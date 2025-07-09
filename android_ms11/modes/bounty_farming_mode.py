@@ -11,7 +11,7 @@ from utils.license_hooks import requires_license
 from core.location_selector import travel_to_target, locate_hotspot
 from core.waypoint_verifier import verify_waypoint_stability
 from modules import TerminalFarmer
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 @requires_license

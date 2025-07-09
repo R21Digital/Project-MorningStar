@@ -6,7 +6,7 @@ from typing import Dict, List
 
 from utils.movement_manager import CURRENT_LOCATION
 
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 # --------------------------------------------------------------

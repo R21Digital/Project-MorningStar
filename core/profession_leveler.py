@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List
 
 from .travel_manager import TravelManager
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 try:  # pragma: no cover - optional dependency
     from modules.professions import progress_tracker
 except Exception:  # pragma: no cover

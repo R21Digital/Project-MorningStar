@@ -1,7 +1,7 @@
 import asyncio
 from typing import Any
 
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 class GameBridge:

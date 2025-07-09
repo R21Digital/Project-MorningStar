@@ -7,7 +7,7 @@ from typing import Dict, List, Tuple
 
 from src.vision.ocr import screen_text
 from core.session_tracker import log_farming_result
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 from utils.load_mob_affinity import load_mob_affinity
 
 # Load mob affinity mapping once so filtering does not repeatedly read the file.

@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 def generate_ai_reply(sender: str, message: str) -> str:

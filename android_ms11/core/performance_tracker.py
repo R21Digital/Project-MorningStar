@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Dict, Any
 
-from utils.logger import log_performance_summary
+from android_ms11.utils.logging_utils import log_performance_summary
 
 
 class PerformanceTracker:

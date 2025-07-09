@@ -2,7 +2,7 @@ import json
 import os
 from utils.travel import travel_to
 from utils.skills import get_player_skills
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 from .trainer_travel import start_travel_to_trainer, plan_travel_to_trainer
 
 class TrainManager:

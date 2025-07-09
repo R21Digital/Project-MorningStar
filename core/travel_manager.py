@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Any
 
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 from .trainer_scanner import TrainerScanner
 

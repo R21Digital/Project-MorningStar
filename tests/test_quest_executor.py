@@ -28,10 +28,12 @@ def test_execute_quest_order(capsys):
 def test_quest_executor_logs(tmp_path, monkeypatch, caplog):
     monkeypatch.chdir(tmp_path)
     import importlib
-    import utils.logger as base_logger
+    import profession_logic.utils.logger as base_logger
 
     base_logger.logger.handlers.clear()
     importlib.reload(base_logger)
+    import src.logging.session_log as session_log
+    importlib.reload(session_log)
 
     import src.execution.quest_executor as qe
     importlib.reload(qe)
