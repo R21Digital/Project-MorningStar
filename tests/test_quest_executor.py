@@ -42,7 +42,7 @@ def test_quest_executor_logs(tmp_path, monkeypatch, capsys):
     executor = qe.QuestExecutor(str(quest_file))
     executor.run()
     captured = capsys.readouterr()
-    output = captured.out
+    output = captured.err
     assert "[QUEST EXECUTOR] Starting quest sequence..." in output
     assert "Executing step 1" in output
 
