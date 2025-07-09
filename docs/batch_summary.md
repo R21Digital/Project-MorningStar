@@ -139,6 +139,12 @@
 - Included `scripts/codex_validation_batch_056.py`.
 - Added `validate-batch-056` Makefile target.
 
+### Batch 057 – Logger Cleanup Phase 1
+
+- Centralized logger configuration across the project using `configure_logger`.
+- Added `scripts/codex_validation_batch_057.py` to verify required files.
+- Introduced a `validate-batch-057` target in the Makefile.
+
 ---
 
 To install dependencies and run validation:
@@ -148,4 +154,5 @@ make install
 make validate
 make validate-batch-055
 make validate-batch-056
+make validate-batch-057
 ```
