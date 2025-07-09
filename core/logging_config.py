@@ -23,6 +23,8 @@ def configure_logger(
     os.makedirs(os.path.dirname(warning_file), exist_ok=True)
 
     logger = logging.getLogger("ms11")
+    if logger.handlers:
+        return logger
     logger.setLevel(logging.INFO)
 
     formatter = logging.Formatter("%(asctime)s [%(levelname)s] %(message)s")
