@@ -155,4 +155,12 @@ make validate
 make validate-batch-055
 make validate-batch-056
 make validate-batch-057
+make validate-batch-058
 ```
+
+### Batch 058 – Logger Compatibility Patch
+
+- Updated `profession_logic/utils/logger.py` to use the new `configure_logger(name, log_file)` signature from `core/logging_config.py`.
+- Replaced stdout-based test assertions with `caplog` to correctly capture structured logger output.
+- Ensured compatibility between old logger calls and new unified logger infrastructure.
+- Included `scripts/codex_validation_batch_058.py` and `validate-batch-058` Makefile target.
