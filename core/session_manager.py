@@ -6,7 +6,7 @@ from datetime import datetime
 from core.xp_estimator import XPEstimator
 from utils.session_utils import track_xp_gain
 from utils.license_hooks import requires_license
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 from core.train_manager import TrainManager
 
 trainer = TrainManager()

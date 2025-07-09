@@ -9,7 +9,7 @@ import yaml
 sys.path.insert(0, os.path.abspath("."))
 
 from src.execution.quest_executor import QuestExecutor
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 def load_steps(path: str) -> list[dict]:

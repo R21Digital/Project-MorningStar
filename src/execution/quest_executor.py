@@ -8,7 +8,7 @@ in-game actions.
 from __future__ import annotations
 
 from core.quest_loader import load_quest_steps
-from utils.logger import log_info
+from profession_logic.utils.logger import log_info
 from src.quest_executor import run_steps
 
 

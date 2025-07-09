@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Dict, Any
 from core.state_tracker import update_state, get_state
-from utils.logger import log_performance_summary
+from android_ms11.utils.logging_utils import log_performance_summary
 
 
 def monitor_session(perf_metrics: Dict[str, Any]) -> Dict[str, Any]:

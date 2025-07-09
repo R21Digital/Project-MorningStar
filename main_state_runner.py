@@ -1,7 +1,7 @@
 """Example script demonstrating the ``StateManager``."""
 
 from src.state import StateManager
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 def on_mission_board():

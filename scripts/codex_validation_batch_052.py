@@ -4,9 +4,8 @@ import sys
 ROOT = Path(__file__).resolve().parent.parent
 
 REQUIRED_FILES = [
-    "utils/logger.py",
+    "profession_logic/utils/logger.py",
     "tests/test_logger.py",
-    "tests/test_utils_logger.py",
 ]
 
 def main():

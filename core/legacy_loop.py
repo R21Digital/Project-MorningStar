@@ -1,6 +1,6 @@
 import time
 
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 from core.legacy_tracker import load_legacy_steps, read_quest_log
 from core.quest_engine import execute_with_retry
 

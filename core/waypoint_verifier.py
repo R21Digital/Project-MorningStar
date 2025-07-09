@@ -7,7 +7,7 @@ import time
 from typing import Tuple
 
 from src.vision import screen_text
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 _COORD_RE = re.compile(r"(-?\d+)\s*[,:]?\s*(-?\d+)")
 

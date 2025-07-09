@@ -4,7 +4,7 @@ import json
 from discord.ext import commands
 
 from discord_relay import DiscordRelay
-from utils.logger import logger
+from profession_logic.utils.logger import logger
 
 
 def main() -> None:

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from rich.console import Console
 
-from utils.logger import log_info
+from profession_logic.utils.logger import log_info
 
 
 from .legacy_tracker import load_legacy_steps
