@@ -132,6 +132,13 @@
 - Updated the validation check script
 - Added `validate-batch-055` Makefile target
 
+### Batch 056 – Logger Handler Fix & Test Isolation
+
+- Fixed repeated file handler setup in `configure_logger`.
+- Added tests ensuring duplicate handlers are avoided when reusing the logger.
+- Included `scripts/codex_validation_batch_056.py`.
+- Added `validate-batch-056` Makefile target.
+
 ---
 
 To install dependencies and run validation:
@@ -140,4 +147,5 @@ To install dependencies and run validation:
 make install
 make validate
 make validate-batch-055
+make validate-batch-056
 ```
