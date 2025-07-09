@@ -124,6 +124,13 @@
 - Removed unused imports
 - Appended Batch 053 entry
 
+### Batch 055 – Logging Configuration
+
+- Added `core/logging_config.configure_logger` for centralized setup
+- Tests verify log creation and warning capture
+- Added `scripts/codex_validation_batch_055.py`
+- Updated the validation check script
+
 ---
 
 To install dependencies and run validation:
