@@ -175,3 +175,9 @@ make validate-batch-058
 
 - Added `tests/test_profession_logger.py` covering all helper functions in `profession_logic.utils.logger`.
 - Included `scripts/codex_validation_batch_060.py` and a `validate-batch-060` Makefile target.
+
+### Batch 060 – Enhanced Logger Diagnostics
+
+- Extended `profession_logic.utils.logger` with `log_warning`, `log_error`, and `log_debug` helpers.
+- Added `tests/test_profession_logger.py` verifying each helper logs at the correct level.
+- Introduced `scripts/codex_validation_batch_060.py` and a `validate-batch-060` Makefile target.
