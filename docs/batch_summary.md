@@ -170,3 +170,8 @@ make validate-batch-058
 - Removed `utils/logger.py` after migrating to centralized logging.
 - Updated imports across the project to use `profession_logic.utils.logger`.
 - Added `scripts/codex_validation_batch_059.py` and a `validate-batch-059` Makefile target.
+
+### Batch 060 – Logger Helper Tests
+
+- Added `tests/test_profession_logger.py` covering all helper functions in `profession_logic.utils.logger`.
+- Included `scripts/codex_validation_batch_060.py` and a `validate-batch-060` Makefile target.
