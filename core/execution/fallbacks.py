@@ -8,6 +8,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from profession_logic.utils import logger as profession_logger
+
 
 def noop(*_args: Any, **_kwargs: Any) -> bool:
     """Return ``False`` without performing any action."""
@@ -22,7 +24,7 @@ def basic_fallback_handler(step: Any) -> bool:
     step:
         Step object that failed to execute.
     """
-    print(f"[Fallback] Step failed: {step}")
+    profession_logger.log_warning(f"[Fallback] Step failed: {step}")
     return False
 
 
