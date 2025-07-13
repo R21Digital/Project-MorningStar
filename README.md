@@ -721,6 +721,7 @@ The application writes several logs under the `logs/` directory:
 - `logs/training_log.txt` &ndash; entries recorded by the trainer navigator.
 
 Running the test suite also writes logs to this directory.
+Set the ``LOG_LEVEL`` environment variable (e.g. ``DEBUG``) to control log verbosity. The default level is ``INFO``.
 
 ## Running Tests
 

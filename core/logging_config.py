@@ -3,8 +3,12 @@ import os
 from pathlib import Path
 
 
-def configure_logger(name: str = "default", log_file: str | None = None) -> logging.Logger:
-    """Return a logger with optional file output.
+def configure_logger(
+    name: str = "default",
+    log_file: str | None = None,
+    level: int | str | None = None,
+) -> logging.Logger:
+    """Return a logger with optional file output and configurable level.
 
     Reusing the same ``name`` ensures handlers are only added once.
     """
@@ -12,7 +16,13 @@ def configure_logger(name: str = "default", log_file: str | None = None) -> logg
     if getattr(logger, "_configured", False):
         return logger
 
-    logger.setLevel(logging.INFO)
+    if level is None:
+        level = os.getenv("LOG_LEVEL", "INFO")
+    if isinstance(level, str):
+        level = logging.getLevelName(level.upper())
+        if not isinstance(level, int):
+            level = logging.INFO
+    logger.setLevel(level)
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
     console_handler = logging.StreamHandler()
