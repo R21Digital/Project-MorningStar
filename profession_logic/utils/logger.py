@@ -5,7 +5,7 @@ from __future__ import annotations
 from core.logging_config import configure_logger
 
 
-logger = configure_logger(name="profession_logic", log_file="logs/profession_logic.log")
+logger = configure_logger(name="profession_logic")
 
 
 def log_info(message: str) -> None:

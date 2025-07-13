@@ -181,3 +181,11 @@ make validate-batch-058
 - Extended `profession_logic.utils.logger` with `log_warning`, `log_error`, and `log_debug` helpers.
 - Added `tests/test_profession_logger.py` verifying each helper logs at the correct level.
 - Introduced `scripts/codex_validation_batch_060.py` and a `validate-batch-060` Makefile target.
+
+### Batch 061 – Instance-Based Logging
+
+- `core.logging_config.configure_logger` now reads `BOT_INSTANCE_NAME` to build
+  a default log path of `logs/{instance}.log` when no file is provided.
+- `profession_logic.utils.logger` relies on this default path.
+- Tests mock different instances to confirm the log file names.
+- Added `scripts/codex_validation_batch_061.py` and a `validate-batch-061` Makefile target.
