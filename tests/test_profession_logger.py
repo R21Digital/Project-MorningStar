@@ -1,5 +1,6 @@
 import importlib
 import logging
+from pathlib import Path
 import sys
 from types import ModuleType
 
@@ -61,4 +62,34 @@ def test_profession_logger_helpers(helper, level, caplog):
     assert any(
         rec.levelno == level and rec.message == message for rec in caplog.records
     )
+
+
+@pytest.mark.parametrize("instance", ["alpha", None])
+def test_profession_logger_log_file(tmp_path, monkeypatch, instance):
+    monkeypatch.chdir(tmp_path)
+    if instance is not None:
+        monkeypatch.setenv("BOT_INSTANCE_NAME", instance)
+    else:
+        monkeypatch.delenv("BOT_INSTANCE_NAME", raising=False)
+
+    test_logger = logging.getLogger("profession_logic_test")
+    for h in list(test_logger.handlers):
+        test_logger.removeHandler(h)
+    if hasattr(test_logger, "_configured"):
+        delattr(test_logger, "_configured")
+
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "logging_config",
+        (Path(__file__).resolve().parents[1] / "core" / "logging_config.py"),
+    )
+    logging_config = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(logging_config)
+
+    logger = logging_config.configure_logger(name="profession_logic_test")
+    logger.info("hello")
+
+    expected = tmp_path / "logs" / f"{instance or 'default'}.log"
+    assert expected.exists()
+    assert "hello" in expected.read_text()
 

@@ -1,4 +1,5 @@
 import logging
+import os
 from pathlib import Path
 
 
@@ -17,6 +18,9 @@ def configure_logger(name: str = "default", log_file: str | None = None) -> logg
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
+    if not log_file:
+        instance = os.getenv("BOT_INSTANCE_NAME", "default")
+        log_file = str(Path("logs") / f"{instance}.log")
 
     if log_file:
         log_path = Path(log_file)
