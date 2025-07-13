@@ -189,3 +189,8 @@ make validate-batch-058
 - `profession_logic.utils.logger` relies on this default path.
 - Tests mock different instances to confirm the log file names.
 - Added `scripts/codex_validation_batch_061.py` and a `validate-batch-061` Makefile target.
+
+### Batch 062 – Log Level Control
+
+- `configure_logger` accepts an optional `level` parameter and reads the `LOG_LEVEL` environment variable.
+- Users can adjust verbosity by setting the log level (default `INFO`).
