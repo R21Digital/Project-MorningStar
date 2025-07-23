@@ -183,6 +183,8 @@ separate logs when running multiple instances:
 BOT_INSTANCE_NAME=MS11_Alpha python src/main.py --mode quest
 # creates logs/MS11_Alpha.log
 ```
+All log levels, including warnings, are written to this file. The application
+does not create a separate `.warnings.log` file.
 
 Set `LOG_LEVEL` to control how verbose the output is. Levels follow the
 standard Python logging values such as `DEBUG` or `INFO` (the default):
@@ -734,6 +736,7 @@ start_travel_to_trainer(trainer)
 The application writes several logs under the `logs/` directory:
 
 - `logs/<instance>.log` &ndash; general runtime messages produced by `start_log()`.
+- *No `warnings.log` is created; warnings are included in the main log.*
 - `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
 - `logs/step_journal.log` &ndash; success/failure records from step validation.
 - `logs/session_*.json` &ndash; detailed step traces and summaries for each session.
