@@ -1,4 +1,6 @@
 import logging
+import os
+from datetime import datetime, timedelta
 from importlib import reload
 
 from core import logging_config
@@ -51,3 +53,32 @@ def test_configure_logger_respects_level(tmp_path, monkeypatch):
         name="ms11_param", level=logging.DEBUG
     )
     assert logger_param.level == logging.DEBUG
+
+
+def test_configure_logger_cleans_old_logs(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    reload(logging_config)
+
+    base_logger = logging.getLogger("cleanup")
+    for h in list(base_logger.handlers):
+        base_logger.removeHandler(h)
+
+    log_dir = tmp_path / "logs"
+    log_dir.mkdir()
+    # Create old logs exceeding limits
+    for i in range(logging_config.MAX_LOG_FILES + 2):
+        p = log_dir / f"old{i}.log"
+        p.write_text("x")
+        old_time = datetime.now() - timedelta(days=logging_config.MAX_LOG_AGE_DAYS + 1)
+        os.utime(p, (old_time.timestamp(), old_time.timestamp()))
+
+    log_file = log_dir / "app.log"
+    logger = logging_config.configure_logger(name="cleanup", log_file=str(log_file))
+    logger.info("new")
+
+    remaining = list(log_dir.glob("*.log"))
+    assert log_file in remaining
+    assert len(remaining) <= logging_config.MAX_LOG_FILES
+    for f in remaining:
+        age_days = (datetime.now() - datetime.fromtimestamp(f.stat().st_mtime)).days
+        assert age_days <= logging_config.MAX_LOG_AGE_DAYS
