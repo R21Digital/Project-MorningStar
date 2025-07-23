@@ -714,7 +714,8 @@ start_travel_to_trainer(trainer)
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
-- `logs/app.log` &ndash; general runtime messages produced by `start_log()`.
+- `logs/<instance>.log` &ndash; general runtime messages produced by `start_log()`. Set
+  `BOT_INSTANCE_NAME` to customize `<instance>` (e.g., `logs/MS11_Alpha.log`).
 - `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
 - `logs/step_journal.log` &ndash; success/failure records from step validation.
 - `logs/session_*.json` &ndash; detailed step traces and summaries for each session.
@@ -722,6 +723,12 @@ The application writes several logs under the `logs/` directory:
 
 Running the test suite also writes logs to this directory.
 Set the ``LOG_LEVEL`` environment variable (e.g. ``DEBUG``) to control log verbosity. The default level is ``INFO``.
+Set ``BOT_INSTANCE_NAME`` to customize the log filename.
+
+```bash
+BOT_INSTANCE_NAME=MS11_Alpha python src/main.py --mode quest
+# writes logs/MS11_Alpha.log
+```
 
 ## Running Tests
 
