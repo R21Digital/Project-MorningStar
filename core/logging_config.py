@@ -9,16 +9,25 @@ MAX_LOG_FILES = 10
 MAX_LOG_AGE_DAYS = 30
 """Maximum age in days before a log file is deleted."""
 
+LOG_RETENTION_ENV = "LOG_RETENTION_DAYS"
+"""Environment variable that overrides ``MAX_LOG_AGE_DAYS`` if set."""
+
 
 def _cleanup_old_logs(log_dir: Path) -> None:
-    """Delete logs exceeding MAX_LOG_FILES or older than MAX_LOG_AGE_DAYS."""
+    """Delete logs exceeding MAX_LOG_FILES or older than the retention period."""
     if not log_dir.exists():
         return
 
     logs = sorted(log_dir.glob("*.log"), key=lambda p: p.stat().st_mtime, reverse=True)
 
+    retention = os.getenv(LOG_RETENTION_ENV)
+    try:
+        retention_days = int(retention) if retention is not None else MAX_LOG_AGE_DAYS
+    except ValueError:
+        retention_days = MAX_LOG_AGE_DAYS
+
     now = datetime.now()
-    cutoff = now - timedelta(days=MAX_LOG_AGE_DAYS)
+    cutoff = now - timedelta(days=retention_days)
 
     for log in list(logs):
         if datetime.fromtimestamp(log.stat().st_mtime) < cutoff:
