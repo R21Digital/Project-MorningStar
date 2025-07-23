@@ -1,6 +1,28 @@
 import logging
 import os
 from pathlib import Path
+import datetime
+
+
+def _cleanup_logs(directory: Path) -> None:
+    retention = os.getenv("LOG_RETENTION_DAYS")
+    if not retention:
+        return
+    try:
+        days = int(retention)
+    except ValueError:
+        return
+    cutoff = datetime.datetime.now() - datetime.timedelta(days=days)
+    for path in directory.glob("*.log"):
+        try:
+            dt = datetime.datetime.strptime(path.stem, "%Y%m%d_%H%M%S")
+        except ValueError:
+            continue
+        if dt < cutoff:
+            try:
+                path.unlink()
+            except Exception:
+                pass
 
 
 def configure_logger(
@@ -35,6 +57,7 @@ def configure_logger(
     if log_file:
         log_path = Path(log_file)
         log_path.parent.mkdir(parents=True, exist_ok=True)
+        _cleanup_logs(log_path.parent)
         file_handler = logging.FileHandler(log_path, encoding="utf-8")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
