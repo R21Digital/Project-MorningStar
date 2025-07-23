@@ -194,3 +194,8 @@ make validate-batch-058
 
 - `configure_logger` accepts an optional `level` parameter and reads the `LOG_LEVEL` environment variable.
 - Users can adjust verbosity by setting the log level (default `INFO`).
+
+### Batch 063 – README Configuration Examples
+
+- Added a configuration section in the README explaining how log files are named using `BOT_INSTANCE_NAME`.
+- Provided sample commands demonstrating `BOT_INSTANCE_NAME` and `LOG_LEVEL` environment variables.
