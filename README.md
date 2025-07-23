@@ -192,6 +192,12 @@ standard Python logging values such as `DEBUG` or `INFO` (the default):
 LOG_LEVEL=DEBUG python src/main.py --mode quest
 ```
 
+Set `LOG_RETENTION_DAYS` to configure how many days to retain timestamped log files. Old files are removed whenever `configure_logger()` runs.
+
+```bash
+LOG_RETENTION_DAYS=7 python src/main.py
+```
+
 ## Automation Modes
 Select a runtime mode when starting the automation. The ``--mode`` option
 controls which behavior module is activated. Available modes include:
