@@ -172,6 +172,25 @@ This section walks through a fresh setup so you can try the project locally.
 These steps should give you a working copy of Android MS11 and confidence
 that the provided modules function as expected.
 
+## ⚙️ Configuration
+
+### Logging Behavior
+`start_log()` writes messages to the `logs/` directory. The file name begins
+with the value of the `BOT_INSTANCE_NAME` environment variable. Use this to
+separate logs when running multiple instances:
+
+```bash
+BOT_INSTANCE_NAME=MS11_Alpha python src/main.py --mode quest
+# creates logs/MS11_Alpha.log
+```
+
+Set `LOG_LEVEL` to control how verbose the output is. Levels follow the
+standard Python logging values such as `DEBUG` or `INFO` (the default):
+
+```bash
+LOG_LEVEL=DEBUG python src/main.py --mode quest
+```
+
 ## Automation Modes
 Select a runtime mode when starting the automation. The ``--mode`` option
 controls which behavior module is activated. Available modes include:
@@ -714,21 +733,14 @@ start_travel_to_trainer(trainer)
 ## Log Files
 The application writes several logs under the `logs/` directory:
 
-- `logs/<instance>.log` &ndash; general runtime messages produced by `start_log()`. Set
-  `BOT_INSTANCE_NAME` to customize `<instance>` (e.g., `logs/MS11_Alpha.log`).
+- `logs/<instance>.log` &ndash; general runtime messages produced by `start_log()`.
 - `logs/quest_selections.log` &ndash; history of quests chosen via the CLI.
 - `logs/step_journal.log` &ndash; success/failure records from step validation.
 - `logs/session_*.json` &ndash; detailed step traces and summaries for each session.
 - `logs/training_log.txt` &ndash; entries recorded by the trainer navigator.
 
-Running the test suite also writes logs to this directory.
-Set the ``LOG_LEVEL`` environment variable (e.g. ``DEBUG``) to control log verbosity. The default level is ``INFO``.
-Set ``BOT_INSTANCE_NAME`` to customize the log filename.
-
-```bash
-BOT_INSTANCE_NAME=MS11_Alpha python src/main.py --mode quest
-# writes logs/MS11_Alpha.log
-```
+Running the test suite also writes logs to this directory. See the
+⚙️ Configuration section for how to control the log filename and verbosity.
 
 ## Running Tests
 
