@@ -3,11 +3,11 @@ import os
 from pathlib import Path
 from datetime import datetime, timedelta
 
-MAX_LOG_FILES = 10
-"""Maximum number of log files to retain in the logs directory."""
+MAX_LOG_FILES = 20
+"""Maximum number of log files to retain in the logs directory (default: 20)."""
 
-MAX_LOG_AGE_DAYS = 30
-"""Maximum age in days before a log file is deleted."""
+MAX_LOG_AGE_DAYS = 14
+"""Maximum age in days before a log file is deleted (default: 14)."""
 
 LOG_RETENTION_ENV = "LOG_RETENTION_DAYS"
 """Environment variable that overrides ``MAX_LOG_AGE_DAYS`` if set."""
