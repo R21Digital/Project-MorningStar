@@ -199,3 +199,9 @@ make validate-batch-058
 
 - Added a configuration section in the README explaining how log files are named using `BOT_INSTANCE_NAME`.
 - Provided sample commands demonstrating `BOT_INSTANCE_NAME` and `LOG_LEVEL` environment variables.
+
+### Batch 064 – Log Retention Policy
+
+- Automatic log cleanup now runs whenever `configure_logger` is called.
+- The default policy keeps at most **20** log files and removes any older than **14** days.
+- Added `tests/test_logging_retention.py` and a `validate-batch-064` Makefile target.
