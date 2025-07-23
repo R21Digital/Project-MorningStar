@@ -54,3 +54,6 @@ validate-batch-060:
 
 validate-batch-061:
 	python scripts/codex_validation_batch_061.py
+
+validate-batch-062:
+	python scripts/codex_validation_batch_062.py
