@@ -205,3 +205,17 @@ make validate-batch-058
 - Automatic log cleanup now runs whenever `configure_logger` is called.
 - The default policy keeps at most **20** log files and removes any older than **14** days.
 - Added `tests/test_logging_retention.py` and a `validate-batch-064` Makefile target.
+
+### Batch 065 – Hybrid Input Intelligence Foundations
+
+Added vision/capture_screen.py for screenshot capture.
+
+Added vision/ocr_engine.py for Tesseract OCR wrapper.
+
+Added vision/ocr_utils.py for basic text cleanup.
+
+Introduced network/chat_listener.py for basic simulated chat listening.
+
+Created tests for OCR and chat.
+
+Created scripts/codex_validation_batch_065.py.
