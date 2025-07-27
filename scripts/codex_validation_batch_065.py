@@ -10,6 +10,7 @@ REQUIRED = [
     "network/chat_listener.py",
     "tests/test_ocr_engine.py",
     "tests/test_chat_listener.py",
+    "tests/test_ocr_utils.py",
 ]
 
 
