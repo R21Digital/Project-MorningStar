@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all pages
+Allow: /pages/
+Allow: /api/
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /logs/
+Disallow: /tmp/
+
+# Allow sitemap
+Sitemap: https://swgdb.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to server)
+Crawl-delay: 1 

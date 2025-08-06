@@ -1,0 +1,109 @@
+{
+  "source_type": "heroic",
+  "planet": "mustafar",
+  "total_runs": 0,
+  "total_loot": 0,
+  "last_updated": "2025-08-05T18:00:00.000000",
+  "heroics": {
+    "lava_demon": {
+      "boss": "Lava Demon",
+      "location": "Mustafar - Lava Fields",
+      "level": 90,
+      "total_kills": 0,
+      "items": {
+        "lava_crystal": {
+          "name": "Lava Crystal",
+          "type": "component",
+          "rarity": "epic",
+          "use_case": "Weapon crafting, rare items",
+          "image": "/assets/loot/lava_crystal.png",
+          "drop_chance": 15.0,
+          "profession_relevance": ["weaponsmith", "artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "demon_hide": {
+          "name": "Demon Hide",
+          "type": "material",
+          "rarity": "rare",
+          "use_case": "Armor crafting, heat resistance",
+          "image": "/assets/loot/demon_hide.png",
+          "drop_chance": 25.0,
+          "profession_relevance": ["armorsmith", "tailor"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "lava_essence": {
+          "name": "Lava Essence",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Rare crafting, alchemy",
+          "image": "/assets/loot/lava_essence.png",
+          "drop_chance": 5.0,
+          "profession_relevance": ["chemist", "artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    },
+    "volcanic_guardian": {
+      "boss": "Volcanic Guardian",
+      "location": "Mustafar - Volcanic Caverns",
+      "level": 85,
+      "total_kills": 0,
+      "items": {
+        "volcanic_stone": {
+          "name": "Volcanic Stone",
+          "type": "material",
+          "rarity": "uncommon",
+          "use_case": "Construction, decoration",
+          "image": "/assets/loot/volcanic_stone.png",
+          "drop_chance": 40.0,
+          "profession_relevance": ["architect", "artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "guardian_shield": {
+          "name": "Guardian's Shield",
+          "type": "weapon",
+          "rarity": "epic",
+          "use_case": "Combat, weapon crafting",
+          "image": "/assets/loot/guardian_shield.png",
+          "drop_chance": 12.0,
+          "profession_relevance": ["weaponsmith"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "cavern_map": {
+          "name": "Cavern Map",
+          "type": "component",
+          "rarity": "rare",
+          "use_case": "Navigation, rare items",
+          "image": "/assets/loot/cavern_map.png",
+          "drop_chance": 20.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    }
+  }
+} 

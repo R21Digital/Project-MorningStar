@@ -1,0 +1,448 @@
+{
+  "safety_defaults": {
+    "version": "1.0.0",
+    "last_updated": "2025-01-27T00:00:00Z",
+    "description": "Secure default configuration for MS11 safety features",
+    "enforcement_level": "strict"
+  },
+  "audit_settings": {
+    "enabled": true,
+    "auto_audit_interval": 3600,
+    "max_audit_history": 50,
+    "critical_threshold": 0.8,
+    "warning_threshold": 0.6,
+    "enforce_safety_defaults": true,
+    "block_unsafe_operations": true
+  },
+  "session_management": {
+    "session_caps": {
+      "enabled": true,
+      "max_daily_hours": 8,
+      "max_weekly_hours": 40,
+      "max_session_hours": 6,
+      "min_break_hours": 2,
+      "mandatory_breaks": true,
+      "enforce_caps": true,
+      "auto_logout_on_cap": true
+    },
+    "login_patterns": {
+      "enabled": true,
+      "variance_required": true,
+      "min_login_interval": 2,
+      "max_login_interval": 12,
+      "randomize_login_times": true,
+      "avoid_peak_hours": true
+    },
+    "session_variance": {
+      "enabled": true,
+      "min_session_variance": 0.5,
+      "max_session_variance": 2.0,
+      "require_variance": true,
+      "prevent_identical_sessions": true
+    }
+  },
+  "humanization": {
+    "enabled": true,
+    "random_delays": {
+      "enabled": true,
+      "min_delay_ms": 50,
+      "max_delay_ms": 2000,
+      "variance_required": true,
+      "human_like_distribution": true
+    },
+    "emote_system": {
+      "enabled": true,
+      "emote_frequency": {
+        "min_per_hour": 1,
+        "max_per_hour": 5,
+        "probability_per_check": 0.3
+      },
+      "emotes": [
+        {
+          "command": "/sit",
+          "description": "Sit down",
+          "probability": 0.4,
+          "context": ["idle", "social"]
+        },
+        {
+          "command": "/mood",
+          "description": "Show mood",
+          "probability": 0.2,
+          "context": ["idle", "social"]
+        },
+        {
+          "command": "/dance",
+          "description": "Dance emote",
+          "probability": 0.1,
+          "context": ["social", "celebration"]
+        },
+        {
+          "command": "/wave",
+          "description": "Wave to others",
+          "probability": 0.15,
+          "context": ["social", "greeting"]
+        },
+        {
+          "command": "/nod",
+          "description": "Nod head",
+          "probability": 0.1,
+          "context": ["social", "agreement"]
+        },
+        {
+          "command": "/shrug",
+          "description": "Shrug shoulders",
+          "probability": 0.05,
+          "context": ["social", "uncertainty"]
+        }
+      ]
+    },
+    "camera_movement": {
+      "enabled": true,
+      "movement_frequency": {
+        "min_interval_seconds": 30,
+        "max_interval_seconds": 300,
+        "probability_per_check": 0.4
+      },
+      "movement_types": [
+        {
+          "type": "pan",
+          "description": "Pan camera",
+          "probability": 0.4,
+          "range_degrees": [5, 45]
+        },
+        {
+          "type": "zoom",
+          "description": "Zoom camera",
+          "probability": 0.2,
+          "range_factor": [0.8, 1.2]
+        },
+        {
+          "type": "rotate",
+          "description": "Rotate camera",
+          "probability": 0.3,
+          "range_degrees": [10, 90]
+        },
+        {
+          "type": "reset",
+          "description": "Reset camera",
+          "probability": 0.1,
+          "context": ["idle", "long_session"]
+        }
+      ]
+    },
+    "idle_behavior": {
+      "enabled": true,
+      "idle_actions": {
+        "enabled": true,
+        "min_idle_time": 60,
+        "max_idle_time": 300,
+        "action_probability": 0.6
+      },
+      "actions": [
+        {
+          "action": "craft",
+          "description": "Start crafting",
+          "probability": 0.3,
+          "duration_minutes": [5, 15]
+        },
+        {
+          "action": "socialize",
+          "description": "Social interaction",
+          "probability": 0.2,
+          "duration_minutes": [2, 8]
+        },
+        {
+          "action": "explore",
+          "description": "Explore area",
+          "probability": 0.25,
+          "duration_minutes": [3, 10]
+        },
+        {
+          "action": "rest",
+          "description": "Take a break",
+          "probability": 0.25,
+          "duration_minutes": [1, 5]
+        }
+      ]
+    },
+    "social_interactions": {
+      "enabled": true,
+      "interaction_frequency": {
+        "min_per_session": 2,
+        "max_per_session": 8,
+        "probability_per_check": 0.2
+      },
+      "interaction_types": [
+        {
+          "type": "greeting",
+          "description": "Greet nearby players",
+          "probability": 0.4,
+          "range_meters": [5, 20]
+        },
+        {
+          "type": "emote_response",
+          "description": "Respond to emotes",
+          "probability": 0.3,
+          "context": ["emote_received"]
+        },
+        {
+          "type": "help_offer",
+          "description": "Offer help",
+          "probability": 0.2,
+          "context": ["player_in_combat", "player_low_health"]
+        },
+        {
+          "type": "conversation",
+          "description": "Start conversation",
+          "probability": 0.1,
+          "duration_minutes": [1, 5]
+        }
+      ]
+    }
+  },
+  "anti_patterns": {
+    "enabled": true,
+    "repetitive_actions": {
+      "enabled": true,
+      "max_consecutive_identical": 3,
+      "max_pattern_length": 5,
+      "enforce_breaks": true,
+      "break_duration_seconds": [10, 60]
+    },
+    "perfect_timing": {
+      "enabled": true,
+      "max_identical_timing": 2,
+      "min_variance_required": 0.1,
+      "enforce_randomization": true,
+      "detection_threshold": 0.8
+    },
+    "continuous_operation": {
+      "enabled": true,
+      "max_continuous_hours": 4,
+      "mandatory_break_hours": 1,
+      "enforce_breaks": true,
+      "prevent_24_7_operation": true
+    },
+    "behavior_patterns": {
+      "enabled": true,
+      "max_dominant_behavior": 0.7,
+      "require_activity_variance": true,
+      "enforce_idle_periods": true,
+      "min_idle_periods_per_session": 2
+    }
+  },
+  "detection_surfaces": {
+    "process_names": {
+      "enabled": true,
+      "suspicious_patterns": [
+        "bot", "auto", "macro", "script", "hack", "cheat",
+        "automation", "program", "tool", "helper", "ms11",
+        "morningstar", "project", "assistant"
+      ],
+      "whitelist": [
+        "swg", "starwars", "galaxies", "client", "game"
+      ],
+      "enforce_generic_names": true,
+      "randomize_process_names": false
+    },
+    "window_titles": {
+      "enabled": true,
+      "suspicious_patterns": [
+        "bot", "auto", "macro", "script", "hack", "cheat",
+        "automation", "program", "tool", "helper"
+      ],
+      "whitelist": [
+        "star wars galaxies", "swg", "galaxies", "game"
+      ],
+      "enforce_generic_titles": true,
+      "randomize_window_titles": false
+    },
+    "macro_cadence": {
+      "enabled": true,
+      "max_repetition": 3,
+      "min_variance": 0.15,
+      "max_pattern_length": 5,
+      "enforce_timing_variance": true,
+      "human_like_patterns": true
+    },
+    "session_length": {
+      "enabled": true,
+      "max_session_hours": 6,
+      "min_break_hours": 2,
+      "variance_required": true,
+      "prevent_identical_sessions": true,
+      "enforce_session_caps": true
+    },
+    "input_timing": {
+      "enabled": true,
+      "min_delay_ms": 50,
+      "max_delay_ms": 2000,
+      "human_like_patterns": true,
+      "enforce_randomization": true,
+      "prevent_perfect_timing": true
+    },
+    "repeat_routes": {
+      "enabled": true,
+      "max_identical_routes": 2,
+      "route_variance_required": true,
+      "cooldown_hours": 4,
+      "enforce_route_randomization": true,
+      "prevent_pattern_detection": true
+    }
+  },
+  "variability_simulation": {
+    "enabled": true,
+    "timing_variations": {
+      "enabled": true,
+      "action_delays": {
+        "min_seconds": 0.1,
+        "max_seconds": 2.0,
+        "variance_required": true
+      },
+      "idle_delays": {
+        "min_seconds": 1.0,
+        "max_seconds": 5.0,
+        "variance_required": true
+      },
+      "response_times": {
+        "min_seconds": 0.5,
+        "max_seconds": 3.0,
+        "variance_required": true
+      }
+    },
+    "behavior_variations": {
+      "enabled": true,
+      "emotes": {
+        "variance_required": true,
+        "random_selection": true,
+        "context_aware": true
+      },
+      "idle_actions": {
+        "variance_required": true,
+        "random_selection": true,
+        "duration_variance": true
+      },
+      "travel_modes": {
+        "variance_required": true,
+        "random_selection": true,
+        "speed_variance": true
+      }
+    },
+    "session_variations": {
+      "enabled": true,
+      "session_lengths": {
+        "min_hours": 2,
+        "max_hours": 8,
+        "variance_required": true
+      },
+      "break_durations": {
+        "min_hours": 1,
+        "max_hours": 4,
+        "variance_required": true
+      },
+      "login_times": {
+        "variance_required": true,
+        "avoid_patterns": true,
+        "randomize_times": true
+      }
+    }
+  },
+  "monitoring": {
+    "enabled": true,
+    "real_time_monitoring": {
+      "enabled": true,
+      "check_interval_seconds": 30,
+      "alert_threshold": 0.8,
+      "auto_intervention": true
+    },
+    "audit_scheduling": {
+      "enabled": true,
+      "auto_audit_interval": 3600,
+      "manual_audit_enabled": true,
+      "audit_history_retention": 50
+    },
+    "alerting": {
+      "enabled": true,
+      "critical_alerts": true,
+      "warning_alerts": true,
+      "info_alerts": false,
+      "alert_channels": ["console", "log", "discord"]
+    }
+  },
+  "enforcement": {
+    "enabled": true,
+    "strict_mode": {
+      "enabled": true,
+      "block_unsafe_operations": true,
+      "require_safety_compliance": true,
+      "auto_correction": true
+    },
+    "compliance_checking": {
+      "enabled": true,
+      "check_on_startup": true,
+      "check_before_operations": true,
+      "enforce_defaults": true
+    },
+    "remediation": {
+      "enabled": true,
+      "auto_fix_critical": true,
+      "auto_fix_high": true,
+      "manual_fix_medium": true,
+      "monitor_low": true
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "audit_logging": {
+      "enabled": true,
+      "log_level": "INFO",
+      "log_file": "logs/safety_audit.log",
+      "max_file_size_mb": 10,
+      "backup_count": 5
+    },
+    "event_logging": {
+      "enabled": true,
+      "log_safety_events": true,
+      "log_detection_events": true,
+      "log_compliance_events": true
+    },
+    "performance_logging": {
+      "enabled": true,
+      "log_performance_metrics": true,
+      "log_resource_usage": true,
+      "log_timing_data": true
+    }
+  },
+  "integration": {
+    "enabled": true,
+    "existing_systems": {
+      "identity_guard": {
+        "enabled": true,
+        "integration_level": "full",
+        "share_configuration": true
+      },
+      "macro_watcher": {
+        "enabled": true,
+        "integration_level": "full",
+        "share_configuration": true
+      },
+      "anti_detection": {
+        "enabled": true,
+        "integration_level": "full",
+        "share_configuration": true
+      }
+    },
+    "external_systems": {
+      "discord_alerts": {
+        "enabled": true,
+        "alert_critical": true,
+        "alert_warnings": true
+      },
+      "dashboard": {
+        "enabled": true,
+        "show_safety_status": true,
+        "show_audit_results": true
+      }
+    }
+  }
+} 

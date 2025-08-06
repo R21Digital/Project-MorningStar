@@ -1,0 +1,492 @@
+# Profession Ranges Configuration
+# This file contains combat range intelligence data for all professions and weapons
+
+# Combat range matrix by profession and weapon
+combat_range_matrix:
+  # Rifleman profession combinations
+  rifleman_rifle:
+    profession: "rifleman"
+    weapon_type: "rifle"
+    optimal_range: 64
+    max_range: 100
+    min_range: 10
+    preferred_stance: "kneeling"
+    movement_speed: 1.0
+    range_bonus: 5
+    accuracy_bonus: 0.1
+    description: "Rifleman with rifle - optimal long-range combat"
+    special_abilities:
+      - "Sniper Shot"
+      - "Precise Aim"
+      - "Cover Fire"
+  
+  rifleman_pistol:
+    profession: "rifleman"
+    weapon_type: "pistol"
+    optimal_range: 32
+    max_range: 50
+    min_range: 5
+    preferred_stance: "standing"
+    movement_speed: 1.2
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    description: "Rifleman with pistol - versatile mid-range combat"
+    special_abilities:
+      - "Quick Draw"
+      - "Rapid Fire"
+      - "Dual Wield"
+  
+  rifleman_carbine:
+    profession: "rifleman"
+    weapon_type: "carbine"
+    optimal_range: 48
+    max_range: 75
+    min_range: 8
+    preferred_stance: "standing"
+    movement_speed: 1.1
+    range_bonus: 2
+    accuracy_bonus: 0.05
+    description: "Rifleman with carbine - balanced range and mobility"
+    special_abilities:
+      - "Burst Fire"
+      - "Tactical Reload"
+      - "Suppressive Fire"
+  
+  # Pistoleer profession combinations
+  pistoleer_pistol:
+    profession: "pistoleer"
+    weapon_type: "pistol"
+    optimal_range: 32
+    max_range: 60
+    min_range: 3
+    preferred_stance: "standing"
+    movement_speed: 1.5
+    range_bonus: 3
+    accuracy_bonus: 0.15
+    description: "Pistoleer with pistol - high mobility and accuracy"
+    special_abilities:
+      - "Fan the Hammer"
+      - "Quick Shot"
+      - "Dual Pistols"
+  
+  pistoleer_carbine:
+    profession: "pistoleer"
+    weapon_type: "carbine"
+    optimal_range: 40
+    max_range: 65
+    min_range: 5
+    preferred_stance: "standing"
+    movement_speed: 1.3
+    range_bonus: 1
+    accuracy_bonus: 0.08
+    description: "Pistoleer with carbine - enhanced range capability"
+    special_abilities:
+      - "Rapid Reload"
+      - "Precision Shot"
+      - "Tactical Movement"
+  
+  # Commando profession combinations
+  commando_heavy:
+    profession: "commando"
+    weapon_type: "heavy_weapon"
+    optimal_range: 80
+    max_range: 150
+    min_range: 20
+    preferred_stance: "prone"
+    movement_speed: 0.8
+    range_bonus: 10
+    accuracy_bonus: 0.2
+    description: "Commando with heavy weapon - maximum firepower and range"
+    special_abilities:
+      - "Heavy Burst"
+      - "Laying Down Fire"
+      - "Suppressive Barrage"
+  
+  commando_rifle:
+    profession: "commando"
+    weapon_type: "rifle"
+    optimal_range: 70
+    max_range: 110
+    min_range: 15
+    preferred_stance: "kneeling"
+    movement_speed: 0.9
+    range_bonus: 8
+    accuracy_bonus: 0.15
+    description: "Commando with rifle - specialized long-range combat"
+    special_abilities:
+      - "Precision Strike"
+      - "Tactical Positioning"
+      - "Cover Fire"
+  
+  # Bounty Hunter profession combinations
+  bounty_hunter_rifle:
+    profession: "bounty_hunter"
+    weapon_type: "rifle"
+    optimal_range: 60
+    max_range: 90
+    min_range: 12
+    preferred_stance: "standing"
+    movement_speed: 1.1
+    range_bonus: 4
+    accuracy_bonus: 0.12
+    description: "Bounty Hunter with rifle - tracking and precision"
+    special_abilities:
+      - "Tracking Shot"
+      - "Hunter's Mark"
+      - "Tactical Retreat"
+  
+  bounty_hunter_pistol:
+    profession: "bounty_hunter"
+    weapon_type: "pistol"
+    optimal_range: 28
+    max_range: 45
+    min_range: 4
+    preferred_stance: "standing"
+    movement_speed: 1.4
+    range_bonus: 2
+    accuracy_bonus: 0.1
+    description: "Bounty Hunter with pistol - close-quarters tracking"
+    special_abilities:
+      - "Quick Capture"
+      - "Stun Shot"
+      - "Evasive Maneuvers"
+  
+  # Smuggler profession combinations
+  smuggler_pistol:
+    profession: "smuggler"
+    weapon_type: "pistol"
+    optimal_range: 25
+    max_range: 40
+    min_range: 3
+    preferred_stance: "standing"
+    movement_speed: 1.6
+    range_bonus: 0
+    accuracy_bonus: 0.05
+    description: "Smuggler with pistol - stealth and mobility"
+    special_abilities:
+      - "Stealth Shot"
+      - "Smuggler's Luck"
+      - "Quick Escape"
+  
+  smuggler_carbine:
+    profession: "smuggler"
+    weapon_type: "carbine"
+    optimal_range: 35
+    max_range: 55
+    min_range: 5
+    preferred_stance: "standing"
+    movement_speed: 1.3
+    range_bonus: 1
+    accuracy_bonus: 0.03
+    description: "Smuggler with carbine - enhanced range for smuggling"
+    special_abilities:
+      - "Smuggler's Precision"
+      - "Tactical Retreat"
+      - "Hidden Shot"
+  
+  # Brawler profession combinations
+  brawler_unarmed:
+    profession: "brawler"
+    weapon_type: "unarmed"
+    optimal_range: 2
+    max_range: 3
+    min_range: 1
+    preferred_stance: "standing"
+    movement_speed: 1.8
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    description: "Brawler unarmed - close-quarters combat specialist"
+    special_abilities:
+      - "Punch Combo"
+      - "Grappling Hook"
+      - "Close Combat"
+  
+  brawler_melee:
+    profession: "brawler"
+    weapon_type: "melee"
+    optimal_range: 3
+    max_range: 4
+    min_range: 1
+    preferred_stance: "standing"
+    movement_speed: 1.7
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    description: "Brawler with melee weapon - enhanced close combat"
+    special_abilities:
+      - "Weapon Mastery"
+      - "Close Quarters"
+      - "Combat Rush"
+  
+  # Fencer profession combinations
+  fencer_melee:
+    profession: "fencer"
+    weapon_type: "melee"
+    optimal_range: 3
+    max_range: 5
+    min_range: 1
+    preferred_stance: "standing"
+    movement_speed: 1.6
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    description: "Fencer with melee weapon - precision sword combat"
+    special_abilities:
+      - "Precision Strike"
+      - "Parry and Riposte"
+      - "Sword Mastery"
+  
+  fencer_unarmed:
+    profession: "fencer"
+    weapon_type: "unarmed"
+    optimal_range: 2
+    max_range: 3
+    min_range: 1
+    preferred_stance: "standing"
+    movement_speed: 1.5
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    description: "Fencer unarmed - martial arts combat"
+    special_abilities:
+      - "Martial Arts"
+      - "Pressure Points"
+      - "Combat Flow"
+  
+  # TKA profession combinations
+  tka_unarmed:
+    profession: "tka"
+    weapon_type: "unarmed"
+    optimal_range: 2
+    max_range: 3
+    min_range: 1
+    preferred_stance: "standing"
+    movement_speed: 1.9
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    description: "TKA unarmed - ultimate martial arts combat"
+    special_abilities:
+      - "Teras Kasi Mastery"
+      - "Chi Control"
+      - "Combat Meditation"
+
+# Default settings
+default_settings:
+  debug_overlay_enabled: false
+  auto_detect_weapon: true
+  auto_detect_profession: true
+  range_check_interval: 2.0  # seconds
+  reposition_threshold: 0.8  # percentage of optimal range
+  max_reposition_attempts: 3
+  debug_overlay_region: [50, 50, 300, 200]
+
+# Weapon type definitions
+weapon_types:
+  rifle:
+    name: "Rifle"
+    base_optimal_range: 64
+    base_max_range: 100
+    base_min_range: 10
+    accuracy_falloff: 0.02
+    reload_time: 2.0
+    damage_type: "energy"
+    description: "Long-range precision weapon"
+  
+  pistol:
+    name: "Pistol"
+    base_optimal_range: 32
+    base_max_range: 50
+    base_min_range: 5
+    accuracy_falloff: 0.05
+    reload_time: 1.5
+    damage_type: "energy"
+    description: "Versatile sidearm weapon"
+  
+  carbine:
+    name: "Carbine"
+    base_optimal_range: 48
+    base_max_range: 75
+    base_min_range: 8
+    accuracy_falloff: 0.03
+    reload_time: 1.8
+    damage_type: "energy"
+    description: "Balanced range and mobility"
+  
+  melee:
+    name: "Melee Weapon"
+    base_optimal_range: 3
+    base_max_range: 5
+    base_min_range: 1
+    accuracy_falloff: 0.0
+    reload_time: 0.0
+    damage_type: "kinetic"
+    description: "Close-quarters combat weapon"
+  
+  heavy_weapon:
+    name: "Heavy Weapon"
+    base_optimal_range: 80
+    base_max_range: 150
+    base_min_range: 20
+    accuracy_falloff: 0.01
+    reload_time: 3.0
+    damage_type: "explosive"
+    description: "Maximum firepower and range"
+  
+  unarmed:
+    name: "Unarmed"
+    base_optimal_range: 2
+    base_max_range: 3
+    base_min_range: 1
+    accuracy_falloff: 0.0
+    reload_time: 0.0
+    damage_type: "kinetic"
+    description: "Hand-to-hand combat"
+
+# Profession type definitions
+profession_types:
+  rifleman:
+    name: "Rifleman"
+    description: "Long-range combat specialist"
+    base_movement_speed: 1.0
+    range_bonus: 5
+    accuracy_bonus: 0.1
+    preferred_weapons: ["rifle", "carbine", "pistol"]
+  
+  pistoleer:
+    name: "Pistoleer"
+    description: "High-mobility pistol specialist"
+    base_movement_speed: 1.5
+    range_bonus: 3
+    accuracy_bonus: 0.15
+    preferred_weapons: ["pistol", "carbine"]
+  
+  commando:
+    name: "Commando"
+    description: "Heavy weapons and tactical specialist"
+    base_movement_speed: 0.8
+    range_bonus: 10
+    accuracy_bonus: 0.2
+    preferred_weapons: ["heavy_weapon", "rifle"]
+  
+  bounty_hunter:
+    name: "Bounty Hunter"
+    description: "Tracking and precision specialist"
+    base_movement_speed: 1.1
+    range_bonus: 4
+    accuracy_bonus: 0.12
+    preferred_weapons: ["rifle", "pistol"]
+  
+  smuggler:
+    name: "Smuggler"
+    description: "Stealth and mobility specialist"
+    base_movement_speed: 1.6
+    range_bonus: 0
+    accuracy_bonus: 0.05
+    preferred_weapons: ["pistol", "carbine"]
+  
+  brawler:
+    name: "Brawler"
+    description: "Close-quarters combat specialist"
+    base_movement_speed: 1.8
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    preferred_weapons: ["unarmed", "melee"]
+  
+  fencer:
+    name: "Fencer"
+    description: "Precision sword combat specialist"
+    base_movement_speed: 1.6
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    preferred_weapons: ["melee", "unarmed"]
+  
+  tka:
+    name: "Teras Kasi Artist"
+    description: "Ultimate martial arts master"
+    base_movement_speed: 1.9
+    range_bonus: 0
+    accuracy_bonus: 0.0
+    preferred_weapons: ["unarmed"]
+
+# Range status definitions
+range_statuses:
+  too_close:
+    name: "Too Close"
+    description: "Target is within minimum range"
+    action: "move_back"
+    priority: "high"
+  
+  optimal:
+    name: "Optimal Range"
+    description: "Target is at optimal combat distance"
+    action: "engage"
+    priority: "none"
+  
+  acceptable:
+    name: "Acceptable Range"
+    description: "Target is within acceptable range"
+    action: "engage"
+    priority: "low"
+  
+  too_far:
+    name: "Too Far"
+    description: "Target is beyond optimal range"
+    action: "move_forward"
+    priority: "medium"
+  
+  out_of_range:
+    name: "Out of Range"
+    description: "Target is beyond maximum range"
+    action: "move_forward"
+    priority: "high"
+
+# Minimap detection settings
+minimap_detection:
+  regions:
+    player_position: [400, 300, 450, 350]
+    target_position: [350, 250, 500, 400]
+    distance_indicators: [350, 250, 500, 400]
+  
+  distance_patterns:
+    - "(\\d+)m"
+    - "distance: (\\d+)"
+    - "range: (\\d+)"
+    - "(\\d+) meters"
+    - "(\\d+) units"
+  
+  confidence_threshold: 50
+  fallback_distance: 50.0
+
+# Debug overlay settings
+debug_overlay:
+  enabled: false
+  region: [50, 50, 300, 200]
+  display_elements:
+    - "current_distance"
+    - "optimal_range"
+    - "range_status"
+    - "reposition_needed"
+    - "suggested_action"
+    - "confidence"
+  
+  colors:
+    too_close: "#FF4444"
+    optimal: "#44FF44"
+    acceptable: "#FFFF44"
+    too_far: "#FF8844"
+    out_of_range: "#FF4444"
+    unknown: "#888888"
+
+# Performance settings
+performance:
+  range_check_interval: 2.0  # seconds
+  weapon_detection_interval: 10.0  # seconds
+  profession_detection_interval: 30.0  # seconds
+  minimap_scan_interval: 1.0  # seconds
+  debug_overlay_update_interval: 0.5  # seconds
+
+# Error handling settings
+error_handling:
+  max_detection_attempts: 3
+  fallback_weapon_type: "pistol"
+  fallback_profession: "rifleman"
+  fallback_optimal_range: 32
+  fallback_max_range: 50
+  fallback_min_range: 5 

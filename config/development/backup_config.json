@@ -1,0 +1,119 @@
+{
+  "backup": {
+    "enabled": true,
+    "schedule": {
+      "frequency": "daily",
+      "time": "02:00",
+      "timezone": "UTC"
+    },
+    "retention": {
+      "daily_backups": 7,
+      "weekly_backups": 4,
+      "monthly_backups": 12,
+      "max_age_days": 365
+    },
+    "paths": {
+      "data_directory": "./data",
+      "uploads_directory": "./uploads",
+      "backup_directory": "./backups",
+      "exclude_patterns": [
+        "*.tmp",
+        "*.log",
+        "*.cache",
+        "__pycache__",
+        ".git",
+        "node_modules"
+      ]
+    },
+    "compression": {
+      "enabled": true,
+      "format": "tar.gz",
+      "level": 6
+    },
+    "verification": {
+      "enabled": true,
+      "checksum": "sha256"
+    },
+    "logging": {
+      "enabled": true,
+      "log_file": "./logs/backup.log",
+      "max_log_size": "10MB",
+      "log_level": "INFO"
+    }
+  },
+  "remote": {
+    "git": {
+      "enabled": false,
+      "repository": "https://github.com/your-username/ms11-backups.git",
+      "branch": "backups",
+      "credentials": {
+        "type": "ssh",
+        "key_path": "~/.ssh/id_rsa"
+      },
+      "auto_commit": true,
+      "commit_message_template": "Backup: {timestamp} - {files_count} files"
+    },
+    "google_drive": {
+      "enabled": false,
+      "folder_id": "your-google-drive-folder-id",
+      "credentials_file": "./config/google_drive_credentials.json",
+      "max_file_size": "100MB"
+    },
+    "s3": {
+      "enabled": false,
+      "bucket": "ms11-backups",
+      "region": "us-east-1",
+      "credentials": {
+        "access_key_id": "",
+        "secret_access_key": ""
+      },
+      "encryption": "AES256"
+    },
+    "ftp": {
+      "enabled": false,
+      "host": "backup.example.com",
+      "port": 21,
+      "username": "backup_user",
+      "password": "",
+      "path": "/backups/ms11"
+    }
+  },
+  "notifications": {
+    "discord": {
+      "enabled": true,
+      "webhook_url": "https://discord.com/api/webhooks/your-webhook-url",
+      "notify_on_success": true,
+      "notify_on_failure": true,
+      "notify_on_restore": true
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "smtp.gmail.com",
+      "smtp_port": 587,
+      "username": "backup@example.com",
+      "password": "",
+      "recipients": ["admin@example.com"]
+    }
+  },
+  "restore": {
+    "enabled": true,
+    "confirmation_required": true,
+    "dry_run": false,
+    "backup_verification": true,
+    "restore_log": "./logs/restore.log"
+  },
+  "monitoring": {
+    "enabled": true,
+    "health_check": {
+      "enabled": true,
+      "interval_hours": 24,
+      "max_backup_age_hours": 26
+    },
+    "metrics": {
+      "enabled": true,
+      "backup_size_tracking": true,
+      "backup_duration_tracking": true,
+      "error_rate_tracking": true
+    }
+  }
+} 

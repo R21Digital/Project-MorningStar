@@ -1,0 +1,48 @@
+{
+  "mount_priority": [
+    "Dewback",
+    "Speeder", 
+    "Swoop",
+    "Bantha",
+    "Ronto"
+  ],
+  "custom_mounts": {
+    "Rare Speeder": {
+      "type": "speeder",
+      "speed": 2.5,
+      "indoor_allowed": false,
+      "city_allowed": true,
+      "combat_allowed": false
+    },
+    "Combat Mount": {
+      "type": "dewback",
+      "speed": 1.8,
+      "indoor_allowed": false,
+      "city_allowed": true,
+      "combat_allowed": true
+    }
+  },
+  "auto_mount_settings": {
+    "enable_auto_mount": true,
+    "enable_auto_dismount": true,
+    "check_interval_seconds": 30,
+    "min_travel_distance_for_mount": 100
+  },
+  "zone_restrictions": {
+    "indoor_zones": [
+      "buildings",
+      "caves",
+      "dungeons",
+      "shuttleports"
+    ],
+    "combat_zones": [
+      "pvp_areas",
+      "war_zones",
+      "battlefields"
+    ],
+    "city_restrictions": {
+      "Swoop": ["Theed", "Coronet"],
+      "Speeder": []
+    }
+  }
+} 

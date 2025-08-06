@@ -1,0 +1,134 @@
+# Legacy Questline - Quest 3: "The Legacy's Call"
+# This is the third quest in the Legacy Questline from SWGR.org
+
+quest_id: "legacy_call"
+name: "The Legacy's Call"
+description: "Discover your true potential and unlock the power of the Legacy within you"
+quest_type: "epic"
+difficulty: "hard"
+level_requirement: 10
+planet: "tatooine"
+zone: "anchorhead"
+coordinates: [800, 900]
+quest_chain: "legacy_questline"
+prerequisites:
+  - "legacy_begins"
+  - "desert_secrets"
+
+rewards:
+  experience: 500
+  credits: 300
+  reputation:
+    tatooine: 100
+  items:
+    - "legacy_crystal"
+    - "enhanced_weapon"
+    - "legacy_title"
+  unlocks:
+    - "legacy_abilities"
+    - "advanced_training"
+    - "galaxy_access"
+
+steps:
+  - step_id: "meet_legacy_master"
+    type: "dialogue"
+    npc_id: "master_kenobi"
+    coordinates: [800, 900]
+    dialogue_options:
+      - "I seek to understand my Legacy"
+      - "Tell me about the ancient powers"
+      - "How do I unlock my potential?"
+    required_response: 1
+    description: "Meet with Master Kenobi to learn about your Legacy heritage"
+
+  - step_id: "meditation_trial"
+    type: "interaction"
+    target_location: "meditation_chamber"
+    coordinates: [850, 950]
+    description: "Complete the meditation trial to connect with your Legacy"
+    interaction_requirements:
+      meditation_time: 300  # 5 minutes
+      focus_level: 80
+    timeout_seconds: 600
+
+  - step_id: "face_inner_demon"
+    type: "combat"
+    target_npc: "inner_demon"
+    coordinates: [900, 1000]
+    description: "Face your inner demon in a spiritual combat trial"
+    combat_requirements:
+      min_damage_dealt: 200
+      max_health_lost: 100
+      special_ability_used: "legacy_force"
+    timeout_seconds: 1200
+
+  - step_id: "collect_legacy_crystal"
+    type: "collection"
+    target_item: "legacy_crystal"
+    coordinates: [950, 1050]
+    description: "Retrieve the Legacy crystal from the ancient temple"
+    collection_radius: 30
+    timeout_seconds: 300
+    required_count: 1
+    special_requirements:
+      - "legacy_force_active"
+      - "meditation_complete"
+
+  - step_id: "final_legacy_ritual"
+    type: "ritual"
+    target_location: "legacy_altar"
+    coordinates: [1000, 1100]
+    description: "Perform the final Legacy ritual to unlock your true potential"
+    ritual_requirements:
+      items_required:
+        - "legacy_crystal"
+        - "ancient_artifact"
+      ritual_time: 180  # 3 minutes
+      concentration_level: 95
+    timeout_seconds: 600
+
+  - step_id: "return_to_master"
+    type: "dialogue"
+    npc_id: "master_kenobi"
+    coordinates: [800, 900]
+    dialogue_options:
+      - "I have unlocked my Legacy potential"
+      - "The crystal has revealed my true power"
+      - "I am ready for the next step"
+    required_response: 1
+    description: "Return to Master Kenobi to complete your Legacy awakening"
+
+completion_conditions:
+  - type: "steps_completed"
+    steps: ["meet_legacy_master", "meditation_trial", "face_inner_demon", "collect_legacy_crystal", "final_legacy_ritual", "return_to_master"]
+    count: 6
+
+failure_conditions:
+  - type: "timeout"
+    timeout_seconds: 7200  # 2 hours
+  - type: "death"
+    max_deaths: 2
+  - type: "meditation_failed"
+    max_failures: 3
+
+hints:
+  - "Focus your mind during meditation - distractions will break your concentration"
+  - "The inner demon represents your fears - face them with courage"
+  - "The Legacy crystal will only respond to those with true potential"
+  - "The ritual requires complete focus - any interruption will fail"
+  - "Your Legacy abilities will grow stronger with practice"
+
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "SWGR.org_Legacy_Data"
+  source: "SWGR.org Legacy Questline"
+  tags:
+    - "legacy"
+    - "epic"
+    - "tatooine"
+    - "anchorhead"
+    - "force"
+    - "meditation"
+    - "crystal" 

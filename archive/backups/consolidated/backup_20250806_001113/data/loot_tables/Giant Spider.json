@@ -1,0 +1,251 @@
+{
+  "source_type": "creature",
+  "total_kills": 0,
+  "total_loot": 143,
+  "last_updated": "2025-08-03T17:35:53.167425",
+  "items": {
+    "77c38045": {
+      "name": "Krayt Dragon Pearl",
+      "rarity": "legendary",
+      "total_drops": 13,
+      "total_quantity": 13,
+      "first_seen": "2025-08-03T16:55:41.978515",
+      "last_seen": "2025-08-03T17:33:28.177540"
+    },
+    "aebd878c": {
+      "name": "Rancor Hide",
+      "rarity": "uncommon",
+      "total_drops": 17,
+      "total_quantity": 48,
+      "first_seen": "2025-08-03T16:55:58.180995",
+      "last_seen": "2025-08-03T17:35:53.167399"
+    },
+    "eb633452": {
+      "name": "Dewback Meat",
+      "rarity": "uncommon",
+      "total_drops": 3,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T16:56:20.040918",
+      "last_seen": "2025-08-03T17:30:19.260702"
+    },
+    "7f5ed1ed": {
+      "name": "5000 Credits from Giant Spider",
+      "rarity": "common",
+      "total_drops": 29,
+      "total_quantity": 29,
+      "first_seen": "2025-08-03T16:56:24.192064",
+      "last_seen": "2025-08-03T17:34:47.216534"
+    },
+    "2a6e4b8d": {
+      "name": "Power Crystal",
+      "rarity": "epic",
+      "total_drops": 20,
+      "total_quantity": 40,
+      "first_seen": "2025-08-03T16:56:32.194782",
+      "last_seen": "2025-08-03T17:34:28.325945"
+    },
+    "b3b856b1": {
+      "name": "Krayt Dragon Pearl from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T16:57:38.045007",
+      "last_seen": "2025-08-03T16:57:38.045007"
+    },
+    "ea325b5d": {
+      "name": "Power Crystal from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T16:58:13.467033",
+      "last_seen": "2025-08-03T16:58:13.467033"
+    },
+    "948a2e35": {
+      "name": "Credits",
+      "rarity": "common",
+      "total_drops": 15,
+      "total_quantity": 71000,
+      "first_seen": "2025-08-03T16:58:27.244961",
+      "last_seen": "2025-08-03T17:30:54.107658"
+    },
+    "49ded14c": {
+      "name": "Krayt Dragon Scale from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T16:59:25.909076",
+      "last_seen": "2025-08-03T16:59:25.909076"
+    },
+    "c799fb12": {
+      "name": "Rancor Bone",
+      "rarity": "rare",
+      "total_drops": 3,
+      "total_quantity": 9,
+      "first_seen": "2025-08-03T16:59:38.117955",
+      "last_seen": "2025-08-03T17:30:12.736250"
+    },
+    "7cb97b75": {
+      "name": "Gurreck Hide from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T16:59:56.294341",
+      "last_seen": "2025-08-03T16:59:56.294341"
+    },
+    "262010f9": {
+      "name": "Composite Armor",
+      "rarity": "epic",
+      "total_drops": 17,
+      "total_quantity": 17,
+      "first_seen": "2025-08-03T17:02:01.246470",
+      "last_seen": "2025-08-03T17:33:06.166879"
+    },
+    "cdd64393": {
+      "name": "Nexu Hide",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:02:07.479326",
+      "last_seen": "2025-08-03T17:04:44.041006"
+    },
+    "ed532879": {
+      "name": "Acklay Brain",
+      "rarity": "rare",
+      "total_drops": 3,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:07:09.711877",
+      "last_seen": "2025-08-03T17:27:13.386447"
+    },
+    "fa34838d": {
+      "name": "Ronto Hide",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:07:37.300651",
+      "last_seen": "2025-08-03T17:07:37.300651"
+    },
+    "9609a4ad": {
+      "name": "Bantha Wool from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:10:02.228463",
+      "last_seen": "2025-08-03T17:10:02.228463"
+    },
+    "aa55867b": {
+      "name": "Nexu Fang",
+      "rarity": "rare",
+      "total_drops": 2,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:11:12.511283",
+      "last_seen": "2025-08-03T17:24:36.905145"
+    },
+    "6fbccbee": {
+      "name": "Gurreck Hide",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 9,
+      "first_seen": "2025-08-03T17:14:18.805333",
+      "last_seen": "2025-08-03T17:25:03.023523"
+    },
+    "2819cceb": {
+      "name": "Krayt Dragon Hide from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T17:14:25.696982",
+      "last_seen": "2025-08-03T17:14:25.696982"
+    },
+    "5bc66696": {
+      "name": "Bantha Hide",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 20,
+      "first_seen": "2025-08-03T17:17:35.631271",
+      "last_seen": "2025-08-03T17:33:13.927124"
+    },
+    "b55e6bc2": {
+      "name": "Gurreck Horn",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:19:05.568490",
+      "last_seen": "2025-08-03T17:19:05.568490"
+    },
+    "ff2f28c5": {
+      "name": "Dewback Hide",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:19:34.385832",
+      "last_seen": "2025-08-03T17:19:34.385832"
+    },
+    "4a6e2918": {
+      "name": "Bantha Meat",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 14,
+      "first_seen": "2025-08-03T17:19:55.880982",
+      "last_seen": "2025-08-03T17:33:56.744910"
+    },
+    "cdb03f60": {
+      "name": "Dewback Scale",
+      "rarity": "rare",
+      "total_drops": 2,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:22:59.466782",
+      "last_seen": "2025-08-03T17:30:44.284719"
+    },
+    "60896051": {
+      "name": "Bantha Wool",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:29:24.940601",
+      "last_seen": "2025-08-03T17:29:24.940601"
+    },
+    "87440cc6": {
+      "name": "Ronto Hide from Giant Spider",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:34:11.042052",
+      "last_seen": "2025-08-03T17:34:11.042052"
+    }
+  },
+  "drop_rates": {
+    "77c38045": 9.09,
+    "aebd878c": 11.89,
+    "eb633452": 2.1,
+    "7f5ed1ed": 20.28,
+    "2a6e4b8d": 13.99,
+    "b3b856b1": 0.7,
+    "ea325b5d": 0.7,
+    "948a2e35": 10.49,
+    "49ded14c": 0.7,
+    "c799fb12": 2.1,
+    "7cb97b75": 0.7,
+    "262010f9": 11.89,
+    "cdd64393": 1.4,
+    "ed532879": 2.1,
+    "fa34838d": 0.7,
+    "9609a4ad": 0.7,
+    "aa55867b": 1.4,
+    "6fbccbee": 1.4,
+    "2819cceb": 0.7,
+    "5bc66696": 1.4,
+    "b55e6bc2": 0.7,
+    "ff2f28c5": 0.7,
+    "4a6e2918": 1.4,
+    "cdb03f60": 1.4,
+    "60896051": 0.7,
+    "87440cc6": 0.7
+  },
+  "rarity_distribution": {
+    "legendary": 13,
+    "uncommon": 21,
+    "common": 57,
+    "epic": 25,
+    "rare": 27
+  }
+}

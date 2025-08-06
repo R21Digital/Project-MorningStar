@@ -1,0 +1,142 @@
+{
+  "validation_time": 1753988504.2654047,
+  "overall_status": "fail",
+  "summary": {
+    "total_checks": 9,
+    "passed_checks": 5,
+    "failed_checks": 2,
+    "warning_checks": 2,
+    "skipped_checks": 0
+  },
+  "checks": [
+    {
+      "name": "Window Mode",
+      "type": "window_mode",
+      "status": "pass",
+      "message": "Game is running in windowed mode",
+      "details": {
+        "windowed": true
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.231958
+    },
+    {
+      "name": "Resolution",
+      "type": "resolution",
+      "status": "pass",
+      "message": "Resolution 1600x900 is supported",
+      "details": {
+        "resolution": [
+          1600,
+          900
+        ]
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.2319627
+    },
+    {
+      "name": "UI Element: minimap",
+      "type": "ui_visibility",
+      "status": "fail",
+      "message": "minimap is not visible",
+      "details": {
+        "element": "minimap",
+        "visible": false
+      },
+      "required": true,
+      "fix_suggestion": "Make sure minimap is visible in the UI",
+      "timestamp": 1753988504.2648427
+    },
+    {
+      "name": "UI Element: quest_journal",
+      "type": "ui_visibility",
+      "status": "fail",
+      "message": "quest_journal is not visible",
+      "details": {
+        "element": "quest_journal",
+        "visible": false
+      },
+      "required": true,
+      "fix_suggestion": "Make sure quest_journal is visible in the UI",
+      "timestamp": 1753988504.2648475
+    },
+    {
+      "name": "UI Element: chat_window",
+      "type": "ui_visibility",
+      "status": "warning",
+      "message": "chat_window is not visible (optional)",
+      "details": {
+        "element": "chat_window",
+        "visible": false
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.2648509
+    },
+    {
+      "name": "UI Element: inventory",
+      "type": "ui_visibility",
+      "status": "warning",
+      "message": "inventory is not visible (optional)",
+      "details": {
+        "element": "inventory",
+        "visible": false
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.2648537
+    },
+    {
+      "name": "UI Scale",
+      "type": "ui_scale",
+      "status": "pass",
+      "message": "UI scale 1.14 is compatible",
+      "details": {
+        "ui_scale": 1.14221236305855
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.265385
+    },
+    {
+      "name": "Game State",
+      "type": "game_state",
+      "status": "pass",
+      "message": "Game is in a valid state for bot operation",
+      "details": {
+        "ready": true,
+        "loaded": true,
+        "character_logged_in": true,
+        "in_game": true
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.265388
+    },
+    {
+      "name": "Performance",
+      "type": "performance",
+      "status": "pass",
+      "message": "Performance is adequate for bot operation",
+      "details": {
+        "adequate": true,
+        "fps": 46,
+        "memory_usage": 31,
+        "reason": null
+      },
+      "required": true,
+      "fix_suggestion": null,
+      "timestamp": 1753988504.2653956
+    }
+  ],
+  "critical_failures": [
+    "UI Element: minimap: minimap is not visible",
+    "UI Element: quest_journal: quest_journal is not visible"
+  ],
+  "recommendations": [
+    "UI Element: minimap: Make sure minimap is visible in the UI",
+    "UI Element: quest_journal: Make sure quest_journal is visible in the UI"
+  ]
+}

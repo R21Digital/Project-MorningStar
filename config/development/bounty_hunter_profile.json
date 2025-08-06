@@ -1,0 +1,70 @@
+{
+  "mode_name": "bounty_hunter_tunit",
+  "description": "T-Unit Bounty Hunter Mode - Phase 1",
+  
+  "mission_settings": {
+    "max_active_missions": 3,
+    "preferred_difficulty": "medium",
+    "min_reward_credits": 500,
+    "max_travel_distance": 5000,
+    "auto_accept_missions": true,
+    "retry_failed_missions": true,
+    "max_retries": 3
+  },
+  
+  "combat_settings": {
+    "combat_behavior": "tactical",
+    "aggressive_threshold": 0.3,
+    "defensive_threshold": 0.7,
+    "heal_threshold": 0.4,
+    "retreat_threshold": 0.2,
+    "max_combat_time": 300
+  },
+  
+  "travel_settings": {
+    "use_shuttle_routes": true,
+    "preferred_mount": "speeder",
+    "avoid_dangerous_zones": true,
+    "waypoint_verification": true
+  },
+  
+  "discord_alerts": {
+    "enable_discord_alerts": true,
+    "alert_channel_id": null,
+    "alert_format": "T-Unit engaged target: {target} @ {location}",
+    "alert_types": ["engage", "complete", "failed"],
+    "include_difficulty": true,
+    "include_rewards": true
+  },
+  
+  "target_filters": {
+    "allowed_target_types": ["npc"],
+    "excluded_targets": [],
+    "preferred_factions": ["imperial"],
+    "max_target_level": 50,
+    "min_target_level": 5
+  },
+  
+  "safety_settings": {
+    "max_mission_time": 7200,
+    "health_check_interval": 30,
+    "emergency_retreat_hp": 0.2,
+    "log_combat_details": true,
+    "save_mission_logs": true
+  },
+  
+  "performance_settings": {
+    "mission_cycle_delay": 60,
+    "combat_cooldown": 10,
+    "travel_cooldown": 30,
+    "max_daily_missions": 50,
+    "enable_statistics": true
+  },
+  
+  "debug_settings": {
+    "verbose_logging": false,
+    "log_combat_decisions": false,
+    "simulate_combat": false,
+    "test_mode": false
+  }
+} 

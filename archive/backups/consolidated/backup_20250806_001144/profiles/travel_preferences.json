@@ -1,0 +1,8 @@
+{
+  "preferred_travel_type": "starport",
+  "use_ship": true,
+  "max_cost": 2000,
+  "max_travel_time": 30,
+  "prefer_direct_routes": true,
+  "fallback_enabled": true
+}

@@ -1,0 +1,56 @@
+[
+    {
+        "name": "mos_eisley_cantina",
+        "x": 3520,
+        "y": -4800,
+        "planet": "tatooine",
+        "zone": "mos_eisley",
+        "description": "Cantina in Mos Eisley",
+        "safe_zone": [3500, -4850, 40, 100]
+    },
+    {
+        "name": "anchorhead_center",
+        "x": 3000,
+        "y": -5500,
+        "planet": "tatooine",
+        "zone": "anchorhead",
+        "description": "Center of Anchorhead",
+        "safe_zone": [2980, -5520, 40, 40]
+    },
+    {
+        "name": "bestine_center",
+        "x": 4000,
+        "y": -6000,
+        "planet": "tatooine",
+        "zone": "bestine",
+        "description": "Center of Bestine",
+        "safe_zone": [3980, -6020, 40, 40]
+    },
+    {
+        "name": "theed_palace",
+        "x": 5000,
+        "y": -4000,
+        "planet": "naboo",
+        "zone": "theed",
+        "description": "Theed Palace entrance",
+        "safe_zone": [4980, -4020, 40, 40]
+    },
+    {
+        "name": "moenia_center",
+        "x": 4500,
+        "y": -4500,
+        "planet": "naboo",
+        "zone": "moenia",
+        "description": "Center of Moenia",
+        "safe_zone": [4480, -4520, 40, 40]
+    },
+    {
+        "name": "dantooine_mining_cave",
+        "x": 50,
+        "y": 75,
+        "planet": "dantooine",
+        "zone": "mining",
+        "description": "Mining cave entrance",
+        "safe_zone": [30, 55, 40, 40]
+    }
+] 

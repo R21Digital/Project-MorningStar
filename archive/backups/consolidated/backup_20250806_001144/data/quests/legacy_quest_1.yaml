@@ -1,0 +1,97 @@
+# Legacy Questline - Quest 1: "The Legacy Begins"
+# This is the first quest in the Legacy Questline from SWGR.org
+
+quest_id: "legacy_begins"
+name: "The Legacy Begins"
+description: "Begin your journey as a Legacy character and learn the basics of survival on Tatooine"
+quest_type: "tutorial"
+difficulty: "easy"
+level_requirement: 1
+planet: "tatooine"
+zone: "mos_eisley"
+coordinates: [100, 150]
+quest_chain: "legacy_questline"
+prerequisites: []
+
+rewards:
+  experience: 100
+  credits: 50
+  reputation:
+    tatooine: 25
+  items:
+    - "basic_weapon"
+    - "starter_armor"
+  unlocks:
+    - "mos_eisley_access"
+    - "basic_combat_training"
+
+steps:
+  - step_id: "talk_to_yevin_rook"
+    type: "dialogue"
+    npc_id: "yevin_rook"
+    coordinates: [100, 150]
+    dialogue_options:
+      - "I'm ready to begin my journey"
+      - "Tell me more about the Legacy"
+      - "What should I know about Tatooine?"
+    required_response: 1
+    description: "Speak with Yevin Rook to begin your Legacy journey"
+
+  - step_id: "collect_supplies"
+    type: "collection"
+    target_item: "basic_supplies"
+    coordinates: [120, 170]
+    description: "Collect basic supplies from the nearby supply crate"
+    collection_radius: 30
+    timeout_seconds: 180
+    required_count: 1
+
+  - step_id: "practice_combat"
+    type: "combat"
+    target_npc: "training_droid"
+    coordinates: [140, 190]
+    description: "Practice basic combat techniques with the training droid"
+    combat_requirements:
+      min_damage_dealt: 50
+      max_health_lost: 20
+    timeout_seconds: 300
+
+  - step_id: "return_to_yevin"
+    type: "dialogue"
+    npc_id: "yevin_rook"
+    coordinates: [100, 150]
+    dialogue_options:
+      - "I've completed my training"
+      - "I'm ready for more challenges"
+    required_response: 1
+    description: "Return to Yevin Rook to complete your initial training"
+
+completion_conditions:
+  - type: "steps_completed"
+    steps: ["talk_to_yevin_rook", "collect_supplies", "practice_combat", "return_to_yevin"]
+    count: 4
+
+failure_conditions:
+  - type: "timeout"
+    timeout_seconds: 1800  # 30 minutes
+  - type: "death"
+    max_deaths: 5
+
+hints:
+  - "Follow the glowing markers to find objectives"
+  - "Use your scanner to locate the supply crate"
+  - "The training droid won't fight back - it's just for practice"
+  - "Don't worry about taking damage during training"
+
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "SWGR.org_Legacy_Data"
+  source: "SWGR.org Legacy Questline"
+  tags:
+    - "legacy"
+    - "tutorial"
+    - "tatooine"
+    - "mos_eisley"
+    - "yevin_rook" 

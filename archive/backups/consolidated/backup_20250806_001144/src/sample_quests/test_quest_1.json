@@ -1,0 +1,22 @@
+[
+  {
+    "type": "move",
+    "data": {
+      "zone": "Tatooine",
+      "coords": [3520, -4810]
+    }
+  },
+  {
+    "type": "npc",
+    "data": {
+      "npc_name": "Sergeant Ryles"
+    }
+  },
+  {
+    "type": "combat",
+    "data": {
+      "target_name": "Scrap Rat",
+      "count": 5
+    }
+  }
+]

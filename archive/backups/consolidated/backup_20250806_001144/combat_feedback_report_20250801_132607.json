@@ -1,0 +1,299 @@
+{
+  "export_timestamp": "2025-08-01T13:26:07.390500",
+  "feedback_history": [
+    {
+      "timestamp": "2025-08-01T13:26:07.389315",
+      "session_id": "demo_session_20250801_132607",
+      "session_comparison": {
+        "status": "comparison_complete",
+        "comparison": {
+          "dps": {
+            "current": 150.0,
+            "previous": 176.35135135135135,
+            "change_percentage": -0.14942528735632185,
+            "improved": false,
+            "declined": true
+          },
+          "xp_per_hour": {
+            "current": 2500.0,
+            "previous": 2763.5135135135133,
+            "change_percentage": -0.0953545232273838,
+            "improved": false,
+            "declined": true
+          },
+          "damage_per_hour": {
+            "current": 15000.0,
+            "previous": 17027.027027027027,
+            "change_percentage": -0.11904761904761903,
+            "improved": false,
+            "declined": true
+          },
+          "kills": {
+            "current": 25,
+            "previous": 27.027027027027028,
+            "change_percentage": -0.07500000000000004,
+            "improved": false,
+            "declined": true
+          },
+          "deaths": {
+            "current": 2,
+            "previous": 1.3243243243243243,
+            "change_percentage": 0.5102040816326531,
+            "improved": true,
+            "declined": false
+          },
+          "efficiency": {
+            "current": 0.75,
+            "previous": 0.7905405405405403,
+            "change_percentage": -0.05128205128205105,
+            "improved": false,
+            "declined": true
+          },
+          "duration": {
+            "current": 3600,
+            "previous": 3600.0,
+            "change_percentage": 0.0,
+            "improved": false,
+            "declined": false
+          }
+        },
+        "alerts": [],
+        "recommendations": [],
+        "current_metrics": {
+          "dps": 150.0,
+          "xp_per_hour": 2500.0,
+          "damage_per_hour": 15000.0,
+          "kills": 25,
+          "deaths": 2,
+          "efficiency": 0.75,
+          "duration": 3600
+        },
+        "previous_metrics": {
+          "dps": 176.35135135135135,
+          "xp_per_hour": 2763.5135135135133,
+          "damage_per_hour": 17027.027027027027,
+          "kills": 27.027027027027028,
+          "deaths": 1.3243243243243243,
+          "efficiency": 0.7905405405405403,
+          "duration": 3600.0
+        }
+      },
+      "skill_analysis": {
+        "timestamp": "2025-08-01T13:26:07.389213",
+        "current_skills": [
+          "rifle_shot",
+          "rifle_hit",
+          "sniper_shot",
+          "pistol_shot",
+          "pistol_hit",
+          "heal_light",
+          "heal_medium",
+          "heal_heavy",
+          "buff_accuracy",
+          "buff_damage"
+        ],
+        "build_skills": [
+          "rifle_shot",
+          "rifle_hit",
+          "sniper_shot",
+          "heal_light",
+          "heal_medium"
+        ],
+        "skill_count": 10,
+        "build_completion": 1.0,
+        "stagnation": {
+          "stagnation_detected": true,
+          "indicators": [
+            "no_recent_progression",
+            "flat_efficiency"
+          ],
+          "skill_progression": {
+            "new_skills_learned": 0,
+            "skill_usage_trend": 0.0,
+            "efficiency_variance": 0.0,
+            "sessions_analyzed": 38
+          },
+          "days_analyzed": 7,
+          "sessions_analyzed": 38
+        },
+        "overlap": {
+          "overlap_groups": [
+            {
+              "category": "combat",
+              "skills": [
+                "rifle_shot",
+                "rifle_hit",
+                "pistol_shot",
+                "pistol_hit"
+              ],
+              "description": "Multiple combat skills with similar function"
+            }
+          ],
+          "redundant_skills": [
+            {
+              "skill": "pistol_shot",
+              "category": "combat",
+              "reason": "not_in_build"
+            },
+            {
+              "skill": "pistol_hit",
+              "category": "combat",
+              "reason": "not_in_build"
+            },
+            {
+              "skill": "heal_heavy",
+              "category": "other",
+              "reason": "not_in_build"
+            },
+            {
+              "skill": "buff_accuracy",
+              "category": "other",
+              "reason": "not_in_build"
+            },
+            {
+              "skill": "buff_damage",
+              "category": "other",
+              "reason": "not_in_build"
+            }
+          ],
+          "total_overlaps": 1,
+          "total_redundant": 5
+        },
+        "inefficiency": {
+          "inefficient_skills": [],
+          "underutilized_skills": [
+            {
+              "skill": "pistol_shot",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "pistol_hit",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "heal_light",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "heal_medium",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "heal_heavy",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "buff_accuracy",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "buff_damage",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            }
+          ],
+          "total_inefficient": 0,
+          "total_underutilized": 7
+        },
+        "recommendations": [
+          "\ud83d\udca1 Consider respeccing to focus on underutilized skills",
+          "\ud83d\udca1 Review skill rotation for efficiency improvements",
+          "\ud83d\udca1 Consider removing overlapping skills to optimize build",
+          "\ud83d\udca1 Skill tree health is low - consider respec"
+        ],
+        "health_score": 0.7000000000000001
+      },
+      "respec_analysis": {
+        "timestamp": "2025-08-01T13:26:07.389305",
+        "respec_recommended": true,
+        "confidence": 0.66,
+        "reasons": [
+          {
+            "type": "skill_stagnation",
+            "severity": "high",
+            "description": "Skill stagnation detected: no_recent_progression, flat_efficiency",
+            "days_analyzed": 7
+          },
+          {
+            "type": "build_inefficiency",
+            "severity": "medium",
+            "description": "0 inefficient, 7 underutilized skills",
+            "total_issues": 7
+          }
+        ],
+        "recommendations": [
+          "\u26a0\ufe0f Respec recommended - significant performance issues detected",
+          "\ud83d\udca1 Consider different skill progression path",
+          "\ud83d\udca1 Remove inefficient skills, add complementary ones"
+        ],
+        "alternative_suggestions": [
+          "\ud83d\udca1 Try different ability rotation before respec",
+          "\ud83d\udca1 Review gear and buff optimization",
+          "\ud83d\udca1 Consider different farming locations",
+          "\ud83d\udca1 Experiment with different combat strategies"
+        ]
+      },
+      "alerts": [
+        "\ud83d\udca1 Consider respeccing to focus on underutilized skills",
+        "\ud83d\udca1 Review skill rotation for efficiency improvements",
+        "\ud83d\udca1 Consider removing overlapping skills to optimize build",
+        "\ud83d\udca1 Skill tree health is low - consider respec",
+        "\u26a0\ufe0f Respec recommended - significant performance issues detected",
+        "\ud83d\udca1 Consider different skill progression path",
+        "\ud83d\udca1 Remove inefficient skills, add complementary ones"
+      ],
+      "recommendations": [
+        "\ud83d\udca1 Try different ability rotation before respec",
+        "\ud83d\udca1 Review gear and buff optimization",
+        "\ud83d\udca1 Consider different farming locations",
+        "\ud83d\udca1 Experiment with different combat strategies"
+      ]
+    }
+  ],
+  "performance_summary": {
+    "status": "summary_calculated",
+    "sessions_count": 38,
+    "days_analyzed": 30,
+    "dps": {
+      "average": 175.6578947368421,
+      "min": 150.0,
+      "max": 200.0,
+      "trend": -0.16686727213043004
+    },
+    "xp_per_hour": {
+      "average": 2756.5789473684213,
+      "min": 2500.0,
+      "max": 3000.0,
+      "trend": -1.6686727213043002
+    },
+    "efficiency": {
+      "average": 0.7894736842105263,
+      "min": 0.75,
+      "max": 0.85,
+      "trend": -0.0007112375533428165
+    }
+  },
+  "performance_trends": {
+    "status": "trends_calculated",
+    "sessions_analyzed": 38,
+    "days_analyzed": 7,
+    "trends": {
+      "dps": -0.16686727213043004,
+      "xp_per_hour": -1.6686727213043002,
+      "efficiency": -0.0007112375533428165,
+      "damage_per_hour": -35.56187766714083
+    }
+  },
+  "anomalies": {
+    "status": "anomalies_detected",
+    "sessions_analyzed": 38,
+    "anomalies_found": 0,
+    "anomalies": []
+  }
+}

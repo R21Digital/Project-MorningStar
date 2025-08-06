@@ -1,0 +1,202 @@
+{
+  "heal": {
+    "category": "combat",
+    "priority": 1,
+    "content": "/heal {target}\n/say Healing {target}",
+    "alternatives": ["cure", "medic", "healing"],
+    "usage_context": "Combat healing",
+    "description": "Heal target with appropriate messaging",
+    "dependencies": ["target"],
+    "hotkey": "F1"
+  },
+  "buff": {
+    "category": "combat",
+    "priority": 1,
+    "content": "/buff {target}\n/say Buffing {target}",
+    "alternatives": ["enhance", "boost", "buffing"],
+    "usage_context": "Combat buffing",
+    "description": "Buff target with appropriate messaging",
+    "dependencies": ["target"],
+    "hotkey": "F2"
+  },
+  "attack": {
+    "category": "combat",
+    "priority": 1,
+    "content": "/attack {target}\n/say Attacking {target}",
+    "alternatives": ["fight", "engage", "attacking"],
+    "usage_context": "Combat attacks",
+    "description": "Attack target with appropriate messaging",
+    "dependencies": ["target"],
+    "hotkey": "F3"
+  },
+  "defend": {
+    "category": "combat",
+    "priority": 2,
+    "content": "/defend\n/say Defending",
+    "alternatives": ["guard", "protect", "defending"],
+    "usage_context": "Combat defense",
+    "description": "Defend with appropriate messaging",
+    "dependencies": [],
+    "hotkey": "F4"
+  },
+  "flee": {
+    "category": "combat",
+    "priority": 1,
+    "content": "/flee\n/say Fleeing",
+    "alternatives": ["run", "escape", "fleeing"],
+    "usage_context": "Combat escape",
+    "description": "Flee from combat with appropriate messaging",
+    "dependencies": [],
+    "hotkey": "F5"
+  },
+  "travel": {
+    "category": "travel",
+    "priority": 1,
+    "content": "/travel {destination}\n/say Traveling to {destination}",
+    "alternatives": ["goto", "move", "traveling"],
+    "usage_context": "Travel commands",
+    "description": "Travel to destination with appropriate messaging",
+    "dependencies": ["destination"],
+    "hotkey": "F6"
+  },
+  "follow": {
+    "category": "travel",
+    "priority": 2,
+    "content": "/follow {target}\n/say Following {target}",
+    "alternatives": ["chase", "pursue", "following"],
+    "usage_context": "Following players",
+    "description": "Follow target with appropriate messaging",
+    "dependencies": ["target"],
+    "hotkey": "F7"
+  },
+  "craft": {
+    "category": "crafting",
+    "priority": 1,
+    "content": "/craft {item}\n/say Crafting {item}",
+    "alternatives": ["build", "create", "crafting"],
+    "usage_context": "Crafting activities",
+    "description": "Craft item with appropriate messaging",
+    "dependencies": ["item"],
+    "hotkey": "F8"
+  },
+  "loot": {
+    "category": "utility",
+    "priority": 1,
+    "content": "/loot\n/say Looting",
+    "alternatives": ["collect", "gather", "looting"],
+    "usage_context": "Looting items",
+    "description": "Loot items with appropriate messaging",
+    "dependencies": [],
+    "hotkey": "F9"
+  },
+  "status": {
+    "category": "utility",
+    "priority": 2,
+    "content": "/status\n/say Checking status",
+    "alternatives": ["check", "info", "status"],
+    "usage_context": "Status checking",
+    "description": "Check status with appropriate messaging",
+    "dependencies": [],
+    "hotkey": "F10"
+  },
+  "say": {
+    "category": "social",
+    "priority": 3,
+    "content": "/say {message}",
+    "alternatives": ["speak", "talk", "chat"],
+    "usage_context": "Social communication",
+    "description": "Say message to nearby players",
+    "dependencies": ["message"],
+    "hotkey": "F11"
+  },
+  "tell": {
+    "category": "social",
+    "priority": 3,
+    "content": "/tell {player} {message}",
+    "alternatives": ["whisper", "pm", "private"],
+    "usage_context": "Private communication",
+    "description": "Send private message to player",
+    "dependencies": ["player", "message"],
+    "hotkey": "F12"
+  },
+  "group_heal": {
+    "category": "combat",
+    "priority": 2,
+    "content": "/group_heal\n/say Group healing",
+    "alternatives": ["mass_heal", "group_cure", "heal_all"],
+    "usage_context": "Group combat healing",
+    "description": "Heal entire group",
+    "dependencies": [],
+    "hotkey": "Ctrl+F1"
+  },
+  "group_buff": {
+    "category": "combat",
+    "priority": 2,
+    "content": "/group_buff\n/say Group buffing",
+    "alternatives": ["mass_buff", "group_enhance", "buff_all"],
+    "usage_context": "Group combat buffing",
+    "description": "Buff entire group",
+    "dependencies": [],
+    "hotkey": "Ctrl+F2"
+  },
+  "harvest": {
+    "category": "crafting",
+    "priority": 2,
+    "content": "/harvest {resource}\n/say Harvesting {resource}",
+    "alternatives": ["gather", "collect", "mining"],
+    "usage_context": "Resource gathering",
+    "description": "Harvest resource with appropriate messaging",
+    "dependencies": ["resource"],
+    "hotkey": "Ctrl+F8"
+  },
+  "survey": {
+    "category": "crafting",
+    "priority": 3,
+    "content": "/survey {area}\n/say Surveying {area}",
+    "alternatives": ["scan", "probe", "analyze"],
+    "usage_context": "Resource surveying",
+    "description": "Survey area for resources",
+    "dependencies": ["area"],
+    "hotkey": "Ctrl+F9"
+  },
+  "inventory": {
+    "category": "utility",
+    "priority": 3,
+    "content": "/inventory\n/say Checking inventory",
+    "alternatives": ["inv", "bag", "items"],
+    "usage_context": "Inventory management",
+    "description": "Check inventory with appropriate messaging",
+    "dependencies": [],
+    "hotkey": "Ctrl+F10"
+  },
+  "equipment": {
+    "category": "utility",
+    "priority": 3,
+    "content": "/equipment\n/say Checking equipment",
+    "alternatives": ["gear", "armor", "weapons"],
+    "usage_context": "Equipment management",
+    "description": "Check equipment with appropriate messaging",
+    "dependencies": [],
+    "hotkey": "Ctrl+F11"
+  },
+  "group": {
+    "category": "social",
+    "priority": 4,
+    "content": "/group {message}",
+    "alternatives": ["guild", "clan", "team"],
+    "usage_context": "Group communication",
+    "description": "Send message to group",
+    "dependencies": ["message"],
+    "hotkey": "Ctrl+F12"
+  },
+  "guild": {
+    "category": "social",
+    "priority": 4,
+    "content": "/guild {message}",
+    "alternatives": ["clan", "organization", "corp"],
+    "usage_context": "Guild communication",
+    "description": "Send message to guild",
+    "dependencies": ["message"],
+    "hotkey": "Alt+F12"
+  }
+} 

@@ -1,0 +1,402 @@
+{
+  "quests": [
+    {
+      "quest_id": "legacy_001",
+      "name": "The Legacy of the Jedi",
+      "description": "Begin your journey as a Jedi and discover the ancient secrets of the Force.",
+      "category": "legacy",
+      "difficulty": "normal",
+      "planet": "tatooine",
+      "level_requirement": 1,
+      "faction_requirement": "rebel",
+      "prerequisites": [],
+      "steps": [
+        {
+          "step_id": "legacy_001_01",
+          "description": "Speak to Obi-Wan Kenobi in Anchorhead",
+          "location": "Anchorhead, Tatooine",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 5
+        },
+        {
+          "step_id": "legacy_001_02",
+          "description": "Collect 5 Krayt Dragon Pearls",
+          "location": "Dune Sea, Tatooine",
+          "requirements": {"combat_level": 10},
+          "is_optional": false,
+          "estimated_time": 30
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "xp",
+          "amount": 5000,
+          "description": "Jedi Training Experience",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "titles",
+          "amount": 1,
+          "description": "Jedi Initiate",
+          "rarity": "rare"
+        }
+      ],
+      "estimated_duration": 60,
+      "max_players": 1,
+      "is_repeatable": false,
+      "is_daily": false,
+      "is_weekly": false,
+      "tags": ["jedi", "force", "training"]
+    },
+    {
+      "quest_id": "themepark_jabba_001",
+      "name": "Jabba's Palace Infiltration",
+      "description": "Infiltrate Jabba's Palace and gather intelligence for the Rebel Alliance.",
+      "category": "theme_park",
+      "difficulty": "hard",
+      "planet": "tatooine",
+      "level_requirement": 25,
+      "faction_requirement": "rebel",
+      "prerequisites": ["legacy_001"],
+      "steps": [
+        {
+          "step_id": "jabba_001_01",
+          "description": "Meet with the Rebel contact in Mos Eisley",
+          "location": "Mos Eisley, Tatooine",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 10
+        },
+        {
+          "step_id": "jabba_001_02",
+          "description": "Steal the palace access codes",
+          "location": "Jabba's Palace, Tatooine",
+          "requirements": {"stealth_level": 15},
+          "is_optional": false,
+          "estimated_time": 45
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "credits",
+          "amount": 25000,
+          "description": "Rebel Alliance Credits",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "items",
+          "amount": 1,
+          "description": "Rebel Infiltration Kit",
+          "rarity": "uncommon"
+        }
+      ],
+      "estimated_duration": 120,
+      "max_players": 4,
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": false,
+      "tags": ["rebel", "infiltration", "jabba"]
+    },
+    {
+      "quest_id": "space_001",
+      "name": "Imperial Star Destroyer Assault",
+      "description": "Lead a squadron of Rebel fighters in an assault on an Imperial Star Destroyer.",
+      "category": "space",
+      "difficulty": "heroic",
+      "planet": "space",
+      "level_requirement": 40,
+      "faction_requirement": "rebel",
+      "prerequisites": ["themepark_jabba_001"],
+      "steps": [
+        {
+          "step_id": "space_001_01",
+          "description": "Assemble your fighter squadron",
+          "location": "Rebel Base, Space",
+          "requirements": {"pilot_level": 20},
+          "is_optional": false,
+          "estimated_time": 15
+        },
+        {
+          "step_id": "space_001_02",
+          "description": "Destroy the Star Destroyer's shield generators",
+          "location": "Imperial Star Destroyer, Space",
+          "requirements": {"combat_level": 35},
+          "is_optional": false,
+          "estimated_time": 90
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "xp",
+          "amount": 15000,
+          "description": "Space Combat Experience",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "vehicles",
+          "amount": 1,
+          "description": "Advanced X-Wing Fighter",
+          "rarity": "rare"
+        }
+      ],
+      "estimated_duration": 180,
+      "max_players": 8,
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": false,
+      "tags": ["space", "combat", "imperial", "star_destroyer"]
+    },
+    {
+      "quest_id": "kashyyyk_001",
+      "name": "Wookiee Freedom Fighters",
+      "description": "Help the Wookiees liberate their homeworld from Imperial occupation.",
+      "category": "kashyyyk",
+      "difficulty": "hard",
+      "planet": "kashyyyk",
+      "level_requirement": 30,
+      "faction_requirement": "rebel",
+      "prerequisites": [],
+      "steps": [
+        {
+          "step_id": "kashyyyk_001_01",
+          "description": "Meet with Chewbacca in the Wookiee village",
+          "location": "Wookiee Village, Kashyyyk",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 10
+        },
+        {
+          "step_id": "kashyyyk_001_02",
+          "description": "Sabotage Imperial supply lines",
+          "location": "Imperial Outpost, Kashyyyk",
+          "requirements": {"stealth_level": 20},
+          "is_optional": false,
+          "estimated_time": 60
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "credits",
+          "amount": 35000,
+          "description": "Wookiee Gratitude Credits",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "titles",
+          "amount": 1,
+          "description": "Honorary Wookiee",
+          "rarity": "rare"
+        }
+      ],
+      "estimated_duration": 150,
+      "max_players": 6,
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": false,
+      "tags": ["wookiee", "liberation", "imperial"]
+    },
+    {
+      "quest_id": "mustafar_001",
+      "name": "Lava Mining Expedition",
+      "description": "Venture into the dangerous lava fields of Mustafar to extract rare minerals.",
+      "category": "mustafar",
+      "difficulty": "legendary",
+      "planet": "mustafar",
+      "level_requirement": 50,
+      "faction_requirement": null,
+      "prerequisites": [],
+      "steps": [
+        {
+          "step_id": "mustafar_001_01",
+          "description": "Acquire heat-resistant mining equipment",
+          "location": "Mining Outpost, Mustafar",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 20
+        },
+        {
+          "step_id": "mustafar_001_02",
+          "description": "Extract 10 Lava Crystals from active lava flows",
+          "location": "Lava Fields, Mustafar",
+          "requirements": {"mining_level": 25},
+          "is_optional": false,
+          "estimated_time": 120
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "credits",
+          "amount": 75000,
+          "description": "Rare Mineral Credits",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "items",
+          "amount": 1,
+          "description": "Lava Crystal",
+          "rarity": "legendary"
+        }
+      ],
+      "estimated_duration": 240,
+      "max_players": 4,
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": false,
+      "tags": ["mining", "lava", "dangerous", "crystals"]
+    },
+    {
+      "quest_id": "heroic_001",
+      "name": "The Battle of Endor",
+      "description": "Participate in the epic Battle of Endor to destroy the second Death Star.",
+      "category": "heroic",
+      "difficulty": "legendary",
+      "planet": "endor",
+      "level_requirement": 60,
+      "faction_requirement": "rebel",
+      "prerequisites": ["space_001"],
+      "steps": [
+        {
+          "step_id": "heroic_001_01",
+          "description": "Join the Rebel fleet at Endor",
+          "location": "Rebel Fleet, Endor System",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 30
+        },
+        {
+          "step_id": "heroic_001_02",
+          "description": "Destroy the Death Star's main reactor",
+          "location": "Death Star II, Endor System",
+          "requirements": {"combat_level": 50},
+          "is_optional": false,
+          "estimated_time": 180
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "xp",
+          "amount": 50000,
+          "description": "Galactic Hero Experience",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "titles",
+          "amount": 1,
+          "description": "Hero of the Rebellion",
+          "rarity": "legendary"
+        },
+        {
+          "reward_type": "decorations",
+          "amount": 1,
+          "description": "Medal of Honor",
+          "rarity": "legendary"
+        }
+      ],
+      "estimated_duration": 300,
+      "max_players": 16,
+      "is_repeatable": false,
+      "is_daily": false,
+      "is_weekly": false,
+      "tags": ["heroic", "death_star", "endor", "epic"]
+    },
+    {
+      "quest_id": "daily_001",
+      "name": "Daily Patrol",
+      "description": "Complete a routine patrol of your assigned sector.",
+      "category": "daily",
+      "difficulty": "easy",
+      "planet": "naboo",
+      "level_requirement": 10,
+      "faction_requirement": null,
+      "prerequisites": [],
+      "steps": [
+        {
+          "step_id": "daily_001_01",
+          "description": "Report to the patrol commander",
+          "location": "Theed Palace, Naboo",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 5
+        },
+        {
+          "step_id": "daily_001_02",
+          "description": "Complete patrol route",
+          "location": "Naboo Countryside",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 30
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "credits",
+          "amount": 5000,
+          "description": "Patrol Payment",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "xp",
+          "amount": 2000,
+          "description": "Patrol Experience",
+          "rarity": "common"
+        }
+      ],
+      "estimated_duration": 45,
+      "max_players": 1,
+      "is_repeatable": true,
+      "is_daily": true,
+      "is_weekly": false,
+      "tags": ["daily", "patrol", "routine"]
+    },
+    {
+      "quest_id": "weekly_001",
+      "name": "Weekly Bounty Hunt",
+      "description": "Track down and capture a notorious criminal for the bounty.",
+      "category": "weekly",
+      "difficulty": "normal",
+      "planet": "corellia",
+      "level_requirement": 20,
+      "faction_requirement": null,
+      "prerequisites": [],
+      "steps": [
+        {
+          "step_id": "weekly_001_01",
+          "description": "Accept bounty from the guild",
+          "location": "Bounty Hunter Guild, Corellia",
+          "requirements": {},
+          "is_optional": false,
+          "estimated_time": 10
+        },
+        {
+          "step_id": "weekly_001_02",
+          "description": "Track and capture the target",
+          "location": "Various Locations",
+          "requirements": {"combat_level": 15},
+          "is_optional": false,
+          "estimated_time": 90
+        }
+      ],
+      "rewards": [
+        {
+          "reward_type": "credits",
+          "amount": 15000,
+          "description": "Bounty Payment",
+          "rarity": "common"
+        },
+        {
+          "reward_type": "xp",
+          "amount": 8000,
+          "description": "Bounty Hunter Experience",
+          "rarity": "common"
+        }
+      ],
+      "estimated_duration": 120,
+      "max_players": 2,
+      "is_repeatable": true,
+      "is_daily": false,
+      "is_weekly": true,
+      "tags": ["weekly", "bounty", "hunt", "criminal"]
+    }
+  ]
+} 

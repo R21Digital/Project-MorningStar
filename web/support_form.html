@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS11 Support - Submit Ticket</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .category-option {
+            position: relative;
+        }
+
+        .category-option input[type="radio"] {
+            display: none;
+        }
+
+        .category-option label {
+            display: block;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .category-option input[type="radio"]:checked + label {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .priority-option {
+            position: relative;
+        }
+
+        .priority-option input[type="radio"] {
+            display: none;
+        }
+
+        .priority-option label {
+            display: block;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .priority-option input[type="radio"]:checked + label {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .priority-low input[type="radio"]:checked + label {
+            border-color: #28a745;
+            background: #28a745;
+        }
+
+        .priority-medium input[type="radio"]:checked + label {
+            border-color: #ffc107;
+            background: #ffc107;
+            color: #333;
+        }
+
+        .priority-high input[type="radio"]:checked + label {
+            border-color: #dc3545;
+            background: #dc3545;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .ticket-info {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .ticket-info h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .ticket-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .ticket-number {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .priority-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MS11 Support</h1>
+            <p>Submit a support ticket and we'll get back to you as soon as possible.</p>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <form id="supportForm">
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Category *</label>
+                <div class="category-grid">
+                    <div class="category-option">
+                        <input type="radio" id="category-account" name="category" value="account" required>
+                        <label for="category-account">Account</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="radio" id="category-software" name="category" value="software" required>
+                        <label for="category-software">Software</label>
+                    </div>
+                    <div class="category-option">
+                        <input type="radio" id="category-general" name="category" value="general" required>
+                        <label for="category-general">General</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Priority *</label>
+                <div class="priority-grid">
+                    <div class="priority-option priority-low">
+                        <input type="radio" id="priority-low" name="priority" value="low" required>
+                        <label for="priority-low">Low</label>
+                    </div>
+                    <div class="priority-option priority-medium">
+                        <input type="radio" id="priority-medium" name="priority" value="medium" required>
+                        <label for="priority-medium">Medium</label>
+                    </div>
+                    <div class="priority-option priority-high">
+                        <input type="radio" id="priority-high" name="priority" value="high" required>
+                        <label for="priority-high">High</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject *</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" placeholder="Please describe your issue in detail..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Submit Ticket
+            </button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Submitting your ticket...</p>
+        </div>
+
+        <div class="ticket-info" id="ticketInfo">
+            <h3>Ticket Submitted Successfully!</h3>
+            <p><strong>Ticket Number:</strong> <span class="ticket-number" id="ticketNumber"></span></p>
+            <p><strong>Category:</strong> <span id="ticketCategory"></span></p>
+            <p><strong>Priority:</strong> <span id="ticketPriority"></span></p>
+            <p>We'll respond to your ticket within 24-48 hours.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('supportForm');
+            const alert = document.getElementById('alert');
+            const loading = document.getElementById('loading');
+            const submitBtn = document.getElementById('submitBtn');
+            const ticketInfo = document.getElementById('ticketInfo');
+
+            function showAlert(message, type) {
+                alert.textContent = message;
+                alert.className = `alert alert-${type}`;
+                alert.style.display = 'block';
+                
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 5000);
+            }
+
+            function showLoading() {
+                loading.style.display = 'block';
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+            }
+
+            function hideLoading() {
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Ticket';
+            }
+
+            function showTicketInfo(ticketData) {
+                document.getElementById('ticketNumber').textContent = ticketData.ticket_id;
+                document.getElementById('ticketCategory').textContent = ticketData.category;
+                document.getElementById('ticketPriority').textContent = ticketData.priority;
+                ticketInfo.style.display = 'block';
+                form.style.display = 'none';
+            }
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    category: formData.get('category'),
+                    priority: formData.get('priority'),
+                    subject: formData.get('subject'),
+                    message: formData.get('message')
+                };
+
+                // Basic validation
+                if (!data.name || !data.email || !data.category || !data.priority || !data.subject || !data.message) {
+                    showAlert('Please fill in all required fields.', 'error');
+                    return;
+                }
+
+                if (data.message.length < 10) {
+                    showAlert('Please provide a more detailed message (at least 10 characters).', 'error');
+                    return;
+                }
+
+                showLoading();
+
+                try {
+                    const response = await fetch('/api/tickets/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        showTicketInfo(result);
+                    } else {
+                        showAlert(result.error || 'Failed to submit ticket. Please try again.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error submitting ticket:', error);
+                    showAlert('Network error. Please check your connection and try again.', 'error');
+                } finally {
+                    hideLoading();
+                }
+            });
+
+            // Real-time validation
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.hasAttribute('required') && !this.value.trim()) {
+                        this.style.borderColor = '#dc3545';
+                    } else {
+                        this.style.borderColor = '#e1e5e9';
+                    }
+                });
+
+                input.addEventListener('input', function() {
+                    if (this.style.borderColor === 'rgb(220, 53, 69)') {
+                        this.style.borderColor = '#e1e5e9';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

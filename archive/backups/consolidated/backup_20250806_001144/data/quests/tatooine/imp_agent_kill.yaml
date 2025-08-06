@@ -1,0 +1,49 @@
+quest_id: imp_agent_kill
+name: Imperial Agent Kill Mission
+description: Eliminate a rebel agent operating in the Tatooine desert
+quest_type: faction
+difficulty: medium
+level_requirement: 20
+planet: tatooine
+zone: ''
+coordinates: &id001
+- 123
+- -456
+npc: Imperial Terminal Officer
+rewards:
+  credits: 5000
+  experience: 2000
+  items:
+  - Imperial Medal
+  - Rebel Intel
+prerequisites:
+- level_20
+- imperial_faction
+dialogue:
+- We have a mission for you, citizen.
+- A rebel agent has been spotted in the desert.
+- Kill the rebel scum and bring us proof.
+- The Empire will reward you handsomely.
+steps:
+- step_id: start_quest
+  type: dialogue
+  npc_id: Imperial Terminal Officer
+  coordinates: *id001
+  description: Start the quest
+completion_conditions:
+- type: dialogue
+  npc_id: Imperial Terminal Officer
+  description: Complete the quest
+failure_conditions: []
+hints: []
+metadata:
+  created_date: '2025-07-31'
+  last_updated: '2025-07-31'
+  version: '1.0'
+  author: MS11_Quest_Scraper
+  source_url: https://swgr.org/wiki/Imperial_Agent_Kill_Mission
+  tags:
+  - tatooine
+  - faction
+source_url: https://swgr.org/wiki/Imperial_Agent_Kill_Mission
+last_updated: '2024-01-01'

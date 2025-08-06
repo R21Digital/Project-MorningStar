@@ -1,0 +1,161 @@
+{
+  "zone": "Tatooine",
+  "planet": "Tatooine",
+  "collections": [
+    {
+      "name": "Tatooine Trophy - Mos Eisley",
+      "type": "trophy",
+      "subzone": "Mos Eisley",
+      "coordinates": [100, 200],
+      "trigger_text": "Collect Trophy",
+      "description": "A rare trophy from the cantina in Mos Eisley",
+      "rarity": "common",
+      "required_level": 5,
+      "ui_elements": {
+        "collection_window": "collection_ui",
+        "trophy_icon": "trophy_indicator",
+        "collect_button": "collect_action"
+      },
+      "ocr_patterns": [
+        "Trophy",
+        "Collect",
+        "Mos Eisley",
+        "Cantina"
+      ],
+      "interaction_sequence": [
+        "approach_coordinates",
+        "wait_for_ui",
+        "click_collect",
+        "confirm_collection"
+      ]
+    },
+    {
+      "name": "Tatooine Trophy - Anchorhead",
+      "type": "trophy",
+      "subzone": "Anchorhead",
+      "coordinates": [250, 150],
+      "trigger_text": "Gather Trophy",
+      "description": "A trophy from the moisture farm",
+      "rarity": "uncommon",
+      "required_level": 8,
+      "ui_elements": {
+        "collection_window": "collection_ui",
+        "trophy_icon": "trophy_indicator",
+        "collect_button": "gather_action"
+      },
+      "ocr_patterns": [
+        "Trophy",
+        "Gather",
+        "Anchorhead",
+        "Moisture Farm"
+      ],
+      "interaction_sequence": [
+        "approach_coordinates",
+        "wait_for_ui",
+        "click_gather",
+        "confirm_collection"
+      ]
+    },
+    {
+      "name": "Tatooine Decoration - Cantina",
+      "type": "decoration",
+      "subzone": "Mos Eisley",
+      "coordinates": [120, 180],
+      "trigger_text": "Take Decoration",
+      "description": "A decorative item from the cantina",
+      "rarity": "common",
+      "required_level": 3,
+      "ui_elements": {
+        "collection_window": "collection_ui",
+        "decoration_icon": "decoration_indicator",
+        "collect_button": "take_action"
+      },
+      "ocr_patterns": [
+        "Decoration",
+        "Take",
+        "Cantina",
+        "Decorative"
+      ],
+      "interaction_sequence": [
+        "approach_coordinates",
+        "wait_for_ui",
+        "click_take",
+        "confirm_collection"
+      ]
+    },
+    {
+      "name": "Tatooine Lore Item - Jundland",
+      "type": "lore_item",
+      "subzone": "Jundland Wastes",
+      "coordinates": [400, 300],
+      "trigger_text": "Study Ancient Lore",
+      "description": "Ancient lore from the Jundland Wastes",
+      "rarity": "epic",
+      "required_level": 14,
+      "ui_elements": {
+        "collection_window": "collection_ui",
+        "lore_icon": "lore_indicator",
+        "collect_button": "study_action"
+      },
+      "ocr_patterns": [
+        "Lore",
+        "Study",
+        "Ancient",
+        "Jundland"
+      ],
+      "interaction_sequence": [
+        "approach_coordinates",
+        "wait_for_ui",
+        "click_study",
+        "confirm_collection"
+      ]
+    },
+    {
+      "name": "Tatooine Badge - Tusken",
+      "type": "badge",
+      "subzone": "Jundland Wastes",
+      "coordinates": [350, 280],
+      "trigger_text": "Earn Tusken Badge",
+      "description": "A badge from the Tusken Raiders",
+      "rarity": "rare",
+      "required_level": 12,
+      "ui_elements": {
+        "collection_window": "collection_ui",
+        "badge_icon": "badge_indicator",
+        "collect_button": "earn_action"
+      },
+      "ocr_patterns": [
+        "Badge",
+        "Earn",
+        "Tusken",
+        "Raiders"
+      ],
+      "interaction_sequence": [
+        "approach_coordinates",
+        "wait_for_ui",
+        "click_earn",
+        "confirm_collection"
+      ]
+    }
+  ],
+  "metadata": {
+    "total_collections": 5,
+    "categories": {
+      "trophy": 2,
+      "decoration": 1,
+      "lore_item": 1,
+      "badge": 1
+    },
+    "subzones": {
+      "Mos Eisley": 2,
+      "Anchorhead": 1,
+      "Jundland Wastes": 2
+    },
+    "rarity_distribution": {
+      "common": 2,
+      "uncommon": 1,
+      "rare": 1,
+      "epic": 1
+    }
+  }
+} 

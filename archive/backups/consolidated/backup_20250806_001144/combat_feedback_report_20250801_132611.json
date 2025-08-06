@@ -1,0 +1,142 @@
+{
+  "export_timestamp": "2025-08-01T13:26:11.831441",
+  "feedback_history": [
+    {
+      "timestamp": "2025-08-01T13:26:11.831430",
+      "session_id": "session_20250801_132611",
+      "session_comparison": {
+        "status": "no_comparison_data",
+        "message": "No previous sessions available for comparison",
+        "alerts": [],
+        "recommendations": []
+      },
+      "skill_analysis": {
+        "timestamp": "2025-08-01T13:26:11.831397",
+        "current_skills": [
+          "rifle_shot",
+          "rifle_hit"
+        ],
+        "build_skills": [
+          "rifle_shot"
+        ],
+        "skill_count": 2,
+        "build_completion": 1.0,
+        "stagnation": {
+          "stagnation_detected": true,
+          "indicators": [
+            "no_recent_progression",
+            "flat_efficiency"
+          ],
+          "skill_progression": {
+            "new_skills_learned": 0,
+            "skill_usage_trend": 0.0,
+            "efficiency_variance": 0.0,
+            "sessions_analyzed": 1
+          },
+          "days_analyzed": 7,
+          "sessions_analyzed": 1
+        },
+        "overlap": {
+          "overlap_groups": [
+            {
+              "category": "combat",
+              "skills": [
+                "rifle_shot",
+                "rifle_hit"
+              ],
+              "description": "Multiple combat skills with similar function"
+            }
+          ],
+          "redundant_skills": [
+            {
+              "skill": "rifle_hit",
+              "category": "combat",
+              "reason": "not_in_build"
+            }
+          ],
+          "total_overlaps": 1,
+          "total_redundant": 1
+        },
+        "inefficiency": {
+          "inefficient_skills": [],
+          "underutilized_skills": [
+            {
+              "skill": "rifle_shot",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            },
+            {
+              "skill": "rifle_hit",
+              "usage_rate": 0.0,
+              "reason": "underutilized"
+            }
+          ],
+          "total_inefficient": 0,
+          "total_underutilized": 2
+        },
+        "recommendations": [
+          "\ud83d\udca1 Consider respeccing to focus on underutilized skills",
+          "\ud83d\udca1 Review skill rotation for efficiency improvements",
+          "\ud83d\udca1 Consider removing overlapping skills to optimize build",
+          "\ud83d\udca1 Skill tree health is low - consider respec"
+        ],
+        "health_score": 0.7000000000000001
+      },
+      "respec_analysis": {
+        "timestamp": "2025-08-01T13:26:11.831422",
+        "respec_recommended": false,
+        "confidence": 0.33,
+        "reasons": [
+          {
+            "type": "skill_stagnation",
+            "severity": "high",
+            "description": "Skill stagnation detected: no_recent_progression, flat_efficiency",
+            "days_analyzed": 7
+          }
+        ],
+        "recommendations": [],
+        "alternative_suggestions": []
+      },
+      "alerts": [
+        "\ud83d\udca1 Consider respeccing to focus on underutilized skills",
+        "\ud83d\udca1 Review skill rotation for efficiency improvements",
+        "\ud83d\udca1 Consider removing overlapping skills to optimize build",
+        "\ud83d\udca1 Skill tree health is low - consider respec"
+      ],
+      "recommendations": []
+    }
+  ],
+  "performance_summary": {
+    "status": "summary_calculated",
+    "sessions_count": 1,
+    "days_analyzed": 30,
+    "dps": {
+      "average": 100.0,
+      "min": 100.0,
+      "max": 100.0,
+      "trend": 0.0
+    },
+    "xp_per_hour": {
+      "average": 2000.0,
+      "min": 2000.0,
+      "max": 2000.0,
+      "trend": 0.0
+    },
+    "efficiency": {
+      "average": 1.0,
+      "min": 1.0,
+      "max": 1.0,
+      "trend": 0.0
+    }
+  },
+  "performance_trends": {
+    "status": "insufficient_data",
+    "message": "Need at least 2 sessions, found 1",
+    "trends": {}
+  },
+  "anomalies": {
+    "status": "insufficient_data",
+    "message": "Need at least 3 sessions for anomaly detection",
+    "anomalies": []
+  }
+}

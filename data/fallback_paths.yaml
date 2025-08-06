@@ -1,0 +1,397 @@
+# Fallback Navigation Paths Database
+# Contains generic waypoints and navigation loops for zones without quest profiles
+
+# Planetary Fallback Paths
+planets:
+  tatooine:
+    name: "Tatooine"
+    description: "Desert planet with scattered settlements"
+    zones:
+      mos_eisley:
+        name: "Mos Eisley"
+        description: "Spaceport city with cantina and shops"
+        hotspots:
+          - name: "mos_eisley_cantina"
+            x: 3520
+            y: -4800
+            description: "Cantina - social hub and quest giver location"
+            scan_radius: 50
+            scan_time: 5
+          - name: "mos_eisley_shuttleport"
+            x: 3500
+            y: -4850
+            description: "Shuttleport - travel hub"
+            scan_radius: 30
+            scan_time: 3
+          - name: "mos_eisley_market"
+            x: 3540
+            y: -4780
+            description: "Market area - vendors and traders"
+            scan_radius: 40
+            scan_time: 4
+          - name: "mos_eisley_outskirts"
+            x: 3480
+            y: -4750
+            description: "City outskirts - potential encounters"
+            scan_radius: 60
+            scan_time: 6
+        navigation_loop:
+          - "mos_eisley_cantina"
+          - "mos_eisley_market"
+          - "mos_eisley_outskirts"
+          - "mos_eisley_shuttleport"
+          - "mos_eisley_cantina"
+        scan_interval: 30  # seconds between full zone scans
+        max_loop_iterations: 5
+        
+      anchorhead:
+        name: "Anchorhead"
+        description: "Mining settlement with basic services"
+        hotspots:
+          - name: "anchorhead_center"
+            x: 3000
+            y: -5500
+            description: "Town center - main gathering area"
+            scan_radius: 50
+            scan_time: 5
+          - name: "anchorhead_mining_office"
+            x: 3020
+            y: -5520
+            description: "Mining office - job opportunities"
+            scan_radius: 30
+            scan_time: 3
+          - name: "anchorhead_cantina"
+            x: 2980
+            y: -5480
+            description: "Local cantina - social hub"
+            scan_radius: 40
+            scan_time: 4
+          - name: "anchorhead_outpost"
+            x: 3050
+            y: -5450
+            description: "Outpost - security and supplies"
+            scan_radius: 35
+            scan_time: 4
+        navigation_loop:
+          - "anchorhead_center"
+          - "anchorhead_mining_office"
+          - "anchorhead_cantina"
+          - "anchorhead_outpost"
+          - "anchorhead_center"
+        scan_interval: 45
+        max_loop_iterations: 3
+        
+      bestine:
+        name: "Bestine"
+        description: "Imperial-controlled city with military presence"
+        hotspots:
+          - name: "bestine_center"
+            x: 4000
+            y: -6000
+            description: "City center - administrative hub"
+            scan_radius: 50
+            scan_time: 5
+          - name: "bestine_imperial_office"
+            x: 4020
+            y: -6020
+            description: "Imperial office - official business"
+            scan_radius: 30
+            scan_time: 3
+          - name: "bestine_cantina"
+            x: 3980
+            y: -5980
+            description: "Local cantina - civilian gathering"
+            scan_radius: 40
+            scan_time: 4
+          - name: "bestine_military_outpost"
+            x: 4050
+            y: -5950
+            description: "Military outpost - security operations"
+            scan_radius: 45
+            scan_time: 5
+        navigation_loop:
+          - "bestine_center"
+          - "bestine_imperial_office"
+          - "bestine_cantina"
+          - "bestine_military_outpost"
+          - "bestine_center"
+        scan_interval: 60
+        max_loop_iterations: 4
+
+  naboo:
+    name: "Naboo"
+    description: "Peaceful planet with royal palace and cities"
+    zones:
+      theed:
+        name: "Theed"
+        description: "Royal capital with palace and government"
+        hotspots:
+          - name: "theed_palace"
+            x: 5000
+            y: -4000
+            description: "Royal palace - government center"
+            scan_radius: 60
+            scan_time: 6
+          - name: "theed_market"
+            x: 5020
+            y: -4020
+            description: "Market district - commerce hub"
+            scan_radius: 50
+            scan_time: 5
+          - name: "theed_cantina"
+            x: 4980
+            y: -3980
+            description: "Local cantina - social gathering"
+            scan_radius: 40
+            scan_time: 4
+          - name: "theed_shuttleport"
+            x: 5050
+            y: -3950
+            description: "Shuttleport - travel hub"
+            scan_radius: 30
+            scan_time: 3
+        navigation_loop:
+          - "theed_palace"
+          - "theed_market"
+          - "theed_cantina"
+          - "theed_shuttleport"
+          - "theed_palace"
+        scan_interval: 40
+        max_loop_iterations: 4
+        
+      moenia:
+        name: "Moenia"
+        description: "Agricultural city with farming communities"
+        hotspots:
+          - name: "moenia_center"
+            x: 4500
+            y: -4500
+            description: "City center - main gathering area"
+            scan_radius: 50
+            scan_time: 5
+          - name: "moenia_farmers_market"
+            x: 4520
+            y: -4520
+            description: "Farmers market - agricultural trade"
+            scan_radius: 45
+            scan_time: 5
+          - name: "moenia_cantina"
+            x: 4480
+            y: -4480
+            description: "Local cantina - community hub"
+            scan_radius: 40
+            scan_time: 4
+          - name: "moenia_outskirts"
+            x: 4550
+            y: -4450
+            description: "City outskirts - farming areas"
+            scan_radius: 60
+            scan_time: 6
+        navigation_loop:
+          - "moenia_center"
+          - "moenia_farmers_market"
+          - "moenia_cantina"
+          - "moenia_outskirts"
+          - "moenia_center"
+        scan_interval: 50
+        max_loop_iterations: 3
+
+  dantooine:
+    name: "Dantooine"
+    description: "Rural planet with Jedi ruins and farming"
+    zones:
+      mining:
+        name: "Mining Region"
+        description: "Mining operations and resource extraction"
+        hotspots:
+          - name: "dantooine_mining_cave"
+            x: 50
+            y: 75
+            description: "Mining cave - resource extraction"
+            scan_radius: 40
+            scan_time: 4
+          - name: "dantooine_mining_camp"
+            x: 70
+            y: 95
+            description: "Mining camp - worker facilities"
+            scan_radius: 50
+            scan_time: 5
+          - name: "dantooine_processing_plant"
+            x: 30
+            y: 55
+            description: "Processing plant - ore refinement"
+            scan_radius: 45
+            scan_time: 5
+          - name: "dantooine_supply_depot"
+            x: 90
+            y: 115
+            description: "Supply depot - equipment and materials"
+            scan_radius: 35
+            scan_time: 4
+        navigation_loop:
+          - "dantooine_mining_cave"
+          - "dantooine_mining_camp"
+          - "dantooine_processing_plant"
+          - "dantooine_supply_depot"
+          - "dantooine_mining_cave"
+        scan_interval: 60
+        max_loop_iterations: 4
+
+# Generic Fallback Patterns
+patterns:
+  # Standard exploration pattern for any zone
+  standard_exploration:
+    name: "Standard Exploration"
+    description: "Basic exploration pattern for unknown zones"
+    hotspots:
+      - name: "zone_center"
+        description: "Zone center - main gathering area"
+        scan_radius: 50
+        scan_time: 5
+      - name: "zone_cantina"
+        description: "Local cantina - social hub"
+        scan_radius: 40
+        scan_time: 4
+      - name: "zone_market"
+        description: "Market area - commerce hub"
+        scan_radius: 45
+        scan_time: 5
+      - name: "zone_outskirts"
+        description: "Zone outskirts - potential encounters"
+        scan_radius: 60
+        scan_time: 6
+    navigation_loop:
+      - "zone_center"
+      - "zone_cantina"
+      - "zone_market"
+      - "zone_outskirts"
+      - "zone_center"
+    scan_interval: 45
+    max_loop_iterations: 3
+
+  # Combat-focused exploration pattern
+  combat_exploration:
+    name: "Combat Exploration"
+    description: "Exploration pattern focused on combat opportunities"
+    hotspots:
+      - name: "combat_zone_center"
+        description: "Zone center - potential combat hub"
+        scan_radius: 60
+        scan_time: 6
+      - name: "combat_zone_outskirts"
+        description: "Zone outskirts - enemy spawns"
+        scan_radius: 80
+        scan_time: 8
+      - name: "combat_zone_cave"
+        description: "Cave entrance - enemy lairs"
+        scan_radius: 40
+        scan_time: 5
+      - name: "combat_zone_ruins"
+        description: "Ancient ruins - dangerous encounters"
+        scan_radius: 70
+        scan_time: 7
+    navigation_loop:
+      - "combat_zone_center"
+      - "combat_zone_outskirts"
+      - "combat_zone_cave"
+      - "combat_zone_ruins"
+      - "combat_zone_center"
+    scan_interval: 30
+    max_loop_iterations: 5
+
+  # Resource gathering pattern
+  resource_gathering:
+    name: "Resource Gathering"
+    description: "Exploration pattern focused on resource collection"
+    hotspots:
+      - name: "resource_zone_center"
+        description: "Zone center - resource hub"
+        scan_radius: 50
+        scan_time: 5
+      - name: "resource_zone_mine"
+        description: "Mining area - mineral resources"
+        scan_radius: 60
+        scan_time: 6
+      - name: "resource_zone_forest"
+        description: "Forest area - organic resources"
+        scan_radius: 70
+        scan_time: 7
+      - name: "resource_zone_water"
+        description: "Water source - liquid resources"
+        scan_radius: 40
+        scan_time: 4
+    navigation_loop:
+      - "resource_zone_center"
+      - "resource_zone_mine"
+      - "resource_zone_forest"
+      - "resource_zone_water"
+      - "resource_zone_center"
+    scan_interval: 40
+    max_loop_iterations: 4
+
+# Dynamic scanning configurations
+scanning:
+  # NPC detection settings
+  npc_detection:
+    enabled: true
+    scan_radius: 50
+    scan_interval: 10
+    npc_types:
+      - "quest_giver"
+      - "vendor"
+      - "trainer"
+      - "guard"
+      - "civilian"
+    
+  # Quest detection settings
+  quest_detection:
+    enabled: true
+    scan_radius: 40
+    scan_interval: 15
+    quest_indicators:
+      - "quest_marker"
+      - "exclamation_mark"
+      - "question_mark"
+      - "quest_dialog"
+    
+  # POI detection settings
+  poi_detection:
+    enabled: true
+    scan_radius: 60
+    scan_interval: 20
+    poi_types:
+      - "cave_entrance"
+      - "ruins"
+      - "camp"
+      - "outpost"
+      - "landmark"
+      - "resource_node"
+
+# Fallback navigation settings
+settings:
+  # Default behavior when no quest profile is found
+  default_behavior: "explore"
+  
+  # Maximum time to spend in fallback mode (seconds)
+  max_fallback_time: 1800  # 30 minutes
+  
+  # Minimum time to spend at each hotspot (seconds)
+  min_hotspot_time: 30
+  
+  # Maximum time to spend at each hotspot (seconds)
+  max_hotspot_time: 120
+  
+  # Time between navigation loops (seconds)
+  loop_cooldown: 60
+  
+  # Whether to enable dynamic quest detection
+  enable_dynamic_quest_detection: true
+  
+  # Whether to enable NPC interaction during fallback
+  enable_npc_interaction: true
+  
+  # Whether to enable combat during fallback
+  enable_combat: true
+  
+  # Whether to enable resource gathering during fallback
+  enable_resource_gathering: true 

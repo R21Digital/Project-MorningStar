@@ -1,0 +1,109 @@
+{
+  "source_type": "heroic",
+  "planet": "corellia",
+  "total_runs": 0,
+  "total_loot": 0,
+  "last_updated": "2025-08-05T18:00:00.000000",
+  "heroics": {
+    "imperial_commander": {
+      "boss": "Imperial Commander",
+      "location": "Corellia - Coronet Spaceport",
+      "level": 80,
+      "total_kills": 0,
+      "items": {
+        "imperial_uniform": {
+          "name": "Imperial Officer Uniform",
+          "type": "armor",
+          "rarity": "rare",
+          "use_case": "Combat, disguise",
+          "image": "/assets/loot/imperial_uniform.png",
+          "drop_chance": 30.0,
+          "profession_relevance": ["armorsmith", "tailor"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "commander_blaster": {
+          "name": "Commander's Blaster",
+          "type": "weapon",
+          "rarity": "epic",
+          "use_case": "Combat, weapon crafting",
+          "image": "/assets/loot/commander_blaster.png",
+          "drop_chance": 15.0,
+          "profession_relevance": ["weaponsmith"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "access_codes": {
+          "name": "Imperial Access Codes",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Access to restricted areas",
+          "image": "/assets/loot/access_codes.png",
+          "drop_chance": 3.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    },
+    "corsec_captain": {
+      "boss": "CorSec Captain",
+      "location": "Corellia - Tyrena",
+      "level": 75,
+      "total_kills": 0,
+      "items": {
+        "corsec_badge": {
+          "name": "CorSec Badge",
+          "type": "component",
+          "rarity": "rare",
+          "use_case": "Decoration, status symbol",
+          "image": "/assets/loot/corsec_badge.png",
+          "drop_chance": 20.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "corsec_armor": {
+          "name": "CorSec Armor",
+          "type": "armor",
+          "rarity": "uncommon",
+          "use_case": "Combat, armor crafting",
+          "image": "/assets/loot/corsec_armor.png",
+          "drop_chance": 35.0,
+          "profession_relevance": ["armorsmith"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "tyrena_codes": {
+          "name": "Tyrena Security Codes",
+          "type": "component",
+          "rarity": "epic",
+          "use_case": "Access to restricted areas",
+          "image": "/assets/loot/tyrena_codes.png",
+          "drop_chance": 8.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    }
+  }
+} 

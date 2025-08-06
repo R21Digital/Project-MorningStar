@@ -1,0 +1,402 @@
+# Community Build Profiles
+# This file contains pre-built combat and utility builds that can be imported and selected by users
+
+builds:
+  rifleman_medic:
+    name: "Rifleman/Medic"
+    description: "Versatile combat build combining ranged damage with healing capabilities"
+    category: "combat"
+    specialization: "pve"
+    difficulty: "medium"
+    
+    # Core profession information
+    professions:
+      primary: "Rifleman"
+      secondary: "Medic"
+    
+    # Skill progression
+    skills:
+      rifleman:
+        - "combat_marksman_novice"
+        - "combat_rifleman_novice"
+        - "combat_rifleman_marksman"
+        - "combat_rifleman_rifleman"
+        - "combat_rifleman_sniper"
+        - "combat_rifleman_master"
+      medic:
+        - "science_medic_novice"
+        - "science_medic_healing"
+        - "science_medic_medicine"
+        - "science_medic_doctor"
+        - "science_medic_master"
+    
+    # Equipment recommendations
+    equipment:
+      weapons:
+        primary: "rifle"
+        secondary: "carbine"
+        recommended:
+          - "T21"
+          - "T21B"
+          - "E11"
+      armor:
+        type: "medium"
+        recommended:
+          - "Stormtrooper Armor"
+          - "Mandalorian Armor"
+      tapes:
+        - "accuracy"
+        - "damage"
+        - "critical"
+      resists:
+        - "energy"
+        - "kinetic"
+        - "blast"
+    
+    # Performance metrics
+    performance:
+      pve_rating: 8.5
+      pvp_rating: 6.0
+      solo_rating: 9.0
+      group_rating: 8.0
+      farming_rating: 7.5
+    
+    # Combat strategy
+    combat:
+      style: "ranged"
+      stance: "kneeling"
+      rotation:
+        - "aim"
+        - "headshot"
+        - "burst_fire"
+      heal_threshold: 50
+      buff_threshold: 80
+      max_range: 50
+    
+    # Cooldowns
+    cooldowns:
+      aim: 0
+      headshot: 5
+      burst_fire: 15
+      rifle_shot: 0
+      heal_self: 30
+      stim_pack: 120
+    
+    # Emergency abilities
+    emergency_abilities:
+      critical_heal: "heal_self"
+      defensive: "stim_pack"
+    
+    # Build notes
+    notes:
+      - "Excellent for solo PvE content"
+      - "Good healing capabilities for group play"
+      - "Requires careful positioning due to ranged nature"
+      - "Best used with cover and distance management"
+
+  tk_pistoleer:
+    name: "Teras Kasi/Pistoleer"
+    description: "Hybrid melee and ranged combat build with high mobility"
+    category: "combat"
+    specialization: "pvp"
+    difficulty: "hard"
+    
+    professions:
+      primary: "Teras Kasi"
+      secondary: "Pistoleer"
+    
+    skills:
+      teras_kasi:
+        - "combat_unarmed_novice"
+        - "combat_unarmed_teras_kasi"
+        - "combat_unarmed_master"
+      pistoleer:
+        - "combat_marksman_novice"
+        - "combat_marksman_pistol"
+        - "combat_marksman_master"
+    
+    equipment:
+      weapons:
+        primary: "unarmed"
+        secondary: "pistol"
+        recommended:
+          - "Power Hammer"
+          - "DL44"
+          - "DH17"
+      armor:
+        type: "light"
+        recommended:
+          - "Combat Armor"
+          - "Reinforced Armor"
+      tapes:
+        - "accuracy"
+        - "damage"
+        - "critical"
+      resists:
+        - "kinetic"
+        - "energy"
+    
+    performance:
+      pve_rating: 7.0
+      pvp_rating: 9.0
+      solo_rating: 8.5
+      group_rating: 6.5
+      farming_rating: 6.0
+    
+    combat:
+      style: "hybrid"
+      stance: "standing"
+      rotation:
+        - "pistol_shot"
+        - "melee_strike"
+        - "combo_attack"
+      heal_threshold: 40
+      buff_threshold: 70
+      max_range: 25
+    
+    cooldowns:
+      pistol_shot: 0
+      melee_strike: 2
+      combo_attack: 8
+      heal_self: 45
+      stim_pack: 90
+    
+    emergency_abilities:
+      critical_heal: "heal_self"
+      defensive: "stim_pack"
+    
+    notes:
+      - "Excellent for PvP combat"
+      - "High mobility and versatility"
+      - "Requires good positioning and timing"
+      - "Can switch between melee and ranged as needed"
+
+  commando_medic:
+    name: "Commando/Medic"
+    description: "Heavy weapons specialist with strong healing support"
+    category: "combat"
+    specialization: "group"
+    difficulty: "medium"
+    
+    professions:
+      primary: "Commando"
+      secondary: "Medic"
+    
+    skills:
+      commando:
+        - "combat_marksman_novice"
+        - "combat_marksman_commando"
+        - "combat_marksman_master"
+      medic:
+        - "science_medic_novice"
+        - "science_medic_healing"
+        - "science_medic_medicine"
+    
+    equipment:
+      weapons:
+        primary: "heavy_weapon"
+        secondary: "rifle"
+        recommended:
+          - "T21"
+          - "Heavy Rifle"
+          - "E11"
+      armor:
+        type: "heavy"
+        recommended:
+          - "Stormtrooper Armor"
+          - "Mandalorian Armor"
+      tapes:
+        - "damage"
+        - "accuracy"
+        - "critical"
+      resists:
+        - "energy"
+        - "kinetic"
+        - "blast"
+    
+    performance:
+      pve_rating: 9.0
+      pvp_rating: 7.5
+      solo_rating: 8.0
+      group_rating: 9.5
+      farming_rating: 8.5
+    
+    combat:
+      style: "ranged"
+      stance: "kneeling"
+      rotation:
+        - "aim"
+        - "burst_fire"
+        - "heavy_shot"
+      heal_threshold: 60
+      buff_threshold: 85
+      max_range: 60
+    
+    cooldowns:
+      aim: 0
+      burst_fire: 15
+      heavy_shot: 20
+      heal_self: 45
+      stim_pack: 120
+    
+    emergency_abilities:
+      critical_heal: "heal_self"
+      defensive: "stim_pack"
+    
+    notes:
+      - "Excellent for group content and heroics"
+      - "Strong area damage capabilities"
+      - "Good healing support for group"
+      - "Requires careful resource management"
+
+  scout_medic:
+    name: "Scout/Medic"
+    description: "Stealth and reconnaissance specialist with healing abilities"
+    category: "utility"
+    specialization: "solo"
+    difficulty: "easy"
+    
+    professions:
+      primary: "Scout"
+      secondary: "Medic"
+    
+    skills:
+      scout:
+        - "combat_marksman_novice"
+        - "combat_marksman_scout"
+        - "combat_marksman_master"
+      medic:
+        - "science_medic_novice"
+        - "science_medic_healing"
+    
+    equipment:
+      weapons:
+        primary: "rifle"
+        secondary: "carbine"
+        recommended:
+          - "T21"
+          - "E11"
+          - "Carbine"
+      armor:
+        type: "light"
+        recommended:
+          - "Scout Armor"
+          - "Combat Armor"
+      tapes:
+        - "accuracy"
+        - "stealth"
+        - "damage"
+      resists:
+        - "energy"
+        - "kinetic"
+    
+    performance:
+      pve_rating: 8.0
+      pvp_rating: 6.5
+      solo_rating: 9.5
+      group_rating: 7.0
+      farming_rating: 8.0
+    
+    combat:
+      style: "stealth"
+      stance: "crouching"
+      rotation:
+        - "stealth_shot"
+        - "sniper_shot"
+        - "heal_self"
+      heal_threshold: 45
+      buff_threshold: 75
+      max_range: 40
+    
+    cooldowns:
+      stealth_shot: 0
+      sniper_shot: 8
+      heal_self: 30
+      stim_pack: 90
+    
+    emergency_abilities:
+      critical_heal: "heal_self"
+      defensive: "stim_pack"
+    
+    notes:
+      - "Excellent for solo exploration and farming"
+      - "Good stealth capabilities"
+      - "Self-sufficient with healing"
+      - "Best for avoiding combat when possible"
+
+  brawler_tank:
+    name: "Brawler/Tank"
+    description: "Melee tank build focused on damage absorption and close combat"
+    category: "combat"
+    specialization: "tank"
+    difficulty: "medium"
+    
+    professions:
+      primary: "Brawler"
+      secondary: "Tank"
+    
+    skills:
+      brawler:
+        - "combat_unarmed_novice"
+        - "combat_unarmed_brawler"
+        - "combat_unarmed_master"
+      tank:
+        - "combat_marksman_novice"
+        - "combat_marksman_tank"
+    
+    equipment:
+      weapons:
+        primary: "unarmed"
+        secondary: "melee_weapon"
+        recommended:
+          - "Power Hammer"
+          - "Vibro Axe"
+          - "Sword"
+      armor:
+        type: "heavy"
+        recommended:
+          - "Tank Armor"
+          - "Heavy Combat Armor"
+      tapes:
+        - "defense"
+        - "health"
+        - "damage"
+      resists:
+        - "kinetic"
+        - "energy"
+        - "blast"
+    
+    performance:
+      pve_rating: 8.5
+      pvp_rating: 8.0
+      solo_rating: 7.5
+      group_rating: 9.0
+      farming_rating: 7.0
+    
+    combat:
+      style: "melee"
+      stance: "standing"
+      rotation:
+        - "melee_strike"
+        - "tank_ability"
+        - "defensive_stance"
+      heal_threshold: 35
+      buff_threshold: 80
+      max_range: 5
+    
+    cooldowns:
+      melee_strike: 0
+      tank_ability: 10
+      defensive_stance: 30
+      heal_self: 60
+      stim_pack: 120
+    
+    emergency_abilities:
+      critical_heal: "heal_self"
+      defensive: "stim_pack"
+    
+    notes:
+      - "Excellent for tanking in groups"
+      - "High survivability"
+      - "Good for protecting other players"
+      - "Requires careful positioning and aggro management" 

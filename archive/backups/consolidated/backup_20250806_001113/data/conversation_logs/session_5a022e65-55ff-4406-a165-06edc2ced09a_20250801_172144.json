@@ -1,0 +1,14 @@
+{
+  "session_id": "5a022e65-55ff-4406-a165-06edc2ced09a",
+  "user_id": "test_user",
+  "start_time": "2025-08-01T17:21:44.044848",
+  "end_time": "2025-08-01T17:21:44.044848",
+  "mode": "bot_config_helper",
+  "message_count": 0,
+  "messages": [],
+  "metadata": {
+    "created_at": "2025-08-01T17:21:44.044848",
+    "mode": "game_guide",
+    "user_id": "test_user"
+  }
+}

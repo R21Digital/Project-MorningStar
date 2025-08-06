@@ -1,0 +1,41 @@
+{
+  "enabled": true,
+  "check_interval": 300,
+  "cache_duration": 300,
+  "use_journal_command": true,
+  "use_ui_detection": true,
+  "fallback_alert": true,
+  "quest_chains_file": "data/quest_chains.json",
+  "completed_quests_file": "data/completed_quests.json",
+  "ui_regions": {
+    "quest_log": {
+      "x": 100,
+      "y": 100,
+      "width": 800,
+      "height": 600
+    },
+    "journal_button": {
+      "x": 50,
+      "y": 50,
+      "width": 100,
+      "height": 30
+    }
+  },
+  "ocr_settings": {
+    "confidence_threshold": 0.7,
+    "language": "eng",
+    "preprocessing": true
+  },
+  "quest_verification": {
+    "verify_before_start": true,
+    "show_eligibility_message": true,
+    "log_verification_results": true,
+    "terminal_message_format": "✔ Quest log verified – ready for chain."
+  },
+  "fallback_settings": {
+    "use_saved_data": true,
+    "alert_on_failure": true,
+    "retry_attempts": 3,
+    "retry_delay": 5
+  }
+} 

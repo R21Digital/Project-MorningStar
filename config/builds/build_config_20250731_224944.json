@@ -1,0 +1,29 @@
+{
+  "combat_style": "support",
+  "weapons_supported": [
+    "pistol",
+    "rifle"
+  ],
+  "abilities_granted": [
+    "Cure Disease",
+    "Cure Poison",
+    "Revive",
+    "Medical Treatment",
+    "Heal",
+    "Heal Other"
+  ],
+  "minimum_attack_distance": 3,
+  "preferred_distance": 3,
+  "movement_style": "defensive",
+  "ability_priorities": [
+    "heal",
+    "support",
+    "buff"
+  ],
+  "targeting_style": "support_range",
+  "build_summary": "Professions: medic | Weapons: pistol, rifle | Combat Style: Support | Key Abilities: Cure Disease, Cure Poison, Revive, Medical Treatment, Heal | ... and 1 more abilities",
+  "profession_boxes": [
+    "medic"
+  ],
+  "loaded_at": "2025-07-31T22:49:44.871626"
+}

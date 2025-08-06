@@ -1,0 +1,24 @@
+{
+  "preferred_mount": "speederbike",
+  "auto_mount_distance": 100,
+  "blacklisted_zones": [
+    "inside_building",
+    "spaceport"
+  ],
+  "enable_auto_mount": true,
+  "enable_auto_dismount": true,
+  "mount_detection_methods": [
+    "hotbar_scan",
+    "command_output"
+  ],
+  "fallback_mounts": [
+    "dewback",
+    "speeder"
+  ],
+  "combat_mount_allowed": false,
+  "indoor_mount_allowed": false,
+  "city_mount_allowed": true,
+  "mount_check_interval": 30,
+  "max_mount_attempts": 3,
+  "mount_cooldown": 5
+}

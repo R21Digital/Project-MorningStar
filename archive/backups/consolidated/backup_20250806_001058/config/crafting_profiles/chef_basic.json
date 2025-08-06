@@ -1,0 +1,23 @@
+{
+  "name": "chef_basic",
+  "description": "Basic chef crafting profile for food preparation",
+  "station_type": "chef",
+  "schematics": [
+    "Basic Meal",
+    "Quality Meal"
+  ],
+  "max_quantity": 8,
+  "resource_check": true,
+  "power_check": true,
+  "min_inventory_space": 4,
+  "min_power": 60,
+  "required_resources": [
+    "vegetable",
+    "meat",
+    "spice"
+  ],
+  "auto_restock": true,
+  "auto_sell_crafted": true,
+  "break_interval": 240,
+  "priority": 2
+} 

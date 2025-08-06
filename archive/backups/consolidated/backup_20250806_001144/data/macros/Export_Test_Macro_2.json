@@ -1,0 +1,29 @@
+{
+  "name": "Export Test Macro 2",
+  "description": "Test macro 2 for export/import",
+  "version": "1.0",
+  "author": "DemoUser",
+  "created_date": "2025-08-03T19:42:57.038034",
+  "modified_date": "2025-08-03T19:42:57.038039",
+  "tags": [
+    "export-test-2"
+  ],
+  "category": "test",
+  "actions": [
+    {
+      "action_type": "MacroActionType.COMMAND",
+      "command": "say",
+      "parameters": {
+        "target": "Test message 2"
+      },
+      "delay_ms": 0,
+      "description": "Say test message 2",
+      "is_conditional": false,
+      "condition": null
+    }
+  ],
+  "variables": {},
+  "settings": {},
+  "is_public": false,
+  "share_id": "EnBZIce7o_Q"
+}

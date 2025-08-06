@@ -1,0 +1,92 @@
+{
+  "channel": "stable",
+  "auto_check_enabled": true,
+  "check_interval_hours": 24,
+  "download_timeout_seconds": 300,
+  "max_retry_attempts": 3,
+  "keep_backups_count": 2,
+  "update_servers": {
+    "stable": {
+      "base_url": "https://updates.ms11.com/stable",
+      "version_endpoint": "/version.json",
+      "download_endpoint": "/download",
+      "description": "Stable releases - thoroughly tested and recommended for production use",
+      "update_frequency": "weekly",
+      "risk_level": "low"
+    },
+    "canary": {
+      "base_url": "https://updates.ms11.com/canary",
+      "version_endpoint": "/version.json",
+      "download_endpoint": "/download",
+      "description": "Canary releases - latest features and experimental updates for testers",
+      "update_frequency": "daily",
+      "risk_level": "high"
+    }
+  },
+  "notification_settings": {
+    "notify_on_available": true,
+    "notify_on_download": true,
+    "notify_on_ready": true,
+    "notify_on_failure": true,
+    "notify_on_channel_change": true
+  },
+  "security_settings": {
+    "verify_checksums": true,
+    "verify_signatures": false,
+    "require_https": true,
+    "allowed_domains": [
+      "updates.ms11.com",
+      "cdn.ms11.com"
+    ]
+  },
+  "rollback_settings": {
+    "auto_rollback_on_failure": true,
+    "max_rollback_attempts": 3,
+    "preserve_user_data": true,
+    "backup_before_update": true
+  },
+  "performance_settings": {
+    "parallel_downloads": 1,
+    "chunk_size_bytes": 8192,
+    "progress_update_interval_ms": 1000,
+    "resume_download_on_failure": true
+  },
+  "channel_switching": {
+    "allow_stable_to_canary": true,
+    "allow_canary_to_stable": true,
+    "require_confirmation": true,
+    "warn_about_risks": true
+  },
+  "update_policy": {
+    "mandatory_updates": {
+      "security_patches": true,
+      "critical_bug_fixes": true,
+      "compatibility_updates": true
+    },
+    "optional_updates": {
+      "feature_updates": false,
+      "performance_improvements": false,
+      "ui_changes": false
+    },
+    "deferral_settings": {
+      "max_deferral_days": 7,
+      "allow_deferral": true,
+      "force_after_deferral": true
+    }
+  },
+  "logging_settings": {
+    "log_level": "INFO",
+    "log_update_events": true,
+    "log_download_progress": false,
+    "log_rollback_events": true,
+    "log_file": "logs/updater.log"
+  },
+  "dashboard_integration": {
+    "show_update_status": true,
+    "show_progress_bar": true,
+    "show_channel_selector": true,
+    "show_changelog": true,
+    "show_version_comparison": true,
+    "auto_refresh_interval_seconds": 30
+  }
+}

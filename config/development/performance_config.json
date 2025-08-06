@@ -1,0 +1,212 @@
+{
+  "monitoring": {
+    "enabled": true,
+    "update_interval": 5.0,
+    "history_size": 1000,
+    "alert_thresholds": {
+      "cpu_percent": 80.0,
+      "memory_percent": 85.0,
+      "ocr_calls_per_minute": 15,
+      "frames_per_second": 30,
+      "io_wait_percent": 10.0,
+      "network_io_mb_per_minute": 50.0,
+      "disk_io_mb_per_minute": 100.0
+    },
+    "sampling": {
+      "system_metrics_interval": 5.0,
+      "module_performance_interval": 10.0,
+      "alert_check_interval": 30.0,
+      "log_metrics_interval": 60.0
+    }
+  },
+  "modules": {
+    "heavy_modules": [
+      "core.ocr",
+      "core.screenshot",
+      "core.movement_controller",
+      "core.combat_manager",
+      "core.navigation",
+      "core.quest_manager"
+    ],
+    "medium_modules": [
+      "core.inventory_manager",
+      "core.state_tracker",
+      "core.session_monitor",
+      "core.performance_tracker"
+    ],
+    "light_modules": [
+      "utils.logging_utils",
+      "core.profile_loader",
+      "core.build_manager"
+    ],
+    "load_thresholds": {
+      "red": {
+        "cpu_percent": 50.0,
+        "memory_mb": 100.0,
+        "call_frequency_per_minute": 100
+      },
+      "yellow": {
+        "cpu_percent": 25.0,
+        "memory_mb": 50.0,
+        "call_frequency_per_minute": 50
+      },
+      "green": {
+        "cpu_percent": 10.0,
+        "memory_mb": 25.0,
+        "call_frequency_per_minute": 20
+      }
+    }
+  },
+  "recommendations": {
+    "cpu_threshold": 70.0,
+    "memory_threshold": 80.0,
+    "ocr_frequency_threshold": 10,
+    "frame_rate_threshold": 25,
+    "io_wait_threshold": 5.0,
+    "network_io_threshold": 30.0,
+    "disk_io_threshold": 50.0,
+    "module_count_thresholds": {
+      "heavy_modules_max": 3,
+      "medium_modules_max": 5,
+      "total_active_modules_max": 10
+    }
+  },
+  "dashboard": {
+    "auto_refresh_interval": 10.0,
+    "chart_history_points": 100,
+    "export_enabled": true,
+    "alert_notifications": true,
+    "real_time_updates": true,
+    "chart_types": {
+      "system_metrics": "line",
+      "module_performance": "bar",
+      "recommendations": "list"
+    },
+    "display_options": {
+      "show_system_metrics": true,
+      "show_module_performance": true,
+      "show_recommendations": true,
+      "show_alerts": true,
+      "show_export_button": true
+    }
+  },
+  "profiling": {
+    "enable_detailed_profiling": true,
+    "profile_heavy_modules": true,
+    "track_io_operations": true,
+    "monitor_network_io": true,
+    "track_memory_leaks": true,
+    "profile_functions": true,
+    "sampling_rate": 0.1,
+    "max_profiling_depth": 10
+  },
+  "optimization": {
+    "auto_optimization": false,
+    "optimization_rules": {
+      "reduce_ocr_frequency": {
+        "enabled": true,
+        "threshold": 15,
+        "action": "decrease_capture_interval"
+      },
+      "disable_heavy_modules": {
+        "enabled": true,
+        "threshold": 3,
+        "action": "disable_non_essential"
+      },
+      "memory_cleanup": {
+        "enabled": true,
+        "threshold": 80.0,
+        "action": "force_garbage_collection"
+      },
+      "cpu_throttling": {
+        "enabled": true,
+        "threshold": 90.0,
+        "action": "reduce_processing_frequency"
+      }
+    },
+    "performance_modes": {
+      "lightweight": {
+        "ocr_interval": 5.0,
+        "screenshot_quality": "low",
+        "max_active_modules": 3,
+        "memory_limit_mb": 200
+      },
+      "balanced": {
+        "ocr_interval": 3.0,
+        "screenshot_quality": "medium",
+        "max_active_modules": 5,
+        "memory_limit_mb": 400
+      },
+      "performance": {
+        "ocr_interval": 1.0,
+        "screenshot_quality": "high",
+        "max_active_modules": 8,
+        "memory_limit_mb": 800
+      }
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "log_level": "INFO",
+    "log_file": "logs/performance_dashboard.jsonl",
+    "log_rotation": {
+      "max_size_mb": 10,
+      "backup_count": 5
+    },
+    "metrics_logging": {
+      "system_metrics": true,
+      "module_performance": true,
+      "alerts": true,
+      "recommendations": true
+    }
+  },
+  "alerts": {
+    "enabled": true,
+    "notification_methods": ["dashboard", "log"],
+    "alert_levels": {
+      "critical": {
+        "cpu_percent": 90.0,
+        "memory_percent": 95.0,
+        "response_time_ms": 5000
+      },
+      "warning": {
+        "cpu_percent": 70.0,
+        "memory_percent": 80.0,
+        "response_time_ms": 2000
+      },
+      "info": {
+        "cpu_percent": 50.0,
+        "memory_percent": 60.0,
+        "response_time_ms": 1000
+      }
+    },
+    "alert_cooldown": {
+      "critical": 300,
+      "warning": 60,
+      "info": 30
+    }
+  },
+  "export": {
+    "enabled": true,
+    "formats": ["json", "csv"],
+    "include_history": true,
+    "include_recommendations": true,
+    "include_alerts": true,
+    "auto_export_interval": 3600,
+    "export_directory": "exports/performance"
+  },
+  "integration": {
+    "session_reports": true,
+    "dashboard_api": true,
+    "external_monitoring": false,
+    "webhook_notifications": false,
+    "metrics_endpoint": "/api/performance/metrics"
+  },
+  "debug": {
+    "enabled": false,
+    "verbose_logging": false,
+    "performance_tracing": false,
+    "memory_profiling": false,
+    "cpu_profiling": false
+  }
+} 

@@ -1,0 +1,240 @@
+completion_estimates:
+  average_time_per_quest: 19.0
+  completion_percentage_milestones:
+  - percentage: 25
+    quests: 2
+  - percentage: 50
+    quests: 4
+  - percentage: 75
+    quests: 6
+  - percentage: 100
+    quests: 8
+  estimated_time_hours: 2.533333333333333
+  estimated_time_minutes: 152
+  total_quests: 8
+completion_goals:
+  estimated_completion_time: 152
+  quests_by_difficulty:
+    easy: 2
+    hard: 2
+    medium: 4
+  quests_by_type:
+    collection: 2
+    delivery: 1
+    discovered: 1
+    epic: 1
+    exploration: 1
+    faction: 1
+    tutorial: 1
+  required_levels:
+  - 1
+  - 5
+  - 10
+  - 15
+  - 20
+  - 25
+  total_quests: 8
+  unlock_requirements: []
+difficulty_progression:
+- count: 2
+  difficulty: easy
+  estimated_time: 20
+  quests:
+  - legacy_begins
+  - moisture_farm_delivery
+- count: 4
+  difficulty: medium
+  estimated_time: 80
+  quests:
+  - desert_secrets
+  - tatooine_artifact_hunt
+  - imp_agent_kill
+  - discovered_tatooine_artifact_hunt
+- count: 2
+  difficulty: hard
+  estimated_time: 52
+  quests:
+  - legacy_call
+  - artifact_hunt
+generated_date: '2025-07-31T16:23:51.910838'
+planet: tatooine
+prerequisites_map:
+  artifact_hunt: []
+  desert_secrets: []
+  discovered_tatooine_artifact_hunt: []
+  imp_agent_kill: []
+  legacy_begins: []
+  legacy_call: []
+  moisture_farm_delivery: []
+  tatooine_artifact_hunt: []
+quest_chains: []
+quests_by_type:
+  collection:
+  - database_info:
+      coordinates:
+      - 100
+      - 200
+      difficulty: medium
+      discovered_time: '2025-07-31 13:09:42.207306'
+      giver: Unknown
+      level_requirement: 15
+      location: mos_eisley
+      name: Tatooine Artifact Hunt
+      planet: tatooine
+      quest_id: tatooine_artifact_hunt
+      quest_type: collection
+      reward: '{''experience'': 500, ''credits'': 1000, ''reputation'': {''tatooine'':
+        200}, ''items'': [''artifact_fragment'', ''desert_map''], ''unlocks'': [''tatooine_cantina_access'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: tatooine_artifact_hunt
+  - database_info:
+      coordinates:
+      - 400
+      - 500
+      difficulty: hard
+      discovered_time: '2025-07-31 13:09:42.211743'
+      giver: Unknown
+      level_requirement: 25
+      location: ''
+      name: Ancient Artifact Hunt
+      planet: tatooine
+      quest_id: artifact_hunt
+      quest_type: collection
+      reward: '{''credits'': 8000, ''experience'': 3000, ''items'': [''Ancient Artifact'',
+        ''Desert Map'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: artifact_hunt
+  delivery:
+  - database_info:
+      coordinates:
+      - 200
+      - 300
+      difficulty: easy
+      discovered_time: '2025-07-31 13:09:42.214479'
+      giver: Unknown
+      level_requirement: 5
+      location: ''
+      name: Moisture Farm Delivery
+      planet: tatooine
+      quest_id: moisture_farm_delivery
+      quest_type: delivery
+      reward: '{''credits'': 1000, ''experience'': 500, ''items'': [''Moisture Vaporator
+        Parts'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: moisture_farm_delivery
+  discovered:
+  - database_info:
+      coordinates:
+      - 0
+      - 0
+      difficulty: medium
+      discovered_time: '2025-07-31 13:09:42.215916'
+      giver: Unknown
+      level_requirement: 1
+      location: Tatooine Desert
+      name: Tatooine Artifact Hunt
+      planet: tatooine
+      quest_id: discovered_tatooine_artifact_hunt
+      quest_type: discovered
+      reward: 1000 credits
+      source: ocr
+    detailed_data: null
+    quest_id: discovered_tatooine_artifact_hunt
+  epic:
+  - database_info:
+      coordinates:
+      - 800
+      - 900
+      difficulty: hard
+      discovered_time: '2025-07-31 13:09:42.204693'
+      giver: Unknown
+      level_requirement: 10
+      location: anchorhead
+      name: The Legacy's Call
+      planet: tatooine
+      quest_id: legacy_call
+      quest_type: epic
+      reward: '{''experience'': 500, ''credits'': 300, ''reputation'': {''tatooine'':
+        100}, ''items'': [''legacy_crystal'', ''enhanced_weapon'', ''legacy_title''],
+        ''unlocks'': [''legacy_abilities'', ''advanced_training'', ''galaxy_access'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: legacy_call
+  exploration:
+  - database_info:
+      coordinates:
+      - 500
+      - 600
+      difficulty: medium
+      discovered_time: '2025-07-31 13:09:42.201063'
+      giver: Unknown
+      level_requirement: 5
+      location: jundland_wastes
+      name: The Desert's Secrets
+      planet: tatooine
+      quest_id: desert_secrets
+      quest_type: exploration
+      reward: '{''experience'': 250, ''credits'': 150, ''reputation'': {''tatooine'':
+        50}, ''items'': [''ancient_artifact'', ''desert_map''], ''unlocks'': [''jundland_access'',
+        ''artifact_collection'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: desert_secrets
+  faction:
+  - database_info:
+      coordinates:
+      - 123
+      - -456
+      difficulty: medium
+      discovered_time: '2025-07-31 13:09:42.213131'
+      giver: Unknown
+      level_requirement: 20
+      location: ''
+      name: Imperial Agent Kill Mission
+      planet: tatooine
+      quest_id: imp_agent_kill
+      quest_type: faction
+      reward: '{''credits'': 5000, ''experience'': 2000, ''items'': [''Imperial Medal'',
+        ''Rebel Intel'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: imp_agent_kill
+  tutorial:
+  - database_info:
+      coordinates:
+      - 100
+      - 150
+      difficulty: easy
+      discovered_time: '2025-07-31 13:09:42.197955'
+      giver: Unknown
+      level_requirement: 1
+      location: mos_eisley
+      name: The Legacy Begins
+      planet: tatooine
+      quest_id: legacy_begins
+      quest_type: tutorial
+      reward: '{''experience'': 100, ''credits'': 50, ''reputation'': {''tatooine'':
+        25}, ''items'': [''basic_weapon'', ''starter_armor''], ''unlocks'': [''mos_eisley_access'',
+        ''basic_combat_training'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: legacy_begins
+recommended_order:
+- legacy_begins
+- discovered_tatooine_artifact_hunt
+- moisture_farm_delivery
+- desert_secrets
+- legacy_call
+- tatooine_artifact_hunt
+- imp_agent_kill
+- artifact_hunt
+rewards_summary:
+  items: []
+  total_credits: 0
+  total_experience: 0
+  total_reputation: {}
+  unlocks: []
+total_quests: 8

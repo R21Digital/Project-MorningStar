@@ -1,0 +1,289 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-01-04T12:00:00",
+    "description": "Meta armor recommendations and optimization data for build analysis"
+  },
+  "armor_recommendations": {
+    "tank": {
+      "primary_sets": [
+        {
+          "name": "Mandalorian Armor",
+          "reason": "High defense and constitution bonuses",
+          "priority": "very_high",
+          "stats": {
+            "constitution": 120,
+            "stamina": 90,
+            "defense": 80
+          },
+          "cost": "high"
+        },
+        {
+          "name": "Stormtrooper Armor",
+          "reason": "Balanced defense and good availability",
+          "priority": "high",
+          "stats": {
+            "constitution": 80,
+            "stamina": 50,
+            "defense": 60
+          },
+          "cost": "medium"
+        }
+      ],
+      "enhancement_priorities": ["defense", "constitution", "stamina", "accuracy"]
+    },
+    "dps": {
+      "primary_sets": [
+        {
+          "name": "Mandalorian Armor",
+          "reason": "High damage and critical bonuses",
+          "priority": "very_high",
+          "stats": {
+            "damage": 100,
+            "accuracy": 80,
+            "critical": 60
+          },
+          "cost": "high"
+        },
+        {
+          "name": "Stormtrooper Armor",
+          "reason": "Good damage output with decent defense",
+          "priority": "high",
+          "stats": {
+            "damage": 70,
+            "accuracy": 60,
+            "critical": 40
+          },
+          "cost": "medium"
+        }
+      ],
+      "enhancement_priorities": ["damage", "accuracy", "critical", "constitution"]
+    },
+    "healer": {
+      "primary_sets": [
+        {
+          "name": "Medic Armor",
+          "reason": "Specialized for healing and survivability",
+          "priority": "very_high",
+          "stats": {
+            "healing": 120,
+            "constitution": 100,
+            "stamina": 80
+          },
+          "cost": "high"
+        },
+        {
+          "name": "Stormtrooper Armor",
+          "reason": "Good survivability for healing roles",
+          "priority": "high",
+          "stats": {
+            "healing": 60,
+            "constitution": 80,
+            "stamina": 50
+          },
+          "cost": "medium"
+        }
+      ],
+      "enhancement_priorities": ["healing", "constitution", "stamina", "accuracy"]
+    },
+    "support": {
+      "primary_sets": [
+        {
+          "name": "Stormtrooper Armor",
+          "reason": "Balanced stats for support roles",
+          "priority": "high",
+          "stats": {
+            "constitution": 80,
+            "stamina": 50,
+            "accuracy": 60
+          },
+          "cost": "medium"
+        },
+        {
+          "name": "Mandalorian Armor",
+          "reason": "High accuracy and survivability",
+          "priority": "high",
+          "stats": {
+            "constitution": 120,
+            "stamina": 90,
+            "accuracy": 80
+          },
+          "cost": "high"
+        }
+      ],
+      "enhancement_priorities": ["accuracy", "constitution", "stamina", "damage"]
+    }
+  },
+  "profession_specific": {
+    "rifleman": {
+      "recommended_sets": ["Mandalorian Armor", "Stormtrooper Armor"],
+      "enhancement_focus": ["accuracy", "damage", "critical"],
+      "special_considerations": "High accuracy requirements for ranged combat"
+    },
+    "pistoleer": {
+      "recommended_sets": ["Mandalorian Armor", "Stormtrooper Armor"],
+      "enhancement_focus": ["critical", "damage", "accuracy"],
+      "special_considerations": "Critical hit focus for burst damage"
+    },
+    "medic": {
+      "recommended_sets": ["Medic Armor", "Stormtrooper Armor"],
+      "enhancement_focus": ["healing", "constitution", "stamina"],
+      "special_considerations": "Healing efficiency and survivability"
+    },
+    "brawler": {
+      "recommended_sets": ["Mandalorian Armor", "Stormtrooper Armor"],
+      "enhancement_focus": ["damage", "constitution", "stamina"],
+      "special_considerations": "High damage and survivability for melee combat"
+    }
+  },
+  "enhancement_guide": {
+    "accuracy": {
+      "description": "Increases hit chance and precision",
+      "priority_by_role": {
+        "dps": "very_high",
+        "support": "high",
+        "tank": "medium",
+        "healer": "medium"
+      },
+      "optimal_values": {
+        "minimum": 50,
+        "optimal": 100,
+        "maximum": 150
+      }
+    },
+    "damage": {
+      "description": "Increases damage output",
+      "priority_by_role": {
+        "dps": "very_high",
+        "tank": "medium",
+        "support": "medium",
+        "healer": "low"
+      },
+      "optimal_values": {
+        "minimum": 30,
+        "optimal": 80,
+        "maximum": 120
+      }
+    },
+    "critical": {
+      "description": "Increases critical hit chance and damage",
+      "priority_by_role": {
+        "dps": "high",
+        "support": "medium",
+        "tank": "low",
+        "healer": "low"
+      },
+      "optimal_values": {
+        "minimum": 20,
+        "optimal": 60,
+        "maximum": 100
+      }
+    },
+    "defense": {
+      "description": "Reduces incoming damage",
+      "priority_by_role": {
+        "tank": "very_high",
+        "healer": "high",
+        "support": "medium",
+        "dps": "low"
+      },
+      "optimal_values": {
+        "minimum": 30,
+        "optimal": 80,
+        "maximum": 120
+      }
+    },
+    "constitution": {
+      "description": "Increases health pool and regeneration",
+      "priority_by_role": {
+        "tank": "very_high",
+        "healer": "high",
+        "support": "high",
+        "dps": "medium"
+      },
+      "optimal_values": {
+        "minimum": 50,
+        "optimal": 100,
+        "maximum": 150
+      }
+    },
+    "stamina": {
+      "description": "Increases energy pool and recovery",
+      "priority_by_role": {
+        "tank": "high",
+        "healer": "high",
+        "support": "high",
+        "dps": "medium"
+      },
+      "optimal_values": {
+        "minimum": 40,
+        "optimal": 80,
+        "maximum": 120
+      }
+    },
+    "healing": {
+      "description": "Increases healing output and efficiency",
+      "priority_by_role": {
+        "healer": "very_high",
+        "support": "medium",
+        "tank": "low",
+        "dps": "low"
+      },
+      "optimal_values": {
+        "minimum": 50,
+        "optimal": 100,
+        "maximum": 150
+      }
+    }
+  },
+  "tape_recommendations": {
+    "tank": {
+      "primary": ["defense_tape", "constitution_tape"],
+      "secondary": ["stamina_tape", "accuracy_tape"],
+      "avoid": ["damage_tape", "critical_tape"]
+    },
+    "dps": {
+      "primary": ["damage_tape", "accuracy_tape"],
+      "secondary": ["critical_tape", "constitution_tape"],
+      "avoid": ["defense_tape", "healing_tape"]
+    },
+    "healer": {
+      "primary": ["healing_tape", "constitution_tape"],
+      "secondary": ["stamina_tape", "accuracy_tape"],
+      "avoid": ["damage_tape", "critical_tape"]
+    },
+    "support": {
+      "primary": ["accuracy_tape", "constitution_tape"],
+      "secondary": ["stamina_tape", "damage_tape"],
+      "avoid": ["critical_tape", "healing_tape"]
+    }
+  },
+  "optimization_rules": {
+    "stat_balance": {
+      "description": "Maintain balance between primary and secondary stats",
+      "rules": [
+        "Primary stats should be 60-70% of total enhancement allocation",
+        "Secondary stats should be 20-30% of total enhancement allocation",
+        "Remaining stats should be 10-20% for utility"
+      ]
+    },
+    "role_specialization": {
+      "description": "Focus on enhancements that enhance your primary role",
+      "rules": [
+        "Tanks: Prioritize defense, constitution, and stamina",
+        "DPS: Prioritize damage, accuracy, and critical",
+        "Healers: Prioritize healing, constitution, and stamina",
+        "Support: Prioritize accuracy, constitution, and stamina"
+      ]
+    },
+    "profession_synergy": {
+      "description": "Consider profession-specific enhancement requirements",
+      "rules": [
+        "Rifleman: High accuracy for ranged combat",
+        "Pistoleer: High critical for burst damage",
+        "Medic: High healing and survivability",
+        "Brawler: High damage and constitution"
+      ]
+    }
+  }
+} 

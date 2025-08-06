@@ -1,0 +1,30 @@
+{
+  "name": "Shareable Test Macro",
+  "description": "A macro for testing sharing functionality",
+  "version": "1.0",
+  "author": "DemoUser",
+  "created_date": "2025-08-03T19:42:57.033063",
+  "modified_date": "2025-08-03T19:42:57.033070",
+  "tags": [
+    "shareable",
+    "test"
+  ],
+  "category": "test",
+  "actions": [
+    {
+      "action_type": "MacroActionType.COMMAND",
+      "command": "say",
+      "parameters": {
+        "target": "Hello World!"
+      },
+      "delay_ms": 0,
+      "description": "Say hello",
+      "is_conditional": false,
+      "condition": null
+    }
+  ],
+  "variables": {},
+  "settings": {},
+  "is_public": true,
+  "share_id": "sIPA8aISyyY"
+}

@@ -1,0 +1,304 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "SWG Keybind Template - Essential bindings for automation",
+    "last_updated": "2025-07-31",
+    "swg_version": "1.0"
+  },
+  "essential_bindings": {
+    "combat": {
+      "attack": {
+        "key": "1",
+        "description": "Primary attack action",
+        "required": true,
+        "category": "combat"
+      },
+      "secondary_attack": {
+        "key": "2", 
+        "description": "Secondary attack action",
+        "required": true,
+        "category": "combat"
+      },
+      "special_attack": {
+        "key": "3",
+        "description": "Special attack ability",
+        "required": true,
+        "category": "combat"
+      },
+      "target_self": {
+        "key": "F1",
+        "description": "Target self for healing/buffs",
+        "required": true,
+        "category": "combat"
+      },
+      "target_next": {
+        "key": "Tab",
+        "description": "Target next enemy",
+        "required": true,
+        "category": "combat"
+      },
+      "target_previous": {
+        "key": "Shift+Tab",
+        "description": "Target previous enemy",
+        "required": false,
+        "category": "combat"
+      }
+    },
+    "movement": {
+      "forward": {
+        "key": "W",
+        "description": "Move forward",
+        "required": true,
+        "category": "movement"
+      },
+      "backward": {
+        "key": "S",
+        "description": "Move backward",
+        "required": true,
+        "category": "movement"
+      },
+      "left": {
+        "key": "A",
+        "description": "Strafe left",
+        "required": true,
+        "category": "movement"
+      },
+      "right": {
+        "key": "D",
+        "description": "Strafe right",
+        "required": true,
+        "category": "movement"
+      },
+      "run": {
+        "key": "Shift",
+        "description": "Run/walk toggle",
+        "required": true,
+        "category": "movement"
+      },
+      "jump": {
+        "key": "Space",
+        "description": "Jump",
+        "required": true,
+        "category": "movement"
+      }
+    },
+    "interaction": {
+      "use": {
+        "key": "E",
+        "description": "Use/interact with objects",
+        "required": true,
+        "category": "interaction"
+      },
+      "examine": {
+        "key": "X",
+        "description": "Examine target",
+        "required": true,
+        "category": "interaction"
+      },
+      "loot": {
+        "key": "L",
+        "description": "Loot target",
+        "required": true,
+        "category": "interaction"
+      },
+      "harvest": {
+        "key": "H",
+        "description": "Harvest resource",
+        "required": true,
+        "category": "interaction"
+      }
+    },
+    "inventory": {
+      "inventory": {
+        "key": "I",
+        "description": "Open inventory",
+        "required": true,
+        "category": "inventory"
+      },
+      "character": {
+        "key": "C",
+        "description": "Open character sheet",
+        "required": true,
+        "category": "inventory"
+      },
+      "datapad": {
+        "key": "P",
+        "description": "Open datapad",
+        "required": true,
+        "category": "inventory"
+      },
+      "skills": {
+        "key": "K",
+        "description": "Open skills window",
+        "required": true,
+        "category": "inventory"
+      }
+    },
+    "mount": {
+      "mount": {
+        "key": "M",
+        "description": "Mount/dismount",
+        "required": true,
+        "category": "mount"
+      },
+      "mount_1": {
+        "key": "F2",
+        "description": "Mount slot 1",
+        "required": false,
+        "category": "mount"
+      },
+      "mount_2": {
+        "key": "F3",
+        "description": "Mount slot 2",
+        "required": false,
+        "category": "mount"
+      }
+    },
+    "chat": {
+      "chat": {
+        "key": "Enter",
+        "description": "Open chat",
+        "required": true,
+        "category": "chat"
+      },
+      "group_chat": {
+        "key": "Alt+G",
+        "description": "Group chat",
+        "required": false,
+        "category": "chat"
+      },
+      "tell": {
+        "key": "Alt+T",
+        "description": "Tell chat",
+        "required": false,
+        "category": "chat"
+      }
+    },
+    "camera": {
+      "camera_forward": {
+        "key": "Num8",
+        "description": "Camera forward",
+        "required": false,
+        "category": "camera"
+      },
+      "camera_back": {
+        "key": "Num2",
+        "description": "Camera back",
+        "required": false,
+        "category": "camera"
+      },
+      "camera_left": {
+        "key": "Num4",
+        "description": "Camera left",
+        "required": false,
+        "category": "camera"
+      },
+      "camera_right": {
+        "key": "Num6",
+        "description": "Camera right",
+        "required": false,
+        "category": "camera"
+      },
+      "camera_zoom_in": {
+        "key": "Num+",
+        "description": "Zoom in",
+        "required": false,
+        "category": "camera"
+      },
+      "camera_zoom_out": {
+        "key": "Num-",
+        "description": "Zoom out",
+        "required": false,
+        "category": "camera"
+      }
+    },
+    "social": {
+      "dance": {
+        "key": "F4",
+        "description": "Dance emote",
+        "required": false,
+        "category": "social"
+      },
+      "wave": {
+        "key": "F5",
+        "description": "Wave emote",
+        "required": false,
+        "category": "social"
+      },
+      "bow": {
+        "key": "F6",
+        "description": "Bow emote",
+        "required": false,
+        "category": "social"
+      }
+    }
+  },
+  "optional_bindings": {
+    "crafting": {
+      "craft": {
+        "key": "Alt+C",
+        "description": "Open crafting window",
+        "required": false,
+        "category": "crafting"
+      },
+      "experiment": {
+        "key": "Alt+E",
+        "description": "Experiment mode",
+        "required": false,
+        "category": "crafting"
+      }
+    },
+    "travel": {
+      "travel": {
+        "key": "Alt+T",
+        "description": "Open travel window",
+        "required": false,
+        "category": "travel"
+      },
+      "shuttle": {
+        "key": "Alt+S",
+        "description": "Call shuttle",
+        "required": false,
+        "category": "travel"
+      }
+    },
+    "utility": {
+      "screenshot": {
+        "key": "PrintScreen",
+        "description": "Take screenshot",
+        "required": false,
+        "category": "utility"
+      },
+      "help": {
+        "key": "F1",
+        "description": "Help window",
+        "required": false,
+        "category": "utility"
+      },
+      "options": {
+        "key": "Esc",
+        "description": "Options menu",
+        "required": false,
+        "category": "utility"
+      }
+    }
+  },
+  "validation_rules": {
+    "required_categories": ["combat", "movement", "interaction", "inventory"],
+    "conflict_detection": true,
+    "auto_fix_suggestions": true,
+    "backup_existing": true
+  },
+  "detection_methods": {
+    "auto_detect": {
+      "enabled": true,
+      "methods": ["user_cfg", "inputmap_xml", "ocr_fallback"],
+      "priority": ["user_cfg", "inputmap_xml", "ocr_fallback"]
+    },
+    "manual_config": {
+      "enabled": true,
+      "guided_setup": true,
+      "validation_prompts": true
+    }
+  }
+} 

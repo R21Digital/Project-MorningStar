@@ -1,0 +1,395 @@
+{
+  "source_type": "creature",
+  "total_kills": 150,
+  "total_loot": 562,
+  "last_updated": "2025-08-03T17:37:32.378103",
+  "items": {
+    "a1b2c3d4": {
+      "name": "Krayt Dragon Pearl",
+      "rarity": "legendary",
+      "total_drops": 3,
+      "total_quantity": 3,
+      "first_seen": "2024-01-10T14:22:15",
+      "last_seen": "2024-01-15T09:45:30"
+    },
+    "e5f6g7h8": {
+      "name": "Krayt Dragon Scale",
+      "rarity": "epic",
+      "total_drops": 25,
+      "total_quantity": 127,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:28:45"
+    },
+    "i9j0k1l2": {
+      "name": "Krayt Dragon Tissue",
+      "rarity": "rare",
+      "total_drops": 45,
+      "total_quantity": 89,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:25:12"
+    },
+    "m3n4o5p6": {
+      "name": "Krayt Dragon Bone",
+      "rarity": "uncommon",
+      "total_drops": 120,
+      "total_quantity": 245,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:30:00"
+    },
+    "q7r8s9t0": {
+      "name": "Krayt Dragon Hide",
+      "rarity": "common",
+      "total_drops": 150,
+      "total_quantity": 312,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:30:00"
+    },
+    "u1v2w3x4": {
+      "name": "Credits",
+      "rarity": "common",
+      "total_drops": 150,
+      "total_quantity": 750000,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:30:00"
+    },
+    "y5z6a7b8": {
+      "name": "Krayt Dragon Heart",
+      "rarity": "epic",
+      "total_drops": 8,
+      "total_quantity": 8,
+      "first_seen": "2024-01-09T16:33:45",
+      "last_seen": "2024-01-15T08:12:30"
+    },
+    "c9d0e1f2": {
+      "name": "Krayt Dragon Brain",
+      "rarity": "rare",
+      "total_drops": 12,
+      "total_quantity": 12,
+      "first_seen": "2024-01-09T16:33:45",
+      "last_seen": "2024-01-15T09:22:15"
+    },
+    "g3h4i5j6": {
+      "name": "Krayt Dragon Claw",
+      "rarity": "uncommon",
+      "total_drops": 85,
+      "total_quantity": 156,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:28:45"
+    },
+    "k7l8m9n0": {
+      "name": "Krayt Dragon Fang",
+      "rarity": "rare",
+      "total_drops": 32,
+      "total_quantity": 67,
+      "first_seen": "2024-01-08T11:15:22",
+      "last_seen": "2024-01-15T10:25:12"
+    },
+    "0b5e54a6": {
+      "name": "Rancor Hide from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 8,
+      "first_seen": "2025-08-03T16:55:36.378171",
+      "last_seen": "2025-08-03T16:55:36.378171"
+    },
+    "aa55867b": {
+      "name": "Nexu Fang",
+      "rarity": "rare",
+      "total_drops": 2,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T16:56:03.254811",
+      "last_seen": "2025-08-03T17:08:44.064231"
+    },
+    "1f745f12": {
+      "name": "Krayt Dragon Pearl from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 26,
+      "total_quantity": 26,
+      "first_seen": "2025-08-03T16:56:19.189491",
+      "last_seen": "2025-08-03T17:37:32.378084"
+    },
+    "c9965e34": {
+      "name": "Krayt Dragon Tissue from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T16:57:22.467896",
+      "last_seen": "2025-08-03T16:57:22.467896"
+    },
+    "3f29e04d": {
+      "name": "Spider Web",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T16:57:33.572255",
+      "last_seen": "2025-08-03T17:30:03.079437"
+    },
+    "aebd878c": {
+      "name": "Rancor Hide",
+      "rarity": "uncommon",
+      "total_drops": 11,
+      "total_quantity": 38,
+      "first_seen": "2025-08-03T16:57:40.226279",
+      "last_seen": "2025-08-03T17:35:58.400963"
+    },
+    "262010f9": {
+      "name": "Composite Armor",
+      "rarity": "rare",
+      "total_drops": 16,
+      "total_quantity": 16,
+      "first_seen": "2025-08-03T16:57:41.227048",
+      "last_seen": "2025-08-03T17:34:10.198667"
+    },
+    "77c38045": {
+      "name": "Krayt Dragon Pearl",
+      "rarity": "legendary",
+      "total_drops": 9,
+      "total_quantity": 9,
+      "first_seen": "2025-08-03T16:57:54.231991",
+      "last_seen": "2025-08-03T17:35:53.398288"
+    },
+    "a7985810": {
+      "name": "Krayt Dragon Scale",
+      "rarity": "epic",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:00:03.501250",
+      "last_seen": "2025-08-03T17:00:03.501250"
+    },
+    "2a6e4b8d": {
+      "name": "Power Crystal",
+      "rarity": "epic",
+      "total_drops": 11,
+      "total_quantity": 22,
+      "first_seen": "2025-08-03T17:02:20.346861",
+      "last_seen": "2025-08-03T17:32:18.145838"
+    },
+    "5bc66696": {
+      "name": "Bantha Hide",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 10,
+      "first_seen": "2025-08-03T17:03:31.040949",
+      "last_seen": "2025-08-03T17:03:31.040949"
+    },
+    "a3588bb8": {
+      "name": "Dewback Scale from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:03:42.890478",
+      "last_seen": "2025-08-03T17:03:42.890478"
+    },
+    "ffde88a5": {
+      "name": "Acklay Hide",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 8,
+      "first_seen": "2025-08-03T17:03:46.422984",
+      "last_seen": "2025-08-03T17:15:58.908700"
+    },
+    "ea98f1e3": {
+      "name": "Gurreck Hide from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 9,
+      "first_seen": "2025-08-03T17:04:02.333357",
+      "last_seen": "2025-08-03T17:15:08.889266"
+    },
+    "b55e6bc2": {
+      "name": "Gurreck Horn",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:04:15.941834",
+      "last_seen": "2025-08-03T17:04:15.941834"
+    },
+    "ef3b4318": {
+      "name": "Rancor Meat from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T17:05:10.839256",
+      "last_seen": "2025-08-03T17:05:10.839256"
+    },
+    "f8e71038": {
+      "name": "Dewback Hide from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:05:35.176210",
+      "last_seen": "2025-08-03T17:05:35.176210"
+    },
+    "3db40cb0": {
+      "name": "Eopie Wool",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:08:05.961975",
+      "last_seen": "2025-08-03T17:12:57.598292"
+    },
+    "01b96c26": {
+      "name": "Ancient Artifact",
+      "rarity": "legendary",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:12:03.085929",
+      "last_seen": "2025-08-03T17:12:03.085929"
+    },
+    "2c3c9811": {
+      "name": "Rancor Meat",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 10,
+      "first_seen": "2025-08-03T17:13:40.377679",
+      "last_seen": "2025-08-03T17:16:38.184674"
+    },
+    "948a2e35": {
+      "name": "Credits",
+      "rarity": "common",
+      "total_drops": 6,
+      "total_quantity": 27500,
+      "first_seen": "2025-08-03T17:13:49.645858",
+      "last_seen": "2025-08-03T17:34:03.989114"
+    },
+    "fa34838d": {
+      "name": "Ronto Hide",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 7,
+      "first_seen": "2025-08-03T17:15:12.633896",
+      "last_seen": "2025-08-03T17:33:21.435448"
+    },
+    "51ae15ab": {
+      "name": "Acklay Brain from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:16:48.658670",
+      "last_seen": "2025-08-03T17:16:48.658670"
+    },
+    "77aa55de": {
+      "name": "Spider Silk",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:16:53.993562",
+      "last_seen": "2025-08-03T17:16:53.993562"
+    },
+    "68a87e52": {
+      "name": "Spider Venom",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:19:25.193774",
+      "last_seen": "2025-08-03T17:19:25.193774"
+    },
+    "078d683f": {
+      "name": "Crystal of Power from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:20:23.879912",
+      "last_seen": "2025-08-03T17:20:23.879912"
+    },
+    "ab11f982": {
+      "name": "Eopie Hide from Krayt Dragon",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:22:04.766932",
+      "last_seen": "2025-08-03T17:22:04.766932"
+    },
+    "4a6e2918": {
+      "name": "Bantha Meat",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 7,
+      "first_seen": "2025-08-03T17:22:11.062211",
+      "last_seen": "2025-08-03T17:22:11.062211"
+    },
+    "6fbccbee": {
+      "name": "Gurreck Hide",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T17:22:18.376051",
+      "last_seen": "2025-08-03T17:22:18.376051"
+    },
+    "dfcebc38": {
+      "name": "Acklay Claw",
+      "rarity": "epic",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:26:30.555469",
+      "last_seen": "2025-08-03T17:26:30.555469"
+    },
+    "c799fb12": {
+      "name": "Rancor Bone",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:27:22.458296",
+      "last_seen": "2025-08-03T17:27:22.458296"
+    },
+    "028d3572": {
+      "name": "Rare Gem",
+      "rarity": "epic",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:29:33.235843",
+      "last_seen": "2025-08-03T17:29:33.235843"
+    }
+  },
+  "drop_rates": {
+    "a1b2c3d4": 0.53,
+    "e5f6g7h8": 4.45,
+    "i9j0k1l2": 8.01,
+    "m3n4o5p6": 21.35,
+    "q7r8s9t0": 26.69,
+    "u1v2w3x4": 26.69,
+    "y5z6a7b8": 1.42,
+    "c9d0e1f2": 2.14,
+    "g3h4i5j6": 15.12,
+    "k7l8m9n0": 5.69,
+    "0b5e54a6": 0.18,
+    "aa55867b": 0.36,
+    "1f745f12": 4.63,
+    "c9965e34": 0.18,
+    "3f29e04d": 0.36,
+    "aebd878c": 1.96,
+    "262010f9": 2.85,
+    "77c38045": 1.6,
+    "a7985810": 0.18,
+    "2a6e4b8d": 1.96,
+    "5bc66696": 0.18,
+    "a3588bb8": 0.18,
+    "ffde88a5": 0.36,
+    "ea98f1e3": 0.36,
+    "b55e6bc2": 0.18,
+    "ef3b4318": 0.18,
+    "f8e71038": 0.18,
+    "3db40cb0": 0.36,
+    "01b96c26": 0.18,
+    "2c3c9811": 0.36,
+    "948a2e35": 1.07,
+    "fa34838d": 0.36,
+    "51ae15ab": 0.18,
+    "77aa55de": 0.18,
+    "68a87e52": 0.18,
+    "078d683f": 0.18,
+    "ab11f982": 0.18,
+    "4a6e2918": 0.18,
+    "6fbccbee": 0.18,
+    "dfcebc38": 0.18,
+    "c799fb12": 0.18,
+    "028d3572": 0.18
+  },
+  "rarity_distribution": {
+    "common": 350,
+    "uncommon": 222,
+    "rare": 188,
+    "epic": 150,
+    "legendary": 13
+  }
+}

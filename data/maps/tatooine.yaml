@@ -1,0 +1,107 @@
+# Tatooine Map Data
+# This file contains map information for the planet Tatooine
+
+planet: "tatooine"
+name: "Tatooine"
+description: "A desert planet with harsh conditions and scattered settlements"
+
+# Major zones and their coordinates
+zones:
+  mos_eisley:
+    name: "Mos Eisley"
+    description: "A spaceport town and major trading hub"
+    coordinates: [0, 0]
+    landmarks:
+      - name: "Cantina"
+        coordinates: [100, 200]
+        description: "Famous cantina where many deals are made"
+      - name: "Spaceport"
+        coordinates: [300, 400]
+        description: "Main spaceport for arrivals and departures"
+      - name: "Market District"
+        coordinates: [200, 300]
+        description: "Busy market area with various vendors"
+  
+  bestine:
+    name: "Bestine"
+    description: "Capital city of Tatooine"
+    coordinates: [1000, 1000]
+    landmarks:
+      - name: "Imperial Garrison"
+        coordinates: [1100, 1200]
+        description: "Imperial military outpost"
+      - name: "City Hall"
+        coordinates: [1050, 1150]
+        description: "Administrative center of Bestine"
+  
+  anchorhead:
+    name: "Anchorhead"
+    description: "Small settlement near the Jundland Wastes"
+    coordinates: [2000, 2000]
+    landmarks:
+      - name: "Tusken Camp"
+        coordinates: [2100, 2200]
+        description: "Tusken Raider encampment"
+      - name: "Moisture Farm"
+        coordinates: [2050, 2150]
+        description: "Local moisture farming operation"
+
+# Navigation waypoints
+waypoints:
+  - name: "Mos Eisley Cantina"
+    coordinates: [100, 200]
+    zone: "mos_eisley"
+    type: "landmark"
+  
+  - name: "Bestine Imperial Garrison"
+    coordinates: [1100, 1200]
+    zone: "bestine"
+    type: "landmark"
+  
+  - name: "Anchorhead Tusken Camp"
+    coordinates: [2100, 2200]
+    zone: "anchorhead"
+    type: "landmark"
+
+# Travel routes between zones
+routes:
+  mos_eisley_to_bestine:
+    start: "mos_eisley"
+    end: "bestine"
+    distance: 1414
+    estimated_time_minutes: 30
+    hazards: ["sandstorms", "tusken_raiders"]
+  
+  bestine_to_anchorhead:
+    start: "bestine"
+    end: "anchorhead"
+    distance: 1414
+    estimated_time_minutes: 25
+    hazards: ["tusken_raiders", "krayt_dragons"]
+
+# Environmental conditions
+environment:
+  weather:
+    primary: "desert"
+    temperature_range: [20, 45]
+    hazards: ["sandstorms", "heat_stroke"]
+  
+  terrain:
+    primary: "desert"
+    features: ["sand_dunes", "rocky_outcrops", "canyons"]
+  
+  wildlife:
+    dangerous: ["krayt_dragons", "tusken_raiders", "sand_people"]
+    harmless: ["dewbacks", "banthas", "womp_rats"]
+
+# Metadata
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "MS11_Map_System"
+  tags:
+    - "tatooine"
+    - "desert"
+    - "imperial"
+    - "tusken_raiders" 

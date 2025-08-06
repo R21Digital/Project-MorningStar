@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-01-01T00:00:00Z",
+    "total_drops": 0,
+    "data_source": "MS11 Loot Tracker"
+  },
+  "heroics": {
+    "axkva-min": {
+      "name": "Axkva Min",
+      "location": "Dathomir",
+      "bosses": {
+        "axkva-min": {
+          "name": "Axkva Min",
+          "drops": []
+        }
+      },
+      "total_drops": 0,
+      "last_drop": null
+    },
+    "ig-88": {
+      "name": "IG-88",
+      "location": "Bespin",
+      "bosses": {
+        "ig-88": {
+          "name": "IG-88",
+          "drops": []
+        }
+      },
+      "total_drops": 0,
+      "last_drop": null
+    },
+    "tusken-army": {
+      "name": "Tusken Army",
+      "location": "Tatooine",
+      "bosses": {
+        "tusken-chieftain": {
+          "name": "Tusken Chieftain",
+          "drops": []
+        }
+      },
+      "total_drops": 0,
+      "last_drop": null
+    }
+  },
+  "characters": {},
+  "statistics": {
+    "total_drops": 0,
+    "unique_items": 0,
+    "rarest_drops": [],
+    "most_active_heroic": null,
+    "most_active_character": null
+  }
+} 

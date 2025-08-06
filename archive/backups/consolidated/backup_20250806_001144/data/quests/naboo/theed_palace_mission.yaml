@@ -1,0 +1,48 @@
+quest_id: theed_palace_mission
+name: Theed Palace Security Mission
+description: Help secure the palace in Theed, Naboo
+quest_type: faction
+difficulty: medium
+level_requirement: 15
+planet: naboo
+zone: ''
+coordinates: &id001
+- 5000
+- -4000
+npc: Palace Guard Captain
+rewards:
+  credits: 3000
+  experience: 1500
+  items:
+  - Palace Security Badge
+prerequisites:
+- level_15
+- naboo_citizen
+dialogue:
+- The palace needs additional security.
+- We've received reports of suspicious activity.
+- Patrol the palace grounds and report any threats.
+- Your service to Naboo will not be forgotten.
+steps:
+- step_id: start_quest
+  type: dialogue
+  npc_id: Palace Guard Captain
+  coordinates: *id001
+  description: Start the quest
+completion_conditions:
+- type: dialogue
+  npc_id: Palace Guard Captain
+  description: Complete the quest
+failure_conditions: []
+hints: []
+metadata:
+  created_date: '2025-07-31'
+  last_updated: '2025-07-31'
+  version: '1.0'
+  author: MS11_Quest_Scraper
+  source_url: https://swgr.org/wiki/Theed_Palace_Security_Mission
+  tags:
+  - naboo
+  - faction
+source_url: https://swgr.org/wiki/Theed_Palace_Security_Mission
+last_updated: '2024-01-01'

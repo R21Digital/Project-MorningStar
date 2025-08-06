@@ -1,0 +1,322 @@
+{
+  "patterns": [
+    {
+      "id": "infinite_loop",
+      "name": "Infinite Loop",
+      "description": "Detects macros that may cause infinite loops",
+      "risk_level": "critical",
+      "regex_pattern": "(while\\s*\\(.*\\)|for\\s*\\(.*\\)|loop\\s*\\(.*\\))",
+      "max_occurrences": 5,
+      "time_window": 10,
+      "action": "stop",
+      "effects": [
+        "Game freeze",
+        "High CPU usage",
+        "Memory leak",
+        "System instability"
+      ]
+    },
+    {
+      "id": "spam_commands",
+      "name": "Command Spam",
+      "description": "Detects rapid command execution",
+      "risk_level": "high",
+      "regex_pattern": "(/attack|/heal|/buff|/cast|/use).*",
+      "max_occurrences": 20,
+      "time_window": 5,
+      "action": "pause",
+      "effects": [
+        "Server lag",
+        "Performance issues",
+        "Detection risk",
+        "Network congestion"
+      ]
+    },
+    {
+      "id": "memory_leak",
+      "name": "Memory Leak",
+      "description": "Detects potential memory leaks",
+      "risk_level": "medium",
+      "regex_pattern": "(createObject|new\\s+\\w+|malloc|allocate)",
+      "max_occurrences": 10,
+      "time_window": 30,
+      "action": "warn",
+      "effects": [
+        "Memory exhaustion",
+        "Performance degradation",
+        "System slowdown"
+      ]
+    },
+    {
+      "id": "rapid_movement",
+      "name": "Rapid Movement",
+      "description": "Detects excessive movement commands",
+      "risk_level": "high",
+      "regex_pattern": "(/move|/follow|/travel|/goto).*",
+      "max_occurrences": 15,
+      "time_window": 3,
+      "action": "pause",
+      "effects": [
+        "Server stress",
+        "Detection risk",
+        "Network issues",
+        "Position desync"
+      ]
+    },
+    {
+      "id": "resource_exhaustion",
+      "name": "Resource Exhaustion",
+      "description": "Detects excessive resource usage",
+      "risk_level": "critical",
+      "regex_pattern": "(/survey|/harvest|/mine|/craft).*",
+      "max_occurrences": 30,
+      "time_window": 10,
+      "action": "stop",
+      "effects": [
+        "Server overload",
+        "Resource depletion",
+        "Performance crash",
+        "Database stress"
+      ]
+    },
+    {
+      "id": "chat_spam",
+      "name": "Chat Spam",
+      "description": "Detects excessive chat messages",
+      "risk_level": "high",
+      "regex_pattern": "(/say|/tell|/group|/guild).*",
+      "max_occurrences": 10,
+      "time_window": 5,
+      "action": "pause",
+      "effects": [
+        "Chat system overload",
+        "Player complaints",
+        "Moderation attention",
+        "Account suspension risk"
+      ]
+    },
+    {
+      "id": "combat_spam",
+      "name": "Combat Spam",
+      "description": "Detects excessive combat actions",
+      "risk_level": "high",
+      "regex_pattern": "(/attack|/special|/ability|/skill).*",
+      "max_occurrences": 25,
+      "time_window": 5,
+      "action": "pause",
+      "effects": [
+        "Combat system stress",
+        "Server lag",
+        "Detection risk",
+        "Performance issues"
+      ]
+    },
+    {
+      "id": "inventory_spam",
+      "name": "Inventory Spam",
+      "description": "Detects excessive inventory operations",
+      "risk_level": "medium",
+      "regex_pattern": "(/inventory|/equip|/unequip|/drop|/pickup).*",
+      "max_occurrences": 15,
+      "time_window": 10,
+      "action": "warn",
+      "effects": [
+        "Inventory system stress",
+        "Data corruption risk",
+        "Performance degradation"
+      ]
+    },
+    {
+      "id": "teleport_spam",
+      "name": "Teleport Spam",
+      "description": "Detects excessive teleportation",
+      "risk_level": "critical",
+      "regex_pattern": "(/teleport|/warp|/jump|/transport).*",
+      "max_occurrences": 5,
+      "time_window": 10,
+      "action": "stop",
+      "effects": [
+        "Server crash risk",
+        "Position corruption",
+        "Network overload",
+        "Game instability"
+      ]
+    },
+    {
+      "id": "macro_recursion",
+      "name": "Macro Recursion",
+      "description": "Detects recursive macro calls",
+      "risk_level": "critical",
+      "regex_pattern": "(/macro|/script|/execute).*",
+      "max_occurrences": 3,
+      "time_window": 5,
+      "action": "stop",
+      "effects": [
+        "Stack overflow",
+        "System crash",
+        "Memory exhaustion",
+        "Infinite recursion"
+      ]
+    }
+  ],
+  "thresholds": {
+    "max_memory_usage": 80.0,
+    "max_cpu_usage": 90.0,
+    "max_risk_score": 0.8,
+    "max_concurrent_macros": 5,
+    "max_events_per_minute": 100
+  },
+  "dangerous_patterns": [
+    "while(true)",
+    "for(;;)",
+    "loop()",
+    "/attack /attack /attack",
+    "/heal /heal /heal",
+    "/move /move /move",
+    "/teleport /teleport",
+    "/macro /macro",
+    "createObject()",
+    "new Object()",
+    "malloc(",
+    "allocate("
+  ],
+  "safe_patterns": [
+    "if(",
+    "else",
+    "return",
+    "break",
+    "continue",
+    "function",
+    "var",
+    "let",
+    "const"
+  ],
+  "risk_levels": {
+    "low": {
+      "score": 0.0,
+      "action": "monitor",
+      "description": "Minimal risk, normal monitoring"
+    },
+    "medium": {
+      "score": 0.3,
+      "action": "warn",
+      "description": "Moderate risk, issue warnings"
+    },
+    "high": {
+      "score": 0.6,
+      "action": "pause",
+      "description": "High risk, pause macro"
+    },
+    "critical": {
+      "score": 0.9,
+      "action": "stop",
+      "description": "Critical risk, stop immediately"
+    }
+  },
+  "actions": {
+    "monitor": {
+      "description": "Continue monitoring without intervention",
+      "log_level": "info"
+    },
+    "warn": {
+      "description": "Issue warning to user",
+      "log_level": "warning",
+      "alert": true
+    },
+    "pause": {
+      "description": "Pause macro execution",
+      "log_level": "warning",
+      "alert": true,
+      "auto_resume": true
+    },
+    "stop": {
+      "description": "Stop macro execution immediately",
+      "log_level": "error",
+      "alert": true,
+      "auto_resume": false
+    }
+  },
+  "effects_database": {
+    "game_freeze": {
+      "description": "Game becomes unresponsive",
+      "severity": "critical",
+      "recovery_time": "manual_restart"
+    },
+    "high_cpu_usage": {
+      "description": "Excessive CPU consumption",
+      "severity": "high",
+      "recovery_time": "immediate"
+    },
+    "memory_leak": {
+      "description": "Gradual memory consumption increase",
+      "severity": "medium",
+      "recovery_time": "restart_required"
+    },
+    "server_lag": {
+      "description": "Increased server response time",
+      "severity": "high",
+      "recovery_time": "automatic"
+    },
+    "detection_risk": {
+      "description": "Risk of being detected by anti-cheat",
+      "severity": "critical",
+      "recovery_time": "immediate"
+    },
+    "network_congestion": {
+      "description": "Excessive network traffic",
+      "severity": "medium",
+      "recovery_time": "automatic"
+    },
+    "performance_degradation": {
+      "description": "Reduced system performance",
+      "severity": "medium",
+      "recovery_time": "automatic"
+    },
+    "system_instability": {
+      "description": "System becomes unstable",
+      "severity": "critical",
+      "recovery_time": "restart_required"
+    },
+    "data_corruption": {
+      "description": "Risk of data corruption",
+      "severity": "critical",
+      "recovery_time": "backup_restore"
+    },
+    "account_suspension": {
+      "description": "Risk of account suspension",
+      "severity": "critical",
+      "recovery_time": "support_contact"
+    }
+  },
+  "monitoring_config": {
+    "check_interval": 1,
+    "event_retention_minutes": 5,
+    "max_events_per_macro": 100,
+    "alert_cooldown_seconds": 30,
+    "auto_resume_delay_seconds": 60,
+    "emergency_stop_threshold": 0.95
+  },
+  "alert_channels": {
+    "dashboard": true,
+    "discord": true,
+    "log_file": true,
+    "console": true
+  },
+  "recovery_procedures": {
+    "macro_paused": {
+      "auto_resume": true,
+      "resume_delay": 60,
+      "max_pause_duration": 300
+    },
+    "macro_stopped": {
+      "auto_resume": false,
+      "manual_intervention": true,
+      "require_user_confirmation": true
+    },
+    "system_alert": {
+      "auto_recovery": false,
+      "manual_intervention": true,
+      "notification_required": true
+    }
+  }
+} 

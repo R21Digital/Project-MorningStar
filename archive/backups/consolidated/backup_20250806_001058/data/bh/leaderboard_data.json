@@ -1,0 +1,59 @@
+{
+  "hunts": [
+    {
+      "target_name": "TestTarget",
+      "target_type": "overt",
+      "success": true,
+      "duration": 0,
+      "reward_credits": 1000,
+      "timestamp": "2025-08-04T19:49:46.757868",
+      "safety_level": "safe",
+      "escape_path_used": 0,
+      "burst_windows_used": 0
+    },
+    {
+      "target_name": "TestTarget",
+      "target_type": "overt",
+      "success": false,
+      "duration": 0,
+      "reward_credits": 1000,
+      "timestamp": "2025-08-04T19:49:46.764489",
+      "safety_level": "safe",
+      "escape_path_used": 0,
+      "burst_windows_used": 0
+    },
+    {
+      "target_name": "OvertPlayer",
+      "target_type": "overt",
+      "success": true,
+      "duration": 0,
+      "reward_credits": 1000,
+      "timestamp": "2025-08-04T19:49:46.846865",
+      "safety_level": "safe",
+      "escape_path_used": 2,
+      "burst_windows_used": 1
+    },
+    {
+      "target_name": "TestTarget",
+      "target_type": "overt",
+      "success": true,
+      "duration": 0,
+      "reward_credits": 1000,
+      "timestamp": "2025-08-04T19:49:46.862547",
+      "safety_level": "safe",
+      "escape_path_used": 0,
+      "burst_windows_used": 0
+    },
+    {
+      "target_name": "EscapeDemoTarget",
+      "target_type": "overt",
+      "success": true,
+      "duration": 0,
+      "reward_credits": 1000,
+      "timestamp": "2025-08-04T19:50:32.632770",
+      "safety_level": "safe",
+      "escape_path_used": 2,
+      "burst_windows_used": 0
+    }
+  ]
+}

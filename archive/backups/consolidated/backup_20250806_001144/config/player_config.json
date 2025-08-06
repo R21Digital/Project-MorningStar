@@ -1,0 +1,99 @@
+{
+  "preferred_mount": "Random",
+  "fallback_if_unavailable": true,
+  "mounts_owned": [
+    "Kaadu",
+    "Bark Mite",
+    "AV-21 Landspeeder"
+  ],
+  "mount_settings": {
+    "auto_select": true,
+    "retry_attempts": 3,
+    "retry_delay": 2.0,
+    "default_mount_command": "/mount",
+    "scan_interval": 5.0
+  },
+  "mount_categories": {
+    "land_mounts": [
+      "Kaadu",
+      "Bark Mite",
+      "Dewback",
+      "Ronto"
+    ],
+    "speeders": [
+      "AV-21 Landspeeder",
+      "X-34 Landspeeder",
+      "SoroSuub 3000"
+    ],
+    "flying_mounts": [
+      "Bantha",
+      "Eopie",
+      "Falumpaset"
+    ]
+  },
+  "mount_speeds": {
+    "Kaadu": 8.0,
+    "Bark Mite": 6.5,
+    "AV-21 Landspeeder": 12.0,
+    "X-34 Landspeeder": 10.5,
+    "SoroSuub 3000": 11.0,
+    "Dewback": 7.0,
+    "Ronto": 6.0,
+    "Bantha": 5.5,
+    "Eopie": 7.5,
+    "Falumpaset": 8.5
+  },
+  "last_mount_scan": "2025-08-04T16:58:52.099300Z",
+  "mount_history": [
+    {
+      "mount": "Kaadu",
+      "timestamp": "2025-08-04T16:57:33.726304Z",
+      "success": true
+    },
+    {
+      "mount": "AV-21 Landspeeder",
+      "timestamp": "2025-08-04T16:57:33.747078Z",
+      "success": true
+    },
+    {
+      "mount": "Bark Mite",
+      "timestamp": "2025-08-04T16:57:33.747941Z",
+      "success": false
+    },
+    {
+      "mount": "Kaadu",
+      "timestamp": "2025-08-04T16:57:33.748809Z",
+      "success": true
+    },
+    {
+      "mount": "Bark Mite",
+      "timestamp": "2025-08-04T16:57:33.749791Z",
+      "success": true
+    },
+    {
+      "mount": "AV-21 Landspeeder",
+      "timestamp": "2025-08-04T16:58:52.080555Z",
+      "success": true
+    },
+    {
+      "mount": "Kaadu",
+      "timestamp": "2025-08-04T16:58:52.081418Z",
+      "success": true
+    },
+    {
+      "mount": "Kaadu",
+      "timestamp": "2025-08-04T16:58:52.082210Z",
+      "success": true
+    },
+    {
+      "mount": "Bark Mite",
+      "timestamp": "2025-08-04T16:58:52.083110Z",
+      "success": true
+    },
+    {
+      "mount": "AV-21 Landspeeder",
+      "timestamp": "2025-08-04T16:58:52.099294Z",
+      "success": true
+    }
+  ]
+}

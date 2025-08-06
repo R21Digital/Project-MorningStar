@@ -1,0 +1,23 @@
+{
+  "name": "structures_basic",
+  "description": "Basic structures crafting profile for building",
+  "station_type": "structures",
+  "schematics": [
+    "Basic Structure",
+    "Advanced Structure"
+  ],
+  "max_quantity": 3,
+  "resource_check": true,
+  "power_check": true,
+  "min_inventory_space": 6,
+  "min_power": 120,
+  "required_resources": [
+    "wood",
+    "metal",
+    "stone"
+  ],
+  "auto_restock": true,
+  "auto_sell_crafted": false,
+  "break_interval": 360,
+  "priority": 3
+} 

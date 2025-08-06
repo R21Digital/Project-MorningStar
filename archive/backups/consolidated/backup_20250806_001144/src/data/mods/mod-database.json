@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "last_updated": "2025-01-05T12:00:00.000Z",
+    "total_mods": 8,
+    "swgr_safe_count": 5,
+    "ms11_derived_count": 2,
+    "categories": ["UI", "HUD", "Crafting Helpers", "Visual Upgrades", "Automation Tools"]
+  },
+  "mods": {
+    "inventory-tracker": {
+      "id": "inventory-tracker",
+      "name": "Inventory Tracker Mod",
+      "author": "KaraNexus",
+      "version": "1.2.0",
+      "description": "Enhanced inventory panel with categories and better organization. Provides visual improvements without automation.",
+      "category": "UI",
+      "swgr_compliant": true,
+      "ms11_derived": false,
+      "compliance_notes": "No automation or interaction - purely visual enhancements",
+      "features": [
+        "Inventory Categories",
+        "Visual Enhancements", 
+        "Better Organization",
+        "Search Functionality"
+      ],
+      "downloads": 1250,
+      "rating": 4.8,
+      "last_updated": "2025-01-04",
+      "file_size": "2.4MB",
+      "dependencies": [],
+      "screenshots": [
+        "/assets/mods/inventory-tracker-1.png",
+        "/assets/mods/inventory-tracker-2.png"
+      ],
+      "download_url": "/downloads/mods/inventory-tracker-v1.2.0.zip",
+      "source_url": "https://github.com/karanexus/swg-inventory-tracker"
+    },
+    "combat-hud": {
+      "id": "combat-hud",
+      "name": "Combat HUD Enhancement",
+      "author": "BattleMaster",
+      "version": "2.1.0",
+      "description": "Advanced combat interface with auto-targeting and damage prediction. Not compatible with SWGR rules.",
+      "category": "HUD",
+      "swgr_compliant": false,
+      "ms11_derived": false,
+      "compliance_notes": "Contains automation features - not allowed on SWGR",
+      "features": [
+        "Auto-targeting",
+        "Damage Prediction",
+        "Combat Automation",
+        "Real-time Stats"
+      ],
+      "downloads": 850,
+      "rating": 4.2,
+      "last_updated": "2024-12-15",
+      "file_size": "3.1MB",
+      "dependencies": [],
+      "screenshots": [
+        "/assets/mods/combat-hud-1.png"
+      ],
+      "download_url": "/downloads/mods/combat-hud-v2.1.0.zip",
+      "source_url": "https://github.com/battlemaster/swg-combat-hud"
+    },
+    "crafting-helper": {
+      "id": "crafting-helper",
+      "name": "Crafting Helper",
+      "author": "ArtisanPro",
+      "version": "1.5.2",
+      "description": "Visual crafting interface improvements with recipe highlighting and material tracking.",
+      "category": "Crafting Helpers",
+      "swgr_compliant": true,
+      "ms11_derived": false,
+      "compliance_notes": "Visual only - no automation of crafting process",
+      "features": [
+        "Recipe Highlighting",
+        "Material Tracking",
+        "Visual Guides",
+        "Resource Calculator"
+      ],
+      "downloads": 2100,
+      "rating": 4.9,
+      "last_updated": "2025-01-02",
+      "file_size": "1.8MB",
+      "dependencies": [],
+      "screenshots": [
+        "/assets/mods/crafting-helper-1.png",
+        "/assets/mods/crafting-helper-2.png"
+      ],
+      "download_url": "/downloads/mods/crafting-helper-v1.5.2.zip",
+      "source_url": "https://github.com/artisanpro/swg-crafting-helper"
+    },
+    "map-enhancer": {
+      "id": "map-enhancer",
+      "name": "Map Enhancer",
+      "author": "Explorer",
+      "version": "1.0.1",
+      "description": "Enhanced map display with better markers and location tracking.",
+      "category": "Visual Upgrades",
+      "swgr_compliant": true,
+      "ms11_derived": false,
+      "compliance_notes": "Visual improvements only - no auto-navigation",
+      "features": [
+        "Better Markers",
+        "Location Tracking",
+        "Enhanced Display",
+        "Custom Waypoints"
+      ],
+      "downloads": 1800,
+      "rating": 4.7,
+      "last_updated": "2024-12-28",
+      "file_size": "1.2MB",
+      "dependencies": [],
+      "screenshots": [
+        "/assets/mods/map-enhancer-1.png"
+      ],
+      "download_url": "/downloads/mods/map-enhancer-v1.0.1.zip",
+      "source_url": "https://github.com/explorer/swg-map-enhancer"
+    },
+    "auto-healer": {
+      "id": "auto-healer",
+      "name": "Auto Healer",
+      "author": "MedicBot",
+      "version": "1.0.0",
+      "description": "Automated healing system that monitors health and applies healing automatically.",
+      "category": "Automation Tools",
+      "swgr_compliant": false,
+      "ms11_derived": false,
+      "compliance_notes": "Automation detected - violates SWGR rules",
+      "features": [
+        "Auto Healing",
+        "Health Monitoring",
+        "Combat Automation",
+        "Priority Targeting"
+      ],
+      "downloads": 650,
+      "rating": 3.8,
+      "last_updated": "2024-11-20",
+      "file_size": "4.2MB",
+      "dependencies": [],
+      "screenshots": [
+        "/assets/mods/auto-healer-1.png"
+      ],
+      "download_url": "/downloads/mods/auto-healer-v1.0.0.zip",
+      "source_url": "https://github.com/medicbot/swg-auto-healer"
+    },
+    "chat-enhancer": {
+      "id": "chat-enhancer",
+      "name": "Chat Enhancer",
+      "author": "SocialGuru",
+      "version": "2.0.0",
+      "description": "Enhanced chat interface with better formatting and message organization.",
+      "category": "UI",
+      "swgr_compliant": true,
+      "ms11_derived": false,
+      "compliance_notes": "UI improvements only - no automation",
+      "features": [
+        "Better Formatting",
+        "Message Organization",
+        "Visual Improvements",
+        "Chat Filters"
+      ],
+      "downloads": 3200,
+      "rating": 4.6,
+      "last_updated": "2025-01-01",
+      "file_size": "1.5MB",
+      "dependencies": [],
+      "screenshots": [
+        "/assets/mods/chat-enhancer-1.png",
+        "/assets/mods/chat-enhancer-2.png"
+      ],
+      "download_url": "/downloads/mods/chat-enhancer-v2.0.0.zip",
+      "source_url": "https://github.com/socialguru/swg-chat-enhancer"
+    },
+    "ms11-combat-assistant": {
+      "id": "ms11-combat-assistant",
+      "name": "MS11 Combat Assistant",
+      "author": "MS11 Team",
+      "version": "1.0.0",
+      "description": "Internal MS11 combat automation tool. For internal use only.",
+      "category": "Automation Tools",
+      "swgr_compliant": false,
+      "ms11_derived": true,
+      "compliance_notes": "Internal MS11 tool - not for public use",
+      "features": [
+        "Combat Automation",
+        "Target Selection",
+        "Skill Rotation",
+        "Performance Tracking"
+      ],
+      "downloads": 0,
+      "rating": 0,
+      "last_updated": "2025-01-05",
+      "file_size": "5.1MB",
+      "dependencies": ["ms11-core"],
+      "screenshots": [],
+      "download_url": null,
+      "source_url": null,
+      "internal_only": true
+    },
+    "ms11-loot-tracker": {
+      "id": "ms11-loot-tracker",
+      "name": "MS11 Loot Tracker",
+      "author": "MS11 Team",
+      "version": "1.0.0",
+      "description": "Internal MS11 loot tracking and analysis tool. For internal use only.",
+      "category": "Automation Tools",
+      "swgr_compliant": false,
+      "ms11_derived": true,
+      "compliance_notes": "Internal MS11 tool - not for public use",
+      "features": [
+        "Loot Tracking",
+        "Drop Analysis",
+        "Statistics Generation",
+        "Data Export"
+      ],
+      "downloads": 0,
+      "rating": 0,
+      "last_updated": "2025-01-05",
+      "file_size": "2.8MB",
+      "dependencies": ["ms11-core"],
+      "screenshots": [],
+      "download_url": null,
+      "source_url": null,
+      "internal_only": true
+    }
+  }
+} 

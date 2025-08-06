@@ -1,0 +1,167 @@
+{
+  "dual_mode_enabled": true,
+  "mode": "leader_follower",
+  "character_1": {
+    "name": "MainChar",
+    "window_title": "SWG - MainChar",
+    "mode": "main",
+    "role": "leader",
+    "support_type": null,
+    "config_file": "config/character_1_config.json",
+    "auto_start": true,
+    "window_position": [0, 0],
+    "window_size": [800, 600],
+    "custom_keybinds": {
+      "follow_leader": "F1",
+      "stop_following": "F2",
+      "emergency_stop": "F12"
+    },
+    "behavior_settings": {
+      "quest_priority": "high",
+      "combat_aggression": "medium",
+      "loot_collection": "auto",
+      "pathfinding": "smart"
+    }
+  },
+  "character_2": {
+    "name": "SupportChar",
+    "window_title": "SWG - SupportChar",
+    "mode": "support",
+    "role": "follower",
+    "support_type": "medic",
+    "config_file": "config/character_2_config.json",
+    "auto_start": true,
+    "window_position": [800, 0],
+    "window_size": [800, 600],
+    "custom_keybinds": {
+      "heal_leader": "F1",
+      "buff_leader": "F2",
+      "follow_leader": "F3",
+      "emergency_stop": "F12"
+    },
+    "behavior_settings": {
+      "heal_threshold": 80,
+      "buff_interval": 300,
+      "follow_distance": 50,
+      "stationary_mode": false
+    }
+  },
+  "window_management": {
+    "auto_arrange": true,
+    "spacing": 50,
+    "character_1_position": [0, 0],
+    "character_2_position": [800, 0],
+    "window_sizing": "split_screen",
+    "always_on_top": false,
+    "minimize_inactive": false
+  },
+  "shared_data": {
+    "xp_sync_enabled": true,
+    "quest_sync_enabled": true,
+    "buff_sync_enabled": true,
+    "position_sync_enabled": true,
+    "combat_sync_enabled": true,
+    "inventory_sync_enabled": false,
+    "sync_interval": 2.0,
+    "data_persistence": true
+  },
+  "support_modes": {
+    "medic": {
+      "buff_interval": 300,
+      "heal_interval": 60,
+      "buff_range": 50,
+      "heal_range": 30,
+      "buffs": ["heal_health", "heal_action", "heal_mind"],
+      "stationary": false,
+      "follow_leader": true,
+      "emergency_heal": true,
+      "auto_revive": false
+    },
+    "dancer": {
+      "buff_interval": 180,
+      "heal_interval": 0,
+      "buff_range": 40,
+      "heal_range": 0,
+      "buffs": ["dance_health", "dance_action", "dance_mind"],
+      "stationary": true,
+      "follow_leader": false,
+      "performance_mode": true,
+      "auto_entertain": true
+    },
+    "entertainer": {
+      "buff_interval": 240,
+      "heal_interval": 0,
+      "buff_range": 45,
+      "heal_range": 0,
+      "buffs": ["entertain_health", "entertain_action", "entertain_mind"],
+      "stationary": true,
+      "follow_leader": false,
+      "performance_mode": true,
+      "auto_entertain": true
+    },
+    "combat_support": {
+      "buff_interval": 120,
+      "heal_interval": 30,
+      "buff_range": 60,
+      "heal_range": 40,
+      "buffs": ["combat_buff", "heal_health", "heal_action"],
+      "stationary": false,
+      "follow_leader": true,
+      "combat_assistance": true,
+      "auto_attack": false
+    },
+    "crafting_support": {
+      "buff_interval": 600,
+      "heal_interval": 0,
+      "buff_range": 30,
+      "heal_range": 0,
+      "buffs": ["crafting_buff"],
+      "stationary": true,
+      "follow_leader": false,
+      "auto_craft": false,
+      "resource_gathering": true
+    }
+  },
+  "communication": {
+    "enabled": true,
+    "port": 12347,
+    "timeout": 30,
+    "retry_attempts": 3,
+    "message_queue_size": 100,
+    "encryption": false,
+    "compression": true
+  },
+  "safety": {
+    "max_session_duration": 7200,
+    "afk_timeout": 300,
+    "emergency_stop": true,
+    "auto_cleanup": true,
+    "health_threshold": 20,
+    "disconnect_timeout": 60,
+    "max_retry_attempts": 5
+  },
+  "performance": {
+    "sync_interval": 2.0,
+    "monitor_interval": 30.0,
+    "cleanup_interval": 300.0,
+    "max_memory_usage": "512MB",
+    "cpu_threshold": 80,
+    "network_timeout": 10
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/dual_character.log",
+    "max_size": "10MB",
+    "backup_count": 5,
+    "console_output": true,
+    "detailed_logging": false
+  },
+  "advanced": {
+    "vm_support": false,
+    "sandbox_mode": false,
+    "multi_monitor": false,
+    "virtual_desktop": false,
+    "process_isolation": true,
+    "memory_optimization": true
+  }
+} 

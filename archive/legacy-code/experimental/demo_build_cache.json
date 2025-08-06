@@ -1,0 +1,85 @@
+{
+  "https://swgr.org/skill-calculator/?build=rifleman_medic&professions=rifleman,medic&weapons=rifle,pistol&abilities=aim,headshot,burst_fire,heal,stim_pack": {
+    "professions": [
+      "rifleman",
+      "medic"
+    ],
+    "weapons_supported": [
+      "rifle",
+      "pistol"
+    ],
+    "abilities_granted": [
+      "aim",
+      "headshot",
+      "burst_fire",
+      "heal",
+      "stim_pack"
+    ],
+    "combat_style": "ranged",
+    "min_attack_distance": 10,
+    "max_attack_distance": 50,
+    "primary_abilities": [
+      "aim",
+      "headshot",
+      "burst_fire"
+    ],
+    "secondary_abilities": [
+      "heal",
+      "stim_pack"
+    ],
+    "build_url": "https://swgr.org/skill-calculator/?build=rifleman_medic&professions=rifleman,medic&weapons=rifle,pistol&abilities=aim,headshot,burst_fire,heal,stim_pack",
+    "parsed_at": "2025-07-31T22:42:58.438630"
+  },
+  "https://swgr.org/skill-calculator/?build=swordsman_tank&professions=swordsman&weapons=sword&abilities=melee_attack,heavy_attack,defend,dodge": {
+    "professions": [
+      "swordsman"
+    ],
+    "weapons_supported": [
+      "sword"
+    ],
+    "abilities_granted": [
+      "melee_attack",
+      "heavy_attack",
+      "defend",
+      "dodge"
+    ],
+    "combat_style": "melee",
+    "min_attack_distance": 0,
+    "max_attack_distance": 5,
+    "primary_abilities": [
+      "melee_attack",
+      "heavy_attack"
+    ],
+    "secondary_abilities": [
+      "defend",
+      "dodge"
+    ],
+    "build_url": "https://swgr.org/skill-calculator/?build=swordsman_tank&professions=swordsman&weapons=sword&abilities=melee_attack,heavy_attack,defend,dodge",
+    "parsed_at": "2025-07-31T22:42:58.439297"
+  },
+  "https://swgr.org/skill-calculator/?build=commando_hybrid&professions=commando&weapons=rifle,grenade&abilities=burst_fire,grenade_toss,cover": {
+    "professions": [
+      "commando"
+    ],
+    "weapons_supported": [
+      "rifle",
+      "grenade"
+    ],
+    "abilities_granted": [
+      "burst_fire",
+      "grenade_toss",
+      "cover"
+    ],
+    "combat_style": "hybrid",
+    "min_attack_distance": 0,
+    "max_attack_distance": 50,
+    "primary_abilities": [],
+    "secondary_abilities": [
+      "burst_fire",
+      "grenade_toss",
+      "cover"
+    ],
+    "build_url": "https://swgr.org/skill-calculator/?build=commando_hybrid&professions=commando&weapons=rifle,grenade&abilities=burst_fire,grenade_toss,cover",
+    "parsed_at": "2025-07-31T22:42:58.439911"
+  }
+}

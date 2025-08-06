@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Feedback - SWGDB</title>
+    <meta name="description" content="Report bugs, suggest features, or share mod conflicts with the SWGDB community. Help us improve the Star Wars Galaxies database experience.">
+    <meta name="keywords" content="SWGDB feedback, SWG bug report, Star Wars Galaxies suggestions, mod conflicts">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Submit Feedback - SWGDB">
+    <meta property="og:description" content="Report bugs and suggest improvements for SWGDB">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.url }}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        .feedback-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .category-card {
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.15);
+        }
+        
+        .category-card.selected {
+            border-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.1);
+        }
+        
+        .priority-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .priority-low { background-color: #d1ecf1; color: #0c5460; }
+        .priority-medium { background-color: #fff3cd; color: #856404; }
+        .priority-high { background-color: #f8d7da; color: #721c24; }
+        
+        .mod-fields {
+            display: none;
+            background-color: #f8f9fa;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .char-counter {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .form-help {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+        }
+        
+        .feedback-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        .submission-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+        
+        .feedback-tips {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="feedback-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2"><i class="fas fa-comments feedback-icon"></i>Submit Feedback</h1>
+                    <p class="mb-0">Help us improve SWGDB by reporting bugs, suggesting features, or sharing mod conflicts.</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="/" class="btn btn-outline-light">
+                        <i class="fas fa-home"></i> Back to SWGDB
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container my-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'success' %}
+                        <div class="submission-success mb-4">
+                            <i class="fas fa-check-circle fa-2x mb-3"></i>
+                            <h3>Feedback Submitted Successfully!</h3>
+                            <p class="mb-0">{{ message }}</p>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Feedback Tips -->
+        <div class="feedback-tips">
+            <h5><i class="fas fa-lightbulb text-primary"></i> Tips for Effective Feedback</h5>
+            <ul class="mb-0">
+                <li><strong>Be specific:</strong> Include steps to reproduce issues</li>
+                <li><strong>Provide context:</strong> Mention which page or feature you're using</li>
+                <li><strong>Include screenshots:</strong> Visual evidence helps us understand the problem</li>
+                <li><strong>Check existing reports:</strong> Search our knowledge base first</li>
+            </ul>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="card shadow">
+            <div class="card-body">
+                <form id="feedbackForm" method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <!-- Category Selection -->
+                    <div class="mb-4">
+                        <label class="form-label h5">What type of feedback are you providing?</label>
+                        <div class="row g-3">
+                            {% set categories = [
+                                ('bug', '🐞', 'Bug Report', 'Something isn\'t working correctly'),
+                                ('feature', '💡', 'Feature Request', 'Suggest a new feature or improvement'),
+                                ('mod', '🛠', 'Mod Conflict', 'Report compatibility issues with mods'),
+                                ('UI', '🎨', 'UI/UX Issue', 'Problems with the interface or design'),
+                                ('content', '📝', 'Content Issue', 'Incorrect or missing information'),
+                                ('suggestion', '💭', 'General Suggestion', 'Other suggestions or ideas')
+                            ] %}
+                            
+                            {% for value, emoji, title, desc in categories %}
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="category-card card h-100" onclick="selectCategory('{{ value }}')">
+                                        <div class="card-body text-center">
+                                            <div class="fs-2 mb-2">{{ emoji }}</div>
+                                            <h6 class="card-title">{{ title }}</h6>
+                                            <small class="text-muted">{{ desc }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {{ form.category(class="d-none") }}
+                        {% if form.category.errors %}
+                            <div class="text-danger small mt-1">{{ form.category.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Title -->
+                            <div class="mb-3">
+                                {{ form.title.label(class="form-label") }}
+                                {{ form.title(class="form-control", placeholder="Brief, descriptive title for your feedback") }}
+                                <div class="char-counter">
+                                    <span id="titleCounter">0</span>/100 characters
+                                </div>
+                                {% if form.title.errors %}
+                                    <div class="text-danger small">{{ form.title.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                {{ form.description.label(class="form-label") }}
+                                {{ form.description(class="form-control", rows="6", placeholder="Detailed description of your feedback. Include steps to reproduce if reporting a bug.") }}
+                                <div class="char-counter">
+                                    <span id="descCounter">0</span>/2000 characters
+                                </div>
+                                {% if form.description.errors %}
+                                    <div class="text-danger small">{{ form.description.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <!-- Priority -->
+                            <div class="mb-3">
+                                {{ form.priority.label(class="form-label") }}
+                                {{ form.priority(class="form-select") }}
+                                {% if form.priority.errors %}
+                                    <div class="text-danger small">{{ form.priority.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Screenshot -->
+                            <div class="mb-3">
+                                {{ form.screenshot.label(class="form-label") }}
+                                {{ form.screenshot(class="form-control", accept="image/*") }}
+                                <div class="form-help">
+                                    Max size: 5MB. Formats: PNG, JPG, GIF
+                                </div>
+                                {% if form.screenshot.errors %}
+                                    <div class="text-danger small">{{ form.screenshot.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Contact -->
+                            <div class="mb-3">
+                                {{ form.user_contact.label(class="form-label") }}
+                                {{ form.user_contact(class="form-control", placeholder="Discord ID, email, etc. (optional)") }}
+                                <div class="form-help">
+                                    Optional. We may contact you for clarification.
+                                </div>
+                                {% if form.user_contact.errors %}
+                                    <div class="text-danger small">{{ form.user_contact.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mod-specific fields (shown when mod category selected) -->
+                    <div id="modFields" class="mod-fields">
+                        <h6><i class="fas fa-puzzle-piece"></i> Mod Information</h6>
+                        {{ form.mod_name.label(class="form-label") }}
+                        {{ form.mod_name(class="form-control", placeholder="Name of the conflicting mod") }}
+                        <div class="form-help">
+                            Which mod is causing the conflict? Include version if known.
+                        </div>
+                        {% if form.mod_name.errors %}
+                            <div class="text-danger small">{{ form.mod_name.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Hidden fields for system info -->
+                    {{ form.user_agent() }}
+                    {{ form.page_url() }}
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg px-5" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Submit Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Additional Resources -->
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-search text-primary"></i> Search Knowledge Base</h5>
+                        <p class="card-text">Check if your issue has already been reported or answered.</p>
+                        <a href="/guides" class="btn btn-outline-primary">Browse Guides</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fab fa-discord text-primary"></i> Join Our Community</h5>
+                        <p class="card-text">Get help from other players and stay updated on SWGDB news.</p>
+                        <a href="#" class="btn btn-outline-primary">Discord Server</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Character counters
+        const titleField = document.getElementById('{{ form.title.id }}');
+        const descField = document.getElementById('{{ form.description.id }}');
+        const titleCounter = document.getElementById('titleCounter');
+        const descCounter = document.getElementById('descCounter');
+
+        function updateCounter(field, counter) {
+            counter.textContent = field.value.length;
+        }
+
+        titleField.addEventListener('input', () => updateCounter(titleField, titleCounter));
+        descField.addEventListener('input', () => updateCounter(descField, descCounter));
+
+        // Category selection
+        function selectCategory(category) {
+            // Remove previous selection
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Select new category
+            event.currentTarget.classList.add('selected');
+            document.getElementById('{{ form.category.id }}').value = category;
+            
+            // Show/hide mod-specific fields
+            const modFields = document.getElementById('modFields');
+            if (category === 'mod') {
+                modFields.style.display = 'block';
+            } else {
+                modFields.style.display = 'none';
+                document.getElementById('{{ form.mod_name.id }}').value = '';
+            }
+        }
+
+        // Populate system information
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('{{ form.user_agent.id }}').value = navigator.userAgent;
+            document.getElementById('{{ form.page_url.id }}').value = document.referrer || window.location.href;
+            
+            // Initialize counters
+            updateCounter(titleField, titleCounter);
+            updateCounter(descField, descCounter);
+        });
+
+        // Form submission handling
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+        });
+
+        // Auto-select category from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+        if (categoryParam) {
+            const categoryCard = document.querySelector(`[onclick="selectCategory('${categoryParam}')"]`);
+            if (categoryCard) {
+                categoryCard.click();
+            }
+        }
+    </script>
+</body>
+</html>

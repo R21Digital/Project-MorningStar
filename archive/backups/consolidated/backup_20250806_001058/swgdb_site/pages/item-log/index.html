@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4ZZ5SFJC0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q4ZZ5SFJC0');
+</script>
+<!-- Fallback noscript version for privacy-aware users -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=G-Q4ZZ5SFJC0"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Discovery Log - SWG Database</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/item-log.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Item Discovery Log</h1>
+            <p>Track all vendors and items discovered by the bot</p>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <section class="search-section">
+            <div class="search-controls">
+                <div class="search-group">
+                    <label for="itemSearch">Item Name:</label>
+                    <input type="text" id="itemSearch" placeholder="Search items...">
+                </div>
+                <div class="search-group">
+                    <label for="vendorType">Vendor Type:</label>
+                    <select id="vendorType">
+                        <option value="">All Types</option>
+                        <option value="armorsmith">Armorsmith</option>
+                        <option value="weaponsmith">Weaponsmith</option>
+                        <option value="tailor">Tailor</option>
+                        <option value="architect">Architect</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="entertainer">Entertainer</option>
+                        <option value="merchant">Merchant</option>
+                        <option value="bazaar">Bazaar</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="planetFilter">Planet:</label>
+                    <select id="planetFilter">
+                        <option value="">All Planets</option>
+                        <option value="corellia">Corellia</option>
+                        <option value="naboo">Naboo</option>
+                        <option value="tatooine">Tatooine</option>
+                        <option value="endor">Endor</option>
+                        <option value="dantooine">Dantooine</option>
+                        <option value="lok">Lok</option>
+                        <option value="yavin4">Yavin 4</option>
+                        <option value="rori">Rori</option>
+                        <option value="talus">Talus</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="categoryFilter">Category:</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="armor">Armor</option>
+                        <option value="weapons">Weapons</option>
+                        <option value="buffs">Buffs</option>
+                        <option value="consumables">Consumables</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="enhancements">Enhancements</option>
+                        <option value="crafting_materials">Crafting Materials</option>
+                        <option value="decorations">Decorations</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="food">Food</option>
+                        <option value="medical">Medical</option>
+                    </select>
+                </div>
+                <div class="search-group">
+                    <label for="minCost">Min Cost:</label>
+                    <input type="number" id="minCost" placeholder="0">
+                </div>
+                <div class="search-group">
+                    <label for="maxCost">Max Cost:</label>
+                    <input type="number" id="maxCost" placeholder="∞">
+                </div>
+                <button id="searchBtn" class="btn btn-primary">Search</button>
+                <button id="resetBtn" class="btn btn-secondary">Reset</button>
+            </div>
+        </section>
+
+        <!-- Statistics Dashboard -->
+        <section class="stats-dashboard">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Items</h3>
+                    <div class="stat-value" id="totalItems">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Vendors</h3>
+                    <div class="stat-value" id="totalVendors">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Value</h3>
+                    <div class="stat-value" id="totalValue">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Recent Discoveries</h3>
+                    <div class="stat-value" id="recentDiscoveries">0</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="chart-container">
+                <div class="chart-card">
+                    <h3>Items by Category</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Vendors by Type</h3>
+                    <canvas id="vendorTypeChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-container">
+                <div class="chart-card">
+                    <h3>Items by Planet</h3>
+                    <canvas id="planetChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Cost Distribution</h3>
+                    <canvas id="costChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div class="results-header">
+                <h2>Discovered Items</h2>
+                <div class="results-controls">
+                    <label for="sortBy">Sort by:</label>
+                    <select id="sortBy">
+                        <option value="timestamp">Discovery Date</option>
+                        <option value="cost">Cost</option>
+                        <option value="name">Item Name</option>
+                        <option value="vendor">Vendor</option>
+                        <option value="planet">Planet</option>
+                    </select>
+                    <label for="itemsPerPage">Items per page:</label>
+                    <select id="itemsPerPage">
+                        <option value="25">25</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="results-table">
+                <table id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Cost</th>
+                            <th>Vendor</th>
+                            <th>Type</th>
+                            <th>Planet</th>
+                            <th>Location</th>
+                            <th>Discovered</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTableBody">
+                        <!-- Items will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="pagination">
+                <button id="prevPage" class="btn btn-secondary">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextPage" class="btn btn-secondary">Next</button>
+            </div>
+        </section>
+
+        <!-- Vendor Details Modal -->
+        <div id="vendorModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="vendorModalTitle">Vendor Details</h2>
+                <div id="vendorModalContent">
+                    <!-- Vendor details will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Item Details Modal -->
+        <div id="itemModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="itemModalTitle">Item Details</h2>
+                <div id="itemModalContent">
+                    <!-- Item details will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/item-log.js"></script>
+</body>
+</html> 

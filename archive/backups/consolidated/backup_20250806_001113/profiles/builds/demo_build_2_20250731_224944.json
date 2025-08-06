@@ -1,0 +1,21 @@
+{
+  "profession_boxes": [
+    "pistoleer"
+  ],
+  "weapons_supported": [
+    "power_pistol",
+    "pistol"
+  ],
+  "abilities_granted": [
+    "Point Blank Shot",
+    "Pistol Critical Hit",
+    "Quick Shot",
+    "Pistol Shot",
+    "Pistol Hit"
+  ],
+  "combat_style": "ranged",
+  "minimum_attack_distance": 3,
+  "build_summary": "Professions: pistoleer | Weapons: power_pistol, pistol | Combat Style: Ranged | Key Abilities: Point Blank Shot, Pistol Critical Hit, Quick Shot, Pistol Shot, Pistol Hit",
+  "parsed_at": "2025-07-31T22:49:44.859383",
+  "source_url": "https://swgr.org/skill-calculator/pistoleer?skills=pistol_shot,quick_shot,point_blank"
+}

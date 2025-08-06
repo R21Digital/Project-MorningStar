@@ -1,0 +1,35 @@
+coordinates:
+- 0
+- 0
+description: Auto-generated quest discovered via OCR
+difficulty: medium
+giver: Unknown
+level_requirement: 1
+metadata:
+  author: MS11_Quest_Profiler
+  created_date: '2025-07-31'
+  last_updated: '2025-07-31'
+  source: ocr
+  version: '1.0'
+name: Tatooine Artifact Hunt
+planet: tatooine
+quest_id: discovered_tatooine_artifact_hunt
+quest_type: discovered
+rewards:
+  credits: 500
+  experience: 100
+  items: []
+state:
+  current_step: null
+  status: available
+  steps_completed: 0
+  total_steps: 1
+steps:
+- coordinates:
+  - 0
+  - 0
+  description: Talk to Unknown to start the quest
+  npc_id: Unknown
+  step_id: talk_to_giver
+  type: dialogue
+zone: Tatooine Desert

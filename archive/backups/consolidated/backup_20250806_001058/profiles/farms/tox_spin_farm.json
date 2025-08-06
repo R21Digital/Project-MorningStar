@@ -1,0 +1,7 @@
+{
+  "planet": "dantooine",
+  "city": "mining",
+  "quest_type": "toxic_spin",
+  "preferred_directions": ["north", "west"],
+  "distance_limit": 800
+}

@@ -1,0 +1,142 @@
+{
+  "session_logs": [],
+  "drop_history": [],
+  "statistics": {
+    "total_sessions": 0,
+    "total_drops": 0,
+    "total_kills": 0,
+    "total_credits_earned": 0,
+    "success_rate": 0.0,
+    "favorite_targets": {},
+    "drop_counts_by_item": {},
+    "drop_counts_by_target": {}
+  },
+  "recent_sessions": [],
+  "cooldown_tracking": {
+    "ig_88": {
+      "last_attempt": null,
+      "next_available": null,
+      "cooldown_minutes": 180,
+      "status": "ready"
+    },
+    "axkva_min": {
+      "last_attempt": null,
+      "next_available": null,
+      "cooldown_minutes": 240,
+      "status": "ready"
+    },
+    "crystal_snake": {
+      "last_attempt": null,
+      "next_available": null,
+      "cooldown_minutes": 90,
+      "status": "ready"
+    },
+    "krayt_dragon": {
+      "last_attempt": null,
+      "next_available": null,
+      "cooldown_minutes": 360,
+      "status": "ready"
+    },
+    "kimogila": {
+      "last_attempt": null,
+      "next_available": null,
+      "cooldown_minutes": 120,
+      "status": "ready"
+    },
+    "mouf_tigrip": {
+      "last_attempt": null,
+      "next_available": null,
+      "cooldown_minutes": 75,
+      "status": "ready"
+    }
+  },
+  "priority_notifications": {
+    "enabled": true,
+    "discord_webhook": null,
+    "notify_on_legendary": true,
+    "notify_on_epic": true,
+    "notify_on_priority_items": true,
+    "notification_history": []
+  },
+  "farming_efficiency": {
+    "credits_per_hour": 0,
+    "drops_per_hour": 0,
+    "kills_per_hour": 0,
+    "most_efficient_target": null,
+    "efficiency_by_target": {}
+  },
+  "export_history": [],
+  "data_version": "1.0.0",
+  "last_updated": "2025-01-16T12:00:00Z",
+  "schema": {
+    "session_log": {
+      "session_id": "string",
+      "start_time": "ISO datetime",
+      "end_time": "ISO datetime", 
+      "target": "string",
+      "location": "string",
+      "group_mode": "string",
+      "group_size": "integer",
+      "kills": "integer",
+      "drops": "array",
+      "credits_earned": "integer",
+      "duration_minutes": "integer",
+      "success_rate": "float",
+      "status": "string"
+    },
+    "drop_entry": {
+      "drop_id": "string",
+      "session_id": "string",
+      "item_name": "string",
+      "target_source": "string",
+      "coordinates": "array",
+      "timestamp": "ISO datetime",
+      "rarity": "string",
+      "value_credits": "integer",
+      "verified": "boolean",
+      "screenshot": "string"
+    }
+  },
+  "sample_data": {
+    "note": "This section contains example data structure for reference",
+    "example_session": {
+      "session_id": "rls_crystal_snake_20250116_120000",
+      "start_time": "2025-01-16T12:00:00Z",
+      "end_time": "2025-01-16T12:45:00Z",
+      "target": "crystal_snake",
+      "location": "Crystal Snake Lair",
+      "group_mode": "solo",
+      "group_size": 1,
+      "kills": 15,
+      "drops": [
+        {
+          "drop_id": "drop_20250116_120530",
+          "item_name": "Crystal Snake Necklace",
+          "target_source": "crystal_snake",
+          "coordinates": [1875, -4325],
+          "timestamp": "2025-01-16T12:05:30Z",
+          "rarity": "rare",
+          "value_credits": 800000,
+          "verified": true,
+          "screenshot": "screenshots/drop_crystal_snake_necklace_20250116_120530.png"
+        }
+      ],
+      "credits_earned": 950000,
+      "duration_minutes": 45,
+      "success_rate": 6.7,
+      "status": "completed"
+    },
+    "example_drop": {
+      "drop_id": "drop_20250116_120530",
+      "session_id": "rls_crystal_snake_20250116_120000",
+      "item_name": "Crystal Snake Necklace",
+      "target_source": "crystal_snake",
+      "coordinates": [1875, -4325],
+      "timestamp": "2025-01-16T12:05:30Z",
+      "rarity": "rare",
+      "value_credits": 800000,
+      "verified": true,
+      "screenshot": "screenshots/drop_crystal_snake_necklace_20250116_120530.png"
+    }
+  }
+}

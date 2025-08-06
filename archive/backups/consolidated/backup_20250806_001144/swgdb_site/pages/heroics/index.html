@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4ZZ5SFJC0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q4ZZ5SFJC0');
+</script>
+<!-- Fallback noscript version for privacy-aware users -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=G-Q4ZZ5SFJC0"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWGDB - Heroics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            max-width: 1400px;
+            overflow: hidden;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            padding: 30px;
+        }
+
+        .heroic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .heroic-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+
+        .heroic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .heroic-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .heroic-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .heroic-body {
+            padding: 20px;
+        }
+
+        .heroic-info {
+            margin-bottom: 15px;
+        }
+
+        .heroic-info h4 {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .info-item i {
+            width: 20px;
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .boss-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .boss-item {
+            background: var(--light-color);
+            padding: 8px 12px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .loot-highlights {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .loot-highlights h5 {
+            color: #8b4513;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .loot-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            margin: 3px 0;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #8b4513;
+        }
+
+        .view-details-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .view-details-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .difficulty-easy { background: var(--success-color); color: white; }
+        .difficulty-medium { background: var(--warning-color); color: var(--dark-color); }
+        .difficulty-hard { background: var(--danger-color); color: white; }
+        .difficulty-expert { background: #6f42c1; color: white; }
+
+        .filter-section {
+            background: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .filter-section h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="header-section">
+            <h1><i class="fas fa-shield-alt"></i> Heroics</h1>
+            <p>Browse all heroic instances in Star Wars Galaxies Restoration</p>
+        </div>
+
+        <div class="content-section">
+            <div class="filter-section">
+                <h3><i class="fas fa-filter"></i> Filter Heroics</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Heroics</button>
+                    <button class="filter-btn" data-filter="easy">Easy</button>
+                    <button class="filter-btn" data-filter="medium">Medium</button>
+                    <button class="filter-btn" data-filter="hard">Hard</button>
+                    <button class="filter-btn" data-filter="expert">Expert</button>
+                </div>
+            </div>
+
+            <div class="heroic-grid" id="heroicGrid">
+                <!-- Heroic cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Heroics data
+        const heroicsData = [
+            {
+                id: "nightsister-stronghold",
+                name: "Nightsister Stronghold",
+                planet: "Dathomir",
+                difficulty: "hard",
+                entryRequirements: "Mustafar access + group",
+                bosses: [
+                    { name: "Sister V'aria", mechanics: "Force Lightning, Mind Control" },
+                    { name: "Matriarch Lishra", mechanics: "Elite Guard Summons" },
+                    { name: "Nightsister Ritualists", mechanics: "Ritual Channeling" }
+                ],
+                lootHighlights: [
+                    "Nightsister Energy Lance",
+                    "Ritualist Robes",
+                    "Force Crystal Shards"
+                ],
+                description: "Infiltrate the infamous Nightsister stronghold with powerful Force-wielding enemies."
+            },
+            {
+                id: "axkva-min",
+                name: "Axkva Min",
+                planet: "Dathomir",
+                difficulty: "expert",
+                entryRequirements: "Level 80+, elite group",
+                bosses: [
+                    { name: "Axkva Min", mechanics: "Force powers, teleportation, corruption" },
+                    { name: "Dark Side Spirits", mechanics: "Possession, life drain" }
+                ],
+                lootHighlights: [
+                    "Axkva Min's Lightsaber",
+                    "Ancient Sith Robe",
+                    "Dark Side Crystals"
+                ],
+                description: "The most challenging Nightsister encounter featuring the legendary Axkva Min."
+            },
+            {
+                id: "ig-88",
+                name: "IG-88",
+                planet: "Tatooine",
+                difficulty: "hard",
+                entryRequirements: "Level 70+, group of 4-6",
+                bosses: [
+                    { name: "IG-88", mechanics: "Precise targeting, weapon systems" },
+                    { name: "Security Droids", mechanics: "Shield generators, self-destruct" }
+                ],
+                lootHighlights: [
+                    "IG-88's Rifle",
+                    "Advanced Droid Parts",
+                    "Targeting Computer"
+                ],
+                description: "Fight the infamous bounty hunter droid IG-88 in his Tatooine lair."
+            },
+            {
+                id: "krayt-dragon",
+                name: "Krayt Dragon Hunt",
+                planet: "Tatooine",
+                difficulty: "expert",
+                entryRequirements: "Level 80+, raid group of 8+",
+                bosses: [
+                    { name: "Ancient Krayt Dragon", mechanics: "Burrow attacks, dragon roar, rage mode" },
+                    { name: "Young Krayt Dragons", mechanics: "Pack hunters, flanking" }
+                ],
+                lootHighlights: [
+                    "Perfect Krayt Dragon Pearl",
+                    "Legendary Dragon Bone Weapon",
+                    "Dragon Scales"
+                ],
+                description: "Hunt the legendary Ancient Krayt Dragon in the vast Dune Sea of Tatooine."
+            },
+            {
+                id: "geonosian-queen",
+                name: "Geonosian Queen",
+                planet: "Geonosis",
+                difficulty: "medium",
+                entryRequirements: "Level 60+, group of 4-6",
+                bosses: [
+                    { name: "Geonosian Queen", mechanics: "Acid spit, swarm call, hive mind" },
+                    { name: "Royal Guards", mechanics: "Protective formation, sonic weapons" }
+                ],
+                lootHighlights: [
+                    "Queen's Staff",
+                    "Royal Armor Piece",
+                    "Geonosian Artifacts"
+                ],
+                description: "Face the Geonosian Queen and her royal guard in their underground hive."
+            },
+            {
+                id: "janta-blood-crisis",
+                name: "Janta Blood Crisis",
+                planet: "Tatooine",
+                difficulty: "easy",
+                entryRequirements: "Level 25+, group of 3-4",
+                bosses: [
+                    { name: "Janta Blood Collectors", mechanics: "Basic combat, blood drain" },
+                    { name: "Blood Leaders", mechanics: "Rally call, enhanced abilities" },
+                    { name: "Desert Scavengers", mechanics: "Hit and run, sand throw" }
+                ],
+                lootHighlights: [
+                    "Blood Artifacts",
+                    "Desert Equipment",
+                    "Tatooine Relics"
+                ],
+                description: "Defeat Janta Blood collectors threatening the settlements around Mos Entha."
+            }
+        ];
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter heroics
+                const filter = this.dataset.filter;
+                filterHeroics(filter);
+            });
+        });
+
+        function filterHeroics(difficulty) {
+            const grid = document.getElementById('heroicGrid');
+            grid.innerHTML = '';
+            
+            const filteredHeroics = difficulty === 'all' 
+                ? heroicsData 
+                : heroicsData.filter(heroic => heroic.difficulty === difficulty);
+            
+            filteredHeroics.forEach(heroic => {
+                grid.appendChild(createHeroicCard(heroic));
+            });
+        }
+
+        function createHeroicCard(heroic) {
+            const card = document.createElement('div');
+            card.className = 'heroic-card';
+            
+            const difficultyClass = `difficulty-${heroic.difficulty}`;
+            const difficultyText = heroic.difficulty.charAt(0).toUpperCase() + heroic.difficulty.slice(1);
+            
+            card.innerHTML = `
+                <div class="heroic-header">
+                    <h3>${heroic.name} <span class="difficulty-badge ${difficultyClass}">${difficultyText}</span></h3>
+                </div>
+                <div class="heroic-body">
+                    <div class="heroic-info">
+                        <h4><i class="fas fa-globe"></i> Location</h4>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${heroic.planet}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="heroic-info">
+                        <h4><i class="fas fa-users"></i> Entry Requirements</h4>
+                        <div class="info-item">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>${heroic.entryRequirements}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="heroic-info">
+                        <h4><i class="fas fa-skull"></i> Bosses</h4>
+                        <ul class="boss-list">
+                            ${heroic.bosses.map(boss => `
+                                <li class="boss-item">
+                                    <strong>${boss.name}</strong>: ${boss.mechanics}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="loot-highlights">
+                        <h5><i class="fas fa-treasure-chest"></i> Notable Loot</h5>
+                        ${heroic.lootHighlights.map(loot => `
+                            <div class="loot-item">${loot}</div>
+                        `).join('')}
+                    </div>
+                    
+                    <a href="${heroic.id}/" class="view-details-btn">
+                        <i class="fas fa-info-circle"></i> View Details & Live Loot
+                    </a>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Initialize the page
+        filterHeroics('all');
+    </script>
+</body>
+</html> 

@@ -1,0 +1,29 @@
+{
+  "session_id": "session_00bf7d2b",
+  "character_id": "char_b009719f",
+  "start_time": "2025-08-03T14:53:20.505484",
+  "end_time": "2025-08-03T14:53:21.537862",
+  "duration_minutes": 0.0172063,
+  "xp_gained": 35000,
+  "credits_earned": 17500,
+  "activities": [
+    "Combat training",
+    "Quest completion",
+    "Resource gathering",
+    "Crafting items",
+    "Group activities"
+  ],
+  "location_start": "Coronet City",
+  "location_end": "Coronet City",
+  "planet_start": "Corellia",
+  "planet_end": "Corellia",
+  "coordinates_start": [
+    0.0,
+    0.0
+  ],
+  "coordinates_end": [
+    0.0,
+    0.0
+  ],
+  "notes": ""
+}

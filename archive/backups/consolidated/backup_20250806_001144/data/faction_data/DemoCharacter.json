@@ -1,0 +1,29 @@
+{
+  "character_name": "DemoCharacter",
+  "faction": "rebel",
+  "current_rank": 4,
+  "rank_points": 4500,
+  "total_battles": 25,
+  "victories": 18,
+  "defeats": 5,
+  "draws": 2,
+  "win_rate": 0.72,
+  "favorite_battle_type": "pvp",
+  "average_battle_duration": 12.5,
+  "last_battle": "2024-01-15T14:30:00",
+  "gear_loadout": {
+    "head": "Rebel Combat Helmet",
+    "chest": "Rebel Combat Armor",
+    "legs": "Rebel Combat Leggings",
+    "feet": "Rebel Combat Boots",
+    "hands": "Rebel Combat Gauntlets",
+    "weapon": "Rebel Blaster Rifle",
+    "secondary": "Stun Baton"
+  },
+  "active_strategies": [
+    "rebel_guerrilla_tactics",
+    "hit_and_run",
+    "team_coordination"
+  ],
+  "notes": "Experienced Rebel fighter with strong PvP performance. Specializes in guerrilla tactics and team coordination. Currently working on improving stun resistance for higher rank PvP encounters."
+} 

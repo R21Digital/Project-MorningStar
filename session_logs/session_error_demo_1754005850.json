@@ -1,0 +1,236 @@
+{
+  "session_id": "error_demo_1754005850",
+  "start_time": "2025-07-31T16:50:50.896056",
+  "end_time": "2025-07-31T16:50:50.898410",
+  "character_name": "ErrorDemo",
+  "character_level": null,
+  "profession": null,
+  "location": null,
+  "total_xp_gained": 0,
+  "total_credits_gained": 0,
+  "total_deaths": 0,
+  "total_quests_completed": 0,
+  "total_combat_actions": 0,
+  "total_travel_events": 0,
+  "total_errors": 12,
+  "average_combat_duration": null,
+  "success_rate": 0.0,
+  "efficiency_score": 0.0,
+  "session_goals": null,
+  "session_mode": null,
+  "notes": null,
+  "events": [
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.896660",
+      "description": "Error (navigation): Pathfinding failed",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "navigation"
+      },
+      "success": null,
+      "error_message": "Pathfinding failed",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.896788",
+      "description": "Error (quest): Quest NPC not found",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "quest"
+      },
+      "success": null,
+      "error_message": "Quest NPC not found",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.896986",
+      "description": "Error (system): Connection timeout",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "system"
+      },
+      "success": null,
+      "error_message": "Connection timeout",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.897127",
+      "description": "Error (inventory): Inventory full",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "inventory"
+      },
+      "success": null,
+      "error_message": "Inventory full",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.897243",
+      "description": "Error (combat): Combat ability failed",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "combat"
+      },
+      "success": null,
+      "error_message": "Combat ability failed",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.897499",
+      "description": "Error (ui): UI element not found",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "ui"
+      },
+      "success": null,
+      "error_message": "UI element not found",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.897630",
+      "description": "Error (navigation): Pathfinding failed",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "navigation",
+        "error_category": "general"
+      },
+      "success": null,
+      "error_message": "Pathfinding failed",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.897782",
+      "description": "Error (quest): Quest NPC not found",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "quest",
+        "error_category": "general"
+      },
+      "success": null,
+      "error_message": "Quest NPC not found",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.897911",
+      "description": "Error (system): Connection timeout",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "system",
+        "error_category": "general"
+      },
+      "success": null,
+      "error_message": "Connection timeout",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.898025",
+      "description": "Error (inventory): Inventory full",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "inventory",
+        "error_category": "general"
+      },
+      "success": null,
+      "error_message": "Inventory full",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.898110",
+      "description": "Error (combat): Combat ability failed",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "combat",
+        "error_category": "general"
+      },
+      "success": null,
+      "error_message": "Combat ability failed",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.898182",
+      "description": "Error (ui): UI element not found",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "ui",
+        "error_category": "general"
+      },
+      "success": null,
+      "error_message": "UI element not found",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    }
+  ],
+  "combat_events": [],
+  "quest_events": []
+}

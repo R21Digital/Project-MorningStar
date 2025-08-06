@@ -1,0 +1,51 @@
+{
+  "target_items": [
+    "Rare Crystal",
+    "Ancient Artifact",
+    "Legendary Weapon", 
+    "Masterwork Armor",
+    "Precious Gem",
+    "Valuable Scroll",
+    "Unique Item",
+    "Collector's Item",
+    "Krayt Dragon Pearl",
+    "Kimogila Scale",
+    "Mouf Poison Sac",
+    "Force Crystal",
+    "Rare Metal",
+    "Exotic Material",
+    "Legendary Component",
+    "Epic Enhancement"
+  ],
+  "description": "Rare loot items to farm for in RLS (Rare Loot System) farming mode",
+  "last_updated": "2025-01-04T10:00:00",
+  "version": "1.0",
+  "notes": [
+    "Items are prioritized based on rarity and value",
+    "Zone-specific items have higher drop rates in their respective zones",
+    "Target items can be customized per farming session",
+    "Session tracking verifies acquisition of target items"
+  ],
+  "zone_mappings": {
+    "Tatooine Krayt Dragon Valley": [
+      "Rare Crystal",
+      "Ancient Artifact", 
+      "Krayt Dragon Pearl"
+    ],
+    "Lok Kimogila Territory": [
+      "Legendary Weapon",
+      "Masterwork Armor",
+      "Kimogila Scale"
+    ],
+    "Kashyyyk Mouf Territory": [
+      "Precious Gem",
+      "Valuable Scroll", 
+      "Mouf Poison Sac"
+    ],
+    "Dantooine Force Crystal Cave": [
+      "Rare Crystal",
+      "Unique Item",
+      "Force Crystal"
+    ]
+  }
+} 

@@ -1,0 +1,419 @@
+---
+layout: base
+title: "Report a Bug"
+description: "Report bugs and issues with SWGDB website, bot, or mods. Help us improve by submitting detailed bug reports."
+tags: ["bug-report", "support", "feedback"]
+---
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Report a Bug</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="mb-0">
+                        <i class="fas fa-bug me-2"></i>
+                        Report a Bug
+                    </h1>
+                    <p class="mb-0 mt-2">
+                        Help us improve SWGDB by reporting bugs and issues you encounter.
+                    </p>
+                </div>
+                
+                <div class="card-body">
+                    <div id="success-message" class="alert alert-success alert-dismissible fade" style="display: none;" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Thank you!</strong> Your bug report has been submitted successfully.
+                        <button type="button" class="btn-close" onclick="hideSuccessMessage()"></button>
+                    </div>
+                    
+                    <div id="error-message" class="alert alert-danger alert-dismissible fade" style="display: none;" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Error:</strong> <span id="error-text"></span>
+                        <button type="button" class="btn-close" onclick="hideErrorMessage()"></button>
+                    </div>
+                    
+                    <div id="warning-message" class="alert alert-warning alert-dismissible fade" style="display: none;" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span id="warning-text"></span>
+                        <button type="button" class="btn-close" onclick="hideWarningMessage()"></button>
+                    </div>
+
+                    <form id="bug-report-form" onsubmit="submitBugReport(event)">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">
+                                        <i class="fas fa-heading me-2"></i>
+                                        Bug Title <span class="text-danger">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="title"
+                                        name="title"
+                                        placeholder="Brief description of the bug"
+                                        required
+                                        maxlength="100"
+                                    />
+                                    <div class="form-text">
+                                        Provide a clear, concise title that describes the issue
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">
+                                        <i class="fas fa-align-left me-2"></i>
+                                        Description <span class="text-danger">*</span>
+                                    </label>
+                                    <textarea
+                                        class="form-control"
+                                        id="description"
+                                        name="description"
+                                        rows="6"
+                                        placeholder="Please provide detailed information about the bug:
+• What were you trying to do?
+• What happened instead?
+• Steps to reproduce the issue
+• Any error messages you saw"
+                                        required
+                                        maxlength="2000"
+                                    ></textarea>
+                                    <div class="form-text">
+                                        Be as detailed as possible to help us understand and fix the issue
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="priority" class="form-label">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        Priority
+                                    </label>
+                                    <select
+                                        class="form-select"
+                                        id="priority"
+                                        name="priority"
+                                    >
+                                        <option value="Low">Low - Minor issue</option>
+                                        <option value="Medium" selected>Medium - Moderate impact</option>
+                                        <option value="High">High - Critical issue</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">
+                                        <i class="fas fa-tags me-2"></i>
+                                        Category
+                                    </label>
+                                    <select
+                                        class="form-select"
+                                        id="category"
+                                        name="category"
+                                    >
+                                        <option value="Website" selected>Website</option>
+                                        <option value="Bot">Bot</option>
+                                        <option value="Mod">Mod</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="screenshot" class="form-label">
+                                        <i class="fas fa-camera me-2"></i>
+                                        Screenshot (Optional)
+                                    </label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="screenshot"
+                                        name="screenshot"
+                                        accept="image/*"
+                                        onchange="handleFileChange(event)"
+                                    />
+                                    <div class="form-text">
+                                        Upload a screenshot showing the issue (PNG, JPG, GIF, max 5MB)
+                                    </div>
+                                    <div id="file-info" class="mt-2" style="display: none;">
+                                        <small class="text-success">
+                                            <i class="fas fa-check me-1"></i>
+                                            <span id="file-name"></span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <div class="d-flex gap-2">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                        id="submit-btn"
+                                    >
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        Submit Bug Report
+                                    </button>
+                                    
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-secondary"
+                                        onclick="resetForm()"
+                                    >
+                                        <i class="fas fa-undo me-2"></i>
+                                        Reset Form
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Tips for Better Bug Reports
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <strong>Be specific:</strong> Include exact steps to reproduce the issue
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <strong>Include context:</strong> Mention your browser, operating system, and any relevant settings
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <strong>Add screenshots:</strong> Visual evidence helps us understand the problem faster
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <strong>Check for duplicates:</strong> Search existing reports before submitting
+                            </li>
+                            <li>
+                                <i class="fas fa-check text-success me-2"></i>
+                                <strong>Follow up:</strong> We may need additional information to resolve the issue
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let selectedFile = null;
+
+function handleFileChange(event) {
+    const file = event.target.files[0];
+    if (file) {
+        // Validate file type
+        if (!file.type.startsWith('image/')) {
+            showWarningMessage('Please select an image file (PNG, JPG, GIF)');
+            event.target.value = '';
+            return;
+        }
+        
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            showWarningMessage('File size must be less than 5MB');
+            event.target.value = '';
+            return;
+        }
+        
+        selectedFile = file;
+        document.getElementById('file-name').textContent = file.name;
+        document.getElementById('file-info').style.display = 'block';
+        hideWarningMessage();
+    }
+}
+
+function generateId() {
+    return `bug_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+async function submitBugReport(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Validate required fields
+    const title = formData.get('title').trim();
+    const description = formData.get('description').trim();
+    
+    if (!title || !description) {
+        showErrorMessage('Please fill in all required fields');
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = document.getElementById('submit-btn');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Submitting...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Create the bug report object
+        const bugReport = {
+            id: generateId(),
+            title: title,
+            description: description,
+            priority: formData.get('priority'),
+            category: formData.get('category'),
+            user_agent: navigator.userAgent,
+            page_url: window.location.href,
+            submitted_at: new Date().toISOString(),
+            status: 'New'
+        };
+        
+        // Handle file upload if present
+        if (selectedFile) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                bugReport.screenshot_url = e.target.result;
+                submitToServer(bugReport);
+            };
+            reader.readAsDataURL(selectedFile);
+        } else {
+            submitToServer(bugReport);
+        }
+        
+    } catch (error) {
+        console.error('Error submitting bug report:', error);
+        showErrorMessage('Failed to submit bug report. Please try again.');
+        resetSubmitButton(submitBtn, originalText);
+    }
+}
+
+async function submitToServer(bugReport) {
+    try {
+        // Submit to the API
+        const response = await fetch('/api/bug-report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bugReport)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            // Show success message
+            showSuccessMessage();
+            
+            // Reset form
+            resetForm();
+        } else {
+            throw new Error(result.error || 'Failed to submit bug report');
+        }
+        
+    } catch (error) {
+        console.error('Error submitting to server:', error);
+        showErrorMessage(error.message || 'Failed to submit bug report. Please try again.');
+    } finally {
+        const submitBtn = document.getElementById('submit-btn');
+        resetSubmitButton(submitBtn, '<i class="fas fa-paper-plane me-2"></i>Submit Bug Report');
+    }
+}
+
+function resetSubmitButton(button, text) {
+    button.innerHTML = text;
+    button.disabled = false;
+}
+
+function resetForm() {
+    document.getElementById('bug-report-form').reset();
+    selectedFile = null;
+    document.getElementById('file-info').style.display = 'none';
+    hideAllMessages();
+}
+
+function showSuccessMessage() {
+    hideAllMessages();
+    document.getElementById('success-message').style.display = 'block';
+    document.getElementById('success-message').classList.add('show');
+}
+
+function showErrorMessage(message) {
+    hideAllMessages();
+    document.getElementById('error-text').textContent = message;
+    document.getElementById('error-message').style.display = 'block';
+    document.getElementById('error-message').classList.add('show');
+}
+
+function showWarningMessage(message) {
+    hideAllMessages();
+    document.getElementById('warning-text').textContent = message;
+    document.getElementById('warning-message').style.display = 'block';
+    document.getElementById('warning-message').classList.add('show');
+}
+
+function hideSuccessMessage() {
+    document.getElementById('success-message').style.display = 'none';
+    document.getElementById('success-message').classList.remove('show');
+}
+
+function hideErrorMessage() {
+    document.getElementById('error-message').style.display = 'none';
+    document.getElementById('error-message').classList.remove('show');
+}
+
+function hideWarningMessage() {
+    document.getElementById('warning-message').style.display = 'none';
+    document.getElementById('warning-message').classList.remove('show');
+}
+
+function hideAllMessages() {
+    hideSuccessMessage();
+    hideErrorMessage();
+    hideWarningMessage();
+}
+
+// Track form interactions for analytics
+document.addEventListener('DOMContentLoaded', function() {
+    // Track form field interactions
+    const formFields = document.querySelectorAll('#bug-report-form input, #bug-report-form textarea, #bug-report-form select');
+    formFields.forEach(field => {
+        field.addEventListener('focus', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_field_focus', {
+                    event_category: 'Bug Report',
+                    event_label: this.name,
+                    page_url: window.location.href
+                });
+            }
+        });
+    });
+    
+    // Track form submission attempt
+    document.getElementById('bug-report-form').addEventListener('submit', function() {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'bug_report_submitted', {
+                event_category: 'Bug Report',
+                event_label: 'Form Submission',
+                page_url: window.location.href
+            });
+        }
+    });
+});
+</script> 

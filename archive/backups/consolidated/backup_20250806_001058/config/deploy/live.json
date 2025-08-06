@@ -1,0 +1,395 @@
+{
+  "deployment": {
+    "environment": "production",
+    "version": "1.0.0",
+    "last_updated": "2025-01-27T12:00:00Z",
+    "description": "Production deployment configuration for MorningStar public launch"
+  },
+  
+  "domain": "morningstar.swg.ms11.com",
+  "base_url": "https://morningstar.swg.ms11.com",
+  
+  "hosting": {
+    "provider": "netlify",
+    "plan": "pro",
+    "region": "us-east-1",
+    "custom_domain": true,
+    "ssl_enabled": true,
+    "ssl_provider": "lets_encrypt",
+    "redirect_www": true,
+    "force_https": true
+  },
+  
+  "cdn": {
+    "enabled": true,
+    "provider": "cloudflare",
+    "cloudflare": {
+      "zone_id": "${CLOUDFLARE_ZONE_ID}",
+      "api_token": "${CLOUDFLARE_API_TOKEN}",
+      "cache_level": "aggressive",
+      "minify": {
+        "css": true,
+        "js": true,
+        "html": true
+      },
+      "compression": "gzip",
+      "browser_cache_ttl": 31536000,
+      "edge_cache_ttl": 2592000
+    },
+    "fastly": {
+      "service_id": "${FASTLY_SERVICE_ID}",
+      "api_token": "${FASTLY_API_TOKEN}",
+      "purge_on_deploy": true
+    }
+  },
+  
+  "analytics": {
+    "enabled": true,
+    "google_tag_manager": {
+      "container_id": "${GTM_CONTAINER_ID}",
+      "environment": "production",
+      "custom_dimensions": {
+        "user_type": "index1",
+        "page_category": "index2",
+        "feature_usage": "index3"
+      }
+    },
+    "search_console": {
+      "verification_code": "${GSC_VERIFICATION_CODE}",
+      "sitemap_url": "https://morningstar.swg.ms11.com/sitemap.xml",
+      "auto_submit_sitemap": true
+    },
+    "google_analytics": {
+      "tracking_id": "${GA_TRACKING_ID}",
+      "property_id": "${GA_PROPERTY_ID}",
+      "enhanced_ecommerce": false,
+      "demographics": true,
+      "advertising": false
+    }
+  },
+  
+  "security": {
+    "headers": {
+      "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:; frame-src 'self' https://www.google.com https://www.youtube.com;",
+      "x_frame_options": "DENY",
+      "x_content_type_options": "nosniff",
+      "x_xss_protection": "1; mode=block",
+      "strict_transport_security": "max-age=31536000; includeSubDomains; preload",
+      "referrer_policy": "strict-origin-when-cross-origin",
+      "permissions_policy": "camera=(), microphone=(), geolocation=()"
+    },
+    "rate_limiting": {
+      "enabled": true,
+      "requests_per_minute": 300,
+      "burst_limit": 50
+    },
+    "firewall": {
+      "enabled": true,
+      "block_countries": [],
+      "whitelist_ips": [],
+      "block_user_agents": ["bot", "crawler", "spider"]
+    }
+  },
+  
+  "performance": {
+    "compression": {
+      "enabled": true,
+      "types": ["text/html", "text/css", "application/javascript", "application/json", "image/svg+xml"],
+      "level": 9
+    },
+    "caching": {
+      "static_assets": {
+        "max_age": 31536000,
+        "patterns": ["*.css", "*.js", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.svg", "*.ico", "*.woff", "*.woff2"]
+      },
+      "html_pages": {
+        "max_age": 3600,
+        "stale_while_revalidate": 86400
+      },
+      "api_responses": {
+        "max_age": 300,
+        "stale_while_revalidate": 600
+      }
+    },
+    "image_optimization": {
+      "enabled": true,
+      "formats": ["webp", "avif"],
+      "quality": 85,
+      "progressive": true
+    }
+  },
+  
+  "build": {
+    "command": "npm run build",
+    "output_directory": "dist",
+    "node_version": "18.x",
+    "python_version": "3.11",
+    "environment_variables": {
+      "NODE_ENV": "production",
+      "ELEVENTY_ENV": "production",
+      "BUILD_TIMESTAMP": "${BUILD_TIMESTAMP}"
+    },
+    "build_hooks": {
+      "pre_build": [
+        "python3 -m pip install -r requirements.txt",
+        "npm install"
+      ],
+      "post_build": [
+        "python3 scripts/post_build_optimization.py",
+        "npm run validate:build"
+      ]
+    }
+  },
+  
+  "notifications": {
+    "discord": {
+      "enabled": true,
+      "webhook_url": "${DISCORD_WEBHOOK_URL}",
+      "channels": {
+        "deployments": "${DISCORD_DEPLOYMENT_WEBHOOK}",
+        "errors": "${DISCORD_ERROR_WEBHOOK}",
+        "alerts": "${DISCORD_ALERT_WEBHOOK}"
+      },
+      "mentions": {
+        "deployment_success": ["@DevTeam"],
+        "deployment_failure": ["@DevTeam", "@Admin"],
+        "critical_errors": ["@everyone"]
+      }
+    },
+    "email": {
+      "enabled": true,
+      "smtp": {
+        "host": "${SMTP_HOST}",
+        "port": 587,
+        "secure": true,
+        "auth": {
+          "user": "${SMTP_USER}",
+          "pass": "${SMTP_PASSWORD}"
+        }
+      },
+      "recipients": {
+        "deployments": ["dev@morningstar.com"],
+        "errors": ["admin@morningstar.com"],
+        "alerts": ["alerts@morningstar.com"]
+      }
+    },
+    "slack": {
+      "enabled": false,
+      "webhook_url": "${SLACK_WEBHOOK_URL}",
+      "channel": "#deployments"
+    }
+  },
+  
+  "monitoring": {
+    "uptime": {
+      "enabled": true,
+      "checks": [
+        {
+          "name": "Homepage",
+          "url": "https://morningstar.swg.ms11.com",
+          "interval": 60,
+          "timeout": 30,
+          "expected_status": 200
+        },
+        {
+          "name": "API Health",
+          "url": "https://morningstar.swg.ms11.com/api/health",
+          "interval": 300,
+          "timeout": 15,
+          "expected_status": 200
+        },
+        {
+          "name": "Heroics Page",
+          "url": "https://morningstar.swg.ms11.com/heroics/",
+          "interval": 300,
+          "timeout": 20,
+          "expected_status": 200
+        }
+      ]
+    },
+    "error_tracking": {
+      "enabled": true,
+      "service": "sentry",
+      "dsn": "${SENTRY_DSN}",
+      "environment": "production",
+      "sample_rate": 0.1
+    },
+    "performance": {
+      "enabled": true,
+      "web_vitals": true,
+      "real_user_monitoring": true,
+      "synthetic_monitoring": true
+    }
+  },
+  
+  "backup": {
+    "enabled": true,
+    "frequency": "daily",
+    "retention": {
+      "daily": 7,
+      "weekly": 4,
+      "monthly": 12
+    },
+    "storage": {
+      "provider": "aws_s3",
+      "bucket": "${BACKUP_S3_BUCKET}",
+      "region": "us-east-1",
+      "encryption": true
+    },
+    "includes": [
+      "data/",
+      "config/",
+      "user_uploads/",
+      "logs/"
+    ]
+  },
+  
+  "features": {
+    "swgdb": {
+      "enabled": true,
+      "features": {
+        "heroic_guides": true,
+        "loot_tracking": true,
+        "build_showcase": true,
+        "quest_database": true,
+        "community_features": true
+      }
+    },
+    "ms11": {
+      "enabled": true,
+      "features": {
+        "automation_suite": true,
+        "session_management": true,
+        "discord_integration": true,
+        "anti_detection": true,
+        "build_awareness": true
+      }
+    },
+    "api": {
+      "enabled": true,
+      "rate_limiting": true,
+      "authentication": true,
+      "documentation": true,
+      "versioning": true
+    },
+    "community": {
+      "enabled": true,
+      "user_profiles": true,
+      "guild_tracking": true,
+      "contribution_system": true,
+      "mod_portal": true
+    }
+  },
+  
+  "database": {
+    "provider": "postgresql",
+    "host": "${DB_HOST}",
+    "port": 5432,
+    "database": "${DB_NAME}",
+    "username": "${DB_USER}",
+    "password": "${DB_PASSWORD}",
+    "ssl": true,
+    "connection_pool": {
+      "min": 5,
+      "max": 25,
+      "idle_timeout": 300
+    },
+    "backup": {
+      "enabled": true,
+      "frequency": "hourly",
+      "retention": 168
+    }
+  },
+  
+  "api": {
+    "base_url": "https://morningstar.swg.ms11.com/api",
+    "version": "v1",
+    "rate_limiting": {
+      "requests_per_minute": 1000,
+      "burst_limit": 100
+    },
+    "authentication": {
+      "jwt_secret": "${JWT_SECRET}",
+      "token_expiry": 3600,
+      "refresh_token_expiry": 2592000
+    },
+    "cors": {
+      "enabled": true,
+      "origins": ["https://morningstar.swg.ms11.com"],
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "headers": ["Content-Type", "Authorization"]
+    }
+  },
+  
+  "search": {
+    "enabled": true,
+    "provider": "algolia",
+    "algolia": {
+      "application_id": "${ALGOLIA_APP_ID}",
+      "api_key": "${ALGOLIA_API_KEY}",
+      "index_name": "morningstar_production"
+    },
+    "indexes": [
+      {
+        "name": "heroics",
+        "fields": ["name", "description", "planet", "encounters"]
+      },
+      {
+        "name": "loot",
+        "fields": ["name", "description", "rarity", "source"]
+      },
+      {
+        "name": "builds",
+        "fields": ["name", "description", "profession", "stats"]
+      },
+      {
+        "name": "quests",
+        "fields": ["name", "description", "rewards", "location"]
+      }
+    ]
+  },
+  
+  "maintenance": {
+    "schedule": {
+      "weekly": "Sunday 02:00 UTC",
+      "duration": 30,
+      "notification_hours": 24
+    },
+    "emergency": {
+      "enabled": true,
+      "page_url": "https://status.morningstar.com",
+      "contact_email": "support@morningstar.com"
+    }
+  },
+  
+  "legal": {
+    "privacy_policy": {
+      "url": "/privacy",
+      "last_updated": "2025-01-27"
+    },
+    "terms_of_service": {
+      "url": "/terms",
+      "last_updated": "2025-01-27"
+    },
+    "cookies": {
+      "consent_required": true,
+      "policy_url": "/cookies"
+    }
+  },
+  
+  "deployment_checklist": [
+    "Verify all environment variables are set",
+    "Run full test suite",
+    "Build and optimize static assets",
+    "Inject analytics and tracking codes",
+    "Configure security headers",
+    "Generate sitemap and robots.txt",
+    "Set up monitoring and alerts",
+    "Configure CDN and caching",
+    "Test all critical user journeys",
+    "Verify SSL certificate",
+    "Submit sitemap to search engines",
+    "Send launch notifications",
+    "Monitor for issues post-launch"
+  ]
+}

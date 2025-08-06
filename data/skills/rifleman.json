@@ -1,0 +1,80 @@
+{
+  "Rifle Shot": {
+    "hotkey": "1",
+    "cooldown": 0.0,
+    "cast_time": 0.5,
+    "damage_type": "kinetic",
+    "damage_range": [15, 25],
+    "range": 50,
+    "priority": 3,
+    "is_aoe": false,
+    "is_heal": false,
+    "is_utility": false,
+    "description": "Basic rifle shot with moderate damage"
+  },
+  "Burst Shot": {
+    "hotkey": "2",
+    "cooldown": 5.0,
+    "cast_time": 1.0,
+    "damage_type": "kinetic",
+    "damage_range": [35, 50],
+    "range": 45,
+    "priority": 2,
+    "is_aoe": false,
+    "is_heal": false,
+    "is_utility": false,
+    "description": "Rapid burst of rifle fire"
+  },
+  "Full Auto": {
+    "hotkey": "3",
+    "cooldown": 15.0,
+    "cast_time": 2.0,
+    "damage_type": "kinetic",
+    "damage_range": [60, 80],
+    "range": 40,
+    "priority": 1,
+    "is_aoe": false,
+    "is_heal": false,
+    "is_utility": false,
+    "description": "Sustained automatic fire"
+  },
+  "Precise Shot": {
+    "hotkey": "4",
+    "cooldown": 8.0,
+    "cast_time": 1.5,
+    "damage_type": "kinetic",
+    "damage_range": [45, 65],
+    "range": 60,
+    "priority": 2,
+    "is_aoe": false,
+    "is_heal": false,
+    "is_utility": false,
+    "description": "High accuracy single shot"
+  },
+  "Suppressive Fire": {
+    "hotkey": "5",
+    "cooldown": 12.0,
+    "cast_time": 1.0,
+    "damage_type": "kinetic",
+    "damage_range": [20, 30],
+    "range": 35,
+    "priority": 4,
+    "is_aoe": true,
+    "is_heal": false,
+    "is_utility": true,
+    "description": "Area suppression fire"
+  },
+  "Reload": {
+    "hotkey": "r",
+    "cooldown": 0.0,
+    "cast_time": 2.0,
+    "damage_type": "kinetic",
+    "damage_range": [0, 0],
+    "range": 0,
+    "priority": 5,
+    "is_aoe": false,
+    "is_heal": false,
+    "is_utility": true,
+    "description": "Reload weapon ammunition"
+  }
+} 

@@ -1,0 +1,29 @@
+{
+  "session_id": "session_8c3224ce",
+  "character_id": "char_571ef788",
+  "start_time": "2025-08-03T14:53:18.443196",
+  "end_time": "2025-08-03T14:53:19.471934",
+  "duration_minutes": 0.017145633333333334,
+  "xp_gained": 60000,
+  "credits_earned": 30000,
+  "activities": [
+    "Combat training",
+    "Quest completion",
+    "Resource gathering",
+    "Crafting items",
+    "Group activities"
+  ],
+  "location_start": "Theed Palace",
+  "location_end": "Theed Palace",
+  "planet_start": "Naboo",
+  "planet_end": "Naboo",
+  "coordinates_start": [
+    0.0,
+    0.0
+  ],
+  "coordinates_end": [
+    0.0,
+    0.0
+  ],
+  "notes": ""
+}

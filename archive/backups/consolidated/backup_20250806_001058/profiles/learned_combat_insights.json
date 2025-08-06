@@ -1,0 +1,74 @@
+{
+  "skill_performance": {
+    "headshot": {
+      "total_uses": 86,
+      "total_damage": 33600,
+      "average_damage": 390.69767441860466,
+      "success_rate": 1.0,
+      "xp_efficiency": 255.0,
+      "damage_per_second": 800.0,
+      "xp_per_minute": 510.0
+    },
+    "burst_fire": {
+      "total_uses": 48,
+      "total_damage": 19200,
+      "average_damage": 400.0,
+      "success_rate": 1.0,
+      "xp_efficiency": 382.0,
+      "damage_per_second": 640.0,
+      "xp_per_minute": 765.0
+    },
+    "rifle_shot": {
+      "total_uses": 81,
+      "total_damage": 14830,
+      "average_damage": 183.08641975308643,
+      "success_rate": 1.0,
+      "xp_efficiency": 172.0,
+      "damage_per_second": 366.2,
+      "xp_per_minute": 344.8
+    }
+  },
+  "xp_efficiency": {
+    "xp_per_minute": 185217391.3043478,
+    "best_xp_skill": "burst_fire",
+    "best_damage_skill": "headshot",
+    "most_reliable_skill": "rifle_shot"
+  },
+  "combat_patterns": {
+    "most_used_skill": "headshot",
+    "highest_damage_skill": "headshot",
+    "most_efficient_skill": "burst_fire",
+    "preferred_rotation": [
+      "headshot",
+      "burst_fire",
+      "rifle_shot"
+    ],
+    "average_session_duration": 30.0,
+    "average_kills_per_session": 24.0,
+    "average_deaths_per_session": 0.0
+  },
+  "build_recommendations": {
+    "primary_damage_skill": "headshot",
+    "secondary_damage_skill": "burst_fire",
+    "filler_skill": "rifle_shot",
+    "recommended_rotation": [
+      "headshot",
+      "burst_fire",
+      "rifle_shot"
+    ],
+    "skill_priorities": {
+      "headshot": "high",
+      "burst_fire": "medium",
+      "rifle_shot": "low"
+    }
+  },
+  "performance_metrics": {
+    "total_sessions_analyzed": 1,
+    "total_xp_analyzed": 12240,
+    "average_xp_per_session": 12240,
+    "best_session_xp": 12240,
+    "average_damage_per_session": 45000,
+    "kill_death_ratio": 24.0
+  },
+  "last_updated": "2025-07-31T09:34:29.668018"
+}

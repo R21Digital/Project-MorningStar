@@ -1,0 +1,487 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-01-04T12:00:00",
+    "total_builds": 0,
+    "total_professions": 0,
+    "data_sources": [
+      "community_submissions",
+      "ai_generated",
+      "player_verified",
+      "combat_profiles"
+    ],
+    "description": "Static builds library showcasing viable builds across all professions"
+  },
+  "professions": {
+    "rifleman": {
+      "name": "Rifleman",
+      "category": "combat",
+      "description": "Ranged combat specialist with high accuracy and damage",
+      "icon": "crosshairs",
+      "color": "#dc3545",
+      "primary_weapon": "rifle",
+      "secondary_weapon": "carbine"
+    },
+    "pistoleer": {
+      "name": "Pistoleer", 
+      "category": "combat",
+      "description": "Fast-paced ranged combat with high mobility",
+      "icon": "gun",
+      "color": "#fd7e14",
+      "primary_weapon": "pistol",
+      "secondary_weapon": "carbine"
+    },
+    "carbineer": {
+      "name": "Carbineer",
+      "category": "combat", 
+      "description": "Versatile ranged combat with burst damage",
+      "icon": "bullseye",
+      "color": "#28a745",
+      "primary_weapon": "carbine",
+      "secondary_weapon": "rifle"
+    },
+    "medic": {
+      "name": "Medic",
+      "category": "support",
+      "description": "Healing and support specialist",
+      "icon": "heart",
+      "color": "#e83e8c",
+      "primary_weapon": "pistol",
+      "secondary_weapon": "carbine"
+    },
+    "scout": {
+      "name": "Scout",
+      "category": "utility",
+      "description": "Exploration and survival specialist",
+      "icon": "compass",
+      "color": "#6f42c1",
+      "primary_weapon": "rifle",
+      "secondary_weapon": "pistol"
+    },
+    "artisan": {
+      "name": "Artisan",
+      "category": "crafting",
+      "description": "Crafting and resource gathering specialist",
+      "icon": "hammer",
+      "color": "#ffc107",
+      "primary_weapon": "pistol",
+      "secondary_weapon": "rifle"
+    },
+    "entertainer": {
+      "name": "Entertainer",
+      "category": "social",
+      "description": "Social interaction and buff specialist",
+      "icon": "music",
+      "color": "#17a2b8",
+      "primary_weapon": "pistol",
+      "secondary_weapon": "carbine"
+    },
+    "brawler": {
+      "name": "Brawler",
+      "category": "combat",
+      "description": "Melee combat specialist with high damage",
+      "icon": "fist-raised",
+      "color": "#6c757d",
+      "primary_weapon": "unarmed",
+      "secondary_weapon": "pistol"
+    }
+  },
+  "categories": {
+    "combat": {
+      "name": "Combat",
+      "description": "Combat-focused builds for PvE and PvP",
+      "icon": "sword",
+      "color": "#dc3545"
+    },
+    "support": {
+      "name": "Support", 
+      "description": "Healing and support builds",
+      "icon": "heart",
+      "color": "#e83e8c"
+    },
+    "utility": {
+      "name": "Utility",
+      "description": "Exploration and utility builds",
+      "icon": "compass",
+      "color": "#6f42c1"
+    },
+    "crafting": {
+      "name": "Crafting",
+      "description": "Crafting and resource gathering builds",
+      "icon": "hammer",
+      "color": "#ffc107"
+    },
+    "social": {
+      "name": "Social",
+      "description": "Social interaction and buff builds",
+      "icon": "music",
+      "color": "#17a2b8"
+    }
+  },
+  "builds": [
+    {
+      "id": "rifleman_medic_001",
+      "name": "Rifleman/Medic",
+      "description": "Versatile combat build combining ranged damage with healing capabilities",
+      "category": "combat",
+      "difficulty": "medium",
+      "specialization": "pve",
+      "professions": {
+        "primary": "rifleman",
+        "secondary": "medic"
+      },
+      "skill_trees": {
+        "rifleman": [
+          "combat_marksman_novice",
+          "combat_rifleman_novice", 
+          "combat_rifleman_marksman",
+          "combat_rifleman_rifleman",
+          "combat_rifleman_sniper",
+          "combat_rifleman_master"
+        ],
+        "medic": [
+          "science_medic_novice",
+          "science_medic_healing",
+          "science_medic_medicine", 
+          "science_medic_doctor",
+          "science_medic_master"
+        ]
+      },
+      "buff_priority": [
+        "accuracy",
+        "damage", 
+        "critical",
+        "healing",
+        "defense"
+      ],
+      "weapon_type": "rifle",
+      "equipment": {
+        "weapons": {
+          "primary": "rifle",
+          "secondary": "carbine",
+          "recommended": [
+            "T21",
+            "T21B", 
+            "E11"
+          ]
+        },
+        "armor": {
+          "type": "medium",
+          "recommended": [
+            "Stormtrooper Armor",
+            "Mandalorian Armor"
+          ]
+        },
+        "tapes": [
+          "accuracy",
+          "damage",
+          "critical"
+        ],
+        "resists": [
+          "energy",
+          "kinetic", 
+          "blast"
+        ]
+      },
+      "performance": {
+        "pve_rating": 8.5,
+        "pvp_rating": 6.0,
+        "solo_rating": 9.0,
+        "group_rating": 8.0,
+        "farming_rating": 7.5
+      },
+      "combat": {
+        "style": "ranged",
+        "stance": "kneeling",
+        "rotation": [
+          "aim",
+          "headshot", 
+          "burst_fire"
+        ],
+        "heal_threshold": 50,
+        "buff_threshold": 80,
+        "max_range": 50
+      },
+      "cooldowns": {
+        "aim": 0,
+        "headshot": 5,
+        "burst_fire": 15,
+        "rifle_shot": 0,
+        "heal_self": 30,
+        "stim_pack": 120
+      },
+      "emergency_abilities": {
+        "critical_heal": "heal_self",
+        "defensive": "stim_pack"
+      },
+      "notes": [
+        "Excellent for solo PvE content",
+        "Good healing capabilities for group play", 
+        "Requires careful positioning due to ranged nature",
+        "Best used with cover and distance management"
+      ],
+      "rating": {
+        "average": 8.2,
+        "total_votes": 45,
+        "votes": {
+          "5": 20,
+          "4": 15,
+          "3": 8,
+          "2": 2,
+          "1": 0
+        }
+      },
+      "attribution": {
+        "type": "ai_generated",
+        "generated_by": "SWGDB",
+        "verified_by": "community",
+        "last_verified": "2024-12-15T10:30:00"
+      },
+      "skill_calculator_url": "https://swgr.org/calculator/rifleman-medic",
+      "created": "2024-01-15T09:00:00",
+      "updated": "2024-12-15T10:30:00"
+    },
+    {
+      "id": "tk_pistoleer_001", 
+      "name": "Teras Kasi/Pistoleer",
+      "description": "Hybrid melee and ranged combat build with high mobility",
+      "category": "combat",
+      "difficulty": "hard",
+      "specialization": "pvp",
+      "professions": {
+        "primary": "brawler",
+        "secondary": "pistoleer"
+      },
+      "skill_trees": {
+        "brawler": [
+          "combat_brawler_novice",
+          "combat_brawler_1handmelee",
+          "combat_brawler_2handmelee",
+          "combat_brawler_polearm",
+          "combat_brawler_unarmed",
+          "combat_brawler_master"
+        ],
+        "pistoleer": [
+          "combat_pistol_novice",
+          "combat_pistol_pistol",
+          "combat_pistol_marksman",
+          "combat_pistol_smuggler",
+          "combat_pistol_master"
+        ]
+      },
+      "buff_priority": [
+        "damage",
+        "speed",
+        "accuracy",
+        "critical",
+        "defense"
+      ],
+      "weapon_type": "hybrid",
+      "equipment": {
+        "weapons": {
+          "primary": "unarmed",
+          "secondary": "pistol",
+          "recommended": [
+            "Vibro Knuckler",
+            "DL44",
+            "Power Hammer"
+          ]
+        },
+        "armor": {
+          "type": "light",
+          "recommended": [
+            "Chitin Armor",
+            "Composite Armor"
+          ]
+        },
+        "tapes": [
+          "damage",
+          "speed",
+          "accuracy"
+        ],
+        "resists": [
+          "kinetic",
+          "energy",
+          "blast"
+        ]
+      },
+      "performance": {
+        "pve_rating": 7.0,
+        "pvp_rating": 9.0,
+        "solo_rating": 8.5,
+        "group_rating": 6.5,
+        "farming_rating": 6.0
+      },
+      "combat": {
+        "style": "hybrid",
+        "stance": "aggressive",
+        "rotation": [
+          "pistol_shot",
+          "melee_attack",
+          "special_attack"
+        ],
+        "heal_threshold": 30,
+        "buff_threshold": 70,
+        "max_range": 25
+      },
+      "cooldowns": {
+        "pistol_shot": 0,
+        "melee_attack": 0,
+        "special_attack": 10,
+        "dodge": 5,
+        "counter_attack": 15
+      },
+      "emergency_abilities": {
+        "escape": "dodge",
+        "counter": "counter_attack"
+      },
+      "notes": [
+        "Excellent for PvP combat",
+        "High mobility and versatility",
+        "Requires good positioning and timing",
+        "Best used with hit-and-run tactics"
+      ],
+      "rating": {
+        "average": 8.8,
+        "total_votes": 32,
+        "votes": {
+          "5": 18,
+          "4": 10,
+          "3": 3,
+          "2": 1,
+          "1": 0
+        }
+      },
+      "attribution": {
+        "type": "player_submitted",
+        "submitted_by": "CombatMaster",
+        "verified_by": "community",
+        "last_verified": "2024-12-10T14:20:00"
+      },
+      "skill_calculator_url": "https://swgr.org/calculator/tk-pistoleer",
+      "created": "2024-01-10T12:00:00",
+      "updated": "2024-12-10T14:20:00"
+    },
+    {
+      "id": "artisan_scout_001",
+      "name": "Artisan/Scout",
+      "description": "Crafting and resource gathering specialist with exploration capabilities",
+      "category": "crafting",
+      "difficulty": "easy",
+      "specialization": "crafting",
+      "professions": {
+        "primary": "artisan",
+        "secondary": "scout"
+      },
+      "skill_trees": {
+        "artisan": [
+          "crafting_artisan_novice",
+          "crafting_artisan_engineering",
+          "crafting_artisan_domestics",
+          "crafting_artisan_business",
+          "crafting_artisan_master"
+        ],
+        "scout": [
+          "outdoors_scout_novice",
+          "outdoors_scout_camp",
+          "outdoors_scout_master",
+          "outdoors_scout_creaturehandler",
+          "outdoors_scout_master"
+        ]
+      },
+      "buff_priority": [
+        "crafting",
+        "gathering",
+        "defense",
+        "speed",
+        "healing"
+      ],
+      "weapon_type": "utility",
+      "equipment": {
+        "weapons": {
+          "primary": "pistol",
+          "secondary": "rifle",
+          "recommended": [
+            "DL44",
+            "E11"
+          ]
+        },
+        "armor": {
+          "type": "light",
+          "recommended": [
+            "Chitin Armor",
+            "Composite Armor"
+          ]
+        },
+        "tapes": [
+          "crafting",
+          "gathering",
+          "defense"
+        ],
+        "resists": [
+          "kinetic",
+          "energy"
+        ]
+      },
+      "performance": {
+        "pve_rating": 6.5,
+        "pvp_rating": 3.0,
+        "solo_rating": 8.0,
+        "group_rating": 7.0,
+        "farming_rating": 9.0
+      },
+      "combat": {
+        "style": "defensive",
+        "stance": "defensive",
+        "rotation": [
+          "pistol_shot",
+          "run_away"
+        ],
+        "heal_threshold": 80,
+        "buff_threshold": 90,
+        "max_range": 30
+      },
+      "cooldowns": {
+        "pistol_shot": 0,
+        "craft_item": 0,
+        "gather_resource": 0,
+        "heal_self": 60
+      },
+      "emergency_abilities": {
+        "escape": "run_away",
+        "heal": "heal_self"
+      },
+      "notes": [
+        "Excellent for crafting and resource gathering",
+        "Good exploration capabilities",
+        "Weak in combat situations",
+        "Best used for economic activities"
+      ],
+      "rating": {
+        "average": 7.5,
+        "total_votes": 28,
+        "votes": {
+          "5": 12,
+          "4": 10,
+          "3": 4,
+          "2": 2,
+          "1": 0
+        }
+      },
+      "attribution": {
+        "type": "ai_generated",
+        "generated_by": "SWGDB",
+        "verified_by": "community",
+        "last_verified": "2024-12-05T16:45:00"
+      },
+      "skill_calculator_url": "https://swgr.org/calculator/artisan-scout",
+      "created": "2024-01-05T08:00:00",
+      "updated": "2024-12-05T16:45:00"
+    }
+  ],
+  "skill_calculators": {
+    "rifleman_medic": "https://swgr.org/calculator/rifleman-medic",
+    "tk_pistoleer": "https://swgr.org/calculator/tk-pistoleer", 
+    "artisan_scout": "https://swgr.org/calculator/artisan-scout"
+  }
+} 

@@ -1,0 +1,109 @@
+{
+  "source_type": "heroic",
+  "planet": "dantooine",
+  "total_runs": 0,
+  "total_loot": 0,
+  "last_updated": "2025-08-05T18:00:00.000000",
+  "heroics": {
+    "jedi_master": {
+      "boss": "Jedi Master",
+      "location": "Dantooine - Jedi Enclave",
+      "level": 85,
+      "total_kills": 0,
+      "items": {
+        "jedi_robes": {
+          "name": "Jedi Robes",
+          "type": "armor",
+          "rarity": "epic",
+          "use_case": "Combat, status symbol",
+          "image": "/assets/loot/jedi_robes.png",
+          "drop_chance": 18.0,
+          "profession_relevance": ["tailor", "armorsmith"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "lightsaber_crystal": {
+          "name": "Lightsaber Crystal",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Lightsaber crafting, rare items",
+          "image": "/assets/loot/lightsaber_crystal.png",
+          "drop_chance": 5.0,
+          "profession_relevance": ["weaponsmith", "artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "jedi_holocron": {
+          "name": "Jedi Holocron",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Knowledge, rare items",
+          "image": "/assets/loot/jedi_holocron.png",
+          "drop_chance": 2.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    },
+    "dark_jedi": {
+      "boss": "Dark Jedi",
+      "location": "Dantooine - Abandoned Jedi Temple",
+      "level": 80,
+      "total_kills": 0,
+      "items": {
+        "dark_jedi_robes": {
+          "name": "Dark Jedi Robes",
+          "type": "armor",
+          "rarity": "epic",
+          "use_case": "Combat, dark side status",
+          "image": "/assets/loot/dark_jedi_robes.png",
+          "drop_chance": 20.0,
+          "profession_relevance": ["tailor", "armorsmith"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "corrupted_crystal": {
+          "name": "Corrupted Crystal",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Dark side lightsaber crafting",
+          "image": "/assets/loot/corrupted_crystal.png",
+          "drop_chance": 8.0,
+          "profession_relevance": ["weaponsmith", "artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "dark_holocron": {
+          "name": "Dark Side Holocron",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Dark side knowledge",
+          "image": "/assets/loot/dark_holocron.png",
+          "drop_chance": 3.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,6 @@
+# HEAL MACRO
+# Created: 2025-08-01T10:40:52.178813
+# Category: combat
+
+/heal {target}
+/say Healing {target}

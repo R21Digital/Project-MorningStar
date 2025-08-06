@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Loot targets for MS11 tracking - items to monitor for drops",
+    "last_updated": "2024-01-01T00:00:00Z"
+  },
+  "tracking_enabled": true,
+  "rarity_levels": {
+    "common": false,
+    "uncommon": true,
+    "rare": true,
+    "epic": true,
+    "legendary": true
+  },
+  "item_categories": {
+    "weapons": true,
+    "armor": true,
+    "jewelry": true,
+    "resources": false,
+    "consumables": false,
+    "decorations": true
+  },
+  "specific_items": [
+    "Nightsister Robe",
+    "Force Crystal",
+    "Dathomirian Staff",
+    "Bounty Hunter Rifle",
+    "Bespin Security Armor",
+    "Cloud City Pistol",
+    "Tusken Raider Armor",
+    "Gaffi Stick",
+    "Tatooine Desert Robe"
+  ],
+  "heroic_specific": {
+    "axkva-min": [
+      "Nightsister Robe",
+      "Force Crystal",
+      "Dathomirian Staff",
+      "Dark Side Artifact"
+    ],
+    "ig-88": [
+      "Bounty Hunter Rifle",
+      "Bespin Security Armor",
+      "Cloud City Pistol",
+      "Droid Targeting System"
+    ],
+    "tusken-army": [
+      "Tusken Raider Armor",
+      "Gaffi Stick",
+      "Tatooine Desert Robe",
+      "Sand People Artifact"
+    ]
+  },
+  "excluded_items": [
+    "Credits",
+    "Experience Points",
+    "Basic Resource",
+    "Common Material"
+  ],
+  "tracking_settings": {
+    "log_all_drops": false,
+    "log_rare_only": true,
+    "include_timestamp": true,
+    "include_character": true,
+    "include_location": true,
+    "include_boss": true
+  }
+} 

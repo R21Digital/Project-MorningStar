@@ -1,0 +1,114 @@
+[
+  {
+    "chain_name": "Tatooine Tusken Raider Chain",
+    "chain_id": "tatooine_tusken_chain",
+    "quests": [
+      "Kill 10 Tusken Raiders",
+      "Collect Tusken Artifacts",
+      "Defeat Tusken Chieftain",
+      "Return Artifacts to Mos Eisley"
+    ],
+    "required_level": 10,
+    "faction": "neutral",
+    "planet": "Tatooine",
+    "description": "A series of quests to eliminate Tusken Raiders and collect their artifacts."
+  },
+  {
+    "chain_name": "Imperial Officer Chain",
+    "chain_id": "imperial_officer_chain",
+    "quests": [
+      "Infiltrate Imperial Base",
+      "Steal Imperial Documents",
+      "Defeat Imperial Officer",
+      "Deliver Documents to Rebel Contact"
+    ],
+    "required_level": 15,
+    "faction": "rebel",
+    "planet": "Naboo",
+    "description": "Covert operations against Imperial forces."
+  },
+  {
+    "chain_name": "Jedi Training Chain",
+    "chain_id": "jedi_training_chain",
+    "quests": [
+      "Find Jedi Master",
+      "Complete Force Training",
+      "Build Lightsaber",
+      "Defeat Dark Jedi"
+    ],
+    "required_level": 20,
+    "faction": "jedi",
+    "planet": "Coruscant",
+    "description": "Traditional Jedi training and trials."
+  },
+  {
+    "chain_name": "Smuggler's Run Chain",
+    "chain_id": "smuggler_run_chain",
+    "quests": [
+      "Acquire Contraband",
+      "Avoid Imperial Patrols",
+      "Deliver to Black Market",
+      "Collect Payment"
+    ],
+    "required_level": 12,
+    "faction": "smuggler",
+    "planet": "Corellia",
+    "description": "Risky smuggling operations for profit."
+  },
+  {
+    "chain_name": "Bounty Hunter Chain",
+    "chain_id": "bounty_hunter_chain",
+    "quests": [
+      "Accept Bounty Contract",
+      "Track Target",
+      "Capture or Eliminate Target",
+      "Collect Bounty"
+    ],
+    "required_level": 18,
+    "faction": "bounty_hunter",
+    "planet": "Mandalore",
+    "description": "Professional bounty hunting operations."
+  },
+  {
+    "chain_name": "Medical Emergency Chain",
+    "chain_id": "medical_emergency_chain",
+    "quests": [
+      "Respond to Medical Emergency",
+      "Gather Medical Supplies",
+      "Treat Injured Patients",
+      "Report to Medical Authority"
+    ],
+    "required_level": 8,
+    "faction": "medic",
+    "planet": "Alderaan",
+    "description": "Medical assistance and emergency response."
+  },
+  {
+    "chain_name": "Entertainment Circuit Chain",
+    "chain_id": "entertainment_circuit_chain",
+    "quests": [
+      "Perform at Local Venue",
+      "Gain Audience Approval",
+      "Travel to Next Venue",
+      "Complete Circuit Tour"
+    ],
+    "required_level": 5,
+    "faction": "entertainer",
+    "planet": "Nar Shaddaa",
+    "description": "Entertainment performances across multiple venues."
+  },
+  {
+    "chain_name": "Crafting Mastery Chain",
+    "chain_id": "crafting_mastery_chain",
+    "quests": [
+      "Gather Rare Materials",
+      "Craft Masterpiece Item",
+      "Present to Crafting Guild",
+      "Receive Master Certification"
+    ],
+    "required_level": 25,
+    "faction": "artisan",
+    "planet": "Dantooine",
+    "description": "Advanced crafting and guild recognition."
+  }
+] 

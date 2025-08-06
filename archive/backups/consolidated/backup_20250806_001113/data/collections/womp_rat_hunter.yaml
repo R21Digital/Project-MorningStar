@@ -1,0 +1,152 @@
+# Womp Rat Hunter Collection
+# A collection chain for hunting womp rats across Tatooine
+
+collection_id: "womp_rat_hunter"
+name: "Womp Rat Hunter"
+description: "Hunt womp rats across the deserts of Tatooine and prove your worth as a hunter"
+collection_type: "hunting"
+rarity: "common"
+planet: "tatooine"
+zones: ["mos_eisley", "jundland_wastes", "anchorhead", "bestine"]
+
+items:
+  - item_id: "womp_rat_pelt"
+    name: "Womp Rat Pelt"
+    description: "The pelt of a womp rat, useful for crafting"
+    rarity: "common"
+    coordinates: [150, 200]
+    zone: "mos_eisley"
+    spawn_conditions:
+      level_requirement: 1
+      time_of_day: "any"
+      weather: "any"
+    collection_method: "combat"
+    dialogue_trigger: "Attack the womp rat"
+    rewards:
+      experience: 25
+      credits: 10
+      reputation:
+        tatooine: 5
+
+  - item_id: "womp_rat_tail"
+    name: "Womp Rat Tail"
+    description: "A womp rat's tail, considered a delicacy by some"
+    rarity: "uncommon"
+    coordinates: [300, 400]
+    zone: "jundland_wastes"
+    spawn_conditions:
+      level_requirement: 3
+      time_of_day: "night"
+      weather: "any"
+    collection_method: "combat"
+    dialogue_trigger: "Defeat the womp rat"
+    rewards:
+      experience: 35
+      credits: 15
+      reputation:
+        tatooine: 8
+
+  - item_id: "womp_rat_fang"
+    name: "Womp Rat Fang"
+    description: "A sharp fang from a particularly large womp rat"
+    rarity: "rare"
+    coordinates: [500, 600]
+    zone: "anchorhead"
+    spawn_conditions:
+      level_requirement: 5
+      time_of_day: "any"
+      weather: "sandstorm"
+    collection_method: "combat"
+    dialogue_trigger: "Slay the giant womp rat"
+    rewards:
+      experience: 50
+      credits: 25
+      reputation:
+        tatooine: 12
+
+  - item_id: "womp_rat_queen_crown"
+    name: "Womp Rat Queen Crown"
+    description: "The crown of a womp rat queen, a rare trophy"
+    rarity: "epic"
+    coordinates: [700, 800]
+    zone: "bestine"
+    spawn_conditions:
+      level_requirement: 8
+      time_of_day: "night"
+      weather: "clear"
+    collection_method: "combat"
+    dialogue_trigger: "Challenge the womp rat queen"
+    rewards:
+      experience: 100
+      credits: 50
+      reputation:
+        tatooine: 20
+
+  - item_id: "womp_rat_king_trophy"
+    name: "Womp Rat King Trophy"
+    description: "The ultimate trophy - proof of defeating the womp rat king"
+    rarity: "legendary"
+    coordinates: [900, 1000]
+    zone: "jundland_wastes"
+    spawn_conditions:
+      level_requirement: 10
+      time_of_day: "night"
+      weather: "sandstorm"
+    collection_method: "combat"
+    dialogue_trigger: "Face the womp rat king"
+    rewards:
+      experience: 200
+      credits: 100
+      reputation:
+        tatooine: 40
+
+completion_rewards:
+  experience: 1000
+  credits: 500
+  reputation:
+    tatooine: 200
+  items:
+    - "womp_rat_hunter_badge"
+    - "desert_hunter_title"
+    - "enhanced_hunting_rifle"
+  unlocks:
+    - "advanced_hunting_quests"
+    - "womp_rat_hunting_guild"
+
+requirements:
+  level_requirement: 1
+  reputation_requirement:
+    tatooine: 0
+  items_required: []
+  quests_required: []
+
+state:
+  status: "available"
+  items_collected: 0
+  total_items: 5
+
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "SWGR.org_Collection_Data"
+  source: "SWGR.org Hunting Collections"
+  tags:
+    - "hunting"
+    - "womp_rats"
+    - "tatooine"
+    - "combat"
+    - "trophy"
+
+hints:
+  - "Womp rats are most active at night"
+  - "Larger womp rats drop better rewards"
+  - "Sandstorms increase the chance of rare spawns"
+  - "The womp rat king only appears in the deepest wastes"
+  - "Use your scanner to detect womp rat dens"
+
+difficulty:
+  overall: "medium"
+  time_estimate_hours: 3.0
+  combat_rating: "moderate"
+  exploration_rating: "high" 

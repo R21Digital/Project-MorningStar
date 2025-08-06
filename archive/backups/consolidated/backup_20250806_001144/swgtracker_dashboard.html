@@ -1,0 +1,134 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>MS11 SWGTracker Dashboard</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+            .dashboard { max-width: 1200px; margin: 0 auto; }
+            .widget { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .widget h3 { margin-top: 0; color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+            th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #f8f9fa; font-weight: bold; }
+            .error { color: red; font-weight: bold; }
+            .quality-purple { background-color: #e6e6fa; }
+            .quality-blue { background-color: #e6f3ff; }
+            .quality-green { background-color: #e6ffe6; }
+            .status-green { color: green; font-weight: bold; }
+            .status-yellow { color: orange; font-weight: bold; }
+            .status-red { color: red; font-weight: bold; }
+            .pulse-info, .summary-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+            .pulse-item, .stat-item { display: flex; justify-content: space-between; padding: 10px; background: #f8f9fa; border-radius: 4px; }
+            .label { font-weight: bold; }
+            .top-categories { margin-top: 20px; }
+            .top-categories ul { list-style: none; padding: 0; }
+            .top-categories li { padding: 5px 0; border-bottom: 1px solid #eee; }
+        </style>
+    </head>
+    <body>
+        <div class="dashboard">
+            <h1>MS11 SWGTracker Dashboard</h1>
+            <p>Last updated: 2025-07-31 21:41:12</p>
+    
+    <div class="widget widget-cities">
+        <h3>Top 0 Cities by Population</h3>
+        <div class="widget-content">
+            <table class="cities-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>City</th>
+                        <th>Planet</th>
+                        <th>Mayor</th>
+                        <th>Population</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="widget widget-materials">
+        <h3>Rare Materials (Rating ≥ 800) (0 total)</h3>
+        <div class="widget-content">
+            <table class="materials-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Rating</th>
+                        <th>Planet</th>
+                        <th>OQ</th>
+                        <th>SR</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="widget widget-territories">
+        <h3>Guild Territories (0 guilds, 0 cities)</h3>
+        <div class="widget-content">
+            <table class="territories-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Guild</th>
+                        <th>Cities</th>
+                        <th>City List</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+        <div class="widget widget-pulse">
+            <h3>Server Pulse</h3>
+            <div class="error">Error: No pulse data available</div>
+        </div>
+        
+    <div class="widget widget-summary">
+        <h3>Resource Summary</h3>
+        <div class="widget-content">
+            <div class="summary-stats">
+                <div class="stat-item">
+                    <span class="label">Total Resources:</span>
+                    <span class="value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Active Resources:</span>
+                    <span class="value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Rare (800+):</span>
+                    <span class="value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Very Rare (900+):</span>
+                    <span class="value">0</span>
+                </div>
+            </div>
+            <div class="top-categories">
+                <h4>Top Categories:</h4>
+                <ul>
+    
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+        </div>
+    </body>
+    </html>
+    

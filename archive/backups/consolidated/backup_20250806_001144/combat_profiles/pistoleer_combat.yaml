@@ -1,0 +1,68 @@
+name: pistoleer_combat
+build_type: pistoleer
+weapon_type: pistol
+combat_style: ranged
+description: "Pistoleer build with high mobility and rapid fire capabilities"
+abilities:
+  - "Pistol Shot"
+  - "Quick Shot"
+  - "Precise Shot"
+  - "Rapid Fire"
+  - "Fan Shot"
+  - "Reload"
+  - "Dodge"
+  - "Combat Roll"
+  - "Quick Draw"
+  - "Steady Aim"
+ability_rotation:
+  - "Pistol Shot"
+  - "Quick Shot"
+  - "Pistol Shot"
+  - "Precise Shot"
+  - "Rapid Fire"
+  - "Fan Shot"
+emergency_abilities:
+  reload: "Reload"
+  dodge: "Dodge"
+  combat_roll: "Combat Roll"
+  quick_draw: "Quick Draw"
+combat_priorities:
+  player_health_threshold: 45
+  target_health_threshold: 25
+  ammo_threshold: 15
+  mobility_priority: 60
+cooldowns:
+  Pistol Shot: 0
+  Quick Shot: 2
+  Precise Shot: 6
+  Rapid Fire: 12
+  Fan Shot: 8
+  Reload: 0
+  Dodge: 4
+  Combat Roll: 10
+  Quick Draw: 15
+  Steady Aim: 20
+targeting:
+  primary_target: "nearest_hostile"
+  max_range: 32
+  switch_target_threshold: 30
+  prefer_weaker_targets: true
+  avoid_elites: false
+healing:
+  self_heal_threshold: 40
+  stim_pack_threshold: 25
+  healing_abilities: []
+  emergency_healing: "Stim Pack"
+buffing:
+  buff_threshold: 85
+  buff_abilities:
+    - "Steady Aim"
+    - "Quick Draw"
+  buff_priorities:
+    - "Steady Aim"
+    - "Quick Draw"
+optimal_range: 25
+fallback_abilities:
+  - "Pistol Shot"
+  - "Reload"
+  - "Dodge" 

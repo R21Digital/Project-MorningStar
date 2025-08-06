@@ -1,0 +1,172 @@
+# Dialogue Patterns for MS11
+# This file contains dialogue patterns for various NPCs
+
+# General dialogue patterns
+general:
+  greeting:
+    - "Hello there!"
+    - "Welcome, traveler."
+    - "What can I do for you?"
+  
+  farewell:
+    - "Safe travels!"
+    - "May the Force be with you."
+    - "Come back anytime."
+  
+  busy:
+    - "I'm a bit busy right now."
+    - "Can this wait?"
+    - "Not now, please."
+
+# NPC-specific dialogue patterns
+mos_eisley_merchant:
+  greeting:
+    - "Welcome to my shop, traveler!"
+    - "Looking for something special?"
+    - "Ah, a new customer!"
+  
+  quest_offer:
+    - "I have a job that needs doing..."
+    - "There's something I need help with."
+    - "I could use someone like you."
+  
+  quest_accept:
+    - "I'll help you with that."
+    - "Count me in!"
+    - "I'm interested."
+  
+  quest_decline:
+    - "Not right now, sorry."
+    - "I have other things to do."
+    - "Maybe another time."
+  
+  quest_complete:
+    - "Excellent work!"
+    - "You've done well."
+    - "Here's your reward."
+  
+  busy:
+    - "I'm dealing with other customers."
+    - "Can you come back later?"
+    - "I'm a bit swamped right now."
+
+tatooine_combat_trainer:
+  greeting:
+    - "Welcome to the training grounds!"
+    - "Ready to learn some combat skills?"
+    - "Ah, a potential student!"
+  
+  training_offer:
+    - "I can teach you combat techniques."
+    - "Want to improve your fighting skills?"
+    - "I have training available."
+  
+  training_accept:
+    - "I'd like to learn."
+    - "Teach me what you know."
+    - "I'm ready to train."
+  
+  training_decline:
+    - "Not right now."
+    - "I'll think about it."
+    - "Maybe later."
+  
+  training_complete:
+    - "You've learned well!"
+    - "Your skills have improved."
+    - "Keep practicing!"
+
+naboo_medic_trainer:
+  greeting:
+    - "Welcome to the medical center."
+    - "Need healing or training?"
+    - "How can I help you?"
+  
+  training_offer:
+    - "I can teach you medical skills."
+    - "Want to learn healing techniques?"
+    - "Medical training is available."
+  
+  training_accept:
+    - "I want to learn healing."
+    - "Teach me medical skills."
+    - "I'm interested in medicine."
+  
+  training_decline:
+    - "Not interested right now."
+    - "I'll consider it."
+    - "Maybe another time."
+  
+  training_complete:
+    - "You've become a skilled healer!"
+    - "Your medical knowledge has grown."
+    - "Use your skills wisely."
+
+# Quest-specific dialogue
+quest_dialogue:
+  accept_quest:
+    - "I'll take this quest."
+    - "I accept the mission."
+    - "Count me in for this."
+  
+  decline_quest:
+    - "I'll pass on this one."
+    - "Not interested."
+    - "I have other priorities."
+  
+  quest_progress:
+    - "I'm working on it."
+    - "Making progress."
+    - "Still on the case."
+  
+  quest_complete:
+    - "Mission accomplished!"
+    - "Quest completed!"
+    - "Task finished!"
+
+# Collection-specific dialogue
+collection_dialogue:
+  examine_item:
+    - "Let me examine this."
+    - "What is this?"
+    - "Interesting find."
+  
+  collect_item:
+    - "I'll take this."
+    - "Adding to my collection."
+    - "This is valuable."
+  
+  collection_complete:
+    - "Collection finished!"
+    - "All items collected!"
+    - "Collection complete!"
+
+# Error and fallback dialogue
+error_dialogue:
+  not_understood:
+    - "I didn't catch that."
+    - "Could you repeat that?"
+    - "What did you say?"
+  
+  busy:
+    - "I'm busy right now."
+    - "Can you wait?"
+    - "Not available."
+  
+  not_available:
+    - "That's not available."
+    - "I can't help with that."
+    - "That's not possible."
+
+# Metadata
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "MS11_Dialogue_System"
+  tags:
+    - "dialogue"
+    - "npc"
+    - "quest"
+    - "training"
+    - "collection" 

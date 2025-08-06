@@ -1,0 +1,85 @@
+{
+  "session_info": {
+    "start_time": "2025-08-04T10:58:28.641663",
+    "end_time": "2025-08-04T10:58:28.644499",
+    "duration_minutes": 4.7350000000000006e-05,
+    "total_loot": 11,
+    "target_items_found": [
+      "Rare Crystal",
+      "Ancient Artifact",
+      "Precious Gem",
+      "Legendary Weapon"
+    ],
+    "enemies_defeated": 0,
+    "zones_visited": []
+  },
+  "loot_log": [
+    {
+      "time": "2025-08-04T10:58:28.642572",
+      "item": "Gold Coin",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.642591",
+      "item": "Health Potion",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.642596",
+      "item": "Rare Crystal",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.642783",
+      "item": "Magic Scroll",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.642791",
+      "item": "Ancient Artifact",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.643204",
+      "item": "Precious Gem",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.643244",
+      "item": "Valuable Scroll",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.643723",
+      "item": "Legendary Weapon",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.643739",
+      "item": "Masterwork Armor",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.644114",
+      "item": "Common Item",
+      "zone": null,
+      "coordinates": null
+    },
+    {
+      "time": "2025-08-04T10:58:28.644147",
+      "item": "Another Common Item",
+      "zone": null,
+      "coordinates": null
+    }
+  ],
+  "combat_log": []
+}

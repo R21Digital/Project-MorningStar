@@ -1,0 +1,379 @@
+# Shuttle Routes Configuration
+# This file contains all shuttle routes and their schedules
+
+shuttle_routes:
+  tatooine:
+    mos_eisley_shuttleport:
+      name: "Mos Eisley Shuttleport"
+      city: "mos_eisley"
+      planet: "tatooine"
+      coordinates: [3520, -4800]
+      npc: "Shuttle Conductor"
+      description: "Main shuttleport in Mos Eisley"
+      routes:
+        - destination_planet: "corellia"
+          destination_city: "coronet"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "naboo"
+          destination_city: "theed"
+          cost: 200
+          travel_time: 4
+          frequency: "every 20 minutes"
+          capacity: 15
+          status: "active"
+        - destination_planet: "dantooine"
+          destination_city: "khoonda"
+          cost: 250
+          travel_time: 5
+          frequency: "every 30 minutes"
+          capacity: 10
+          status: "active"
+        - destination_planet: "tatooine"
+          destination_city: "bestine"
+          cost: 50
+          travel_time: 1
+          frequency: "every 10 minutes"
+          capacity: 25
+          status: "active"
+        - destination_planet: "tatooine"
+          destination_city: "anchorhead"
+          cost: 75
+          travel_time: 2
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+    
+    bestine_shuttleport:
+      name: "Bestine Shuttleport"
+      city: "bestine"
+      planet: "tatooine"
+      coordinates: [4000, -6000]
+      npc: "Shuttle Attendant"
+      description: "Shuttleport in Bestine"
+      routes:
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 50
+          travel_time: 1
+          frequency: "every 10 minutes"
+          capacity: 25
+          status: "active"
+        - destination_planet: "naboo"
+          destination_city: "theed"
+          cost: 200
+          travel_time: 4
+          frequency: "every 20 minutes"
+          capacity: 15
+          status: "active"
+        - destination_planet: "corellia"
+          destination_city: "coronet"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+    
+    anchorhead_shuttleport:
+      name: "Anchorhead Shuttleport"
+      city: "anchorhead"
+      planet: "tatooine"
+      coordinates: [-100, 200]
+      npc: "Shuttle Attendant"
+      description: "Shuttleport in Anchorhead"
+      routes:
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 75
+          travel_time: 2
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "tatooine"
+          destination_city: "bestine"
+          cost: 100
+          travel_time: 2
+          frequency: "every 20 minutes"
+          capacity: 15
+          status: "active"
+
+  naboo:
+    theed_shuttleport:
+      name: "Theed Shuttleport"
+      city: "theed"
+      planet: "naboo"
+      coordinates: [5000, -4000]
+      npc: "Shuttle Conductor"
+      description: "Main shuttleport in Theed"
+      routes:
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 200
+          travel_time: 4
+          frequency: "every 20 minutes"
+          capacity: 15
+          status: "active"
+        - destination_planet: "corellia"
+          destination_city: "coronet"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "naboo"
+          destination_city: "moenia"
+          cost: 75
+          travel_time: 2
+          frequency: "every 10 minutes"
+          capacity: 25
+          status: "active"
+        - destination_planet: "dantooine"
+          destination_city: "khoonda"
+          cost: 250
+          travel_time: 5
+          frequency: "every 30 minutes"
+          capacity: 10
+          status: "active"
+    
+    moenia_shuttleport:
+      name: "Moenia Shuttleport"
+      city: "moenia"
+      planet: "naboo"
+      coordinates: [4500, -4500]
+      npc: "Shuttle Attendant"
+      description: "Shuttleport in Moenia"
+      routes:
+        - destination_planet: "naboo"
+          destination_city: "theed"
+          cost: 75
+          travel_time: 2
+          frequency: "every 10 minutes"
+          capacity: 25
+          status: "active"
+        - destination_planet: "corellia"
+          destination_city: "tyrena"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 200
+          travel_time: 4
+          frequency: "every 20 minutes"
+          capacity: 15
+          status: "active"
+
+  corellia:
+    coronet_shuttleport:
+      name: "Coronet Shuttleport"
+      city: "coronet"
+      planet: "corellia"
+      coordinates: [123, 456]
+      npc: "Shuttle Conductor"
+      description: "Main shuttleport in Coronet"
+      routes:
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "naboo"
+          destination_city: "theed"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "corellia"
+          destination_city: "tyrena"
+          cost: 50
+          travel_time: 1
+          frequency: "every 10 minutes"
+          capacity: 25
+          status: "active"
+        - destination_planet: "dantooine"
+          destination_city: "khoonda"
+          cost: 250
+          travel_time: 5
+          frequency: "every 30 minutes"
+          capacity: 10
+          status: "active"
+    
+    tyrena_shuttleport:
+      name: "Tyrena Shuttleport"
+      city: "tyrena"
+      planet: "corellia"
+      coordinates: [200, 300]
+      npc: "Shuttle Attendant"
+      description: "Shuttleport in Tyrena"
+      routes:
+        - destination_planet: "corellia"
+          destination_city: "coronet"
+          cost: 50
+          travel_time: 1
+          frequency: "every 10 minutes"
+          capacity: 25
+          status: "active"
+        - destination_planet: "naboo"
+          destination_city: "moenia"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 150
+          travel_time: 3
+          frequency: "every 15 minutes"
+          capacity: 20
+          status: "active"
+
+  dantooine:
+    khoonda_shuttleport:
+      name: "Khoonda Shuttleport"
+      city: "khoonda"
+      planet: "dantooine"
+      coordinates: [100, 200]
+      npc: "Shuttle Conductor"
+      description: "Main shuttleport on Dantooine"
+      routes:
+        - destination_planet: "tatooine"
+          destination_city: "mos_eisley"
+          cost: 250
+          travel_time: 5
+          frequency: "every 30 minutes"
+          capacity: 10
+          status: "active"
+        - destination_planet: "naboo"
+          destination_city: "theed"
+          cost: 250
+          travel_time: 5
+          frequency: "every 30 minutes"
+          capacity: 10
+          status: "active"
+        - destination_planet: "corellia"
+          destination_city: "coronet"
+          cost: 250
+          travel_time: 5
+          frequency: "every 30 minutes"
+          capacity: 10
+          status: "active"
+
+# Shuttle schedules and timing
+schedules:
+  # Peak hours (higher frequency)
+  peak_hours:
+    start: "08:00"
+    end: "18:00"
+    frequency_multiplier: 1.5
+  
+  # Off-peak hours (lower frequency)
+  off_peak_hours:
+    start: "18:00"
+    end: "08:00"
+    frequency_multiplier: 0.7
+  
+  # Night hours (reduced service)
+  night_hours:
+    start: "22:00"
+    end: "06:00"
+    frequency_multiplier: 0.5
+
+# Shuttle capacity and passenger limits
+capacity:
+  standard_shuttle: 25
+  express_shuttle: 15
+  luxury_shuttle: 10
+  cargo_shuttle: 50
+
+# Shuttle types and their characteristics
+shuttle_types:
+  standard:
+    name: "Standard Shuttle"
+    capacity: 25
+    speed: "normal"
+    comfort: "basic"
+    cost_multiplier: 1.0
+  
+  express:
+    name: "Express Shuttle"
+    capacity: 15
+    speed: "fast"
+    comfort: "standard"
+    cost_multiplier: 1.5
+  
+  luxury:
+    name: "Luxury Shuttle"
+    capacity: 10
+    speed: "normal"
+    comfort: "premium"
+    cost_multiplier: 2.0
+  
+  cargo:
+    name: "Cargo Shuttle"
+    capacity: 50
+    speed: "slow"
+    comfort: "minimal"
+    cost_multiplier: 0.8
+
+# Shuttle maintenance and reliability
+maintenance:
+  # Maintenance intervals (in hours of operation)
+  intervals:
+    standard_shuttle: 48
+    express_shuttle: 36
+    luxury_shuttle: 72
+    cargo_shuttle: 60
+  
+  # Reliability factors (percentage of on-time departures)
+  reliability:
+    standard_shuttle: 95
+    express_shuttle: 98
+    luxury_shuttle: 99
+    cargo_shuttle: 90
+
+# Shuttle route status and conditions
+route_status:
+  active: "Route is currently operating"
+  maintenance: "Route temporarily closed for maintenance"
+  weather: "Route affected by weather conditions"
+  security: "Route closed due to security concerns"
+  capacity: "Route at full capacity"
+
+# Shuttle travel restrictions
+restrictions:
+  # Planets with special travel requirements
+  permit_required:
+    - planet: "lok"
+      permit: "Lok Travel Permit"
+      cost: 500
+    - planet: "endor"
+      permit: "Endor Travel Permit"
+      cost: 750
+  
+  # Planets with travel restrictions
+  restricted:
+    - planet: "kashyyyk"
+      reason: "Wookiee homeworld - restricted access"
+    - planet: "geonosis"
+      reason: "Separatist stronghold - dangerous"
+  
+  # Weather-related restrictions
+  weather_restrictions:
+    - condition: "sandstorm"
+      affected_planets: ["tatooine"]
+      delay_multiplier: 2.0
+    - condition: "heavy_rain"
+      affected_planets: ["naboo"]
+      delay_multiplier: 1.5
+    - condition: "ion_storm"
+      affected_planets: ["all"]
+      delay_multiplier: 3.0 

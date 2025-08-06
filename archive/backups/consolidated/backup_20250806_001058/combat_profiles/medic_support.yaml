@@ -1,0 +1,87 @@
+name: medic_support
+build_type: medic
+weapon_type: pistol
+combat_style: support
+description: "Pure medic build focused on healing and support abilities"
+abilities:
+  - "Heal Self"
+  - "Heal Other"
+  - "Cure Poison"
+  - "Cure Disease"
+  - "Stim Pack"
+  - "Medical Kit"
+  - "Diagnosis"
+  - "Treatment"
+  - "Combat Stim"
+  - "Pistol Shot"
+  - "Reload"
+  - "Dodge"
+ability_rotation:
+  - "Heal Self"
+  - "Diagnosis"
+  - "Treatment"
+  - "Heal Other"
+  - "Cure Poison"
+  - "Pistol Shot"
+emergency_abilities:
+  heal_emergency: "Heal Self"
+  stim_emergency: "Stim Pack"
+  cure_poison: "Cure Poison"
+  cure_disease: "Cure Disease"
+  dodge: "Dodge"
+combat_priorities:
+  player_health_threshold: 70
+  target_health_threshold: 30
+  healing_priority: 90
+  support_priority: 85
+cooldowns:
+  Heal Self: 20
+  Heal Other: 25
+  Cure Poison: 45
+  Cure Disease: 60
+  Stim Pack: 120
+  Medical Kit: 90
+  Diagnosis: 10
+  Treatment: 15
+  Combat Stim: 60
+  Pistol Shot: 0
+  Reload: 0
+  Dodge: 5
+targeting:
+  primary_target: "nearest_hostile"
+  max_range: 25
+  switch_target_threshold: 40
+  prefer_weaker_targets: true
+  avoid_elites: true
+healing:
+  self_heal_threshold: 80
+  stim_pack_threshold: 50
+  healing_abilities:
+    - "Heal Self"
+    - "Heal Other"
+    - "Cure Poison"
+    - "Cure Disease"
+    - "Stim Pack"
+    - "Medical Kit"
+  emergency_healing: "Stim Pack"
+  healing_priorities:
+    - "Cure Poison"
+    - "Cure Disease"
+    - "Heal Self"
+    - "Heal Other"
+    - "Stim Pack"
+buffing:
+  buff_threshold: 75
+  buff_abilities:
+    - "Combat Stim"
+    - "Medical Kit"
+    - "Treatment"
+  buff_priorities:
+    - "Combat Stim"
+    - "Medical Kit"
+    - "Treatment"
+optimal_range: 20
+fallback_abilities:
+  - "Pistol Shot"
+  - "Heal Self"
+  - "Dodge" 

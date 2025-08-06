@@ -1,0 +1,24 @@
+{
+  "bug_reports": [],
+  "metadata": {
+    "created": "2024-01-01T00:00:00Z",
+    "version": "1.0",
+    "description": "Bug reports collected from SWGDB website users"
+  },
+  "schema": {
+    "bug_report": {
+      "id": "string",
+      "title": "string",
+      "description": "string",
+      "priority": "enum: Low, Medium, High",
+      "category": "enum: Bot, Website, Mod",
+      "screenshot_url": "string (optional)",
+      "user_agent": "string",
+      "page_url": "string",
+      "submitted_at": "string (ISO 8601)",
+      "status": "enum: New, In Progress, Resolved, Closed",
+      "assigned_to": "string (optional)",
+      "notes": "string (optional)"
+    }
+  }
+} 

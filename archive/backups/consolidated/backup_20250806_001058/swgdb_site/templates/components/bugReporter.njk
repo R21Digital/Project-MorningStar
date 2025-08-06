@@ -1,0 +1,428 @@
+{% macro bugReporter() %}
+<div class="bug-reporter-container">
+  <div class="bug-reporter-header">
+    <h2><i class="fas fa-bug"></i> Report a Bug</h2>
+    <p>Help us improve SWGDB by reporting bugs you encounter. Your feedback is valuable!</p>
+  </div>
+
+  <form id="bugReportForm" class="bug-report-form">
+    <div class="form-section">
+      <h3>Basic Information</h3>
+      
+      <div class="form-group">
+        <label for="bugTitle">Bug Title *</label>
+        <input type="text" id="bugTitle" name="title" required 
+               placeholder="Brief description of the issue"
+               class="form-control">
+        <small class="form-text">A clear, concise title that describes the problem</small>
+      </div>
+
+      <div class="form-group">
+        <label for="bugDescription">Description *</label>
+        <textarea id="bugDescription" name="description" required 
+                  placeholder="Please describe the bug in detail..."
+                  rows="4" class="form-control"></textarea>
+        <small class="form-text">Provide a detailed description of what happened</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="bugSeverity">Severity *</label>
+          <select id="bugSeverity" name="severity" required class="form-control">
+            <option value="">Select severity...</option>
+            <option value="low">Low - Minor issue, doesn't affect functionality</option>
+            <option value="medium">Medium - Noticeable issue, some impact</option>
+            <option value="high">High - Significant issue, affects functionality</option>
+            <option value="critical">Critical - Blocks core functionality</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="bugModule">Module *</label>
+          <select id="bugModule" name="module" required class="form-control">
+            <option value="">Select module...</option>
+            <option value="heroics">Heroics</option>
+            <option value="rls">RLS Mode</option>
+            <option value="api">API</option>
+            <option value="dashboard">Dashboard</option>
+            <option value="admin">Admin Panel</option>
+            <option value="user-management">User Management</option>
+            <option value="builds">Builds</option>
+            <option value="loot">Loot</option>
+            <option value="general">General</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Reproduction Steps</h3>
+      
+      <div class="form-group">
+        <label for="bugSteps">Steps to Reproduce *</label>
+        <textarea id="bugSteps" name="steps_to_reproduce" required 
+                  placeholder="1. Go to...
+2. Click on...
+3. Observe..."
+                  rows="4" class="form-control"></textarea>
+        <small class="form-text">Numbered steps to reproduce the issue</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="bugExpected">Expected Behavior *</label>
+          <textarea id="bugExpected" name="expected_behavior" required 
+                    placeholder="What should happen?"
+                    rows="3" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="bugActual">Actual Behavior *</label>
+          <textarea id="bugActual" name="actual_behavior" required 
+                    placeholder="What actually happened?"
+                    rows="3" class="form-control"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Environment & Contact</h3>
+      
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="bugBrowser">Browser</label>
+          <input type="text" id="bugBrowser" name="browser" 
+                 placeholder="e.g., Chrome 120, Firefox 115"
+                 class="form-control">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="bugOS">Operating System</label>
+          <input type="text" id="bugOS" name="os" 
+                 placeholder="e.g., Windows 11, macOS 14, Ubuntu 22.04"
+                 class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="bugEmail">Your Email *</label>
+        <input type="email" id="bugEmail" name="email" required 
+               placeholder="your.email@example.com"
+               class="form-control">
+        <small class="form-text">We'll use this to contact you about the bug status</small>
+      </div>
+
+      <div class="form-group">
+        <label for="bugDiscord">Discord Link (Optional)</label>
+        <input type="url" id="bugDiscord" name="discord_link" 
+               placeholder="https://discord.com/channels/..."
+               class="form-control">
+        <small class="form-text">Link to Discord conversation about this bug</small>
+      </div>
+
+      <div class="form-group">
+        <label for="bugTags">Tags (Optional)</label>
+        <input type="text" id="bugTags" name="tags" 
+               placeholder="mobile, responsive, heroics"
+               class="form-control">
+        <small class="form-text">Comma-separated tags to help categorize the bug</small>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <h3>Additional Information</h3>
+      
+      <div class="form-group">
+        <label for="bugPriority">Priority</label>
+        <select id="bugPriority" name="priority" class="form-control">
+          <option value="normal">Normal</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+          <option value="low">Low</option>
+        </select>
+        <small class="form-text">How urgent is this issue for you?</small>
+      </div>
+
+      <div class="form-group">
+        <label for="bugCategory">Category</label>
+        <select id="bugCategory" name="category" class="form-control">
+          <option value="">Select category...</option>
+          <option value="ui">UI/UX</option>
+          <option value="functionality">Functionality</option>
+          <option value="api">API</option>
+          <option value="performance">Performance</option>
+          <option value="security">Security</option>
+          <option value="mobile">Mobile</option>
+          <option value="desktop">Desktop</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="bugScreenshots">Screenshots (Optional)</label>
+        <input type="file" id="bugScreenshots" name="screenshots" 
+               multiple accept="image/*"
+               class="form-control">
+        <small class="form-text">Upload screenshots showing the issue (max 5 files)</small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-paper-plane"></i> Submit Bug Report
+      </button>
+      <button type="reset" class="btn btn-secondary">
+        <i class="fas fa-undo"></i> Reset Form
+      </button>
+    </div>
+  </form>
+
+  <div id="bugReportSuccess" class="alert alert-success" style="display: none;">
+    <i class="fas fa-check-circle"></i>
+    <strong>Bug report submitted successfully!</strong>
+    <p>Thank you for your feedback. We'll review your report and get back to you soon.</p>
+  </div>
+
+  <div id="bugReportError" class="alert alert-danger" style="display: none;">
+    <i class="fas fa-exclamation-triangle"></i>
+    <strong>Error submitting bug report</strong>
+    <p id="errorMessage">Please try again or contact support if the problem persists.</p>
+  </div>
+</div>
+
+<style>
+.bug-reporter-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.bug-reporter-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+}
+
+.bug-reporter-header h2 {
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.bug-report-form {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.form-section h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  border-left: 4px solid #667eea;
+  padding-left: 15px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+  outline: none;
+}
+
+.form-text {
+  color: #6c757d;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  border: none;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.alert {
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+@media (max-width: 768px) {
+  .bug-reporter-container {
+    padding: 10px;
+  }
+  
+  .bug-report-form {
+    padding: 20px;
+  }
+  
+  .form-actions .btn {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('bugReportForm');
+  const successAlert = document.getElementById('bugReportSuccess');
+  const errorAlert = document.getElementById('bugReportError');
+  const errorMessage = document.getElementById('errorMessage');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Hide previous alerts
+    successAlert.style.display = 'none';
+    errorAlert.style.display = 'none';
+    
+    // Collect form data
+    const formData = new FormData(form);
+    const bugData = {
+      title: formData.get('title'),
+      description: formData.get('description'),
+      severity: formData.get('severity'),
+      module: formData.get('module'),
+      steps_to_reproduce: formData.get('steps_to_reproduce').split('\n').filter(step => step.trim()),
+      expected_behavior: formData.get('expected_behavior'),
+      actual_behavior: formData.get('actual_behavior'),
+      browser: formData.get('browser') || 'N/A',
+      os: formData.get('os') || 'N/A',
+      email: formData.get('email'),
+      discord_link: formData.get('discord_link') || null,
+      tags: formData.get('tags') ? formData.get('tags').split(',').map(tag => tag.trim()) : [],
+      priority: formData.get('priority'),
+      category: formData.get('category'),
+      reported_at: new Date().toISOString()
+    };
+
+    try {
+      // In a real implementation, this would send to your API
+      console.log('Submitting bug report:', bugData);
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Show success message
+      successAlert.style.display = 'block';
+      form.reset();
+      
+      // Scroll to success message
+      successAlert.scrollIntoView({ behavior: 'smooth' });
+      
+    } catch (error) {
+      console.error('Error submitting bug report:', error);
+      errorMessage.textContent = error.message || 'An unexpected error occurred. Please try again.';
+      errorAlert.style.display = 'block';
+      errorAlert.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // Form validation
+  const requiredFields = form.querySelectorAll('[required]');
+  requiredFields.forEach(field => {
+    field.addEventListener('blur', function() {
+      if (!this.value.trim()) {
+        this.classList.add('is-invalid');
+      } else {
+        this.classList.remove('is-invalid');
+      }
+    });
+  });
+
+  // File upload validation
+  const fileInput = document.getElementById('bugScreenshots');
+  fileInput.addEventListener('change', function() {
+    const files = this.files;
+    if (files.length > 5) {
+      alert('Maximum 5 screenshots allowed');
+      this.value = '';
+    }
+    
+    for (let file of files) {
+      if (!file.type.startsWith('image/')) {
+        alert('Only image files are allowed');
+        this.value = '';
+        break;
+      }
+    }
+  });
+});
+</script>
+{% endmacro %} 

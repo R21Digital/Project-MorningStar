@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>{{ title or "SWGDB - Star Wars Galaxies Database" }}</title>
+    <meta name="description" content="{{ description or "Comprehensive tools and information for Star Wars Galaxies players including heroics, loot tracking, builds, and more." }}">
+    <meta name="keywords" content="{{ keywords or "Star Wars Galaxies, SWG, database, heroics, loot, builds, tools, MS11, gaming" }}">
+    <meta name="author" content="SWGDB Team">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="{{ googleSiteVerification or 'your-verification-code-here' }}" />
+    
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="{{ title or 'SWGDB - Star Wars Galaxies Database' }}">
+    <meta property="og:description" content="{{ description or 'Comprehensive tools and information for Star Wars Galaxies players' }}">
+    <meta property="og:type" content="{{ ogType or 'website' }}">
+    <meta property="og:url" content="{{ canonicalUrl or 'https://swgdb.com' }}{{ page.url }}">
+    <meta property="og:site_name" content="SWGDB">
+    <meta property="og:image" content="{{ ogImage or 'https://swgdb.com/assets/swgdb-og-image.jpg' }}">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title or 'SWGDB - Star Wars Galaxies Database' }}">
+    <meta name="twitter:description" content="{{ description or 'Comprehensive tools and information for Star Wars Galaxies players' }}">
+    <meta name="twitter:site" content="@swgdb">
+    <meta name="twitter:image" content="{{ twitterImage or ogImage or 'https://swgdb.com/assets/swgdb-twitter-card.jpg' }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ canonicalUrl or 'https://swgdb.com' }}{{ page.url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- External CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+    
+    <!-- Custom CSS -->
+    {% if customCSS %}
+        {% for css in customCSS %}
+            <link href="{{ css }}" rel="stylesheet">
+        {% endfor %}
+    {% endif %}
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4ZZ5SFJC0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-Q4ZZ5SFJC0', {
+            // Enhanced configuration for better tracking
+            page_title: document.title,
+            page_location: window.location.href,
+            send_page_view: true,
+            // Custom dimensions for SWGDB tracking
+            custom_map: {
+                'custom_dimension1': 'user_type',
+                'custom_dimension2': 'page_category',
+                'custom_dimension3': 'content_type',
+                'custom_dimension4': 'heroic_type',
+                'custom_dimension5': 'loot_rarity'
+            },
+            // Enhanced ecommerce for tracking user engagement
+            allow_enhanced_conversions: true,
+            allow_ad_personalization_signals: false // Privacy-first approach
+        });
+
+        // Enhanced tracking functions
+        function trackSWGDBEvent(eventName, parameters = {}) {
+            gtag('event', eventName, {
+                event_category: 'SWGDB',
+                event_label: window.location.pathname,
+                page_category: getPageCategory(),
+                content_type: getContentType(),
+                ...parameters
+            });
+        }
+
+        // Track page views with enhanced data
+        gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_category: getPageCategory(),
+            content_type: getContentType(),
+            heroic_type: getHeroicType(),
+            user_agent: navigator.userAgent
+        });
+
+        // Helper functions for enhanced tracking
+        function getPageCategory() {
+            const path = window.location.pathname;
+            if (path.includes('/heroics/')) return 'Heroics';
+            if (path.includes('/loot/')) return 'Loot';
+            if (path.includes('/builds/')) return 'Builds';
+            if (path.includes('/tools/')) return 'Tools';
+            if (path.includes('/admin/')) return 'Admin';
+            if (path.includes('/getting-started/')) return 'Getting Started';
+            if (path.includes('/api/')) return 'API';
+            return 'General';
+        }
+
+        function getContentType() {
+            const path = window.location.pathname;
+            if (path.endsWith('.html')) return 'HTML';
+            if (path.includes('/api/')) return 'API';
+            if (path.includes('/loot/')) return 'Loot Data';
+            if (path.includes('/heroics/')) return 'Heroic Guide';
+            return 'Page';
+        }
+
+        function getHeroicType() {
+            const path = window.location.pathname;
+            if (path.includes('/axkva-min')) return 'Axkva Min';
+            if (path.includes('/ig-88')) return 'IG-88';
+            if (path.includes('/geonosian-queen')) return 'Geonosian Queen';
+            if (path.includes('/krayt-dragon')) return 'Krayt Dragon';
+            if (path.includes('/nightsister-stronghold')) return 'Nightsister Stronghold';
+            if (path.includes('/janta-blood-crisis')) return 'Janta Blood Crisis';
+            return null;
+        }
+
+        // Enhanced user interaction tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track filter usage with more detail
+            const filterButtons = document.querySelectorAll('.filter-btn, .tag-filter-btn, [data-filter]');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    trackSWGDBEvent('filter_used', {
+                        filter_type: this.dataset.filter || this.dataset.rarity || this.className,
+                        filter_value: this.textContent.trim(),
+                        page_section: this.closest('[data-section]')?.dataset.section || 'unknown'
+                    });
+                });
+            });
+
+            // Track search usage with improved data
+            const searchBoxes = document.querySelectorAll('input[type="search"], .search-box, input[placeholder*="search" i]');
+            searchBoxes.forEach(box => {
+                let searchTimeout;
+                box.addEventListener('input', function() {
+                    clearTimeout(searchTimeout);
+                    if (this.value.length > 2) {
+                        searchTimeout = setTimeout(() => {
+                            trackSWGDBEvent('search_performed', {
+                                search_term: this.value,
+                                search_location: window.location.pathname,
+                                search_length: this.value.length,
+                                page_category: getPageCategory()
+                            });
+                        }, 1000); // Debounce search tracking
+                    }
+                });
+            });
+
+            // Track navigation clicks with enhanced data
+            const navLinks = document.querySelectorAll('a[href]:not([href^="javascript:"]):not([href^="#"])');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const isExternal = this.hostname !== window.location.hostname;
+                    const linkCategory = this.closest('[data-nav]')?.dataset.nav || 'general';
+                    
+                    trackSWGDBEvent('navigation_click', {
+                        link_text: this.textContent.trim(),
+                        link_url: this.href,
+                        link_location: window.location.pathname,
+                        is_external: isExternal,
+                        link_category: linkCategory,
+                        destination_category: this.pathname ? getDestinationCategory(this.pathname) : 'unknown'
+                    });
+                });
+            });
+
+            // Track form submissions with enhanced data
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function() {
+                    const formType = this.dataset.formType || this.id || 'unknown';
+                    const formFields = this.querySelectorAll('input, select, textarea').length;
+                    
+                    trackSWGDBEvent('form_submitted', {
+                        form_id: this.id || 'unknown',
+                        form_action: this.action,
+                        form_type: formType,
+                        form_field_count: formFields,
+                        page_category: getPageCategory()
+                    });
+                });
+            });
+
+            // Track tab interactions
+            const tabButtons = document.querySelectorAll('.tab-btn, [data-tab]');
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    trackSWGDBEvent('tab_clicked', {
+                        tab_name: this.dataset.tab || this.textContent.trim(),
+                        page_category: getPageCategory(),
+                        heroic_type: getHeroicType()
+                    });
+                });
+            });
+
+            // Track loot table interactions
+            const lootTableElements = document.querySelectorAll('.loot-table, .loot-row, .rarity-badge');
+            lootTableElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    trackSWGDBEvent('loot_interaction', {
+                        element_type: this.className,
+                        heroic_type: getHeroicType(),
+                        page_category: getPageCategory()
+                    });
+                });
+            });
+        });
+
+        function getDestinationCategory(pathname) {
+            if (pathname.includes('/heroics/')) return 'Heroics';
+            if (pathname.includes('/loot/')) return 'Loot';
+            if (pathname.includes('/builds/')) return 'Builds';
+            if (pathname.includes('/tools/')) return 'Tools';
+            return 'General';
+        }
+
+        // Track performance metrics
+        window.addEventListener('load', function() {
+            // Track Core Web Vitals
+            if (window.performance && window.performance.timing) {
+                const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+                const domContentLoaded = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+                
+                trackSWGDBEvent('page_performance', {
+                    load_time_ms: loadTime,
+                    dom_content_loaded_ms: domContentLoaded,
+                    page_url: window.location.href,
+                    page_category: getPageCategory(),
+                    heroic_type: getHeroicType()
+                });
+
+                // Track if load time is slow
+                if (loadTime > 3000) {
+                    trackSWGDBEvent('slow_page_load', {
+                        load_time_ms: loadTime,
+                        page_url: window.location.href,
+                        page_category: getPageCategory()
+                    });
+                }
+            }
+
+            // Enhanced user engagement tracking
+            let timeOnPage = 0;
+            let maxScroll = 0;
+            let engagementEvents = 0;
+
+            const engagementInterval = setInterval(function() {
+                timeOnPage += 10;
+                const currentScroll = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+                maxScroll = Math.max(maxScroll, currentScroll);
+
+                // Track engagement milestones
+                if (timeOnPage === 30 || timeOnPage === 60 || timeOnPage === 120 || timeOnPage % 300 === 0) {
+                    trackSWGDBEvent('user_engagement', {
+                        time_on_page_seconds: timeOnPage,
+                        max_scroll_percent: maxScroll,
+                        page_url: window.location.href,
+                        page_category: getPageCategory(),
+                        heroic_type: getHeroicType(),
+                        engagement_events: engagementEvents
+                    });
+                }
+            }, 10000); // Check every 10 seconds
+
+            // Track user interactions for engagement scoring
+            document.addEventListener('click', () => engagementEvents++);
+            document.addEventListener('scroll', () => {
+                const currentScroll = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+                maxScroll = Math.max(maxScroll, currentScroll);
+            });
+
+            // Clear interval and send final engagement data when user leaves
+            window.addEventListener('beforeunload', function() {
+                clearInterval(engagementInterval);
+                trackSWGDBEvent('page_exit', {
+                    time_on_page_seconds: timeOnPage,
+                    max_scroll_percent: maxScroll,
+                    page_url: window.location.href,
+                    page_category: getPageCategory(),
+                    heroic_type: getHeroicType(),
+                    engagement_events: engagementEvents
+                });
+            });
+        });
+
+        // Track 404 errors and broken links
+        window.addEventListener('error', function(e) {
+            if (e.target !== window) {
+                trackSWGDBEvent('resource_error', {
+                    error_source: e.target.src || e.target.href || 'unknown',
+                    error_type: e.target.tagName || 'unknown',
+                    page_url: window.location.href,
+                    page_category: getPageCategory()
+                });
+            }
+        });
+
+        // Track JavaScript errors
+        window.addEventListener('error', function(e) {
+            trackSWGDBEvent('javascript_error', {
+                error_message: e.message,
+                error_filename: e.filename,
+                error_line: e.lineno,
+                page_url: window.location.href,
+                page_category: getPageCategory()
+            });
+        });
+    </script>
+
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "{{ schemaType or 'WebSite' }}",
+        "name": "{{ siteName or 'SWGDB' }}",
+        "description": "{{ description or 'Star Wars Galaxies Database - Comprehensive tools and information for SWG players' }}",
+        "url": "{{ canonicalUrl or 'https://swgdb.com' }}",
+        {% if schemaType == 'WebSite' %}
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ canonicalUrl or 'https://swgdb.com' }}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        {% endif %}
+        "publisher": {
+            "@type": "Organization",
+            "name": "SWGDB Team",
+            "url": "{{ canonicalUrl or 'https://swgdb.com' }}"
+        }
+        {% if breadcrumbs %}
+        ,"breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {% for crumb in breadcrumbs %}
+                {
+                    "@type": "ListItem",
+                    "position": {{ loop.index }},
+                    "name": "{{ crumb.name }}",
+                    "item": "{{ canonicalUrl or 'https://swgdb.com' }}{{ crumb.url }}"
+                }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ]
+        }
+        {% endif %}
+    }
+    </script>
+
+    {% block head %}{% endblock %}
+</head>
+<body class="{{ bodyClass or '' }}">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+    {% block header %}
+    <header class="site-header" role="banner">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" data-nav="main">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-database"></i>
+                    SWGDB
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/heroics/">Heroics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/loot/">Loot</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/builds/">Builds</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tools/">Tools</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/getting-started/">Getting Started</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% endblock %}
+
+    <main id="main-content" role="main">
+        {% block content %}
+        {{ content | safe }}
+        {% endblock %}
+    </main>
+
+    {% block footer %}
+    <footer class="site-footer bg-dark text-light mt-5" role="contentinfo">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>SWGDB</h5>
+                    <p>Star Wars Galaxies Database - Your comprehensive resource for SWG tools and information.</p>
+                </div>
+                <div class="col-md-6">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled" data-nav="footer">
+                        <li><a href="/heroics/" class="text-light">Heroics</a></li>
+                        <li><a href="/loot/" class="text-light">Loot Tracking</a></li>
+                        <li><a href="/builds/" class="text-light">Character Builds</a></li>
+                        <li><a href="/getting-started/" class="text-light">Getting Started</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <small>&copy; {{ "now" | date: "%Y" }} SWGDB Team. All rights reserved.</small>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small>Powered by MS11 bot data and community contributions</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!-- External JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    
+    <!-- Custom JavaScript -->
+    {% if customJS %}
+        {% for js in customJS %}
+            <script src="{{ js }}"></script>
+        {% endfor %}
+    {% endif %}
+
+    {% block scripts %}{% endblock %}
+
+    <!-- Privacy Notice for Analytics -->
+    <noscript>
+        <div class="alert alert-info small">
+            This site uses Google Analytics to understand how you interact with our content. 
+            No personally identifiable information is collected.
+        </div>
+    </noscript>
+</body>
+</html>

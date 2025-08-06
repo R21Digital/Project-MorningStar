@@ -1,0 +1,206 @@
+{
+  "legacy_begins": {
+    "quest_id": "legacy_begins",
+    "name": "The Legacy Begins",
+    "giver": "Unknown",
+    "location": "mos_eisley",
+    "planet": "tatooine",
+    "coordinates": [
+      100,
+      150
+    ],
+    "reward": "{'experience': 100, 'credits': 50, 'reputation': {'tatooine': 25}, 'items': ['basic_weapon', 'starter_armor'], 'unlocks': ['mos_eisley_access', 'basic_combat_training']}",
+    "quest_type": "tutorial",
+    "difficulty": "easy",
+    "level_requirement": 1,
+    "discovered_time": "2025-07-31 13:09:42.197955",
+    "source": "yaml"
+  },
+  "desert_secrets": {
+    "quest_id": "desert_secrets",
+    "name": "The Desert's Secrets",
+    "giver": "Unknown",
+    "location": "jundland_wastes",
+    "planet": "tatooine",
+    "coordinates": [
+      500,
+      600
+    ],
+    "reward": "{'experience': 250, 'credits': 150, 'reputation': {'tatooine': 50}, 'items': ['ancient_artifact', 'desert_map'], 'unlocks': ['jundland_access', 'artifact_collection']}",
+    "quest_type": "exploration",
+    "difficulty": "medium",
+    "level_requirement": 5,
+    "discovered_time": "2025-07-31 13:09:42.201063",
+    "source": "yaml"
+  },
+  "legacy_call": {
+    "quest_id": "legacy_call",
+    "name": "The Legacy's Call",
+    "giver": "Unknown",
+    "location": "anchorhead",
+    "planet": "tatooine",
+    "coordinates": [
+      800,
+      900
+    ],
+    "reward": "{'experience': 500, 'credits': 300, 'reputation': {'tatooine': 100}, 'items': ['legacy_crystal', 'enhanced_weapon', 'legacy_title'], 'unlocks': ['legacy_abilities', 'advanced_training', 'galaxy_access']}",
+    "quest_type": "epic",
+    "difficulty": "hard",
+    "level_requirement": 10,
+    "discovered_time": "2025-07-31 13:09:42.204693",
+    "source": "yaml"
+  },
+  "tatooine_artifact_hunt": {
+    "quest_id": "tatooine_artifact_hunt",
+    "name": "Tatooine Artifact Hunt",
+    "giver": "Unknown",
+    "location": "mos_eisley",
+    "planet": "tatooine",
+    "coordinates": [
+      100,
+      200
+    ],
+    "reward": "{'experience': 500, 'credits': 1000, 'reputation': {'tatooine': 200}, 'items': ['artifact_fragment', 'desert_map'], 'unlocks': ['tatooine_cantina_access']}",
+    "quest_type": "collection",
+    "difficulty": "medium",
+    "level_requirement": 15,
+    "discovered_time": "2025-07-31 13:09:42.207306",
+    "source": "yaml"
+  },
+  "coronet_trade_mission": {
+    "quest_id": "coronet_trade_mission",
+    "name": "Coronet Trade Mission",
+    "giver": "Unknown",
+    "location": "",
+    "planet": "corellia",
+    "coordinates": [
+      123,
+      456
+    ],
+    "reward": "{'credits': 2000, 'experience': 800, 'items': ['Trade Federation Credits']}",
+    "quest_type": "delivery",
+    "difficulty": "easy",
+    "level_requirement": 10,
+    "discovered_time": "2025-07-31 13:09:42.208792",
+    "source": "yaml"
+  },
+  "theed_palace_mission": {
+    "quest_id": "theed_palace_mission",
+    "name": "Theed Palace Security Mission",
+    "giver": "Unknown",
+    "location": "",
+    "planet": "naboo",
+    "coordinates": [
+      5000,
+      -4000
+    ],
+    "reward": "{'credits': 3000, 'experience': 1500, 'items': ['Palace Security Badge']}",
+    "quest_type": "faction",
+    "difficulty": "medium",
+    "level_requirement": 15,
+    "discovered_time": "2025-07-31 13:09:42.210312",
+    "source": "yaml"
+  },
+  "artifact_hunt": {
+    "quest_id": "artifact_hunt",
+    "name": "Ancient Artifact Hunt",
+    "giver": "Unknown",
+    "location": "",
+    "planet": "tatooine",
+    "coordinates": [
+      400,
+      500
+    ],
+    "reward": "{'credits': 8000, 'experience': 3000, 'items': ['Ancient Artifact', 'Desert Map']}",
+    "quest_type": "collection",
+    "difficulty": "hard",
+    "level_requirement": 25,
+    "discovered_time": "2025-07-31 13:09:42.211743",
+    "source": "yaml"
+  },
+  "imp_agent_kill": {
+    "quest_id": "imp_agent_kill",
+    "name": "Imperial Agent Kill Mission",
+    "giver": "Unknown",
+    "location": "",
+    "planet": "tatooine",
+    "coordinates": [
+      123,
+      -456
+    ],
+    "reward": "{'credits': 5000, 'experience': 2000, 'items': ['Imperial Medal', 'Rebel Intel']}",
+    "quest_type": "faction",
+    "difficulty": "medium",
+    "level_requirement": 20,
+    "discovered_time": "2025-07-31 13:09:42.213131",
+    "source": "yaml"
+  },
+  "moisture_farm_delivery": {
+    "quest_id": "moisture_farm_delivery",
+    "name": "Moisture Farm Delivery",
+    "giver": "Unknown",
+    "location": "",
+    "planet": "tatooine",
+    "coordinates": [
+      200,
+      300
+    ],
+    "reward": "{'credits': 1000, 'experience': 500, 'items': ['Moisture Vaporator Parts']}",
+    "quest_type": "delivery",
+    "difficulty": "easy",
+    "level_requirement": 5,
+    "discovered_time": "2025-07-31 13:09:42.214479",
+    "source": "yaml"
+  },
+  "discovered_tatooine_artifact_hunt": {
+    "quest_id": "discovered_tatooine_artifact_hunt",
+    "name": "Tatooine Artifact Hunt",
+    "giver": "Unknown",
+    "location": "Tatooine Desert",
+    "planet": "tatooine",
+    "coordinates": [
+      0,
+      0
+    ],
+    "reward": "1000 credits",
+    "quest_type": "discovered",
+    "difficulty": "medium",
+    "level_requirement": 1,
+    "discovered_time": "2025-07-31 13:09:42.215916",
+    "source": "ocr"
+  },
+  "discovered_naboo_palace_security": {
+    "quest_id": "discovered_naboo_palace_security",
+    "name": "Naboo Palace Security",
+    "giver": "Unknown",
+    "location": "Theed Palace",
+    "planet": "unknown",
+    "coordinates": [
+      0,
+      0
+    ],
+    "reward": "500 credits and reputation",
+    "quest_type": "discovered",
+    "difficulty": "medium",
+    "level_requirement": 1,
+    "discovered_time": "2025-07-31 13:09:42.217564",
+    "source": "ocr"
+  },
+  "discovered_corellia_trade_route": {
+    "quest_id": "discovered_corellia_trade_route",
+    "name": "Corellia Trade Route",
+    "giver": "Unknown",
+    "location": "Coronet City",
+    "planet": "unknown",
+    "coordinates": [
+      0,
+      0
+    ],
+    "reward": "750 credits",
+    "quest_type": "discovered",
+    "difficulty": "medium",
+    "level_requirement": 1,
+    "discovered_time": "2025-07-31 13:09:42.219020",
+    "source": "ocr"
+  }
+}

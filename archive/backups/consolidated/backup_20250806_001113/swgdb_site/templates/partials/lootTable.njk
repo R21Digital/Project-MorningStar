@@ -1,0 +1,151 @@
+{# Loot Table Partial Template #}
+{# Usage: {% include "partials/lootTable.njk" with context %} #}
+
+{% macro renderLootItem(item, lootTypes) %}
+<div class="loot-item" data-rarity="{{ item.rarity }}" data-type="{{ item.type }}">
+    <div class="loot-header">
+        <div class="loot-name">{{ item.name }}</div>
+        <div class="loot-rarity rarity-{{ item.rarity }}">{{ item.rarity | title }}</div>
+    </div>
+    
+    <div class="loot-type">
+        <i class="{{ lootTypes[item.type].icon if lootTypes[item.type] else 'fas fa-question' }}"></i>
+        {{ lootTypes[item.type].description if lootTypes[item.type] else item.type | title }}
+    </div>
+    
+    {% if item.stats %}
+    <div class="loot-stats">
+        {% for key, value in item.stats %}
+        <div class="stat-item">
+            <span class="stat-label">{{ key | replace('_', ' ') | title }}:</span>
+            <span class="stat-value">{{ value }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="drop-chance">
+        <i class="fas fa-percentage"></i> {{ item.drop_chance }}% Drop Chance
+    </div>
+    
+    <div class="use-case">
+        <i class="fas fa-info-circle"></i> {{ item.use_case }}
+    </div>
+    
+    <div class="loot-description">{{ item.description }}</div>
+    
+    {% if item.image %}
+    <div class="loot-image">
+        <img src="/assets/loot/{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+    </div>
+    {% endif %}
+</div>
+{% endmacro %}
+
+{% macro renderBossSection(boss, lootTypes) %}
+<div class="boss-section" data-boss="{{ boss.name | lower | replace(' ', '-') }}">
+    <div class="boss-header">
+        <div class="boss-name">{{ boss.name }}</div>
+        <div class="boss-level">Level {{ boss.level }}</div>
+    </div>
+    
+    <div class="loot-grid">
+        {% for item in boss.loot %}
+        {{ renderLootItem(item, lootTypes) }}
+        {% endfor %}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro renderHeroicSection(heroic, lootTypes) %}
+<div class="heroic-section" data-heroic="{{ heroic.name | lower | replace(' ', '-') }}">
+    <div class="heroic-header">
+        <h2>{{ heroic.name }}</h2>
+        <p><i class="fas fa-globe"></i> {{ heroic.planet }}</p>
+    </div>
+    
+    {% for boss in heroic.bosses %}
+    {{ renderBossSection(boss, lootTypes) }}
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro renderFilters(heroics, rarityLevels, lootTypes, professionRelevance) %}
+<div class="filters-section">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="filter-group">
+                <h4><i class="fas fa-filter"></i> Heroic Instance</h4>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="heroic" data-value="all">All Heroics</button>
+                    {% for heroicId, heroic in heroics %}
+                    <button class="filter-btn" data-filter="heroic" data-value="{{ heroicId }}">{{ heroic.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="filter-group">
+                <h4><i class="fas fa-gem"></i> Rarity</h4>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="rarity" data-value="all">All Rarities</button>
+                    {% for rarity in rarityLevels %}
+                    <button class="filter-btn" data-filter="rarity" data-value="{{ rarity }}">{{ rarity | title }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="filter-group">
+                <h4><i class="fas fa-tag"></i> Item Type</h4>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="type" data-value="all">All Types</button>
+                    {% for type in lootTypes %}
+                    <button class="filter-btn" data-filter="type" data-value="{{ type }}">{{ type | title }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="filter-group">
+                <h4><i class="fas fa-user-tie"></i> Profession</h4>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="profession" data-value="all">All Professions</button>
+                    {% for profession in professionRelevance %}
+                    <button class="filter-btn" data-filter="profession" data-value="{{ profession }}">{{ profession | title }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro renderLootContainer(heroics, lootTypes) %}
+<div id="lootContainer">
+    {% for heroicId, heroic in heroics %}
+    {{ renderHeroicSection(heroic, lootTypes) }}
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro renderSourceAttribution() %}
+<div class="source-attribution">
+    <i class="fas fa-database"></i> Generated by SWGDB
+</div>
+{% endmacro %}
+
+{# Main loot table component #}
+{% macro renderLootTable(heroics, rarityLevels, lootTypes, professionRelevance) %}
+<div class="loot-table-container">
+    {{ renderFilters(heroics, rarityLevels, lootTypes, professionRelevance) }}
+    {{ renderLootContainer(heroics, lootTypes) }}
+    {{ renderSourceAttribution() }}
+</div>
+{% endmacro %}
+
+{# Export the main macro for use in other templates #}
+{{ renderLootTable(heroics, rarityLevels, lootTypes, professionRelevance) if heroics else '' }} 

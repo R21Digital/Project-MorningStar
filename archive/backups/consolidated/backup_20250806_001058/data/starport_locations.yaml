@@ -1,0 +1,257 @@
+# Starport Locations Configuration
+# This file contains the locations and information for all starports in the game
+
+starports:
+  tatooine:
+    mos_eisley_starport:
+      name: "Mos Eisley Starport"
+      city: "mos_eisley"
+      planet: "tatooine"
+      coordinates: [3520, -4800]
+      npc: "Starport Attendant"
+      description: "Main starport in Mos Eisley"
+      available_destinations:
+        - planet: "corellia"
+          city: "coronet"
+          cost: 200
+          travel_time: 5
+        - planet: "naboo"
+          city: "theed"
+          cost: 250
+          travel_time: 6
+        - planet: "dantooine"
+          city: "khoonda"
+          cost: 300
+          travel_time: 8
+        - planet: "lok"
+          city: "narmle"
+          cost: 400
+          travel_time: 10
+    
+    bestine_starport:
+      name: "Bestine Starport"
+      city: "bestine"
+      planet: "tatooine"
+      coordinates: [4000, -6000]
+      npc: "Starport Attendant"
+      description: "Starport in Bestine"
+      available_destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 50
+          travel_time: 2
+        - planet: "naboo"
+          city: "theed"
+          cost: 250
+          travel_time: 6
+        - planet: "corellia"
+          city: "coronet"
+          cost: 200
+          travel_time: 5
+
+  naboo:
+    theed_starport:
+      name: "Theed Starport"
+      city: "theed"
+      planet: "naboo"
+      coordinates: [5000, -4000]
+      npc: "Starport Attendant"
+      description: "Main starport in Theed"
+      available_destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 250
+          travel_time: 6
+        - planet: "corellia"
+          city: "coronet"
+          cost: 200
+          travel_time: 5
+        - planet: "naboo"
+          city: "moenia"
+          cost: 100
+          travel_time: 3
+        - planet: "dantooine"
+          city: "khoonda"
+          cost: 350
+          travel_time: 9
+    
+    moenia_starport:
+      name: "Moenia Starport"
+      city: "moenia"
+      planet: "naboo"
+      coordinates: [4500, -4500]
+      npc: "Starport Attendant"
+      description: "Starport in Moenia"
+      available_destinations:
+        - planet: "naboo"
+          city: "theed"
+          cost: 100
+          travel_time: 3
+        - planet: "corellia"
+          city: "tyrena"
+          cost: 200
+          travel_time: 5
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 250
+          travel_time: 6
+
+  corellia:
+    coronet_starport:
+      name: "Coronet Starport"
+      city: "coronet"
+      planet: "corellia"
+      coordinates: [123, 456]
+      npc: "Starport Attendant"
+      description: "Main starport in Coronet"
+      available_destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 200
+          travel_time: 5
+        - planet: "naboo"
+          city: "theed"
+          cost: 200
+          travel_time: 5
+        - planet: "corellia"
+          city: "tyrena"
+          cost: 75
+          travel_time: 2
+        - planet: "dantooine"
+          city: "khoonda"
+          cost: 300
+          travel_time: 8
+    
+    tyrena_starport:
+      name: "Tyrena Starport"
+      city: "tyrena"
+      planet: "corellia"
+      coordinates: [200, 300]
+      npc: "Starport Attendant"
+      description: "Starport in Tyrena"
+      available_destinations:
+        - planet: "corellia"
+          city: "coronet"
+          cost: 75
+          travel_time: 2
+        - planet: "naboo"
+          city: "moenia"
+          cost: 200
+          travel_time: 5
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 200
+          travel_time: 5
+
+  dantooine:
+    khoonda_starport:
+      name: "Khoonda Starport"
+      city: "khoonda"
+      planet: "dantooine"
+      coordinates: [100, 200]
+      npc: "Starport Attendant"
+      description: "Main starport on Dantooine"
+      available_destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 300
+          travel_time: 8
+        - planet: "naboo"
+          city: "theed"
+          cost: 350
+          travel_time: 9
+        - planet: "corellia"
+          city: "coronet"
+          cost: 300
+          travel_time: 8
+
+  lok:
+    narmle_starport:
+      name: "Narmle Starport"
+      city: "narmle"
+      planet: "lok"
+      coordinates: [800, 900]
+      npc: "Starport Attendant"
+      description: "Starport in Narmle"
+      available_destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          cost: 400
+          travel_time: 10
+        - planet: "naboo"
+          city: "theed"
+          cost: 450
+          travel_time: 12
+        - planet: "corellia"
+          city: "coronet"
+          cost: 400
+          travel_time: 10
+
+# Starport features and capabilities
+features:
+  # Standard features available at all starports
+  standard:
+    - "Interplanetary travel"
+    - "Ship storage"
+    - "Fuel refueling"
+    - "Ship repairs"
+    - "Cargo loading"
+  
+  # Premium features available at major starports
+  premium:
+    - "Ship customization"
+    - "Advanced repairs"
+    - "Cargo insurance"
+    - "VIP lounges"
+    - "Ship rentals"
+
+# Starport classifications
+classifications:
+  major:
+    - "mos_eisley_starport"
+    - "theed_starport"
+    - "coronet_starport"
+  
+  minor:
+    - "bestine_starport"
+    - "moenia_starport"
+    - "tyrena_starport"
+    - "khoonda_starport"
+    - "narmle_starport"
+
+# Travel restrictions and requirements
+restrictions:
+  # Planets that require special permits
+  permit_required:
+    - planet: "lok"
+      permit: "Lok Travel Permit"
+      cost: 1000
+    - planet: "endor"
+      permit: "Endor Travel Permit"
+      cost: 1500
+  
+  # Planets with travel restrictions
+  restricted:
+    - planet: "kashyyyk"
+      reason: "Wookiee homeworld - restricted access"
+    - planet: "geonosis"
+      reason: "Separatist stronghold - dangerous"
+
+# Starport maintenance schedules
+maintenance:
+  schedule:
+    - day: "monday"
+      time: "02:00-04:00"
+      affected_starports:
+        - "mos_eisley_starport"
+        - "theed_starport"
+    - day: "wednesday"
+      time: "02:00-04:00"
+      affected_starports:
+        - "coronet_starport"
+        - "tyrena_starport"
+    - day: "friday"
+      time: "02:00-04:00"
+      affected_starports:
+        - "khoonda_starport"
+        - "narmle_starport" 

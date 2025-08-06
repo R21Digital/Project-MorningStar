@@ -1,0 +1,463 @@
+introductory_quests:
+  title: "Introductory Quests Guide"
+  description: "Essential quests for new players in Star Wars Galaxies"
+  version: "1.0"
+  last_updated: "2024-12-19"
+
+  quest_categories:
+    tutorial:
+      name: "Tutorial Quests"
+      description: "Basic tutorial quests for new characters"
+      difficulty: "Beginner"
+      level_range: "1-5"
+      
+      quests:
+        welcome_to_swg:
+          name: "Welcome to Star Wars Galaxies"
+          npc: "Tutorial Droid"
+          location: "Tutorial Area"
+          objectives:
+            - "Talk to the Tutorial Droid"
+            - "Learn basic movement controls"
+            - "Practice interacting with objects"
+            - "Complete basic combat tutorial"
+          rewards:
+            credits: 100
+            experience: 50
+            items:
+              - "Basic Blaster Pistol"
+              - "Starter Clothing"
+              - "Health Pack"
+          tips:
+            - "Take your time learning the controls"
+            - "Don't rush through the tutorial"
+            - "Ask questions if you're confused"
+          next_quest: "profession_introduction"
+
+        profession_introduction:
+          name: "Choose Your Path"
+          npc: "Profession Counselor"
+          location: "Tutorial Area"
+          objectives:
+            - "Speak with the Profession Counselor"
+            - "Learn about different professions"
+            - "Choose your first profession"
+            - "Receive basic training"
+          rewards:
+            credits: 200
+            experience: 100
+            items:
+              - "Profession Starter Kit"
+              - "Basic Training Manual"
+          tips:
+            - "Read about each profession carefully"
+            - "Consider your playstyle when choosing"
+            - "You can learn multiple professions later"
+          next_quest: "first_combat"
+
+        first_combat:
+          name: "First Combat Experience"
+          npc: "Combat Trainer"
+          location: "Tutorial Combat Area"
+          objectives:
+            - "Learn combat basics"
+            - "Defeat 3 training droids"
+            - "Practice healing"
+            - "Learn about buffs"
+          rewards:
+            credits: 150
+            experience: 75
+            items:
+              - "Combat Stim Pack"
+              - "Basic Armor"
+          tips:
+            - "Keep your health above 50%"
+            - "Use buffs when available"
+            - "Practice your combat skills"
+          next_quest: "leave_tutorial"
+
+    starter_zone:
+      name: "Starter Zone Quests"
+      description: "Quests available in your starting city"
+      difficulty: "Beginner"
+      level_range: "5-15"
+      
+      quests:
+        city_orientation:
+          name: "City Orientation"
+          npc: "City Guide"
+          location: "Starting City"
+          objectives:
+            - "Find the city guide"
+            - "Learn about city services"
+            - "Visit key locations"
+            - "Learn about transportation"
+          rewards:
+            credits: 300
+            experience: 150
+            items:
+              - "City Map"
+              - "Transportation Pass"
+          tips:
+            - "Memorize key locations"
+            - "Learn about shuttle services"
+            - "Find the medical center"
+          next_quest: "first_crafting"
+
+        first_crafting:
+          name: "Introduction to Crafting"
+          npc: "Crafting Instructor"
+          location: "Crafting Center"
+          objectives:
+            - "Learn about resource gathering"
+            - "Practice basic crafting"
+            - "Create your first item"
+            - "Learn about experimentation"
+          rewards:
+            credits: 250
+            experience: 125
+            items:
+              - "Basic Crafting Tools"
+              - "Resource Survey Tool"
+          tips:
+            - "Start with simple items"
+            - "Learn about resource properties"
+            - "Experiment carefully"
+          next_quest: "social_introduction"
+
+        social_introduction:
+          name: "Social Features"
+          npc: "Social Coordinator"
+          location: "Entertainment District"
+          objectives:
+            - "Learn about chat channels"
+            - "Join a group"
+            - "Learn about guilds"
+            - "Practice social skills"
+          rewards:
+            credits: 200
+            experience: 100
+            items:
+              - "Communication Device"
+              - "Social Guide"
+          tips:
+            - "Be respectful to other players"
+            - "Ask questions when needed"
+            - "Join community channels"
+          next_quest: "first_mission"
+
+    early_progression:
+      name: "Early Progression Quests"
+      description: "Quests to help you progress beyond the starter zone"
+      difficulty: "Beginner to Intermediate"
+      level_range: "10-25"
+      
+      quests:
+        first_mission:
+          name: "Your First Mission"
+          npc: "Mission Terminal"
+          location: "Mission Terminal"
+          objectives:
+            - "Access the mission terminal"
+            - "Accept a simple mission"
+            - "Complete the mission objectives"
+            - "Return for your reward"
+          rewards:
+            credits: 500
+            experience: 250
+            items:
+              - "Mission Reward Package"
+          tips:
+            - "Start with easy missions"
+            - "Read mission descriptions carefully"
+            - "Don't be afraid to ask for help"
+          next_quest: "profession_advancement"
+
+        profession_advancement:
+          name: "Advancing Your Profession"
+          npc: "Profession Trainer"
+          location: "Training Center"
+          objectives:
+            - "Learn new profession skills"
+            - "Practice advanced techniques"
+            - "Complete profession-specific tasks"
+            - "Receive advanced training"
+          rewards:
+            credits: 400
+            experience: 200
+            items:
+              - "Advanced Training Manual"
+              - "Profession Equipment"
+          tips:
+            - "Focus on one profession at a time"
+            - "Practice new skills regularly"
+            - "Seek guidance from experienced players"
+          next_quest: "first_heroic"
+
+        first_heroic:
+          name: "Introduction to Heroics"
+          npc: "Heroic Coordinator"
+          location: "Heroic Terminal"
+          objectives:
+            - "Learn about heroic missions"
+            - "Join a heroic group"
+            - "Complete a simple heroic"
+            - "Learn group tactics"
+          rewards:
+            credits: 1000
+            experience: 500
+            items:
+              - "Heroic Reward Package"
+              - "Group Communication Device"
+          tips:
+            - "Communicate with your group"
+            - "Follow the group leader"
+            - "Learn your role in the group"
+          next_quest: "exploration_quest"
+
+    exploration:
+      name: "Exploration Quests"
+      description: "Quests that encourage exploration of the galaxy"
+      difficulty: "Beginner to Intermediate"
+      level_range: "15-30"
+      
+      quests:
+        exploration_quest:
+          name: "Exploring the Galaxy"
+          npc: "Exploration Guide"
+          location: "Spaceport"
+          objectives:
+            - "Learn about different planets"
+            - "Visit a new planet"
+            - "Explore unique locations"
+            - "Document your discoveries"
+          rewards:
+            credits: 600
+            experience: 300
+            items:
+              - "Exploration Kit"
+              - "Planetary Guide"
+          tips:
+            - "Research planets before visiting"
+            - "Bring appropriate equipment"
+            - "Be aware of environmental hazards"
+          next_quest: "resource_discovery"
+
+        resource_discovery:
+          name: "Resource Discovery"
+          npc: "Resource Surveyor"
+          location: "Resource Center"
+          objectives:
+            - "Learn about resource surveying"
+            - "Survey different resource types"
+            - "Discover rare resources"
+            - "Learn about resource properties"
+          rewards:
+            credits: 450
+            experience: 225
+            items:
+              - "Advanced Survey Tool"
+              - "Resource Database"
+          tips:
+            - "Different areas have different resources"
+            - "Learn about resource quality"
+            - "Keep track of good resource locations"
+          next_quest: "creature_encounter"
+
+        creature_encounter:
+          name: "Wildlife Encounter"
+          npc: "Wildlife Researcher"
+          location: "Research Station"
+          objectives:
+            - "Learn about local wildlife"
+            - "Observe different creatures"
+            - "Learn about creature behavior"
+            - "Document your findings"
+          rewards:
+            credits: 350
+            experience: 175
+            items:
+              - "Wildlife Guide"
+              - "Research Equipment"
+          tips:
+            - "Be careful around aggressive creatures"
+            - "Learn creature weaknesses"
+            - "Respect wildlife habitats"
+          next_quest: "cultural_exchange"
+
+    cultural:
+      name: "Cultural Exchange Quests"
+      description: "Quests that explore the cultural aspects of SWG"
+      difficulty: "Beginner to Intermediate"
+      level_range: "20-35"
+      
+      quests:
+        cultural_exchange:
+          name: "Cultural Exchange"
+          npc: "Cultural Ambassador"
+          location: "Cultural Center"
+          objectives:
+            - "Learn about different cultures"
+            - "Visit cultural sites"
+            - "Participate in cultural activities"
+            - "Share your experiences"
+          rewards:
+            credits: 400
+            experience: 200
+            items:
+              - "Cultural Artifact"
+              - "Cultural Guide"
+          tips:
+            - "Be respectful of different cultures"
+            - "Learn about cultural significance"
+            - "Share your own culture"
+          next_quest: "entertainment_career"
+
+        entertainment_career:
+          name: "Entertainment Career"
+          npc: "Entertainment Coordinator"
+          location: "Entertainment District"
+          objectives:
+            - "Learn about entertainment professions"
+            - "Practice entertainment skills"
+            - "Perform for an audience"
+            - "Learn about buffs"
+          rewards:
+            credits: 300
+            experience: 150
+            items:
+              - "Entertainment Equipment"
+              - "Performance Guide"
+          tips:
+            - "Practice your skills regularly"
+            - "Learn about different buffs"
+            - "Be creative with your performances"
+          next_quest: "community_service"
+
+        community_service:
+          name: "Community Service"
+          npc: "Community Coordinator"
+          location: "Community Center"
+          objectives:
+            - "Help other players"
+            - "Participate in community events"
+            - "Contribute to the community"
+            - "Learn about community values"
+          rewards:
+            credits: 500
+            experience: 250
+            items:
+              - "Community Badge"
+              - "Community Guide"
+          tips:
+            - "Be helpful to new players"
+            - "Participate in community activities"
+            - "Build positive relationships"
+          next_quest: "advanced_training"
+
+  quest_progression:
+    recommended_order:
+      - "tutorial"
+      - "starter_zone"
+      - "early_progression"
+      - "exploration"
+      - "cultural"
+
+    level_requirements:
+      tutorial: "1-5"
+      starter_zone: "5-15"
+      early_progression: "10-25"
+      exploration: "15-30"
+      cultural: "20-35"
+
+  quest_tips:
+    general:
+      - "Always read quest descriptions carefully"
+      - "Don't be afraid to ask for help"
+      - "Take your time and enjoy the journey"
+      - "Keep track of your quest progress"
+      - "Use quest waypoints to guide you"
+
+    combat:
+      - "Check enemy levels before engaging"
+      - "Keep your health and ammunition stocked"
+      - "Learn to use cover and positioning"
+      - "Practice your combat skills regularly"
+      - "Don't be afraid to run from tough fights"
+
+    social:
+      - "Be respectful to other players"
+      - "Ask questions when you need help"
+      - "Join community channels"
+      - "Participate in group activities"
+      - "Share knowledge with other players"
+
+    exploration:
+      - "Research areas before visiting"
+      - "Bring appropriate equipment"
+      - "Be aware of environmental hazards"
+      - "Document interesting discoveries"
+      - "Respect wildlife and cultural sites"
+
+  rewards_overview:
+    experience_gains:
+      tutorial: "50-100 XP per quest"
+      starter_zone: "100-200 XP per quest"
+      early_progression: "200-500 XP per quest"
+      exploration: "175-300 XP per quest"
+      cultural: "150-250 XP per quest"
+
+    credit_rewards:
+      tutorial: "100-200 credits per quest"
+      starter_zone: "200-500 credits per quest"
+      early_progression: "400-1000 credits per quest"
+      exploration: "350-600 credits per quest"
+      cultural: "300-500 credits per quest"
+
+    item_rewards:
+      - "Basic equipment and tools"
+      - "Training manuals and guides"
+      - "Specialized equipment"
+      - "Cultural artifacts"
+      - "Community badges"
+
+  quest_completion_tracking:
+    tracking_methods:
+      - "Quest journal entries"
+      - "Progress indicators"
+      - "Completion notifications"
+      - "Reward confirmations"
+
+    completion_benefits:
+      - "Experience and credits"
+      - "Useful items and equipment"
+      - "Access to new areas"
+      - "Unlock new quests"
+      - "Reputation gains"
+
+  troubleshooting:
+    common_issues:
+      quest_not_appearing:
+        - "Check level requirements"
+        - "Complete prerequisite quests"
+        - "Check location requirements"
+        - "Verify NPC availability"
+
+      quest_objectives_not_updating:
+        - "Try relogging"
+        - "Check quest journal"
+        - "Verify objective completion"
+        - "Contact support if needed"
+
+      rewards_not_received:
+        - "Check inventory space"
+        - "Verify quest completion"
+        - "Check bank for credits"
+        - "Contact support if needed"
+
+    getting_help:
+      - "Ask in community channels"
+      - "Check the official forums"
+      - "Search existing guides"
+      - "Contact server support"
+      - "Join community Discord servers" 

@@ -1,0 +1,79 @@
+{
+  "missions": [
+    {
+      "mission_id": "bh_001",
+      "target_name": "Rebel Scout",
+      "target_type": "npc",
+      "location": {
+        "planet": "tatooine",
+        "city": "mos_eisley",
+        "coordinates": [3520, -4800],
+        "zone": "cantina"
+      },
+      "difficulty": "easy",
+      "reward_credits": 500,
+      "reward_faction": "imperial",
+      "time_limit": 1800,
+      "requirements": {
+        "level_min": 5,
+        "level_max": 20,
+        "profession": "bounty_hunter",
+        "faction": "imperial"
+      },
+      "combat_profile": "aggressive",
+      "escape_chance": 0.05,
+      "backup_targets": [],
+      "notes": "Standard rebel scout in cantina area"
+    },
+    {
+      "mission_id": "bh_002", 
+      "target_name": "Smuggler Boss",
+      "target_type": "npc",
+      "location": {
+        "planet": "dantooine",
+        "city": "imperial_outpost",
+        "coordinates": [50, 75],
+        "zone": "cave"
+      },
+      "difficulty": "medium",
+      "reward_credits": 1200,
+      "reward_faction": "imperial",
+      "time_limit": 3600,
+      "requirements": {
+        "level_min": 15,
+        "level_max": 35,
+        "profession": "bounty_hunter",
+        "faction": "imperial"
+      },
+      "combat_profile": "tactical",
+      "escape_chance": 0.15,
+      "backup_targets": ["Smuggler Guard", "Smuggler Runner"],
+      "notes": "Smuggler boss with backup guards in cave system"
+    },
+    {
+      "mission_id": "bh_003",
+      "target_name": "Elite Rebel Commander",
+      "target_type": "npc", 
+      "location": {
+        "planet": "naboo",
+        "city": "theed",
+        "coordinates": [100, -200],
+        "zone": "palace_grounds"
+      },
+      "difficulty": "hard",
+      "reward_credits": 2500,
+      "reward_faction": "imperial",
+      "time_limit": 7200,
+      "requirements": {
+        "level_min": 25,
+        "level_max": 50,
+        "profession": "bounty_hunter",
+        "faction": "imperial"
+      },
+      "combat_profile": "defensive",
+      "escape_chance": 0.25,
+      "backup_targets": ["Rebel Guard", "Rebel Medic"],
+      "notes": "High-value target with strong backup, requires careful approach"
+    }
+  ]
+} 

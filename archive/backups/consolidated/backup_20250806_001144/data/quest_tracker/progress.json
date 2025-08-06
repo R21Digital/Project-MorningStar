@@ -1,0 +1,70 @@
+{
+  "progress": [
+    {
+      "quest_id": "legacy_001",
+      "user_id": "player_001",
+      "status": "completed",
+      "current_step": 2,
+      "steps_completed": ["legacy_001_01", "legacy_001_02"],
+      "start_time": "2025-01-15T10:30:00Z",
+      "completion_time": "2025-01-15T11:45:00Z",
+      "total_time": 75,
+      "notes": "Completed Jedi training successfully"
+    },
+    {
+      "quest_id": "themepark_jabba_001",
+      "user_id": "player_001",
+      "status": "in_progress",
+      "current_step": 1,
+      "steps_completed": ["jabba_001_01"],
+      "start_time": "2025-01-16T14:20:00Z",
+      "completion_time": null,
+      "total_time": null,
+      "notes": "Working on palace infiltration"
+    },
+    {
+      "quest_id": "daily_001",
+      "user_id": "player_002",
+      "status": "completed",
+      "current_step": 2,
+      "steps_completed": ["daily_001_01", "daily_001_02"],
+      "start_time": "2025-01-17T08:00:00Z",
+      "completion_time": "2025-01-17T08:45:00Z",
+      "total_time": 45,
+      "notes": "Daily patrol completed"
+    },
+    {
+      "quest_id": "space_001",
+      "user_id": "player_003",
+      "status": "not_started",
+      "current_step": 0,
+      "steps_completed": [],
+      "start_time": null,
+      "completion_time": null,
+      "total_time": null,
+      "notes": ""
+    },
+    {
+      "quest_id": "kashyyyk_001",
+      "user_id": "player_004",
+      "status": "failed",
+      "current_step": 1,
+      "steps_completed": ["kashyyyk_001_01"],
+      "start_time": "2025-01-16T16:00:00Z",
+      "completion_time": null,
+      "total_time": null,
+      "notes": "Failed to sabotage Imperial supply lines"
+    },
+    {
+      "quest_id": "heroic_001",
+      "user_id": "player_005",
+      "status": "completed",
+      "current_step": 2,
+      "steps_completed": ["heroic_001_01", "heroic_001_02"],
+      "start_time": "2025-01-15T20:00:00Z",
+      "completion_time": "2025-01-15T23:30:00Z",
+      "total_time": 210,
+      "notes": "Successfully destroyed the Death Star!"
+    }
+  ]
+} 

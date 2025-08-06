@@ -1,0 +1,124 @@
+{
+  "idle_emotes": true,
+  "chat_rate_limit": 12,
+  "sanitize_logs": true,
+  "randomize_movement": true,
+  "randomize_mood": true,
+  "camera_wiggles": true,
+  "protection_level": "medium",
+  "sensitive_patterns": [
+    "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
+    "\\b\\d{3}-\\d{3}-\\d{4}\\b",
+    "\\b\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}[\\s-]?\\d{4}\\b",
+    "@[A-Za-z0-9_]{3,}",
+    "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b",
+    "\\b\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\b"
+  ],
+  "rate_limiting": {
+    "chat_messages_per_minute": 12,
+    "emotes_per_hour": 20,
+    "mood_changes_per_hour": 10,
+    "camera_movements_per_minute": 8,
+    "movement_actions_per_minute": 15,
+    "interaction_actions_per_minute": 10
+  },
+  "randomization": {
+    "movement_variation": 0.3,
+    "emote_delay_range": [30, 180],
+    "mood_delay_range": [60, 300],
+    "camera_wiggle_range": [5, 15],
+    "response_time_variation": 0.2,
+    "idle_behavior_variation": 0.4
+  },
+  "sanitization": {
+    "redact_usernames": true,
+    "redact_discord_tags": true,
+    "redact_emails": true,
+    "redact_ips": true,
+    "redact_phone_numbers": true,
+    "redact_credit_cards": true,
+    "replacement_char": "*",
+    "log_sanitization_level": "high"
+  },
+  "behavior_patterns": {
+    "avoid_repetitive_actions": true,
+    "randomize_idle_behavior": true,
+    "humanize_movement": true,
+    "vary_response_times": true,
+    "randomize_walk_jog_toggle": true,
+    "add_human_pauses": true,
+    "vary_interaction_timing": true
+  },
+  "chat_protection": {
+    "prevent_identical_greetings": true,
+    "rate_limit_canned_replies": true,
+    "vary_message_timing": true,
+    "add_typing_delays": true,
+    "randomize_response_length": true,
+    "avoid_perfect_grammar": false,
+    "add_typos_occasionally": false
+  },
+  "movement_protection": {
+    "randomize_pathfinding": true,
+    "add_movement_pauses": true,
+    "vary_movement_speed": true,
+    "avoid_perfect_paths": true,
+    "add_obstacle_avoidance": true,
+    "humanize_stopping": true
+  },
+  "emote_protection": {
+    "randomize_emote_timing": true,
+    "vary_emote_selection": true,
+    "avoid_repetitive_emotes": true,
+    "add_contextual_emotes": true,
+    "randomize_emote_duration": true
+  },
+  "mood_protection": {
+    "randomize_mood_changes": true,
+    "vary_mood_selection": true,
+    "avoid_repetitive_moods": true,
+    "add_contextual_moods": true,
+    "randomize_mood_duration": true
+  },
+  "camera_protection": {
+    "add_camera_movement": true,
+    "randomize_camera_timing": true,
+    "vary_camera_movements": true,
+    "avoid_perfect_camera": true,
+    "add_human_camera_behavior": true
+  },
+  "logging_protection": {
+    "sanitize_all_logs": true,
+    "redact_sensitive_data": true,
+    "log_identity_events": true,
+    "track_protection_metrics": true,
+    "alert_on_risks": true
+  },
+  "risk_assessment": {
+    "high_risk_threshold": 3,
+    "medium_risk_threshold": 5,
+    "low_risk_threshold": 10,
+    "risk_decay_rate": 0.1,
+    "risk_assessment_interval": 60
+  },
+  "performance": {
+    "max_history_size": 100,
+    "cleanup_interval": 3600,
+    "memory_limit": 50,
+    "cpu_limit": 80,
+    "log_rotation_size": 10485760
+  },
+  "notifications": {
+    "enable_alerts": true,
+    "alert_on_high_risk": true,
+    "alert_on_rate_limit": true,
+    "alert_on_sanitization": false,
+    "notification_methods": ["dashboard", "log"]
+  },
+  "debug": {
+    "enabled": false,
+    "verbose_logging": false,
+    "log_all_events": false,
+    "performance_monitoring": false
+  }
+} 

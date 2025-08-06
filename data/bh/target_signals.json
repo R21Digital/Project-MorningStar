@@ -1,0 +1,231 @@
+{
+  "signal_patterns": {
+    "overt_player": {
+      "confidence_threshold": 0.8,
+      "refresh_rate": 30,
+      "location_accuracy": 0.9,
+      "detection_range": 2000,
+      "signal_strength_multiplier": 1.2,
+      "priority_level": "high",
+      "risk_assessment": {
+        "base_risk": 0.7,
+        "distance_factor": 0.1,
+        "reward_factor": 0.2,
+        "zone_factor": 0.3
+      }
+    },
+    "tef_flagged": {
+      "confidence_threshold": 0.7,
+      "refresh_rate": 45,
+      "location_accuracy": 0.8,
+      "detection_range": 1500,
+      "signal_strength_multiplier": 1.0,
+      "priority_level": "medium",
+      "risk_assessment": {
+        "base_risk": 0.6,
+        "distance_factor": 0.1,
+        "reward_factor": 0.15,
+        "zone_factor": 0.25
+      }
+    },
+    "faction_enemy": {
+      "confidence_threshold": 0.6,
+      "refresh_rate": 60,
+      "location_accuracy": 0.7,
+      "detection_range": 1000,
+      "signal_strength_multiplier": 0.8,
+      "priority_level": "low",
+      "risk_assessment": {
+        "base_risk": 0.5,
+        "distance_factor": 0.1,
+        "reward_factor": 0.1,
+        "zone_factor": 0.2
+      }
+    },
+    "gcw_target": {
+      "confidence_threshold": 0.75,
+      "refresh_rate": 40,
+      "location_accuracy": 0.85,
+      "detection_range": 1800,
+      "signal_strength_multiplier": 1.1,
+      "priority_level": "high",
+      "risk_assessment": {
+        "base_risk": 0.65,
+        "distance_factor": 0.1,
+        "reward_factor": 0.18,
+        "zone_factor": 0.28
+      }
+    },
+    "player": {
+      "confidence_threshold": 0.5,
+      "refresh_rate": 90,
+      "location_accuracy": 0.6,
+      "detection_range": 800,
+      "signal_strength_multiplier": 0.6,
+      "priority_level": "lowest",
+      "risk_assessment": {
+        "base_risk": 0.4,
+        "distance_factor": 0.1,
+        "reward_factor": 0.05,
+        "zone_factor": 0.15
+      }
+    }
+  },
+  "triangulation_heuristics": {
+    "max_distance": 5000,
+    "min_confidence": 0.7,
+    "location_update_interval": 30,
+    "path_prediction": true,
+    "zone_analysis": true,
+    "reference_points": [
+      {
+        "name": "mission_terminal",
+        "weight": 1.0,
+        "accuracy": 0.9
+      },
+      {
+        "name": "player_reports",
+        "weight": 0.8,
+        "accuracy": 0.7
+      },
+      {
+        "name": "zone_activity",
+        "weight": 0.6,
+        "accuracy": 0.6
+      },
+      {
+        "name": "movement_patterns",
+        "weight": 0.7,
+        "accuracy": 0.75
+      }
+    ],
+    "path_prediction_settings": {
+      "prediction_horizon": 300,
+      "update_frequency": 15,
+      "confidence_decay": 0.1,
+      "max_predictions": 5
+    },
+    "zone_analysis_settings": {
+      "zone_types": ["safe", "neutral", "hostile", "gcw_hotspot"],
+      "zone_radius": 200,
+      "zone_overlap_threshold": 0.3,
+      "zone_risk_multiplier": 1.5
+    }
+  },
+  "target_acquisition": {
+    "mission_terminal_patterns": [
+      "overt.*\\d+,\\d+.*\\d+m.*\\d+c",
+      "tef.*\\d+,\\d+.*\\d+m.*\\d+c",
+      "enemy.*\\d+,\\d+.*\\d+m.*\\d+c",
+      "hostile.*\\d+,\\d+.*\\d+m.*\\d+c",
+      "gcw.*\\d+,\\d+.*\\d+m.*\\d+c"
+    ],
+    "terminal_scan_interval": 60,
+    "max_targets_per_scan": 10,
+    "target_filtering": {
+      "min_reward": 500,
+      "max_distance": 5000,
+      "excluded_zones": ["safe_zones", "restricted_areas"],
+      "preferred_targets": ["overt_player", "gcw_target"]
+    }
+  },
+  "signal_processing": {
+    "noise_reduction": {
+      "enabled": true,
+      "threshold": 0.3,
+      "filter_type": "gaussian"
+    },
+    "signal_enhancement": {
+      "enabled": true,
+      "amplification_factor": 1.2,
+      "clarity_threshold": 0.6
+    },
+    "confidence_calculation": {
+      "base_confidence": 0.5,
+      "signal_strength_weight": 0.3,
+      "location_accuracy_weight": 0.4,
+      "historical_data_weight": 0.3
+    }
+  },
+  "historical_data": {
+    "target_movement_patterns": {
+      "average_speed": 50,
+      "preferred_zones": ["cantina", "market", "outskirts"],
+      "avoidance_zones": ["safe_zones", "guarded_areas"],
+      "rest_stops": ["inns", "cantinas", "safe_houses"]
+    },
+    "engagement_patterns": {
+      "preferred_range": 150,
+      "escape_probability": 0.3,
+      "counter_attack_probability": 0.2,
+      "group_size_tendency": 1.2
+    },
+    "success_metrics": {
+      "capture_rate": 0.7,
+      "escape_rate": 0.2,
+      "failure_rate": 0.1,
+      "average_hunt_duration": 900
+    }
+  },
+  "real_time_updates": {
+    "location_refresh": {
+      "enabled": true,
+      "interval": 30,
+      "accuracy_threshold": 0.8
+    },
+    "status_updates": {
+      "enabled": true,
+      "update_types": ["location", "health", "status", "surroundings"],
+      "priority_levels": ["critical", "high", "medium", "low"]
+    },
+    "alert_system": {
+      "enabled": true,
+      "alert_types": ["target_spotted", "target_moving", "target_engaging", "target_escaping"],
+      "notification_channels": ["discord", "in_game", "log_file"]
+    }
+  },
+  "safety_integration": {
+    "risk_assessment": {
+      "enabled": true,
+      "assessment_interval": 10,
+      "risk_thresholds": {
+        "safe": 0.3,
+        "caution": 0.6,
+        "danger": 0.8,
+        "critical": 0.95
+      }
+    },
+    "zone_monitoring": {
+      "enabled": true,
+      "monitored_zones": ["gcw_hotspots", "crowded_areas", "restricted_zones"],
+      "zone_risk_multipliers": {
+        "gcw_hotspot": 2.0,
+        "crowded_area": 1.5,
+        "restricted_zone": 1.8
+      }
+    },
+    "player_density": {
+      "enabled": true,
+      "max_nearby_players": 10,
+      "hostile_player_threshold": 0.3,
+      "escape_trigger_threshold": 0.7
+    }
+  },
+  "performance_optimization": {
+    "signal_processing": {
+      "batch_size": 10,
+      "processing_interval": 5,
+      "memory_limit": 100
+    },
+    "data_storage": {
+      "max_history_size": 1000,
+      "cleanup_interval": 3600,
+      "compression_enabled": true
+    },
+    "caching": {
+      "enabled": true,
+      "cache_size": 100,
+      "cache_ttl": 300
+    }
+  }
+} 

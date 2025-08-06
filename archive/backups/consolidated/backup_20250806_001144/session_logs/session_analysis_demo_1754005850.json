@@ -1,0 +1,123 @@
+{
+  "session_id": "analysis_demo_1754005850",
+  "start_time": "2025-07-31T16:50:50.864939",
+  "end_time": "2025-07-31T16:50:50.865593",
+  "character_name": "AnalysisDemo",
+  "character_level": null,
+  "profession": null,
+  "location": null,
+  "total_xp_gained": 700,
+  "total_credits_gained": 0,
+  "total_deaths": 1,
+  "total_quests_completed": 1,
+  "total_combat_actions": 1,
+  "total_travel_events": 0,
+  "total_errors": 1,
+  "average_combat_duration": 0.0,
+  "success_rate": 0.0,
+  "efficiency_score": 0.22399999999999998,
+  "session_goals": null,
+  "session_mode": null,
+  "notes": null,
+  "events": [
+    {
+      "event_type": "xp_gain",
+      "timestamp": "2025-07-31T16:50:50.865272",
+      "description": "Gained 500 XP from quest_completion",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "source": "quest_completion"
+      },
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": 500,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "xp_gain",
+      "timestamp": "2025-07-31T16:50:50.865323",
+      "description": "Gained 200 XP from combat",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "source": "combat"
+      },
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": 200,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "error",
+      "timestamp": "2025-07-31T16:50:50.865414",
+      "description": "Error (general): Test error",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "error_type": "general"
+      },
+      "success": null,
+      "error_message": "Test error",
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "death",
+      "timestamp": "2025-07-31T16:50:50.865547",
+      "description": "Death: Test death",
+      "location": "Test location",
+      "coordinates": null,
+      "metadata": {
+        "reason": "Test death"
+      },
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    }
+  ],
+  "combat_events": [
+    {
+      "combat_type": "attack",
+      "target_name": "Enemy",
+      "damage_dealt": null,
+      "damage_received": null,
+      "ability_used": null,
+      "weapon_used": null,
+      "combat_duration": null,
+      "victory": true,
+      "loot_gained": null,
+      "xp_gained": null,
+      "location": null,
+      "coordinates": null
+    }
+  ],
+  "quest_events": [
+    {
+      "quest_name": "Test Quest",
+      "quest_id": null,
+      "status": "completed",
+      "npc_name": null,
+      "location": null,
+      "objectives_completed": null,
+      "rewards_gained": null,
+      "xp_reward": 500,
+      "credit_reward": null,
+      "time_spent": null,
+      "difficulty": null
+    }
+  ]
+}

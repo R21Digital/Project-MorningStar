@@ -1,0 +1,241 @@
+{
+  "fleet_name": "MorningStar Fleet",
+  "description": "Multi-client orchestration fleet for SWG automation",
+  "version": "1.0.0",
+  "created_at": "2024-01-01T00:00:00Z",
+  "last_updated": "2024-01-01T00:00:00Z",
+  
+  "agents": [
+    {
+      "name": "Main",
+      "machine_id": "DESKTOP-ABC123",
+      "window_id": "SWG_MAIN_01",
+      "mode": "quest",
+      "capabilities": [
+        "quest",
+        "combat",
+        "exploration",
+        "social"
+      ],
+      "config_path": "config/agent_main.json",
+      "priority": "high",
+      "auto_start": true,
+      "heartbeat_interval": 30,
+      "performance_thresholds": {
+        "cpu_max": 80.0,
+        "memory_max": 85.0,
+        "response_time_max": 5000
+      },
+      "schedule_preferences": {
+        "preferred_hours": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+        "avoid_hours": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        "max_daily_runtime": 12,
+        "cooldown_periods": [
+          {
+            "start": "12:00",
+            "end": "13:00",
+            "reason": "lunch_break"
+          },
+          {
+            "start": "18:00",
+            "end": "19:00",
+            "reason": "dinner_break"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Heals",
+      "machine_id": "DESKTOP-ABC123",
+      "window_id": "SWG_HEALS_01",
+      "mode": "medic_follow",
+      "capabilities": [
+        "medic_follow",
+        "combat",
+        "social"
+      ],
+      "config_path": "config/agent_heals.json",
+      "priority": "normal",
+      "auto_start": true,
+      "heartbeat_interval": 30,
+      "performance_thresholds": {
+        "cpu_max": 70.0,
+        "memory_max": 75.0,
+        "response_time_max": 3000
+      },
+      "schedule_preferences": {
+        "preferred_hours": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22],
+        "avoid_hours": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+        "max_daily_runtime": 10,
+        "cooldown_periods": [
+          {
+            "start": "12:00",
+            "end": "13:00",
+            "reason": "lunch_break"
+          },
+          {
+            "start": "18:00",
+            "end": "19:00",
+            "reason": "dinner_break"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Craft",
+      "machine_id": "DESKTOP-DEF456",
+      "window_id": "SWG_CRAFT_01",
+      "mode": "crafting",
+      "capabilities": [
+        "crafting",
+        "trading",
+        "social"
+      ],
+      "config_path": "config/agent_craft.json",
+      "priority": "normal",
+      "auto_start": false,
+      "heartbeat_interval": 60,
+      "performance_thresholds": {
+        "cpu_max": 60.0,
+        "memory_max": 70.0,
+        "response_time_max": 10000
+      },
+      "schedule_preferences": {
+        "preferred_hours": [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "avoid_hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 21, 22, 23],
+        "max_daily_runtime": 8,
+        "cooldown_periods": [
+          {
+            "start": "12:00",
+            "end": "13:00",
+            "reason": "lunch_break"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Farm",
+      "machine_id": "DESKTOP-GHI789",
+      "window_id": "SWG_FARM_01",
+      "mode": "farming",
+      "capabilities": [
+        "farming",
+        "combat",
+        "exploration"
+      ],
+      "config_path": "config/agent_farm.json",
+      "priority": "low",
+      "auto_start": false,
+      "heartbeat_interval": 45,
+      "performance_thresholds": {
+        "cpu_max": 75.0,
+        "memory_max": 80.0,
+        "response_time_max": 6000
+      },
+      "schedule_preferences": {
+        "preferred_hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "avoid_hours": [0, 1, 2, 3, 4, 5, 6, 7, 21, 22, 23],
+        "max_daily_runtime": 14,
+        "cooldown_periods": [
+          {
+            "start": "12:00",
+            "end": "13:00",
+            "reason": "lunch_break"
+          },
+          {
+            "start": "18:00",
+            "end": "19:00",
+            "reason": "dinner_break"
+          }
+        ]
+      }
+    }
+  ],
+  
+  "schedule_windows": {
+    "peak_hours": {
+      "start_time": "09:00",
+      "end_time": "22:00",
+      "days_of_week": [0, 1, 2, 3, 4, 5, 6],
+      "priority_boost": 1.5,
+      "description": "Peak activity hours"
+    },
+    "off_peak_hours": {
+      "start_time": "22:00",
+      "end_time": "09:00",
+      "days_of_week": [0, 1, 2, 3, 4, 5, 6],
+      "priority_boost": 0.7,
+      "description": "Off-peak hours with reduced activity"
+    },
+    "weekend_peak": {
+      "start_time": "10:00",
+      "end_time": "23:00",
+      "days_of_week": [5, 6],
+      "priority_boost": 1.8,
+      "description": "Weekend peak hours"
+    }
+  },
+  
+  "anti_pattern_rules": {
+    "recent_failure_cooldown": {
+      "type": "recent_failure",
+      "timeout": 3600,
+      "max_failures": 3,
+      "description": "Cooldown after recent task failures"
+    },
+    "idle_block_morning": {
+      "type": "idle_block",
+      "idle_start": "06:00",
+      "idle_end": "08:00",
+      "description": "Morning idle block"
+    },
+    "idle_block_night": {
+      "type": "idle_block",
+      "idle_start": "23:00",
+      "idle_end": "06:00",
+      "description": "Night idle block"
+    },
+    "task_cooldown": {
+      "type": "cooldown",
+      "duration": 1800,
+      "description": "General task cooldown period"
+    }
+  },
+  
+  "global_constraints": {
+    "max_concurrent_agents": 4,
+    "max_concurrent_combat": 2,
+    "max_concurrent_crafting": 1,
+    "max_concurrent_farming": 2,
+    "min_agent_health": "healthy",
+    "max_daily_errors": 10,
+    "max_weekly_errors": 50
+  },
+  
+  "monitoring": {
+    "health_check_interval": 60,
+    "performance_monitoring": true,
+    "error_tracking": true,
+    "discord_alerts": true,
+    "log_level": "INFO",
+    "metrics_retention_days": 30
+  },
+  
+  "notifications": {
+    "discord_webhook": "",
+    "alert_channels": ["health", "performance", "errors", "schedule"],
+    "alert_thresholds": {
+      "agent_offline": "immediate",
+      "high_error_rate": "5_minutes",
+      "performance_degradation": "10_minutes",
+      "schedule_conflicts": "30_minutes"
+    }
+  },
+  
+  "backup": {
+    "enabled": true,
+    "backup_interval_hours": 6,
+    "retention_days": 7,
+    "backup_location": "backups/orchestrator/"
+  }
+} 

@@ -1,0 +1,847 @@
+{
+  "known_players": {
+    "ZabrakWarrior": {
+      "name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Corellia",
+        "city": "Coronet",
+        "coordinates": [
+          200,
+          400
+        ]
+      },
+      "encounter_count": 6,
+      "first_seen": "2025-08-03T21:56:21.655789",
+      "last_seen": "2025-08-03T21:58:02.121041"
+    },
+    "TwilekDancer": {
+      "name": "TwilekDancer",
+      "guild": "Entertainers Guild",
+      "title": "Dancer",
+      "species": "twilek",
+      "faction": "neutral",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Tatooine",
+        "city": "Mos Eisley",
+        "coordinates": [
+          150,
+          300
+        ]
+      },
+      "encounter_count": 2,
+      "first_seen": "2025-08-03T21:56:21.655835",
+      "last_seen": "2025-08-03T21:58:02.121049"
+    },
+    "IthorianSage": {
+      "name": "IthorianSage",
+      "guild": "Sages Guild",
+      "title": "Sage",
+      "species": "ithorian",
+      "faction": "neutral",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Corellia",
+        "city": "Coronet",
+        "coordinates": [
+          200,
+          400
+        ]
+      },
+      "encounter_count": 1,
+      "first_seen": "2025-08-03T21:56:21.655921",
+      "last_seen": "2025-08-03T21:58:02.121052"
+    },
+    "WookieeWarrior": {
+      "name": "WookieeWarrior",
+      "guild": "Rebel Alliance",
+      "title": "Warrior",
+      "species": "wookiee",
+      "faction": "rebel",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Alderaan",
+        "city": "Aldera",
+        "coordinates": [
+          250,
+          500
+        ]
+      },
+      "encounter_count": 1,
+      "first_seen": "2025-08-03T21:56:21.655957",
+      "last_seen": "2025-08-03T21:58:02.121053"
+    },
+    "JediMaster": {
+      "name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Alderaan",
+        "city": "Aldera",
+        "coordinates": [
+          250,
+          500
+        ]
+      },
+      "encounter_count": 3,
+      "first_seen": "2025-08-03T21:56:21.656042",
+      "last_seen": "2025-08-03T21:58:02.121055"
+    },
+    "SullustanTrader": {
+      "name": "SullustanTrader",
+      "guild": "Merchants Guild",
+      "title": "Trader",
+      "species": "sullustan",
+      "faction": "neutral",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Tatooine",
+        "city": "Mos Eisley",
+        "coordinates": [
+          150,
+          300
+        ]
+      },
+      "encounter_count": 2,
+      "first_seen": "2025-08-03T21:56:21.656155",
+      "last_seen": "2025-08-03T21:58:02.121057"
+    },
+    "TrandoshanMerc": {
+      "name": "TrandoshanMerc",
+      "guild": "Mercenaries Guild",
+      "title": "Mercenary",
+      "species": "trandoshan",
+      "faction": "neutral",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Alderaan",
+        "city": "Aldera",
+        "coordinates": [
+          250,
+          500
+        ]
+      },
+      "encounter_count": 2,
+      "first_seen": "2025-08-03T21:56:21.656195",
+      "last_seen": "2025-08-03T21:58:02.121058"
+    },
+    "MonCalamari": {
+      "name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "profession": null,
+      "level": null,
+      "location": {
+        "planet": "Alderaan",
+        "city": "Aldera",
+        "coordinates": [
+          250,
+          500
+        ]
+      },
+      "encounter_count": 3,
+      "first_seen": "2025-08-03T21:56:21.656312",
+      "last_seen": "2025-08-03T21:58:02.121060"
+    }
+  },
+  "encounter_history": [
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.655770",
+      "encounter_type": "detected",
+      "confidence": 74.37717505009644,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.655770",
+      "encounter_type": "detected",
+      "confidence": 74.37717505009644,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TwilekDancer",
+      "guild": "Entertainers Guild",
+      "title": "Dancer",
+      "species": "twilek",
+      "faction": "neutral",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.655828",
+      "encounter_type": "detected",
+      "confidence": 84.493124404117,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TwilekDancer",
+      "guild": "Entertainers Guild",
+      "title": "Dancer",
+      "species": "twilek",
+      "faction": "neutral",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.655828",
+      "encounter_type": "detected",
+      "confidence": 84.493124404117,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TwilekDancer",
+      "guild": "Entertainers Guild",
+      "title": "Dancer",
+      "species": "twilek",
+      "faction": "neutral",
+      "planet": "Naboo",
+      "city": "Theed",
+      "coordinates": [
+        100,
+        200
+      ],
+      "timestamp": "2025-08-03T21:56:21.655867",
+      "encounter_type": "detected",
+      "confidence": 70.6160626188788,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TwilekDancer",
+      "guild": "Entertainers Guild",
+      "title": "Dancer",
+      "species": "twilek",
+      "faction": "neutral",
+      "planet": "Naboo",
+      "city": "Theed",
+      "coordinates": [
+        100,
+        200
+      ],
+      "timestamp": "2025-08-03T21:56:21.655867",
+      "encounter_type": "detected",
+      "confidence": 70.6160626188788,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "IthorianSage",
+      "guild": "Sages Guild",
+      "title": "Sage",
+      "species": "ithorian",
+      "faction": "neutral",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.655913",
+      "encounter_type": "detected",
+      "confidence": 93.94719770859786,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "IthorianSage",
+      "guild": "Sages Guild",
+      "title": "Sage",
+      "species": "ithorian",
+      "faction": "neutral",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.655913",
+      "encounter_type": "detected",
+      "confidence": 93.94719770859786,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "WookieeWarrior",
+      "guild": "Rebel Alliance",
+      "title": "Warrior",
+      "species": "wookiee",
+      "faction": "rebel",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.655953",
+      "encounter_type": "detected",
+      "confidence": 86.09577866595534,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "WookieeWarrior",
+      "guild": "Rebel Alliance",
+      "title": "Warrior",
+      "species": "wookiee",
+      "faction": "rebel",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.655953",
+      "encounter_type": "detected",
+      "confidence": 86.09577866595534,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.655990",
+      "encounter_type": "detected",
+      "confidence": 90.74081777804668,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.655990",
+      "encounter_type": "detected",
+      "confidence": 90.74081777804668,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656037",
+      "encounter_type": "detected",
+      "confidence": 89.86791706438206,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656037",
+      "encounter_type": "detected",
+      "confidence": 89.86791706438206,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656075",
+      "encounter_type": "detected",
+      "confidence": 73.21899552312692,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656075",
+      "encounter_type": "detected",
+      "confidence": 73.21899552312692,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "planet": "Naboo",
+      "city": "Theed",
+      "coordinates": [
+        100,
+        200
+      ],
+      "timestamp": "2025-08-03T21:56:21.656112",
+      "encounter_type": "detected",
+      "confidence": 92.7337924135361,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "planet": "Naboo",
+      "city": "Theed",
+      "coordinates": [
+        100,
+        200
+      ],
+      "timestamp": "2025-08-03T21:56:21.656112",
+      "encounter_type": "detected",
+      "confidence": 92.7337924135361,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "SullustanTrader",
+      "guild": "Merchants Guild",
+      "title": "Trader",
+      "species": "sullustan",
+      "faction": "neutral",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656149",
+      "encounter_type": "detected",
+      "confidence": 71.27330127088189,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "SullustanTrader",
+      "guild": "Merchants Guild",
+      "title": "Trader",
+      "species": "sullustan",
+      "faction": "neutral",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656149",
+      "encounter_type": "detected",
+      "confidence": 71.27330127088189,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TrandoshanMerc",
+      "guild": "Mercenaries Guild",
+      "title": "Mercenary",
+      "species": "trandoshan",
+      "faction": "neutral",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656191",
+      "encounter_type": "detected",
+      "confidence": 84.84293030286187,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TrandoshanMerc",
+      "guild": "Mercenaries Guild",
+      "title": "Mercenary",
+      "species": "trandoshan",
+      "faction": "neutral",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656191",
+      "encounter_type": "detected",
+      "confidence": 84.84293030286187,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TrandoshanMerc",
+      "guild": "Mercenaries Guild",
+      "title": "Mercenary",
+      "species": "trandoshan",
+      "faction": "neutral",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656234",
+      "encounter_type": "detected",
+      "confidence": 79.946313326784,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "TrandoshanMerc",
+      "guild": "Mercenaries Guild",
+      "title": "Mercenary",
+      "species": "trandoshan",
+      "faction": "neutral",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656234",
+      "encounter_type": "detected",
+      "confidence": 79.946313326784,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656274",
+      "encounter_type": "detected",
+      "confidence": 74.51799930747445,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656274",
+      "encounter_type": "detected",
+      "confidence": 74.51799930747445,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656308",
+      "encounter_type": "detected",
+      "confidence": 79.43942482182136,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "planet": "Alderaan",
+      "city": "Aldera",
+      "coordinates": [
+        250,
+        500
+      ],
+      "timestamp": "2025-08-03T21:56:21.656308",
+      "encounter_type": "detected",
+      "confidence": 79.43942482182136,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Naboo",
+      "city": "Theed",
+      "coordinates": [
+        100,
+        200
+      ],
+      "timestamp": "2025-08-03T21:56:21.656338",
+      "encounter_type": "detected",
+      "confidence": 87.3174224784159,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Naboo",
+      "city": "Theed",
+      "coordinates": [
+        100,
+        200
+      ],
+      "timestamp": "2025-08-03T21:56:21.656338",
+      "encounter_type": "detected",
+      "confidence": 87.3174224784159,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656372",
+      "encounter_type": "detected",
+      "confidence": 70.27637257940357,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "JediMaster",
+      "guild": "Jedi Order",
+      "title": "Jedi Master",
+      "species": "human",
+      "faction": "jedi",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656372",
+      "encounter_type": "detected",
+      "confidence": 70.27637257940357,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "SullustanTrader",
+      "guild": "Merchants Guild",
+      "title": "Trader",
+      "species": "sullustan",
+      "faction": "neutral",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656398",
+      "encounter_type": "detected",
+      "confidence": 91.83060355985317,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "SullustanTrader",
+      "guild": "Merchants Guild",
+      "title": "Trader",
+      "species": "sullustan",
+      "faction": "neutral",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656398",
+      "encounter_type": "detected",
+      "confidence": 91.83060355985317,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656427",
+      "encounter_type": "detected",
+      "confidence": 94.7037237292798,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656427",
+      "encounter_type": "detected",
+      "confidence": 94.7037237292798,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656456",
+      "encounter_type": "detected",
+      "confidence": 88.40930018557233,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "ZabrakWarrior",
+      "guild": "Mandalorian",
+      "title": "Warrior",
+      "species": "zabrak",
+      "faction": "mandalorian",
+      "planet": "Corellia",
+      "city": "Coronet",
+      "coordinates": [
+        200,
+        400
+      ],
+      "timestamp": "2025-08-03T21:56:21.656456",
+      "encounter_type": "detected",
+      "confidence": 88.40930018557233,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656490",
+      "encounter_type": "detected",
+      "confidence": 84.23813675127494,
+      "screenshot_path": null
+    },
+    {
+      "player_name": "MonCalamari",
+      "guild": "Mon Calamari Council",
+      "title": "Admiral",
+      "species": "mon_calamari",
+      "faction": "rebel",
+      "planet": "Tatooine",
+      "city": "Mos Eisley",
+      "coordinates": [
+        150,
+        300
+      ],
+      "timestamp": "2025-08-03T21:56:21.656490",
+      "encounter_type": "detected",
+      "confidence": 84.23813675127494,
+      "screenshot_path": null
+    }
+  ],
+  "last_updated": "2025-08-03T21:58:02.408465"
+}

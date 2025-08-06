@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Tracker Widget</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+        }
+        .widget-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .widget-header {
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+        }
+        .widget-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0;
+        }
+        .widget-subtitle {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin: 5px 0 0 0;
+        }
+        .quest-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #28a745;
+        }
+        .quest-item.in-progress {
+            border-left-color: #ffc107;
+        }
+        .quest-item.failed {
+            border-left-color: #dc3545;
+        }
+        .quest-item.not-started {
+            border-left-color: #6c757d;
+        }
+        .quest-name {
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .quest-info {
+            font-size: 0.75em;
+            opacity: 0.8;
+            display: flex;
+            justify-content: space-between;
+        }
+        .quest-progress {
+            margin-top: 5px;
+        }
+        .progress {
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+        }
+        .progress-bar {
+            background: #28a745;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.8em;
+        }
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.7em;
+            opacity: 0.8;
+        }
+        .category-icon {
+            margin-right: 5px;
+            font-size: 0.8em;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+        .no-quests {
+            text-align: center;
+            padding: 20px;
+            opacity: 0.7;
+        }
+        .refresh-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 0.7em;
+            cursor: pointer;
+        }
+        .refresh-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="widget-container">
+        <button class="refresh-btn" onclick="loadWidgetData()" title="Refresh">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+        
+        <div class="widget-header">
+            <h6 class="widget-title">
+                <i class="fas fa-map-marked-alt"></i> What's Hot in the Galaxy
+            </h6>
+            <p class="widget-subtitle">Quest Progress Tracker</p>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row" id="stats-row">
+            <div class="stat-item">
+                <span class="stat-number" id="total-quests">0</span>
+                <span class="stat-label">Total</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="completed-quests">0</span>
+                <span class="stat-label">Completed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="active-players">0</span>
+                <span class="stat-label">Active</span>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="loading">
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.8em;">Loading quest data...</div>
+        </div>
+
+        <!-- No Quests State -->
+        <div id="no-quests-state" class="no-quests" style="display: none;">
+            <i class="fas fa-search fa-2x mb-2"></i>
+            <div>No quests available</div>
+        </div>
+
+        <!-- Quest List -->
+        <div id="quest-list" style="display: none;">
+            <!-- Quests will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Widget configuration
+        const WIDGET_CONFIG = {
+            maxQuests: 5,
+            refreshInterval: 300000, // 5 minutes
+            showStats: true,
+            showProgress: true
+        };
+
+        let refreshTimer = null;
+
+        // Initialize widget
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWidgetData();
+            startAutoRefresh();
+        });
+
+        // Load widget data
+        async function loadWidgetData() {
+            try {
+                showLoading(true);
+                
+                // Load popular quests
+                const response = await fetch('/api/quest-tracker/widget-data');
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayWidgetData(data);
+                } else {
+                    showNoQuests();
+                }
+            } catch (error) {
+                console.error('Error loading widget data:', error);
+                showNoQuests();
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Display widget data
+        function displayWidgetData(data) {
+            // Update stats
+            if (WIDGET_CONFIG.showStats) {
+                document.getElementById('total-quests').textContent = data.stats.total_quests || 0;
+                document.getElementById('completed-quests').textContent = data.stats.completed_quests || 0;
+                document.getElementById('active-players').textContent = data.stats.active_players || 0;
+            }
+
+            // Display quests
+            const questList = document.getElementById('quest-list');
+            questList.innerHTML = '';
+
+            if (data.quests && data.quests.length > 0) {
+                const limitedQuests = data.quests.slice(0, WIDGET_CONFIG.maxQuests);
+                
+                limitedQuests.forEach(quest => {
+                    const questElement = createQuestElement(quest);
+                    questList.appendChild(questElement);
+                });
+
+                questList.style.display = 'block';
+                document.getElementById('no-quests-state').style.display = 'none';
+            } else {
+                showNoQuests();
+            }
+        }
+
+        // Create quest element
+        function createQuestElement(quest) {
+            const questDiv = document.createElement('div');
+            questDiv.className = `quest-item ${getStatusClass(quest.status)}`;
+
+            const categoryIcon = getCategoryIcon(quest.category);
+            const progressPercent = quest.progress || 0;
+
+            questDiv.innerHTML = `
+                <div class="quest-name">
+                    <span class="category-icon">${categoryIcon}</span>
+                    ${quest.name}
+                </div>
+                <div class="quest-info">
+                    <span>${quest.planet}</span>
+                    <span>${quest.difficulty}</span>
+                </div>
+                ${WIDGET_CONFIG.showProgress ? `
+                    <div class="quest-progress">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: ${progressPercent}%"></div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+
+            return questDiv;
+        }
+
+        // Show loading state
+        function showLoading(show) {
+            const loadingState = document.getElementById('loading-state');
+            const questList = document.getElementById('quest-list');
+            const noQuestsState = document.getElementById('no-quests-state');
+
+            if (show) {
+                loadingState.style.display = 'block';
+                questList.style.display = 'none';
+                noQuestsState.style.display = 'none';
+            } else {
+                loadingState.style.display = 'none';
+            }
+        }
+
+        // Show no quests state
+        function showNoQuests() {
+            const questList = document.getElementById('quest-list');
+            const noQuestsState = document.getElementById('no-quests-state');
+
+            questList.style.display = 'none';
+            noQuestsState.style.display = 'block';
+        }
+
+        // Start auto refresh
+        function startAutoRefresh() {
+            if (refreshTimer) {
+                clearInterval(refreshTimer);
+            }
+            
+            refreshTimer = setInterval(() => {
+                loadWidgetData();
+            }, WIDGET_CONFIG.refreshInterval);
+        }
+
+        // Helper functions
+        function getStatusClass(status) {
+            switch (status) {
+                case 'completed': return 'completed';
+                case 'in_progress': return 'in-progress';
+                case 'failed': return 'failed';
+                default: return 'not-started';
+            }
+        }
+
+        function getCategoryIcon(category) {
+            switch (category) {
+                case 'legacy': return '<i class="fas fa-crown"></i>';
+                case 'theme_park': return '<i class="fas fa-theater-masks"></i>';
+                case 'space': return '<i class="fas fa-rocket"></i>';
+                case 'kashyyyk': return '<i class="fas fa-tree"></i>';
+                case 'mustafar': return '<i class="fas fa-fire"></i>';
+                case 'heroic': return '<i class="fas fa-shield-alt"></i>';
+                case 'daily': return '<i class="fas fa-calendar-day"></i>';
+                case 'weekly': return '<i class="fas fa-calendar-week"></i>';
+                default: return '<i class="fas fa-quest"></i>';
+            }
+        }
+
+        // Clean up on page unload
+        window.addEventListener('beforeunload', function() {
+            if (refreshTimer) {
+                clearInterval(refreshTimer);
+            }
+        });
+    </script>
+</body>
+</html> 

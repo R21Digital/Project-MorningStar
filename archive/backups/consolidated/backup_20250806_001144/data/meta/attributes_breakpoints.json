@@ -1,0 +1,220 @@
+{
+  "breakpoints": {
+    "strength": {
+      "melee_damage": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "health": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+      "carry_weight": [25, 50, 75, 100, 125, 150, 175, 200, 225, 250],
+      "description": "Primary attribute for melee combat and physical strength"
+    },
+    "precision": {
+      "ranged_damage": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "critical_chance": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+      "accuracy": [25, 50, 75, 100, 125, 150, 175, 200, 225, 250],
+      "description": "Primary attribute for ranged combat and precision"
+    },
+    "agility": {
+      "dodge": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+      "speed": [25, 50, 75, 100, 125, 150, 175, 200, 225, 250],
+      "stamina": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "description": "Primary attribute for mobility and evasion"
+    },
+    "constitution": {
+      "health": [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000],
+      "stamina": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "resistance": [25, 50, 75, 100, 125, 150, 175, 200, 225, 250],
+      "description": "Primary attribute for survivability and endurance"
+    },
+    "focus": {
+      "force_power": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "mental_resistance": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+      "healing_power": [25, 50, 75, 100, 125, 150, 175, 200, 225, 250],
+      "description": "Primary attribute for force abilities and mental power"
+    },
+    "willpower": {
+      "mental_resistance": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      "force_power": [50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+      "healing_power": [25, 50, 75, 100, 125, 150, 175, 200, 225, 250],
+      "description": "Primary attribute for mental fortitude and force mastery"
+    }
+  },
+  "role_priorities": {
+    "dps": {
+      "primary": ["precision", "strength"],
+      "secondary": ["agility", "constitution"],
+      "tertiary": ["focus", "willpower"],
+      "description": "Damage-focused build prioritizing offensive capabilities"
+    },
+    "tank": {
+      "primary": ["constitution", "willpower"],
+      "secondary": ["strength", "focus"],
+      "tertiary": ["agility", "precision"],
+      "description": "Survivability-focused build prioritizing defensive capabilities"
+    },
+    "support": {
+      "primary": ["focus", "willpower"],
+      "secondary": ["constitution", "agility"],
+      "tertiary": ["precision", "strength"],
+      "description": "Support-focused build prioritizing healing and utility"
+    },
+    "hybrid": {
+      "primary": ["precision", "constitution"],
+      "secondary": ["agility", "focus"],
+      "tertiary": ["strength", "willpower"],
+      "description": "Balanced build with mixed offensive and defensive capabilities"
+    },
+    "pvp": {
+      "primary": ["precision", "agility"],
+      "secondary": ["constitution", "focus"],
+      "tertiary": ["strength", "willpower"],
+      "description": "PvP-focused build prioritizing mobility and burst damage"
+    }
+  },
+  "breakpoint_weights": {
+    "critical": 1.0,
+    "high": 0.8,
+    "medium": 0.6,
+    "low": 0.4
+  },
+  "optimization_thresholds": {
+    "minimum_improvement": 0.1,
+    "significant_improvement": 0.3,
+    "major_improvement": 0.5
+  },
+  "attribute_caps": {
+    "strength": 1000,
+    "precision": 1000,
+    "agility": 1000,
+    "constitution": 1000,
+    "focus": 1000,
+    "willpower": 1000
+  },
+  "role_specializations": {
+    "dps": {
+      "rifleman": {
+        "primary": ["precision"],
+        "secondary": ["agility", "constitution"],
+        "breakpoint_focus": ["ranged_damage", "critical_chance"]
+      },
+      "pistoleer": {
+        "primary": ["precision", "agility"],
+        "secondary": ["constitution"],
+        "breakpoint_focus": ["ranged_damage", "dodge"]
+      },
+      "swordsman": {
+        "primary": ["strength", "agility"],
+        "secondary": ["constitution"],
+        "breakpoint_focus": ["melee_damage", "dodge"]
+      }
+    },
+    "tank": {
+      "brawler": {
+        "primary": ["constitution", "strength"],
+        "secondary": ["willpower"],
+        "breakpoint_focus": ["health", "resistance"]
+      },
+      "fencer": {
+        "primary": ["agility", "constitution"],
+        "secondary": ["precision"],
+        "breakpoint_focus": ["dodge", "health"]
+      }
+    },
+    "support": {
+      "medic": {
+        "primary": ["focus", "willpower"],
+        "secondary": ["constitution"],
+        "breakpoint_focus": ["healing_power", "mental_resistance"]
+      },
+      "entertainer": {
+        "primary": ["focus", "agility"],
+        "secondary": ["willpower"],
+        "breakpoint_focus": ["force_power", "speed"]
+      }
+    }
+  },
+  "gcw_requirements": {
+    "infantry": {
+      "minimum_attributes": {
+        "strength": 300,
+        "constitution": 250,
+        "agility": 200,
+        "precision": 200
+      },
+      "breakpoint_targets": {
+        "strength": ["melee_damage", "health"],
+        "constitution": ["health", "resistance"],
+        "agility": ["dodge", "stamina"],
+        "precision": ["ranged_damage", "accuracy"]
+      }
+    },
+    "specialist": {
+      "minimum_attributes": {
+        "precision": 350,
+        "agility": 300,
+        "constitution": 200,
+        "strength": 150
+      },
+      "breakpoint_targets": {
+        "precision": ["ranged_damage", "critical_chance"],
+        "agility": ["dodge", "speed"],
+        "constitution": ["health", "stamina"],
+        "strength": ["melee_damage", "carry_weight"]
+      }
+    },
+    "commando": {
+      "minimum_attributes": {
+        "strength": 350,
+        "precision": 300,
+        "constitution": 250,
+        "agility": 200
+      },
+      "breakpoint_targets": {
+        "strength": ["melee_damage", "health"],
+        "precision": ["ranged_damage", "critical_chance"],
+        "constitution": ["health", "resistance"],
+        "agility": ["dodge", "stamina"]
+      }
+    },
+    "sniper": {
+      "minimum_attributes": {
+        "precision": 400,
+        "focus": 250,
+        "agility": 200,
+        "willpower": 200
+      },
+      "breakpoint_targets": {
+        "precision": ["ranged_damage", "critical_chance"],
+        "focus": ["force_power", "mental_resistance"],
+        "agility": ["dodge", "speed"],
+        "willpower": ["mental_resistance", "force_power"]
+      }
+    },
+    "medic": {
+      "minimum_attributes": {
+        "focus": 350,
+        "willpower": 300,
+        "constitution": 250,
+        "agility": 200
+      },
+      "breakpoint_targets": {
+        "focus": ["force_power", "healing_power"],
+        "willpower": ["mental_resistance", "healing_power"],
+        "constitution": ["health", "stamina"],
+        "agility": ["dodge", "speed"]
+      }
+    },
+    "engineer": {
+      "minimum_attributes": {
+        "focus": 300,
+        "precision": 250,
+        "willpower": 250,
+        "agility": 200
+      },
+      "breakpoint_targets": {
+        "focus": ["force_power", "mental_resistance"],
+        "precision": ["ranged_damage", "accuracy"],
+        "willpower": ["mental_resistance", "force_power"],
+        "agility": ["dodge", "speed"]
+      }
+    }
+  }
+} 

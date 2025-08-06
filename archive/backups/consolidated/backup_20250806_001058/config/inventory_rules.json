@@ -1,0 +1,28 @@
+{
+  "exclusions": [
+    "Janta Blood",
+    "Robe of the Benevolent",
+    "Ancient Artifact",
+    "Rare Crystal",
+    "Legendary Weapon",
+    "Masterwork Armor",
+    "Precious Gem",
+    "Valuable Scroll",
+    "Unique Item",
+    "Collector's Item",
+    "Duplicate Item",
+    "Persistent Test Item"
+  ],
+  "storage_target": {
+    "planet": "Corellia",
+    "city": "Coronet",
+    "structure_name": "Test Storage",
+    "coordinates": null
+  },
+  "settings": {
+    "max_inventory_warning_threshold": 90,
+    "auto_storage_enabled": false,
+    "storage_check_interval": 600,
+    "exclusion_case_sensitive": false
+  }
+}

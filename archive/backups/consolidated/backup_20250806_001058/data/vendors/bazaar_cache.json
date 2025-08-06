@@ -1,0 +1,38 @@
+{
+  "bazaar_3754": {
+    "item_name": "Durindfire",
+    "quantity": 50,
+    "price": 4500,
+    "seller_name": "Corellian_Trader",
+    "listing_id": "bazaar_3754",
+    "expires_at": "2025-08-02T13:55:02.594839",
+    "location": "Various"
+  },
+  "bazaar_4757": {
+    "item_name": "Spice Wine",
+    "quantity": 25,
+    "price": 2800,
+    "seller_name": "Naboo_Merchant",
+    "listing_id": "bazaar_4757",
+    "expires_at": "2025-08-02T13:55:02.594849",
+    "location": "Various"
+  },
+  "bazaar_9544": {
+    "item_name": "Durindfire",
+    "quantity": 50,
+    "price": 4500,
+    "seller_name": "Corellian_Trader",
+    "listing_id": "bazaar_9544",
+    "expires_at": "2025-08-02T14:00:45.373206",
+    "location": "Various"
+  },
+  "bazaar_7717": {
+    "item_name": "Spice Wine",
+    "quantity": 25,
+    "price": 2800,
+    "seller_name": "Naboo_Merchant",
+    "listing_id": "bazaar_7717",
+    "expires_at": "2025-08-02T14:00:45.373215",
+    "location": "Various"
+  }
+}

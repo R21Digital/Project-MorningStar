@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ guild.name }} [{{ guild.tag }}] - Guild Profile - SWGDB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .guild-profile {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .guild-name {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .guild-tag {
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .profile-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+        }
+
+        .info-label {
+            color: #7f8c8d;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .info-value {
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .stats-section {
+            grid-column: 1 / -1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .members-section {
+            grid-column: 1 / -1;
+        }
+
+        .members-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .members-count {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .member-item {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .member-rank {
+            background: #f39c12;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .member-info {
+            display: grid;
+            gap: 5px;
+        }
+
+        .member-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+
+        .member-label {
+            color: #7f8c8d;
+        }
+
+        .member-value {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .territories-section {
+            grid-column: 1 / -1;
+        }
+
+        .territories-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .territory-item {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .territory-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .achievements-section {
+            grid-column: 1 / -1;
+        }
+
+        .achievements-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement-item {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .achievement-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .achievement-date {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .faction-badge {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .faction-rebel {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .faction-imperial {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .faction-neutral {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .recruitment-status {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-open {
+            background: #27ae60;
+            color: white;
+        }
+
+        .status-closed {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .status-invite {
+            background: #f39c12;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/guilds" class="back-link">← Back to Guilds</a>
+    
+    <div class="container">
+        <div class="header">
+            <h1>{{ guild.name }}</h1>
+            <p>Guild Profile & Member Information</p>
+        </div>
+
+        <div class="guild-profile">
+            <div class="profile-header">
+                <div class="guild-name">{{ guild.name }}</div>
+                <div class="guild-tag">[{{ guild.tag }}]</div>
+            </div>
+
+            <div class="profile-grid">
+                <div class="profile-section">
+                    <div class="section-title">Basic Information</div>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Leader:</span>
+                            <span class="info-value">{{ guild.leader }}</span>
+                        </div>
+                        
+                        <div class="info-row">
+                            <span class="info-label">Faction:</span>
+                            <span class="info-value">
+                                <span class="faction-badge faction-{{ guild.faction.lower() }}">{{ guild.faction }}</span>
+                            </span>
+                        </div>
+                        
+                        {% if guild.planet %}
+                        <div class="info-row">
+                            <span class="info-label">Planet:</span>
+                            <span class="info-value">{{ guild.planet }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if guild.city %}
+                        <div class="info-row">
+                            <span class="info-label">City:</span>
+                            <span class="info-value">{{ guild.city }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if guild.founded_date %}
+                        <div class="info-row">
+                            <span class="info-label">Founded:</span>
+                            <span class="info-value">{{ guild.founded_date }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if guild.website %}
+                        <div class="info-row">
+                            <span class="info-label">Website:</span>
+                            <span class="info-value">
+                                <a href="{{ guild.website }}" target="_blank" style="color: #3498db;">{{ guild.website }}</a>
+                            </span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if guild.recruitment_status %}
+                        <div class="info-row">
+                            <span class="info-label">Recruitment:</span>
+                            <span class="info-value">
+                                <span class="recruitment-status status-{{ guild.recruitment_status.lower() }}">{{ guild.recruitment_status }}</span>
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-title">Activity & Statistics</div>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Total Members:</span>
+                            <span class="info-value">{{ guild.members_total }}</span>
+                        </div>
+                        
+                        <div class="info-row">
+                            <span class="info-label">Active Members:</span>
+                            <span class="info-value">{{ guild.members_active }}</span>
+                        </div>
+                        
+                        <div class="info-row">
+                            <span class="info-label">Activity Rate:</span>
+                            <span class="info-value">{{ "%.1f"|format(guild.active_percentage) }}%</span>
+                        </div>
+                        
+                        {% if guild.last_updated %}
+                        <div class="info-row">
+                            <span class="info-label">Last Updated:</span>
+                            <span class="info-value">{{ guild.last_updated }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if guild.description %}
+                        <div class="info-row">
+                            <span class="info-label">Description:</span>
+                            <span class="info-value">{{ guild.description }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="profile-section stats-section">
+                    <div class="section-title">Guild Statistics</div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value">{{ guild.members_total }}</div>
+                            <div class="stat-label">Total Members</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ guild.members_active }}</div>
+                            <div class="stat-label">Active Members</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ "%.1f"|format(guild.active_percentage) }}%</div>
+                            <div class="stat-label">Activity Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">{{ guild.territories|length if guild.territories else 0 }}</div>
+                            <div class="stat-label">Territories</div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if guild.members %}
+                <div class="profile-section members-section">
+                    <div class="members-header">
+                        <div class="section-title">Guild Members</div>
+                        <div class="members-count">{{ guild.members|length }} members</div>
+                    </div>
+                    <div class="members-grid">
+                        {% for member in guild.members %}
+                        <div class="member-item">
+                            <div class="member-header">
+                                <div class="member-name">{{ member.name }}</div>
+                                <div class="member-rank">{{ member.rank }}</div>
+                            </div>
+                            <div class="member-info">
+                                {% if member.profession %}
+                                <div class="member-detail">
+                                    <span class="member-label">Profession:</span>
+                                    <span class="member-value">{{ member.profession }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if member.level %}
+                                <div class="member-detail">
+                                    <span class="member-label">Level:</span>
+                                    <span class="member-value">{{ member.level }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if member.join_date %}
+                                <div class="member-detail">
+                                    <span class="member-label">Joined:</span>
+                                    <span class="member-value">{{ member.join_date }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if member.last_active %}
+                                <div class="member-detail">
+                                    <span class="member-label">Last Active:</span>
+                                    <span class="member-value">{{ member.last_active }}</span>
+                                </div>
+                                {% endif %}
+                                
+                                {% if member.contribution %}
+                                <div class="member-detail">
+                                    <span class="member-label">Contribution:</span>
+                                    <span class="member-value">{{ member.contribution }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if guild.territories %}
+                <div class="profile-section territories-section">
+                    <div class="section-title">Guild Territories</div>
+                    <div class="territories-list">
+                        {% for territory in guild.territories %}
+                        <div class="territory-item">
+                            <div class="territory-name">{{ territory }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if guild.achievements %}
+                <div class="profile-section achievements-section">
+                    <div class="section-title">Guild Achievements</div>
+                    <div class="achievements-list">
+                        {% for achievement in guild.achievements %}
+                        <div class="achievement-item">
+                            <div class="achievement-name">{{ achievement }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

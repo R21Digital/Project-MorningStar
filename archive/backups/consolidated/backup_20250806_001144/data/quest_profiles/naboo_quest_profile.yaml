@@ -1,0 +1,64 @@
+completion_estimates:
+  average_time_per_quest: 25.0
+  completion_percentage_milestones:
+  - percentage: 25
+    quests: 0
+  - percentage: 50
+    quests: 0
+  - percentage: 75
+    quests: 0
+  - percentage: 100
+    quests: 1
+  estimated_time_hours: 0.4166666666666667
+  estimated_time_minutes: 25
+  total_quests: 1
+completion_goals:
+  estimated_completion_time: 25
+  quests_by_difficulty:
+    medium: 1
+  quests_by_type:
+    faction: 1
+  required_levels:
+  - 15
+  total_quests: 1
+  unlock_requirements: []
+difficulty_progression:
+- count: 1
+  difficulty: medium
+  estimated_time: 25
+  quests:
+  - theed_palace_mission
+generated_date: '2025-07-31T16:23:51.560198'
+planet: naboo
+prerequisites_map:
+  theed_palace_mission: []
+quest_chains: []
+quests_by_type:
+  faction:
+  - database_info:
+      coordinates:
+      - 5000
+      - -4000
+      difficulty: medium
+      discovered_time: '2025-07-31 13:09:42.210312'
+      giver: Unknown
+      level_requirement: 15
+      location: ''
+      name: Theed Palace Security Mission
+      planet: naboo
+      quest_id: theed_palace_mission
+      quest_type: faction
+      reward: '{''credits'': 3000, ''experience'': 1500, ''items'': [''Palace Security
+        Badge'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: theed_palace_mission
+recommended_order:
+- theed_palace_mission
+rewards_summary:
+  items: []
+  total_credits: 0
+  total_experience: 0
+  total_reputation: {}
+  unlocks: []
+total_quests: 1

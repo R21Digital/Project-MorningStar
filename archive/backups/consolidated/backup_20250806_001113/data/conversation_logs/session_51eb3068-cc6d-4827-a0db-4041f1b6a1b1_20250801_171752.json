@@ -1,0 +1,29 @@
+{
+  "session_id": "51eb3068-cc6d-4827-a0db-4041f1b6a1b1",
+  "user_id": "demo_user",
+  "start_time": "2025-08-01T17:17:52.483174",
+  "end_time": "2025-08-01T17:17:52.483714",
+  "mode": "game_guide",
+  "message_count": 2,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Where can I find a trainer?",
+      "timestamp": "2025-08-01T17:17:52.483425",
+      "mode": "game_guide",
+      "metadata": {}
+    },
+    {
+      "role": "assistant",
+      "content": "I can help you find trainers!",
+      "timestamp": "2025-08-01T17:17:52.483714",
+      "mode": "game_guide",
+      "metadata": {}
+    }
+  ],
+  "metadata": {
+    "created_at": "2025-08-01T17:17:52.483174",
+    "mode": "game_guide",
+    "user_id": "demo_user"
+  }
+}

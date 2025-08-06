@@ -1,0 +1,172 @@
+{
+  "bug_reports": [
+    {
+      "id": "BUG-001",
+      "title": "MS11 bot fails to detect vendor NPCs in Mos Eisley",
+      "severity": "high",
+      "description": "The bot's NPC detection system is not properly identifying vendor NPCs in the Mos Eisley cantina area. This affects automated trading and item purchasing workflows. The issue appears to be related to lighting conditions and NPC positioning variance.",
+      "screenshot": "/assets/bugs/bug-001-vendor-detection.png",
+      "status": "open",
+      "tags": ["Bot", "NPC Detection", "Trading"],
+      "assignedTo": "dev-alice",
+      "priority": "P1",
+      "reportedBy": "user-john",
+      "reportedDate": "2025-01-15T10:30:00Z",
+      "lastUpdated": "2025-01-15T14:22:00Z",
+      "reproductionSteps": [
+        "Navigate MS11 bot to Mos Eisley cantina",
+        "Attempt to initiate vendor trading sequence",
+        "Observe NPC detection failure in console logs"
+      ],
+      "environment": {
+        "botVersion": "v2.1.4",
+        "gameServer": "Restoration III",
+        "operatingSystem": "Windows 11"
+      },
+      "comments": [
+        {
+          "id": "comment-001",
+          "author": "dev-alice",
+          "date": "2025-01-15T14:22:00Z",
+          "content": "Investigating the OCR patterns for vendor identification. May need to update the training data."
+        }
+      ]
+    },
+    {
+      "id": "BUG-002", 
+      "title": "SWGDB heroic loot tables showing incorrect drop rates",
+      "severity": "medium",
+      "description": "The loot tables on heroic pages are displaying inaccurate drop rate percentages. The calculation appears to be off by approximately 15-20% compared to actual MS11 session data.",
+      "screenshot": "/assets/bugs/bug-002-loot-rates.png",
+      "status": "in-progress",
+      "tags": ["Website", "Loot System", "Data"],
+      "assignedTo": "dev-bob",
+      "priority": "P2",
+      "reportedBy": "user-sarah",
+      "reportedDate": "2025-01-14T16:45:00Z",
+      "lastUpdated": "2025-01-15T09:10:00Z",
+      "reproductionSteps": [
+        "Navigate to any heroic page (e.g., IG-88)",
+        "Compare displayed drop rates with raw session data",
+        "Note discrepancy in percentage calculations"
+      ],
+      "environment": {
+        "browser": "Chrome 131.0.0.0",
+        "device": "Desktop",
+        "screenResolution": "1920x1080"
+      },
+      "comments": [
+        {
+          "id": "comment-002",
+          "author": "dev-bob",
+          "date": "2025-01-15T09:10:00Z",
+          "content": "Found the issue in the statistics aggregation function. Working on a fix."
+        }
+      ]
+    },
+    {
+      "id": "BUG-003",
+      "title": "Missing quest data for Naboo legacy quests",
+      "severity": "low",
+      "description": "Several legacy quests from Naboo are not appearing in the quest database. This affects quest completion tracking and progress statistics.",
+      "screenshot": null,
+      "status": "open",
+      "tags": ["Content", "Quest Data"],
+      "assignedTo": null,
+      "priority": "P3",
+      "reportedBy": "user-mike",
+      "reportedDate": "2025-01-13T11:20:00Z",
+      "lastUpdated": "2025-01-13T11:20:00Z",
+      "reproductionSteps": [
+        "Navigate to quest tracker",
+        "Search for 'Naboo' quests",
+        "Compare with known legacy quest list"
+      ],
+      "environment": {
+        "contentVersion": "v1.2.3",
+        "dataSource": "Legacy Quest Import"
+      },
+      "comments": []
+    },
+    {
+      "id": "BUG-004",
+      "title": "Bot crashes when attempting Krayt Dragon hunt",
+      "severity": "critical",
+      "description": "MS11 bot experiences fatal crashes during Krayt Dragon hunting sequences. The crash occurs consistently at the 75% health mark of the Ancient Krayt Dragon encounter.",
+      "screenshot": "/assets/bugs/bug-004-krayt-crash.png",
+      "status": "open",
+      "tags": ["Bot", "Critical", "Heroics"],
+      "assignedTo": "dev-charlie",
+      "priority": "P0",
+      "reportedBy": "user-alex",
+      "reportedDate": "2025-01-16T08:15:00Z",
+      "lastUpdated": "2025-01-16T08:15:00Z",
+      "reproductionSteps": [
+        "Initiate Krayt Dragon hunt with MS11 bot",
+        "Engage Ancient Krayt Dragon",
+        "Monitor bot behavior at 75% dragon health",
+        "Observe crash and error logs"
+      ],
+      "environment": {
+        "botVersion": "v2.1.4",
+        "gameServer": "Restoration III",
+        "operatingSystem": "Windows 10",
+        "memoryUsage": "High (>8GB)"
+      },
+      "comments": []
+    },
+    {
+      "id": "BUG-005",
+      "title": "Mobile responsive layout breaks on heroic pages",
+      "severity": "medium",
+      "description": "The loot table UI becomes unusable on mobile devices with screen widths below 480px. Tables overflow and navigation buttons are inaccessible.",
+      "screenshot": "/assets/bugs/bug-005-mobile-layout.png",
+      "status": "resolved",
+      "tags": ["Website", "Mobile", "UI"],
+      "assignedTo": "dev-diana",
+      "priority": "P2",
+      "reportedBy": "user-emma",
+      "reportedDate": "2025-01-12T14:30:00Z",
+      "lastUpdated": "2025-01-15T16:45:00Z",
+      "reproductionSteps": [
+        "Open SWGDB on mobile device",
+        "Navigate to any heroic page",
+        "Switch to loot table tab",
+        "Observe layout issues"
+      ],
+      "environment": {
+        "browser": "Safari Mobile",
+        "device": "iPhone 12",
+        "screenResolution": "390x844"
+      },
+      "comments": [
+        {
+          "id": "comment-003",
+          "author": "dev-diana",
+          "date": "2025-01-15T16:45:00Z",
+          "content": "Fixed with improved CSS media queries and table responsive design. Deployed in v1.2.4."
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "totalBugs": 5,
+    "openBugs": 3,
+    "inProgressBugs": 1,
+    "resolvedBugs": 1,
+    "lastUpdated": "2025-01-16T08:15:00Z",
+    "nextBugId": "BUG-006"
+  },
+  "config": {
+    "severityLevels": ["critical", "high", "medium", "low"],
+    "statusTypes": ["open", "in-progress", "resolved", "closed", "wont-fix"],
+    "priorityLevels": ["P0", "P1", "P2", "P3"],
+    "tagCategories": ["Bot", "Website", "Content", "NPC Detection", "Trading", "Loot System", "Data", "Quest Data", "Critical", "Heroics", "Mobile", "UI"],
+    "assignableDevs": [
+      {"id": "dev-alice", "name": "Alice Johnson", "role": "Senior Bot Developer"},
+      {"id": "dev-bob", "name": "Bob Smith", "role": "Full Stack Developer"}, 
+      {"id": "dev-charlie", "name": "Charlie Brown", "role": "Backend Developer"},
+      {"id": "dev-diana", "name": "Diana Prince", "role": "Frontend Developer"}
+    ]
+  }
+}

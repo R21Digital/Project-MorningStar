@@ -1,0 +1,98 @@
+{
+  "character_name": "SupportChar",
+  "character_type": "support",
+  "profession": "medic",
+  "level": 90,
+  "support_type": "medic",
+  "behavior": {
+    "heal_threshold": 80,
+    "buff_interval": 300,
+    "follow_distance": 50,
+    "stationary_mode": false,
+    "auto_follow_leader": true,
+    "emergency_heal": true,
+    "auto_revive": false
+  },
+  "healing": {
+    "heal_spells": ["heal_health", "heal_action", "heal_mind"],
+    "heal_range": 30,
+    "heal_priority": "lowest_health",
+    "group_heal": true,
+    "heal_potions": true,
+    "heal_food": true
+  },
+  "buffing": {
+    "buff_spells": ["heal_health", "heal_action", "heal_mind"],
+    "buff_range": 50,
+    "buff_interval": 300,
+    "auto_buff_leader": true,
+    "buff_potions": true,
+    "buff_food": true
+  },
+  "movement": {
+    "travel_method": "mount",
+    "follow_leader": true,
+    "follow_distance": 50,
+    "catch_up_speed": "fast",
+    "avoid_combat": true,
+    "safe_positioning": true
+  },
+  "combat": {
+    "weapon_preference": "pistol",
+    "armor_type": "light",
+    "combat_range": "long",
+    "target_priority": "none",
+    "retreat_health": 50,
+    "max_engagement_time": 0
+  },
+  "inventory": {
+    "auto_loot": false,
+    "loot_filter": ["medical_supplies", "buff_items"],
+    "inventory_management": "manual",
+    "sell_junk_items": false,
+    "keep_medical_items": true
+  },
+  "social": {
+    "auto_greet": false,
+    "respond_to_tells": false,
+    "group_invitation": "auto_accept",
+    "guild_activities": "participate"
+  },
+  "safety": {
+    "afk_detection": true,
+    "emergency_logout": true,
+    "health_threshold": 50,
+    "disconnect_timeout": 60,
+    "max_session_time": 7200
+  },
+  "dual_mode": {
+    "is_follower": true,
+    "leader_character": "MainChar",
+    "sync_position": true,
+    "sync_quests": false,
+    "sync_combat": false,
+    "follow_distance": 50,
+    "support_mode": "medic"
+  },
+  "support_modes": {
+    "medic": {
+      "enabled": true,
+      "heal_threshold": 80,
+      "buff_interval": 300,
+      "emergency_heal": true,
+      "auto_revive": false
+    },
+    "dancer": {
+      "enabled": false,
+      "dance_interval": 180,
+      "performance_mode": true,
+      "auto_entertain": true
+    },
+    "entertainer": {
+      "enabled": false,
+      "entertain_interval": 240,
+      "performance_mode": true,
+      "auto_entertain": true
+    }
+  }
+} 

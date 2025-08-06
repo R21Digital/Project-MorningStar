@@ -1,0 +1,183 @@
+<!-- Google Analytics v4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4ZZ5SFJC0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q4ZZ5SFJC0', {
+    // Enhanced configuration for better tracking
+    page_title: document.title,
+    page_location: window.location.href,
+    send_page_view: true,
+    // Custom dimensions for SWGDB tracking
+    custom_map: {
+      'custom_dimension1': 'user_type',
+      'custom_dimension2': 'page_category',
+      'custom_dimension3': 'content_type'
+    }
+  });
+
+  // Track custom events for SWGDB
+  function trackSWGDBEvent(eventName, parameters = {}) {
+    gtag('event', eventName, {
+      event_category: 'SWGDB',
+      event_label: window.location.pathname,
+      ...parameters
+    });
+  }
+
+  // Track page views with custom data
+  gtag('event', 'page_view', {
+    page_title: document.title,
+    page_location: window.location.href,
+    page_category: getPageCategory(),
+    content_type: getContentType()
+  });
+
+  // Helper functions for tracking
+  function getPageCategory() {
+    const path = window.location.pathname;
+    if (path.includes('/heroics/')) return 'Heroics';
+    if (path.includes('/loot/')) return 'Loot';
+    if (path.includes('/builds/')) return 'Builds';
+    if (path.includes('/tools/')) return 'Tools';
+    if (path.includes('/admin/')) return 'Admin';
+    return 'General';
+  }
+
+  function getContentType() {
+    const path = window.location.pathname;
+    if (path.endsWith('.html')) return 'HTML';
+    if (path.includes('/api/')) return 'API';
+    return 'Page';
+  }
+
+  // Track user interactions
+  document.addEventListener('DOMContentLoaded', function() {
+    // Track filter usage
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        trackSWGDBEvent('filter_used', {
+          filter_type: this.dataset.filter || this.dataset.rarity,
+          filter_value: this.textContent.trim()
+        });
+      });
+    });
+
+    // Track search usage
+    const searchBoxes = document.querySelectorAll('input[type="search"], .search-box');
+    searchBoxes.forEach(box => {
+      box.addEventListener('input', function() {
+        if (this.value.length > 2) {
+          trackSWGDBEvent('search_performed', {
+            search_term: this.value,
+            search_location: window.location.pathname
+          });
+        }
+      });
+    });
+
+    // Track navigation clicks
+    const navLinks = document.querySelectorAll('a[href]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        if (this.href && !this.href.includes('javascript:')) {
+          trackSWGDBEvent('navigation_click', {
+            link_text: this.textContent.trim(),
+            link_url: this.href,
+            link_location: window.location.pathname
+          });
+        }
+      });
+    });
+
+    // Track form submissions
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      form.addEventListener('submit', function() {
+        trackSWGDBEvent('form_submitted', {
+          form_id: this.id || 'unknown',
+          form_action: this.action
+        });
+      });
+    });
+  });
+
+  // Track performance metrics
+  window.addEventListener('load', function() {
+    // Track page load time
+    if (window.performance && window.performance.timing) {
+      const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+      trackSWGDBEvent('page_load_time', {
+        load_time_ms: loadTime,
+        page_url: window.location.href
+      });
+    }
+
+    // Track user engagement
+    let timeOnPage = 0;
+    const engagementInterval = setInterval(function() {
+      timeOnPage += 10;
+      if (timeOnPage % 30 === 0) { // Track every 30 seconds
+        trackSWGDBEvent('user_engagement', {
+          time_on_page_seconds: timeOnPage,
+          page_url: window.location.href
+        });
+      }
+    }, 10000); // Check every 10 seconds
+
+    // Clear interval when user leaves
+    window.addEventListener('beforeunload', function() {
+      clearInterval(engagementInterval);
+      trackSWGDBEvent('page_exit', {
+        time_on_page_seconds: timeOnPage,
+        page_url: window.location.href
+      });
+    });
+  });
+</script>
+
+<!-- Google Search Console Verification -->
+<meta name="google-site-verification" content="your-google-site-verification-code-here" />
+
+<!-- Additional SEO and Performance Meta Tags -->
+<meta name="robots" content="index, follow">
+<meta name="author" content="SWGDB Team">
+<meta name="description" content="Star Wars Galaxies Database - Comprehensive tools and information for SWG players">
+<meta name="keywords" content="Star Wars Galaxies, SWG, database, tools, heroics, loot, builds, gaming">
+
+<!-- Open Graph Meta Tags for Social Media -->
+<meta property="og:title" content="SWGDB - Star Wars Galaxies Database">
+<meta property="og:description" content="Comprehensive tools and information for Star Wars Galaxies players">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://swgdb.com">
+<meta property="og:site_name" content="SWGDB">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SWGDB - Star Wars Galaxies Database">
+<meta name="twitter:description" content="Comprehensive tools and information for Star Wars Galaxies players">
+<meta name="twitter:site" content="@swgdb">
+
+<!-- Structured Data for Rich Snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "SWGDB",
+  "description": "Star Wars Galaxies Database - Comprehensive tools and information for SWG players",
+  "url": "https://swgdb.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://swgdb.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+    }
+} 
+</script>
+
+<!-- Fallback noscript version for privacy-aware users -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=G-Q4ZZ5SFJC0"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript> 

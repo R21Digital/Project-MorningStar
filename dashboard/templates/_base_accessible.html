@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SWGDB - Star Wars Galaxies Database{% endblock %}</title>
+    
+    <!-- SEO Meta Tags -->
+    {% block meta %}
+    <meta name="description" content="{% block description %}The ultimate Star Wars Galaxies database with heroic guides, character builds, and community tools.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}star wars galaxies, swg, heroics, builds, database{% endblock %}">
+    {% endblock %}
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        /* Skip Navigation Link */
+        .skip-nav {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 0 0 4px 4px;
+            z-index: 1000;
+        }
+        
+        .skip-nav:focus {
+            top: 6px;
+        }
+        
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            :root {
+                --bs-body-bg: #000;
+                --bs-body-color: #fff;
+                --bs-primary: #00ff00;
+            }
+        }
+        
+        /* Reduced Motion Support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Focus Indicators */
+        a:focus,
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 3px solid #0066cc;
+            outline-offset: 2px;
+        }
+        
+        /* Color Contrast Improvements */
+        .text-muted {
+            color: #6c757d !important; /* Ensures 4.5:1 contrast ratio */
+        }
+        
+        /* Screen Reader Only Content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-nav">Skip to main content</a>
+    
+    <!-- Header -->
+    <header role="banner" class="bg-primary text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand" href="/" aria-label="SWGDB Home">
+                    <img src="/static/images/swgdb-logo.png" alt="SWGDB Logo" width="32" height="32" class="d-inline-block align-text-top">
+                    SWGDB
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/heroics" {% if request.endpoint == 'heroics' %}aria-current="page"{% endif %}>
+                                <i class="fas fa-dungeon" aria-hidden="true"></i>
+                                <span>Heroics</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/builds" {% if request.endpoint == 'builds' %}aria-current="page"{% endif %}>
+                                <i class="fas fa-user-cog" aria-hidden="true"></i>
+                                <span>Builds</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/guides" {% if request.endpoint == 'guides' %}aria-current="page"{% endif %}>
+                                <i class="fas fa-book" aria-hidden="true"></i>
+                                <span>Guides</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tools" {% if request.endpoint == 'tools' %}aria-current="page"{% endif %}>
+                                <i class="fas fa-tools" aria-hidden="true"></i>
+                                <span>Tools</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/feedback" {% if request.endpoint == 'feedback' %}aria-current="page"{% endif %}>
+                                <i class="fas fa-comments" aria-hidden="true"></i>
+                                <span>Feedback</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Breadcrumb Navigation -->
+        {% block breadcrumb %}
+        {% if breadcrumbs %}
+        <nav aria-label="Breadcrumb" class="bg-light">
+            <div class="container">
+                <ol class="breadcrumb mb-0 py-2">
+                    <li class="breadcrumb-item">
+                        <a href="/" aria-label="Home">
+                            <i class="fas fa-home" aria-hidden="true"></i>
+                            <span class="sr-only">Home</span>
+                        </a>
+                    </li>
+                    {% for breadcrumb in breadcrumbs %}
+                        {% if loop.last %}
+                            <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.title }}</li>
+                        {% else %}
+                            <li class="breadcrumb-item">
+                                <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            </div>
+        </nav>
+        {% endif %}
+        {% endblock %}
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content" tabindex="-1" role="main">
+        <!-- Page Header -->
+        {% block page_header %}
+        <div class="bg-light py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1>{% block page_title %}{% endblock %}</h1>
+                        {% block page_description %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        
+        <!-- Alert Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="container mt-3">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                            <strong>{% if category == 'error' %}Error:{% elif category == 'success' %}Success:{% elif category == 'warning' %}Warning:{% else %}Info:{% endif %}</strong>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close alert"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Page Content -->
+        <div class="container my-4">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer role="contentinfo" class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>SWGDB - Star Wars Galaxies Database</h5>
+                    <p class="text-muted">Community-driven database and tools for Star Wars Galaxies players.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/about" class="text-light">About SWGDB</a></li>
+                        <li><a href="/contributing" class="text-light">Contributing</a></li>
+                        <li><a href="/api" class="text-light">API Documentation</a></li>
+                        <li><a href="/feedback" class="text-light">Submit Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Community</h6>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="https://github.com/project-morningstar/Project-MorningStar" class="text-light" aria-label="GitHub Repository">
+                                <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://discord.gg/swgdb" class="text-light" aria-label="Discord Community">
+                                <i class="fab fa-discord" aria-hidden="true"></i> Discord
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 SWGDB Community. Open source under MIT License.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <small class="text-muted">
+                            Not affiliated with LucasArts, Sony Online Entertainment, or Disney.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Accessibility Enhancements -->
+    <script>
+        // Keyboard navigation for dropdown menus
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Close any open dropdowns
+                const openDropdowns = document.querySelectorAll('.dropdown-menu.show');
+                openDropdowns.forEach(dropdown => {
+                    const toggle = dropdown.previousElementSibling;
+                    if (toggle) {
+                        bootstrap.Dropdown.getInstance(toggle).hide();
+                        toggle.focus();
+                    }
+                });
+            }
+        });
+        
+        // Announce page changes to screen readers
+        function announcePageChange(message) {
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.className = 'sr-only';
+            announcement.textContent = message;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                document.body.removeChild(announcement);
+            }, 1000);
+        }
+        
+        // Focus management for single page app behavior
+        window.addEventListener('popstate', function() {
+            document.getElementById('main-content').focus();
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,119 @@
+[
+  {
+    "kill_id": "66e71bd5",
+    "target_name": "Jedi Master Kael",
+    "location": "Theed Palace",
+    "planet": "Naboo",
+    "coordinates": [
+      100,
+      200
+    ],
+    "timestamp": "2025-08-03T22:08:32.921491",
+    "reward_earned": 50000,
+    "kill_method": "ranged",
+    "season_id": "season_2025_08",
+    "hunter_name": "Boba Fett",
+    "target_level": 80,
+    "target_species": "Human",
+    "target_faction": "Jedi",
+    "screenshot_path": null,
+    "notes": "Elite Jedi Master with advanced combat skills"
+  },
+  {
+    "kill_id": "78161b61",
+    "target_name": "Padawan Ahsoka",
+    "location": "Mos Eisley Cantina",
+    "planet": "Tatooine",
+    "coordinates": [
+      150,
+      300
+    ],
+    "timestamp": "2025-08-03T22:08:32.922414",
+    "reward_earned": 25000,
+    "kill_method": "melee",
+    "season_id": "season_2025_08",
+    "hunter_name": "Dengar",
+    "target_level": 45,
+    "target_species": "Togruta",
+    "target_faction": "Jedi",
+    "screenshot_path": null,
+    "notes": "Young but skilled padawan"
+  },
+  {
+    "kill_id": "5c1aca29",
+    "target_name": "Jedi Knight Obi-Wan",
+    "location": "Coronet Spaceport",
+    "planet": "Corellia",
+    "coordinates": [
+      200,
+      150
+    ],
+    "timestamp": "2025-08-03T22:08:32.923230",
+    "reward_earned": 75000,
+    "kill_method": "poison",
+    "season_id": "season_2025_08",
+    "hunter_name": "IG-88",
+    "target_level": 90,
+    "target_species": "Human",
+    "target_faction": "Jedi",
+    "screenshot_path": null,
+    "notes": "Experienced Jedi Knight, difficult target"
+  },
+  {
+    "kill_id": "95a6c9c0",
+    "target_name": "Jedi Test Target",
+    "location": "Demo Location",
+    "planet": "Naboo",
+    "coordinates": [
+      100,
+      200
+    ],
+    "timestamp": "2025-08-03T22:08:32.926422",
+    "reward_earned": 30000,
+    "kill_method": "demo",
+    "season_id": "season_2025_08",
+    "hunter_name": "Demo Hunter",
+    "target_level": 50,
+    "target_species": null,
+    "target_faction": null,
+    "screenshot_path": null,
+    "notes": "Demo kill for testing integration"
+  },
+  {
+    "kill_id": "2b7cffd9",
+    "target_name": "Manual Jedi Entry",
+    "location": "Manual Location",
+    "planet": "Manual Planet",
+    "coordinates": [
+      999,
+      999
+    ],
+    "timestamp": "2025-08-03T22:08:32.928401",
+    "reward_earned": 100000,
+    "kill_method": "manual_entry",
+    "season_id": "season_2025_08",
+    "hunter_name": "Verified User",
+    "target_level": 99,
+    "target_species": "Unknown",
+    "target_faction": "Jedi",
+    "screenshot_path": null,
+    "notes": "Manually entered by verified user"
+  },
+  {
+    "kill_id": "2d2ff528",
+    "target_name": "",
+    "location": "Test",
+    "planet": "Test",
+    "coordinates": null,
+    "timestamp": "2025-08-03T22:08:32.930922",
+    "reward_earned": -1000,
+    "kill_method": "test",
+    "season_id": "season_2025_08",
+    "hunter_name": "Test",
+    "target_level": null,
+    "target_species": null,
+    "target_faction": null,
+    "screenshot_path": null,
+    "notes": null
+  }
+]

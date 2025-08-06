@@ -1,0 +1,28 @@
+{
+  "ships": {
+    "x-wing": {
+      "type": "starfighter",
+      "unlocked": true,
+      "cooldown_remaining": 0,
+      "max_cooldown": 180,
+      "fuel_level": 100,
+      "last_used": 1753989089.4058177
+    },
+    "millennium_falcon": {
+      "type": "heavy_freighter",
+      "unlocked": true,
+      "cooldown_remaining": 0,
+      "max_cooldown": 300,
+      "fuel_level": 100,
+      "last_used": 0.0
+    },
+    "transport_shuttle": {
+      "type": "transport",
+      "unlocked": true,
+      "cooldown_remaining": 0,
+      "max_cooldown": 120,
+      "fuel_level": 100,
+      "last_used": 0.0
+    }
+  }
+}

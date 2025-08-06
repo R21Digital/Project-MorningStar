@@ -1,0 +1,44 @@
+{
+  "cities": {
+    "title": "Top 0 Cities by Population",
+    "type": "cities",
+    "timestamp": "2025-07-31T21:41:12.840903",
+    "data": []
+  },
+  "materials": {
+    "title": "Rare Materials (Rating \u2265 800)",
+    "type": "materials",
+    "timestamp": "2025-07-31T21:41:12.840962",
+    "min_rating": 800,
+    "total_count": 0,
+    "data": []
+  },
+  "territories": {
+    "title": "Guild Territories",
+    "type": "territories",
+    "timestamp": "2025-07-31T21:41:12.841018",
+    "total_guilds": 0,
+    "total_cities": 0,
+    "data": []
+  },
+  "pulse": {
+    "title": "Server Pulse",
+    "type": "pulse",
+    "timestamp": "2025-07-31T21:41:12.841079",
+    "error": "No pulse data available",
+    "online_players": 0,
+    "server_status": "Unknown"
+  },
+  "summary": {
+    "title": "Resource Summary",
+    "type": "summary",
+    "timestamp": "2025-07-31T21:41:12.841144",
+    "total_resources": 0,
+    "active_resources": 0,
+    "rare_resources": 0,
+    "very_rare_resources": 0,
+    "top_categories": []
+  },
+  "last_refresh": 1754023272.8398292,
+  "cache_duration": 300
+}

@@ -1,0 +1,33 @@
+{
+  "tatooine": [
+    {
+      "city": "mos_eisley",
+      "npc": "Shuttle Conductor",
+      "x": 3520,
+      "y": -4800,
+      "destinations": [
+        {"planet": "corellia", "city": "coronet"}
+      ]
+    },
+    {
+      "city": "anchorhead",
+      "npc": "Shuttle Attendant",
+      "x": -100,
+      "y": 200,
+      "destinations": [
+        {"planet": "tatooine", "city": "mos_eisley"}
+      ]
+    }
+  ],
+  "corellia": [
+    {
+      "city": "coronet",
+      "npc": "Shuttle Conductor",
+      "x": 123,
+      "y": 456,
+      "destinations": [
+        {"planet": "tatooine", "city": "mos_eisley"}
+      ]
+    }
+  ]
+}

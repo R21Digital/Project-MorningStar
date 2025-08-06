@@ -1,0 +1,69 @@
+name: tkm_brawler
+build_type: melee
+weapon_type: unarmed
+combat_style: melee
+description: "Teräs Käsi Master brawler build with high damage melee abilities and defensive skills"
+abilities:
+  - "Punch"
+  - "Kick"
+  - "Uppercut"
+  - "Body Slam"
+  - "Dodge"
+  - "Block"
+  - "Counter Attack"
+  - "Stunning Strike"
+  - "Defensive Stance"
+  - "Combat Focus"
+ability_rotation:
+  - "Punch"
+  - "Kick"
+  - "Punch"
+  - "Uppercut"
+  - "Body Slam"
+  - "Counter Attack"
+emergency_abilities:
+  dodge: "Dodge"
+  block: "Block"
+  defensive_stance: "Defensive Stance"
+  stunning_strike: "Stunning Strike"
+combat_priorities:
+  player_health_threshold: 40
+  target_health_threshold: 15
+  stamina_threshold: 20
+  focus_threshold: 30
+cooldowns:
+  Punch: 0
+  Kick: 3
+  Uppercut: 8
+  Body Slam: 12
+  Dodge: 5
+  Block: 2
+  Counter Attack: 10
+  Stunning Strike: 15
+  Defensive Stance: 20
+  Combat Focus: 30
+targeting:
+  primary_target: "nearest_hostile"
+  max_range: 5
+  switch_target_threshold: 25
+  prefer_weaker_targets: true
+  avoid_elites: false
+healing:
+  self_heal_threshold: 30
+  stim_pack_threshold: 20
+  healing_abilities:
+    - "Combat Focus"
+  emergency_healing: "Stim Pack"
+buffing:
+  buff_threshold: 80
+  buff_abilities:
+    - "Defensive Stance"
+    - "Combat Focus"
+  buff_priorities:
+    - "Defensive Stance"
+    - "Combat Focus"
+optimal_range: 3
+fallback_abilities:
+  - "Punch"
+  - "Block"
+  - "Dodge" 

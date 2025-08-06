@@ -1,0 +1,153 @@
+{
+  "hotspots": [
+    {
+      "zone_name": "restuss",
+      "planet": "rori",
+      "coordinates": [5000, -3000],
+      "risk_level": "critical",
+      "faction_activity": {
+        "imperial": 0.8,
+        "rebel": 0.7
+      },
+      "description": "Major GCW zone with heavy PvP activity",
+      "avoidance_strategy": "zone_change",
+      "safe_alternatives": ["moenia", "theed", "coronet"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "battlefield",
+      "planet": "dantooine",
+      "coordinates": [100, 200],
+      "risk_level": "high",
+      "faction_activity": {
+        "imperial": 0.6,
+        "rebel": 0.5
+      },
+      "description": "Active battlefield with regular PvP",
+      "avoidance_strategy": "mount_escape",
+      "safe_alternatives": ["anchorhead", "mos_eisley", "coronet"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "theed_palace",
+      "planet": "naboo",
+      "coordinates": [5000, -4000],
+      "risk_level": "medium",
+      "faction_activity": {
+        "imperial": 0.3,
+        "rebel": 0.4
+      },
+      "description": "Palace area with occasional PvP",
+      "avoidance_strategy": "soft_path_deviation",
+      "safe_alternatives": ["moenia", "kaadara"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "coronet_trade_district",
+      "planet": "corellia",
+      "coordinates": [4000, -5000],
+      "risk_level": "medium",
+      "faction_activity": {
+        "imperial": 0.4,
+        "rebel": 0.3
+      },
+      "description": "Trade district with occasional faction conflicts",
+      "avoidance_strategy": "safe_spot_wait",
+      "safe_alternatives": ["coronet_residential", "tyrena"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "anchorhead_center",
+      "planet": "tatooine",
+      "coordinates": [3520, -4800],
+      "risk_level": "low",
+      "faction_activity": {
+        "imperial": 0.2,
+        "rebel": 0.2
+      },
+      "description": "Generally safe with minimal PvP",
+      "avoidance_strategy": "log_only",
+      "safe_alternatives": ["mos_eisley", "bestine"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "moenia_city",
+      "planet": "naboo",
+      "coordinates": [4800, -4200],
+      "risk_level": "low",
+      "faction_activity": {
+        "imperial": 0.1,
+        "rebel": 0.1
+      },
+      "description": "Safe city with minimal PvP activity",
+      "avoidance_strategy": "log_only",
+      "safe_alternatives": ["theed", "kaadara"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "tyrena_city",
+      "planet": "corellia",
+      "coordinates": [4200, -5200],
+      "risk_level": "low",
+      "faction_activity": {
+        "imperial": 0.1,
+        "rebel": 0.1
+      },
+      "description": "Safe city with minimal PvP activity",
+      "avoidance_strategy": "log_only",
+      "safe_alternatives": ["coronet", "doaba_guerfel"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "bestine_city",
+      "planet": "tatooine",
+      "coordinates": [3800, -4600],
+      "risk_level": "low",
+      "faction_activity": {
+        "imperial": 0.1,
+        "rebel": 0.1
+      },
+      "description": "Safe city with minimal PvP activity",
+      "avoidance_strategy": "log_only",
+      "safe_alternatives": ["anchorhead", "mos_eisley"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "kaadara_city",
+      "planet": "naboo",
+      "coordinates": [5200, -3800],
+      "risk_level": "low",
+      "faction_activity": {
+        "imperial": 0.1,
+        "rebel": 0.1
+      },
+      "description": "Safe city with minimal PvP activity",
+      "avoidance_strategy": "log_only",
+      "safe_alternatives": ["theed", "moenia"],
+      "last_updated": "2025-08-02T16:00:00"
+    },
+    {
+      "zone_name": "doaba_guerfel",
+      "planet": "corellia",
+      "coordinates": [4400, -5400],
+      "risk_level": "low",
+      "faction_activity": {
+        "imperial": 0.1,
+        "rebel": 0.1
+      },
+      "description": "Safe city with minimal PvP activity",
+      "avoidance_strategy": "log_only",
+      "safe_alternatives": ["coronet", "tyrena"],
+      "last_updated": "2025-08-02T16:00:00"
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-08-02T16:00:00",
+    "total_hotspots": 10,
+    "critical_zones": 1,
+    "high_risk_zones": 1,
+    "medium_risk_zones": 2,
+    "low_risk_zones": 6,
+    "description": "GCW hotspots and safe zones for PvP avoidance"
+  }
+} 

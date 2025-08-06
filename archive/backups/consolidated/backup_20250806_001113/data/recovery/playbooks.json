@@ -1,0 +1,257 @@
+{
+  "playbooks": {
+    "standard": {
+      "name": "Standard Recovery",
+      "description": "Standard laddered recovery sequence for common stuck states",
+      "actions": [
+        {
+          "action": "micro_path_jitter",
+          "name": "Micro Path Jitter",
+          "description": "Small random movements to break stuck state",
+          "timeout": 10.0,
+          "cooldown": 30.0,
+          "parameters": {
+            "movement_range": 3,
+            "movement_count": 5,
+            "delay_between_movements": 0.5
+          }
+        },
+        {
+          "action": "mount_toggle",
+          "name": "Mount Toggle",
+          "description": "Toggle mount state to reset movement",
+          "timeout": 15.0,
+          "cooldown": 60.0,
+          "parameters": {
+            "mount_key": "m",
+            "toggle_delay": 1.0,
+            "verify_mount_state": true
+          }
+        },
+        {
+          "action": "face_camera_rescan",
+          "name": "Face Camera & Re-scan",
+          "description": "Rotate camera and re-scan environment",
+          "timeout": 20.0,
+          "cooldown": 120.0,
+          "parameters": {
+            "rotation_left_key": "q",
+            "rotation_right_key": "e",
+            "rotation_duration": 2.0,
+            "scan_delay": 1.0
+          }
+        },
+        {
+          "action": "nearest_navmesh_waypoint",
+          "name": "Nearest Navmesh Waypoint",
+          "description": "Navigate to nearest known waypoint",
+          "timeout": 60.0,
+          "cooldown": 300.0,
+          "parameters": {
+            "max_distance": 1000.0,
+            "waypoint_search_radius": 500.0,
+            "navigation_timeout": 30.0
+          }
+        },
+        {
+          "action": "shuttle_fallback",
+          "name": "Shuttle Fallback",
+          "description": "Use shuttle to escape stuck location",
+          "timeout": 120.0,
+          "cooldown": 600.0,
+          "parameters": {
+            "destination_priority": ["nearest_city", "home_city", "capital_city"],
+            "shuttle_search_radius": 200.0,
+            "travel_timeout": 60.0
+          }
+        },
+        {
+          "action": "safe_logout",
+          "name": "Safe Logout",
+          "description": "Emergency logout to prevent permanent stuck",
+          "timeout": 30.0,
+          "cooldown": 3600.0,
+          "parameters": {
+            "logout_delay": 5.0,
+            "save_state": true,
+            "notify_user": true
+          }
+        }
+      ]
+    },
+    "aggressive": {
+      "name": "Aggressive Recovery",
+      "description": "More aggressive recovery sequence for severe stuck states",
+      "actions": [
+        {
+          "action": "micro_path_jitter",
+          "name": "Extended Path Jitter",
+          "description": "Extended random movements with larger range",
+          "timeout": 20.0,
+          "cooldown": 45.0,
+          "parameters": {
+            "movement_range": 5,
+            "movement_count": 10,
+            "delay_between_movements": 0.3
+          }
+        },
+        {
+          "action": "mount_toggle",
+          "name": "Mount Toggle",
+          "description": "Toggle mount state to reset movement",
+          "timeout": 15.0,
+          "cooldown": 60.0,
+          "parameters": {
+            "mount_key": "m",
+            "toggle_delay": 1.0,
+            "verify_mount_state": true
+          }
+        },
+        {
+          "action": "face_camera_rescan",
+          "name": "Extended Camera Scan",
+          "description": "Extended camera rotation and environment scanning",
+          "timeout": 30.0,
+          "cooldown": 180.0,
+          "parameters": {
+            "rotation_left_key": "q",
+            "rotation_right_key": "e",
+            "rotation_duration": 3.0,
+            "scan_delay": 2.0,
+            "full_rotation": true
+          }
+        },
+        {
+          "action": "shuttle_fallback",
+          "name": "Immediate Shuttle Escape",
+          "description": "Immediate shuttle escape to safe location",
+          "timeout": 90.0,
+          "cooldown": 300.0,
+          "parameters": {
+            "destination_priority": ["home_city", "capital_city", "nearest_city"],
+            "shuttle_search_radius": 300.0,
+            "travel_timeout": 45.0,
+            "force_shuttle": true
+          }
+        },
+        {
+          "action": "safe_logout",
+          "name": "Emergency Logout",
+          "description": "Emergency logout to prevent permanent stuck",
+          "timeout": 15.0,
+          "cooldown": 1800.0,
+          "parameters": {
+            "logout_delay": 3.0,
+            "save_state": true,
+            "notify_user": true,
+            "force_logout": true
+          }
+        }
+      ]
+    },
+    "conservative": {
+      "name": "Conservative Recovery",
+      "description": "Conservative recovery sequence with minimal disruption",
+      "actions": [
+        {
+          "action": "micro_path_jitter",
+          "name": "Minimal Path Jitter",
+          "description": "Minimal random movements to break stuck state",
+          "timeout": 5.0,
+          "cooldown": 60.0,
+          "parameters": {
+            "movement_range": 2,
+            "movement_count": 3,
+            "delay_between_movements": 1.0
+          }
+        },
+        {
+          "action": "face_camera_rescan",
+          "name": "Gentle Camera Scan",
+          "description": "Gentle camera rotation and environment scanning",
+          "timeout": 15.0,
+          "cooldown": 180.0,
+          "parameters": {
+            "rotation_left_key": "q",
+            "rotation_right_key": "e",
+            "rotation_duration": 1.5,
+            "scan_delay": 1.0,
+            "partial_rotation": true
+          }
+        },
+        {
+          "action": "nearest_navmesh_waypoint",
+          "name": "Nearest Safe Waypoint",
+          "description": "Navigate to nearest safe waypoint",
+          "timeout": 90.0,
+          "cooldown": 600.0,
+          "parameters": {
+            "max_distance": 500.0,
+            "waypoint_search_radius": 300.0,
+            "navigation_timeout": 45.0,
+            "safe_waypoints_only": true
+          }
+        },
+        {
+          "action": "shuttle_fallback",
+          "name": "Safe Shuttle Travel",
+          "description": "Use shuttle to travel to safe location",
+          "timeout": 180.0,
+          "cooldown": 900.0,
+          "parameters": {
+            "destination_priority": ["home_city", "nearest_city"],
+            "shuttle_search_radius": 150.0,
+            "travel_timeout": 90.0,
+            "safe_destinations_only": true
+          }
+        },
+        {
+          "action": "safe_logout",
+          "name": "Graceful Logout",
+          "description": "Graceful logout to prevent permanent stuck",
+          "timeout": 60.0,
+          "cooldown": 7200.0,
+          "parameters": {
+            "logout_delay": 10.0,
+            "save_state": true,
+            "notify_user": true,
+            "graceful_shutdown": true
+          }
+        }
+      ]
+    }
+  },
+  "stuck_type_playbooks": {
+    "no_coordinate_delta": "standard",
+    "repeat_clicks": "aggressive",
+    "no_quest_progress": "conservative",
+    "path_oscillation": "standard",
+    "obstacle_blocked": "aggressive",
+    "navigation_failure": "aggressive",
+    "interaction_stuck": "conservative"
+  },
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-08-02T16:00:00",
+    "description": "Recovery playbooks for stuck state recovery with laddered escalation",
+    "total_playbooks": 3,
+    "total_actions": 18,
+    "supported_stuck_types": [
+      "no_coordinate_delta",
+      "repeat_clicks", 
+      "no_quest_progress",
+      "path_oscillation",
+      "obstacle_blocked",
+      "navigation_failure",
+      "interaction_stuck"
+    ],
+    "recovery_actions": [
+      "micro_path_jitter",
+      "mount_toggle",
+      "face_camera_rescan",
+      "nearest_navmesh_waypoint",
+      "shuttle_fallback",
+      "safe_logout"
+    ]
+  }
+} 

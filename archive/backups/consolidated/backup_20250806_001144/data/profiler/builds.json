@@ -1,0 +1,353 @@
+{
+  "builds": {
+    "rifleman_medic": {
+      "name": "Rifleman Medic",
+      "description": "Hybrid build combining rifle combat with healing abilities",
+      "profession": "hybrid",
+      "primary_profession": "rifleman",
+      "secondary_profession": "medic",
+      "build_type": "combat_healer",
+      "skill_trees": {
+        "rifleman": {
+          "required_skills": [
+            "Novice Marksman",
+            "Marksman Rifle Handling I",
+            "Marksman Rifle Handling II",
+            "Marksman Rifle Handling III",
+            "Marksman Rifle Handling IV",
+            "Master Marksman"
+          ],
+          "optional_skills": [
+            "Rifle Accuracy I",
+            "Rifle Accuracy II",
+            "Rifle Speed I",
+            "Rifle Speed II"
+          ]
+        },
+        "medic": {
+          "required_skills": [
+            "Novice Medic",
+            "Medic Healing I",
+            "Medic Healing II",
+            "Medic Healing III",
+            "Medic Healing IV",
+            "Master Medic"
+          ],
+          "optional_skills": [
+            "Medic Efficiency I",
+            "Medic Efficiency II",
+            "Medic Speed I",
+            "Medic Speed II"
+          ]
+        }
+      },
+      "training_priorities": [
+        "Novice Marksman",
+        "Novice Medic",
+        "Marksman Rifle Handling I",
+        "Medic Healing I",
+        "Marksman Rifle Handling II",
+        "Medic Healing II",
+        "Rifle Accuracy I",
+        "Medic Efficiency I",
+        "Marksman Rifle Handling III",
+        "Medic Healing III",
+        "Rifle Speed I",
+        "Medic Speed I",
+        "Marksman Rifle Handling IV",
+        "Medic Healing IV",
+        "Rifle Accuracy II",
+        "Medic Efficiency II",
+        "Master Marksman",
+        "Master Medic",
+        "Rifle Speed II",
+        "Medic Speed II"
+      ],
+      "combat_profile": "rifleman_medic",
+      "leveling_plan": {
+        "early_game": {
+          "focus": "basic_combat",
+          "skills": ["Novice Marksman", "Novice Medic"],
+          "combat_style": "ranged_healing"
+        },
+        "mid_game": {
+          "focus": "hybrid_development",
+          "skills": ["Marksman Rifle Handling I", "Medic Healing I"],
+          "combat_style": "sustained_combat"
+        },
+        "late_game": {
+          "focus": "mastery",
+          "skills": ["Master Marksman", "Master Medic"],
+          "combat_style": "versatile_combat"
+        }
+      }
+    },
+    "tk_fencer": {
+      "name": "Teras Kasi Fencer",
+      "description": "Melee combat specialist using Teras Kasi martial arts",
+      "profession": "teras_kasi",
+      "primary_profession": "teras_kasi",
+      "secondary_profession": null,
+      "build_type": "melee_combat",
+      "skill_trees": {
+        "teras_kasi": {
+          "required_skills": [
+            "Novice Teras Kasi",
+            "Teras Kasi Melee I",
+            "Teras Kasi Melee II",
+            "Teras Kasi Melee III",
+            "Teras Kasi Melee IV",
+            "Master Teras Kasi"
+          ],
+          "optional_skills": [
+            "Teras Kasi Speed I",
+            "Teras Kasi Speed II",
+            "Teras Kasi Defense I",
+            "Teras Kasi Defense II"
+          ]
+        }
+      },
+      "training_priorities": [
+        "Novice Teras Kasi",
+        "Teras Kasi Melee I",
+        "Teras Kasi Speed I",
+        "Teras Kasi Melee II",
+        "Teras Kasi Defense I",
+        "Teras Kasi Melee III",
+        "Teras Kasi Speed II",
+        "Teras Kasi Melee IV",
+        "Teras Kasi Defense II",
+        "Master Teras Kasi"
+      ],
+      "combat_profile": "tk_fencer",
+      "leveling_plan": {
+        "early_game": {
+          "focus": "basic_melee",
+          "skills": ["Novice Teras Kasi"],
+          "combat_style": "close_combat"
+        },
+        "mid_game": {
+          "focus": "melee_development",
+          "skills": ["Teras Kasi Melee I", "Teras Kasi Speed I"],
+          "combat_style": "aggressive_melee"
+        },
+        "late_game": {
+          "focus": "mastery",
+          "skills": ["Master Teras Kasi"],
+          "combat_style": "elite_melee"
+        }
+      }
+    },
+    "combat_dancer": {
+      "name": "Combat Dancer",
+      "description": "Agile combat specialist with enhanced movement and evasion",
+      "profession": "dancer",
+      "primary_profession": "dancer",
+      "secondary_profession": null,
+      "build_type": "agile_combat",
+      "skill_trees": {
+        "dancer": {
+          "required_skills": [
+            "Novice Dancer",
+            "Dancer Movement I",
+            "Dancer Movement II",
+            "Dancer Movement III",
+            "Dancer Movement IV",
+            "Master Dancer"
+          ],
+          "optional_skills": [
+            "Dancer Agility I",
+            "Dancer Agility II",
+            "Dancer Evasion I",
+            "Dancer Evasion II"
+          ]
+        }
+      },
+      "training_priorities": [
+        "Novice Dancer",
+        "Dancer Movement I",
+        "Dancer Agility I",
+        "Dancer Movement II",
+        "Dancer Evasion I",
+        "Dancer Movement III",
+        "Dancer Agility II",
+        "Dancer Movement IV",
+        "Dancer Evasion II",
+        "Master Dancer"
+      ],
+      "combat_profile": "combat_dancer",
+      "leveling_plan": {
+        "early_game": {
+          "focus": "basic_movement",
+          "skills": ["Novice Dancer"],
+          "combat_style": "mobile_combat"
+        },
+        "mid_game": {
+          "focus": "agility_development",
+          "skills": ["Dancer Movement I", "Dancer Agility I"],
+          "combat_style": "evasive_combat"
+        },
+        "late_game": {
+          "focus": "mastery",
+          "skills": ["Master Dancer"],
+          "combat_style": "elite_mobile_combat"
+        }
+      }
+    },
+    "pure_rifleman": {
+      "name": "Pure Rifleman",
+      "description": "Focused rifle combat specialist with maximum damage output",
+      "profession": "rifleman",
+      "primary_profession": "rifleman",
+      "secondary_profession": null,
+      "build_type": "pure_combat",
+      "skill_trees": {
+        "rifleman": {
+          "required_skills": [
+            "Novice Marksman",
+            "Marksman Rifle Handling I",
+            "Marksman Rifle Handling II",
+            "Marksman Rifle Handling III",
+            "Marksman Rifle Handling IV",
+            "Master Marksman"
+          ],
+          "optional_skills": [
+            "Rifle Accuracy I",
+            "Rifle Accuracy II",
+            "Rifle Speed I",
+            "Rifle Speed II",
+            "Rifle Damage I",
+            "Rifle Damage II"
+          ]
+        }
+      },
+      "training_priorities": [
+        "Novice Marksman",
+        "Marksman Rifle Handling I",
+        "Rifle Accuracy I",
+        "Marksman Rifle Handling II",
+        "Rifle Speed I",
+        "Marksman Rifle Handling III",
+        "Rifle Damage I",
+        "Marksman Rifle Handling IV",
+        "Rifle Accuracy II",
+        "Rifle Speed II",
+        "Rifle Damage II",
+        "Master Marksman"
+      ],
+      "combat_profile": "pure_rifleman",
+      "leveling_plan": {
+        "early_game": {
+          "focus": "basic_combat",
+          "skills": ["Novice Marksman"],
+          "combat_style": "ranged_combat"
+        },
+        "mid_game": {
+          "focus": "damage_development",
+          "skills": ["Marksman Rifle Handling I", "Rifle Accuracy I"],
+          "combat_style": "precision_combat"
+        },
+        "late_game": {
+          "focus": "mastery",
+          "skills": ["Master Marksman"],
+          "combat_style": "elite_ranged_combat"
+        }
+      }
+    },
+    "pure_medic": {
+      "name": "Pure Medic",
+      "description": "Focused healing specialist with maximum healing output",
+      "profession": "medic",
+      "primary_profession": "medic",
+      "secondary_profession": null,
+      "build_type": "pure_healer",
+      "skill_trees": {
+        "medic": {
+          "required_skills": [
+            "Novice Medic",
+            "Medic Healing I",
+            "Medic Healing II",
+            "Medic Healing III",
+            "Medic Healing IV",
+            "Master Medic"
+          ],
+          "optional_skills": [
+            "Medic Efficiency I",
+            "Medic Efficiency II",
+            "Medic Speed I",
+            "Medic Speed II",
+            "Medic Range I",
+            "Medic Range II"
+          ]
+        }
+      },
+      "training_priorities": [
+        "Novice Medic",
+        "Medic Healing I",
+        "Medic Efficiency I",
+        "Medic Healing II",
+        "Medic Speed I",
+        "Medic Healing III",
+        "Medic Range I",
+        "Medic Healing IV",
+        "Medic Efficiency II",
+        "Medic Speed II",
+        "Medic Range II",
+        "Master Medic"
+      ],
+      "combat_profile": "pure_medic",
+      "leveling_plan": {
+        "early_game": {
+          "focus": "basic_healing",
+          "skills": ["Novice Medic"],
+          "combat_style": "support_healing"
+        },
+        "mid_game": {
+          "focus": "healing_development",
+          "skills": ["Medic Healing I", "Medic Efficiency I"],
+          "combat_style": "efficient_healing"
+        },
+        "late_game": {
+          "focus": "mastery",
+          "skills": ["Master Medic"],
+          "combat_style": "elite_healing"
+        }
+      }
+    }
+  },
+  "build_detection": {
+    "ui_elements": {
+      "profession_window": "profession_skills",
+      "skill_boxes": "skill_indicators",
+      "build_indicators": "build_marks"
+    },
+    "ocr_patterns": {
+      "profession_titles": [
+        "Rifleman",
+        "Medic",
+        "Teras Kasi",
+        "Dancer"
+      ],
+      "skill_indicators": [
+        "Novice",
+        "Master",
+        "I",
+        "II",
+        "III",
+        "IV"
+      ]
+    },
+    "confidence_thresholds": {
+      "exact_match": 0.95,
+      "partial_match": 0.80,
+      "fuzzy_match": 0.60
+    }
+  },
+  "default_builds": {
+    "new_character": "pure_rifleman",
+    "experienced_player": "rifleman_medic",
+    "support_player": "pure_medic",
+    "melee_player": "tk_fencer",
+    "mobile_player": "combat_dancer"
+  }
+} 

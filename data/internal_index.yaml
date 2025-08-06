@@ -1,0 +1,80 @@
+planets:
+  tatooine:
+    quests:
+      imp_agent_kill:
+        name: Imperial Agent Kill Mission
+        type: faction
+        difficulty: medium
+        level_requirement: 20
+        coordinates:
+        - 123
+        - -456
+        npc: Imperial Terminal Officer
+        file_path: tatooine/imp_agent_kill.yaml
+      moisture_farm_delivery:
+        name: Moisture Farm Delivery
+        type: delivery
+        difficulty: easy
+        level_requirement: 5
+        coordinates:
+        - 200
+        - 300
+        npc: Mos Eisley Merchant
+        file_path: tatooine/moisture_farm_delivery.yaml
+      artifact_hunt:
+        name: Ancient Artifact Hunt
+        type: collection
+        difficulty: hard
+        level_requirement: 25
+        coordinates:
+        - 400
+        - 500
+        npc: Archaeologist
+        file_path: tatooine/artifact_hunt.yaml
+    quest_types:
+      faction:
+      - imp_agent_kill
+      delivery:
+      - moisture_farm_delivery
+      collection:
+      - artifact_hunt
+  naboo:
+    quests:
+      theed_palace_mission:
+        name: Theed Palace Security Mission
+        type: faction
+        difficulty: medium
+        level_requirement: 15
+        coordinates:
+        - 5000
+        - -4000
+        npc: Palace Guard Captain
+        file_path: naboo/theed_palace_mission.yaml
+    quest_types:
+      faction:
+      - theed_palace_mission
+  corellia:
+    quests:
+      coronet_trade_mission:
+        name: Coronet Trade Mission
+        type: delivery
+        difficulty: easy
+        level_requirement: 10
+        coordinates:
+        - 123
+        - 456
+        npc: Trade Federation Representative
+        file_path: corellia/coronet_trade_mission.yaml
+    quest_types:
+      delivery:
+      - coronet_trade_mission
+quest_types:
+  faction:
+  - imp_agent_kill
+  - theed_palace_mission
+  delivery:
+  - moisture_farm_delivery
+  - coronet_trade_mission
+  collection:
+  - artifact_hunt
+last_updated: '2025-07-31 09:03:24'

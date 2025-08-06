@@ -1,0 +1,162 @@
+{
+  "scanner_enabled": true,
+  "scan_interval": 30,
+  "ocr_confidence_threshold": 60.0,
+  "auto_save_interval": 300,
+  "max_encounters_per_session": 1000,
+  "screenshot_enabled": true,
+  "swgdb_upload_enabled": false,
+  "swgdb_api_endpoint": "https://swgdb.com/api/player-encounters",
+  "swgdb_api_key": "",
+  "scan_regions": {
+    "nearby_players": [100, 100, 400, 300],
+    "chat_window": [50, 400, 600, 500],
+    "target_info": [700, 100, 900, 200],
+    "group_window": [800, 200, 1000, 400],
+    "guild_window": [600, 100, 800, 300],
+    "player_list": [50, 50, 300, 400],
+    "social_window": [400, 100, 600, 300],
+    "who_window": [200, 100, 500, 400]
+  },
+  "name_patterns": [
+    "^[A-Z][a-z]+[A-Z][a-z]+$",
+    "^[A-Z][a-z]+_[A-Z][a-z]+$",
+    "^[A-Z][a-z]+[0-9]+$",
+    "^[A-Z][a-z]+[A-Z][a-z]+[0-9]+$",
+    "^[A-Z][a-z]+_[A-Z][a-z]+[0-9]+$"
+  ],
+  "guild_patterns": [
+    "\\[([^\\]]+)\\]",
+    "<([^>]+)>",
+    "Guild: ([^\\n]+)",
+    "\\{([^}]+)\\}",
+    "Guild ([^\\n]+)"
+  ],
+  "title_patterns": [
+    "([A-Z][a-z]+ [A-Z][a-z]+)",
+    "([A-Z][a-z]+ of [A-Z][a-z]+)",
+    "([A-Z][a-z]+ the [A-Z][a-z]+)",
+    "([A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+)",
+    "([A-Z][a-z]+ [A-Z][a-z]+ of [A-Z][a-z]+)"
+  ],
+  "race_patterns": {
+    "human": ["human", "humanoid", "humanoid"],
+    "wookiee": ["wookiee", "wookie", "wookiee"],
+    "twilek": ["twilek", "twi'lek", "twilek"],
+    "zabrak": ["zabrak", "zabrak"],
+    "ithorian": ["ithorian", "hammerhead", "ithorian"],
+    "rodian": ["rodian", "rodian"],
+    "mon calamari": ["mon calamari", "moncal", "mon calamari"],
+    "sullustan": ["sullustan", "sullustan"],
+    "togruta": ["togruta", "togruta"],
+    "kel dor": ["kel dor", "kel-dor", "kel dor"],
+    "chiss": ["chiss", "chiss"],
+    "trandoshan": ["trandoshan", "trandoshan"],
+    "geonosian": ["geonosian", "geonosian"],
+    "gotal": ["gotal", "gotal"],
+    "quarren": ["quarren", "quarren"],
+    "aqualish": ["aqualish", "aqualish"],
+    "gran": ["gran", "gran"],
+    "duros": ["duros", "duros"],
+    "neimoidian": ["neimoidian", "neimoidian"],
+    "weequay": ["weequay", "weequay"]
+  },
+  "faction_patterns": {
+    "rebel": ["rebel", "alliance", "resistance", "rebel alliance"],
+    "imperial": ["imperial", "empire", "imperial", "galactic empire"],
+    "neutral": ["neutral", "independent", "neutral"],
+    "jedi": ["jedi", "force user", "jedi order", "jedi"],
+    "sith": ["sith", "dark side", "sith order", "sith"],
+    "mandalorian": ["mandalorian", "mando", "mandalorian"],
+    "hutt": ["hutt", "hutt cartel", "hutt"],
+    "black sun": ["black sun", "blacksun", "black sun"],
+    "corsec": ["corsec", "corporate sector", "corsec"],
+    "smuggler": ["smuggler", "criminal", "smuggler"]
+  },
+  "profession_patterns": {
+    "commando": ["commando", "commando"],
+    "rifleman": ["rifleman", "rifleman"],
+    "pistoleer": ["pistoleer", "pistoleer"],
+    "carbineer": ["carbineer", "carbineer"],
+    "medic": ["medic", "medic"],
+    "combat medic": ["combat medic", "combat medic"],
+    "doctor": ["doctor", "doctor"],
+    "dancer": ["dancer", "dancer"],
+    "musician": ["musician", "musician"],
+    "entertainer": ["entertainer", "entertainer"],
+    "architect": ["architect", "architect"],
+    "artisan": ["artisan", "artisan"],
+    "bio engineer": ["bio engineer", "bio engineer"],
+    "bounty hunter": ["bounty hunter", "bounty hunter"],
+    "businessman": ["businessman", "businessman"],
+    "chef": ["chef", "chef"],
+    "creature handler": ["creature handler", "creature handler"],
+    "droid engineer": ["droid engineer", "droid engineer"],
+    "image designer": ["image designer", "image designer"],
+    "jedi": ["jedi", "jedi"],
+    "marksman": ["marksman", "marksman"],
+    "pilot": ["pilot", "pilot"],
+    "politician": ["politician", "politician"],
+    "ranger": ["ranger", "ranger"],
+    "scout": ["scout", "scout"],
+    "smuggler": ["smuggler", "smuggler"],
+    "squad leader": ["squad leader", "squad leader"],
+    "squadron leader": ["squadron leader", "squadron leader"],
+    "tailor": ["tailor", "tailor"],
+    "teras kasi artist": ["teras kasi artist", "teras kasi artist"],
+    "trader": ["trader", "trader"],
+    "weapon smith": ["weapon smith", "weapon smith"]
+  },
+  "ocr_settings": {
+    "tesseract_config": "--oem 3 --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789[]<>(){}:;.,!?-_ ",
+    "confidence_threshold": 60.0,
+    "min_word_count": 2,
+    "max_word_count": 50
+  },
+  "data_storage": {
+    "encounters_file": "data/encounters/players_seen.json",
+    "screenshots_dir": "data/encounters/screenshots",
+    "backup_enabled": true,
+    "backup_interval": 3600,
+    "max_backups": 10
+  },
+  "swgdb_integration": {
+    "enabled": false,
+    "api_endpoint": "https://swgdb.com/api/player-encounters",
+    "api_key": "",
+    "upload_interval": 3600,
+    "batch_size": 100,
+    "retry_attempts": 3,
+    "timeout": 30
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/player_scanner.log",
+    "max_size": "10MB",
+    "backup_count": 5,
+    "console_output": true
+  },
+  "performance": {
+    "scan_thread_priority": "normal",
+    "memory_limit": "512MB",
+    "cpu_threshold": 80,
+    "cleanup_interval": 300
+  },
+  "safety": {
+    "max_session_duration": 7200,
+    "emergency_stop": true,
+    "auto_cleanup": true,
+    "privacy_mode": false
+  },
+  "advanced": {
+    "duplicate_detection": true,
+    "duplicate_timeout": 300,
+    "location_tracking": true,
+    "guild_tracking": true,
+    "faction_tracking": true,
+    "profession_tracking": true,
+    "level_tracking": false,
+    "screenshot_compression": true,
+    "data_encryption": false
+  }
+} 

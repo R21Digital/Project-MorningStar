@@ -1,0 +1,147 @@
+{
+  "season": 1,
+  "start_date": "2025-01-01",
+  "end_date": "2025-01-31",
+  "status": "active",
+  "last_updated": "2025-08-05T07:27:17.768766",
+  "hunters": [
+    {
+      "name": "D'rev",
+      "guild": "JusticeCorp",
+      "kills": 2,
+      "deaths": 0,
+      "total_bounty": 6000,
+      "specializations": [
+        "jedi_hunter",
+        "force_sensitive"
+      ],
+      "last_kill": "2025-08-05T07:27:13.227042",
+      "last_death": null,
+      "rank": 0
+    },
+    {
+      "name": "Tyla",
+      "guild": "Outlaws",
+      "kills": 10,
+      "deaths": 6,
+      "total_bounty": 40000,
+      "specializations": [
+        "jedi_hunter",
+        "marksman"
+      ],
+      "last_kill": "2025-08-05T07:27:13.731282",
+      "last_death": "2025-08-05T07:27:14.033938",
+      "rank": 0
+    },
+    {
+      "name": "Vexx",
+      "guild": "ShadowStalkers",
+      "kills": 10,
+      "deaths": 6,
+      "total_bounty": 40000,
+      "specializations": [
+        "jedi_hunter",
+        "tracker"
+      ],
+      "last_kill": "2025-08-05T07:27:14.538252",
+      "last_death": "2025-08-05T07:27:14.840777",
+      "rank": 0
+    },
+    {
+      "name": "K'Rin",
+      "guild": "CrimsonFang",
+      "kills": 2,
+      "deaths": 0,
+      "total_bounty": 6000,
+      "specializations": [
+        "jedi_hunter",
+        "melee"
+      ],
+      "last_kill": "2025-08-05T07:27:14.941701",
+      "last_death": null,
+      "rank": 0
+    },
+    {
+      "name": "Zara",
+      "guild": "VoidHunters",
+      "kills": 10,
+      "deaths": 6,
+      "total_bounty": 40000,
+      "specializations": [
+        "jedi_hunter",
+        "sniper"
+      ],
+      "last_kill": "2025-08-05T07:27:15.446481",
+      "last_death": "2025-08-05T07:27:15.749084",
+      "rank": 0
+    },
+    {
+      "name": "Mara",
+      "guild": "ImperialElite",
+      "kills": 10,
+      "deaths": 6,
+      "total_bounty": 40000,
+      "specializations": [
+        "jedi_hunter",
+        "tactician"
+      ],
+      "last_kill": "2025-08-05T07:27:16.253380",
+      "last_death": "2025-08-05T07:27:16.555635",
+      "rank": 0
+    },
+    {
+      "name": "Jax",
+      "guild": "RebelAlliance",
+      "kills": 8,
+      "deaths": 4,
+      "total_bounty": 30000,
+      "specializations": [
+        "jedi_hunter",
+        "scout"
+      ],
+      "last_kill": "2025-08-05T07:27:16.961802",
+      "last_death": "2025-08-05T07:27:17.163427",
+      "rank": 0
+    },
+    {
+      "name": "Nyx",
+      "guild": "DarkOrder",
+      "kills": 8,
+      "deaths": 4,
+      "total_bounty": 30000,
+      "specializations": [
+        "jedi_hunter",
+        "assassin"
+      ],
+      "last_kill": "2025-08-05T07:27:17.567069",
+      "last_death": "2025-08-05T07:27:17.768725",
+      "rank": 0
+    }
+  ],
+  "season_stats": {
+    "total_kills": 60,
+    "total_deaths": 32,
+    "total_bounty": 232000,
+    "active_hunters": 8,
+    "average_kills": 7.5,
+    "average_kd": 1.88,
+    "top_guild": "Outlaws",
+    "most_active_day": null,
+    "mvp_hunter": "Tyla",
+    "mvp_kills": 10,
+    "mvp_kd": 1.67
+  },
+  "settings": {
+    "auto_reset": true,
+    "reset_day": 1,
+    "reset_month": true,
+    "archive_enabled": true,
+    "discord_alerts": true,
+    "min_kills_for_ranking": 1,
+    "mvp_categories": [
+      "most_kills",
+      "best_kd",
+      "highest_bounty"
+    ]
+  }
+}

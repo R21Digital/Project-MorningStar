@@ -1,0 +1,134 @@
+{
+  "total_tests": 21,
+  "passed": 21,
+  "failed": 0,
+  "warnings": 0,
+  "tests": [
+    {
+      "name": "Backup Script File Exists",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.521357"
+    },
+    {
+      "name": "Restore Script File Exists",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.521483"
+    },
+    {
+      "name": "Config File Exists",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.521597"
+    },
+    {
+      "name": "Config Section: backup",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522076"
+    },
+    {
+      "name": "Config Section: remote",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522102"
+    },
+    {
+      "name": "Config Section: notifications",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522122"
+    },
+    {
+      "name": "Config Section: restore",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522141"
+    },
+    {
+      "name": "Config Section: monitoring",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522161"
+    },
+    {
+      "name": "Backup Config: enabled",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522190"
+    },
+    {
+      "name": "Backup Config: schedule",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522219"
+    },
+    {
+      "name": "Backup Config: retention",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522246"
+    },
+    {
+      "name": "Backup Config: paths",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522269"
+    },
+    {
+      "name": "Backup Config: compression",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522291"
+    },
+    {
+      "name": "Backup Config: verification",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522322"
+    },
+    {
+      "name": "Backup Config: logging",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522346"
+    },
+    {
+      "name": "Remote Config: git",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522369"
+    },
+    {
+      "name": "Remote Config: google_drive",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522395"
+    },
+    {
+      "name": "Remote Config: s3",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522421"
+    },
+    {
+      "name": "Remote Config: ftp",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522449"
+    },
+    {
+      "name": "Notification Config: discord",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522473"
+    },
+    {
+      "name": "Notification Config: email",
+      "status": "PASS",
+      "message": "",
+      "timestamp": "2025-08-05T23:41:55.522498"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[
+  {
+    "type": "quest",
+    "id": "intro_mission",
+    "action": "start",
+    "success_texts": ["intro mission started"]
+  },
+  {
+    "type": "move",
+    "to": { "planet": "Tatooine", "city": "Mos Eisley" },
+    "success_texts": ["mos eisley"]
+  }
+]

@@ -1,0 +1,109 @@
+{
+  "source_type": "heroic",
+  "planet": "naboo",
+  "total_runs": 0,
+  "total_loot": 0,
+  "last_updated": "2025-08-05T18:00:00.000000",
+  "heroics": {
+    "gungan_warlord": {
+      "boss": "Gungan Warlord",
+      "location": "Naboo - Gungan Sacred Place",
+      "level": 70,
+      "total_kills": 0,
+      "items": {
+        "gungan_shield": {
+          "name": "Gungan Shield",
+          "type": "weapon",
+          "rarity": "rare",
+          "use_case": "Combat, decoration",
+          "image": "/assets/loot/gungan_shield.png",
+          "drop_chance": 20.0,
+          "profession_relevance": ["weaponsmith", "artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "gungan_relic": {
+          "name": "Sacred Gungan Relic",
+          "type": "component",
+          "rarity": "epic",
+          "use_case": "Decoration, rare crafting",
+          "image": "/assets/loot/gungan_relic.png",
+          "drop_chance": 10.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "gungan_armor": {
+          "name": "Gungan Battle Armor",
+          "type": "armor",
+          "rarity": "uncommon",
+          "use_case": "Combat, armor crafting",
+          "image": "/assets/loot/gungan_armor.png",
+          "drop_chance": 30.0,
+          "profession_relevance": ["armorsmith"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    },
+    "royal_guard_captain": {
+      "boss": "Naboo Royal Guard Captain",
+      "location": "Naboo - Theed Palace",
+      "level": 75,
+      "total_kills": 0,
+      "items": {
+        "royal_uniform": {
+          "name": "Royal Guard Uniform",
+          "type": "armor",
+          "rarity": "rare",
+          "use_case": "Combat, status symbol",
+          "image": "/assets/loot/royal_uniform.png",
+          "drop_chance": 25.0,
+          "profession_relevance": ["armorsmith", "tailor"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "palace_badge": {
+          "name": "Palace Security Badge",
+          "type": "component",
+          "rarity": "epic",
+          "use_case": "Decoration, rare items",
+          "image": "/assets/loot/palace_badge.png",
+          "drop_chance": 12.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        },
+        "palace_key": {
+          "name": "Theed Palace Key",
+          "type": "component",
+          "rarity": "legendary",
+          "use_case": "Access to restricted areas",
+          "image": "/assets/loot/palace_key.png",
+          "drop_chance": 2.0,
+          "profession_relevance": ["artisan"],
+          "total_drops": 0,
+          "total_quantity": 0,
+          "first_seen": null,
+          "last_seen": null,
+          "source": "SWGDB Generated"
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,305 @@
+{
+  "contributors": [
+    {
+      "name": "Alex Starweaver",
+      "discord": "alex_starweaver",
+      "badges": ["guide-author", "modder"],
+      "contributions": "Created comprehensive combat guides and developed the popular AutoCombat mod. Expert in PvP mechanics and class optimization.",
+      "links": [
+        {
+          "text": "Combat Guide Series",
+          "url": "/guides/combat/"
+        },
+        {
+          "text": "AutoCombat Mod",
+          "url": "/mods/autocombat/"
+        }
+      ]
+    },
+    {
+      "name": "Sarah Questmaster",
+      "discord": "sarah_quest",
+      "badges": ["guide-author", "community-helper"],
+      "contributions": "Wrote extensive quest guides and helps new players navigate the game. Known for detailed walkthroughs and community support.",
+      "links": [
+        {
+          "text": "Quest Guide Collection",
+          "url": "/guides/quests/"
+        },
+        {
+          "text": "New Player Guide",
+          "url": "/guides/new-player/"
+        }
+      ]
+    },
+    {
+      "name": "Mike Bugfinder",
+      "discord": "mike_bugfinder",
+      "badges": ["bug-hunter", "tester"],
+      "contributions": "Discovered and reported over 50 critical bugs. Extensive testing of new features and mods. Reliable quality assurance contributor.",
+      "links": [
+        {
+          "text": "Bug Reports",
+          "url": "/bugs/reported/"
+        }
+      ]
+    },
+    {
+      "name": "Jenny Modcraft",
+      "discord": "jenny_mods",
+      "badges": ["modder", "tester"],
+      "contributions": "Developed several popular UI mods and quality-of-life improvements. Regular contributor to the modding community.",
+      "links": [
+        {
+          "text": "UI Enhancement Pack",
+          "url": "/mods/ui-enhancement/"
+        },
+        {
+          "text": "Inventory Manager",
+          "url": "/mods/inventory-manager/"
+        }
+      ]
+    },
+    {
+      "name": "David Testmaster",
+      "discord": "david_test",
+      "badges": ["tester", "community-helper"],
+      "contributions": "Dedicated tester for all new features and mods. Provides detailed feedback and helps maintain quality standards.",
+      "links": [
+        {
+          "text": "Testing Reports",
+          "url": "/testing/reports/"
+        }
+      ]
+    },
+    {
+      "name": "Lisa Guidewriter",
+      "discord": "lisa_guides",
+      "badges": ["guide-author"],
+      "contributions": "Specializes in crafting and profession guides. Created comprehensive documentation for all crafting professions.",
+      "links": [
+        {
+          "text": "Crafting Guides",
+          "url": "/guides/crafting/"
+        },
+        {
+          "text": "Profession Handbook",
+          "url": "/guides/professions/"
+        }
+      ]
+    },
+    {
+      "name": "Tom Modsmith",
+      "discord": "tom_modsmith",
+      "badges": ["modder", "bug-hunter"],
+      "contributions": "Developed advanced combat mods and frequently reports bugs in mod compatibility. Expert in game mechanics.",
+      "links": [
+        {
+          "text": "Advanced Combat Mods",
+          "url": "/mods/advanced-combat/"
+        },
+        {
+          "text": "Compatibility Fixes",
+          "url": "/mods/compatibility/"
+        }
+      ]
+    },
+    {
+      "name": "Emma Community",
+      "discord": "emma_community",
+      "badges": ["community-helper", "tester"],
+      "contributions": "Active community helper who assists new players and tests community mods. Known for patience and helpfulness.",
+      "links": [
+        {
+          "text": "Community Support",
+          "url": "/community/support/"
+        }
+      ]
+    },
+    {
+      "name": "Chris Bugcatcher",
+      "discord": "chris_bugs",
+      "badges": ["bug-hunter"],
+      "contributions": "Specializes in finding edge-case bugs and performance issues. Has reported over 30 critical bugs.",
+      "links": [
+        {
+          "text": "Performance Bug Reports",
+          "url": "/bugs/performance/"
+        }
+      ]
+    },
+    {
+      "name": "Rachel Guidepro",
+      "discord": "rachel_guides",
+      "badges": ["guide-author", "community-helper"],
+      "contributions": "Creates beginner-friendly guides and helps organize community events. Expert in making complex topics accessible.",
+      "links": [
+        {
+          "text": "Beginner Guides",
+          "url": "/guides/beginner/"
+        },
+        {
+          "text": "Community Events",
+          "url": "/community/events/"
+        }
+      ]
+    },
+    {
+      "name": "Steve Modder",
+      "discord": "steve_mods",
+      "badges": ["modder"],
+      "contributions": "Developed several popular utility mods and tools. Focuses on quality-of-life improvements.",
+      "links": [
+        {
+          "text": "Utility Mods",
+          "url": "/mods/utilities/"
+        },
+        {
+          "text": "Tool Collection",
+          "url": "/mods/tools/"
+        }
+      ]
+    },
+    {
+      "name": "Amanda Tester",
+      "discord": "amanda_test",
+      "badges": ["tester"],
+      "contributions": "Comprehensive testing of all new features and mods. Provides detailed feedback and bug reports.",
+      "links": [
+        {
+          "text": "Feature Testing",
+          "url": "/testing/features/"
+        }
+      ]
+    },
+    {
+      "name": "Kevin Helper",
+      "discord": "kevin_help",
+      "badges": ["community-helper"],
+      "contributions": "Active in community support and helps new players get started. Known for friendly and helpful demeanor.",
+      "links": [
+        {
+          "text": "New Player Support",
+          "url": "/community/new-players/"
+        }
+      ]
+    },
+    {
+      "name": "Maria Guidecraft",
+      "discord": "maria_guides",
+      "badges": ["guide-author"],
+      "contributions": "Specializes in advanced gameplay guides and strategy content. Expert in endgame content and optimization.",
+      "links": [
+        {
+          "text": "Advanced Guides",
+          "url": "/guides/advanced/"
+        },
+        {
+          "text": "Strategy Content",
+          "url": "/guides/strategy/"
+        }
+      ]
+    },
+    {
+      "name": "Paul Modmaster",
+      "discord": "paul_mods",
+      "badges": ["modder", "tester"],
+      "contributions": "Developed core framework mods and extensively tests other community mods. Technical expert in modding.",
+      "links": [
+        {
+          "text": "Framework Mods",
+          "url": "/mods/framework/"
+        },
+        {
+          "text": "Mod Testing",
+          "url": "/mods/testing/"
+        }
+      ]
+    },
+    {
+      "name": "Sophie Bugmaster",
+      "discord": "sophie_bugs",
+      "badges": ["bug-hunter", "community-helper"],
+      "contributions": "Finds and reports bugs while helping other community members. Known for thorough bug investigation.",
+      "links": [
+        {
+          "text": "Bug Investigation",
+          "url": "/bugs/investigation/"
+        }
+      ]
+    },
+    {
+      "name": "Robert Guidewriter",
+      "discord": "robert_guides",
+      "badges": ["guide-author"],
+      "contributions": "Creates technical guides and documentation. Expert in game mechanics and systems.",
+      "links": [
+        {
+          "text": "Technical Guides",
+          "url": "/guides/technical/"
+        },
+        {
+          "text": "System Documentation",
+          "url": "/guides/systems/"
+        }
+      ]
+    },
+    {
+      "name": "Laura Modhelper",
+      "discord": "laura_mods",
+      "badges": ["modder", "community-helper"],
+      "contributions": "Develops mods and helps other modders with technical support. Active in the modding community.",
+      "links": [
+        {
+          "text": "Mod Support",
+          "url": "/mods/support/"
+        },
+        {
+          "text": "Modder Resources",
+          "url": "/mods/resources/"
+        }
+      ]
+    },
+    {
+      "name": "James Tester",
+      "discord": "james_test",
+      "badges": ["tester"],
+      "contributions": "Dedicated tester for new features and community mods. Provides comprehensive testing reports.",
+      "links": [
+        {
+          "text": "Testing Reports",
+          "url": "/testing/reports/"
+        }
+      ]
+    },
+    {
+      "name": "Nina Community",
+      "discord": "nina_community",
+      "badges": ["community-helper"],
+      "contributions": "Active community helper who organizes events and supports new players. Known for community building.",
+      "links": [
+        {
+          "text": "Community Events",
+          "url": "/community/events/"
+        },
+        {
+          "text": "Player Support",
+          "url": "/community/support/"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "last_updated": "2025-08-05",
+    "total_contributors": 20,
+    "badge_counts": {
+      "guide-author": 6,
+      "modder": 6,
+      "bug-hunter": 4,
+      "tester": 6,
+      "community-helper": 6
+    },
+    "discord_integration": true,
+    "auto_pull_metadata": true
+  }
+} 

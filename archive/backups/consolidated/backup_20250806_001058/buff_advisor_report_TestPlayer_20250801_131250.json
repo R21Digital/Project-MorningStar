@@ -1,0 +1,315 @@
+{
+  "timestamp": "2025-08-01T13:12:50.559711",
+  "character_name": "TestPlayer",
+  "optimization_type": "pve_damage",
+  "budget": "medium",
+  "stats": {
+    "strength": 95,
+    "agility": 110,
+    "constitution": 105,
+    "stamina": 88,
+    "mind": 120,
+    "focus": 115,
+    "willpower": 92
+  },
+  "stat_analysis": {
+    "total_stats": 725,
+    "average_stat": 103.57142857142857,
+    "stat_levels": {
+      "strength": {
+        "value": 95,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      },
+      "agility": {
+        "value": 110,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      },
+      "constitution": {
+        "value": 105,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      },
+      "stamina": {
+        "value": 88,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      },
+      "mind": {
+        "value": 120,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      },
+      "focus": {
+        "value": 115,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      },
+      "willpower": {
+        "value": 92,
+        "level": "medium",
+        "threshold": {
+          "min": 81,
+          "max": 120
+        }
+      }
+    },
+    "weakest_stats": [
+      "stamina",
+      "willpower",
+      "strength"
+    ],
+    "strongest_stats": [
+      "agility",
+      "focus",
+      "mind"
+    ],
+    "optimization_opportunities": [
+      {
+        "stat": "strength",
+        "current": 95,
+        "recommended_min": 100,
+        "improvement_needed": 5
+      },
+      {
+        "stat": "stamina",
+        "current": 88,
+        "recommended_min": 100,
+        "improvement_needed": 12
+      },
+      {
+        "stat": "willpower",
+        "current": 92,
+        "recommended_min": 100,
+        "improvement_needed": 8
+      }
+    ]
+  },
+  "optimization_priorities": [
+    {
+      "stat": "strength",
+      "current_value": 95,
+      "priority_score": 7.5,
+      "recommended_min": 120,
+      "optimization_type": "pve_damage"
+    },
+    {
+      "stat": "constitution",
+      "current_value": 105,
+      "priority_score": -5,
+      "recommended_min": 110,
+      "optimization_type": "pve_damage"
+    },
+    {
+      "stat": "agility",
+      "current_value": 110,
+      "priority_score": -15.0,
+      "recommended_min": 120,
+      "optimization_type": "pve_damage"
+    }
+  ],
+  "buff_recommendations": {
+    "timestamp": "2025-08-01T13:12:50.558730",
+    "optimization_type": "pve_damage",
+    "budget": "medium",
+    "buff_food": [
+      {
+        "type": "buff_food",
+        "stat_target": "strength",
+        "items": [
+          "Ryshcate",
+          "Spiced Tea",
+          "Caf",
+          "Corellian Brandy"
+        ],
+        "stat_bonus": {
+          "strength": 25,
+          "constitution": 10
+        },
+        "duration": 3600,
+        "cost": "medium",
+        "priority_score": 5,
+        "current_stat": 95,
+        "expected_improvement": 25
+      },
+      {
+        "type": "buff_food",
+        "stat_target": "agility",
+        "items": [
+          "Smoked Shaak Roast",
+          "Bantha Steak",
+          "Spice Bread"
+        ],
+        "stat_bonus": {
+          "agility": 25,
+          "stamina": 10
+        },
+        "duration": 3600,
+        "cost": "medium",
+        "priority_score": 0,
+        "current_stat": 110,
+        "expected_improvement": 25
+      }
+    ],
+    "entertainer_dances": [
+      {
+        "type": "entertainer_dance",
+        "dance_name": "Constitution Dance",
+        "stat_target": "constitution",
+        "stat_bonus": {
+          "constitution": 30,
+          "stamina": 20
+        },
+        "duration": 7200,
+        "entertainer_level": "expert",
+        "cost": "medium",
+        "priority_score": 0,
+        "current_stat": 105,
+        "expected_improvement": 30
+      }
+    ],
+    "total_expected_improvements": {
+      "strength": 25,
+      "constitution": 40,
+      "agility": 25,
+      "stamina": 30
+    },
+    "recommendation_count": 3
+  },
+  "template_recommendations": {
+    "timestamp": "2025-08-01T13:12:50.559304",
+    "optimization_type": "pve_damage",
+    "budget": "medium",
+    "armor_setup": {
+      "template_name": "Rifleman Combat Armor",
+      "template_type": "rifleman",
+      "combat_style": "ranged",
+      "cost": "medium",
+      "slots": {
+        "head": {
+          "stat_bonus": {
+            "agility": 15,
+            "stamina": 10
+          }
+        },
+        "chest": {
+          "stat_bonus": {
+            "strength": 20,
+            "constitution": 15
+          }
+        },
+        "legs": {
+          "stat_bonus": {
+            "agility": 15,
+            "stamina": 10
+          }
+        },
+        "feet": {
+          "stat_bonus": {
+            "agility": 10,
+            "stamina": 5
+          }
+        },
+        "hands": {
+          "stat_bonus": {
+            "agility": 10,
+            "stamina": 5
+          }
+        }
+      },
+      "set_bonus": {
+        "agility": 25,
+        "stamina": 20
+      },
+      "total_stat_bonuses": {
+        "agility": 75,
+        "stamina": 50,
+        "strength": 20,
+        "constitution": 15
+      },
+      "optimization_type": "pve_damage",
+      "budget": "medium"
+    },
+    "weapon_setup": {
+      "weapon_name": "Rifle Setup",
+      "weapon_type": "rifle",
+      "range": "long",
+      "damage_type": "kinetic",
+      "weapon_bonus": {
+        "agility": 20,
+        "stamina": 10
+      }
+    },
+    "total_expected_improvements": {
+      "agility": 95,
+      "stamina": 60,
+      "strength": 20,
+      "constitution": 15
+    },
+    "build_data": {}
+  },
+  "build_analysis": {
+    "timestamp": "2025-08-01T13:12:50.559572",
+    "character_name": "TestPlayer",
+    "stats": {
+      "strength": 95,
+      "agility": 110,
+      "constitution": 105,
+      "stamina": 88,
+      "mind": 120,
+      "focus": 115,
+      "willpower": 92
+    },
+    "build_data": {},
+    "optimization_type": "pve_damage",
+    "build_aware_recommendations": {}
+  },
+  "summary": {
+    "total_stats": 725,
+    "average_stat": 103.57142857142857,
+    "weakest_stats": [
+      "stamina",
+      "willpower",
+      "strength"
+    ],
+    "strongest_stats": [
+      "agility",
+      "focus",
+      "mind"
+    ],
+    "top_priorities": [
+      "strength",
+      "constitution",
+      "agility"
+    ],
+    "buff_recommendations_count": 3,
+    "template_recommendations": {
+      "armor_setup": "Rifleman Combat Armor",
+      "weapon_setup": "Rifle Setup"
+    },
+    "key_recommendations": [
+      "Prioritize strength buffs (current: 95)",
+      "Consider 2 buff food items",
+      "Consider 1 entertainer dances"
+    ]
+  }
+}

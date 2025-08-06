@@ -1,0 +1,72 @@
+{
+  "enable_discord_relay": false,
+  "dual_mode": false,
+  "primary_character": {
+    "name": "PrimaryChar",
+    "mode": "quest",
+    "role": "leader",
+    "window_title": "SWG - Primary"
+  },
+  "secondary_character": {
+    "name": "SecondaryChar",
+    "mode": "medic",
+    "role": "follower", 
+    "window_title": "SWG - Secondary"
+  },
+  "shared_discord_channel": {
+    "enabled": false,
+    "channel_id": "",
+    "tag_format": "[{character}] {message}"
+  },
+  "session_monitor": {
+    "enabled": true,
+    "check_interval": 30,
+    "drop_threshold": 60,
+    "auto_reconnect": true
+  },
+  "sync_settings": {
+    "shared_session_id": true,
+    "sync_positions": true,
+    "sync_combat": true,
+    "sync_quests": true
+  },
+  "space_mode": {
+    "enabled": true,
+    "auto_detect_space_events": true,
+    "preferred_mission_types": ["patrol", "escort", "kill_target"],
+    "default_station": "Tansarii Point Station",
+    "combat_simulation": true,
+    "ship_entry_exit": true,
+    "terminal_detection": true
+  },
+  "crafting_mode": {
+    "enabled": false,
+    "auto_detect_stations": true,
+    "preferred_station_types": ["artisan", "chef", "structures"],
+    "max_crafting_time": 3600,
+    "break_interval": 300,
+    "auto_restock": true,
+    "auto_sell_crafted": false
+  },
+  "discord_alerts": {
+    "enabled": false,
+    "auto_send_alerts": true,
+    "alert_on_session_end": true,
+    "alert_on_milestone": true,
+    "include_build_analysis": true,
+    "include_skill_analysis": true,
+    "include_recommendations": true,
+    "milestone_damage": 10000,
+    "milestone_kills": 50
+  },
+  "macro_learning": {
+    "enabled": false,
+    "auto_scan_macros": true,
+    "auto_scan_aliases": true,
+    "auto_create_fallbacks": true,
+    "auto_send_alerts": true,
+    "scan_interval": 300,
+    "alert_threshold": 3,
+    "warning_threshold": 5
+  }
+}

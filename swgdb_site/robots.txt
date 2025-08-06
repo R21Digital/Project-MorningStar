@@ -1,0 +1,66 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://swgdb.com/sitemap.xml
+
+# Crawl delay for polite crawling
+Crawl-delay: 1
+
+# Disallow private/admin areas (MS11 exclusion)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /logs/
+Disallow: /tmp/
+Disallow: /core/
+Disallow: /safety/
+Disallow: /auth/
+Disallow: /android_ms11/
+Disallow: *.ms11
+Disallow: *_private.py
+Disallow: /config/ms11_*
+
+# Disallow file types not meant for indexing
+Disallow: *.json$
+Disallow: *.log$
+Disallow: *.yaml$
+Disallow: *.yml$
+Disallow: *.py$
+
+# Allow important API documentation
+Allow: /api/
+Allow: /api/docs/
+Allow: /api/builds/
+Allow: /api/heroics/
+Allow: /api/loot/
+
+# Allow important content directories
+Allow: /heroics/
+Allow: /builds/
+Allow: /guides/
+Allow: /loot/
+Allow: /tools/
+Allow: /players/
+
+# Google-specific optimizations
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0.5
+Allow: /static/css/
+Allow: /static/js/
+Allow: /static/images/
+
+# Bing-specific optimizations  
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block aggressive crawlers
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: / 

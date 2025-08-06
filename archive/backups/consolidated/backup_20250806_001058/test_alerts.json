@@ -1,0 +1,42 @@
+[
+  {
+    "timestamp": "2025-08-01T12:59:49.309512",
+    "character_name": "TestCharacter",
+    "alert_level": "critical",
+    "optimization_type": null,
+    "score": 35.0,
+    "issues_count": 1,
+    "warnings_count": 0,
+    "recommendations_count": 0
+  },
+  {
+    "timestamp": "2025-08-01T12:59:49.312478",
+    "character_name": "TestCharacter",
+    "alert_level": "warning",
+    "optimization_type": null,
+    "score": 65.0,
+    "issues_count": 0,
+    "warnings_count": 1,
+    "recommendations_count": 0
+  },
+  {
+    "timestamp": "2025-08-01T13:00:02.965580",
+    "character_name": "TestCharacter",
+    "alert_level": "critical",
+    "optimization_type": null,
+    "score": 35.0,
+    "issues_count": 1,
+    "warnings_count": 0,
+    "recommendations_count": 0
+  },
+  {
+    "timestamp": "2025-08-01T13:00:02.968261",
+    "character_name": "TestCharacter",
+    "alert_level": "warning",
+    "optimization_type": null,
+    "score": 65.0,
+    "issues_count": 0,
+    "warnings_count": 1,
+    "recommendations_count": 0
+  }
+]

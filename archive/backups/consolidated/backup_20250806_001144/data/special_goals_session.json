@@ -1,0 +1,304 @@
+{
+  "active_session": {
+    "goal_name": "Tatooine Cantina Access",
+    "start_time": "2025-07-31 07:52:21.557979",
+    "current_milestone": null,
+    "milestones_completed": 0,
+    "total_milestones": 2,
+    "estimated_completion": null,
+    "last_activity": "2025-07-31 07:52:21.557980"
+  },
+  "milestone_cache": {
+    "Third Character Slot Unlock": [
+      {
+        "name": "Step 1: Reach 2000 reputation on Tatooine",
+        "description": "Reach 2000 reputation on Tatooine",
+        "requirement_type": "reputation",
+        "target_value": 2000,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Tatooine Artifact Hunt quest",
+        "description": "Complete the Tatooine Artifact Hunt quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Reach character level 25",
+        "description": "Reach character level 25",
+        "requirement_type": "level",
+        "target_value": 25,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Mustafar Key Quest": [
+      {
+        "name": "Step 1: Complete the Naboo Palace Investigation quest",
+        "description": "Complete the Naboo Palace Investigation quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Reach 3000 reputation on Naboo",
+        "description": "Reach 3000 reputation on Naboo",
+        "requirement_type": "reputation",
+        "target_value": 3000,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Master combat skills",
+        "description": "Master combat skills",
+        "requirement_type": "skill",
+        "target_value": "master",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Galactic Fortitude Token Loop": [
+      {
+        "name": "Step 1: Reach 1500 reputation on Corellia",
+        "description": "Reach 1500 reputation on Corellia",
+        "requirement_type": "reputation",
+        "target_value": 1500,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Corellia Smuggler Bust quest",
+        "description": "Complete the Corellia Smuggler Bust quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Collect all Corellia trade items",
+        "description": "Collect all Corellia trade items",
+        "requirement_type": "collection",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Dantooine Jedi Knowledge": [
+      {
+        "name": "Step 1: Reach 2500 reputation on Dantooine",
+        "description": "Reach 2500 reputation on Dantooine",
+        "requirement_type": "reputation",
+        "target_value": 2500,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Dantooine Ruins Exploration quest",
+        "description": "Complete the Dantooine Ruins Exploration quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Develop force sensitivity",
+        "description": "Develop force sensitivity",
+        "requirement_type": "skill",
+        "target_value": "novice",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Bestine Merchant Guild": [
+      {
+        "name": "Step 1: Reach 1200 reputation on Tatooine",
+        "description": "Reach 1200 reputation on Tatooine",
+        "requirement_type": "reputation",
+        "target_value": 1200,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Bestine Merchant Quest",
+        "description": "Complete the Bestine Merchant Quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Achieve novice artisan skills",
+        "description": "Achieve novice artisan skills",
+        "requirement_type": "skill",
+        "target_value": "novice",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Tyrena Medical Center Access": [
+      {
+        "name": "Step 1: Reach 1800 reputation on Corellia",
+        "description": "Reach 1800 reputation on Corellia",
+        "requirement_type": "reputation",
+        "target_value": 1800,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Tyrena Medical Emergency quest",
+        "description": "Complete the Tyrena Medical Emergency quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Achieve novice medic skills",
+        "description": "Achieve novice medic skills",
+        "requirement_type": "skill",
+        "target_value": "novice",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Naboo Palace Security Clearance": [
+      {
+        "name": "Step 1: Reach 2000 reputation on Naboo",
+        "description": "Reach 2000 reputation on Naboo",
+        "requirement_type": "reputation",
+        "target_value": 2000,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Naboo Palace Investigation quest",
+        "description": "Complete the Naboo Palace Investigation quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Reach character level 30",
+        "description": "Reach character level 30",
+        "requirement_type": "level",
+        "target_value": 30,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Corellia Trade Network": [
+      {
+        "name": "Step 1: Reach 1500 reputation on Corellia",
+        "description": "Reach 1500 reputation on Corellia",
+        "requirement_type": "reputation",
+        "target_value": 1500,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Corellia Smuggler Bust quest",
+        "description": "Complete the Corellia Smuggler Bust quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Achieve novice smuggler skills",
+        "description": "Achieve novice smuggler skills",
+        "requirement_type": "skill",
+        "target_value": "novice",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Tatooine Cantina Access": [
+      {
+        "name": "Step 1: Reach 1000 reputation on Tatooine",
+        "description": "Reach 1000 reputation on Tatooine",
+        "requirement_type": "reputation",
+        "target_value": 1000,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Tatooine Artifact Hunt quest",
+        "description": "Complete the Tatooine Artifact Hunt quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ],
+    "Fourth Character Slot Unlock": [
+      {
+        "name": "Step 1: Reach 5000 reputation on Naboo",
+        "description": "Reach 5000 reputation on Naboo",
+        "requirement_type": "reputation",
+        "target_value": 5000,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 2: Complete the Naboo Palace Investigation quest",
+        "description": "Complete the Naboo Palace Investigation quest",
+        "requirement_type": "quest",
+        "target_value": "completed",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 3: Reach character level 50",
+        "description": "Reach character level 50",
+        "requirement_type": "level",
+        "target_value": 50,
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      },
+      {
+        "name": "Step 4: Master combat skills",
+        "description": "Master combat skills",
+        "requirement_type": "skill",
+        "target_value": "master",
+        "current_value": null,
+        "completed": false,
+        "completion_time": null
+      }
+    ]
+  },
+  "last_updated": "2025-07-31T07:52:21.559109"
+}

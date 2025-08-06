@@ -1,0 +1,218 @@
+{
+  "last_updated": "2025-08-01T13:40:37.925794",
+  "lockout_data": {
+    "TestCharacter_axkva_min_normal": {
+      "character_name": "TestCharacter",
+      "heroic_id": "axkva_min",
+      "difficulty": "normal",
+      "completion_time": 1754080837.9257855,
+      "lockout_until": 1754167237.9257855
+    },
+    "TestCharacter_axkva_min_hard": {
+      "character_name": "TestCharacter",
+      "heroic_id": "axkva_min",
+      "difficulty": "hard",
+      "completion_time": 1754080631.9436371,
+      "lockout_until": 1754685431.9436371
+    },
+    "Player1_axkva_min_normal": {
+      "character_name": "Player1",
+      "heroic_id": "axkva_min",
+      "difficulty": "normal",
+      "completion_time": 1754080631.9604368,
+      "lockout_until": 1754167031.9604368
+    },
+    "Player2_axkva_min_normal": {
+      "character_name": "Player2",
+      "heroic_id": "axkva_min",
+      "difficulty": "normal",
+      "completion_time": 1754080631.9610615,
+      "lockout_until": 1754167031.9610615
+    },
+    "Player3_axkva_min_normal": {
+      "character_name": "Player3",
+      "heroic_id": "axkva_min",
+      "difficulty": "normal",
+      "completion_time": 1754080631.961625,
+      "lockout_until": 1754167031.961625
+    },
+    "IntegrationTest_test_heroic_normal": {
+      "character_name": "IntegrationTest",
+      "heroic_id": "test_heroic",
+      "difficulty": "normal",
+      "completion_time": 1754080696.5011532,
+      "lockout_until": 1754167096.5011532
+    },
+    "IntegrationTest_1754080783_test_heroic_normal": {
+      "character_name": "IntegrationTest_1754080783",
+      "heroic_id": "test_heroic",
+      "difficulty": "normal",
+      "completion_time": 1754080783.6792662,
+      "lockout_until": 1754167183.6792662
+    },
+    "IntegrationTest_1754080805_test_heroic_normal": {
+      "character_name": "IntegrationTest_1754080805",
+      "heroic_id": "test_heroic",
+      "difficulty": "normal",
+      "completion_time": 1754080805.496034,
+      "lockout_until": 1754167205.496034
+    },
+    "IntegrationTest_1754080821_test_heroic_normal": {
+      "character_name": "IntegrationTest_1754080821",
+      "heroic_id": "test_heroic",
+      "difficulty": "normal",
+      "completion_time": 1754080821.477257,
+      "lockout_until": 1754167221.477257
+    }
+  },
+  "character_lockouts": {
+    "TestCharacter": {
+      "axkva_min_normal": {
+        "character_name": "TestCharacter",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080837.9257855,
+        "lockout_until": 1754167237.9257855
+      },
+      "axkva_min_hard": {
+        "character_name": "TestCharacter",
+        "heroic_id": "axkva_min",
+        "difficulty": "hard",
+        "completion_time": 1754080631.9436371,
+        "lockout_until": 1754685431.9436371
+      }
+    },
+    "Player1": {
+      "axkva_min_normal": {
+        "character_name": "Player1",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080631.9604368,
+        "lockout_until": 1754167031.9604368
+      }
+    },
+    "Player2": {
+      "axkva_min_normal": {
+        "character_name": "Player2",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080631.9610615,
+        "lockout_until": 1754167031.9610615
+      }
+    },
+    "Player3": {
+      "axkva_min_normal": {
+        "character_name": "Player3",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080631.961625,
+        "lockout_until": 1754167031.961625
+      }
+    },
+    "IntegrationTest": {
+      "test_heroic_normal": {
+        "character_name": "IntegrationTest",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080696.5011532,
+        "lockout_until": 1754167096.5011532
+      }
+    },
+    "IntegrationTest_1754080783": {
+      "test_heroic_normal": {
+        "character_name": "IntegrationTest_1754080783",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080783.6792662,
+        "lockout_until": 1754167183.6792662
+      }
+    },
+    "IntegrationTest_1754080805": {
+      "test_heroic_normal": {
+        "character_name": "IntegrationTest_1754080805",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080805.496034,
+        "lockout_until": 1754167205.496034
+      }
+    },
+    "IntegrationTest_1754080821": {
+      "test_heroic_normal": {
+        "character_name": "IntegrationTest_1754080821",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080821.477257,
+        "lockout_until": 1754167221.477257
+      }
+    }
+  },
+  "instance_lockouts": {
+    "axkva_min": {
+      "TestCharacter_normal": {
+        "character_name": "TestCharacter",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080837.9257855,
+        "lockout_until": 1754167237.9257855
+      },
+      "TestCharacter_hard": {
+        "character_name": "TestCharacter",
+        "heroic_id": "axkva_min",
+        "difficulty": "hard",
+        "completion_time": 1754080631.9436371,
+        "lockout_until": 1754685431.9436371
+      },
+      "Player1_normal": {
+        "character_name": "Player1",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080631.9604368,
+        "lockout_until": 1754167031.9604368
+      },
+      "Player2_normal": {
+        "character_name": "Player2",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080631.9610615,
+        "lockout_until": 1754167031.9610615
+      },
+      "Player3_normal": {
+        "character_name": "Player3",
+        "heroic_id": "axkva_min",
+        "difficulty": "normal",
+        "completion_time": 1754080631.961625,
+        "lockout_until": 1754167031.961625
+      }
+    },
+    "test_heroic": {
+      "IntegrationTest_normal": {
+        "character_name": "IntegrationTest",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080696.5011532,
+        "lockout_until": 1754167096.5011532
+      },
+      "IntegrationTest_1754080783_normal": {
+        "character_name": "IntegrationTest_1754080783",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080783.6792662,
+        "lockout_until": 1754167183.6792662
+      },
+      "IntegrationTest_1754080805_normal": {
+        "character_name": "IntegrationTest_1754080805",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080805.496034,
+        "lockout_until": 1754167205.496034
+      },
+      "IntegrationTest_1754080821_normal": {
+        "character_name": "IntegrationTest_1754080821",
+        "heroic_id": "test_heroic",
+        "difficulty": "normal",
+        "completion_time": 1754080821.477257,
+        "lockout_until": 1754167221.477257
+      }
+    }
+  }
+}

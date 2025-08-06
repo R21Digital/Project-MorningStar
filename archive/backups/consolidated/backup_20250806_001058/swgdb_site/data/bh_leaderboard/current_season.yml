@@ -1,0 +1,72 @@
+season: 9
+start_date: 2025-08-01
+end_date: 2025-08-31
+status: active
+last_updated: 2025-01-04T08:12:00Z
+
+entries:
+  - name: D'rev
+    kills: 8
+    guild: JusticeCorp
+    rank: 1
+    last_kill: 2025-01-03T14:30:00Z
+    total_bounty: 24000
+    specializations:
+      - jedi_hunter
+      - force_sensitive
+    
+  - name: Tyla
+    kills: 6
+    guild: Outlaws
+    rank: 2
+    last_kill: 2025-01-02T19:45:00Z
+    total_bounty: 18000
+    specializations:
+      - jedi_hunter
+      - marksman
+    
+  - name: Vexx
+    kills: 5
+    guild: ShadowStalkers
+    rank: 3
+    last_kill: 2025-01-01T22:15:00Z
+    total_bounty: 15000
+    specializations:
+      - jedi_hunter
+      - tracker
+    
+  - name: K'Rin
+    kills: 4
+    guild: CrimsonFang
+    rank: 4
+    last_kill: 2024-12-31T16:20:00Z
+    total_bounty: 12000
+    specializations:
+      - jedi_hunter
+      - melee
+    
+  - name: Zara
+    kills: 3
+    guild: VoidHunters
+    rank: 5
+    last_kill: 2024-12-30T11:30:00Z
+    total_bounty: 9000
+    specializations:
+      - jedi_hunter
+      - sniper
+
+season_stats:
+  total_kills: 26
+  total_bounty: 78000
+  active_hunters: 5
+  average_kills: 5.2
+  top_guild: JusticeCorp
+  most_active_day: 2025-01-03
+
+settings:
+  auto_reset: true
+  reset_day: 1
+  reset_month: true
+  archive_enabled: true
+  discord_alerts: true
+  min_kills_for_ranking: 1 

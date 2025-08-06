@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Showcase - Project MorningStar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            max-width: 1400px;
+            overflow: hidden;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            padding: 30px;
+            background: var(--light-color);
+        }
+
+        .search-form {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form h3 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .builds-section {
+            padding: 30px;
+        }
+
+        .build-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .build-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .build-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .build-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .build-author {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .build-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: var(--light-color);
+            color: var(--dark-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .build-description {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .build-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-icon {
+            color: var(--primary-color);
+        }
+
+        .build-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: var(--info-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .build-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+        }
+
+        .loading-placeholder {
+            text-align: center;
+            padding: 100px 20px;
+            color: var(--secondary-color);
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .no-builds {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--secondary-color);
+        }
+
+        .no-builds i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .filters-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        .filter-select {
+            padding: 6px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .clear-filters {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .clear-filters:hover {
+            background: var(--dark-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Project MorningStar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/builds">Builds</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/build-showcase">Build Showcase</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/status">Status</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <h1><i class="fas fa-cogs"></i> Build Showcase</h1>
+            <p>Discover and share character builds and combat rotations</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-form">
+                <h3><i class="fas fa-search"></i> Find Builds</h3>
+                <form id="searchForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="searchQuery">Search</label>
+                            <input type="text" class="form-control" id="searchQuery" placeholder="Search builds...">
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryFilter">Category</label>
+                            <select class="form-control" id="categoryFilter">
+                                <option value="">All Categories</option>
+                                <option value="pve">PVE</option>
+                                <option value="pvp">PVP</option>
+                                <option value="solo">Solo</option>
+                                <option value="group">Group</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="support">Support</option>
+                                <option value="tank">Tank</option>
+                                <option value="dps">DPS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="difficultyFilter">Difficulty</label>
+                            <select class="form-control" id="difficultyFilter">
+                                <option value="">All Difficulties</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="professionFilter">Profession</label>
+                            <select class="form-control" id="professionFilter">
+                                <option value="">All Professions</option>
+                                <option value="rifleman">Rifleman</option>
+                                <option value="pistoleer">Pistoleer</option>
+                                <option value="medic">Medic</option>
+                                <option value="bounty_hunter">Bounty Hunter</option>
+                                <option value="commando">Commando</option>
+                                <option value="smuggler">Smuggler</option>
+                                <option value="spy">Spy</option>
+                                <option value="squad_leader">Squad Leader</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tagsFilter">Tags</label>
+                            <input type="text" class="form-control" id="tagsFilter" placeholder="Enter tags separated by commas">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="clearFilters">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Builds Section -->
+        <div class="builds-section">
+            <div id="buildsContainer">
+                <div class="loading-placeholder">
+                    <div class="loading-spinner"></div>
+                    <p>Loading builds...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Build Showcase JavaScript
+        class BuildShowcase {
+            constructor() {
+                this.builds = [];
+                this.filters = {};
+                this.init();
+            }
+
+            async init() {
+                this.setupEventListeners();
+                await this.loadBuilds();
+            }
+
+            setupEventListeners() {
+                // Search form
+                document.getElementById('searchForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.applyFilters();
+                });
+
+                // Clear filters
+                document.getElementById('clearFilters').addEventListener('click', () => {
+                    this.clearFilters();
+                });
+
+                // Filter changes
+                ['categoryFilter', 'difficultyFilter', 'professionFilter'].forEach(id => {
+                    document.getElementById(id).addEventListener('change', () => {
+                        this.applyFilters();
+                    });
+                });
+            }
+
+            async loadBuilds() {
+                try {
+                    const response = await fetch('/api/build-showcase');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.builds = data.builds;
+                        this.renderBuilds();
+                    } else {
+                        this.showError('Failed to load builds');
+                    }
+                } catch (error) {
+                    console.error('Error loading builds:', error);
+                    this.showError('Failed to load builds');
+                }
+            }
+
+            applyFilters() {
+                const query = document.getElementById('searchQuery').value;
+                const category = document.getElementById('categoryFilter').value;
+                const difficulty = document.getElementById('difficultyFilter').value;
+                const profession = document.getElementById('professionFilter').value;
+                const tags = document.getElementById('tagsFilter').value;
+
+                this.filters = {
+                    q: query,
+                    category: category,
+                    difficulty: difficulty,
+                    profession: profession,
+                    tags: tags
+                };
+
+                this.loadFilteredBuilds();
+            }
+
+            async loadFilteredBuilds() {
+                try {
+                    const params = new URLSearchParams();
+                    Object.entries(this.filters).forEach(([key, value]) => {
+                        if (value) params.append(key, value);
+                    });
+
+                    const response = await fetch(`/api/build-showcase?${params.toString()}`);
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.builds = data.builds;
+                        this.renderBuilds();
+                    } else {
+                        this.showError('Failed to load filtered builds');
+                    }
+                } catch (error) {
+                    console.error('Error loading filtered builds:', error);
+                    this.showError('Failed to load filtered builds');
+                }
+            }
+
+            clearFilters() {
+                document.getElementById('searchQuery').value = '';
+                document.getElementById('categoryFilter').value = '';
+                document.getElementById('difficultyFilter').value = '';
+                document.getElementById('professionFilter').value = '';
+                document.getElementById('tagsFilter').value = '';
+                
+                this.filters = {};
+                this.loadBuilds();
+            }
+
+            renderBuilds() {
+                const container = document.getElementById('buildsContainer');
+                
+                if (this.builds.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-builds">
+                            <i class="fas fa-search"></i>
+                            <h3>No builds found</h3>
+                            <p>Try adjusting your search criteria or browse all builds.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const buildsHtml = this.builds.map(build => this.renderBuildCard(build)).join('');
+                container.innerHTML = buildsHtml;
+
+                // Add event listeners to like buttons
+                this.builds.forEach(build => {
+                    const likeBtn = document.getElementById(`likeBtn_${build.id}`);
+                    if (likeBtn) {
+                        likeBtn.addEventListener('click', () => this.likeBuild(build.id));
+                    }
+                });
+            }
+
+            renderBuildCard(build) {
+                const professions = Object.values(build.professions).join(', ');
+                const tags = build.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                
+                return `
+                    <div class="build-card">
+                        <div class="build-header">
+                            <div>
+                                <div class="build-title">${build.name}</div>
+                                <div class="build-author">by ${build.author}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="build-meta">
+                            <span class="meta-badge">${build.category}</span>
+                            <span class="meta-badge">${build.difficulty}</span>
+                            <span class="meta-badge">${professions}</span>
+                        </div>
+                        
+                        <div class="build-description">${build.description}</div>
+                        
+                        <div class="build-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-eye stat-icon"></i>
+                                <span>${build.views} views</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-heart stat-icon"></i>
+                                <span>${build.likes} likes</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-star stat-icon"></i>
+                                <span>${build.rating.toFixed(1)} rating</span>
+                            </div>
+                        </div>
+                        
+                        <div class="build-tags">
+                            ${tags}
+                        </div>
+                        
+                        <div class="build-actions">
+                            <button class="btn btn-primary btn-sm" onclick="window.location.href='${build.url}'">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" id="likeBtn_${build.id}">
+                                <i class="fas fa-heart"></i> Like
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm" onclick="this.exportBuild('${build.id}')">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            async likeBuild(buildId) {
+                try {
+                    const response = await fetch(`/api/build-showcase/${buildId}/like`, {
+                        method: 'POST'
+                    });
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Update the like count in the UI
+                        const build = this.builds.find(b => b.id === buildId);
+                        if (build) {
+                            build.likes += 1;
+                            this.renderBuilds();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error liking build:', error);
+                }
+            }
+
+            async exportBuild(buildId) {
+                try {
+                    const response = await fetch(`/api/build-showcase/${buildId}/export`);
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Create and download markdown file
+                        const blob = new Blob([data.markdown], { type: 'text/markdown' });
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `build_${buildId}.md`;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);
+                    }
+                } catch (error) {
+                    console.error('Error exporting build:', error);
+                }
+            }
+
+            showError(message) {
+                const container = document.getElementById('buildsContainer');
+                container.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle"></i> ${message}
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize the build showcase
+        document.addEventListener('DOMContentLoaded', () => {
+            new BuildShowcase();
+        });
+    </script>
+</body>
+</html> 

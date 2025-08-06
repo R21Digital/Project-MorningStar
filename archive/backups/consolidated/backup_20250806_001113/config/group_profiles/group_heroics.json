@@ -1,0 +1,201 @@
+{
+  "group_coordination": {
+    "enabled": true,
+    "discord_integration": {
+      "enabled": false,
+      "webhook_url": "",
+      "channel_id": "",
+      "bot_token": ""
+    },
+    "auto_role_assignment": true,
+    "role_priority": ["healer", "tank", "dps", "support"]
+  },
+  
+  "roles": {
+    "dps": {
+      "description": "Damage dealer role",
+      "priorities": [
+        "maximize_damage_output",
+        "target_priority_bosses",
+        "avoid_aggro_management",
+        "use_damage_cooldowns"
+      ],
+      "combat_profile": "dps_heroic",
+      "keybinds": {
+        "primary_attack": "1",
+        "secondary_attack": "2",
+        "damage_cooldown": "3",
+        "escape_ability": "4"
+      },
+      "targeting_rules": {
+        "primary_target": "boss",
+        "secondary_target": "elite_minions",
+        "avoid_targets": ["friendly_players", "healers"]
+      }
+    },
+    
+    "healer": {
+      "description": "Healing and support role",
+      "priorities": [
+        "maintain_group_health",
+        "prioritize_tank_healing",
+        "use_healing_cooldowns",
+        "cleanse_debuffs"
+      ],
+      "combat_profile": "healer_heroic",
+      "keybinds": {
+        "primary_heal": "1",
+        "group_heal": "2",
+        "cleanse": "3",
+        "healing_cooldown": "4"
+      },
+      "healing_rules": {
+        "tank_health_threshold": 0.8,
+        "group_health_threshold": 0.6,
+        "emergency_heal_threshold": 0.3,
+        "priority_targets": ["tank", "dps", "support"]
+      }
+    },
+    
+    "tank": {
+      "description": "Tank and aggro management role",
+      "priorities": [
+        "maintain_aggro_on_boss",
+        "position_boss_correctly",
+        "use_defensive_cooldowns",
+        "protect_group_members"
+      ],
+      "combat_profile": "tank_heroic",
+      "keybinds": {
+        "taunt": "1",
+        "defensive_cooldown": "2",
+        "position_ability": "3",
+        "emergency_defense": "4"
+      },
+      "tanking_rules": {
+        "aggro_threshold": 0.9,
+        "positioning_distance": 10,
+        "defensive_cooldown_threshold": 0.7
+      }
+    },
+    
+    "support": {
+      "description": "Buff and debuff management role",
+      "priorities": [
+        "maintain_group_buffs",
+        "debuff_enemy_targets",
+        "provide_utility_abilities",
+        "assist_with_healing"
+      ],
+      "combat_profile": "support_heroic",
+      "keybinds": {
+        "group_buff": "1",
+        "debuff_target": "2",
+        "utility_ability": "3",
+        "emergency_support": "4"
+      },
+      "support_rules": {
+        "buff_duration_threshold": 0.3,
+        "debuff_priority": ["boss", "elite_minions"],
+        "utility_cooldown_management": true
+      }
+    }
+  },
+  
+  "heroic_instances": {
+    "axkva_min": {
+      "recommended_group_size": {
+        "normal": 6,
+        "hard": 8
+      },
+      "role_distribution": {
+        "normal": {
+          "tank": 1,
+          "healer": 2,
+          "dps": 2,
+          "support": 1
+        },
+        "hard": {
+          "tank": 1,
+          "healer": 2,
+          "dps": 3,
+          "support": 2
+        }
+      },
+      "special_mechanics": {
+        "dark_side_corruption": {
+          "affected_roles": ["all"],
+          "mitigation": "cleanse_abilities",
+          "priority": "high"
+        },
+        "force_storm": {
+          "affected_roles": ["all"],
+          "mitigation": "healing_coordination",
+          "priority": "critical"
+        },
+        "mind_control": {
+          "affected_roles": ["dps", "support"],
+          "mitigation": "crowd_control",
+          "priority": "high"
+        }
+      }
+    },
+    
+    "ancient_jedi_temple": {
+      "recommended_group_size": {
+        "normal": 8,
+        "hard": 12
+      },
+      "role_distribution": {
+        "normal": {
+          "tank": 2,
+          "healer": 2,
+          "dps": 3,
+          "support": 1
+        },
+        "hard": {
+          "tank": 2,
+          "healer": 3,
+          "dps": 4,
+          "support": 3
+        }
+      }
+    },
+    
+    "sith_academy": {
+      "recommended_group_size": {
+        "normal": 8,
+        "hard": 16
+      },
+      "role_distribution": {
+        "normal": {
+          "tank": 2,
+          "healer": 2,
+          "dps": 3,
+          "support": 1
+        },
+        "hard": {
+          "tank": 2,
+          "healer": 4,
+          "dps": 6,
+          "support": 4
+        }
+      }
+    }
+  },
+  
+  "coordination_settings": {
+    "auto_formation": true,
+    "role_switching": false,
+    "communication_channels": {
+      "discord": false,
+      "in_game_chat": true,
+      "voice_commands": false
+    },
+    "emergency_protocols": {
+      "wipe_recovery": true,
+      "member_replacement": true,
+      "role_reassignment": true
+    }
+  }
+} 

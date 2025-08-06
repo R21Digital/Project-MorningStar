@@ -1,0 +1,158 @@
+{
+  "shortcuts": [
+    {
+      "name": "heal",
+      "command": "/heal {target}",
+      "category": "combat",
+      "hotkey": "F1",
+      "description": "Heal target",
+      "usage_count": 2,
+      "last_used": "2025-08-01 10:40:52.184143",
+      "is_favorite": true
+    },
+    {
+      "name": "buff",
+      "command": "/buff {target}",
+      "category": "combat",
+      "hotkey": "F2",
+      "description": "Buff target",
+      "usage_count": 1,
+      "last_used": "2025-08-01 10:40:52.184284",
+      "is_favorite": true
+    },
+    {
+      "name": "attack",
+      "command": "/attack {target}",
+      "category": "combat",
+      "hotkey": "F3",
+      "description": "Attack target",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "defend",
+      "command": "/defend",
+      "category": "combat",
+      "hotkey": "F4",
+      "description": "Defend",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "flee",
+      "command": "/flee",
+      "category": "combat",
+      "hotkey": "F5",
+      "description": "Flee from combat",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "travel",
+      "command": "/travel {destination}",
+      "category": "travel",
+      "hotkey": "F6",
+      "description": "Travel to destination",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": true
+    },
+    {
+      "name": "follow",
+      "command": "/follow {target}",
+      "category": "travel",
+      "hotkey": "F7",
+      "description": "Follow target",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "craft",
+      "command": "/craft {item}",
+      "category": "crafting",
+      "hotkey": "F8",
+      "description": "Craft item",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "loot",
+      "command": "/loot",
+      "category": "utility",
+      "hotkey": "F9",
+      "description": "Loot items",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "status",
+      "command": "/status",
+      "category": "utility",
+      "hotkey": "F10",
+      "description": "Show status",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "say",
+      "command": "/say {message}",
+      "category": "social",
+      "hotkey": "F11",
+      "description": "Say message",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    },
+    {
+      "name": "tell",
+      "command": "/tell {player} {message}",
+      "category": "social",
+      "hotkey": "F12",
+      "description": "Tell player",
+      "usage_count": 0,
+      "last_used": null,
+      "is_favorite": false
+    }
+  ],
+  "categories": {
+    "combat": [
+      "heal",
+      "buff",
+      "attack",
+      "defend",
+      "flee"
+    ],
+    "travel": [
+      "travel",
+      "follow"
+    ],
+    "crafting": [
+      "craft"
+    ],
+    "utility": [
+      "loot",
+      "status"
+    ],
+    "social": [
+      "say",
+      "tell"
+    ]
+  },
+  "favorites": [
+    "travel",
+    "buff",
+    "heal"
+  ],
+  "usage_stats": {
+    "heal": 2,
+    "buff": 1
+  },
+  "export_date": "2025-08-01T10:40:52.185346"
+}

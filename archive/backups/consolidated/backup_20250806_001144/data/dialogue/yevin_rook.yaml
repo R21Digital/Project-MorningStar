@@ -1,0 +1,153 @@
+# Yevin Rook Dialogue Patterns
+# Starting NPC for Legacy questline with keyword mappings
+
+yevin_rook:
+  greeting:
+    - "Welcome, traveler! I am Yevin Rook, and I sense great potential in you."
+    - "Ah, a new face in Mos Eisley! I am Yevin Rook, and I have a feeling about you."
+    - "Greetings, young one. I am Yevin Rook, and I believe you are destined for greatness."
+  
+  quest_offer:
+    - "I have a special opportunity for someone like you. Are you interested in learning about your Legacy?"
+    - "There's something unique about you. Would you like to discover your true potential?"
+    - "I sense the Legacy within you. Would you like to begin your journey of discovery?"
+  
+  quest_accept:
+    - "Excellent! Your journey begins now. Let me teach you the basics of survival."
+    - "Perfect! I knew you were the right one. Let's start with some fundamental training."
+    - "Wonderful! Your Legacy awakening starts here. Follow me to the training area."
+  
+  quest_decline:
+    - "I understand. The path of Legacy is not for everyone. Perhaps another time."
+    - "Very well. The choice is yours. The Legacy will wait for when you're ready."
+    - "As you wish. The potential remains within you, should you change your mind."
+  
+  quest_complete:
+    - "Outstanding work! You've taken your first step on the path of Legacy."
+    - "Excellent! You've proven yourself worthy of the Legacy training."
+    - "Magnificent! Your potential is even greater than I imagined."
+  
+  training_offer:
+    - "Would you like to learn some basic combat techniques?"
+    - "I can teach you essential survival skills. Are you interested?"
+    - "There's much to learn about the Legacy. Shall we begin with the fundamentals?"
+  
+  training_accept:
+    - "Excellent! Let's start with the basics of combat and survival."
+    - "Perfect! I'll teach you everything you need to know about the Legacy."
+    - "Wonderful! Your training begins immediately."
+  
+  training_decline:
+    - "I understand. Training can be intense. Take your time."
+    - "Very well. The training will be here when you're ready."
+    - "As you wish. The Legacy training awaits your return."
+  
+  legacy_explanation:
+    - "The Legacy is an ancient power that flows through certain individuals. It grants enhanced abilities and insight."
+    - "Legacy users can sense the Force more acutely, have enhanced combat abilities, and can access ancient knowledge."
+    - "The Legacy is not just about power - it's about understanding your true potential and using it wisely."
+  
+  tatooine_info:
+    - "Tatooine is a harsh world, but it's perfect for training. The desert teaches patience and resilience."
+    - "This planet may seem barren, but it holds many secrets. The desert has a way of revealing truth."
+    - "Tatooine's challenges will make you stronger. Every sandstorm, every heat wave builds character."
+  
+  busy:
+    - "I'm currently training another student. Can you come back later?"
+    - "I have some important matters to attend to. Please return when I'm free."
+    - "I'm a bit occupied right now. Perhaps we can talk later?"
+  
+  farewell:
+    - "May the Legacy guide your path, young one."
+    - "Remember, your potential is limitless. Use it wisely."
+    - "The desert will teach you much. Return when you're ready for more training."
+    - "Safe travels, and may the Force be with you."
+
+  keyword_mappings:
+    legacy:
+      triggers:
+        - "Tell me about the Legacy"
+        - "What is the Legacy?"
+        - "Explain the Legacy"
+        - "Legacy powers"
+        - "Legacy abilities"
+      responses:
+        - "The Legacy is an ancient power that flows through certain individuals. It grants enhanced abilities and insight."
+        - "Legacy users can sense the Force more acutely, have enhanced combat abilities, and can access ancient knowledge."
+        - "The Legacy is not just about power - it's about understanding your true potential and using it wisely."
+    
+    training:
+      triggers:
+        - "I want to train"
+        - "Teach me"
+        - "Training"
+        - "Learn skills"
+        - "Combat training"
+      responses:
+        - "Would you like to learn some basic combat techniques?"
+        - "I can teach you essential survival skills. Are you interested?"
+        - "There's much to learn about the Legacy. Shall we begin with the fundamentals?"
+    
+    tatooine:
+      triggers:
+        - "Tell me about Tatooine"
+        - "What should I know about this planet?"
+        - "Tatooine information"
+        - "Planet info"
+      responses:
+        - "Tatooine is a harsh world, but it's perfect for training. The desert teaches patience and resilience."
+        - "This planet may seem barren, but it holds many secrets. The desert has a way of revealing truth."
+        - "Tatooine's challenges will make you stronger. Every sandstorm, every heat wave builds character."
+    
+    quest:
+      triggers:
+        - "I need a quest"
+        - "Give me a job"
+        - "What can I do?"
+        - "Help me"
+      responses:
+        - "I have a special opportunity for someone like you. Are you interested in learning about your Legacy?"
+        - "There's something unique about you. Would you like to discover your true potential?"
+        - "I sense the Legacy within you. Would you like to begin your journey of discovery?"
+    
+    goodbye:
+      triggers:
+        - "Goodbye"
+        - "Farewell"
+        - "See you later"
+        - "I'm leaving"
+      responses:
+        - "May the Legacy guide your path, young one."
+        - "Remember, your potential is limitless. Use it wisely."
+        - "The desert will teach you much. Return when you're ready for more training."
+        - "Safe travels, and may the Force be with you."
+
+  context_responses:
+    first_meeting:
+      - "Welcome, traveler! I am Yevin Rook, and I sense great potential in you."
+      - "Ah, a new face in Mos Eisley! I am Yevin Rook, and I have a feeling about you."
+    
+    returning_student:
+      - "Welcome back! How has your training progressed?"
+      - "Ah, my returning student! I'm glad to see you again."
+    
+    quest_in_progress:
+      - "How is your training coming along?"
+      - "Are you making progress with your Legacy awakening?"
+    
+    quest_completed:
+      - "Excellent work! You've proven yourself worthy of the Legacy."
+      - "Magnificent! Your potential is even greater than I imagined."
+
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "SWGR.org_Dialogue_Data"
+  source: "SWGR.org Legacy Questline"
+  tags:
+    - "yevin_rook"
+    - "legacy"
+    - "tutorial"
+    - "tatooine"
+    - "mos_eisley" 

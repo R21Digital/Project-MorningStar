@@ -1,0 +1,64 @@
+completion_estimates:
+  average_time_per_quest: 8.0
+  completion_percentage_milestones:
+  - percentage: 25
+    quests: 0
+  - percentage: 50
+    quests: 0
+  - percentage: 75
+    quests: 0
+  - percentage: 100
+    quests: 1
+  estimated_time_hours: 0.13333333333333333
+  estimated_time_minutes: 8
+  total_quests: 1
+completion_goals:
+  estimated_completion_time: 8
+  quests_by_difficulty:
+    easy: 1
+  quests_by_type:
+    delivery: 1
+  required_levels:
+  - 10
+  total_quests: 1
+  unlock_requirements: []
+difficulty_progression:
+- count: 1
+  difficulty: easy
+  estimated_time: 8
+  quests:
+  - coronet_trade_mission
+generated_date: '2025-07-31T16:23:51.558494'
+planet: corellia
+prerequisites_map:
+  coronet_trade_mission: []
+quest_chains: []
+quests_by_type:
+  delivery:
+  - database_info:
+      coordinates:
+      - 123
+      - 456
+      difficulty: easy
+      discovered_time: '2025-07-31 13:09:42.208792'
+      giver: Unknown
+      level_requirement: 10
+      location: ''
+      name: Coronet Trade Mission
+      planet: corellia
+      quest_id: coronet_trade_mission
+      quest_type: delivery
+      reward: '{''credits'': 2000, ''experience'': 800, ''items'': [''Trade Federation
+        Credits'']}'
+      source: yaml
+    detailed_data: null
+    quest_id: coronet_trade_mission
+recommended_order:
+- coronet_trade_mission
+rewards_summary:
+  items: []
+  total_credits: 0
+  total_experience: 0
+  total_reputation: {}
+  unlocks: []
+total_quests: 1

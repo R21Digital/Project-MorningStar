@@ -1,0 +1,71 @@
+{
+  "google_analytics": {
+    "measurement_id": "G-Q4ZZ5SFJC0",
+    "enhanced_config": [
+      "custom_map",
+      "page_title",
+      "page_location",
+      "send_page_view"
+    ],
+    "custom_events": [
+      "trackSWGDBEvent",
+      "filter_used",
+      "search_performed",
+      "navigation_click",
+      "form_submitted"
+    ],
+    "performance_tracking": [
+      "load_time_ms"
+    ],
+    "status": "PASSED"
+  },
+  "seo_meta_tags": {
+    "meta_tags": [
+      "meta name=\"description\"",
+      "meta property=\"og:title\"",
+      "meta property=\"og:description\"",
+      "meta property=\"og:type\"",
+      "meta property=\"og:url\"",
+      "meta name=\"twitter:card\"",
+      "meta name=\"twitter:title\"",
+      "meta name=\"twitter:description\""
+    ],
+    "structured_data": true,
+    "gsc_verification": true,
+    "status": "PASSED"
+  },
+  "robots_txt": {
+    "directives": [
+      "User-agent: *",
+      "Allow: /",
+      "Sitemap:"
+    ],
+    "sitemap_url": "https://swgdb.com/sitemap.xml",
+    "crawl_delay": true,
+    "status": "PASSED"
+  },
+  "sitemap_xml": {
+    "namespace": "incorrect",
+    "url_count": 19,
+    "elements": {
+      "loc": 5,
+      "lastmod": 5,
+      "changefreq": 5,
+      "priority": 5
+    },
+    "main_pages": [
+      "https://swgdb.com/",
+      "https://swgdb.com/pages/heroics/",
+      "https://swgdb.com/pages/loot/",
+      "https://swgdb.com/pages/builds/"
+    ],
+    "status": "PASSED"
+  },
+  "search_console": {
+    "verification_tag": true,
+    "sitemap_ready": true,
+    "domain": "swgdb.com",
+    "status": "PASSED"
+  },
+  "overall_status": "PASSED"
+}

@@ -1,0 +1,103 @@
+{
+  "max_characters": 2,
+  "quest_sync_enabled": true,
+  "position_sync_enabled": true,
+  "communication_port": 12345,
+  "window_spacing": 50,
+  "support_modes": ["medic", "dancer", "entertainer"],
+  "main_modes": ["quest", "combat", "farming", "profession"],
+  "window_management": {
+    "auto_arrange": true,
+    "spacing": 50,
+    "minimize_inactive": false,
+    "always_on_top": false
+  },
+  "communication": {
+    "enabled": true,
+    "port": 12345,
+    "timeout": 30,
+    "retry_attempts": 3
+  },
+  "synchronization": {
+    "quest_sync": {
+      "enabled": true,
+      "sync_interval": 10,
+      "auto_follow": true
+    },
+    "position_sync": {
+      "enabled": true,
+      "sync_interval": 5,
+      "max_distance": 100
+    },
+    "status_sync": {
+      "enabled": true,
+      "sync_interval": 15
+    }
+  },
+  "support_configs": {
+    "medic": {
+      "buff_interval": 300,
+      "heal_interval": 60,
+      "buff_range": 50,
+      "heal_range": 30,
+      "buffs": ["heal_health", "heal_action", "heal_mind"],
+      "stationary": true,
+      "follow_leader": false
+    },
+    "dancer": {
+      "buff_interval": 180,
+      "heal_interval": 0,
+      "buff_range": 40,
+      "heal_range": 0,
+      "buffs": ["dance_health", "dance_action", "dance_mind"],
+      "stationary": true,
+      "follow_leader": false
+    },
+    "entertainer": {
+      "buff_interval": 240,
+      "heal_interval": 0,
+      "buff_range": 45,
+      "heal_range": 0,
+      "buffs": ["entertain_health", "entertain_action", "entertain_mind"],
+      "stationary": true,
+      "follow_leader": false
+    },
+    "medic_mobile": {
+      "buff_interval": 300,
+      "heal_interval": 60,
+      "buff_range": 50,
+      "heal_range": 30,
+      "buffs": ["heal_health", "heal_action", "heal_mind"],
+      "stationary": false,
+      "follow_leader": true
+    }
+  },
+  "character_profiles": {
+    "main_character": {
+      "name": "MainChar",
+      "window_title": "SWG - MainChar",
+      "mode": "main",
+      "role": "leader",
+      "default_mode": "quest"
+    },
+    "support_character": {
+      "name": "SupportChar",
+      "window_title": "SWG - SupportChar",
+      "mode": "support",
+      "role": "follower",
+      "default_mode": "medic"
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/multi_character.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  },
+  "safety": {
+    "max_session_duration": 7200,
+    "afk_timeout": 300,
+    "emergency_stop": true,
+    "auto_cleanup": true
+  }
+} 

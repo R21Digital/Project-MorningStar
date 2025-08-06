@@ -1,0 +1,21 @@
+{
+  "profession_boxes": [
+    "brawler"
+  ],
+  "weapons_supported": [
+    "unarmed",
+    "melee"
+  ],
+  "abilities_granted": [
+    "Power Attack",
+    "Counter Attack",
+    "Melee Hit",
+    "Melee Critical Hit",
+    "Defensive Stance"
+  ],
+  "combat_style": "melee",
+  "minimum_attack_distance": 1,
+  "build_summary": "Professions: brawler | Weapons: unarmed, melee | Combat Style: Melee | Key Abilities: Power Attack, Counter Attack, Melee Hit, Melee Critical Hit, Defensive Stance",
+  "parsed_at": "2025-07-31T22:49:44.863378",
+  "source_url": "https://swgr.org/skill-calculator/brawler?skills=melee_hit,power_attack,unarmed"
+}

@@ -1,0 +1,281 @@
+{
+  "mapId": "ancient_jedi_temple",
+  "name": "Ancient Jedi Temple",
+  "planet": "yavin4",
+  "location": "yavin4_jungle",
+  "coordinates": [3000, 2000],
+  
+  "mapData": {
+    "scale": 1.2,
+    "bounds": {
+      "north": 2500,
+      "south": 1500,
+      "east": 3500,
+      "west": 2500
+    },
+    "gridSize": 10
+  },
+  
+  "zones": [
+    {
+      "id": "temple_entrance",
+      "name": "Temple Entrance",
+      "type": "entrance",
+      "coordinates": [3000, 1900],
+      "description": "Grand entrance to the ancient Jedi temple",
+      "connections": ["outer_courtyard"]
+    },
+    {
+      "id": "outer_courtyard",
+      "name": "Outer Courtyard", 
+      "type": "area",
+      "coordinates": [3100, 2000],
+      "description": "Open courtyard with ancient statues",
+      "connections": ["temple_entrance", "inner_temple"],
+      "enemies": [
+        {
+          "type": "temple_guardian",
+          "level": 78,
+          "count": "3-4",
+          "respawn": false
+        },
+        {
+          "type": "dark_spirit",
+          "level": 80,
+          "count": "2",
+          "respawn": true,
+          "respawnTime": 300
+        }
+      ]
+    },
+    {
+      "id": "inner_temple",
+      "name": "Inner Temple",
+      "type": "corridor",
+      "coordinates": [3200, 2100],
+      "description": "Sacred halls of the ancient temple",
+      "connections": ["outer_courtyard", "meditation_chamber", "crystal_chamber"],
+      "features": [
+        {
+          "type": "force_crystal",
+          "name": "Guidance Crystal",
+          "description": "Provides hints about temple layout",
+          "interactive": true
+        }
+      ]
+    },
+    {
+      "id": "meditation_chamber",
+      "name": "Meditation Chamber",
+      "type": "encounter",
+      "coordinates": [3150, 2200],
+      "description": "Where ancient Jedi meditated on the Force",
+      "connections": ["inner_temple"],
+      "encounters": [
+        {
+          "bossId": "fallen_jedi_master",
+          "name": "Fallen Jedi Master",
+          "level": 85,
+          "phase": 1,
+          "abilities": ["Force Lightning", "Saber Throw", "Force Choke"],
+          "mechanics": [
+            {
+              "name": "Force Meditation",
+              "description": "Heals for 25% health every 30 seconds",
+              "counter": "Interrupt with high damage or special attacks"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crystal_chamber",
+      "name": "Crystal Chamber",
+      "type": "boss",
+      "coordinates": [3300, 2200],
+      "description": "Chamber containing the temple's sacred crystal",
+      "connections": ["inner_temple"],
+      "encounters": [
+        {
+          "bossId": "crystal_guardian",
+          "name": "Crystal Guardian",
+          "level": 88,
+          "phase": 1,
+          "abilities": ["Crystal Blast", "Force Shield", "Energy Drain"],
+          "mechanics": [
+            {
+              "name": "Crystal Resonance",
+              "description": "Reflects damage back to attackers",
+              "counter": "Use ranged attacks or special crystals"
+            },
+            {
+              "name": "Temple Awakening",
+              "description": "At 50% health, awakens temple defenses",
+              "counter": "Focus fire and avoid environmental hazards"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  
+  "markers": [
+    {
+      "id": "spawn_point",
+      "type": "spawn",
+      "coordinates": [2980, 1900],
+      "name": "Temple Entrance",
+      "description": "Group spawns at the temple entrance",
+      "icon": "spawn"
+    },
+    {
+      "id": "checkpoint_courtyard",
+      "type": "checkpoint", 
+      "coordinates": [3100, 2000],
+      "name": "Courtyard Checkpoint",
+      "description": "Respawn point after clearing courtyard",
+      "icon": "checkpoint"
+    },
+    {
+      "id": "meditation_altar",
+      "type": "interaction",
+      "coordinates": [3150, 2220],
+      "name": "Ancient Meditation Altar",
+      "description": "Provides Force regeneration buff",
+      "icon": "altar",
+      "effect": "Force regeneration +50% for 10 minutes"
+    },
+    {
+      "id": "crystal_deposit",
+      "type": "resource",
+      "coordinates": [3320, 2180],
+      "name": "Kyber Crystal Deposit",
+      "description": "Source of rare kyber crystals",
+      "icon": "crystal",
+      "harvestable": true
+    },
+    {
+      "id": "loot_chest_meditation",
+      "type": "loot",
+      "coordinates": [3160, 2210],
+      "name": "Jedi Master's Cache",
+      "description": "Contains ancient Jedi artifacts",
+      "icon": "chest",
+      "lootTable": "jedi_temple_meditation"
+    },
+    {
+      "id": "loot_chest_crystal",
+      "type": "loot",
+      "coordinates": [3310, 2210],
+      "name": "Sacred Crystal Vault",
+      "description": "Main loot containing powerful crystals",
+      "icon": "boss_chest",
+      "lootTable": "jedi_temple_crystal"
+    }
+  ],
+  
+  "paths": [
+    {
+      "id": "standard_path",
+      "name": "Standard Route",
+      "description": "Complete temple exploration",
+      "waypoints": [
+        [3000, 1900],
+        [3100, 2000],
+        [3200, 2100],
+        [3150, 2200],
+        [3300, 2200]
+      ],
+      "estimatedTime": "60-75 minutes",
+      "difficulty": "normal"
+    },
+    {
+      "id": "crystal_rush",
+      "name": "Crystal Rush",
+      "description": "Direct path to crystal chamber",
+      "waypoints": [
+        [3000, 1900],
+        [3100, 2000],
+        [3300, 2200]
+      ],
+      "estimatedTime": "30-45 minutes",
+      "difficulty": "hard",
+      "requirements": ["Skip meditation chamber", "High Force resistance"]
+    }
+  ],
+  
+  "hazards": [
+    {
+      "id": "force_lightning_trap",
+      "type": "trap",
+      "coordinates": [3120, 2050],
+      "name": "Ancient Force Trap",
+      "description": "Triggers Force lightning when stepped on",
+      "damage": "600-900",
+      "avoidable": true,
+      "trigger": "pressure_plate"
+    },
+    {
+      "id": "collapsing_ceiling",
+      "type": "environmental",
+      "coordinates": [3180, 2120],
+      "name": "Unstable Ceiling",
+      "description": "Ceiling collapses during combat",
+      "damage": "800-1200",
+      "trigger": "combat_vibrations",
+      "warning": "Cracks appear 5 seconds before collapse"
+    }
+  ],
+  
+  "secrets": [
+    {
+      "id": "hidden_archive",
+      "type": "secret",
+      "coordinates": [3080, 2150],
+      "name": "Hidden Jedi Archives",
+      "description": "Secret chamber with ancient Jedi knowledge",
+      "requirements": ["Activate Force crystal sequence", "Jedi class recommended"],
+      "rewards": ["Ancient Jedi holocron", "Rare Force power scroll"]
+    },
+    {
+      "id": "masters_study",
+      "type": "secret",
+      "coordinates": [3250, 2180],
+      "name": "Temple Master's Study",
+      "description": "Private chambers of the temple's last master",
+      "requirements": ["Defeat Fallen Jedi Master", "Solve crystal puzzle"],
+      "rewards": ["Master's lightsaber", "Ancient Force technique"]
+    }
+  ],
+  
+  "environmental": [
+    {
+      "id": "force_nexus",
+      "type": "buff_zone",
+      "coordinates": [3200, 2100],
+      "name": "Force Nexus",
+      "description": "Area of concentrated Force energy",
+      "effect": "Force powers +25% effectiveness",
+      "radius": 50
+    },
+    {
+      "id": "dark_corruption",
+      "type": "debuff_zone",
+      "coordinates": [3150, 2200],
+      "name": "Dark Side Corruption",
+      "description": "Area tainted by the fallen Jedi's presence",
+      "effect": "Light side powers -20% effectiveness",
+      "radius": 30
+    }
+  ],
+  
+  "metadata": {
+    "created": "2025-01-27",
+    "version": "1.0",
+    "accuracy": "high",
+    "source": "Archaeological surveys and player expeditions",
+    "contributors": ["JediExplorers", "TempleScholars"],
+    "lastVerified": "2025-01-27",
+    "notes": "Force-sensitive characters may experience additional effects"
+  }
+}

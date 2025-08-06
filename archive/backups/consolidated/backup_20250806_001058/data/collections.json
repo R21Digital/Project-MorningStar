@@ -1,0 +1,191 @@
+{
+  "collections": [
+    {
+      "name": "Tatooine Trophy - Mos Eisley",
+      "type": "trophy",
+      "planet": "Tatooine",
+      "zone": "Mos Eisley",
+      "coordinates": [100, 200],
+      "trigger_text": "Collect Trophy",
+      "description": "A rare trophy from the cantina in Mos Eisley",
+      "rarity": "common",
+      "required_level": 5
+    },
+    {
+      "name": "Tatooine Trophy - Anchorhead",
+      "type": "trophy",
+      "planet": "Tatooine",
+      "zone": "Anchorhead",
+      "coordinates": [250, 150],
+      "trigger_text": "Gather Trophy",
+      "description": "A trophy from the moisture farm",
+      "rarity": "uncommon",
+      "required_level": 8
+    },
+    {
+      "name": "Corellia Badge - Coronet",
+      "type": "badge",
+      "planet": "Corellia",
+      "zone": "Coronet",
+      "coordinates": [150, 250],
+      "trigger_text": "Earn Badge",
+      "description": "A prestigious badge from Corellia's capital",
+      "rarity": "rare",
+      "required_level": 10
+    },
+    {
+      "name": "Corellia Badge - Tyrena",
+      "type": "badge",
+      "planet": "Corellia",
+      "zone": "Tyrena",
+      "coordinates": [300, 400],
+      "trigger_text": "Receive Badge",
+      "description": "A badge from the Tyrena spaceport",
+      "rarity": "uncommon",
+      "required_level": 7
+    },
+    {
+      "name": "Naboo Lore Item - Theed",
+      "type": "lore_item",
+      "planet": "Naboo",
+      "zone": "Theed",
+      "coordinates": [200, 300],
+      "trigger_text": "Study Lore",
+      "description": "Ancient lore from the Royal Palace",
+      "rarity": "epic",
+      "required_level": 12
+    },
+    {
+      "name": "Naboo Lore Item - Keren",
+      "type": "lore_item",
+      "planet": "Naboo",
+      "zone": "Keren",
+      "coordinates": [450, 350],
+      "trigger_text": "Examine Lore",
+      "description": "Historical lore from Keren's archives",
+      "rarity": "rare",
+      "required_level": 9
+    },
+    {
+      "name": "Dantooine Achievement - Mining",
+      "type": "achievement",
+      "planet": "Dantooine",
+      "zone": "Mining Outpost",
+      "coordinates": [180, 220],
+      "trigger_text": "Complete Achievement",
+      "description": "Mining achievement from Dantooine",
+      "rarity": "common",
+      "required_level": 6,
+      "required_profession": "miner"
+    },
+    {
+      "name": "Dantooine Achievement - Farming",
+      "type": "achievement",
+      "planet": "Dantooine",
+      "zone": "Agricultural Outpost",
+      "coordinates": [320, 180],
+      "trigger_text": "Earn Achievement",
+      "description": "Farming achievement from Dantooine",
+      "rarity": "uncommon",
+      "required_level": 8,
+      "required_profession": "farmer"
+    },
+    {
+      "name": "Tatooine Decoration - Cantina",
+      "type": "decoration",
+      "planet": "Tatooine",
+      "zone": "Mos Eisley",
+      "coordinates": [120, 180],
+      "trigger_text": "Take Decoration",
+      "description": "A decorative item from the cantina",
+      "rarity": "common",
+      "required_level": 3
+    },
+    {
+      "name": "Corellia Decoration - Spaceport",
+      "type": "decoration",
+      "planet": "Corellia",
+      "zone": "Coronet",
+      "coordinates": [280, 320],
+      "trigger_text": "Collect Decoration",
+      "description": "A decorative item from the spaceport",
+      "rarity": "uncommon",
+      "required_level": 5
+    },
+    {
+      "name": "Naboo Trophy - Lake Retreat",
+      "type": "trophy",
+      "planet": "Naboo",
+      "zone": "Lake Retreat",
+      "coordinates": [380, 420],
+      "trigger_text": "Gather Trophy",
+      "description": "A trophy from the peaceful lake retreat",
+      "rarity": "rare",
+      "required_level": 11
+    },
+    {
+      "name": "Dantooine Badge - Jedi Enclave",
+      "type": "badge",
+      "planet": "Dantooine",
+      "zone": "Jedi Enclave",
+      "coordinates": [150, 150],
+      "trigger_text": "Receive Badge",
+      "description": "A badge from the Jedi Enclave",
+      "rarity": "epic",
+      "required_level": 15,
+      "required_profession": "jedi"
+    },
+    {
+      "name": "Tatooine Lore Item - Jundland",
+      "type": "lore_item",
+      "planet": "Tatooine",
+      "zone": "Jundland Wastes",
+      "coordinates": [400, 300],
+      "trigger_text": "Study Ancient Lore",
+      "description": "Ancient lore from the Jundland Wastes",
+      "rarity": "epic",
+      "required_level": 14
+    },
+    {
+      "name": "Corellia Achievement - Smuggler",
+      "type": "achievement",
+      "planet": "Corellia",
+      "zone": "Coronet",
+      "coordinates": [200, 280],
+      "trigger_text": "Complete Smuggler Achievement",
+      "description": "A smuggler's achievement from Corellia",
+      "rarity": "rare",
+      "required_level": 12,
+      "required_profession": "smuggler"
+    },
+    {
+      "name": "Naboo Decoration - Palace Gardens",
+      "type": "decoration",
+      "planet": "Naboo",
+      "zone": "Theed",
+      "coordinates": [220, 280],
+      "trigger_text": "Take Garden Decoration",
+      "description": "A decorative item from the palace gardens",
+      "rarity": "uncommon",
+      "required_level": 6
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-01-01",
+    "total_collections": 15,
+    "categories": {
+      "trophy": 4,
+      "badge": 3,
+      "lore_item": 3,
+      "achievement": 3,
+      "decoration": 2
+    },
+    "planets": {
+      "Tatooine": 5,
+      "Corellia": 4,
+      "Naboo": 4,
+      "Dantooine": 2
+    }
+  }
+} 

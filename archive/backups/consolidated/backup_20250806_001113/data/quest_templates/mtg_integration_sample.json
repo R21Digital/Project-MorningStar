@@ -1,0 +1,237 @@
+{
+  "quest_id": "mtg_integration_demo",
+  "name": "MTG Integration Demo Quest",
+  "description": "Demonstrates the new quest logic templates based on MTG server patterns",
+  "quest_type": "story",
+  "difficulty": "medium",
+  "level_requirement": 10,
+  "planet": "tatooine",
+  "zone": "mos_eisley",
+  "coordinates": [100, 150],
+  "quest_chain": "mtg_integration_chain",
+  "prerequisites": [],
+  
+  "rewards": {
+    "experience": 2000,
+    "credits": 500,
+    "reputation": {
+      "tatooine": 100,
+      "mos_eisley": 50
+    },
+    "items": [
+      "mtg_demo_item",
+      "quest_completion_token"
+    ],
+    "unlocks": [
+      "advanced_mtg_quests",
+      "mtg_integration_access"
+    ]
+  },
+  
+  "steps": [
+    {
+      "step_id": "wait_for_quest_giver",
+      "type": "dialogue",
+      "title": "Wait for Quest Giver",
+      "description": "Wait for the quest giver NPC to appear",
+      "coordinates": [150, 200],
+      "zone": "mos_eisley",
+      "planet": "tatooine",
+      "npc_id": "quest_giver_npc",
+      "dialogue_options": [
+        "I'm ready to begin the MTG integration quest",
+        "Tell me about the new quest system",
+        "What are the requirements?"
+      ],
+      "required_response": 0,
+      "timeout_seconds": 300,
+      "retry_count": 3,
+      "fallback_blocks": ["alternative_quest_giver"],
+      "prerequisites": []
+    },
+    
+    {
+      "step_id": "travel_to_ruins",
+      "type": "move",
+      "title": "Travel to Ancient Ruins",
+      "description": "Travel to the ancient ruins where the quest continues",
+      "coordinates": [500, 600],
+      "zone": "tatooine_desert",
+      "planet": "tatooine",
+      "data": {
+        "coords": [500, 600],
+        "planet": "tatooine"
+      },
+      "timeout_seconds": 600,
+      "retry_count": 3,
+      "travel_method": "mount",
+      "route_optimization": true,
+      "fallback_blocks": ["travel_alternative_route"],
+      "prerequisites": ["wait_for_quest_giver"]
+    },
+    
+    {
+      "step_id": "use_ancient_key",
+      "type": "use_item",
+      "title": "Use Ancient Key",
+      "description": "Use the ancient key to unlock the ruins entrance",
+      "coordinates": [500, 600],
+      "zone": "tatooine_desert",
+      "planet": "tatooine",
+      "item_name": "ancient_key",
+      "use_target": "ruins_entrance",
+      "use_conditions": {
+        "player_level": 10,
+        "quest_progress": "travel_to_ruins"
+      },
+      "use_effect": {
+        "type": "unlock_door",
+        "door_id": "ruins_entrance",
+        "consume_item": false
+      },
+      "timeout_seconds": 300,
+      "retry_count": 3,
+      "fallback_blocks": ["find_alternative_key", "force_entrance"],
+      "prerequisites": ["travel_to_ruins"]
+    },
+    
+    {
+      "step_id": "escort_merchant",
+      "type": "escort",
+      "title": "Escort Merchant Through Ruins",
+      "description": "Escort a merchant through the dangerous ruins",
+      "coordinates": [500, 600],
+      "zone": "tatooine_desert",
+      "planet": "tatooine",
+      "target_info": {
+        "name": "Merchant Talo",
+        "health": 100,
+        "movement_speed": "normal"
+      },
+      "protection_requirements": {
+        "defense_duration": 180,
+        "min_target_health": 50,
+        "max_threats_encountered": 5
+      },
+      "route_points": [
+        {"coordinates": [550, 650], "description": "First checkpoint"},
+        {"coordinates": [600, 700], "description": "Second checkpoint"},
+        {"coordinates": [650, 750], "description": "Final destination"}
+      ],
+      "threat_level": "medium",
+      "timeout_seconds": 900,
+      "retry_count": 2,
+      "fallback_blocks": ["defend_merchant_in_place"],
+      "prerequisites": ["use_ancient_key"]
+    },
+    
+    {
+      "step_id": "defend_merchant_camp",
+      "type": "defend",
+      "title": "Defend Merchant Camp",
+      "description": "Defend the merchant camp from incoming threats",
+      "coordinates": [650, 750],
+      "zone": "tatooine_desert",
+      "planet": "tatooine",
+      "target_info": {
+        "name": "Merchant Camp",
+        "health": 200,
+        "defense_radius": 100
+      },
+      "protection_requirements": {
+        "defense_duration": 300,
+        "min_camp_health": 100,
+        "max_enemies_defeated": 10
+      },
+      "threat_level": "high",
+      "timeout_seconds": 600,
+      "retry_count": 2,
+      "fallback_blocks": ["retreat_to_safe_zone"],
+      "prerequisites": ["escort_merchant"]
+    },
+    
+    {
+      "step_id": "return_to_quest_giver",
+      "type": "dialogue",
+      "title": "Return to Quest Giver",
+      "description": "Return to the quest giver to complete the quest",
+      "coordinates": [150, 200],
+      "zone": "mos_eisley",
+      "planet": "tatooine",
+      "npc_id": "quest_giver_npc",
+      "dialogue_options": [
+        "I've completed the MTG integration quest",
+        "The merchant is safe and the camp is defended",
+        "Here's my report on the mission"
+      ],
+      "required_response": 0,
+      "timeout_seconds": 300,
+      "retry_count": 3,
+      "prerequisites": ["defend_merchant_camp"]
+    }
+  ],
+  
+  "completion_conditions": [
+    {
+      "type": "steps_completed",
+      "steps": [
+        "wait_for_quest_giver",
+        "travel_to_ruins",
+        "use_ancient_key",
+        "escort_merchant",
+        "defend_merchant_camp",
+        "return_to_quest_giver"
+      ],
+      "count": 6
+    }
+  ],
+  
+  "failure_conditions": [
+    {
+      "type": "timeout",
+      "timeout_seconds": 3600
+    },
+    {
+      "type": "death",
+      "max_deaths": 3
+    },
+    {
+      "type": "target_death",
+      "target": "Merchant Talo",
+      "max_deaths": 1
+    }
+  ],
+  
+  "hints": [
+    "The quest giver may take time to appear - be patient",
+    "Use your mount for faster travel to the ruins",
+    "The ancient key is reusable - don't worry about losing it",
+    "Stay close to the merchant during escort missions",
+    "Be prepared for multiple threats during the defense phase"
+  ],
+  
+  "metadata": {
+    "created_date": "2024-01-01",
+    "last_updated": "2024-01-01",
+    "version": "1.0",
+    "author": "MTG_Integration_System",
+    "tags": [
+      "mtg_integration",
+      "demo",
+      "escort",
+      "defend",
+      "travel",
+      "use_item"
+    ]
+  },
+  
+  "state": {
+    "status": "available",
+    "current_step": null,
+    "steps_completed": 0,
+    "total_steps": 6,
+    "start_time": null,
+    "completion_time": null,
+    "attempts": 0
+  }
+} 

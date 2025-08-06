@@ -1,0 +1,318 @@
+# Axkva Min Heroic Instance
+# Source: SWGR.org Heroics Database
+# Last Updated: 2025-01-27
+
+heroic_id: "axkva_min"
+name: "Axkva Min"
+planet: "dantooine"
+location: "dantooine_ruins"
+coordinates: [5000, -3000]
+
+# Instance Information
+instance_type: "heroic"
+difficulty_tiers:
+  normal:
+    level_requirement: 80
+    group_size: "4-8 players"
+    lockout_timer: 86400  # 24 hours in seconds
+    reset_time: "daily"
+    description: "Standard difficulty for experienced groups"
+    
+  hard:
+    level_requirement: 90
+    group_size: "8-16 players"
+    lockout_timer: 604800  # 7 days in seconds
+    reset_time: "weekly"
+    description: "High difficulty for well-coordinated groups"
+
+# Prerequisites
+prerequisites:
+  quests:
+    - quest_id: "dantooine_ruins_exploration"
+      name: "Dantooine Ruins Exploration"
+      status: "required"
+      description: "Must complete the initial ruins exploration quest"
+      
+    - quest_id: "ancient_artifact_collection"
+      name: "Ancient Artifact Collection"
+      status: "required"
+      description: "Collect artifacts from the ruins"
+      
+    - quest_id: "force_sensitive_training"
+      name: "Force-Sensitive Training"
+      status: "optional"
+      description: "Recommended for better performance"
+
+  skills:
+    - skill_name: "combat_skills"
+      level_requirement: 4000
+      description: "Combat skills at master level"
+      
+    - skill_name: "healing_skills"
+      level_requirement: 3000
+      description: "Healing abilities recommended"
+      
+    - skill_name: "buff_skills"
+      level_requirement: 2000
+      description: "Support buffs helpful"
+
+  items:
+    - item_name: "ancient_key_fragment"
+      quantity: 3
+      description: "Key fragments from previous quests"
+      
+    - item_name: "ruins_map"
+      quantity: 1
+      description: "Map of the ruins layout"
+
+  reputation:
+    - faction: "dantooine_locals"
+      level: "friendly"
+      description: "Friendly reputation with local inhabitants"
+
+# Encounters and Boss Information
+encounters:
+  - boss_id: "guardian_of_trials"
+    boss_name: "Guardian of Trials"
+    level: 85
+    health: 25000
+    phase: 1
+    difficulty: "normal"
+    description: "Ancient guardian that tests worthiness before facing Axkva Min"
+    location: "first_trial_chamber"
+    abilities:
+      - name: "Force Push"
+        description: "Knocks back all players in front, causing knockdown"
+        damage: "400-600"
+        cooldown: 15
+        counter: "Stay behind or to the sides of the guardian"
+      - name: "Lightning Storm"
+        description: "Area lightning that hits random locations"
+        damage: "300-500 per second"
+        duration: 8
+        counter: "Watch for ground indicators and move quickly"
+      - name: "Summon Trials"
+        description: "Spawns 4 trial minions at 50% health"
+        minions: 4
+        minion_level: 80
+        counter: "Focus fire minions first, then resume boss"
+    tactics: |
+      <p>The Guardian of Trials serves as a skill check before the main boss. Key tactics:</p>
+      <ul>
+        <li><strong>Positioning:</strong> Keep the tank in front, DPS behind/sides to avoid Force Push</li>
+        <li><strong>Lightning Storm:</strong> Red circles appear before lightning strikes - move immediately</li>
+        <li><strong>Minion Phase:</strong> At 50% health, kill the 4 summoned minions quickly</li>
+        <li><strong>Healing:</strong> Consistent damage requires dedicated healers</li>
+      </ul>
+    
+  - boss_id: "axkva_min_phase_1"
+    boss_name: "Axkva Min"
+    level: 90
+    health: 50000
+    phase: 1
+    difficulty: "normal"
+    description: "Fallen Jedi Master corrupted by the dark side, Phase 1: Initial Assault"
+    location: "main_sanctum"
+    abilities:
+      - name: "Dark Force Lightning"
+        description: "Channeled lightning targeting highest threat player"
+        damage: "800-1200"
+        channel_time: 3
+        counter: "Interrupt with stuns or move out of line of sight"
+      - name: "Mind Control"
+        description: "Controls random non-tank player for 10 seconds"
+        duration: 10
+        cooldown: 45
+        counter: "Controlled player should move away from group, focus fire to break"
+      - name: "Force Drain"
+        description: "Drains HAM from all players within 50m"
+        drain_amount: "15% current HAM"
+        range: 50
+        counter: "Healers focus on HAM restoration immediately"
+    tactics: |
+      <p>Phase 1 focuses on learning Axkva Min's basic attack patterns:</p>
+      <ul>
+        <li><strong>Tank Positioning:</strong> Keep boss faced away from group</li>
+        <li><strong>Mind Control:</strong> Stay spread out, controlled player runs away</li>
+        <li><strong>Force Drain:</strong> Healers prioritize HAM restoration over health</li>
+        <li><strong>Interrupts:</strong> Save stuns/interrupts for Dark Force Lightning</li>
+      </ul>
+    
+  - boss_id: "axkva_min_phase_2"
+    boss_name: "Axkva Min"
+    level: 90
+    health: 50000
+    phase: 2
+    difficulty: "normal"
+    description: "Fallen Jedi Master corrupted by the dark side, Phase 2: Dark Fury (50% health)"
+    location: "main_sanctum"
+    abilities:
+      - name: "Dark Side Aura"
+        description: "Persistent debuff reducing light side effectiveness"
+        effect: "Light side powers -50% effectiveness"
+        radius: 100
+        permanent: true
+        counter: "Switch to non-light side abilities and weapons"
+      - name: "Summon Dark Spirits"
+        description: "Spawns 6 dark spirits every 60 seconds"
+        spawn_count: 6
+        spawn_interval: 60
+        spirit_health: 3000
+        counter: "AoE abilities to clear spirits quickly"
+      - name: "Force Scream"
+        description: "Fear effect causing players to run randomly"
+        duration: 5
+        cooldown: 30
+        counter: "Cure fear abilities or wait it out in safe positions"
+    tactics: |
+      <p>Phase 2 becomes more chaotic with adds and debuffs:</p>
+      <ul>
+        <li><strong>Dark Aura:</strong> Light side players switch to conventional weapons/abilities</li>
+        <li><strong>Spirit Management:</strong> Use AoE to clear dark spirits before they overwhelm</li>
+        <li><strong>Fear Control:</strong> Designate safe zones before fear effects</li>
+        <li><strong>Sustained Healing:</strong> Increased damage requires more healing coordination</li>
+      </ul>
+    
+  - boss_id: "axkva_min_phase_3_hard"
+    boss_name: "Axkva Min (Enraged)"
+    level: 92
+    health: 75000
+    phase: 3
+    difficulty: "hard"
+    description: "Hard mode only - Axkva Min's final desperate phase with devastating attacks"
+    location: "main_sanctum"
+    abilities:
+      - name: "Dark Side Mastery"
+        description: "All dark side abilities enhanced and faster casting"
+        effect: "50% faster casting, +25% damage"
+        permanent: true
+      - name: "Force Storm"
+        description: "Room-wide lightning storm lasting 20 seconds"
+        duration: 20
+        damage: "500-800 per second"
+        counter: "Use defensive cooldowns, maximum healing output"
+      - name: "Possession"
+        description: "Takes control of entire group except tank for 8 seconds"
+        duration: 8
+        cooldown: 120
+        counter: "Tank must survive alone, group fights each other briefly"
+      - name: "Dark Reconstruction"
+        description: "Heals for 25% health if not interrupted"
+        heal_amount: "25% max health"
+        cast_time: 8
+        counter: "All interrupts and stuns must be coordinated"
+    tactics: |
+      <p>Phase 3 (Hard Mode Only) is an extremely challenging final phase:</p>
+      <ul>
+        <li><strong>Survival Priority:</strong> Focus on staying alive over dealing damage</li>
+        <li><strong>Force Storm:</strong> All defensive abilities and maximum healing</li>
+        <li><strong>Possession:</strong> Tank must survive 8 seconds alone while group is hostile</li>
+        <li><strong>Interrupt Coordination:</strong> Save all interrupts for Dark Reconstruction</li>
+        <li><strong>Perfect Execution:</strong> Any major mistake likely results in wipe</li>
+      </ul>
+
+# Boss Summary
+bosses:
+  - name: "Guardian of Trials"
+    level: 85
+    health: 25000
+    role: "Mini-boss"
+    phases: 1
+    abilities: ["Force Push", "Lightning Storm", "Summon Trials"]
+  - name: "Axkva Min"
+    level: 90
+    health: 50000
+    role: "Main boss"
+    phases: 3
+    abilities: ["Dark Force Lightning", "Mind Control", "Force Drain", "Dark Side Aura", "Summon Dark Spirits"]
+
+# Special Mechanics
+special_mechanics:
+  - name: "Dark Side Corruption"
+    description: "Players accumulate corruption during the fight"
+    effect: "Reduces healing effectiveness over time"
+    
+  - name: "Force Storm"
+    description: "Periodic area damage to all players"
+    effect: "Requires coordinated healing"
+    
+  - name: "Mind Control"
+    description: "Random player becomes hostile"
+    effect: "Must be controlled or killed"
+
+# Rewards
+rewards:
+  normal:
+    experience: 50000
+    credits: 100000
+    items:
+      - "axkva_min_crystal"
+      - "dark_side_relic"
+    reputation:
+      dantooine_locals: 500
+    unlocks:
+      - "hard_mode_access"
+      - "dark_side_abilities"
+      
+  hard:
+    experience: 100000
+    credits: 250000
+    items:
+      - "axkva_min_crystal"
+      - "dark_side_relic"
+      - "force_essence"
+      - "heroic_armor_piece"
+    reputation:
+      dantooine_locals: 1000
+    unlocks:
+      - "legendary_abilities"
+      - "special_title"
+
+# General Tactics and Strategy
+general_tactics: |
+  <div class="general-tactics">
+    <h3>Pre-Fight Preparation</h3>
+    <ul>
+      <li><strong>Group Composition:</strong> 1 Tank, 2-3 Healers, 4-5 DPS (including at least 1 AoE specialist)</li>
+      <li><strong>Required Buffs:</strong> Mind resistance, Force resistance, HAM regeneration</li>
+      <li><strong>Consumables:</strong> Bring dark side cleansing items, extra stimpacks</li>
+      <li><strong>Communication:</strong> Establish clear callouts for mind control and positioning</li>
+    </ul>
+    
+    <h3>Key Success Factors</h3>
+    <ul>
+      <li><strong>Positioning:</strong> Maintain proper spread to minimize mind control impact</li>
+      <li><strong>Interrupt Timing:</strong> Coordinate stuns for critical abilities</li>
+      <li><strong>Add Management:</strong> Clear spirits and minions quickly</li>
+      <li><strong>Resource Management:</strong> Conserve big cooldowns for hard mode phase 3</li>
+    </ul>
+    
+    <h3>Common Mistakes to Avoid</h3>
+    <ul>
+      <li>Standing too close together during mind control phases</li>
+      <li>Wasting interrupts on minor abilities</li>
+      <li>Ignoring dark spirits until they overwhelm the group</li>
+      <li>Not switching off light side abilities when debuffed</li>
+    </ul>
+  </div>
+
+recommended_group:
+  tank: 1
+  healer: 2-3
+  dps: 4-5
+  support: 1
+  
+travel_notes: |
+  The entrance to Axkva Min's complex is located in the southeastern ruins of Dantooine. 
+  Look for the large stone archway marked with ancient Jedi symbols. The instance entrance 
+  is at the bottom of the staircase leading underground. Groups should meet at the nearby 
+  camp for final preparations.
+
+# Notes
+notes:
+  - "Requires coordination and communication"
+  - "Dark side corruption can be cleansed with specific items"
+  - "Weekly reset allows for multiple attempts"
+  - "Hard mode requires all normal mode prerequisites plus additional preparation"
+  - "Force-sensitive characters may experience unique dialogue and mechanics"
+  - "Some achievements require multiple runs to complete" 

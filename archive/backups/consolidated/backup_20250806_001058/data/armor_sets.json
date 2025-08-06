@@ -1,0 +1,549 @@
+{
+  "armor_sets": {
+    "stormtrooper_armor": {
+      "name": "Stormtrooper Armor",
+      "type": "medium",
+      "profession": "combat",
+      "cost": "medium",
+      "slots": {
+        "head": {
+          "name": "Stormtrooper Helmet",
+          "base_stats": {
+            "constitution": 15,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 25,
+            "kinetic": 20,
+            "blast": 15
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense"]
+        },
+        "chest": {
+          "name": "Stormtrooper Chestplate",
+          "base_stats": {
+            "constitution": 25,
+            "stamina": 15
+          },
+          "resists": {
+            "energy": 30,
+            "kinetic": 25,
+            "blast": 20
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense", "health"]
+        },
+        "legs": {
+          "name": "Stormtrooper Leggings",
+          "base_stats": {
+            "constitution": 20,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 15,
+            "blast": 10
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense"]
+        },
+        "feet": {
+          "name": "Stormtrooper Boots",
+          "base_stats": {
+            "constitution": 10,
+            "stamina": 5
+          },
+          "resists": {
+            "energy": 15,
+            "kinetic": 10,
+            "blast": 5
+          },
+          "enhancement_slots": 1,
+          "available_enhancements": ["accuracy", "damage", "defense"]
+        },
+        "hands": {
+          "name": "Stormtrooper Gauntlets",
+          "base_stats": {
+            "constitution": 10,
+            "stamina": 5
+          },
+          "resists": {
+            "energy": 15,
+            "kinetic": 10,
+            "blast": 5
+          },
+          "enhancement_slots": 1,
+          "available_enhancements": ["accuracy", "damage", "critical"]
+        }
+      },
+      "set_bonus": {
+        "constitution": 20,
+        "stamina": 15,
+        "energy_resist": 10
+      },
+      "combat_style": "ranged",
+      "specialization": "pve"
+    },
+    "mandalorian_armor": {
+      "name": "Mandalorian Armor",
+      "type": "heavy",
+      "profession": "combat",
+      "cost": "high",
+      "slots": {
+        "head": {
+          "name": "Mandalorian Helmet",
+          "base_stats": {
+            "constitution": 20,
+            "stamina": 15
+          },
+          "resists": {
+            "energy": 30,
+            "kinetic": 25,
+            "blast": 20,
+            "heat": 15
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense", "health"]
+        },
+        "chest": {
+          "name": "Mandalorian Chestplate",
+          "base_stats": {
+            "constitution": 30,
+            "stamina": 20
+          },
+          "resists": {
+            "energy": 35,
+            "kinetic": 30,
+            "blast": 25,
+            "heat": 20
+          },
+          "enhancement_slots": 4,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense", "health", "stamina"]
+        },
+        "legs": {
+          "name": "Mandalorian Leggings",
+          "base_stats": {
+            "constitution": 25,
+            "stamina": 15
+          },
+          "resists": {
+            "energy": 25,
+            "kinetic": 20,
+            "blast": 15,
+            "heat": 10
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense", "health"]
+        },
+        "feet": {
+          "name": "Mandalorian Boots",
+          "base_stats": {
+            "constitution": 15,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 15,
+            "blast": 10,
+            "heat": 5
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["accuracy", "damage", "defense", "stamina"]
+        },
+        "hands": {
+          "name": "Mandalorian Gauntlets",
+          "base_stats": {
+            "constitution": 15,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 15,
+            "blast": 10,
+            "heat": 5
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense"]
+        }
+      },
+      "set_bonus": {
+        "constitution": 25,
+        "stamina": 20,
+        "energy_resist": 15,
+        "kinetic_resist": 10
+      },
+      "combat_style": "balanced",
+      "specialization": "pvp"
+    },
+    "medic_armor": {
+      "name": "Medic Support Armor",
+      "type": "light",
+      "profession": "support",
+      "cost": "medium",
+      "slots": {
+        "head": {
+          "name": "Medic Helmet",
+          "base_stats": {
+            "mind": 15,
+            "focus": 10
+          },
+          "resists": {
+            "energy": 15,
+            "kinetic": 10,
+            "blast": 5
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["mind", "focus", "healing", "defense"]
+        },
+        "chest": {
+          "name": "Medic Chestplate",
+          "base_stats": {
+            "constitution": 20,
+            "mind": 15
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 15,
+            "blast": 10
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["mind", "focus", "healing", "defense", "health"]
+        },
+        "legs": {
+          "name": "Medic Leggings",
+          "base_stats": {
+            "constitution": 15,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 15,
+            "kinetic": 10,
+            "blast": 5
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["mind", "focus", "healing", "defense"]
+        },
+        "feet": {
+          "name": "Medic Boots",
+          "base_stats": {
+            "constitution": 10,
+            "stamina": 5
+          },
+          "resists": {
+            "energy": 10,
+            "kinetic": 5,
+            "blast": 0
+          },
+          "enhancement_slots": 1,
+          "available_enhancements": ["mind", "focus", "healing"]
+        },
+        "hands": {
+          "name": "Medic Gauntlets",
+          "base_stats": {
+            "mind": 10,
+            "focus": 5
+          },
+          "resists": {
+            "energy": 10,
+            "kinetic": 5,
+            "blast": 0
+          },
+          "enhancement_slots": 1,
+          "available_enhancements": ["mind", "focus", "healing"]
+        }
+      },
+      "set_bonus": {
+        "mind": 25,
+        "constitution": 20,
+        "healing_bonus": 15
+      },
+      "combat_style": "support",
+      "specialization": "group"
+    },
+    "pistoleer_armor": {
+      "name": "Pistoleer Combat Armor",
+      "type": "medium",
+      "profession": "combat",
+      "cost": "medium",
+      "slots": {
+        "head": {
+          "name": "Pistoleer Helmet",
+          "base_stats": {
+            "agility": 15,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 15,
+            "blast": 10
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense"]
+        },
+        "chest": {
+          "name": "Pistoleer Chestplate",
+          "base_stats": {
+            "strength": 15,
+            "agility": 10
+          },
+          "resists": {
+            "energy": 25,
+            "kinetic": 20,
+            "blast": 15
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense", "health"]
+        },
+        "legs": {
+          "name": "Pistoleer Leggings",
+          "base_stats": {
+            "agility": 15,
+            "stamina": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 15,
+            "blast": 10
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["accuracy", "damage", "critical", "defense"]
+        },
+        "feet": {
+          "name": "Pistoleer Boots",
+          "base_stats": {
+            "agility": 10,
+            "stamina": 5
+          },
+          "resists": {
+            "energy": 15,
+            "kinetic": 10,
+            "blast": 5
+          },
+          "enhancement_slots": 1,
+          "available_enhancements": ["accuracy", "damage", "defense"]
+        },
+        "hands": {
+          "name": "Pistoleer Gauntlets",
+          "base_stats": {
+            "agility": 10,
+            "stamina": 5
+          },
+          "resists": {
+            "energy": 15,
+            "kinetic": 10,
+            "blast": 5
+          },
+          "enhancement_slots": 1,
+          "available_enhancements": ["accuracy", "damage", "critical"]
+        }
+      },
+      "set_bonus": {
+        "agility": 30,
+        "stamina": 15,
+        "accuracy_bonus": 10
+      },
+      "combat_style": "ranged",
+      "specialization": "pve"
+    },
+    "brawler_armor": {
+      "name": "Brawler Tank Armor",
+      "type": "heavy",
+      "profession": "combat",
+      "cost": "high",
+      "slots": {
+        "head": {
+          "name": "Brawler Helmet",
+          "base_stats": {
+            "strength": 20,
+            "constitution": 15
+          },
+          "resists": {
+            "energy": 25,
+            "kinetic": 30,
+            "blast": 20,
+            "stun": 15
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["strength", "constitution", "defense", "health", "stamina"]
+        },
+        "chest": {
+          "name": "Brawler Chestplate",
+          "base_stats": {
+            "strength": 25,
+            "constitution": 25
+          },
+          "resists": {
+            "energy": 30,
+            "kinetic": 35,
+            "blast": 25,
+            "stun": 20
+          },
+          "enhancement_slots": 4,
+          "available_enhancements": ["strength", "constitution", "defense", "health", "stamina", "armor"]
+        },
+        "legs": {
+          "name": "Brawler Leggings",
+          "base_stats": {
+            "strength": 20,
+            "constitution": 20
+          },
+          "resists": {
+            "energy": 25,
+            "kinetic": 30,
+            "blast": 20,
+            "stun": 15
+          },
+          "enhancement_slots": 3,
+          "available_enhancements": ["strength", "constitution", "defense", "health", "stamina"]
+        },
+        "feet": {
+          "name": "Brawler Boots",
+          "base_stats": {
+            "strength": 15,
+            "constitution": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 25,
+            "blast": 15,
+            "stun": 10
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["strength", "constitution", "defense", "stamina"]
+        },
+        "hands": {
+          "name": "Brawler Gauntlets",
+          "base_stats": {
+            "strength": 15,
+            "constitution": 10
+          },
+          "resists": {
+            "energy": 20,
+            "kinetic": 25,
+            "blast": 15,
+            "stun": 10
+          },
+          "enhancement_slots": 2,
+          "available_enhancements": ["strength", "constitution", "defense", "damage"]
+        }
+      },
+      "set_bonus": {
+        "strength": 30,
+        "constitution": 25,
+        "kinetic_resist": 20,
+        "armor_bonus": 15
+      },
+      "combat_style": "melee",
+      "specialization": "tank"
+    }
+  },
+  "enhancements": {
+    "accuracy": {
+      "name": "Accuracy Enhancement",
+      "type": "combat",
+      "stats": {
+        "accuracy": 10
+      },
+      "cost": "medium"
+    },
+    "damage": {
+      "name": "Damage Enhancement",
+      "type": "combat",
+      "stats": {
+        "damage": 15
+      },
+      "cost": "high"
+    },
+    "critical": {
+      "name": "Critical Enhancement",
+      "type": "combat",
+      "stats": {
+        "critical_chance": 5
+      },
+      "cost": "high"
+    },
+    "defense": {
+      "name": "Defense Enhancement",
+      "type": "defensive",
+      "stats": {
+        "defense": 10
+      },
+      "cost": "medium"
+    },
+    "health": {
+      "name": "Health Enhancement",
+      "type": "defensive",
+      "stats": {
+        "health": 50
+      },
+      "cost": "medium"
+    },
+    "stamina": {
+      "name": "Stamina Enhancement",
+      "type": "defensive",
+      "stats": {
+        "stamina": 25
+      },
+      "cost": "medium"
+    },
+    "mind": {
+      "name": "Mind Enhancement",
+      "type": "support",
+      "stats": {
+        "mind": 15
+      },
+      "cost": "medium"
+    },
+    "focus": {
+      "name": "Focus Enhancement",
+      "type": "support",
+      "stats": {
+        "focus": 15
+      },
+      "cost": "medium"
+    },
+    "healing": {
+      "name": "Healing Enhancement",
+      "type": "support",
+      "stats": {
+        "healing_bonus": 10
+      },
+      "cost": "high"
+    },
+    "strength": {
+      "name": "Strength Enhancement",
+      "type": "combat",
+      "stats": {
+        "strength": 15
+      },
+      "cost": "medium"
+    },
+    "constitution": {
+      "name": "Constitution Enhancement",
+      "type": "defensive",
+      "stats": {
+        "constitution": 15
+      },
+      "cost": "medium"
+    },
+    "armor": {
+      "name": "Armor Enhancement",
+      "type": "defensive",
+      "stats": {
+        "armor": 20
+      },
+      "cost": "high"
+    }
+  },
+  "resist_types": {
+    "energy": "Energy damage resistance",
+    "kinetic": "Kinetic damage resistance",
+    "blast": "Blast damage resistance",
+    "heat": "Heat damage resistance",
+    "cold": "Cold damage resistance",
+    "electricity": "Electricity damage resistance",
+    "acid": "Acid damage resistance",
+    "stun": "Stun resistance"
+  }
+} 

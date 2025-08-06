@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall of Hunters - Jedi Bounty Tracking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .leaderboard-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .hunter-rank {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        .kill-method-badge {
+            background: #28a745;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+        }
+        .season-badge {
+            background: #007bff;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .active-season {
+            background: #28a745 !important;
+        }
+        .kill-detail {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .error-message {
+            display: none;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-crosshairs"></i> Hall of Hunters
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#leaderboard">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recent-kills">Recent Kills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#seasons">Seasons</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 mb-4">
+                <i class="fas fa-crosshairs"></i> Hall of Hunters
+            </h1>
+            <p class="lead">Track the galaxy's most skilled Jedi bounty hunters</p>
+            <div class="row mt-5">
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <h3 id="total-kills">0</h3>
+                        <p>Total Kills</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <h3 id="total-rewards">0</h3>
+                        <p>Total Rewards</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <h3 id="active-hunters">0</h3>
+                        <p>Active Hunters</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <h3 id="planets-hunted">0</h3>
+                        <p>Planets Hunted</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <!-- Error/Success Messages -->
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="loading-spinner">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h4><i class="fas fa-chart-pie"></i> Kill Methods</h4>
+                        <div id="kill-methods-chart"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="stats-card">
+                        <h4><i class="fas fa-globe"></i> Planets Hunted</h4>
+                        <div id="planets-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Season -->
+        <section id="active-season" class="mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-calendar-alt"></i> Active Season</h4>
+                </div>
+                <div class="card-body">
+                    <div id="active-season-info">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard Section -->
+        <section id="leaderboard" class="mt-5">
+            <div class="card leaderboard-card">
+                <div class="card-header">
+                    <h4><i class="fas fa-trophy"></i> Season Leaderboard</h4>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <select id="season-selector" class="form-select">
+                                <option value="">Loading seasons...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="refresh-leaderboard" class="btn btn-primary">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="leaderboard-content">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Kills Section -->
+        <section id="recent-kills" class="mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-history"></i> Recent Kills</h4>
+                </div>
+                <div class="card-body">
+                    <div id="recent-kills-content">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seasons Section -->
+        <section id="seasons" class="mt-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-calendar"></i> All Seasons</h4>
+                </div>
+                <div class="card-body">
+                    <div id="seasons-content">
+                        <div class="text-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p>&copy; 2024 Hall of Hunters. Track your Jedi bounty hunting achievements.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Global variables
+        let currentSeason = null;
+        let killMethodsChart = null;
+        let planetsChart = null;
+
+        // Utility functions
+        function showLoading() {
+            document.getElementById('loading-spinner').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading-spinner').style.display = 'none';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('success-message');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function formatNumber(num) {
+            return new Intl.NumberFormat().format(num);
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString() + ' ' + 
+                   new Date(dateString).toLocaleTimeString();
+        }
+
+        // API functions
+        async function fetchStatistics() {
+            try {
+                const response = await fetch('/api/jedi-bounty/statistics');
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateOverviewStats(data.data);
+                    updateCharts(data.data);
+                } else {
+                    showError('Failed to load statistics: ' + data.error);
+                }
+            } catch (error) {
+                showError('Error loading statistics: ' + error.message);
+            }
+        }
+
+        async function fetchActiveSeason() {
+            try {
+                const response = await fetch('/api/jedi-bounty/active-season');
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentSeason = data.data;
+                    updateActiveSeason(data.data);
+                } else {
+                    showError('Failed to load active season: ' + data.error);
+                }
+            } catch (error) {
+                showError('Error loading active season: ' + error.message);
+            }
+        }
+
+        async function fetchSeasons() {
+            try {
+                const response = await fetch('/api/jedi-bounty/seasons');
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateSeasonSelector(data.data);
+                    updateSeasonsList(data.data);
+                } else {
+                    showError('Failed to load seasons: ' + data.error);
+                }
+            } catch (error) {
+                showError('Error loading seasons: ' + error.message);
+            }
+        }
+
+        async function fetchLeaderboard(seasonId) {
+            try {
+                showLoading();
+                const response = await fetch(`/api/jedi-bounty/seasons/${seasonId}/leaderboard`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateLeaderboard(data.data);
+                } else {
+                    showError('Failed to load leaderboard: ' + data.error);
+                }
+            } catch (error) {
+                showError('Error loading leaderboard: ' + error.message);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function fetchRecentKills() {
+            try {
+                const response = await fetch('/api/jedi-bounty/kills?limit=10');
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateRecentKills(data.data);
+                } else {
+                    showError('Failed to load recent kills: ' + data.error);
+                }
+            } catch (error) {
+                showError('Error loading recent kills: ' + error.message);
+            }
+        }
+
+        // Update functions
+        function updateOverviewStats(stats) {
+            document.getElementById('total-kills').textContent = formatNumber(stats.total_kills);
+            document.getElementById('total-rewards').textContent = formatNumber(stats.total_rewards);
+            document.getElementById('active-hunters').textContent = formatNumber(stats.active_hunters);
+            document.getElementById('planets-hunted').textContent = formatNumber(stats.planets_hunted);
+        }
+
+        function updateCharts(stats) {
+            // Kill methods chart
+            const killMethodsCtx = document.getElementById('kill-methods-chart');
+            if (killMethodsChart) {
+                killMethodsChart.destroy();
+            }
+            
+            if (Object.keys(stats.kill_methods).length > 0) {
+                killMethodsChart = new Chart(killMethodsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(stats.kill_methods),
+                        datasets: [{
+                            data: Object.values(stats.kill_methods),
+                            backgroundColor: [
+                                '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+                                '#9966FF', '#FF9F40', '#FF6384', '#C9CBCF'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: 'white'
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                killMethodsCtx.innerHTML = '<p class="text-center text-white">No kill data available</p>';
+            }
+
+            // Planets chart (placeholder for now)
+            const planetsCtx = document.getElementById('planets-chart');
+            planetsCtx.innerHTML = '<p class="text-center text-white">Planet data coming soon</p>';
+        }
+
+        function updateActiveSeason(season) {
+            const container = document.getElementById('active-season-info');
+            container.innerHTML = `
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>${season.name}</h5>
+                        <p class="text-muted">${season.description || 'No description available'}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Start Date:</strong> ${formatDate(season.start_date)}
+                            </div>
+                            <div class="col-md-6">
+                                <strong>End Date:</strong> ${formatDate(season.end_date)}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <span class="season-badge active-season">
+                            <i class="fas fa-star"></i> Active Season
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateSeasonSelector(seasons) {
+            const selector = document.getElementById('season-selector');
+            selector.innerHTML = '';
+            
+            seasons.forEach(season => {
+                const option = document.createElement('option');
+                option.value = season.season_id;
+                option.textContent = season.name;
+                if (season.is_active) {
+                    option.selected = true;
+                    currentSeason = season;
+                }
+                selector.appendChild(option);
+            });
+
+            // Load leaderboard for selected season
+            if (currentSeason) {
+                fetchLeaderboard(currentSeason.season_id);
+            }
+        }
+
+        function updateLeaderboard(leaderboard) {
+            const container = document.getElementById('leaderboard-content');
+            
+            if (leaderboard.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No hunters found for this season</p>';
+                return;
+            }
+
+            let html = '<div class="table-responsive"><table class="table table-hover">';
+            html += '<thead><tr>';
+            html += '<th>Rank</th>';
+            html += '<th>Hunter</th>';
+            html += '<th>Kills</th>';
+            html += '<th>Total Rewards</th>';
+            html += '<th>Avg Reward</th>';
+            html += '<th>Planets</th>';
+            html += '<th>Last Kill</th>';
+            html += '</tr></thead><tbody>';
+
+            leaderboard.forEach((hunter, index) => {
+                const rank = index + 1;
+                const avgReward = hunter.total_kills > 0 ? Math.round(hunter.total_rewards / hunter.total_kills) : 0;
+                const lastKill = hunter.last_kill ? formatDate(hunter.last_kill) : 'N/A';
+                
+                html += '<tr>';
+                html += `<td><span class="hunter-rank">#${rank}</span></td>`;
+                html += `<td><strong>${hunter.hunter_name}</strong></td>`;
+                html += `<td>${hunter.total_kills}</td>`;
+                html += `<td>${formatNumber(hunter.total_rewards)}</td>`;
+                html += `<td>${formatNumber(avgReward)}</td>`;
+                html += `<td>${hunter.planets.length}</td>`;
+                html += `<td>${lastKill}</td>`;
+                html += '</tr>';
+            });
+
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+        }
+
+        function updateRecentKills(kills) {
+            const container = document.getElementById('recent-kills-content');
+            
+            if (kills.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No recent kills found</p>';
+                return;
+            }
+
+            let html = '';
+            kills.forEach(kill => {
+                html += '<div class="kill-detail">';
+                html += '<div class="row">';
+                html += '<div class="col-md-8">';
+                html += `<h6><strong>${kill.target_name}</strong> - ${kill.location}, ${kill.planet}</h6>`;
+                html += `<p class="text-muted mb-1">Killed by <strong>${kill.hunter_name}</strong> using <span class="kill-method-badge">${kill.kill_method}</span></p>`;
+                html += `<small class="text-muted">${formatDate(kill.timestamp)}</small>`;
+                html += '</div>';
+                html += '<div class="col-md-4 text-end">';
+                html += `<h5 class="text-success">${formatNumber(kill.reward_earned)} credits</h5>`;
+                if (kill.target_level) {
+                    html += `<small class="text-muted">Level ${kill.target_level}</small>`;
+                }
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        function updateSeasonsList(seasons) {
+            const container = document.getElementById('seasons-content');
+            
+            if (seasons.length === 0) {
+                container.innerHTML = '<p class="text-center text-muted">No seasons found</p>';
+                return;
+            }
+
+            let html = '<div class="row">';
+            seasons.forEach(season => {
+                const isActive = season.is_active ? 'active-season' : '';
+                html += '<div class="col-md-6 mb-3">';
+                html += '<div class="card">';
+                html += '<div class="card-body">';
+                html += `<h6 class="card-title">${season.name}</h6>`;
+                html += `<p class="card-text text-muted">${season.description || 'No description'}</p>`;
+                html += '<div class="row">';
+                html += '<div class="col-6"><small class="text-muted">Start: ' + formatDate(season.start_date) + '</small></div>';
+                html += '<div class="col-6"><small class="text-muted">End: ' + formatDate(season.end_date) + '</small></div>';
+                html += '</div>';
+                html += '<div class="mt-2">';
+                html += `<span class="season-badge ${isActive}">`;
+                html += season.is_active ? '<i class="fas fa-star"></i> Active' : '<i class="fas fa-calendar"></i> Inactive';
+                html += '</span>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // Event listeners
+        document.getElementById('season-selector').addEventListener('change', function() {
+            const seasonId = this.value;
+            if (seasonId) {
+                fetchLeaderboard(seasonId);
+            }
+        });
+
+        document.getElementById('refresh-leaderboard').addEventListener('click', function() {
+            const seasonId = document.getElementById('season-selector').value;
+            if (seasonId) {
+                fetchLeaderboard(seasonId);
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchStatistics();
+            fetchActiveSeason();
+            fetchSeasons();
+            fetchRecentKills();
+        });
+    </script>
+</body>
+</html> 

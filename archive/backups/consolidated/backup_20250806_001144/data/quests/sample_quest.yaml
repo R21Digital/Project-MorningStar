@@ -1,0 +1,109 @@
+# Sample Quest Configuration for MS11
+# This file demonstrates the structure for quest data in the MS11 system
+
+quest_id: "tatooine_artifact_hunt"
+name: "Tatooine Artifact Hunt"
+description: "Search for ancient artifacts in the deserts of Tatooine"
+quest_type: "collection"
+difficulty: "medium"
+level_requirement: 15
+planet: "tatooine"
+zone: "mos_eisley"
+coordinates: [100, 200]
+
+# Quest chain information
+quest_chain: "tatooine_reputation_grind"
+prerequisites:
+  - "tatooine_basic_training"
+  - "level_15"
+
+# Rewards
+rewards:
+  experience: 500
+  credits: 1000
+  reputation:
+    tatooine: 200
+  items:
+    - "artifact_fragment"
+    - "desert_map"
+  unlocks:
+    - "tatooine_cantina_access"
+
+# Quest steps
+steps:
+  - step_id: "talk_to_quest_giver"
+    type: "dialogue"
+    npc_id: "mos_eisley_merchant"
+    coordinates: [150, 250]
+    dialogue_options:
+      - "Accept the quest"
+      - "Ask for more information"
+    required_response: 1
+
+  - step_id: "find_artifact_1"
+    type: "collection"
+    target_item: "ancient_artifact_fragment"
+    coordinates: [300, 400]
+    description: "Search the ancient ruins for artifact fragments"
+    collection_radius: 50
+    timeout_seconds: 300
+
+  - step_id: "find_artifact_2"
+    type: "collection"
+    target_item: "desert_relic"
+    coordinates: [500, 600]
+    description: "Explore the desert for hidden relics"
+    collection_radius: 75
+    timeout_seconds: 400
+
+  - step_id: "return_to_merchant"
+    type: "dialogue"
+    npc_id: "mos_eisley_merchant"
+    coordinates: [150, 250]
+    dialogue_options:
+      - "Complete the quest"
+      - "Ask about other artifacts"
+    required_response: 1
+
+# Quest completion conditions
+completion_conditions:
+  - type: "items_collected"
+    items:
+      - "ancient_artifact_fragment"
+      - "desert_relic"
+    count: 2
+
+# Quest failure conditions
+failure_conditions:
+  - type: "timeout"
+    timeout_seconds: 3600  # 1 hour
+  - type: "death"
+    max_deaths: 3
+
+# Quest hints and help
+hints:
+  - "Look for glowing objects in the ruins"
+  - "Use your scanner to detect artifacts"
+  - "Beware of Tusken Raiders in the desert"
+
+# Quest metadata
+metadata:
+  created_date: "2024-01-01"
+  last_updated: "2024-01-01"
+  version: "1.0"
+  author: "MS11_Quest_System"
+  tags:
+    - "tatooine"
+    - "collection"
+    - "reputation"
+    - "artifacts"
+
+# Quest state tracking
+state:
+  status: "available"  # available, active, completed, failed
+  current_step: null
+  steps_completed: 0
+  total_steps: 4
+  start_time: null
+  completion_time: null
+  attempts: 0 

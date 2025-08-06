@@ -1,0 +1,287 @@
+{
+  "source_type": "creature",
+  "total_kills": 0,
+  "total_loot": 44,
+  "last_updated": "2025-08-03T17:34:48.811529",
+  "items": {
+    "d6a16005": {
+      "name": "Eopie Hide",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T16:56:55.158471",
+      "last_seen": "2025-08-03T17:24:49.402751"
+    },
+    "77c38045": {
+      "name": "Krayt Dragon Pearl",
+      "rarity": "legendary",
+      "total_drops": 2,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T16:59:05.416982",
+      "last_seen": "2025-08-03T17:22:54.401791"
+    },
+    "8a05a4e4": {
+      "name": "Crystal of Power from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:00:56.658022",
+      "last_seen": "2025-08-03T17:00:56.658022"
+    },
+    "bd10d76e": {
+      "name": "Gurreck Hide from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T17:03:15.966992",
+      "last_seen": "2025-08-03T17:03:15.966992"
+    },
+    "eb633452": {
+      "name": "Dewback Meat",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 8,
+      "first_seen": "2025-08-03T17:04:10.004722",
+      "last_seen": "2025-08-03T17:27:18.150722"
+    },
+    "1284e2ab": {
+      "name": "Bantha Wool from Nexu",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T17:08:00.354542",
+      "last_seen": "2025-08-03T17:23:18.470275"
+    },
+    "3db40cb0": {
+      "name": "Eopie Wool",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:08:36.692102",
+      "last_seen": "2025-08-03T17:17:56.879962"
+    },
+    "6fbccbee": {
+      "name": "Gurreck Hide",
+      "rarity": "common",
+      "total_drops": 3,
+      "total_quantity": 14,
+      "first_seen": "2025-08-03T17:10:14.720566",
+      "last_seen": "2025-08-03T17:15:33.302308"
+    },
+    "a7985810": {
+      "name": "Krayt Dragon Scale",
+      "rarity": "epic",
+      "total_drops": 2,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:10:51.799645",
+      "last_seen": "2025-08-03T17:33:35.234756"
+    },
+    "ffde88a5": {
+      "name": "Acklay Hide",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 8,
+      "first_seen": "2025-08-03T17:10:55.929522",
+      "last_seen": "2025-08-03T17:16:57.956329"
+    },
+    "fa3c7902": {
+      "name": "Krayt Dragon Bone from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 8,
+      "first_seen": "2025-08-03T17:12:43.220981",
+      "last_seen": "2025-08-03T17:12:43.220981"
+    },
+    "2a6e4b8d": {
+      "name": "Power Crystal",
+      "rarity": "epic",
+      "total_drops": 1,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T17:13:56.858667",
+      "last_seen": "2025-08-03T17:13:56.858667"
+    },
+    "e620fc8b": {
+      "name": "Credits from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 2500,
+      "first_seen": "2025-08-03T17:14:44.263276",
+      "last_seen": "2025-08-03T17:14:44.263276"
+    },
+    "ce9e8417": {
+      "name": "Nexu Claw from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T17:15:26.792445",
+      "last_seen": "2025-08-03T17:15:26.792445"
+    },
+    "948a2e35": {
+      "name": "Credits",
+      "rarity": "common",
+      "total_drops": 5,
+      "total_quantity": 9000,
+      "first_seen": "2025-08-03T17:15:38.067343",
+      "last_seen": "2025-08-03T17:34:41.039242"
+    },
+    "01b96c26": {
+      "name": "Ancient Artifact",
+      "rarity": "legendary",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:16:30.496920",
+      "last_seen": "2025-08-03T17:16:30.496920"
+    },
+    "3f29e04d": {
+      "name": "Spider Web",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:18:04.844051",
+      "last_seen": "2025-08-03T17:18:04.844051"
+    },
+    "469b8184": {
+      "name": "Rare Gem from Nexu",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:19:47.187119",
+      "last_seen": "2025-08-03T17:19:47.187119"
+    },
+    "d4bbcbcd": {
+      "name": "Krayt Dragon Bone",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 8,
+      "first_seen": "2025-08-03T17:19:50.526656",
+      "last_seen": "2025-08-03T17:19:50.526656"
+    },
+    "aa55867b": {
+      "name": "Nexu Fang",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T17:20:51.291119",
+      "last_seen": "2025-08-03T17:20:51.291119"
+    },
+    "c9ca74e9": {
+      "name": "Ancient Artifact from Nexu",
+      "rarity": "legendary",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:23:03.417152",
+      "last_seen": "2025-08-03T17:23:03.417152"
+    },
+    "ccbe8b12": {
+      "name": "Krayt Dragon Hide from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T17:23:23.327129",
+      "last_seen": "2025-08-03T17:23:23.327129"
+    },
+    "7e8de6a3": {
+      "name": "Acklay Brain from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:23:26.418339",
+      "last_seen": "2025-08-03T17:23:26.418339"
+    },
+    "dfcebc38": {
+      "name": "Acklay Claw",
+      "rarity": "epic",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:25:27.842126",
+      "last_seen": "2025-08-03T17:25:27.842126"
+    },
+    "cdd64393": {
+      "name": "Nexu Hide",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:26:04.099930",
+      "last_seen": "2025-08-03T17:26:04.099930"
+    },
+    "77aa55de": {
+      "name": "Spider Silk",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:28:32.566822",
+      "last_seen": "2025-08-03T17:28:32.566822"
+    },
+    "cdb03f60": {
+      "name": "Dewback Scale",
+      "rarity": "rare",
+      "total_drops": 2,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:29:55.172100",
+      "last_seen": "2025-08-03T17:30:38.435877"
+    },
+    "defb7791": {
+      "name": "Ronto Hide from Nexu",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:31:11.815290",
+      "last_seen": "2025-08-03T17:31:11.815290"
+    },
+    "2c3c9811": {
+      "name": "Rancor Meat",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T17:31:58.470250",
+      "last_seen": "2025-08-03T17:31:58.470250"
+    },
+    "b55e6bc2": {
+      "name": "Gurreck Horn",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:34:48.811506",
+      "last_seen": "2025-08-03T17:34:48.811506"
+    }
+  },
+  "drop_rates": {
+    "d6a16005": 4.55,
+    "77c38045": 4.55,
+    "8a05a4e4": 2.27,
+    "bd10d76e": 2.27,
+    "eb633452": 4.55,
+    "1284e2ab": 4.55,
+    "3db40cb0": 4.55,
+    "6fbccbee": 6.82,
+    "a7985810": 4.55,
+    "ffde88a5": 4.55,
+    "fa3c7902": 2.27,
+    "2a6e4b8d": 2.27,
+    "e620fc8b": 2.27,
+    "ce9e8417": 2.27,
+    "948a2e35": 11.36,
+    "01b96c26": 2.27,
+    "3f29e04d": 2.27,
+    "469b8184": 2.27,
+    "d4bbcbcd": 2.27,
+    "aa55867b": 2.27,
+    "c9ca74e9": 2.27,
+    "ccbe8b12": 2.27,
+    "7e8de6a3": 2.27,
+    "dfcebc38": 2.27,
+    "cdd64393": 2.27,
+    "77aa55de": 2.27,
+    "cdb03f60": 4.55,
+    "defb7791": 2.27,
+    "2c3c9811": 2.27,
+    "b55e6bc2": 2.27
+  },
+  "rarity_distribution": {
+    "common": 23,
+    "legendary": 4,
+    "uncommon": 7,
+    "epic": 4,
+    "rare": 6
+  }
+}

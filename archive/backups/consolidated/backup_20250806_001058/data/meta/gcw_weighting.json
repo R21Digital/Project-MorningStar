@@ -1,0 +1,286 @@
+{
+  "roles": {
+    "infantry": {
+      "primary_attributes": ["strength", "constitution"],
+      "secondary_attributes": ["agility", "precision"],
+      "gear_priorities": ["armor", "weapons", "enhancements"],
+      "strategy": "Close combat with heavy armor",
+      "description": "Front-line combat specialist with high survivability",
+      "attribute_weights": {
+        "strength": 1.5,
+        "constitution": 1.4,
+        "agility": 1.2,
+        "precision": 1.0,
+        "focus": 0.8,
+        "willpower": 0.9
+      },
+      "gear_recommendations": {
+        "armor": ["Heavy Combat Armor", "Reinforced Plating", "Defensive Shields"],
+        "weapons": ["Assault Rifles", "Combat Knives", "Grenades"],
+        "enhancements": ["Combat Stimulants", "Armor Plating", "Tactical Gear"]
+      }
+    },
+    "specialist": {
+      "primary_attributes": ["precision", "agility"],
+      "secondary_attributes": ["strength", "constitution"],
+      "gear_priorities": ["weapons", "enhancements", "armor"],
+      "strategy": "Ranged combat with mobility",
+      "description": "Versatile combatant with balanced offensive and defensive capabilities",
+      "attribute_weights": {
+        "precision": 1.5,
+        "agility": 1.4,
+        "strength": 1.0,
+        "constitution": 1.1,
+        "focus": 0.9,
+        "willpower": 0.8
+      },
+      "gear_recommendations": {
+        "armor": ["Medium Combat Armor", "Mobility Enhancers", "Light Shields"],
+        "weapons": ["Precision Rifles", "Pistols", "Specialized Tools"],
+        "enhancements": ["Accuracy Boosters", "Speed Enhancers", "Tactical Gear"]
+      }
+    },
+    "commando": {
+      "primary_attributes": ["strength", "precision"],
+      "secondary_attributes": ["agility", "constitution"],
+      "gear_priorities": ["weapons", "armor", "enhancements"],
+      "strategy": "Heavy weapons and explosives",
+      "description": "Heavy weapons specialist with high damage output",
+      "attribute_weights": {
+        "strength": 1.5,
+        "precision": 1.4,
+        "agility": 1.1,
+        "constitution": 1.2,
+        "focus": 0.8,
+        "willpower": 0.9
+      },
+      "gear_recommendations": {
+        "armor": ["Heavy Combat Armor", "Explosive Resistance", "Weapon Mounts"],
+        "weapons": ["Heavy Rifles", "Explosives", "Grenade Launchers"],
+        "enhancements": ["Damage Boosters", "Explosive Resistance", "Weapon Stabilizers"]
+      }
+    },
+    "sniper": {
+      "primary_attributes": ["precision", "focus"],
+      "secondary_attributes": ["agility", "willpower"],
+      "gear_priorities": ["weapons", "enhancements", "armor"],
+      "strategy": "Long-range precision strikes",
+      "description": "Long-range specialist with high accuracy and stealth",
+      "attribute_weights": {
+        "precision": 1.6,
+        "focus": 1.4,
+        "agility": 1.2,
+        "willpower": 1.1,
+        "strength": 0.8,
+        "constitution": 0.9
+      },
+      "gear_recommendations": {
+        "armor": ["Stealth Armor", "Camouflage Systems", "Light Protection"],
+        "weapons": ["Sniper Rifles", "Precision Scopes", "Silenced Weapons"],
+        "enhancements": ["Accuracy Boosters", "Stealth Enhancers", "Range Extenders"]
+      }
+    },
+    "medic": {
+      "primary_attributes": ["focus", "willpower"],
+      "secondary_attributes": ["constitution", "agility"],
+      "gear_priorities": ["enhancements", "armor", "weapons"],
+      "strategy": "Healing and support",
+      "description": "Support specialist with healing and buffing capabilities",
+      "attribute_weights": {
+        "focus": 1.6,
+        "willpower": 1.5,
+        "constitution": 1.2,
+        "agility": 1.1,
+        "precision": 0.9,
+        "strength": 0.8
+      },
+      "gear_recommendations": {
+        "armor": ["Medical Armor", "Healing Enhancers", "Protective Gear"],
+        "weapons": ["Medical Tools", "Support Weapons", "Healing Devices"],
+        "enhancements": ["Healing Boosters", "Medical Supplies", "Support Gear"]
+      }
+    },
+    "engineer": {
+      "primary_attributes": ["focus", "precision"],
+      "secondary_attributes": ["willpower", "agility"],
+      "gear_priorities": ["enhancements", "weapons", "armor"],
+      "strategy": "Technical support and gadgets",
+      "description": "Technical specialist with gadget and device expertise",
+      "attribute_weights": {
+        "focus": 1.5,
+        "precision": 1.4,
+        "willpower": 1.2,
+        "agility": 1.1,
+        "constitution": 0.9,
+        "strength": 0.8
+      },
+      "gear_recommendations": {
+        "armor": ["Technical Armor", "Device Mounts", "Protective Gear"],
+        "weapons": ["Technical Tools", "Gadgets", "Support Devices"],
+        "enhancements": ["Technical Boosters", "Device Enhancers", "Gadget Gear"]
+      }
+    }
+  },
+  "rank_requirements": {
+    1: {
+      "min_attributes": 100,
+      "gear_tier": "basic",
+      "description": "Novice rank with basic equipment",
+      "attribute_breakpoints": {
+        "strength": 150,
+        "precision": 150,
+        "agility": 120,
+        "constitution": 120,
+        "focus": 100,
+        "willpower": 100
+      }
+    },
+    2: {
+      "min_attributes": 200,
+      "gear_tier": "standard",
+      "description": "Apprentice rank with standard equipment",
+      "attribute_breakpoints": {
+        "strength": 250,
+        "precision": 250,
+        "agility": 200,
+        "constitution": 200,
+        "focus": 180,
+        "willpower": 180
+      }
+    },
+    3: {
+      "min_attributes": 300,
+      "gear_tier": "advanced",
+      "description": "Journeyman rank with advanced equipment",
+      "attribute_breakpoints": {
+        "strength": 350,
+        "precision": 350,
+        "agility": 300,
+        "constitution": 300,
+        "focus": 280,
+        "willpower": 280
+      }
+    },
+    4: {
+      "min_attributes": 400,
+      "gear_tier": "elite",
+      "description": "Expert rank with elite equipment",
+      "attribute_breakpoints": {
+        "strength": 450,
+        "precision": 450,
+        "agility": 400,
+        "constitution": 400,
+        "focus": 380,
+        "willpower": 380
+      }
+    },
+    5: {
+      "min_attributes": 500,
+      "gear_tier": "master",
+      "description": "Master rank with master equipment",
+      "attribute_breakpoints": {
+        "strength": 550,
+        "precision": 550,
+        "agility": 500,
+        "constitution": 500,
+        "focus": 480,
+        "willpower": 480
+      }
+    }
+  },
+  "faction_specializations": {
+    "rebel": {
+      "infantry": {
+        "bonus_attributes": ["agility", "precision"],
+        "special_gear": ["Rebel Combat Armor", "Freedom Fighters Kit"],
+        "strategy_modifier": "Guerrilla warfare tactics"
+      },
+      "specialist": {
+        "bonus_attributes": ["precision", "focus"],
+        "special_gear": ["Rebel Sniper Kit", "Stealth Equipment"],
+        "strategy_modifier": "Hit-and-run tactics"
+      },
+      "medic": {
+        "bonus_attributes": ["focus", "willpower"],
+        "special_gear": ["Rebel Medical Kit", "Field Hospital Gear"],
+        "strategy_modifier": "Mobile medical support"
+      }
+    },
+    "imperial": {
+      "infantry": {
+        "bonus_attributes": ["strength", "constitution"],
+        "special_gear": ["Imperial Heavy Armor", "Stormtrooper Kit"],
+        "strategy_modifier": "Disciplined formation fighting"
+      },
+      "commando": {
+        "bonus_attributes": ["strength", "precision"],
+        "special_gear": ["Imperial Commando Kit", "Heavy Weapons"],
+        "strategy_modifier": "Overwhelming firepower"
+      },
+      "engineer": {
+        "bonus_attributes": ["focus", "precision"],
+        "special_gear": ["Imperial Tech Kit", "Advanced Gadgets"],
+        "strategy_modifier": "Superior technology advantage"
+      }
+    }
+  },
+  "combat_scenarios": {
+    "urban_combat": {
+      "infantry": {"effectiveness": 1.2, "gear_focus": ["armor", "close_combat"]},
+      "specialist": {"effectiveness": 1.1, "gear_focus": ["mobility", "versatility"]},
+      "commando": {"effectiveness": 1.0, "gear_focus": ["heavy_weapons", "explosives"]},
+      "sniper": {"effectiveness": 0.8, "gear_focus": ["stealth", "precision"]},
+      "medic": {"effectiveness": 1.0, "gear_focus": ["support", "healing"]},
+      "engineer": {"effectiveness": 0.9, "gear_focus": ["gadgets", "technical"]}
+    },
+    "open_field": {
+      "infantry": {"effectiveness": 1.0, "gear_focus": ["armor", "weapons"]},
+      "specialist": {"effectiveness": 1.2, "gear_focus": ["mobility", "ranged"]},
+      "commando": {"effectiveness": 1.1, "gear_focus": ["heavy_weapons", "explosives"]},
+      "sniper": {"effectiveness": 1.3, "gear_focus": ["precision", "range"]},
+      "medic": {"effectiveness": 0.9, "gear_focus": ["support", "healing"]},
+      "engineer": {"effectiveness": 1.0, "gear_focus": ["gadgets", "technical"]}
+    },
+    "close_quarters": {
+      "infantry": {"effectiveness": 1.3, "gear_focus": ["armor", "melee"]},
+      "specialist": {"effectiveness": 1.1, "gear_focus": ["mobility", "versatility"]},
+      "commando": {"effectiveness": 1.2, "gear_focus": ["heavy_weapons", "explosives"]},
+      "sniper": {"effectiveness": 0.6, "gear_focus": ["stealth", "precision"]},
+      "medic": {"effectiveness": 1.0, "gear_focus": ["support", "healing"]},
+      "engineer": {"effectiveness": 0.8, "gear_focus": ["gadgets", "technical"]}
+    }
+  },
+  "optimization_weights": {
+    "attribute_improvement": 0.4,
+    "gear_enhancement": 0.3,
+    "role_specialization": 0.2,
+    "faction_bonus": 0.1
+  },
+  "cost_estimates": {
+    "basic_gear": {
+      "armor": "5k-15k",
+      "weapons": "3k-10k",
+      "enhancements": "1k-5k"
+    },
+    "standard_gear": {
+      "armor": "15k-50k",
+      "weapons": "10k-30k",
+      "enhancements": "5k-15k"
+    },
+    "advanced_gear": {
+      "armor": "50k-150k",
+      "weapons": "30k-100k",
+      "enhancements": "15k-50k"
+    },
+    "elite_gear": {
+      "armor": "150k-500k",
+      "weapons": "100k-300k",
+      "enhancements": "50k-150k"
+    },
+    "master_gear": {
+      "armor": "500k+",
+      "weapons": "300k+",
+      "enhancements": "150k+"
+    }
+  }
+} 

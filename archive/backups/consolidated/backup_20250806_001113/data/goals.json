@@ -1,0 +1,349 @@
+{
+  "goals": [
+    {
+      "name": "Third Character Slot Unlock",
+      "type": "character_slot",
+      "description": "Unlock the third character slot through reputation and quest completion",
+      "priority": "high",
+      "planet": "tatooine",
+      "zone": "mos_eisley",
+      "coordinates": [100, 200],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "tatooine_2000",
+          "description": "Reach 2000 reputation on Tatooine",
+          "required_progress": 2000
+        },
+        {
+          "type": "quest",
+          "target": "tatooine_artifact_hunt",
+          "description": "Complete the Tatooine Artifact Hunt quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "level",
+          "target": "level_25",
+          "description": "Reach character level 25",
+          "required_progress": 25
+        }
+      ],
+      "rewards": ["third_character_slot", "tatooine_cantina_access"],
+      "estimated_time_hours": 8.0,
+      "quest_chain": ["tatooine_artifact_hunt", "tatooine_reputation_grind"]
+    },
+    {
+      "name": "Mustafar Key Quest",
+      "type": "key_quest",
+      "description": "Complete the Mustafar key quest to unlock access to Mustafar",
+      "priority": "critical",
+      "planet": "naboo",
+      "zone": "theed",
+      "coordinates": [200, 300],
+      "requirements": [
+        {
+          "type": "quest",
+          "target": "naboo_palace_investigation",
+          "description": "Complete the Naboo Palace Investigation quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "reputation",
+          "target": "naboo_3000",
+          "description": "Reach 3000 reputation on Naboo",
+          "required_progress": 3000
+        },
+        {
+          "type": "skill",
+          "target": "combat_master",
+          "description": "Master combat skills",
+          "required_progress": "master"
+        }
+      ],
+      "rewards": ["mustafar_access", "mustafar_key"],
+      "estimated_time_hours": 12.0,
+      "quest_chain": ["naboo_palace_investigation", "mustafar_key_quest"]
+    },
+    {
+      "name": "Galactic Fortitude Token Loop",
+      "type": "token_loop",
+      "description": "Establish a sustainable token farming loop for Galactic Fortitude",
+      "priority": "medium",
+      "planet": "corellia",
+      "zone": "coronet",
+      "coordinates": [150, 250],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "corellia_1500",
+          "description": "Reach 1500 reputation on Corellia",
+          "required_progress": 1500
+        },
+        {
+          "type": "quest",
+          "target": "corellia_smuggler_bust",
+          "description": "Complete the Corellia Smuggler Bust quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "collection",
+          "target": "corellia_trade_items",
+          "description": "Collect all Corellia trade items",
+          "required_progress": "completed"
+        }
+      ],
+      "rewards": ["galactic_fortitude_tokens", "trade_network_access"],
+      "estimated_time_hours": 6.0,
+      "collection_targets": ["corellia_trade_items", "smuggler_contraband"]
+    },
+    {
+      "name": "Dantooine Jedi Knowledge",
+      "type": "unlock_path",
+      "description": "Unlock access to ancient Jedi knowledge on Dantooine",
+      "priority": "high",
+      "planet": "dantooine",
+      "zone": "khoonda",
+      "coordinates": [100, 125],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "dantooine_2500",
+          "description": "Reach 2500 reputation on Dantooine",
+          "required_progress": 2500
+        },
+        {
+          "type": "quest",
+          "target": "dantooine_ruins_exploration",
+          "description": "Complete the Dantooine Ruins Exploration quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "skill",
+          "target": "force_sensitive",
+          "description": "Develop force sensitivity",
+          "required_progress": "novice"
+        }
+      ],
+      "rewards": ["jedi_knowledge_access", "force_training"],
+      "estimated_time_hours": 10.0,
+      "quest_chain": ["dantooine_ruins_exploration", "jedi_knowledge_quest"]
+    },
+    {
+      "name": "Bestine Merchant Guild",
+      "type": "reputation_grind",
+      "description": "Join the exclusive Bestine Merchant Guild",
+      "priority": "medium",
+      "planet": "tatooine",
+      "zone": "bestine",
+      "coordinates": [4100, -6100],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "tatooine_1200",
+          "description": "Reach 1200 reputation on Tatooine",
+          "required_progress": 1200
+        },
+        {
+          "type": "quest",
+          "target": "bestine_merchant_quest",
+          "description": "Complete the Bestine Merchant Quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "skill",
+          "target": "artisan_novice",
+          "description": "Achieve novice artisan skills",
+          "required_progress": "novice"
+        }
+      ],
+      "rewards": ["merchant_guild_access", "trade_discounts"],
+      "estimated_time_hours": 5.0,
+      "quest_chain": ["bestine_merchant_quest"]
+    },
+    {
+      "name": "Tyrena Medical Center Access",
+      "type": "unlock_path",
+      "description": "Gain access to advanced medical facilities in Tyrena",
+      "priority": "medium",
+      "planet": "corellia",
+      "zone": "tyrena",
+      "coordinates": [300, 400],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "corellia_1800",
+          "description": "Reach 1800 reputation on Corellia",
+          "required_progress": 1800
+        },
+        {
+          "type": "quest",
+          "target": "tyrena_medical_emergency",
+          "description": "Complete the Tyrena Medical Emergency quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "skill",
+          "target": "medic_novice",
+          "description": "Achieve novice medic skills",
+          "required_progress": "novice"
+        }
+      ],
+      "rewards": ["medical_center_access", "advanced_healing"],
+      "estimated_time_hours": 4.0,
+      "quest_chain": ["tyrena_medical_emergency"]
+    },
+    {
+      "name": "Naboo Palace Security Clearance",
+      "type": "unlock_path",
+      "description": "Gain security clearance for palace access on Naboo",
+      "priority": "high",
+      "planet": "naboo",
+      "zone": "theed",
+      "coordinates": [5100, -4100],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "naboo_2000",
+          "description": "Reach 2000 reputation on Naboo",
+          "required_progress": 2000
+        },
+        {
+          "type": "quest",
+          "target": "naboo_palace_investigation",
+          "description": "Complete the Naboo Palace Investigation quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "level",
+          "target": "level_30",
+          "description": "Reach character level 30",
+          "required_progress": 30
+        }
+      ],
+      "rewards": ["palace_security_clearance", "royal_access"],
+      "estimated_time_hours": 9.0,
+      "quest_chain": ["naboo_palace_investigation"]
+    },
+    {
+      "name": "Corellia Trade Network",
+      "type": "unlock_path",
+      "description": "Unlock access to the Corellian trade network",
+      "priority": "medium",
+      "planet": "corellia",
+      "zone": "coronet",
+      "coordinates": [150, 500],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "corellia_1500",
+          "description": "Reach 1500 reputation on Corellia",
+          "required_progress": 1500
+        },
+        {
+          "type": "quest",
+          "target": "corellia_smuggler_bust",
+          "description": "Complete the Corellia Smuggler Bust quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "skill",
+          "target": "smuggler_novice",
+          "description": "Achieve novice smuggler skills",
+          "required_progress": "novice"
+        }
+      ],
+      "rewards": ["trade_network_access", "smuggler_contacts"],
+      "estimated_time_hours": 7.0,
+      "quest_chain": ["corellia_smuggler_bust"]
+    },
+    {
+      "name": "Tatooine Cantina Access",
+      "type": "unlock_path",
+      "description": "Gain access to the exclusive cantina area on Tatooine",
+      "priority": "low",
+      "planet": "tatooine",
+      "zone": "mos_eisley",
+      "coordinates": [3500, -4850],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "tatooine_1000",
+          "description": "Reach 1000 reputation on Tatooine",
+          "required_progress": 1000
+        },
+        {
+          "type": "quest",
+          "target": "tatooine_artifact_hunt",
+          "description": "Complete the Tatooine Artifact Hunt quest",
+          "required_progress": "completed"
+        }
+      ],
+      "rewards": ["cantina_access", "exclusive_contacts"],
+      "estimated_time_hours": 3.0,
+      "quest_chain": ["tatooine_artifact_hunt"]
+    },
+    {
+      "name": "Fourth Character Slot Unlock",
+      "type": "character_slot",
+      "description": "Unlock the fourth character slot through advanced reputation and quest completion",
+      "priority": "critical",
+      "planet": "naboo",
+      "zone": "theed",
+      "coordinates": [250, 350],
+      "requirements": [
+        {
+          "type": "reputation",
+          "target": "naboo_5000",
+          "description": "Reach 5000 reputation on Naboo",
+          "required_progress": 5000
+        },
+        {
+          "type": "quest",
+          "target": "naboo_palace_investigation",
+          "description": "Complete the Naboo Palace Investigation quest",
+          "required_progress": "completed"
+        },
+        {
+          "type": "level",
+          "target": "level_50",
+          "description": "Reach character level 50",
+          "required_progress": 50
+        },
+        {
+          "type": "skill",
+          "target": "combat_master",
+          "description": "Master combat skills",
+          "required_progress": "master"
+        }
+      ],
+      "rewards": ["fourth_character_slot", "palace_security_clearance", "royal_access"],
+      "estimated_time_hours": 20.0,
+      "quest_chain": ["naboo_palace_investigation", "advanced_naboo_quests"]
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2024-01-01",
+    "total_goals": 10,
+    "goal_types": {
+      "character_slot": 2,
+      "key_quest": 1,
+      "token_loop": 1,
+      "reputation_grind": 1,
+      "unlock_path": 5
+    },
+    "priorities": {
+      "critical": 2,
+      "high": 3,
+      "medium": 4,
+      "low": 1
+    },
+    "planets": {
+      "tatooine": 3,
+      "naboo": 3,
+      "corellia": 3,
+      "dantooine": 1
+    },
+    "total_estimated_hours": 84.0
+  }
+} 

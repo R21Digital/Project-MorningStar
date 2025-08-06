@@ -1,0 +1,127 @@
+{
+  "installation": {
+    "installation_path": "C:\\Users\\{username}\\MS11",
+    "version": "1.0.0",
+    "install_date": "{install_date}",
+    "first_run": true,
+    "auto_update": true
+  },
+  "authentication": {
+    "discord_auth_required": true,
+    "auth_file_path": "{installation_path}\\auth\\discord_auth.json",
+    "auto_refresh_tokens": true,
+    "session_timeout": 3600
+  },
+  "security": {
+    "encrypt_auth_data": false,
+    "backup_auth_data": true,
+    "log_auth_events": true,
+    "require_mfa": false
+  },
+  "logging": {
+    "log_level": "INFO",
+    "log_file": "{installation_path}\\logs\\ms11.log",
+    "max_log_size": "10MB",
+    "log_retention_days": 30,
+    "console_output": true
+  },
+  "performance": {
+    "max_memory_usage": "2GB",
+    "cpu_priority": "normal",
+    "auto_restart_on_crash": true,
+    "performance_monitoring": true
+  },
+  "backup": {
+    "backup_enabled": true,
+    "backup_interval_hours": 24,
+    "backup_location": "{installation_path}\\backups",
+    "max_backup_count": 10,
+    "backup_config_files": true,
+    "backup_session_data": true
+  },
+  "notifications": {
+    "discord_notifications": true,
+    "email_notifications": false,
+    "desktop_notifications": true,
+    "notification_level": "INFO"
+  },
+  "updates": {
+    "check_for_updates": true,
+    "update_check_interval_hours": 24,
+    "auto_download_updates": false,
+    "update_channel": "stable"
+  },
+  "privacy": {
+    "collect_usage_data": false,
+    "share_error_reports": false,
+    "telemetry_enabled": false,
+    "anonymize_logs": true
+  },
+  "accessibility": {
+    "high_contrast_mode": false,
+    "large_text_mode": false,
+    "screen_reader_support": false,
+    "keyboard_navigation": true
+  },
+  "advanced": {
+    "debug_mode": false,
+    "developer_mode": false,
+    "experimental_features": false,
+    "custom_scripts_enabled": false
+  },
+  "paths": {
+    "config_dir": "{installation_path}\\config",
+    "data_dir": "{installation_path}\\data",
+    "logs_dir": "{installation_path}\\logs",
+    "screenshots_dir": "{installation_path}\\screenshots",
+    "session_logs_dir": "{installation_path}\\session_logs",
+    "backups_dir": "{installation_path}\\backups",
+    "temp_dir": "{installation_path}\\temp"
+  },
+  "compatibility": {
+    "windows_version": "10",
+    "python_version": "3.8+",
+    "required_dependencies": [
+      "discord.py",
+      "requests",
+      "PIL",
+      "opencv-python",
+      "pyautogui",
+      "pytesseract",
+      "rich",
+      "PyYAML"
+    ]
+  },
+  "licensing": {
+    "license_key": "",
+    "license_type": "trial",
+    "expiration_date": "",
+    "features_enabled": [
+      "basic_bot_functionality",
+      "discord_integration",
+      "session_logging"
+    ]
+  },
+  "_metadata": {
+    "template_version": "1.0",
+    "created_by": "MS11 Installer",
+    "last_modified": "{install_date}",
+    "description": "User configuration template for MS11 - Star Wars Galaxies Bot"
+  },
+  "_comments": {
+    "installation": "Installation and update settings",
+    "authentication": "Discord OAuth2 authentication settings",
+    "security": "Security and privacy settings",
+    "logging": "Logging and debugging settings",
+    "performance": "Performance and resource management",
+    "backup": "Backup and data protection settings",
+    "notifications": "Notification preferences",
+    "updates": "Software update settings",
+    "privacy": "Privacy and data collection settings",
+    "accessibility": "Accessibility features",
+    "advanced": "Advanced configuration options",
+    "paths": "File system paths",
+    "compatibility": "System compatibility requirements",
+    "licensing": "License and feature management"
+  }
+} 

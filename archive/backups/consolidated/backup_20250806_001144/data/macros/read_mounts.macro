@@ -1,0 +1,34 @@
+# Mount Reading Macro
+# This macro helps MS11 read available mounts from the game interface
+
+# Macro Name: read_mounts
+# Description: Scans and reads available mounts from the game interface
+# Usage: Execute this macro to capture mount information
+
+# Step 1: Open mount interface
+/ui action mount_window
+/pause 1
+
+# Step 2: Capture mount information
+/learn_mounts
+/pause 2
+
+# Step 3: Scan hotbar for mount icons
+/ui action hotbar_scan
+/pause 1
+
+# Step 4: Check character sheet for mount info
+/ui action character_sheet
+/pause 1
+
+# Step 5: Close interfaces
+/ui action close_all
+/pause 1
+
+# Alternative: Direct command output capture
+# This can be used if the above steps don't work
+/learn_mounts
+/pause 3
+
+# End macro
+/echo Mount reading macro completed 

@@ -1,0 +1,305 @@
+{
+  "source_type": "creature",
+  "total_kills": 0,
+  "total_loot": 47,
+  "last_updated": "2025-08-03T17:35:57.105257",
+  "items": {
+    "eb633452": {
+      "name": "Dewback Meat",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T16:55:20.032125",
+      "last_seen": "2025-08-03T16:55:20.032125"
+    },
+    "0b55bafc": {
+      "name": "Spider Web from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T16:56:47.574629",
+      "last_seen": "2025-08-03T16:56:47.574629"
+    },
+    "e8577197": {
+      "name": "Dewback Meat from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T16:58:18.738797",
+      "last_seen": "2025-08-03T16:58:18.738797"
+    },
+    "262010f9": {
+      "name": "Composite Armor",
+      "rarity": "epic",
+      "total_drops": 2,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T17:00:49.586652",
+      "last_seen": "2025-08-03T17:31:25.705642"
+    },
+    "862997d8": {
+      "name": "Krayt Dragon Hide from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T17:06:15.476276",
+      "last_seen": "2025-08-03T17:06:15.476276"
+    },
+    "cfa7d1b1": {
+      "name": "Bantha Hide from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 10,
+      "first_seen": "2025-08-03T17:06:38.520461",
+      "last_seen": "2025-08-03T17:06:38.520461"
+    },
+    "fa34838d": {
+      "name": "Ronto Hide",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 7,
+      "first_seen": "2025-08-03T17:07:04.517539",
+      "last_seen": "2025-08-03T17:23:49.516611"
+    },
+    "60896051": {
+      "name": "Bantha Wool",
+      "rarity": "rare",
+      "total_drops": 4,
+      "total_quantity": 24,
+      "first_seen": "2025-08-03T17:07:26.704170",
+      "last_seen": "2025-08-03T17:29:16.624128"
+    },
+    "d27f14da": {
+      "name": "Acklay Leg",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T17:09:38.288429",
+      "last_seen": "2025-08-03T17:09:38.288429"
+    },
+    "4a6e2918": {
+      "name": "Bantha Meat",
+      "rarity": "uncommon",
+      "total_drops": 1,
+      "total_quantity": 7,
+      "first_seen": "2025-08-03T17:09:54.740110",
+      "last_seen": "2025-08-03T17:09:54.740110"
+    },
+    "2c3c9811": {
+      "name": "Rancor Meat",
+      "rarity": "uncommon",
+      "total_drops": 2,
+      "total_quantity": 10,
+      "first_seen": "2025-08-03T17:10:37.145965",
+      "last_seen": "2025-08-03T17:21:07.222405"
+    },
+    "77b82c54": {
+      "name": "Nexu Claw",
+      "rarity": "uncommon",
+      "total_drops": 3,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:11:51.518773",
+      "last_seen": "2025-08-03T17:18:27.103053"
+    },
+    "3c042211": {
+      "name": "Dewback Hide from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:13:13.520472",
+      "last_seen": "2025-08-03T17:13:13.520472"
+    },
+    "a7985810": {
+      "name": "Krayt Dragon Scale",
+      "rarity": "epic",
+      "total_drops": 4,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T17:13:21.030548",
+      "last_seen": "2025-08-03T17:28:50.706463"
+    },
+    "ce3fe562": {
+      "name": "Krayt Dragon Hide",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 12,
+      "first_seen": "2025-08-03T17:14:11.280630",
+      "last_seen": "2025-08-03T17:14:11.280630"
+    },
+    "de83c645": {
+      "name": "Nexu Hide from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:17:53.538905",
+      "last_seen": "2025-08-03T17:17:53.538905"
+    },
+    "77aa55de": {
+      "name": "Spider Silk",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:19:15.981826",
+      "last_seen": "2025-08-03T17:19:15.981826"
+    },
+    "948a2e35": {
+      "name": "Credits",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 6000,
+      "first_seen": "2025-08-03T17:19:30.533318",
+      "last_seen": "2025-08-03T17:26:19.620772"
+    },
+    "073d0398": {
+      "name": "Crystal of Power from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:20:56.577564",
+      "last_seen": "2025-08-03T17:20:56.577564"
+    },
+    "aebd878c": {
+      "name": "Rancor Hide",
+      "rarity": "epic",
+      "total_drops": 2,
+      "total_quantity": 10,
+      "first_seen": "2025-08-03T17:21:10.684396",
+      "last_seen": "2025-08-03T17:32:38.005942"
+    },
+    "2a6e4b8d": {
+      "name": "Power Crystal",
+      "rarity": "epic",
+      "total_drops": 2,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:22:15.225321",
+      "last_seen": "2025-08-03T17:31:48.034283"
+    },
+    "7a0778b8": {
+      "name": "Ronto Hide from Bantha",
+      "rarity": "common",
+      "total_drops": 2,
+      "total_quantity": 7,
+      "first_seen": "2025-08-03T17:22:27.895946",
+      "last_seen": "2025-08-03T17:28:37.487418"
+    },
+    "b55e6bc2": {
+      "name": "Gurreck Horn",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:24:44.706522",
+      "last_seen": "2025-08-03T17:24:44.706522"
+    },
+    "6ece8f52": {
+      "name": "Power Crystal from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 2,
+      "first_seen": "2025-08-03T17:27:06.030381",
+      "last_seen": "2025-08-03T17:27:06.030381"
+    },
+    "28579da1": {
+      "name": "Rancor Meat from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T17:28:55.334254",
+      "last_seen": "2025-08-03T17:28:55.334254"
+    },
+    "5bc66696": {
+      "name": "Bantha Hide",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 10,
+      "first_seen": "2025-08-03T17:29:05.501935",
+      "last_seen": "2025-08-03T17:29:05.501935"
+    },
+    "d35e03f4": {
+      "name": "Gurreck Hide from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 4,
+      "first_seen": "2025-08-03T17:29:10.135936",
+      "last_seen": "2025-08-03T17:29:10.135936"
+    },
+    "ccb5af51": {
+      "name": "Rancor Bone from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 3,
+      "first_seen": "2025-08-03T17:29:29.695696",
+      "last_seen": "2025-08-03T17:29:29.695696"
+    },
+    "3f29e04d": {
+      "name": "Spider Web",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 6,
+      "first_seen": "2025-08-03T17:29:48.803523",
+      "last_seen": "2025-08-03T17:29:48.803523"
+    },
+    "ed140c71": {
+      "name": "Krayt Dragon Tissue",
+      "rarity": "rare",
+      "total_drops": 1,
+      "total_quantity": 5,
+      "first_seen": "2025-08-03T17:33:29.132538",
+      "last_seen": "2025-08-03T17:33:29.132538"
+    },
+    "45fa0d61": {
+      "name": "Crystal of Power",
+      "rarity": "legendary",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:33:49.490811",
+      "last_seen": "2025-08-03T17:33:49.490811"
+    },
+    "7458ce52": {
+      "name": "Acklay Brain from Bantha",
+      "rarity": "common",
+      "total_drops": 1,
+      "total_quantity": 1,
+      "first_seen": "2025-08-03T17:35:57.105239",
+      "last_seen": "2025-08-03T17:35:57.105239"
+    }
+  },
+  "drop_rates": {
+    "eb633452": 2.13,
+    "0b55bafc": 2.13,
+    "e8577197": 2.13,
+    "262010f9": 4.26,
+    "862997d8": 2.13,
+    "cfa7d1b1": 2.13,
+    "fa34838d": 4.26,
+    "60896051": 8.51,
+    "d27f14da": 2.13,
+    "4a6e2918": 2.13,
+    "2c3c9811": 4.26,
+    "77b82c54": 6.38,
+    "3c042211": 2.13,
+    "a7985810": 8.51,
+    "ce3fe562": 2.13,
+    "de83c645": 2.13,
+    "77aa55de": 2.13,
+    "948a2e35": 4.26,
+    "073d0398": 2.13,
+    "aebd878c": 4.26,
+    "2a6e4b8d": 4.26,
+    "7a0778b8": 4.26,
+    "b55e6bc2": 2.13,
+    "6ece8f52": 2.13,
+    "28579da1": 2.13,
+    "5bc66696": 2.13,
+    "d35e03f4": 2.13,
+    "ccb5af51": 2.13,
+    "3f29e04d": 2.13,
+    "ed140c71": 2.13,
+    "45fa0d61": 2.13,
+    "7458ce52": 2.13
+  },
+  "rarity_distribution": {
+    "uncommon": 9,
+    "common": 21,
+    "epic": 9,
+    "rare": 7,
+    "legendary": 1
+  }
+}

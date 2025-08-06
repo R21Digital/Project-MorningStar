@@ -1,0 +1,25 @@
+{
+  "quests": [
+    {
+      "mission_id": "patrol_1754063683",
+      "name": "Test Mission",
+      "mission_type": "SpaceMissionType.PATROL",
+      "description": "A patrol mission",
+      "status": "available",
+      "credits_reward": 100,
+      "experience_reward": 50,
+      "level_requirement": 0,
+      "ship_requirement": null,
+      "start_location": "Tansarii Point Station",
+      "target_location": null,
+      "time_limit": null,
+      "start_time": null,
+      "completion_time": null,
+      "steps": [],
+      "current_step": 0,
+      "tags": [
+        "patrol"
+      ]
+    }
+  ]
+}

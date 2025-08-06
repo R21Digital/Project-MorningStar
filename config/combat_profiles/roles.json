@@ -1,0 +1,314 @@
+{
+  "combat_roles": {
+    "version": "1.0",
+    "last_updated": "2025-01-27T00:00:00Z",
+    "description": "Combat role configurations for MS11 combat profiles",
+    
+    "roles": {
+      "solo_dps": {
+        "name": "Solo DPS",
+        "description": "Optimized for solo combat with maximum damage output",
+        "enabled": true,
+        "priority": 1,
+        "behaviors": {
+          "damage_optimization": {
+            "enabled": true,
+            "priority": "high",
+            "use_highest_damage_abilities": true,
+            "maintain_damage_buffs": true,
+            "use_execute_at_low_health": true
+          },
+          "survival": {
+            "enabled": true,
+            "priority": "medium",
+            "use_defensive_cooldowns": true,
+            "use_healing_potions": true,
+            "flee_at_critical_health": true,
+            "critical_health_threshold": 0.2
+          },
+          "target_selection": {
+            "enabled": true,
+            "priority": "high",
+            "focus_lowest_health_target": true,
+            "avoid_elite_targets": false,
+            "switch_targets_efficiently": true
+          }
+        },
+        "triggers": {
+          "use_taunt": false,
+          "maintain_aggro": false,
+          "use_group_healing": false,
+          "use_crowd_control": true,
+          "use_escape_abilities": true
+        },
+        "ability_priorities": [
+          "highest_damage_ability",
+          "damage_buff",
+          "defensive_cooldown",
+          "healing_potion",
+          "escape_ability"
+        ]
+      },
+      
+      "healer": {
+        "name": "Healer",
+        "description": "Focused on healing and supporting group members",
+        "enabled": true,
+        "priority": 1,
+        "behaviors": {
+          "healing_optimization": {
+            "enabled": true,
+            "priority": "critical",
+            "prioritize_group_healing": true,
+            "maintain_healing_buffs": true,
+            "use_emergency_heals": true,
+            "heal_threshold": 0.7
+          },
+          "survival": {
+            "enabled": true,
+            "priority": "high",
+            "use_defensive_cooldowns": true,
+            "use_healing_potions": true,
+            "maintain_distance": true,
+            "flee_when_threatened": true
+          },
+          "target_selection": {
+            "enabled": true,
+            "priority": "high",
+            "heal_lowest_health_ally": true,
+            "heal_tank_first": true,
+            "heal_self_when_needed": true
+          }
+        },
+        "triggers": {
+          "use_taunt": false,
+          "maintain_aggro": false,
+          "use_group_healing": true,
+          "use_crowd_control": false,
+          "use_escape_abilities": true
+        },
+        "ability_priorities": [
+          "emergency_heal",
+          "group_heal",
+          "healing_buff",
+          "defensive_cooldown",
+          "healing_potion"
+        ]
+      },
+      
+      "group_dps": {
+        "name": "Group DPS",
+        "description": "Optimized for group combat with coordinated damage output",
+        "enabled": true,
+        "priority": 1,
+        "behaviors": {
+          "damage_optimization": {
+            "enabled": true,
+            "priority": "high",
+            "use_highest_damage_abilities": true,
+            "maintain_damage_buffs": true,
+            "coordinate_with_group": true
+          },
+          "survival": {
+            "enabled": true,
+            "priority": "medium",
+            "use_defensive_cooldowns": true,
+            "use_healing_potions": true,
+            "stay_behind_tank": true
+          },
+          "target_selection": {
+            "enabled": true,
+            "priority": "high",
+            "focus_tank_target": true,
+            "avoid_stealing_aggro": true,
+            "switch_targets_efficiently": true
+          }
+        },
+        "triggers": {
+          "use_taunt": false,
+          "maintain_aggro": false,
+          "use_group_healing": false,
+          "use_crowd_control": true,
+          "use_escape_abilities": true
+        },
+        "ability_priorities": [
+          "highest_damage_ability",
+          "damage_buff",
+          "defensive_cooldown",
+          "healing_potion",
+          "escape_ability"
+        ]
+      },
+      
+      "tank": {
+        "name": "Tank",
+        "description": "Focused on maintaining aggro and protecting group members",
+        "enabled": true,
+        "priority": 1,
+        "behaviors": {
+          "aggro_management": {
+            "enabled": true,
+            "priority": "critical",
+            "use_taunt_abilities": true,
+            "maintain_aggro_on_all_targets": true,
+            "use_aggro_generating_abilities": true,
+            "taunt_threshold": 0.8
+          },
+          "survival": {
+            "enabled": true,
+            "priority": "high",
+            "use_defensive_cooldowns": true,
+            "use_healing_potions": true,
+            "maintain_high_health": true,
+            "health_threshold": 0.5
+          },
+          "target_selection": {
+            "enabled": true,
+            "priority": "high",
+            "focus_strongest_target": true,
+            "protect_healers": true,
+            "control_elite_targets": true
+          }
+        },
+        "triggers": {
+          "use_taunt": true,
+          "maintain_aggro": true,
+          "use_group_healing": false,
+          "use_crowd_control": true,
+          "use_escape_abilities": false
+        },
+        "ability_priorities": [
+          "taunt_ability",
+          "aggro_generating_ability",
+          "defensive_cooldown",
+          "healing_potion",
+          "damage_ability"
+        ]
+      },
+      
+      "pvp_roamer": {
+        "name": "PvP Roamer",
+        "description": "Optimized for player versus player combat with mobility and burst damage",
+        "enabled": true,
+        "priority": 1,
+        "behaviors": {
+          "damage_optimization": {
+            "enabled": true,
+            "priority": "critical",
+            "use_burst_damage_abilities": true,
+            "maintain_damage_buffs": true,
+            "use_execute_at_low_health": true,
+            "focus_weakest_target": true
+          },
+          "mobility": {
+            "enabled": true,
+            "priority": "high",
+            "use_movement_abilities": true,
+            "maintain_distance": true,
+            "use_escape_abilities": true,
+            "avoid_crowd_control": true
+          },
+          "survival": {
+            "enabled": true,
+            "priority": "high",
+            "use_defensive_cooldowns": true,
+            "use_healing_potions": true,
+            "flee_when_outnumbered": true,
+            "use_stealth_abilities": true
+          }
+        },
+        "triggers": {
+          "use_taunt": false,
+          "maintain_aggro": false,
+          "use_group_healing": false,
+          "use_crowd_control": true,
+          "use_escape_abilities": true
+        },
+        "ability_priorities": [
+          "burst_damage_ability",
+          "movement_ability",
+          "defensive_cooldown",
+          "healing_potion",
+          "escape_ability"
+        ]
+      }
+    },
+    
+    "role_switching": {
+      "enabled": true,
+      "auto_detect_group_size": true,
+      "auto_switch_to_healer": {
+        "enabled": true,
+        "group_size_threshold": 3,
+        "no_healer_in_group": true
+      },
+      "auto_switch_to_tank": {
+        "enabled": true,
+        "group_size_threshold": 4,
+        "no_tank_in_group": true
+      },
+      "manual_override": {
+        "enabled": true,
+        "allow_user_override": true,
+        "remember_user_preference": true
+      }
+    },
+    
+    "logic_triggers": {
+      "tank_triggers": {
+        "use_taunt_if_tank": true,
+        "maintain_aggro": true,
+        "protect_healers": true,
+        "control_elite_targets": true,
+        "use_defensive_cooldowns": true
+      },
+      "healer_triggers": {
+        "prioritize_group_healing": true,
+        "heal_tank_first": true,
+        "heal_lowest_health_ally": true,
+        "use_emergency_heals": true,
+        "maintain_healing_buffs": true
+      },
+      "dps_triggers": {
+        "focus_damage_output": true,
+        "avoid_stealing_aggro": true,
+        "use_crowd_control": true,
+        "coordinate_with_group": true
+      },
+      "pvp_triggers": {
+        "use_burst_damage": true,
+        "maintain_mobility": true,
+        "avoid_crowd_control": true,
+        "use_escape_abilities": true,
+        "focus_weakest_target": true
+      }
+    },
+    
+    "performance_metrics": {
+      "track_role_effectiveness": true,
+      "track_damage_output": true,
+      "track_healing_output": true,
+      "track_survival_time": true,
+      "track_aggro_maintenance": true,
+      "generate_role_reports": true
+    },
+    
+    "integration_settings": {
+      "combat_profile_integration": {
+        "enabled": true,
+        "override_existing_settings": false,
+        "merge_with_existing": true
+      },
+      "ai_companion_integration": {
+        "enabled": true,
+        "provide_role_advice": true,
+        "suggest_role_switches": true
+      },
+      "analytics_integration": {
+        "enabled": true,
+        "track_role_performance": true,
+        "generate_role_analytics": true
+      }
+    }
+  }
+} 

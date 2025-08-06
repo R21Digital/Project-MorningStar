@@ -1,0 +1,5 @@
+{
+  "profession": "Rifleman",
+  "skills": ["Novice Marksman", "Master Rifleman"]
+}
+

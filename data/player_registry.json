@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "last_updated": "2025-08-05T23:45:00.000000",
+    "total_players": 0,
+    "total_scans": 0,
+    "scanner_version": "1.0",
+    "description": "Lightweight player registry for SWGDB population",
+    "source": "Batch 178 - Passive Player Scanner"
+  },
+  "players": {},
+  "opt_out_players": [],
+  "statistics": {
+    "guild_distribution": {},
+    "faction_distribution": {},
+    "race_distribution": {},
+    "location_distribution": {},
+    "scan_frequency_stats": {
+      "average_scans_per_day": 0.0,
+      "most_active_players": [],
+      "recent_activity_24h": 0
+    }
+  },
+  "settings": {
+    "privacy_enabled": true,
+    "opt_out_keywords": [
+      "private",
+      "no scan",
+      "opt out",
+      "do not track"
+    ],
+    "scan_intervals": {
+      "idle": 300,
+      "travel": 30,
+      "combat": 120
+    },
+    "ocr_confidence_threshold": 50.0
+  }
+} 

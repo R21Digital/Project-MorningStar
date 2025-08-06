@@ -1,0 +1,27 @@
+{
+  "name": "rifleman_medic",
+  "description": "Rifleman with medic abilities for sustained combat and healing",
+  "weapon_type": "ranged",
+  "stance": "kneeling",
+  "rotation": [
+    "aim",
+    "headshot",
+    "burst_fire"
+  ],
+  "heal_threshold": 50,
+  "fallback": "rifle_shot",
+  "cooldowns": {
+    "aim": 0,
+    "headshot": 5,
+    "burst_fire": 15,
+    "rifle_shot": 0,
+    "heal_self": 30,
+    "stim_pack": 120
+  },
+  "emergency_abilities": {
+    "critical_heal": "heal_self",
+    "defensive": "stim_pack"
+  },
+  "buff_threshold": 80,
+  "max_range": 50
+} 

@@ -1,0 +1,86 @@
+{
+  "whitelist": [
+    "123456789012345678",
+    "234567890123456789",
+    "345678901234567890",
+    "456789012345678901",
+    "555555555555555555"
+  ],
+  "webhook_url": null,
+  "offline_mode": false,
+  "licenses": [
+    {
+      "license_key": "TESTER_001_MS11_2024",
+      "discord_id": "123456789012345678",
+      "license_type": "tester",
+      "status": "valid",
+      "created_date": "2024-01-01T00:00:00",
+      "expiry_date": null,
+      "last_check": "2025-07-31T17:17:43.384991",
+      "features": [
+        "combat_intelligence",
+        "license_management",
+        "offline_mode"
+      ],
+      "notes": "Hardcoded tester license"
+    },
+    {
+      "license_key": "TESTER_002_MS11_2024",
+      "discord_id": "234567890123456789",
+      "license_type": "tester",
+      "status": "valid",
+      "created_date": "2024-01-01T00:00:00",
+      "expiry_date": null,
+      "last_check": null,
+      "features": [
+        "combat_intelligence",
+        "license_management",
+        "offline_mode"
+      ],
+      "notes": "Hardcoded tester license"
+    },
+    {
+      "license_key": "TESTER_003_MS11_2024",
+      "discord_id": "345678901234567890",
+      "license_type": "tester",
+      "status": "valid",
+      "created_date": "2024-01-01T00:00:00",
+      "expiry_date": null,
+      "last_check": null,
+      "features": [
+        "combat_intelligence",
+        "license_management",
+        "offline_mode"
+      ],
+      "notes": "Hardcoded tester license"
+    },
+    {
+      "license_key": "TESTER_004_MS11_2024",
+      "discord_id": "456789012345678901",
+      "license_type": "tester",
+      "status": "valid",
+      "created_date": "2024-01-01T00:00:00",
+      "expiry_date": null,
+      "last_check": null,
+      "features": [
+        "combat_intelligence",
+        "license_management",
+        "offline_mode"
+      ],
+      "notes": "Hardcoded tester license"
+    },
+    {
+      "license_key": "DEMO_LICENSE_001",
+      "discord_id": "987654321098765432",
+      "license_type": "basic",
+      "status": "valid",
+      "created_date": "2025-07-31T17:17:43.381501",
+      "expiry_date": "2025-08-30T17:17:43.381496",
+      "last_check": null,
+      "features": [
+        "combat_intelligence"
+      ],
+      "notes": "Demo license for testing"
+    }
+  ]
+}

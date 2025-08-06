@@ -1,0 +1,31 @@
+{
+  "character_id": "916b9734-492f-4484-af38-fb21b3da3d6b",
+  "discord_user_id": "user_123456789",
+  "name": "DemoCrafter",
+  "server": "Basilisk",
+  "race": "Human",
+  "profession": "Artisan",
+  "level": 60,
+  "faction": "Neutral",
+  "city": "Theed",
+  "guild": "Demo Guild",
+  "guild_tag": "[DEMO]",
+  "planet": "Naboo",
+  "location": "Theed Palace",
+  "coordinates": [
+    0.0,
+    0.0
+  ],
+  "status": "CharacterStatus.ACTIVE",
+  "role": "CharacterRole.ALT",
+  "is_main_character": false,
+  "auto_launch_enabled": true,
+  "created_at": "2025-08-03T13:03:31.512200",
+  "updated_at": "2025-08-03T13:03:31.512201",
+  "last_session_at": null,
+  "total_playtime_hours": 0.0,
+  "total_sessions": 0,
+  "total_xp_gained": 0,
+  "total_credits_earned": 0,
+  "notes": "Crafting alt character for resource gathering"
+}

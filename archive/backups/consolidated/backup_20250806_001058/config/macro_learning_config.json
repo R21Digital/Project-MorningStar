@@ -1,0 +1,159 @@
+{
+  "macro_learning": {
+    "enabled": false,
+    "auto_scan_macros": true,
+    "auto_scan_aliases": true,
+    "auto_create_fallbacks": true,
+    "auto_send_alerts": true,
+    "scan_interval": 300,
+    "alert_threshold": 3,
+    "warning_threshold": 5
+  },
+  "macro_parser": {
+    "swg_directory": "",
+    "macro_directories": [
+      "macros",
+      "macro", 
+      "ui/macros",
+      "ui/macro"
+    ],
+    "alias_files": [
+      "alias.txt",
+      "aliases.txt",
+      "chat/alias.txt",
+      "chat/aliases.txt"
+    ],
+    "critical_macros": [
+      "heal",
+      "buff",
+      "travel",
+      "craft",
+      "combat",
+      "loot",
+      "follow",
+      "attack",
+      "defend",
+      "flee"
+    ],
+    "critical_aliases": [
+      "/heal",
+      "/buff",
+      "/travel",
+      "/craft",
+      "/loot",
+      "/follow",
+      "/attack",
+      "/defend",
+      "/flee"
+    ]
+  },
+  "alias_analyzer": {
+    "analyze_patterns": true,
+    "calculate_complexity": true,
+    "find_dependencies": true,
+    "generate_optimizations": true,
+    "pattern_recognition": true,
+    "complexity_threshold": 0.7,
+    "dependency_depth_limit": 5
+  },
+  "macro_recommender": {
+    "data_directory": "data/macros",
+    "create_fallback_maps": true,
+    "generate_recommendations": true,
+    "store_best_practices": true,
+    "auto_create_macros": false,
+    "recommendation_threshold": 0.6,
+    "fallback_confidence_threshold": 0.5
+  },
+  "shortcut_helper": {
+    "enabled": true,
+    "shortcuts_file": "data/shortcuts.json",
+    "auto_suggestions": true,
+    "favorite_shortcuts": true,
+    "usage_tracking": true,
+    "category_organization": true,
+    "hotkey_support": true,
+    "max_shortcuts_per_category": 20
+  },
+  "discord_alerts": {
+    "enabled": false,
+    "webhook_url": "",
+    "bot_token": "",
+    "channel_id": 0,
+    "alert_mode": "webhook",
+    "critical_threshold": 3,
+    "warning_threshold": 5,
+    "send_missing_alerts": true,
+    "send_recommendation_alerts": true,
+    "send_fallback_alerts": true,
+    "alert_cooldown": 300
+  },
+  "categories": {
+    "combat": {
+      "description": "Combat-related macros and aliases",
+      "color": "red",
+      "icon": "⚔️",
+      "priority": 1
+    },
+    "travel": {
+      "description": "Travel and movement macros",
+      "color": "blue",
+      "icon": "🚀", 
+      "priority": 2
+    },
+    "crafting": {
+      "description": "Crafting and resource macros",
+      "color": "green",
+      "icon": "🛠️",
+      "priority": 3
+    },
+    "social": {
+      "description": "Social interaction macros",
+      "color": "yellow",
+      "icon": "💬",
+      "priority": 4
+    },
+    "utility": {
+      "description": "Utility and system macros",
+      "color": "gray",
+      "icon": "🔧",
+      "priority": 5
+    },
+    "profession": {
+      "description": "Profession-specific macros",
+      "color": "purple",
+      "icon": "🎯",
+      "priority": 6
+    }
+  },
+  "logging": {
+    "log_macro_scanning": true,
+    "log_alias_analysis": true,
+    "log_recommendations": true,
+    "log_shortcuts": true,
+    "log_discord_alerts": true,
+    "log_fallback_maps": true,
+    "log_level": "INFO",
+    "save_reports": true,
+    "report_directory": "logs/macro_learning"
+  },
+  "performance": {
+    "scan_timeout": 30,
+    "analysis_timeout": 60,
+    "max_macro_size": 10000,
+    "max_alias_length": 500,
+    "cache_results": true,
+    "cache_duration": 3600,
+    "parallel_processing": true,
+    "max_workers": 4
+  },
+  "best_practices": {
+    "store_in_data_directory": true,
+    "auto_update_best_practices": true,
+    "community_recommendations": true,
+    "version_control": true,
+    "backup_before_changes": true,
+    "validate_macro_syntax": true,
+    "check_macro_dependencies": true
+  }
+} 

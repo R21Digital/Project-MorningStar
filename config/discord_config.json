@@ -1,6 +1,0 @@
-{
-  "discord_token": "YOUR_BOT_TOKEN",
-  "relay_mode": "notify",
-  "target_user_id": 0,
-  "reply_queue": []
-}

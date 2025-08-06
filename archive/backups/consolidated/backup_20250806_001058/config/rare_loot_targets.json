@@ -1,0 +1,147 @@
+{
+  "targets": [
+    {
+      "name": "Greater Krayt Dragon",
+      "planet": "Tatooine",
+      "zone": "Dune Sea",
+      "level": 90,
+      "priority": 10,
+      "loot_types": ["pearls", "scales", "trophies"],
+      "notes": "Drops rare pearls and valuable scales",
+      "coordinates": [100, 200],
+      "spawn_conditions": "night_only",
+      "rarity": "legendary"
+    },
+    {
+      "name": "Kimogila Matriarch",
+      "planet": "Lok",
+      "zone": "Kimogila Valley",
+      "level": 85,
+      "priority": 9,
+      "loot_types": ["hides", "claws", "trophies"],
+      "notes": "Sought after by bounty hunters for rare materials",
+      "coordinates": [300, 150],
+      "spawn_conditions": "any_time",
+      "rarity": "epic"
+    },
+    {
+      "name": "Mouf Tigrip",
+      "planet": "Kashyyyk",
+      "zone": "Wookiee Hunting Grounds",
+      "level": 82,
+      "priority": 8,
+      "loot_types": ["poison", "fangs", "trophies"],
+      "notes": "Known for deadly poison and valuable fangs",
+      "coordinates": [250, 400],
+      "spawn_conditions": "day_only",
+      "rarity": "rare"
+    },
+    {
+      "name": "Ancient Krayt Dragon",
+      "planet": "Tatooine",
+      "zone": "Jundland Wastes",
+      "level": 95,
+      "priority": 10,
+      "loot_types": ["pearls", "scales", "trophies", "artifacts"],
+      "notes": "Rarest of the Krayt Dragons, drops legendary artifacts",
+      "coordinates": [500, 300],
+      "spawn_conditions": "full_moon",
+      "rarity": "legendary"
+    },
+    {
+      "name": "Rancor Alpha",
+      "planet": "Dathomir",
+      "zone": "Rancor Pit",
+      "level": 88,
+      "priority": 9,
+      "loot_types": ["hides", "claws", "trophies", "bones"],
+      "notes": "Alpha Rancor with enhanced loot drops",
+      "coordinates": [150, 250],
+      "spawn_conditions": "any_time",
+      "rarity": "epic"
+    },
+    {
+      "name": "Giant Spider Queen",
+      "planet": "Naboo",
+      "zone": "Spider Cave",
+      "level": 80,
+      "priority": 7,
+      "loot_types": ["silk", "venom", "trophies"],
+      "notes": "Rare spider that drops valuable silk and venom",
+      "coordinates": [200, 350],
+      "spawn_conditions": "night_only",
+      "rarity": "rare"
+    },
+    {
+      "name": "Crystal Cave Beast",
+      "planet": "Dantooine",
+      "zone": "Crystal Cave",
+      "level": 75,
+      "priority": 6,
+      "loot_types": ["crystals", "gems", "trophies"],
+      "notes": "Crystal-infused beast with valuable mineral drops",
+      "coordinates": [400, 200],
+      "spawn_conditions": "any_time",
+      "rarity": "uncommon"
+    },
+    {
+      "name": "Desert Sand Demon",
+      "planet": "Tatooine",
+      "zone": "Dune Sea",
+      "level": 78,
+      "priority": 7,
+      "loot_types": ["sand_crystals", "demon_essence", "trophies"],
+      "notes": "Mystical desert creature with rare essence drops",
+      "coordinates": [600, 100],
+      "spawn_conditions": "sandstorm",
+      "rarity": "rare"
+    }
+  ],
+  "settings": {
+    "scan_interval": 30,
+    "max_targets_per_session": 10,
+    "discord_alerts_enabled": true,
+    "auto_logout_on_rare": false,
+    "notification_threshold": "rare",
+    "learning_enabled": true,
+    "area_scan_radius": 1000,
+    "enemy_type_scan": true
+  },
+  "loot_categories": {
+    "pearls": {
+      "rarity": "legendary",
+      "value": 10000,
+      "professions": ["artisan", "merchant"]
+    },
+    "scales": {
+      "rarity": "epic",
+      "value": 5000,
+      "professions": ["armorsmith", "artisan"]
+    },
+    "hides": {
+      "rarity": "rare",
+      "value": 2000,
+      "professions": ["armorsmith", "artisan"]
+    },
+    "claws": {
+      "rarity": "rare",
+      "value": 1500,
+      "professions": ["weaponsmith", "artisan"]
+    },
+    "poison": {
+      "rarity": "epic",
+      "value": 3000,
+      "professions": ["medic", "artisan"]
+    },
+    "crystals": {
+      "rarity": "uncommon",
+      "value": 800,
+      "professions": ["artisan", "architect"]
+    },
+    "trophies": {
+      "rarity": "common",
+      "value": 500,
+      "professions": ["artisan", "merchant"]
+    }
+  }
+} 

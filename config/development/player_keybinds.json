@@ -1,0 +1,14 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created_at": 1754009868.258926,
+    "detection_methods": [],
+    "confidence": 0.0
+  },
+  "bindings": {},
+  "validation": {
+    "last_validated": 1754009868.2589266,
+    "essential_missing": [],
+    "conflicts": []
+  }
+}

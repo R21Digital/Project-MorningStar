@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ-L0N AI Assistant - SWGDB</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #4a9eff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            background: rgba(74, 158, 255, 0.1);
+        }
+
+        .nav-links a:hover {
+            background: rgba(74, 158, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .chat-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            height: 70vh;
+        }
+
+        .chat-main {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .droid-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .droid-info h3 {
+            color: #ffd700;
+            margin-bottom: 5px;
+        }
+
+        .droid-info p {
+            color: #cccccc;
+            font-size: 0.9em;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(45deg, #4a9eff, #6bb6ff);
+            color: white;
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #000;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #4a9eff, #6bb6ff);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.assistant .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-timestamp {
+            font-size: 0.7em;
+            color: #888888;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1em;
+        }
+
+        .chat-input input::placeholder {
+            color: #888888;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .send-button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #4a9eff, #6bb6ff);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 158, 255, 0.3);
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .chat-sidebar {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .sidebar-section h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .session-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(74, 158, 255, 0.2);
+            color: #4a9eff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .control-button:hover {
+            background: rgba(74, 158, 255, 0.3);
+        }
+
+        .control-button.danger {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .control-button.danger:hover {
+            background: rgba(255, 107, 107, 0.3);
+        }
+
+        .session-info {
+            font-size: 0.9em;
+            color: #cccccc;
+        }
+
+        .session-info span {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .suggestions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .suggestion {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .suggestion:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #888888;
+            font-style: italic;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .loading-dots span {
+            width: 6px;
+            height: 6px;
+            background: #888888;
+            border-radius: 50%;
+            animation: loading 1.4s infinite ease-in-out;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes loading {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            color: #888888;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .typing-indicator.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .chat-sidebar {
+                order: -1;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AZ-L0N AI Assistant</h1>
+            <p>Your protocol droid companion for Star Wars Galaxies</p>
+            <div class="nav-links">
+                <a href="/">Dashboard</a>
+                <a href="/players">Players</a>
+                <a href="/builds">Builds</a>
+                <a href="/guides">Guides</a>
+                <a href="/sessions">Sessions</a>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-main">
+                <div class="chat-header">
+                    <div class="droid-avatar">AZ</div>
+                    <div class="droid-info">
+                        <h3>AZ-L0N</h3>
+                        <p>Protocol Droid • Ready to assist</p>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message assistant">
+                        <div class="message-avatar">AZ</div>
+                        <div class="message-content">
+                            Greetings, organic! I am AZ-L0N, your protocol droid assistant. I can help you with quests, trainers, professions, locations, and Star Wars lore. What would you like to know about?
+                            <div class="message-timestamp" id="welcomeTimestamp"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="droid-avatar" style="width: 30px; height: 30px; font-size: 1em;">AZ</div>
+                    <span>AZ-L0N is thinking</span>
+                    <div class="loading-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Ask AZ-L0N about Star Wars Galaxies..." maxlength="500">
+                    <button class="send-button" id="sendButton">Send</button>
+                </div>
+            </div>
+
+            <div class="chat-sidebar">
+                <div class="sidebar-section">
+                    <h3>Session Info</h3>
+                    <div class="session-info">
+                        <div>Session: <span id="sessionId">-</span></div>
+                        <div>Messages: <span id="messageCount">1</span></div>
+                        <div>Status: <span id="sessionStatus">Active</span></div>
+                    </div>
+                    <div class="session-controls">
+                        <button class="control-button" id="newSessionBtn">New Session</button>
+                        <button class="control-button danger" id="clearSessionBtn">Clear Chat</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Quick Questions</h3>
+                    <div class="suggestions">
+                        <div class="suggestion" onclick="sendSuggestion('Where can I find a Marksman trainer?')">
+                            Where can I find a Marksman trainer?
+                        </div>
+                        <div class="suggestion" onclick="sendSuggestion('Tell me about quests on Tatooine')">
+                            Tell me about quests on Tatooine
+                        </div>
+                        <div class="suggestion" onclick="sendSuggestion('What professions are available?')">
+                            What professions are available?
+                        </div>
+                        <div class="suggestion" onclick="sendSuggestion('Tell me about the Rebel Alliance')">
+                            Tell me about the Rebel Alliance
+                        </div>
+                        <div class="suggestion" onclick="sendSuggestion('How do I travel between planets?')">
+                            How do I travel between planets?
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>About AZ-L0N</h3>
+                    <p style="font-size: 0.9em; color: #cccccc; line-height: 1.4;">
+                        I am a protocol droid designed to assist with Star Wars Galaxies knowledge. 
+                        I can help with quests, trainers, professions, locations, and lore. 
+                        I'm here to make your galactic journey easier!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSessionId = null;
+        let messageCount = 1;
+
+        // Initialize the chat
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChat();
+            updateTimestamp();
+        });
+
+        function initializeChat() {
+            // Create a new session
+            createNewSession();
+            
+            // Set up event listeners
+            document.getElementById('messageInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            document.getElementById('sendButton').addEventListener('click', sendMessage);
+            document.getElementById('newSessionBtn').addEventListener('click', createNewSession);
+            document.getElementById('clearSessionBtn').addEventListener('click', clearChat);
+        }
+
+        function createNewSession() {
+            fetch('/api/ai-chat/session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: 'anonymous',
+                    mode: 'general'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    currentSessionId = data.session_id;
+                    document.getElementById('sessionId').textContent = currentSessionId.substring(0, 8) + '...';
+                    messageCount = 1;
+                    document.getElementById('messageCount').textContent = messageCount;
+                    document.getElementById('sessionStatus').textContent = 'Active';
+                }
+            })
+            .catch(error => {
+                console.error('Error creating session:', error);
+            });
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message || !currentSessionId) return;
+            
+            // Add user message to chat
+            addMessageToChat('user', message);
+            input.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Send to AI
+            fetch(`/api/ai-chat/session/${currentSessionId}/message`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideTypingIndicator();
+                
+                if (data.success) {
+                    addMessageToChat('assistant', data.response);
+                    messageCount += 2; // User message + AI response
+                    document.getElementById('messageCount').textContent = messageCount;
+                } else {
+                    addMessageToChat('assistant', 'I apologize, but I encountered an error. Please try again.');
+                }
+            })
+            .catch(error => {
+                hideTypingIndicator();
+                addMessageToChat('assistant', 'I apologize, but I encountered an error. Please try again.');
+                console.error('Error sending message:', error);
+            });
+        }
+
+        function addMessageToChat(role, content) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            const avatar = role === 'user' ? 'U' : 'AZ';
+            const avatarClass = role === 'user' ? 'user' : 'assistant';
+            
+            const timestamp = new Date().toLocaleTimeString();
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar ${avatarClass}">${avatar}</div>
+                <div class="message-content">
+                    ${content}
+                    <div class="message-timestamp">${timestamp}</div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('messageInput').value = text;
+            sendMessage();
+        }
+
+        function clearChat() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = `
+                <div class="message assistant">
+                    <div class="message-avatar">AZ</div>
+                    <div class="message-content">
+                        Greetings, organic! I am AZ-L0N, your protocol droid assistant. I can help you with quests, trainers, professions, locations, and Star Wars lore. What would you like to know about?
+                        <div class="message-timestamp" id="welcomeTimestamp"></div>
+                    </div>
+                </div>
+            `;
+            messageCount = 1;
+            document.getElementById('messageCount').textContent = messageCount;
+            updateTimestamp();
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').classList.add('show');
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').classList.remove('show');
+        }
+
+        function updateTimestamp() {
+            const timestamp = new Date().toLocaleTimeString();
+            document.getElementById('welcomeTimestamp').textContent = timestamp;
+        }
+    </script>
+</body>
+</html> 

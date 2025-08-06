@@ -1,0 +1,130 @@
+{
+  "session_id": "convenience_test_1754005855",
+  "start_time": "2025-07-31T16:50:55.098718",
+  "end_time": "2025-07-31T16:50:55.099578",
+  "character_name": "ConvenienceTest",
+  "character_level": null,
+  "profession": null,
+  "location": null,
+  "total_xp_gained": 300,
+  "total_credits_gained": 0,
+  "total_deaths": 1,
+  "total_quests_completed": 1,
+  "total_combat_actions": 1,
+  "total_travel_events": 1,
+  "total_errors": 0,
+  "average_combat_duration": 0.0,
+  "success_rate": 0.0,
+  "efficiency_score": 0.124,
+  "session_goals": null,
+  "session_mode": null,
+  "notes": null,
+  "events": [
+    {
+      "event_type": "xp_gain",
+      "timestamp": "2025-07-31T16:50:55.099079",
+      "description": "Test event",
+      "location": null,
+      "coordinates": null,
+      "metadata": {},
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": 100,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "xp_gain",
+      "timestamp": "2025-07-31T16:50:55.099229",
+      "description": "Gained 200 XP from quest",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "source": "quest",
+        "cumulative_xp": 200,
+        "xp_per_hour": 0,
+        "source_total": 200
+      },
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": 200,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "death",
+      "timestamp": "2025-07-31T16:50:55.099274",
+      "description": "Death: Test death",
+      "location": null,
+      "coordinates": null,
+      "metadata": {
+        "reason": "Test death",
+        "total_deaths": 1,
+        "death_reason_count": 1,
+        "time_since_last_death": null
+      },
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    },
+    {
+      "event_type": "travel_event",
+      "timestamp": "2025-07-31T16:50:55.099522",
+      "description": "Traveled to Test Destination",
+      "location": "Test Destination",
+      "coordinates": null,
+      "metadata": {
+        "destination": "Test Destination",
+        "total_travel_events": 1,
+        "destination_count": 1,
+        "travel_efficiency": null
+      },
+      "success": null,
+      "error_message": null,
+      "duration": null,
+      "xp_gained": null,
+      "credits_gained": null,
+      "items_gained": null,
+      "items_lost": null
+    }
+  ],
+  "combat_events": [
+    {
+      "combat_type": "attack",
+      "target_name": "Enemy",
+      "damage_dealt": null,
+      "damage_received": null,
+      "ability_used": null,
+      "weapon_used": null,
+      "combat_duration": null,
+      "victory": null,
+      "loot_gained": null,
+      "xp_gained": null,
+      "location": null,
+      "coordinates": null
+    }
+  ],
+  "quest_events": [
+    {
+      "quest_name": "Test Quest",
+      "quest_id": null,
+      "status": "completed",
+      "npc_name": null,
+      "location": null,
+      "objectives_completed": null,
+      "rewards_gained": null,
+      "xp_reward": 150,
+      "credit_reward": null,
+      "time_spent": null,
+      "difficulty": null
+    }
+  ]
+}

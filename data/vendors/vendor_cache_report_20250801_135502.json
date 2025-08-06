@@ -1,0 +1,260 @@
+{
+  "timestamp": "2025-08-01T13:55:02.583518",
+  "cache_stats": {
+    "total_vendors": 4,
+    "total_bazaar_listings": 0,
+    "total_items": 24,
+    "item_types": {
+      "supply": 14,
+      "weapon": 2,
+      "ammo": 1,
+      "medicine": 4,
+      "drink": 2,
+      "food": 1
+    },
+    "vendor_types": {
+      "vendor": 3,
+      "bazaar": 1
+    },
+    "scan_history_count": 1,
+    "cache_size_mb": 0.01
+  },
+  "vendors": {
+    "General Store_tatooine_mos_eisley": {
+      "vendor_name": "General Store",
+      "planet": "tatooine",
+      "city": "mos_eisley",
+      "coordinates": [
+        3456,
+        -4864
+      ],
+      "vendor_type": "vendor",
+      "last_scan": "2025-08-01T13:55:02.580999",
+      "items": [
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        }
+      ]
+    },
+    "Weapon Shop_tatooine_mos_eisley": {
+      "vendor_name": "Weapon Shop",
+      "planet": "tatooine",
+      "city": "mos_eisley",
+      "coordinates": [
+        3424,
+        -4896
+      ],
+      "vendor_type": "vendor",
+      "last_scan": "2025-08-01T13:55:02.580999",
+      "items": [
+        {
+          "name": "Rifle",
+          "quantity": 3,
+          "price": 15000,
+          "item_type": "weapon",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Pistol",
+          "quantity": 5,
+          "price": 8000,
+          "item_type": "weapon",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Ammo Pack",
+          "quantity": 50,
+          "price": 500,
+          "item_type": "ammo",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        }
+      ]
+    },
+    "Medical Supply_tatooine_mos_eisley": {
+      "vendor_name": "Medical Supply",
+      "planet": "tatooine",
+      "city": "mos_eisley",
+      "coordinates": [
+        3509,
+        -4811
+      ],
+      "vendor_type": "vendor",
+      "last_scan": "2025-08-01T13:55:02.580999",
+      "items": [
+        {
+          "name": "Stimpack",
+          "quantity": 20,
+          "price": 2000,
+          "item_type": "medicine",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Bandages",
+          "quantity": 30,
+          "price": 500,
+          "item_type": "medicine",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Antidote",
+          "quantity": 10,
+          "price": 1500,
+          "item_type": "medicine",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Basic Supply",
+          "quantity": 25,
+          "price": 100,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Local Item",
+          "quantity": 15,
+          "price": 200,
+          "item_type": "supply",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        }
+      ]
+    },
+    "Bazaar Terminal_tatooine_mos_eisley": {
+      "vendor_name": "Bazaar Terminal",
+      "planet": "tatooine",
+      "city": "mos_eisley",
+      "coordinates": [
+        3534,
+        -4786
+      ],
+      "vendor_type": "bazaar",
+      "last_scan": "2025-08-01T13:55:02.580999",
+      "items": [
+        {
+          "name": "Durindfire",
+          "quantity": 10,
+          "price": 5000,
+          "item_type": "drink",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Spice Wine",
+          "quantity": 5,
+          "price": 3000,
+          "item_type": "drink",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Bantha Steak",
+          "quantity": 20,
+          "price": 1000,
+          "item_type": "food",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        },
+        {
+          "name": "Stimpack",
+          "quantity": 15,
+          "price": 2000,
+          "item_type": "medicine",
+          "last_updated": "2025-08-01T13:55:02.580999"
+        }
+      ]
+    }
+  },
+  "bazaar_listings": {},
+  "scan_history": [
+    {
+      "timestamp": "2025-08-01T13:55:02.580835",
+      "location": [
+        "tatooine",
+        "mos_eisley",
+        [
+          3520,
+          -4800
+        ]
+      ],
+      "vendors_detected": 4,
+      "cache_size": 4
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "timestamp": "2025-07-31T16:40:40.208624",
+    "npc_name": "Mos Eisley Merchant",
+    "quest_id": "quest_1",
+    "quest_name": "Tatooine Artifact Hunt",
+    "confidence": 0.9,
+    "acquisition_type": "automatic",
+    "success": true,
+    "coordinates": [
+      500,
+      225
+    ]
+  },
+  {
+    "timestamp": "2025-07-31T16:40:40.209291",
+    "npc_name": "Mos Eisley Merchant",
+    "quest_id": "quest_1",
+    "quest_name": "Tatooine Artifact Hunt",
+    "confidence": 0.5,
+    "acquisition_type": "manual",
+    "success": true,
+    "coordinates": [
+      500,
+      225
+    ]
+  },
+  {
+    "timestamp": "2025-07-31T16:40:40.220054",
+    "npc_name": "Mos Eisley Merchant",
+    "quest_id": "quest_1",
+    "quest_name": "Tatooine Artifact Hunt",
+    "confidence": 0.7,
+    "acquisition_type": "suggested",
+    "success": true,
+    "coordinates": [
+      500,
+      225
+    ]
+  }
+]

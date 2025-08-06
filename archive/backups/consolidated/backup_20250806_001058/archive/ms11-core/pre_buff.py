@@ -1,0 +1,1 @@
+# Handles doctor/entertainer buffing before questing

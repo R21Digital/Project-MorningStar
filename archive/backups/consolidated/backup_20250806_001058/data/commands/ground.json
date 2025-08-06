@@ -1,0 +1,16 @@
+[
+  {
+    "command": "/afk",
+    "description": "Sets your character to AFK mode.",
+    "category": "social",
+    "usage": "/afk [optional_message]",
+    "source": "swgaide"
+  },
+  {
+    "command": "/attack",
+    "description": "Initiates a standard attack.",
+    "category": "combat",
+    "usage": "/attack [target]",
+    "source": "swgaide"
+  }
+]

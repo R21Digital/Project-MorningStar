@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWGR Todo Tracker Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #007bff;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            transition: width 0.3s ease;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        .section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        .quest-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .quest-item {
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #dee2e6;
+            transition: all 0.2s ease;
+        }
+        .quest-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .quest-item.completed {
+            border-left-color: #28a745;
+            opacity: 0.7;
+        }
+        .quest-item.in-progress {
+            border-left-color: #ffc107;
+        }
+        .quest-item.not-started {
+            border-left-color: #6c757d;
+        }
+        .quest-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .quest-meta {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .priority-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .priority-critical { background: #dc3545; color: white; }
+        .priority-high { background: #fd7e14; color: white; }
+        .priority-medium { background: #ffc107; color: black; }
+        .priority-low { background: #6c757d; color: white; }
+        .chart-container {
+            height: 300px;
+            margin-top: 20px;
+        }
+        .trend-chart {
+            width: 100%;
+            height: 200px;
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 SWGR Todo Tracker</h1>
+            <p>Track your progress toward 100% completion</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">22</div>
+                <div class="stat-label">Total Items</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Completed</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 4.5%"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,200</div>
+                <div class="stat-label">XP Gained</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5,000</div>
+                <div class="stat-label">Credits Earned</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Planets Visited</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Day Streak</div>
+            </div>
+        </div>
+        
+        <div class="content-grid">
+            <div class="main-content">
+                <div class="section">
+                    <h2>📋 Recent Quests</h2>
+                    <div class="quest-list">
+                        
+                <div class="quest-item in-progress">
+                    <div class="quest-title">
+                        Tatooine Trade Route
+                        <span class="priority-badge priority-medium">MEDIUM</span>
+                    </div>
+                    <div class="quest-meta">
+                        🌍 tatooine • 🎯 500 XP • 💰 2000 Credits
+                         • 👤 Mos Eisley Merchant
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Naboo Palace Security
+                        <span class="priority-badge priority-high">HIGH</span>
+                    </div>
+                    <div class="quest-meta">
+                        🌍 naboo • 🎯 800 XP • 💰 3500 Credits
+                         • 👤 Palace Guard
+                    </div>
+                </div>
+            
+                <div class="quest-item completed">
+                    <div class="quest-title">
+                        Corellia Artifact Hunt
+                        <span class="priority-badge priority-critical">CRITICAL</span>
+                    </div>
+                    <div class="quest-meta">
+                        🌍 corellia • 🎯 1200 XP • 💰 5000 Credits
+                         • 👤 Archaeologist
+                    </div>
+                </div>
+            
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>✅ Recent Todos</h2>
+                    <div class="quest-list">
+                        
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Complete Tatooine Trade Route
+                        <span class="priority-badge priority-medium">MEDIUM</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Quest • 🌍 tatooine
+                         • ⏱️ 30 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Collect 100 Credits
+                        <span class="priority-badge priority-low">LOW</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Collection • 🌍 Any
+                         • ⏱️ 60 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Visit All Planets
+                        <span class="priority-badge priority-high">HIGH</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Exploration • 🌍 Any
+                         • ⏱️ 120 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Complete Tatooine Trade Route
+                        <span class="priority-badge priority-medium">MEDIUM</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Quest • 🌍 tatooine
+                         • ⏱️ 30 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Collect 100 Credits
+                        <span class="priority-badge priority-low">LOW</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Collection • 🌍 Any
+                         • ⏱️ 60 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Visit All Planets
+                        <span class="priority-badge priority-high">HIGH</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Exploration • 🌍 Any
+                         • ⏱️ 120 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Complete Tatooine Trade Route
+                        <span class="priority-badge priority-medium">MEDIUM</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Quest • 🌍 tatooine
+                         • ⏱️ 30 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Collect 100 Credits
+                        <span class="priority-badge priority-low">LOW</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Collection • 🌍 Any
+                         • ⏱️ 60 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Visit All Planets
+                        <span class="priority-badge priority-high">HIGH</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Exploration • 🌍 Any
+                         • ⏱️ 120 min
+                    </div>
+                </div>
+            
+                <div class="quest-item not-started">
+                    <div class="quest-title">
+                        Complete Tatooine Trade Route
+                        <span class="priority-badge priority-medium">MEDIUM</span>
+                    </div>
+                    <div class="quest-meta">
+                        📂 Quest • 🌍 tatooine
+                         • ⏱️ 30 min
+                    </div>
+                </div>
+            
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="section">
+                    <h2>📊 Progress Trends</h2>
+                    <div class="trend-chart">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2>🌍 Planet Progress</h2>
+                    
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <strong>Corellia</strong>
+                        <span>0.0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0.0%"></div>
+                    </div>
+                </div>
+            
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <strong>Tatooine</strong>
+                        <span>0.0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0.0%"></div>
+                    </div>
+                </div>
+            
+                <div style="margin-bottom: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <strong>Naboo</strong>
+                        <span>0.0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0.0%"></div>
+                    </div>
+                </div>
+            
+                </div>
+                
+                <div class="section">
+                    <h2>📂 Category Progress</h2>
+                    <p>No category data available.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Last updated: 2025-07-31T17:05:52.619990</p>
+            <p>Generated by SWGR Todo Tracker v1.0</p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Chart.js configuration for trends
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        const trendData = [["2025-07-25", 0], ["2025-07-26", 0], ["2025-07-27", 0], ["2025-07-28", 0], ["2025-07-29", 0], ["2025-07-30", 0], ["2025-07-31", 7]];
+        
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: trendData.map(item => item[0]),
+                datasets: [{
+                    label: 'Daily Completions',
+                    data: trendData.map(item => item[1]),
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+        

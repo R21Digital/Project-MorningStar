@@ -1,0 +1,223 @@
+[
+  {
+    "name": "Mos Eisley Merchant",
+    "coordinates": [
+      500,
+      225
+    ],
+    "detected_time": 1754005033.6348367,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:13.658903"
+  },
+  {
+    "name": "Coronet Security",
+    "coordinates": [
+      800,
+      325
+    ],
+    "detected_time": 1754005033.6348374,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:13.660942"
+  },
+  {
+    "name": "Theed Palace Guard",
+    "coordinates": [
+      1200,
+      175
+    ],
+    "detected_time": 1754005033.6348379,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:13.662886"
+  },
+  {
+    "name": "Unknown Merchant",
+    "coordinates": [
+      1500,
+      400
+    ],
+    "detected_time": 1754005033.6648746,
+    "quest_icon_type": "quest",
+    "confidence": 0.45,
+    "planet": "tatooine",
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:13.664970"
+  },
+  {
+    "name": "Low Confidence NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005036.6382723,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:16.638498"
+  },
+  {
+    "name": "Test NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005042.9478278,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:22.947852"
+  },
+  {
+    "name": "Unknown Merchant",
+    "coordinates": [
+      1500,
+      400
+    ],
+    "detected_time": 1754005043.0572283,
+    "quest_icon_type": "quest",
+    "confidence": 0.45,
+    "planet": "tatooine",
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:23.057240"
+  },
+  {
+    "name": "Unknown NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005043.0660343,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:37:23.066053"
+  },
+  {
+    "name": "Test NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005114.6156545,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:38:34.615672"
+  },
+  {
+    "name": "Unknown Merchant",
+    "coordinates": [
+      1500,
+      400
+    ],
+    "detected_time": 1754005114.7267177,
+    "quest_icon_type": "quest",
+    "confidence": 0.45,
+    "planet": "tatooine",
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:38:34.726728"
+  },
+  {
+    "name": "Unknown NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005114.7353861,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:38:34.735402"
+  },
+  {
+    "name": "Test NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005189.239752,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:39:49.239769"
+  },
+  {
+    "name": "Unknown Merchant",
+    "coordinates": [
+      1500,
+      400
+    ],
+    "detected_time": 1754005189.3494184,
+    "quest_icon_type": "quest",
+    "confidence": 0.45,
+    "planet": "tatooine",
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:39:49.349429"
+  },
+  {
+    "name": "Unknown NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005189.3591762,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:39:49.359194"
+  },
+  {
+    "name": "Test NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005240.0930853,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:40:40.093103"
+  },
+  {
+    "name": "Unknown Merchant",
+    "coordinates": [
+      1500,
+      400
+    ],
+    "detected_time": 1754005240.200823,
+    "quest_icon_type": "quest",
+    "confidence": 0.45,
+    "planet": "tatooine",
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:40:40.200834"
+  },
+  {
+    "name": "Unknown NPC",
+    "coordinates": [
+      100,
+      100
+    ],
+    "detected_time": 1754005240.2147057,
+    "quest_icon_type": "quest",
+    "confidence": 0.5,
+    "planet": null,
+    "zone": null,
+    "context": "Detected at 2025-07-31T16:40:40.214724"
+  }
+]

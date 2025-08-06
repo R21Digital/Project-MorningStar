@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWGDB AI Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 20px 0 0 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #bdc3c7;
+            opacity: 0.8;
+        }
+
+        .mode-selector {
+            margin-bottom: 30px;
+        }
+
+        .mode-selector h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+
+        .mode-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mode-btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .mode-btn.active {
+            background: #3498db;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .mode-btn .icon {
+            font-size: 18px;
+        }
+
+        .mode-btn .info {
+            flex: 1;
+        }
+
+        .mode-btn .name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .mode-btn .desc {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        .session-info {
+            margin-top: auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .session-info h4 {
+            margin-bottom: 8px;
+            color: #ecf0f1;
+        }
+
+        .session-info p {
+            color: #bdc3c7;
+            margin-bottom: 5px;
+        }
+
+        .main-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 0 20px 20px 0;
+        }
+
+        .chat-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #ecf0f1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 0 20px 0 0;
+        }
+
+        .chat-header h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .chat-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px 30px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .message-content {
+            flex: 1;
+            max-width: 70%;
+        }
+
+        .message.user .message-content {
+            text-align: right;
+        }
+
+        .message-bubble {
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.assistant .message-bubble {
+            background: white;
+            color: #333;
+            border: 1px solid #e1e8ed;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-timestamp {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        .message.user .message-timestamp {
+            text-align: right;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e1e8ed;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #bdc3c7;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .chat-input {
+            padding: 20px 30px;
+            border-top: 1px solid #ecf0f1;
+            background: white;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 25px;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+            max-height: 120px;
+            min-height: 50px;
+        }
+
+        .message-input:focus {
+            border-color: #3498db;
+        }
+
+        .send-btn {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+
+        .welcome-message h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .welcome-message p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .example-questions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .example-question {
+            padding: 15px;
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .example-question:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-question h4 {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .example-question p {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                flex-direction: column;
+                height: calc(100vh - 20px);
+            }
+
+            .sidebar {
+                width: 100%;
+                border-radius: 20px 20px 0 0;
+                padding: 15px;
+            }
+
+            .main-chat {
+                border-radius: 0 0 20px 20px;
+            }
+
+            .chat-header {
+                border-radius: 0;
+                padding: 15px 20px;
+            }
+
+            .chat-messages {
+                padding: 15px 20px;
+            }
+
+            .chat-input {
+                padding: 15px 20px;
+                border-radius: 0 0 20px 20px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="header">
+                <h1>🤖 SWGDB AI</h1>
+                <p>Your AI assistant for Star Wars Galaxies</p>
+            </div>
+
+            <div class="mode-selector">
+                <h3>Conversation Modes</h3>
+                <div class="mode-buttons">
+                    <button class="mode-btn active" data-mode="game_guide">
+                        <span class="icon">🎮</span>
+                        <div class="info">
+                            <div class="name">Game Guide</div>
+                            <div class="desc">Quests, professions, locations</div>
+                        </div>
+                    </button>
+                    <button class="mode-btn" data-mode="bot_config_helper">
+                        <span class="icon">⚙️</span>
+                        <div class="info">
+                            <div class="name">Bot Config Helper</div>
+                            <div class="desc">MS11 bot settings & profiles</div>
+                        </div>
+                    </button>
+                    <button class="mode-btn" data-mode="lore_assistant">
+                        <span class="icon">📚</span>
+                        <div class="info">
+                            <div class="name">Lore Assistant</div>
+                            <div class="desc">Star Wars lore & background</div>
+                        </div>
+                    </button>
+                    <button class="mode-btn" data-mode="general_assistant">
+                        <span class="icon">💬</span>
+                        <div class="info">
+                            <div class="name">General Assistant</div>
+                            <div class="desc">General SWG & MS11 help</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="session-info">
+                <h4>Session Info</h4>
+                <p id="session-id">Session: <span>Loading...</span></p>
+                <p id="current-mode">Mode: <span>Game Guide</span></p>
+                <p id="message-count">Messages: <span>0</span></p>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <div class="chat-header">
+                <h2 id="chat-title">Game Guide Mode</h2>
+                <p id="chat-description">Assist with quests, professions, locations, and game mechanics</p>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="welcome-message">
+                    <h3>Welcome to SWGDB AI Companion! 🤖</h3>
+                    <p>I'm your AI assistant for Star Wars Galaxies. I can help you with quests, professions, locations, bot configuration, lore, and much more!</p>
+                    
+                    <div class="example-questions">
+                        <div class="example-question" data-question="Where can I find a Marksman trainer on Tatooine?">
+                            <h4>🎯 Trainer Locations</h4>
+                            <p>Find trainers for any profession</p>
+                        </div>
+                        <div class="example-question" data-question="What quests are available for level 10 players?">
+                            <h4>📜 Quest Information</h4>
+                            <p>Discover quests and requirements</p>
+                        </div>
+                        <div class="example-question" data-question="How do I configure my combat profile?">
+                            <h4>⚙️ Bot Configuration</h4>
+                            <p>MS11 bot setup and settings</p>
+                        </div>
+                        <div class="example-question" data-question="Tell me about the Mandalorians in SWG">
+                            <h4>📚 Lore & Background</h4>
+                            <p>Star Wars lore and game history</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <div class="input-container">
+                    <textarea 
+                        class="message-input" 
+                        id="message-input" 
+                        placeholder="Ask me anything about Star Wars Galaxies..."
+                        rows="1"
+                    ></textarea>
+                    <button class="send-btn" id="send-btn">
+                        <span>Send</span>
+                        <span>📤</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentSessionId = null;
+        let currentMode = 'game_guide';
+        let messageCount = 0;
+        let isProcessing = false;
+
+        // Mode configurations
+        const modes = {
+            game_guide: {
+                title: 'Game Guide Mode',
+                description: 'Assist with quests, professions, locations, and game mechanics',
+                icon: '🎮',
+                color: '#4CAF50'
+            },
+            bot_config_helper: {
+                title: 'Bot Config Helper',
+                description: 'Help configure MS11 bot settings and profiles',
+                icon: '⚙️',
+                color: '#2196F3'
+            },
+            lore_assistant: {
+                title: 'Lore Assistant',
+                description: 'Provide Star Wars lore and SWG-specific background information',
+                icon: '📚',
+                color: '#9C27B0'
+            },
+            general_assistant: {
+                title: 'General Assistant',
+                description: 'General SWG and MS11 assistance',
+                icon: '💬',
+                color: '#FF9800'
+            }
+        };
+
+        // Initialize the chat
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeChat();
+            setupEventListeners();
+        });
+
+        function initializeChat() {
+            // Generate session ID
+            currentSessionId = generateSessionId();
+            
+            // Update session info
+            updateSessionInfo();
+            
+            // Set initial mode
+            setMode('game_guide');
+        }
+
+        function setupEventListeners() {
+            // Mode buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const mode = this.dataset.mode;
+                    setMode(mode);
+                });
+            });
+
+            // Send button
+            document.getElementById('send-btn').addEventListener('click', sendMessage);
+
+            // Message input
+            const messageInput = document.getElementById('message-input');
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Auto-resize textarea
+            messageInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+
+            // Example questions
+            document.querySelectorAll('.example-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const questionText = this.dataset.question;
+                    document.getElementById('message-input').value = questionText;
+                    sendMessage();
+                });
+            });
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            
+            // Update active button
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-mode="${mode}"]`).classList.add('active');
+            
+            // Update chat header
+            const modeConfig = modes[mode];
+            document.getElementById('chat-title').textContent = modeConfig.title;
+            document.getElementById('chat-description').textContent = modeConfig.description;
+            
+            // Update session info
+            updateSessionInfo();
+        }
+
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+            
+            if (!message || isProcessing) return;
+            
+            // Add user message
+            addMessage('user', message);
+            
+            // Clear input
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Process message
+            processMessage(message);
+        }
+
+        function addMessage(role, content) {
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            // Remove welcome message if it exists
+            const welcomeMessage = messagesContainer.querySelector('.welcome-message');
+            if (welcomeMessage) {
+                welcomeMessage.remove();
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = role === 'user' ? '👤' : '🤖';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.textContent = content;
+            
+            const timestamp = document.createElement('div');
+            timestamp.className = 'message-timestamp';
+            timestamp.textContent = new Date().toLocaleTimeString();
+            
+            contentDiv.appendChild(bubble);
+            contentDiv.appendChild(timestamp);
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(contentDiv);
+            
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Update message count
+            if (role === 'user') {
+                messageCount++;
+                updateSessionInfo();
+            }
+        }
+
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            indicator.style.display = 'block';
+            
+            const messagesContainer = document.getElementById('chat-messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typing-indicator');
+            indicator.style.display = 'none';
+        }
+
+        async function processMessage(message) {
+            isProcessing = true;
+            
+            try {
+                // Simulate API call (replace with actual API endpoint)
+                const response = await simulateAIResponse(message);
+                
+                hideTypingIndicator();
+                addMessage('assistant', response);
+                
+            } catch (error) {
+                hideTypingIndicator();
+                addMessage('assistant', 'Sorry, I encountered an error. Please try again.');
+                console.error('Error processing message:', error);
+            }
+            
+            isProcessing = false;
+        }
+
+        async function simulateAIResponse(message) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+            
+            // Simple response logic based on keywords
+            const messageLower = message.toLowerCase();
+            
+            if (messageLower.includes('trainer') || messageLower.includes('training')) {
+                return `I can help you find trainers! Based on the available data, I have information about trainer locations, skill requirements, and training costs. What specific profession or skill are you interested in?`;
+            } else if (messageLower.includes('quest') || messageLower.includes('mission')) {
+                return `I can help you with quests! I have data about quest locations, requirements, rewards, and difficulty levels. What specific quest are you looking for?`;
+            } else if (messageLower.includes('config') || messageLower.includes('setting') || messageLower.includes('ms11')) {
+                return `I can help you with MS11 bot configuration! I can provide guidance on combat profiles, crafting settings, travel automation, anti-detection, and other bot features. What specific configuration do you need help with?`;
+            } else if (messageLower.includes('lore') || messageLower.includes('background') || messageLower.includes('story')) {
+                return `I can help you with Star Wars lore and SWG background information! I can share information about factions, planets, characters, and the game's story. What aspect of the lore interests you?`;
+            } else {
+                return `I'm here to help with Star Wars Galaxies! I can assist with quests, professions, locations, bot configuration, lore, and general game information. What would you like to know about?`;
+            }
+        }
+
+        function generateSessionId() {
+            return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        }
+
+        function updateSessionInfo() {
+            document.getElementById('session-id').innerHTML = `Session: <span>${currentSessionId}</span>`;
+            document.getElementById('current-mode').innerHTML = `Mode: <span>${modes[currentMode].title}</span>`;
+            document.getElementById('message-count').innerHTML = `Messages: <span>${messageCount}</span>`;
+        }
+    </script>
+</body>
+</html> 
