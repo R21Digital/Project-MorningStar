@@ -1,8 +1,24 @@
-# Additional dependencies required when running the test suite
-# Install these alongside `requirements.txt` before invoking pytest
-#   pip install -r requirements.txt -r requirements-test.txt
-# or run `scripts/setup_test_env.sh`
+# Test-specific dependencies
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.1
+pytest-xdist>=3.3.1
+pytest-html>=3.2.0
+pytest-json-report>=1.5.0
 
-requests>=2.0   # used by profession_importer tests
-discord.py      # used by Discord relay tests
-Flask           # used by dashboard tests
+# Code quality and security
+bandit>=1.7.5
+coverage>=7.3.2
+black>=23.12.1
+isort>=5.13.2
+flake8>=7.0.0
+mypy>=1.8.0
+ruff>=0.1.9
+
+# Platform-specific test dependencies
+# These will be mocked on Linux
+pygetwindow>=0.0.9; sys_platform == "win32"
+pyautogui>=0.9.54; sys_platform == "win32"
+
+# Virtual display for GUI tests on Linux
+xvfbwrapper>=1.2.1; sys_platform == "linux"

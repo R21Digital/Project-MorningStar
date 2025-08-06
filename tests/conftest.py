@@ -3,6 +3,7 @@ import sys
 import types
 from pathlib import Path
 import pytest
+from unittest.mock import Mock, patch
 
 try:
     import rich  # noqa: F401
@@ -89,3 +90,54 @@ def trainer_file_env(monkeypatch):
     monkeypatch.setenv("TRAINER_FILE", str(default))
     yield
     monkeypatch.delenv("TRAINER_FILE", raising=False)
+
+# Platform-specific test configuration
+def pytest_configure(config):
+    """Configure pytest for platform-specific test skipping."""
+    # Add custom markers
+    config.addinivalue_line(
+        "markers", "windows_only: mark test to run only on Windows"
+    )
+    config.addinivalue_line(
+        "markers", "linux_skip: mark test to skip on Linux"
+    )
+
+def pytest_collection_modifyitems(config, items):
+    """Modify test collection to skip platform-specific tests."""
+    skip_windows_only = pytest.mark.skip(reason="Test requires Windows")
+    skip_linux = pytest.mark.skip(reason="Test not supported on Linux")
+    
+    for item in items:
+        # Skip Windows-only tests on non-Windows platforms
+        if "windows_only" in item.keywords and not sys.platform.startswith("win"):
+            item.add_marker(skip_windows_only)
+        
+        # Skip Linux-incompatible tests on Linux
+        if "linux_skip" in item.keywords and sys.platform.startswith("linux"):
+            item.add_marker(skip_linux)
+
+@pytest.fixture(autouse=True)
+def mock_pygetwindow():
+    """Mock PyGetWindow for Linux compatibility."""
+    if sys.platform.startswith("linux"):
+        with patch.dict('sys.modules', {
+            'pygetwindow': Mock(),
+            'pyautogui': Mock(),
+        }):
+            yield
+    else:
+        yield
+
+@pytest.fixture(autouse=True)
+def mock_windows_dependencies():
+    """Mock Windows-specific dependencies on non-Windows platforms."""
+    if not sys.platform.startswith("win"):
+        with patch.dict('sys.modules', {
+            'win32api': Mock(),
+            'win32gui': Mock(),
+            'win32con': Mock(),
+            'win32process': Mock(),
+        }):
+            yield
+    else:
+        yield

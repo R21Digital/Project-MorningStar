@@ -47,7 +47,8 @@ try:
 except ImportError as e:
     print(f"❌ Import error: {e}")
     print("Make sure you're running from the project root directory")
-    sys.exit(1)
+    # Don't call sys.exit() in tests - raise exception instead
+    raise ImportError(f"Failed to import required modules: {e}") from e
 
 
 class TestQuestStatus(unittest.TestCase):
