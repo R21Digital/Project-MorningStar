@@ -894,6 +894,7 @@ def api_create_session():
     profile = payload.get('profile') or 'default_profile'
     character = payload.get('character') or 'Player'
     mode = payload.get('mode') or 'quest'
+    enforce_preflight = bool(payload.get('preflight', True))
     sid = str(uuid.uuid4())
     spec = {
         'id': sid,
@@ -906,6 +907,36 @@ def api_create_session():
     with sessions_lock:
         sessions_store[sid] = spec
     socketio.emit('session', {"type": "session", "data": spec})
+
+    # Optional preflight
+    if enforce_preflight:
+        errors = []
+        # Attachment check
+        try:
+            from ms11lib.window import find_swg_window
+            if not find_swg_window():
+                errors.append('Game window not detected. Please open SWG and ensure it is visible.')
+        except Exception:
+            pass
+        # OCR regions configured
+        regions = _load_regions()
+        for k in ('hotbar','chat'):
+            r = regions.get(k) or {}
+            if not r or int(r.get('w',0)) <= 0 or int(r.get('h',0)) <= 0:
+                errors.append(f'OCR region "{k}" is not configured. Visit /ocr to calibrate.')
+        # Shortcuts exist
+        if not _load_shortcuts():
+            errors.append('No shortcuts configured. Set up shortcuts in /shortcuts.')
+        # Capabilities (mounts) verified
+        try:
+            if PROBE_AVAILABLE and probe is not None:
+                res = probe.ensure_preflight(required=["mounts"], verify=True)
+                if not res.get('ok', True):
+                    errors.append('Capabilities preflight failed (mounts).')
+        except Exception:
+            pass
+        if errors:
+            return jsonify({"ok": False, "errors": errors}), 400
 
     # launch runner process bound to this session
     pid = f'session:{sid}'
