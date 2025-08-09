@@ -384,6 +384,17 @@ def serve_public_js(filename: str):
     public_js = Path(__file__).parents[2] / 'public' / 'js'
     return send_from_directory(str(public_js), filename)
 
+# Static images (logos, icons)
+@app.route('/img/<path:filename>')
+def serve_public_img(filename: str):
+    public_img = Path(__file__).parents[2] / 'public' / 'img'
+    # Ensure directory exists to avoid 500s when missing. Create lazily.
+    try:
+        public_img.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
+    return send_from_directory(str(public_img), filename)
+
 # Disable caching of HTML to avoid stale UI after edits
 @app.after_request
 def add_no_cache_headers(response):
