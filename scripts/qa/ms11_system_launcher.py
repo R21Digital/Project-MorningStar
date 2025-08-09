@@ -25,7 +25,7 @@ class MS11SystemLauncher:
         self.ports = {
             'main_interface': 5000,
             'config_ui': 5001,
-            'bot_monitor': None  # Desktop app, no port
+            'control_center': None  # Desktop app, no port
         }
         
         # Component configurations
@@ -44,10 +44,10 @@ class MS11SystemLauncher:
                 'type': 'web',
                 'auto_start': True
             },
-            'bot_monitor': {
-                'script': 'bot_attachment_monitor.py',
-                'name': 'Bot Attachment Monitor',
-                'description': 'Desktop application for monitoring bot status',
+            'control_center': {
+                'script': 'ms11_control_center.py',
+                'name': 'MS11 Control Center',
+                'description': 'Desktop control center with embedded dashboard and attachment status',
                 'type': 'desktop',
                 'auto_start': True
             }
@@ -74,6 +74,7 @@ class MS11SystemLauncher:
             'main_interface': self.script_dir / 'requirements_main_interface.txt',
             'config_ui': self.script_dir / 'requirements_ui.txt',
             'bot_monitor': self.script_dir / 'requirements_monitor.txt',
+            'control_center': self.script_dir / 'requirements_control_center.txt',
         }
         if component in fallback_map:
             candidates.append(fallback_map[component])
