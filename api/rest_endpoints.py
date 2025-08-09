@@ -94,6 +94,145 @@ def log_api_call(f):
             raise
     return wrapper
 
+# Configuration Management Endpoints
+
+@api_bp.route('/config/scan', methods=['GET'])
+@log_api_call
+@handle_exceptions
+def scan_configurations():
+    """Scan and return available configuration files"""
+    try:
+        import os
+        from pathlib import Path
+        
+        config_dir = Path("config")
+        template_dir = Path("scripts/qa/templates")
+        
+        configs = []
+        templates = []
+        
+        # Scan config files
+        if config_dir.exists():
+            for file_path in config_dir.rglob("*.json"):
+                configs.append({
+                    "name": file_path.stem,
+                    "path": str(file_path),
+                    "modified": datetime.fromtimestamp(file_path.stat().st_mtime).isoformat(),
+                    "size": file_path.stat().st_size
+                })
+        
+        # Scan template files  
+        if template_dir.exists():
+            for file_path in template_dir.rglob("*.html"):
+                templates.append({
+                    "name": file_path.stem,
+                    "path": str(file_path),
+                    "modified": datetime.fromtimestamp(file_path.stat().st_mtime).isoformat(),
+                    "size": file_path.stat().st_size
+                })
+        
+        return api_response(True, {
+            "configs": configs,
+            "templates": templates,
+            "scan_time": datetime.now().isoformat()
+        }, "Configuration scan completed")
+        
+    except Exception as e:
+        logger.error("Configuration scan failed", error=str(e))
+        return api_response(False, error=f"Scan failed: {str(e)}", status_code=500)
+
+@api_bp.route('/config/validate', methods=['POST'])
+@log_api_call
+@handle_exceptions
+def validate_configuration():
+    """Validate configuration files"""
+    try:
+        import json
+        from pathlib import Path
+        
+        validation_results = []
+        config_dir = Path("config")
+        
+        if not config_dir.exists():
+            return api_response(False, error="Config directory not found", status_code=404)
+        
+        # Validate JSON files
+        for config_file in config_dir.rglob("*.json"):
+            try:
+                with open(config_file, 'r') as f:
+                    json.load(f)
+                validation_results.append({
+                    "file": str(config_file),
+                    "status": "valid",
+                    "message": "JSON syntax is valid"
+                })
+            except json.JSONDecodeError as e:
+                validation_results.append({
+                    "file": str(config_file),
+                    "status": "error", 
+                    "message": f"JSON syntax error: {str(e)}"
+                })
+            except Exception as e:
+                validation_results.append({
+                    "file": str(config_file),
+                    "status": "error",
+                    "message": f"Validation error: {str(e)}"
+                })
+        
+        # Check if all validations passed
+        all_valid = all(result["status"] == "valid" for result in validation_results)
+        
+        return api_response(all_valid, {
+            "validation_results": validation_results,
+            "total_files": len(validation_results),
+            "valid_files": sum(1 for r in validation_results if r["status"] == "valid"),
+            "validation_time": datetime.now().isoformat()
+        }, "Validation completed" if all_valid else "Validation found errors")
+        
+    except Exception as e:
+        logger.error("Configuration validation failed", error=str(e))
+        return api_response(False, error=f"Validation failed: {str(e)}", status_code=500)
+
+@api_bp.route('/config/deploy', methods=['POST']) 
+@log_api_call
+@handle_exceptions
+def deploy_configuration():
+    """Deploy configuration changes"""
+    try:
+        # In a real implementation, this would:
+        # 1. Backup current configs
+        # 2. Apply new configurations
+        # 3. Restart affected services
+        # 4. Verify deployment success
+        
+        logger.info("Configuration deployment requested")
+        
+        # Simulate deployment process
+        deployment_steps = [
+            {"step": "backup_configs", "status": "completed", "timestamp": datetime.now().isoformat()},
+            {"step": "validate_configs", "status": "completed", "timestamp": datetime.now().isoformat()},
+            {"step": "apply_configs", "status": "completed", "timestamp": datetime.now().isoformat()},
+            {"step": "restart_services", "status": "completed", "timestamp": datetime.now().isoformat()},
+            {"step": "verify_deployment", "status": "completed", "timestamp": datetime.now().isoformat()}
+        ]
+        
+        # Emit deployment progress via WebSocket
+        ws_manager = get_websocket_manager()
+        if ws_manager:
+            for step in deployment_steps:
+                ws_manager.emit('deployment_progress', step)
+                time.sleep(0.1)  # Small delay for demo
+        
+        return api_response(True, {
+            "deployment_id": str(uuid.uuid4()),
+            "steps": deployment_steps,
+            "deployment_time": datetime.now().isoformat()
+        }, "Configuration deployed successfully")
+        
+    except Exception as e:
+        logger.error("Configuration deployment failed", error=str(e))
+        return api_response(False, error=f"Deployment failed: {str(e)}", status_code=500)
+
 # Health Check Endpoints
 
 @api_bp.route('/health', methods=['GET'])

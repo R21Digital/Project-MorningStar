@@ -171,18 +171,26 @@
         <section class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
             <div class="flex items-center justify-between mb-3">
                 <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Launch Session</h2>
-                <div id="attachmentPill" class="text-xs px-2 py-1 rounded bg-neutral-800 ring-1 ring-neutral-700">Attachment: —</div>
+                <div id="attachmentPill" class="text-xs px-2 py-1 rounded bg-neutral-800 ring-1 ring-neutral-700">
+                    Attachment: —</div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
-                <input id="inpCharacter" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100" placeholder="Character name" />
-                <input id="inpProfile" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100" placeholder="Profile id (e.g. legacy_tatooine_01)" />
-                <select id="selMode" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100">
+                <input id="inpCharacter"
+                    class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100"
+                    placeholder="Character name" />
+                <input id="inpProfile"
+                    class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100"
+                    placeholder="Profile id (e.g. legacy_tatooine_01)" />
+                <select id="selMode"
+                    class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100">
                     <option value="quest">Quest</option>
                     <option value="farm">Farm</option>
                     <option value="trainer">Trainer</option>
                     <option value="paper">Paper</option>
                 </select>
-                <button id="btnLaunch" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white ring-1 ring-emerald-700">Start Session</button>
+                <button id="btnLaunch"
+                    class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white ring-1 ring-emerald-700">Start
+                    Session</button>
             </div>
         </section>
 
@@ -212,7 +220,8 @@
         <section class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
             <div class="flex items-center justify-between mb-2">
                 <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Live Logs</h2>
-                <button id="btnClearLog" class="text-xs px-2 py-1 rounded bg-neutral-900 ring-1 ring-neutral-800">Clear</button>
+                <button id="btnClearLog"
+                    class="text-xs px-2 py-1 rounded bg-neutral-900 ring-1 ring-neutral-800">Clear</button>
             </div>
             <pre id="logPane" class="h-56 overflow-auto bg-black/60 p-3 rounded text-xs"></pre>
         </section>
@@ -278,28 +287,28 @@
                     <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5">
                       <div class="flex items-center justify-between">
                         <div class="font-medium text-neutral-100">${m.name}</div>
-                        <span class="text-xs px-2 py-1 rounded ${m.health==='active'?'bg-emerald-700 text-emerald-100':m.health==='degraded'?'bg-amber-700 text-amber-100':m.health==='error'?'bg-rose-700 text-rose-100':'bg-neutral-800 text-neutral-300'}">${m.health}</span>
+                        <span class="text-xs px-2 py-1 rounded ${m.health === 'active' ? 'bg-emerald-700 text-emerald-100' : m.health === 'degraded' ? 'bg-amber-700 text-amber-100' : m.health === 'error' ? 'bg-rose-700 text-rose-100' : 'bg-neutral-800 text-neutral-300'}">${m.health}</span>
                       </div>
                       <div class="text-neutral-400 text-sm mt-1">${m.description}</div>
                       <dl class="grid grid-cols-3 gap-2 mt-3">
-                        ${m.metrics.slice(0,3).map(mm => `
+                        ${m.metrics.slice(0, 3).map(mm => `
                           <div class="rounded ring-1 ring-neutral-800 bg-neutral-900/60 p-2">
                             <dt class="text-neutral-400 text-xs">${mm.label}</dt>
                             <dd class="text-neutral-100">${fmt(mm.value)}</dd>
                           </div>`).join('')}
                       </dl>
                     </div>`).join('');
-                const active = modules.filter(m => m.health==='active').length;
+                const active = modules.filter(m => m.health === 'active').length;
                 const statsRow = document.getElementById('statsRow');
                 if (statsRow) statsRow.innerHTML = [
-                    { label:'Active Modules', value: active },
-                    { label:'Total Modules',  value: modules.length },
+                    { label: 'Active Modules', value: active },
+                    { label: 'Total Modules', value: modules.length },
                 ].map(s => `
                     <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5">
                       <div class="text-sm text-neutral-400">${s.label}</div>
                       <div class="mt-2 text-3xl font-semibold text-neutral-100">${fmt(s.value)}</div>
                     </div>`).join('');
-            } catch {}
+            } catch { }
         }
 
         async function loadSystem() {
@@ -319,7 +328,7 @@
                     <div class="text-sm text-neutral-400">Memory Used</div>
                     <div class="mt-2 text-3xl font-semibold text-neutral-100">${fmt(s.memUsedPct)}%</div>
                   </div>`);
-            } catch {}
+            } catch { }
         }
 
         async function loadSessions() {
@@ -330,55 +339,57 @@
                 if (!tb) return;
                 tb.innerHTML = sessions.map(s => `
                   <tr class="border-t border-neutral-800">
-                    <td class="p-2">${s.id.slice(0,8)}</td>
+                    <td class="p-2">${s.id.slice(0, 8)}</td>
                     <td class="p-2">${s.character}</td>
                     <td class="p-2">${s.profile}</td>
                     <td class="p-2">${s.mode}</td>
                     <td class="p-2">${s.status}</td>
-                    <td class="p-2 text-right">${s.status==='running'?`<button data-stop="${s.id}" class="px-2 py-1 rounded bg-neutral-900 ring-1 ring-neutral-800 text-xs">Stop</button>`:''}</td>
+                    <td class="p-2 text-right">${s.status === 'running' ? `<button data-stop="${s.id}" class="px-2 py-1 rounded bg-neutral-900 ring-1 ring-neutral-800 text-xs">Stop</button>` : ''}</td>
                   </tr>`).join('');
                 $$('#sessionsTbody [data-stop]').forEach(b => b.addEventListener('click', async ev => {
                     const id = ev.currentTarget.getAttribute('data-stop');
-                    await fetch(`/api/sessions/${id}`, { method:'DELETE' });
+                    await fetch(`/api/sessions/${id}`, { method: 'DELETE' });
                 }));
-            } catch {}
+            } catch { }
         }
 
         const socket = io();
         const logs = [];
         const logPane = document.getElementById('logPane');
-        function pushLog(line){
+        function pushLog(line) {
             if (!logPane) return;
-            logs.push(line); while (logs.length>200) logs.shift();
+            logs.push(line); while (logs.length > 200) logs.shift();
             logPane.textContent = logs.join('\n');
             logPane.scrollTop = logPane.scrollHeight;
         }
 
-        try { document.getElementById('btnClearLog')?.addEventListener('click', () => { logs.length=0; if (logPane) logPane.textContent=''; }); } catch {}
-        try { document.getElementById('btnStartAll')?.addEventListener('click', () => fetch('/api/services/startAll', {method:'POST'})); } catch {}
-        try { document.getElementById('btnStopAll')?.addEventListener('click', () => fetch('/api/services/stopAll', {method:'POST'})); } catch {}
-        try { document.getElementById('btnLaunch')?.addEventListener('click', async ()=>{
-            const body = {
-                character: document.getElementById('inpCharacter')?.value || 'Player',
-                profile: document.getElementById('inpProfile')?.value || 'legacy_tatooine_01',
-                mode: document.getElementById('selMode')?.value || 'quest',
-            };
-            await fetch('/api/sessions', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
-        }); } catch {}
+        try { document.getElementById('btnClearLog')?.addEventListener('click', () => { logs.length = 0; if (logPane) logPane.textContent = ''; }); } catch { }
+        try { document.getElementById('btnStartAll')?.addEventListener('click', () => fetch('/api/services/startAll', { method: 'POST' })); } catch { }
+        try { document.getElementById('btnStopAll')?.addEventListener('click', () => fetch('/api/services/stopAll', { method: 'POST' })); } catch { }
+        try {
+            document.getElementById('btnLaunch')?.addEventListener('click', async () => {
+                const body = {
+                    character: document.getElementById('inpCharacter')?.value || 'Player',
+                    profile: document.getElementById('inpProfile')?.value || 'legacy_tatooine_01',
+                    mode: document.getElementById('selMode')?.value || 'quest',
+                };
+                await fetch('/api/sessions', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+            });
+        } catch { }
 
-        socket.on('log',    e => pushLog(`[${(e.level||'info').toUpperCase()}] [${e.source}] ${e.msg}`));
+        socket.on('log', e => pushLog(`[${(e.level || 'info').toUpperCase()}] [${e.source}] ${e.msg}`));
         socket.on('metric', e => {
-            if (e.key === 'attachment'){
+            if (e.key === 'attachment') {
                 const pill = document.getElementById('attachmentPill');
                 if (!pill) return;
-                const on = Number(e.value)===1;
-                pill.textContent = `Attachment: ${on?'Attached':'Detached'}`;
-                pill.className = `text-xs px-2 py-1 rounded ${on?'bg-emerald-700':'bg-neutral-800'}`;
+                const on = Number(e.value) === 1;
+                pill.textContent = `Attachment: ${on ? 'Attached' : 'Detached'}`;
+                pill.className = `text-xs px-2 py-1 rounded ${on ? 'bg-emerald-700' : 'bg-neutral-800'}`;
             }
         });
         socket.on('session', _ => loadSessions());
 
-        (async function boot(){
+        (async function boot() {
             await loadModules();
             await loadSystem();
             await loadSessions();
