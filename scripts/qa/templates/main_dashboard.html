@@ -21,7 +21,7 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 
 <body class="bg-neutral-950 text-neutral-200 min-h-screen">
@@ -82,12 +82,12 @@
                 <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Quick Actions</h2>
             </div>
             <div class="flex flex-wrap gap-3">
-                <button
+                <button id="btnStartAll"
                     class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary-600 hover:bg-primary-500 text-white ring-1 ring-primary-700"
                     onclick="quickAction('start_all')">
                     <i class="fas fa-play"></i> Start All Services
                 </button>
-                <button
+                <button id="btnStopAll"
                     class="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-neutral-800 hover:bg-neutral-700 text-neutral-100 ring-1 ring-neutral-700"
                     onclick="quickAction('stop_all')">
                     <i class="fas fa-stop"></i> Stop All Services
@@ -108,6 +108,11 @@
                     <i class="fas fa-stethoscope"></i> Run Diagnostics
                 </button>
             </div>
+        </section>
+
+        <!-- Lightweight Stats Row (populated by ms11-dashboard.js) -->
+        <section>
+            <div id="statsRow" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-2"></div>
         </section>
 
         <!-- System Statistics -->
@@ -139,7 +144,7 @@
         <!-- MS11 Modules -->
         <section class="space-y-4">
             <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">System Modules</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div id="modulesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {% for module_id, module in modules.items() %}
                 <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
                     onclick="navigateToModule('{{ module.route }}')">
@@ -160,6 +165,56 @@
                 </div>
                 {% endfor %}
             </div>
+        </section>
+
+        <!-- Session Launcher -->
+        <section class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Launch Session</h2>
+                <div id="attachmentPill" class="text-xs px-2 py-1 rounded bg-neutral-800 ring-1 ring-neutral-700">Attachment: —</div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                <input id="inpCharacter" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100" placeholder="Character name" />
+                <input id="inpProfile" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100" placeholder="Profile id (e.g. legacy_tatooine_01)" />
+                <select id="selMode" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100">
+                    <option value="quest">Quest</option>
+                    <option value="farm">Farm</option>
+                    <option value="trainer">Trainer</option>
+                    <option value="paper">Paper</option>
+                </select>
+                <button id="btnLaunch" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white ring-1 ring-emerald-700">Start Session</button>
+            </div>
+        </section>
+
+        <!-- Sessions Table -->
+        <section class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Sessions</h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <thead class="text-neutral-400">
+                        <tr>
+                            <th class="text-left p-2">ID</th>
+                            <th class="text-left p-2">Character</th>
+                            <th class="text-left p-2">Profile</th>
+                            <th class="text-left p-2">Mode</th>
+                            <th class="text-left p-2">Status</th>
+                            <th class="p-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="sessionsTbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Live Logs -->
+        <section class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Live Logs</h2>
+                <button id="btnClearLog" class="text-xs px-2 py-1 rounded bg-neutral-900 ring-1 ring-neutral-800">Clear</button>
+            </div>
+            <pre id="logPane" class="h-56 overflow-auto bg-black/60 p-3 rounded text-xs"></pre>
         </section>
 
         <!-- Performance Chart -->
@@ -205,6 +260,130 @@
 
     <!-- Notification Container -->
     <div id="notificationContainer" class="fixed bottom-6 right-6 space-y-2 z-50"></div>
+
+    <!-- Optional: Hook minimal client wiring if not using the standalone public page -->
+    <script type="module">
+        const $ = s => document.querySelector(s);
+        const $$ = s => Array.from(document.querySelectorAll(s));
+        const fmt = v => typeof v === 'number' ? v.toLocaleString() : v;
+
+        async function loadModules() {
+            try {
+                let res = await fetch('/api/modules/overview');
+                if (!res.ok) res = await fetch('/api/system/overview');
+                const { modules } = await res.json();
+                const grid = document.getElementById('modulesGrid');
+                if (!grid) return;
+                grid.innerHTML = modules.map(m => `
+                    <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5">
+                      <div class="flex items-center justify-between">
+                        <div class="font-medium text-neutral-100">${m.name}</div>
+                        <span class="text-xs px-2 py-1 rounded ${m.health==='active'?'bg-emerald-700 text-emerald-100':m.health==='degraded'?'bg-amber-700 text-amber-100':m.health==='error'?'bg-rose-700 text-rose-100':'bg-neutral-800 text-neutral-300'}">${m.health}</span>
+                      </div>
+                      <div class="text-neutral-400 text-sm mt-1">${m.description}</div>
+                      <dl class="grid grid-cols-3 gap-2 mt-3">
+                        ${m.metrics.slice(0,3).map(mm => `
+                          <div class="rounded ring-1 ring-neutral-800 bg-neutral-900/60 p-2">
+                            <dt class="text-neutral-400 text-xs">${mm.label}</dt>
+                            <dd class="text-neutral-100">${fmt(mm.value)}</dd>
+                          </div>`).join('')}
+                      </dl>
+                    </div>`).join('');
+                const active = modules.filter(m => m.health==='active').length;
+                const statsRow = document.getElementById('statsRow');
+                if (statsRow) statsRow.innerHTML = [
+                    { label:'Active Modules', value: active },
+                    { label:'Total Modules',  value: modules.length },
+                ].map(s => `
+                    <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5">
+                      <div class="text-sm text-neutral-400">${s.label}</div>
+                      <div class="mt-2 text-3xl font-semibold text-neutral-100">${fmt(s.value)}</div>
+                    </div>`).join('');
+            } catch {}
+        }
+
+        async function loadSystem() {
+            try {
+                const r = await fetch('/api/system/info');
+                if (!r.ok) return;
+                const s = await r.json();
+                const row = document.getElementById('statsRow');
+                if (!row) return;
+                row.insertAdjacentHTML('beforeend', `
+                  <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5">
+                    <div class="text-sm text-neutral-400">CPU</div>
+                    <div class="mt-2 text-3xl font-semibold text-neutral-100">${fmt(s.cpu)}</div>
+                  </div>`);
+                row.insertAdjacentHTML('beforeend', `
+                  <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-5">
+                    <div class="text-sm text-neutral-400">Memory Used</div>
+                    <div class="mt-2 text-3xl font-semibold text-neutral-100">${fmt(s.memUsedPct)}%</div>
+                  </div>`);
+            } catch {}
+        }
+
+        async function loadSessions() {
+            try {
+                const r = await fetch('/api/sessions');
+                const { sessions } = await r.json();
+                const tb = document.getElementById('sessionsTbody');
+                if (!tb) return;
+                tb.innerHTML = sessions.map(s => `
+                  <tr class="border-t border-neutral-800">
+                    <td class="p-2">${s.id.slice(0,8)}</td>
+                    <td class="p-2">${s.character}</td>
+                    <td class="p-2">${s.profile}</td>
+                    <td class="p-2">${s.mode}</td>
+                    <td class="p-2">${s.status}</td>
+                    <td class="p-2 text-right">${s.status==='running'?`<button data-stop="${s.id}" class="px-2 py-1 rounded bg-neutral-900 ring-1 ring-neutral-800 text-xs">Stop</button>`:''}</td>
+                  </tr>`).join('');
+                $$('#sessionsTbody [data-stop]').forEach(b => b.addEventListener('click', async ev => {
+                    const id = ev.currentTarget.getAttribute('data-stop');
+                    await fetch(`/api/sessions/${id}`, { method:'DELETE' });
+                }));
+            } catch {}
+        }
+
+        const socket = io();
+        const logs = [];
+        const logPane = document.getElementById('logPane');
+        function pushLog(line){
+            if (!logPane) return;
+            logs.push(line); while (logs.length>200) logs.shift();
+            logPane.textContent = logs.join('\n');
+            logPane.scrollTop = logPane.scrollHeight;
+        }
+
+        try { document.getElementById('btnClearLog')?.addEventListener('click', () => { logs.length=0; if (logPane) logPane.textContent=''; }); } catch {}
+        try { document.getElementById('btnStartAll')?.addEventListener('click', () => fetch('/api/services/startAll', {method:'POST'})); } catch {}
+        try { document.getElementById('btnStopAll')?.addEventListener('click', () => fetch('/api/services/stopAll', {method:'POST'})); } catch {}
+        try { document.getElementById('btnLaunch')?.addEventListener('click', async ()=>{
+            const body = {
+                character: document.getElementById('inpCharacter')?.value || 'Player',
+                profile: document.getElementById('inpProfile')?.value || 'legacy_tatooine_01',
+                mode: document.getElementById('selMode')?.value || 'quest',
+            };
+            await fetch('/api/sessions', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
+        }); } catch {}
+
+        socket.on('log',    e => pushLog(`[${(e.level||'info').toUpperCase()}] [${e.source}] ${e.msg}`));
+        socket.on('metric', e => {
+            if (e.key === 'attachment'){
+                const pill = document.getElementById('attachmentPill');
+                if (!pill) return;
+                const on = Number(e.value)===1;
+                pill.textContent = `Attachment: ${on?'Attached':'Detached'}`;
+                pill.className = `text-xs px-2 py-1 rounded ${on?'bg-emerald-700':'bg-neutral-800'}`;
+            }
+        });
+        socket.on('session', _ => loadSessions());
+
+        (async function boot(){
+            await loadModules();
+            await loadSystem();
+            await loadSessions();
+        })();
+    </script>
 
     <script>
         // Socket.IO connection
