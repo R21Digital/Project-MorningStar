@@ -56,6 +56,8 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 import time
+import uuid
+import subprocess
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from flask_socketio import SocketIO, emit
@@ -145,6 +147,89 @@ else:
 mount_manager = get_mount_manager() if MOUNTS_AVAILABLE else None
 probe = get_probe() if PROBE_AVAILABLE else None
 connected_clients = set()
+
+# --- Lightweight Process Manager & Session Store ---
+class ManagedProcess:
+    def __init__(self, proc: subprocess.Popen, name: str):
+        self.proc = proc
+        self.name = name
+
+
+process_table: Dict[str, ManagedProcess] = {}
+sessions_store: Dict[str, Dict[str, Any]] = {}
+process_table_lock = threading.Lock()
+sessions_lock = threading.Lock()
+
+
+def _stream_pipe(pipe, source_name: str, level: str):
+    for raw in iter(pipe.readline, b""):
+        try:
+            line = raw.decode(errors='ignore').strip()
+        except Exception:
+            line = str(raw).strip()
+        if not line:
+            continue
+        socketio.emit('log', {
+            'type': 'log',
+            'level': level,
+            'source': source_name,
+            'msg': line,
+            'ts': datetime.now().isoformat(),
+        })
+
+
+def start_managed_process(pid: str, name: str, cmd: List[str]) -> None:
+    with process_table_lock:
+        if pid in process_table:
+            return
+        env = os.environ.copy()
+        env.setdefault('PYTHONIOENCODING', 'utf-8')
+        try:
+            proc = subprocess.Popen(
+                cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                stdin=subprocess.DEVNULL,
+                env=env,
+                creationflags=(0x08000000 if os.name == 'nt' else 0),  # CREATE_NO_WINDOW on Windows
+            )
+        except Exception as e:
+            logger.error(f"Failed to start process {name}: {e}")
+            return
+
+        mp = ManagedProcess(proc=proc, name=name)
+        process_table[pid] = mp
+
+        if proc.stdout is not None:
+            threading.Thread(target=_stream_pipe, args=(proc.stdout, name, 'info'), daemon=True).start()
+        if proc.stderr is not None:
+            threading.Thread(target=_stream_pipe, args=(proc.stderr, name, 'error'), daemon=True).start()
+
+        def _waiter():
+            code = proc.wait()
+            socketio.emit('log', {
+                'type': 'log', 'level': 'info' if code == 0 else 'error',
+                'source': name, 'msg': f'{name} exited ({code})', 'ts': datetime.now().isoformat()
+            })
+            with process_table_lock:
+                process_table.pop(pid, None)
+
+        threading.Thread(target=_waiter, daemon=True).start()
+
+
+def stop_managed_process(pid: str) -> None:
+    with process_table_lock:
+        mp = process_table.pop(pid, None)
+    if not mp:
+        return
+    try:
+        mp.proc.terminate()
+        try:
+            mp.proc.wait(timeout=3)
+        except Exception:
+            mp.proc.kill()
+    except Exception:
+        pass
 
 # MS11 Module Registry
 ms11_modules = {
@@ -383,6 +468,14 @@ def api_modules_overview():
         logger.error(f"overview error: {e}")
         return jsonify({"modules": []})
 
+@app.route('/api/system/overview')
+def api_system_overview():
+    """Alias to provide tiles data compatibility if needed by client."""
+    try:
+        return jsonify({"modules": get_all_overviews()})
+    except Exception:
+        return jsonify({"modules": []})
+
 @app.route('/api/modules/<module_id>')
 def api_module_detail(module_id: str):
     data = get_overview(module_id)
@@ -424,6 +517,99 @@ def api_performance():
     """Get performance metrics."""
     return jsonify(ms11_state["performance_metrics"])
 
+# --- System info endpoint to match scaffold ---
+@app.route('/api/system/info')
+def api_system_info():
+    try:
+        import psutil
+        cpu_pct = psutil.cpu_percent(interval=None)
+        vm = psutil.virtual_memory()
+        free = vm.available
+        total = vm.total
+        mem_used_pct = round(((total - free) / total) * 100)
+        uptime = int(time.time() - datetime.fromisoformat(ms11_state.get("started_at")).timestamp())
+    except Exception:
+        cpu_pct = None
+        mem_used_pct = None
+        uptime = None
+    return jsonify({
+        "cpu": cpu_pct,
+        "memUsedPct": mem_used_pct,
+        "uptime": uptime,
+    })
+
+# --- Services start/stop (stubbed commands) ---
+@app.post('/api/services/startAll')
+def api_start_services():
+    # Wire real commands or keep stubs for now
+    try:
+        start_managed_process('svc:combatd', 'combatd', [sys.executable, str(Path(__file__).parent / 'session_runner.py'), '--daemon', 'combat'])
+        start_managed_process('svc:questd', 'questd', [sys.executable, str(Path(__file__).parent / 'session_runner.py'), '--daemon', 'quest'])
+        return jsonify({"ok": True, "running": list(process_table.keys())})
+    except Exception as e:
+        logger.error(f"startAll failed: {e}")
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+
+@app.post('/api/services/stopAll')
+def api_stop_services():
+    try:
+        with process_table_lock:
+            ids = list(process_table.keys())
+        for pid in ids:
+            stop_managed_process(pid)
+        return jsonify({"ok": True})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+
+# --- Sessions API ---
+@app.get('/api/sessions')
+def api_list_sessions():
+    with sessions_lock:
+        return jsonify({"sessions": list(sessions_store.values())})
+
+
+@app.post('/api/sessions')
+def api_create_session():
+    payload = request.get_json(silent=True) or {}
+    profile = payload.get('profile') or 'default_profile'
+    character = payload.get('character') or 'Player'
+    mode = payload.get('mode') or 'quest'
+    sid = str(uuid.uuid4())
+    spec = {
+        'id': sid,
+        'profile': profile,
+        'character': character,
+        'mode': mode,
+        'createdAt': datetime.now().isoformat(),
+        'status': 'starting',
+    }
+    with sessions_lock:
+        sessions_store[sid] = spec
+    socketio.emit('session', {"type": "session", "data": spec})
+
+    # launch runner process bound to this session
+    pid = f'session:{sid}'
+    start_managed_process(pid, f'session-{profile}', [
+        sys.executable, str(Path(__file__).parent / 'session_runner.py'), sid, profile, character, mode
+    ])
+    spec['status'] = 'running'
+    socketio.emit('session', {"type": "session", "data": spec})
+    return jsonify({"ok": True, "session": spec})
+
+
+@app.delete('/api/sessions/<sid>')
+def api_stop_session(sid: str):
+    stop_managed_process(f'session:{sid}')
+    with sessions_lock:
+        spec = sessions_store.get(sid)
+        if spec:
+            spec['status'] = 'stopped'
+    if spec:
+        socketio.emit('session', {"type": "session", "data": spec})
+    return jsonify({"ok": True})
+
 # SocketIO Events
 @socketio.on('connect')
 def handle_connect():
@@ -432,6 +618,11 @@ def handle_connect():
     connected_clients.add(request.sid)
     ms11_state["active_sessions"] = len(connected_clients)
     emit('status_update', ms11_state)
+    # On connect, send a small hello log line for the live console
+    socketio.emit('log', {
+        'type': 'log', 'level': 'info', 'source': 'ui',
+        'msg': 'Client connected to MS11 WS', 'ts': datetime.now().isoformat()
+    })
 
 @socketio.on('disconnect')
 def handle_disconnect():
@@ -439,6 +630,10 @@ def handle_disconnect():
     logger.info(f"Client disconnected: {request.sid}")
     connected_clients.discard(request.sid)
     ms11_state["active_sessions"] = len(connected_clients)
+    socketio.emit('log', {
+        'type': 'log', 'level': 'info', 'source': 'ui',
+        'msg': 'Client disconnected from MS11 WS', 'ts': datetime.now().isoformat()
+    })
 
 @socketio.on('get_status')
 def handle_get_status():
@@ -487,6 +682,15 @@ def update_system_status():
             
             # Emit status update to all connected clients
             socketio.emit('status_update', ms11_state)
+            # Also emit a metric event compatible with scaffold
+            try:
+                perf = ms11_state.get("performance_metrics", {})
+                if "cpu_usage" in perf:
+                    socketio.emit('metric', {"type": "metric", "key": "cpu", "value": perf["cpu_usage"], "ts": datetime.now().isoformat()})
+                if "memory_mb" in perf:
+                    socketio.emit('metric', {"type": "metric", "key": "memory_mb", "value": perf["memory_mb"], "ts": datetime.now().isoformat()})
+            except Exception:
+                pass
             
             time.sleep(5)  # Update every 5 seconds
             
