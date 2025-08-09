@@ -1,0 +1,215 @@
+# Combat Profile Template for MS11
+# This template defines automated combat behavior and priorities
+
+profile_name: "Default Combat Profile"
+description: "Balanced combat profile with defensive capabilities"
+version: "1.0.0"
+
+# Combat Behavior Settings
+behavior:
+  # Aggression level: passive, balanced, aggressive
+  aggression_level: "balanced"
+  
+  # Target selection priority
+  target_priority:
+    - "healers"
+    - "support"
+    - "damage_dealers"
+    - "tanks"
+    - "weakest"
+  
+  # Health thresholds for actions
+  health_thresholds:
+    auto_heal: 0.7      # Heal when health drops below 70%
+    retreat: 0.3        # Retreat when health drops below 30%
+    emergency_heal: 0.5 # Emergency heal when below 50%
+  
+  # Combat timing
+  timing:
+    max_combat_time: 300    # Maximum seconds in combat
+    heal_cooldown: 10       # Seconds between heals
+    ability_cooldown: 5     # Seconds between abilities
+    
+# Ability Rotation
+abilities:
+  primary:
+    - name: "Primary Attack"
+      priority: 1
+      cooldown: 0
+      conditions:
+        - "target_health > 0.2"
+        - "player_health > 0.5"
+  
+  defensive:
+    - name: "Heal Self"
+      priority: 1
+      cooldown: 10
+      conditions:
+        - "player_health < 0.7"
+        - "not in_cooldown"
+    
+    - name: "Defensive Stance"
+      priority: 2
+      cooldown: 30
+      conditions:
+        - "player_health < 0.5"
+        - "not in_cooldown"
+  
+  utility:
+    - name: "Stun Target"
+      priority: 3
+      cooldown: 45
+      conditions:
+        - "target_health > 0.8"
+        - "not in_cooldown"
+    
+    - name: "Escape Ability"
+      priority: 1
+      cooldown: 120
+      conditions:
+        - "player_health < 0.3"
+        - "not in_cooldown"
+
+# Target Selection Rules
+targeting:
+  # Preferred target types
+  preferred_targets:
+    - type: "healer"
+      priority: 10
+      conditions:
+        - "target_health > 0.3"
+        - "target_distance < 50"
+    
+    - type: "support"
+      priority: 8
+      conditions:
+        - "target_health > 0.4"
+        - "target_distance < 60"
+  
+  # Avoid these target types
+  avoid_targets:
+    - type: "elite"
+      conditions:
+        - "player_health < 0.8"
+        - "no_allies_nearby"
+    
+    - type: "boss"
+      conditions:
+        - "player_level < target_level + 5"
+        - "player_health < 0.9"
+
+# Movement and Positioning
+movement:
+  # Combat positioning
+  positioning:
+    preferred_distance: 20      # Preferred distance from target
+    max_distance: 50           # Maximum distance to engage
+    retreat_distance: 100      # Distance to retreat to
+  
+  # Movement patterns
+  patterns:
+    - name: "Kite Pattern"
+      description: "Move while attacking to maintain distance"
+      conditions:
+        - "target_distance < 15"
+        - "player_health < 0.8"
+    
+    - name: "Circle Pattern"
+      description: "Circle around target to avoid frontal attacks"
+      conditions:
+        - "target_type == 'melee'"
+        - "player_health > 0.6"
+
+# Equipment and Gear
+equipment:
+  # Auto-equip settings
+  auto_equip:
+    enabled: true
+    priority:
+      - "weapon_damage"
+      - "armor_defense"
+      - "stat_bonuses"
+  
+  # Equipment switching
+  switching:
+    - name: "Defensive Gear"
+      conditions:
+        - "player_health < 0.5"
+        - "in_combat"
+      gear_sets:
+        - "defensive_armor"
+        - "healing_weapon"
+    
+    - name: "Offensive Gear"
+      conditions:
+        - "player_health > 0.8"
+        - "target_health < 0.3"
+      gear_sets:
+        - "damage_armor"
+        - "damage_weapon"
+
+# Safety and Limits
+safety:
+  # Maximum resource usage
+  limits:
+    max_health_potions: 10
+    max_mana_potions: 15
+    max_combat_time: 600      # 10 minutes
+  
+  # Emergency protocols
+  emergency:
+    - name: "Emergency Retreat"
+      conditions:
+        - "player_health < 0.2"
+        - "no_healing_available"
+      actions:
+        - "use_escape_ability"
+        - "run_to_safe_zone"
+        - "log_combat_end"
+    
+    - name: "Call for Help"
+      conditions:
+        - "player_health < 0.3"
+        - "allies_nearby"
+      actions:
+        - "send_help_request"
+        - "use_defensive_abilities"
+
+# Performance Monitoring
+monitoring:
+  # Metrics to track
+  metrics:
+    - "damage_dealt"
+    - "damage_taken"
+    - "healing_done"
+    - "combat_duration"
+    - "targets_defeated"
+  
+  # Alerts and notifications
+  alerts:
+    - name: "Low Health Alert"
+      condition: "player_health < 0.4"
+      action: "notify_player"
+    
+    - name: "Combat Time Alert"
+      condition: "combat_duration > 300"
+      action: "suggest_retreat"
+
+# Integration Settings
+integration:
+  # Discord notifications
+  discord:
+    enabled: false
+    webhook_url: ""
+    notifications:
+      - "combat_start"
+      - "combat_end"
+      - "low_health"
+      - "combat_victory"
+  
+  # Logging
+  logging:
+    level: "INFO"
+    file: "logs/combat.log"
+    include_screenshots: false
+    log_combat_events: true

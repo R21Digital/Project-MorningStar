@@ -1,0 +1,306 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+/* CSS Variables for consistent theming */
+:root {
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+
+  --border-radius: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply antialiased;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-800/50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-600/70 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-500/80;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  @apply bg-slate-900/50;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-slate-700/70;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-600/80;
+}
+
+/* Selection styles */
+::selection {
+  @apply bg-primary-500/30 text-white;
+}
+
+/* Focus styles */
+.focus-visible {
+  @apply outline-none ring-2 ring-primary-500/50 ring-offset-2 ring-offset-slate-900;
+}
+
+/* Button focus styles */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply outline-none ring-2 ring-primary-500/50 ring-offset-2 ring-offset-slate-900;
+}
+
+/* Gaming-specific animations */
+@keyframes pulse-gaming {
+  0%, 100% {
+    @apply opacity-100;
+  }
+  50% {
+    @apply opacity-70;
+  }
+}
+
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    @apply shadow-lg;
+  }
+  50% {
+    @apply shadow-glow;
+  }
+}
+
+/* Custom utility classes */
+.animate-pulse-gaming {
+  animation: pulse-gaming 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.3s ease-out;
+}
+
+.animate-slide-down-fade {
+  animation: slide-down-fade 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+.animate-status-pulse {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Status indicator styles */
+.status-online {
+  @apply bg-success-500 shadow-lg;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.status-offline {
+  @apply bg-slate-500 shadow-lg;
+  box-shadow: 0 0 10px rgba(100, 116, 139, 0.3);
+}
+
+.status-error {
+  @apply bg-danger-500 shadow-lg;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.status-warning {
+  @apply bg-warning-500 shadow-lg;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+/* Gaming card effects */
+.card-gaming {
+  @apply glass-effect rounded-lg border border-slate-700/50;
+  transition: all var(--transition-normal);
+}
+
+.card-gaming:hover {
+  @apply border-primary-500/30 shadow-glow;
+  transform: translateY(-2px);
+}
+
+/* Interactive elements */
+.button-primary {
+  @apply bg-primary-600 hover:bg-primary-500 text-white font-medium px-4 py-2 rounded-lg;
+  @apply transition-all duration-200 transform hover:scale-105 active:scale-95;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:ring-offset-slate-900;
+}
+
+.button-secondary {
+  @apply bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium px-4 py-2 rounded-lg;
+  @apply transition-all duration-200 transform hover:scale-105 active:scale-95;
+  @apply focus:outline-none focus:ring-2 focus:ring-slate-500/50 focus:ring-offset-2 focus:ring-offset-slate-900;
+}
+
+.button-danger {
+  @apply bg-danger-600 hover:bg-danger-500 text-white font-medium px-4 py-2 rounded-lg;
+  @apply transition-all duration-200 transform hover:scale-105 active:scale-95;
+  @apply focus:outline-none focus:ring-2 focus:ring-danger-500/50 focus:ring-offset-2 focus:ring-offset-slate-900;
+}
+
+/* Form elements */
+.input-field {
+  @apply bg-slate-800/50 border border-slate-600/50 rounded-lg px-3 py-2 text-slate-200;
+  @apply placeholder-slate-400 focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/30;
+  @apply transition-colors duration-200;
+}
+
+.input-field:focus {
+  @apply outline-none bg-slate-800/70;
+}
+
+/* Loading states */
+.loading-spinner {
+  @apply animate-spin rounded-full border-2 border-slate-600 border-t-primary-500;
+}
+
+/* Gaming grid background */
+.bg-gaming-grid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Terminal/console styling */
+.console-text {
+  @apply font-mono text-sm text-green-400 bg-black/80 p-4 rounded-lg overflow-x-auto;
+  font-feature-settings: 'liga' 0;
+}
+
+/* Notification styles */
+.notification-success {
+  @apply bg-success-500/10 border border-success-500/20 text-success-400;
+}
+
+.notification-error {
+  @apply bg-danger-500/10 border border-danger-500/20 text-danger-400;
+}
+
+.notification-warning {
+  @apply bg-warning-500/10 border border-warning-500/20 text-warning-400;
+}
+
+.notification-info {
+  @apply bg-primary-500/10 border border-primary-500/20 text-primary-400;
+}
+
+/* Data visualization styles */
+.chart-container {
+  @apply w-full h-64 p-4 glass-effect rounded-lg;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 641px) {
+  .show-mobile {
+    display: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MS11 Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+
+<body class="bg-neutral-950 text-neutral-200 min-h-screen">
+    <header class="border-b border-neutral-800 bg-neutral-950/80 sticky top-0 z-40 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="/" class="text-neutral-400 hover:text-neutral-200"><i class="fas fa-arrow-left"></i></a>
+                <span class="font-semibold tracking-tight text-neutral-100">MS11 • Details</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-8 space-y-8">
+        <!-- Overview -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="md:col-span-2 rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">System Overview</h2>
+                </div>
+                <div id="overview" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-neutral-300">
+                    <div>
+                        <div class="text-neutral-400">Status</div>
+                        <div id="ovStatus">—</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-400">Uptime</div>
+                        <div id="ovUptime">—</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-400">CPU</div>
+                        <div id="ovCpu">—</div>
+                    </div>
+                    <div>
+                        <div class="text-neutral-400">Memory</div>
+                        <div id="ovMem">—</div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+                <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase mb-3">Navigation</h2>
+                <nav class="space-y-2 text-neutral-300">
+                    <a class="block hover:text-white" href="/configuration">Configuration</a>
+                    <a class="block hover:text-white" href="/movement">Movement & Travel</a>
+                    <a class="block hover:text-white" href="/combat">Combat</a>
+                    <a class="block hover:text-white" href="/analytics">Analytics</a>
+                    <a class="block hover:text-white" href="/system">System Monitor</a>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Capabilities & Character -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase">Character Capabilities</h2>
+                    <button onclick="refreshCaps()"
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-md ring-1 ring-neutral-700 bg-neutral-900 hover:bg-neutral-800 text-neutral-200 text-xs"><i
+                            class="fas fa-rotate"></i> Refresh</button>
+                </div>
+                <div class="text-sm text-neutral-300">
+                    <div class="mb-2 font-medium">Mounts</div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <div class="text-neutral-400">Verified</div>
+                            <ul id="capMountsV" class="list-disc list-inside text-neutral-300"></ul>
+                        </div>
+                        <div>
+                            <div class="text-neutral-400">Detected (unverified)</div>
+                            <ul id="capMountsU" class="list-disc list-inside text-neutral-400"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+                <h2 class="text-sm font-medium tracking-wide text-neutral-400 uppercase mb-3">Server Info</h2>
+                <div id="serverInfo" class="space-y-1 text-sm text-neutral-300">
+                    <div>CPU: <span id="svCpu">—</span></div>
+                    <div>Memory: <span id="svMem">—</span></div>
+                    <div>Active Modules: <span id="svModules">—</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const socket = io();
+
+        function el(id) { return document.getElementById(id); }
+
+        function setList(id, items) {
+            const ul = el(id); ul.innerHTML = '';
+            (items || []).forEach(m => { const li = document.createElement('li'); li.textContent = m; ul.appendChild(li); });
+        }
+
+        function loadHealth() {
+            fetch('/api/health').then(r => r.json()).then(h => {
+                el('ovStatus').textContent = h.status;
+                el('ovUptime').textContent = h.uptime;
+                el('ovCpu').textContent = h.cpu_usage;
+                el('ovMem').textContent = h.memory_usage;
+                el('svCpu').textContent = h.cpu_usage;
+                el('svMem').textContent = h.memory_usage;
+            }).catch(() => { });
+            fetch('/api/status').then(r => r.json()).then(s => {
+                el('svModules').textContent = (s.active_modules || []).length;
+            }).catch(() => { });
+        }
+
+        function refreshCaps() {
+            fetch('/api/capabilities').then(r => r.json()).then(d => {
+                const caps = d.data || {};
+                const mounts = (caps.mounts || {});
+                setList('capMountsV', mounts.learned_verified);
+                setList('capMountsU', mounts.detected_unverified);
+            }).catch(() => { });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHealth();
+            refreshCaps();
+        });
+
+        socket.on('status_update', loadHealth);
+    </script>
+</body>
+
+</html>

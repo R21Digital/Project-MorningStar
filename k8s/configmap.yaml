@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms11-config
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: ms11
+    app.kubernetes.io/component: config
+data:
+  MS11_ENVIRONMENT: "production"
+  MS11_LOG_LEVEL: "INFO"
+  PYTHONPATH: "/app"
+  DISPLAY: ":99"
+  # Database configuration will be set via secrets
+  MS11_DATABASE_HOST: "postgres-service.ms11.svc.cluster.local"
+  MS11_DATABASE_PORT: "5432"
+  MS11_DATABASE_NAME: "ms11"
+  MS11_REDIS_HOST: "redis-service.ms11.svc.cluster.local"
+  MS11_REDIS_PORT: "6379"
+  MS11_REDIS_DB: "0"
+  
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: postgres
+    app.kubernetes.io/component: database
+data:
+  init-db.sql: |
+    -- MS11 PostgreSQL Initialization Script
+    SELECT 'CREATE DATABASE ms11_dev' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'ms11_dev')\gexec
+    SELECT 'CREATE DATABASE ms11_test' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'ms11_test')\gexec
+
+    \c ms11
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE EXTENSION IF NOT EXISTS "pg_stat_statements";
+    CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+
+    \c ms11_dev
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE EXTENSION IF NOT EXISTS "pg_stat_statements";
+    CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+
+    \c ms11_test
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE EXTENSION IF NOT EXISTS "pg_stat_statements";
+    CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+
+    \c ms11
+    GRANT ALL PRIVILEGES ON DATABASE ms11 TO ms11;
+    GRANT ALL PRIVILEGES ON DATABASE ms11_dev TO ms11;
+    GRANT ALL PRIVILEGES ON DATABASE ms11_test TO ms11;
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: redis
+    app.kubernetes.io/component: cache
+data:
+  redis.conf: |
+    # Redis configuration for MS11
+    appendonly yes
+    maxmemory 512mb
+    maxmemory-policy allkeys-lru
+    save 60 1000
+    tcp-keepalive 60
+    timeout 300

@@ -1,0 +1,39 @@
+{
+    "session": {
+        "idle_timeout": 300,
+        "max_duration": 14400,
+        "auto_resume": true
+    },
+    "logging": {
+        "level": "INFO",
+        "file": "logs/session.log",
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    },
+    "scanner": {
+        "scan_interval": 60,
+        "idle_scan_interval": 300,
+        "travel_scan_interval": 30,
+        "ocr_confidence_threshold": 50.0
+    },
+    "safety": {
+        "fatigue_threshold": 75,
+        "health_threshold": 50,
+        "action_threshold": 25
+    },
+    "modes": {
+        "quest": {
+            "auto_accept": true,
+            "auto_complete": true,
+            "quest_types": ["story", "daily", "repeatable"]
+        },
+        "combat": {
+            "style": "defensive",
+            "range": "medium",
+            "tactics": ["kite", "cover"]
+        },
+        "medic": {
+            "heal_threshold": 75,
+            "buff_interval": 300
+        }
+    }
+}

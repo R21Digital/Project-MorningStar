@@ -1,0 +1,29 @@
+{
+  "name": "swgdb-site",
+  "version": "1.0.0",
+  "description": "Star Wars Galaxies Database - Community-driven database and tools",
+  "main": "apps/web/.eleventy.js",
+  "private": true,
+  "scripts": {
+    "build": "cd apps/web && npx eleventy",
+    "serve": "cd apps/web && npx eleventy --serve",
+    "start": "cd apps/web && npx eleventy --serve",
+    "dev": "cd apps/web && npx eleventy --serve --watch",
+    "clean": "node -e \"require('fs').rmSync('apps/web/_site', { recursive: true, force: true })\"",
+    "debug": "node scripts/debug-eleventy.js"
+  },
+  "keywords": [
+    "star-wars-galaxies",
+    "swg",
+    "database",
+    "eleventy"
+  ],
+  "author": "Project MorningStar Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "dependencies": {
+    "marked": "^16.1.2"
+  }
+}

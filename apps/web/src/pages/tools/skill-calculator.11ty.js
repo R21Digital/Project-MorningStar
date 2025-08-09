@@ -1,0 +1,1215 @@
+module.exports = class {
+  data() {
+    return {
+      title: "Skill Calculator - SWGDB Tools",
+      description: "Interactive skill calculator for Star Wars Galaxies Restoration - plan your profession builds with automatic dependency tracking",
+      layout: "base.11ty.js",
+      permalink: "/tools/skill-calculator/"
+    };
+  }
+
+  render(data) {
+    return `
+    <style>
+        .calculator-hero {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.8) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .calculator-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #06b6d4;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .calculator-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e2e8f0;
+        }
+
+        .summary-bar {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(6, 182, 212, 0.6);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .summary-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #06b6d4;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .summary-label {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.9) 0%, rgba(8, 145, 178, 0.9) 100%);
+            color: white;
+            border-color: rgba(6, 182, 212, 0.6);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, rgba(8, 145, 178, 0.9) 0%, rgba(6, 182, 212, 0.9) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(185, 28, 28, 0.9) 100%);
+            color: white;
+            border-color: rgba(220, 38, 38, 0.6);
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, rgba(185, 28, 28, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.9) 0%, rgba(22, 163, 74, 0.9) 100%);
+            color: white;
+            border-color: rgba(34, 197, 94, 0.6);
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, rgba(22, 163, 74, 0.9) 0%, rgba(34, 197, 94, 0.9) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .profession-selector {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .profession-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .profession-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .profession-card:hover {
+            border-color: rgba(6, 182, 212, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
+        }
+
+        .profession-card.selected {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, 0.1);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .profession-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 10px;
+            background: rgba(6, 182, 212, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .profession-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #06b6d4;
+            margin-bottom: 5px;
+        }
+
+        .profession-category {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .skill-tree {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* SWGR.org Exact Visual Replica */
+        .skill-tree-container {
+            display: flex;
+            min-height: 100vh;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        .profession-selector {
+            width: 300px;
+            background: #2a2a2a;
+            border-right: 1px solid #444;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profession-selector h3 {
+            color: #00aaff;
+            font-size: 16px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-weight: bold;
+        }
+
+        .profession-dropdown {
+            background: #2a2a2a;
+            border: 1px solid #555;
+            border-radius: 6px;
+            color: #ffffff;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .profession-dropdown:hover {
+            border-color: #00aaff;
+            background: #333;
+        }
+
+        .profession-dropdown:focus {
+            outline: none;
+            border-color: #00aaff;
+            box-shadow: 0 0 8px rgba(0, 170, 255, 0.3);
+        }
+
+        .profession-dropdown option {
+            background: #2a2a2a;
+            color: #ffffff;
+            padding: 8px;
+        }
+
+        .skill-tree-display {
+            flex: 1;
+            padding: 20px;
+            background: #1a1a1a;
+            position: relative;
+            overflow: auto;
+        }
+
+        .skill-tree-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .skill-tree-header h2 {
+            color: #00aaff;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-weight: bold;
+        }
+
+        .skill-tree-header p {
+            color: #cccccc;
+            font-size: 14px;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        /* SWGR.org Skill Tree Layout */
+        .skill-tree {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .skill-tier {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px;
+            position: relative;
+        }
+
+        .tier-label {
+            color: #00aaff;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        .skill-box {
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 200px;
+            text-align: center;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+
+        .skill-box:hover {
+            border-color: #00aaff;
+            background: rgba(0, 170, 255, 0.1);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 170, 255, 0.2);
+        }
+
+        .skill-box.selected {
+            border-color: #00aaff;
+            background: rgba(0, 170, 255, 0.15);
+            box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+        }
+
+        .skill-box.locked {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background: #222;
+            border-color: #444;
+        }
+
+        .skill-box.locked:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .skill-name {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .skill-cost {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 11px;
+            color: #00aaff;
+            font-weight: normal;
+            margin-bottom: 2px;
+        }
+
+        .skill-xp {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 10px;
+            color: #cccccc;
+            font-weight: normal;
+        }
+
+        /* SWGR.org Connection Lines */
+        .skill-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .connection-line {
+            stroke: #555;
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .connection-line.active {
+            stroke: #00aaff;
+            stroke-width: 3;
+            opacity: 1;
+        }
+
+        .connection-line.hover {
+            stroke: #00aaff;
+            stroke-width: 2;
+            opacity: 0.8;
+        }
+
+        /* SWGR.org Special Skill Types */
+        .skill-box.novice {
+            background: #2a2a2a;
+            border-color: #00aaff;
+            border-width: 2px;
+        }
+
+        .skill-box.master {
+            background: linear-gradient(135deg, #333 0%, #2a2a2a 100%);
+            border-color: #00aaff;
+            border-width: 2px;
+        }
+
+        /* SWGR.org Branch Labels */
+        .branch-label {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00aaff;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: #2a2a2a;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+        }
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(6, 182, 212, 0.2);
+            color: #06b6d4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .alert {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #fca5a5;
+        }
+
+        .export-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .export-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .export-content {
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .export-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .export-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #06b6d4;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .close-btn:hover {
+            color: #06b6d4;
+        }
+
+        .export-textarea {
+            width: 100%;
+            height: 200px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 8px;
+            color: #e2e8f0;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.9) 0%, rgba(8, 145, 178, 0.9) 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(135deg, rgba(8, 145, 178, 0.9) 0%, rgba(6, 182, 212, 0.9) 100%);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .profession-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <section class="py-12 px-6 max-w-6xl mx-auto text-white relative z-10">
+        <!-- Hero Section -->
+        <div class="calculator-hero">
+            <h1>Skill Calculator</h1>
+            <p>Plan your character's skill progression with automatic dependency tracking and XP requirements</p>
+        </div>
+
+        <!-- Summary Bar -->
+        <div class="summary-bar">
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-value" id="skillPointsUsed">0</div>
+                    <div class="summary-label">Skill Points Used</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value" id="skillPointsRemaining">250</div>
+                    <div class="summary-label">Skill Points Remaining</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value" id="totalXP">0</div>
+                    <div class="summary-label">Total XP Required</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value" id="selectedSkills">0</div>
+                    <div class="summary-label">Skills Selected</div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="resetCalculator()">
+                    <i class="fas fa-undo mr-2"></i>Reset Build
+                </button>
+                <button class="btn btn-success" onclick="exportBuild()">
+                    <i class="fas fa-download mr-2"></i>Export Build
+                </button>
+            </div>
+        </div>
+
+        <!-- Alert for Skill Points -->
+        <div id="skillPointsAlert" class="alert" style="display: none;">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            Warning: You have exceeded the maximum skill points (250). Please deselect some skills.
+        </div>
+
+        <!-- SWGR-style Skill Calculator Interface -->
+        <div class="skill-tree-container">
+            <!-- Left Panel: Profession Selector -->
+            <div class="profession-selector">
+                <h3>SELECT A PROFESSION</h3>
+                <select id="professionDropdown" class="profession-dropdown">
+                    <option value="">Choose a profession...</option>
+                </select>
+                <div id="professionInfo" class="profession-info">
+                    <p>Select a profession to view its skill tree</p>
+                </div>
+            </div>
+
+            <!-- Right Panel: Skill Tree Display -->
+            <div class="skill-tree-display">
+                <div class="skill-tree-header">
+                    <h2 id="selectedProfessionName">SKILL CALCULATOR</h2>
+                    <p>Plan your character's skill progression with automatic dependency tracking</p>
+                </div>
+                
+                <div id="skillTree" class="skill-tree">
+                    <svg id="skillConnections" class="skill-connections">
+                        <!-- Connection lines will be drawn here -->
+                    </svg>
+                    <div id="skillTiers" class="skill-tiers">
+                        <!-- Skill tiers will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="export-modal">
+        <div class="export-content">
+            <div class="export-header">
+                <h3 class="export-title">Export Build</h3>
+                <button class="close-btn" onclick="closeExportModal()">&times;</button>
+            </div>
+            <p class="text-slate-300 mb-4">Copy this build data to share with others or save for later:</p>
+            <textarea id="exportData" class="export-textarea" readonly></textarea>
+            <button class="copy-btn" onclick="copyToClipboard()">
+                <i class="fas fa-copy mr-2"></i>Copy to Clipboard
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Export Build Button -->
+    <div id="exportBuildButton" class="fixed bottom-4 right-4 z-50" style="display: none;">
+        <button
+            onclick="exportBuild()"
+            class="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 hover:shadow-cyan-500/25 border border-cyan-400/50"
+        >
+            <i class="fas fa-download mr-2"></i>
+            Export Build
+        </button>
+    </div>
+
+    <script>
+        // Skill Calculator State
+        let selectedSkills = new Set();
+        let professions = {};
+        let currentProfession = null;
+        let skillPointsUsed = 0;
+        let totalXP = 0;
+
+        // Load profession data
+        async function loadProfessions() {
+            try {
+                const response = await fetch('/data/skills/professions.json');
+                const data = await response.json();
+                professions = data.professions;
+                renderProfessionGrid();
+            } catch (error) {
+                console.error('Error loading professions:', error);
+            }
+        }
+
+        // Render profession dropdown (SWGR-style)
+        function renderProfessionGrid() {
+            const dropdown = document.getElementById('professionDropdown');
+            dropdown.innerHTML = '<option value="">Choose a profession...</option>';
+
+            Object.values(professions).forEach(profession => {
+                const option = document.createElement('option');
+                option.value = profession.id;
+                option.textContent = profession.name;
+                dropdown.appendChild(option);
+            });
+
+            // Add change event listener
+            dropdown.addEventListener('change', function() {
+                if (this.value) {
+                    selectProfession(this.value);
+                } else {
+                    // Reset display
+                    document.getElementById('selectedProfessionName').textContent = 'SKILL CALCULATOR';
+                    document.getElementById('skillTiers').innerHTML = '';
+                    document.getElementById('skillConnections').innerHTML = '';
+                }
+            });
+        }
+
+        // Get profession icon based on category
+        function getProfessionIcon(category) {
+            const icons = {
+                'Combat': 'sword',
+                'Crafter': 'hammer',
+                'Entertainer': 'music'
+            };
+            return icons[category] || 'user';
+        }
+
+        // Select a profession (SWGR-style)
+        function selectProfession(professionId) {
+            currentProfession = professions[professionId];
+            
+            // Update profession name display
+            document.getElementById('selectedProfessionName').textContent = currentProfession.name.toUpperCase();
+            
+            // Update profession info
+            const professionInfo = document.getElementById('professionInfo');
+            professionInfo.innerHTML = \`
+                <p><strong>Category:</strong> \${currentProfession.category}</p>
+                <p><strong>Skills Available:</strong> \${currentProfession.skills.length}</p>
+            \`;
+            
+            renderSkillTree();
+        }
+
+        // Render skill tree for selected profession (SWGR-style vertical layout)
+        function renderSkillTree() {
+            const tiersContainer = document.getElementById('skillTiers');
+            const connectionsSvg = document.getElementById('skillConnections');
+            
+            tiersContainer.innerHTML = '';
+            connectionsSvg.innerHTML = '';
+
+            // Group skills by tier
+            const skillsByTier = {};
+            currentProfession.skills.forEach(skill => {
+                if (!skillsByTier[skill.tier]) {
+                    skillsByTier[skill.tier] = [];
+                }
+                skillsByTier[skill.tier].push(skill);
+            });
+
+            // Create tier containers
+            const tiers = Object.keys(skillsByTier).sort((a, b) => parseInt(a) - parseInt(b));
+            
+            tiers.forEach((tier, tierIndex) => {
+                const tierContainer = document.createElement('div');
+                tierContainer.className = 'skill-tier';
+                tierContainer.id = \`tier-\${tier}\`;
+                
+                // Add tier label
+                const tierLabel = document.createElement('div');
+                tierLabel.className = 'tier-label';
+                tierLabel.textContent = \`TIER \${tier}\`;
+                tierContainer.appendChild(tierLabel);
+                
+                // Add skills for this tier
+                const skills = skillsByTier[tier];
+                skills.forEach(skill => {
+                    const skillBox = createSkillBox(skill);
+                    tierContainer.appendChild(skillBox);
+                });
+                
+                tiersContainer.appendChild(tierContainer);
+            });
+
+            // Draw connection lines after all skills are rendered
+            setTimeout(() => {
+                drawSkillConnections();
+            }, 100);
+        }
+
+        // Draw connection lines between skills
+        function drawSkillConnections() {
+            const connectionsSvg = document.getElementById('skillConnections');
+            const skillBoxes = document.querySelectorAll('.skill-box');
+            
+            // Clear existing connections
+            connectionsSvg.innerHTML = '';
+            
+            // Set SVG dimensions
+            const container = document.getElementById('skillTree');
+            const rect = container.getBoundingClientRect();
+            connectionsSvg.setAttribute('width', rect.width);
+            connectionsSvg.setAttribute('height', rect.height);
+            
+            // Draw connections for each skill to its prerequisites
+            currentProfession.skills.forEach(skill => {
+                if (skill.prereqs && skill.prereqs.length > 0) {
+                    skill.prereqs.forEach(prereqId => {
+                        const fromSkill = document.getElementById(\`skill-\${prereqId}\`);
+                        const toSkill = document.getElementById(\`skill-\${skill.id}\`);
+                        
+                        if (fromSkill && toSkill) {
+                            const fromRect = fromSkill.getBoundingClientRect();
+                            const toRect = toSkill.getBoundingClientRect();
+                            const containerRect = container.getBoundingClientRect();
+                            
+                            const fromX = fromRect.left + fromRect.width / 2 - containerRect.left;
+                            const fromY = fromRect.top + fromRect.height - containerRect.top;
+                            const toX = toRect.left + toRect.width / 2 - containerRect.left;
+                            const toY = toRect.top - containerRect.top;
+                            
+                            // Create path
+                            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                            path.setAttribute('d', \`M \${fromX} \${fromY} L \${toX} \${toY}\`);
+                            path.setAttribute('class', 'connection-line');
+                            
+                            // Make line active if both skills are selected
+                            if (selectedSkills.has(prereqId) && selectedSkills.has(skill.id)) {
+                                path.classList.add('active');
+                            }
+                            
+                            connectionsSvg.appendChild(path);
+                        }
+                    });
+                }
+            });
+        }
+
+        // Create individual skill box (SWGR-style)
+        function createSkillBox(skill) {
+            const skillBox = document.createElement('div');
+            skillBox.className = 'skill-box';
+            skillBox.id = \`skill-\${skill.id}\`;
+            
+            const isSelected = selectedSkills.has(skill.id);
+            const isLocked = !canSelectSkill(skill);
+            
+            if (isSelected) skillBox.classList.add('selected');
+            if (isLocked) skillBox.classList.add('locked');
+            
+            // Add special classes for master/novice skills
+            if (skill.tier === 1) skillBox.classList.add('novice');
+            if (skill.tier === 4) skillBox.classList.add('master');
+            
+            skillBox.innerHTML = \`
+                <div class="skill-name">\${skill.name}</div>
+                <div class="skill-cost">Cost: \${skill.cost} SP</div>
+                <div class="skill-xp">\${skill.xpType}: \${skill.xpRequired.toLocaleString()}</div>
+            \`;
+            
+            if (!isLocked) {
+                skillBox.onclick = () => toggleSkill(skill.id);
+            }
+            
+            return skillBox;
+        }
+
+        // Check if a skill can be selected
+        function canSelectSkill(skill) {
+            // Check prerequisites
+            for (const prereq of skill.prereqs) {
+                if (!selectedSkills.has(prereq)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Toggle skill selection (SWGR-style)
+        function toggleSkill(skillId) {
+            const skill = currentProfession.skills.find(s => s.id === skillId);
+            if (!skill) return;
+            
+            if (selectedSkills.has(skillId)) {
+                // Deselect skill
+                selectedSkills.delete(skillId);
+                skillPointsUsed -= skill.cost;
+                totalXP -= skill.xpRequired;
+            } else {
+                // Check if we can afford it
+                if (skillPointsUsed + skill.cost > 250) {
+                    showAlert('Cannot select skill: Would exceed 250 skill points');
+                    return;
+                }
+                
+                // Select skill
+                selectedSkills.add(skillId);
+                skillPointsUsed += skill.cost;
+                totalXP += skill.xpRequired;
+            }
+            
+            updateUI();
+            renderSkillTree(); // Re-render to update locked states and connections
+        }
+
+        // Update UI elements
+        function updateUI() {
+            document.getElementById('skillPointsUsed').textContent = skillPointsUsed;
+            document.getElementById('skillPointsRemaining').textContent = 250 - skillPointsUsed;
+            document.getElementById('totalXP').textContent = totalXP.toLocaleString();
+            document.getElementById('selectedSkills').textContent = selectedSkills.size;
+            
+            // Show/hide alert
+            const alert = document.getElementById('skillPointsAlert');
+            if (skillPointsUsed > 250) {
+                alert.style.display = 'block';
+            } else {
+                alert.style.display = 'none';
+            }
+            
+            // Show/hide export button based on selected skills
+            const exportButton = document.getElementById('exportBuildButton');
+            if (selectedSkills.size > 0) {
+                exportButton.style.display = 'block';
+            } else {
+                exportButton.style.display = 'none';
+            }
+            
+            // Update skill box states
+            selectedSkills.forEach(skillId => {
+                const skillBox = document.getElementById(\`skill-\${skillId}\`);
+                if (skillBox) skillBox.classList.add('selected');
+            });
+            
+            // Remove selected class from unselected skills
+            document.querySelectorAll('.skill-box').forEach(box => {
+                if (!selectedSkills.has(box.id.replace('skill-', ''))) {
+                    box.classList.remove('selected');
+                }
+            });
+        }
+
+        // Reset calculator
+        function resetCalculator() {
+            selectedSkills.clear();
+            skillPointsUsed = 0;
+            totalXP = 0;
+            updateUI();
+            renderSkillTree();
+        }
+
+        // Export build - Enhanced version with new Export Build system
+        function exportBuild() {
+            const buildData = {
+                profession: currentProfession ? currentProfession.name : 'None',
+                skills: Array.from(selectedSkills),
+                pointsUsed: skillPointsUsed,
+                totalXP: totalXP,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Show the export modal with the new system
+            showExportModal(buildData);
+        }
+
+        // Show export modal with new Export Build system
+        function showExportModal(buildData) {
+            // Create modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm';
+            modalOverlay.id = 'exportModalOverlay';
+            
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.className = 'bg-gray-900 text-white rounded-lg p-6 max-w-md w-full shadow-xl border border-cyan-500 relative mx-4';
+            
+            // Generate URL
+            const url = encodeBuildToURL(buildData);
+            
+            modalContent.innerHTML = \`
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-cyan-400">Export Build</h2>
+                    <button onclick="closeExportModal()" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <p class="text-sm mb-4 text-gray-300">Use the options below to share or save your build.</p>
+
+                <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 mb-4">
+                    <h3 class="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
+                        <i class="fas fa-chart-bar mr-2"></i>
+                        Build Summary
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="bg-gray-700 p-2 rounded">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide">Skill Points</div>
+                            <div class="text-white font-semibold">\${buildData.pointsUsed} / 250</div>
+                        </div>
+                        <div class="bg-gray-700 p-2 rounded">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide">XP Required</div>
+                            <div class="text-white font-semibold">\${buildData.totalXP.toLocaleString()}</div>
+                        </div>
+                        <div class="bg-gray-700 p-2 rounded">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide">Skills Selected</div>
+                            <div class="text-white font-semibold">\${buildData.skills.length}</div>
+                        </div>
+                        <div class="bg-gray-700 p-2 rounded">
+                            <div class="text-gray-400 text-xs uppercase tracking-wide">Profession</div>
+                            <div class="text-white font-semibold">\${buildData.profession}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label class="block text-sm font-medium mb-2 text-cyan-400">Sharable URL</label>
+                    <div class="flex">
+                        <input type="text" value="\${url}" readonly onclick="this.select()" 
+                               class="flex-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded-l text-sm focus:border-cyan-500 focus:outline-none">
+                        <button onclick="copyToClipboard('\${url}')" 
+                                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-r text-sm font-semibold transition-colors border border-blue-600">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-6 space-x-3">
+                    <button onclick="downloadBuildAsJSON(\${JSON.stringify(buildData)})" 
+                            class="flex-1 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-semibold transition-colors border border-green-600 hover:border-green-700">
+                        <i class="fas fa-download mr-2"></i>
+                        Download JSON
+                    </button>
+                    <button onclick="closeExportModal()" 
+                            class="flex-1 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm font-semibold transition-colors border border-gray-600 hover:border-gray-500">
+                        Close
+                    </button>
+                </div>
+            \`;
+            
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+        }
+
+        // Close export modal
+        function closeExportModal() {
+            const modal = document.getElementById('exportModalOverlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Copy to clipboard with feedback
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showCopyFeedback();
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showCopyFeedback();
+            });
+        }
+
+        // Show copy feedback
+        function showCopyFeedback() {
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+            button.className = 'px-4 py-2 bg-green-600 hover:bg-green-700 rounded-r text-sm font-semibold transition-colors border border-green-600';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.className = 'px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-r text-sm font-semibold transition-colors border border-blue-600';
+            }, 2000);
+        }
+
+        // Encode build to URL
+        function encodeBuildToURL(build) {
+            try {
+                const buildData = {
+                    profession: build.profession || 'None',
+                    skills: build.skills || [],
+                    pointsUsed: build.pointsUsed || 0,
+                    totalXP: build.totalXP || 0,
+                    timestamp: new Date().toISOString(),
+                    version: '1.0'
+                };
+                
+                const base64 = btoa(JSON.stringify(buildData));
+                return \`\${window.location.origin}\${window.location.pathname}?build=\${encodeURIComponent(base64)}\`;
+            } catch (error) {
+                console.error('Error encoding build to URL:', error);
+                return window.location.href;
+            }
+        }
+
+        // Download build as JSON
+        function downloadBuildAsJSON(buildData) {
+            try {
+                const build = {
+                    profession: buildData.profession || 'None',
+                    skills: buildData.skills || [],
+                    pointsUsed: buildData.pointsUsed || 0,
+                    totalXP: buildData.totalXP || 0,
+                    timestamp: new Date().toISOString(),
+                    version: '1.0',
+                    metadata: {
+                        exportedFrom: 'SWGDB Skill Calculator',
+                        game: 'Star Wars Galaxies Restoration',
+                        tool: 'Skill Calculator'
+                    }
+                };
+
+                const blob = new Blob([JSON.stringify(build, null, 2)], { 
+                    type: 'application/json' 
+                });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = \`swgdb-build-\${build.profession || 'unknown'}-\${Date.now()}.json\`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error downloading build as JSON:', error);
+                alert('Failed to download build. Please try again.');
+            }
+        }
+
+        // Show alert
+        function showAlert(message) {
+            // You could implement a more sophisticated alert system here
+            console.warn(message);
+        }
+
+        // Initialize calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfessions();
+            
+            // Check for build data in URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const buildParam = urlParams.get('build');
+            if (buildParam) {
+                try {
+                    const buildData = decodeBuildFromURL(buildParam);
+                    if (buildData) {
+                        // Import the build data
+                        importBuildFromURL(buildData);
+                    }
+                } catch (error) {
+                    console.error('Error importing build from URL:', error);
+                }
+            }
+            
+            // Close modal when clicking outside
+            document.getElementById('exportModal')?.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeExportModal();
+                }
+            });
+        });
+
+        // Import build from URL data
+        function importBuildFromURL(buildData) {
+            // Set the profession
+            if (buildData.profession && buildData.profession !== 'None') {
+                const professionId = Object.keys(professions).find(key => 
+                    professions[key].name === buildData.profession
+                );
+                if (professionId) {
+                    selectProfession(professionId);
+                    
+                    // Wait for the skill tree to render, then select skills
+                    setTimeout(() => {
+                        if (buildData.skills && Array.isArray(buildData.skills)) {
+                            buildData.skills.forEach(skillId => {
+                                if (currentProfession && currentProfession.skills.find(s => s.id === skillId)) {
+                                    selectedSkills.add(skillId);
+                                    const skill = currentProfession.skills.find(s => s.id === skillId);
+                                    if (skill) {
+                                        skillPointsUsed += skill.cost;
+                                        totalXP += skill.xpRequired;
+                                    }
+                                }
+                            });
+                            updateUI();
+                            renderSkillTree();
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        // Decode build from URL
+        function decodeBuildFromURL(encodedData) {
+            try {
+                const decoded = JSON.parse(atob(decodeURIComponent(encodedData)));
+                return {
+                    profession: decoded.profession || 'None',
+                    skills: decoded.skills || [],
+                    pointsUsed: decoded.pointsUsed || 0,
+                    totalXP: decoded.totalXP || 0,
+                    timestamp: decoded.timestamp || new Date().toISOString()
+                };
+            } catch (error) {
+                console.error('Error decoding build from URL:', error);
+                return null;
+            }
+        }
+    </script>
+    `;
+  }
+};

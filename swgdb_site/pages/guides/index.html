@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builds & Guides Hub - SWGDB</title>
+    <link rel="icon" type="image/png" href="../../assets/SWGDB Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0C0C0C;
+            color: #F5EEDC;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #FFF8E6;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #FFF8E6;
+        }
+        .section-header {
+            text-align: center;
+            margin: 50px 0 30px 0;
+            padding: 20px 0;
+        }
+        .section-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2em;
+            color: #FFF8E6;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        .section-header p {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin: 0;
+        }
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .guide-card {
+            background: rgba(245, 238, 220, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-decoration: none;
+            color: #F5EEDC;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(245, 238, 220, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .guide-card:hover {
+            background: rgba(245, 238, 220, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.15), 0 0 12px rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .guide-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+            color: #FFF8E6;
+            font-weight: 600;
+        }
+        .guide-card p {
+            margin: 0;
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .guide-meta {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .guide-tag {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        .difficulty-beginner { background: rgba(0, 255, 0, 0.2); color: #00FF00; }
+        .difficulty-intermediate { background: rgba(255, 215, 0, 0.2); color: #FFD700; }
+        .difficulty-advanced { background: rgba(255, 107, 107, 0.2); color: #FF6B6B; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to SWGDB Home</a>
+        
+        <div class="header">
+            <h1>📚 Builds & Guides Hub</h1>
+            <p>Comprehensive guides, builds, and strategies for Star Wars Galaxies</p>
+        </div>
+
+        <!-- Class & Profession Builds -->
+        <div class="section-header">
+            <h2>🎯 Class & Profession Builds</h2>
+            <p>Optimized builds for every profession and playstyle</p>
+        </div>
+        <div class="guides-grid">
+            <a href="builds/combat.html" class="guide-card">
+                <h3>⚔️ Combat Builds</h3>
+                <p>Master combat professions with optimized skill templates. TKM, Fencer, Pistoleer, Rifleman, and hybrid builds.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-intermediate">Intermediate</span>
+                    <span class="guide-tag">PvP Ready</span>
+                </div>
+            </a>
+
+            <a href="builds/crafter.html" class="guide-card">
+                <h3>🔨 Crafter Builds</h3>
+                <p>Complete crafting profession guides. Weaponsmith, Armorsmith, Architect, Chef, and resource management.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Economy</span>
+                </div>
+            </a>
+
+            <a href="builds/entertainer.html" class="guide-card">
+                <h3>🎭 Entertainer Builds</h3>
+                <p>Musician and Dancer builds for maximum effectiveness. Buff rotations, cantina strategies, and group support.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Social</span>
+                </div>
+            </a>
+
+            <a href="builds/force-sensitive.html" class="guide-card">
+                <h3>⚡ Force Sensitive Builds</h3>
+                <p>Jedi and Sith builds for unlocked characters. Lightsaber combat, Force powers, and Jedi trial strategies.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-advanced">Advanced</span>
+                    <span class="guide-tag">Endgame</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- PvP & Combat Guides -->
+        <div class="section-header">
+            <h2>⚔️ PvP & Combat</h2>
+            <p>Dominate in player vs player combat and group warfare</p>
+        </div>
+        <div class="guides-grid">
+            <a href="pvp/basics.html" class="guide-card">
+                <h3>🛡️ PvP Fundamentals</h3>
+                <p>Essential PvP mechanics, HAM management, special attacks, and counter strategies. Learn the basics of combat.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Combat</span>
+                </div>
+            </a>
+
+            <a href="pvp/group-tactics.html" class="guide-card">
+                <h3>👥 Group PvP Tactics</h3>
+                <p>Coordinate with your faction in large-scale battles. Formation strategies, target calling, and communication.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-intermediate">Intermediate</span>
+                    <span class="guide-tag">Group Play</span>
+                </div>
+            </a>
+
+            <a href="pvp/base-busting.html" class="guide-card">
+                <h3>🏗️ Base Busting Guide</h3>
+                <p>Effective strategies for attacking and defending player bases. Siege tactics and defensive positioning.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-advanced">Advanced</span>
+                    <span class="guide-tag">GCW</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Farming & Economy -->
+        <div class="section-header">
+            <h2>💰 Farming & Economy</h2>
+            <p>Maximize your credit income and resource gathering</p>
+        </div>
+        <div class="guides-grid">
+            <a href="farming/credit-farming.html" class="guide-card">
+                <h3>💸 Credit Farming</h3>
+                <p>Most efficient methods for earning credits. Mission grinding, resource sales, and market manipulation.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Economy</span>
+                </div>
+            </a>
+
+            <a href="farming/resource-guide.html" class="guide-card">
+                <h3>⛏️ Resource Harvesting</h3>
+                <p>Complete guide to surveying, harvester placement, and resource quality optimization for crafters.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-intermediate">Intermediate</span>
+                    <span class="guide-tag">Crafting</span>
+                </div>
+            </a>
+
+            <a href="farming/rare-loot.html" class="guide-card">
+                <h3>💎 Rare Loot Farming</h3>
+                <p>Target high-value drops from specific creatures and locations. RLS farming, krayt hunting, and rare spawns.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-advanced">Advanced</span>
+                    <span class="guide-tag">Endgame</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- New Player Guides -->
+        <div class="section-header">
+            <h2>🚀 New Player Guides</h2>
+            <p>Essential information for starting your SWG journey</p>
+        </div>
+        <div class="guides-grid">
+            <a href="newbie/character-creation.html" class="guide-card">
+                <h3>👤 Character Creation</h3>
+                <p>Choose your species, starting planet, and initial stats. Planning your character's progression path.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Essential</span>
+                </div>
+            </a>
+
+            <a href="newbie/first-steps.html" class="guide-card">
+                <h3>👣 First Steps</h3>
+                <p>Your first hours in SWG. Tutorial missions, skill trainers, and essential game mechanics explained.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Tutorial</span>
+                </div>
+            </a>
+
+            <a href="newbie/profession-guide.html" class="guide-card">
+                <h3>🎓 Profession Overview</h3>
+                <p>Complete overview of all professions, their roles, and how to choose the right path for your playstyle.</p>
+                <div class="guide-meta">
+                    <span class="guide-tag difficulty-beginner">Beginner</span>
+                    <span class="guide-tag">Planning</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

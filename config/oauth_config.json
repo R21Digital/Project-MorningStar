@@ -1,0 +1,76 @@
+{
+  "oauth_providers": {
+    "google": {
+      "provider": "google",
+      "client_id": "",
+      "client_secret": "",
+      "redirect_uri": "http://localhost:5000/auth/oauth/callback/google",
+      "enabled": false
+    },
+    "microsoft": {
+      "provider": "microsoft", 
+      "client_id": "",
+      "client_secret": "",
+      "redirect_uri": "http://localhost:5000/auth/oauth/callback/microsoft",
+      "enabled": false
+    },
+    "github": {
+      "provider": "github",
+      "client_id": "",
+      "client_secret": "",
+      "redirect_uri": "http://localhost:5000/auth/oauth/callback/github",
+      "enabled": false
+    },
+    "discord": {
+      "provider": "discord",
+      "client_id": "",
+      "client_secret": "",
+      "redirect_uri": "http://localhost:5000/auth/oauth/callback/discord",
+      "enabled": true,
+      "scopes": ["identify", "email"]
+    }
+  },
+  
+  "oauth_settings": {
+    "state_ttl_seconds": 600,
+    "use_pkce": true,
+    "token_refresh_threshold_seconds": 300,
+    "cleanup_interval_seconds": 3600,
+    "max_concurrent_sessions": 5
+  },
+  
+  "session_management": {
+    "session_timeout_seconds": 86400,
+    "remember_me_duration_days": 30,
+    "require_email_verification": true,
+    "auto_create_users": true,
+    "link_existing_accounts": true
+  },
+  
+  "security_settings": {
+    "require_https": true,
+    "csrf_protection": true,
+    "same_site_cookies": "Lax",
+    "secure_cookies": true,
+    "jwt_algorithm": "HS256",
+    "jwt_expiration_seconds": 3600
+  },
+  
+  "user_mapping": {
+    "email_field": "email",
+    "name_field": "name", 
+    "id_field": "user_id",
+    "avatar_field": "avatar_url",
+    "default_role": "user",
+    "admin_emails": [],
+    "blocked_domains": []
+  },
+  
+  "logging": {
+    "log_successful_logins": true,
+    "log_failed_attempts": true,
+    "log_token_refresh": false,
+    "log_user_info_requests": false,
+    "audit_oauth_events": true
+  }
+}

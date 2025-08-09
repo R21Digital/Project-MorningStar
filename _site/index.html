@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWGDB - Star Wars Galaxies Database</title>
+  <link rel="icon" type="image/png" href="/public/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'swg': ['Rajdhani', 'sans-serif'],
+          },
+          colors: {
+            'swg-navy': '#0f172a',
+            'swg-steel': '#334155',
+            'swg-charcoal': '#1e293b',
+            'swg-cyan': '#06b6d4',
+            'swg-orange': '#ea580c',
+            'swg-gold': '#f59e0b',
+            'swg-red': '#dc2626',
+          },
+          backgroundImage: {
+            'swgdb-space': "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)",
+            'swgdb-starfield': "radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)",
+          },
+          animation: {
+            'holo-glow': 'holo-glow 2s ease-in-out infinite alternate',
+            'terminal-blink': 'terminal-blink 1.5s infinite',
+          },
+          keyframes: {
+            'holo-glow': {
+              '0%': { boxShadow: '0 0 5px rgba(6, 182, 212, 0.5)' },
+              '100%': { boxShadow: '0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.3)' }
+            },
+            'terminal-blink': {
+              '0%, 50%': { opacity: '1' },
+              '51%, 100%': { opacity: '0.3' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* SWG-themed custom styles */
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      background-attachment: fixed;
+    }
+    
+    /* Starfield overlay effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(6, 182, 212, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(6, 182, 212, 0.2), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(6, 182, 212, 0.4), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(6, 182, 212, 0.2), transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: starfield 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes starfield {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    /* Holo-terminal panel styles */
+    .holo-panel {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      border-radius: 8px;
+      box-shadow: 
+        0 0 10px rgba(6, 182, 212, 0.3),
+        inset 0 0 20px rgba(6, 182, 212, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .holo-panel:hover {
+      border-color: rgba(6, 182, 212, 0.8);
+      box-shadow: 
+        0 0 20px rgba(6, 182, 212, 0.5),
+        inset 0 0 30px rgba(6, 182, 212, 0.2);
+    }
+    
+    /* Terminal-style buttons */
+    .terminal-btn {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.9) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.6);
+      color: #06b6d4;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .terminal-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .terminal-btn:hover::before {
+      left: 100%;
+    }
+    
+    .terminal-btn:hover {
+      border-color: rgba(6, 182, 212, 1);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+      color: #22d3ee;
+    }
+    
+    /* Navigation styles */
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #06b6d4, #22d3ee);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Custom dropdown styles */
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      min-width: 16rem;
+      margin-top: 0.5rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(6, 182, 212, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown.show .dropdown-menu {
+      display: block !important;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+    }
+    .dropdown-menu a:hover {
+      background: rgba(6, 182, 212, 0.1);
+      color: #06b6d4;
+      padding-left: 1.5rem;
+    }
+    .dropdown-menu .dropdown-header {
+      padding: 0.75rem 1rem;
+      background: rgba(6, 182, 212, 0.2);
+      color: #06b6d4;
+      font-weight: 600;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .dropdown-menu a:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body class="font-swg bg-swgdb-space bg-cover bg-fixed text-white min-h-screen relative">
+
+<!-- Header with SWG-themed Navigation -->
+<header class="bg-black/80 border-b border-swg-cyan/50 shadow-lg backdrop-blur-sm sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+    <!-- Brand Section -->
+    <a href="/" class="flex items-center space-x-3 group">
+      <div class="flex items-center space-x-3">
+        <img src="/public/images/swgdb-logo.png" alt="SWGDB Logo" class="h-8 md:h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity" />
+      </div>
+      <div class="text-xs text-slate-400 font-medium">
+        <div>STAR WARS GALAXIES</div>
+        <div class="text-swg-cyan">DATABASE</div>
+      </div>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="flex gap-8 text-sm font-medium">
+      <a href="/tools/skill-calculator/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-calculator mr-2"></i>Skill Calculator
+      </a>
+      <a href="/tools/gcw-calculator/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-globe mr-2"></i>GCW Calculator
+      </a>
+      <a href="/tools/build-calculator/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-cogs mr-2"></i>Build Calculator
+      </a>
+      <a href="/tools/gear-optimizer/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-shield-alt mr-2"></i>Gear Optimizer
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="relative z-10 min-h-screen">
+  
+<section class="py-12 px-6 max-w-6xl mx-auto text-white relative z-10">
+  <!-- Hero Section -->
+  <div class="holo-panel p-12 mb-12 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-swg-cyan/10 to-transparent"></div>
+          <div class="relative z-10">
+        <div class="flex items-center justify-center mb-6">
+          <img src="/public/images/swgdb-logo.png" alt="SWGDB Logo" class="h-24 md:h-32 w-auto opacity-90" />
+        </div>
+        <p class="text-2xl text-slate-300 mb-8 max-w-3xl mx-auto font-light">
+          Your comprehensive database for Star Wars Galaxies Restoration
+        </p>
+      <div class="flex flex-wrap justify-center gap-6">
+        <a href="/tools/skill-calculator" class="terminal-btn px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-transform">
+          <i class="fas fa-calculator mr-2"></i>Skill Calculator
+        </a>
+        <a href="/tools/gcw-calculator" class="terminal-btn px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-transform">
+          <i class="fas fa-globe mr-2"></i>GCW Calculator
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Tools Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+    <div class="holo-panel p-6 hover:scale-105 transition-all duration-300 group">
+      <div class="text-4xl mb-4 text-swg-cyan group-hover:text-cyan-300 transition-colors">🧮</div>
+      <h3 class="text-xl font-bold text-swg-cyan mb-3 tracking-wide">Skill Calculator</h3>
+      <p class="text-slate-300 mb-4 font-light">Plan your character's skill progression with our comprehensive skill calculator. Track dependencies, optimize builds, and export your configurations.</p>
+      <a href="/tools/skill-calculator" class="text-swg-cyan hover:text-cyan-300 font-semibold transition-colors group-hover:translate-x-2 inline-block">
+        <i class="fas fa-arrow-right mr-2"></i>Try Calculator
+      </a>
+    </div>
+
+    <div class="holo-panel p-6 hover:scale-105 transition-all duration-300 group">
+      <div class="text-4xl mb-4 text-swg-cyan group-hover:text-cyan-300 transition-colors">🌟</div>
+      <h3 class="text-xl font-bold text-swg-cyan mb-3 tracking-wide">GCW Calculator</h3>
+      <p class="text-slate-300 mb-4 font-light">Simulate Galactic Civil War control across all planets and track faction dominance with real-time calculations.</p>
+      <a href="/tools/gcw-calculator" class="text-swg-cyan hover:text-cyan-300 font-semibold transition-colors group-hover:translate-x-2 inline-block">
+        <i class="fas fa-arrow-right mr-2"></i>Try Calculator
+      </a>
+    </div>
+
+    <div class="holo-panel p-6 hover:scale-105 transition-all duration-300 group">
+      <div class="text-4xl mb-4 text-swg-cyan group-hover:text-cyan-300 transition-colors">⚙️</div>
+      <h3 class="text-xl font-bold text-swg-cyan mb-3 tracking-wide">Build Calculator</h3>
+      <p class="text-slate-300 mb-4 font-light">Create and optimize character builds with our advanced build calculator. Test different configurations and share with the community.</p>
+      <a href="/tools/build-calculator" class="text-swg-cyan hover:text-cyan-300 font-semibold transition-colors group-hover:translate-x-2 inline-block">
+        <i class="fas fa-arrow-right mr-2"></i>Try Calculator
+      </a>
+    </div>
+
+    <div class="holo-panel p-6 hover:scale-105 transition-all duration-300 group">
+      <div class="text-4xl mb-4 text-swg-cyan group-hover:text-cyan-300 transition-colors">🛡️</div>
+      <h3 class="text-xl font-bold text-swg-cyan mb-3 tracking-wide">Gear Optimizer</h3>
+      <p class="text-slate-300 mb-4 font-light">Optimize your character's gear loadout with our intelligent gear optimizer. Find the best combinations for your playstyle.</p>
+      <a href="/tools/gear-optimizer" class="text-swg-cyan hover:text-cyan-300 font-semibold transition-colors group-hover:translate-x-2 inline-block">
+        <i class="fas fa-arrow-right mr-2"></i>Try Optimizer
+      </a>
+    </div>
+  </div>
+
+  <!-- Recent Updates -->
+  <div class="holo-panel p-8">
+    <h2 class="text-3xl font-bold text-white mb-8 text-center tracking-wide">
+      <i class="fas fa-satellite-dish mr-3 text-swg-cyan"></i>Recent Updates
+    </h2>
+    <div class="space-y-6">
+      <div class="border-l-4 border-swg-cyan pl-6 py-2 hover:bg-swg-cyan/10 transition-colors rounded-r-lg">
+        <h3 class="font-semibold text-swg-cyan text-lg">Skill Calculator Enhanced</h3>
+        <p class="text-slate-300 text-sm font-light">Added support for 5 professions with automatic dependency tracking and build export functionality.</p>
+        <span class="text-xs text-slate-500 mt-2 inline-block">
+          <i class="fas fa-clock mr-1"></i>1 week ago
+        </span>
+      </div>
+      <div class="border-l-4 border-swg-orange pl-6 py-2 hover:bg-swg-orange/10 transition-colors rounded-r-lg">
+        <h3 class="font-semibold text-swg-orange text-lg">GCW Calculator Released</h3>
+        <p class="text-slate-300 text-sm font-light">New Galactic Civil War calculator with real-time planet control tracking and faction dominance analysis.</p>
+        <span class="text-xs text-slate-500 mt-2 inline-block">
+          <i class="fas fa-clock mr-1"></i>2 weeks ago
+        </span>
+      </div>
+      <div class="border-l-4 border-swg-gold pl-6 py-2 hover:bg-swg-gold/10 transition-colors rounded-r-lg">
+        <h3 class="font-semibold text-swg-gold text-lg">Site Redesign Complete</h3>
+        <p class="text-slate-300 text-sm font-light">New SWG-themed design with improved navigation and authentic Star Wars Galaxies aesthetic.</p>
+        <span class="text-xs text-slate-500 mt-2 inline-block">
+          <i class="fas fa-clock mr-1"></i>3 weeks ago
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-12">
+    <div class="holo-panel p-6 text-center">
+      <div class="text-3xl font-bold text-swg-cyan mb-2">4</div>
+      <div class="text-slate-400 text-sm font-light">Core Tools</div>
+    </div>
+    <div class="holo-panel p-6 text-center">
+      <div class="text-3xl font-bold text-swg-orange mb-2">5+</div>
+      <div class="text-slate-400 text-sm font-light">Professions Supported</div>
+    </div>
+    <div class="holo-panel p-6 text-center">
+      <div class="text-3xl font-bold text-swg-gold mb-2">100%</div>
+      <div class="text-slate-400 text-sm font-light">Free & Open Source</div>
+    </div>
+    <div class="holo-panel p-6 text-center">
+      <div class="text-3xl font-bold text-swg-cyan mb-2">24/7</div>
+      <div class="text-slate-400 text-sm font-light">Available</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-black/80 border-t border-swg-cyan/50 py-12 relative z-10">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="mb-8">
+      <div class="flex items-center justify-center mb-4">
+        <img src="/public/images/swgdb-logo.png" alt="SWGDB Logo" class="h-16 w-auto opacity-80" />
+      </div>
+      <p class="text-slate-400">Star Wars Galaxies Database - Empowering the Community</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+      <a href="/tools/skill-calculator/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-calculator mr-1"></i>Skill Calculator
+      </a>
+      <a href="/tools/gcw-calculator/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-globe mr-1"></i>GCW Calculator
+      </a>
+      <a href="/tools/build-calculator/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-cogs mr-1"></i>Build Calculator
+      </a>
+      <a href="/tools/gear-optimizer/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-shield-alt mr-1"></i>Gear Optimizer
+      </a>
+    </div>
+
+    <div class="border-t border-slate-700 pt-8 text-sm text-slate-500">
+      <p>&copy; 2025 SWGDB - Built with <span class="text-swg-red">❤️</span> by the Project MorningStar team</p>
+      <p class="mt-1">Empowering the Star Wars Galaxies Restoration community</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Enhanced dropdown functionality with JavaScript fallback
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdowns = document.querySelectorAll('.dropdown');
+  
+  dropdowns.forEach(dropdown => {
+    const button = dropdown.querySelector('button');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    
+    if (button && menu) {
+      // Show dropdown on hover
+      dropdown.addEventListener('mouseenter', () => {
+        menu.style.display = 'block';
+      });
+      
+      // Hide dropdown when mouse leaves
+      dropdown.addEventListener('mouseleave', () => {
+        menu.style.display = 'none';
+      });
+      
+      // Also handle click for touch devices
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isVisible = menu.style.display === 'block';
+        
+        // Hide all other dropdowns
+        document.querySelectorAll('.dropdown-menu').forEach(m => {
+          if (m !== menu) m.style.display = 'none';
+        });
+        
+        // Toggle current dropdown
+        menu.style.display = isVisible ? 'none' : 'block';
+      });
+    }
+  });
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        menu.style.display = 'none';
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

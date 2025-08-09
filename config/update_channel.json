@@ -1,0 +1,26 @@
+{
+  "channel": "stable",
+  "auto_check_enabled": true,
+  "check_interval_hours": 24,
+  "download_timeout_seconds": 300,
+  "max_retry_attempts": 3,
+  "keep_backups_count": 2,
+  "update_servers": {
+    "stable": {
+      "base_url": "https://updates.ms11.com/stable",
+      "version_endpoint": "/version.json",
+      "download_endpoint": "/download"
+    },
+    "canary": {
+      "base_url": "https://updates.ms11.com/canary",
+      "version_endpoint": "/version.json",
+      "download_endpoint": "/download"
+    }
+  },
+  "notification_settings": {
+    "notify_on_available": true,
+    "notify_on_download": true,
+    "notify_on_ready": true,
+    "notify_on_failure": true
+  }
+}

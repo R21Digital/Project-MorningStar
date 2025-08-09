@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Corellia",
+    "imperial": 45,
+    "rebel": 35,
+    "description": "Core World industrial planet and birthplace of Han Solo",
+    "system": "Corellian System",
+    "region": "Core Worlds"
+  },
+  {
+    "name": "Tatooine", 
+    "imperial": 25,
+    "rebel": 55,
+    "description": "Outer Rim desert world, Luke Skywalker's homeworld",
+    "system": "Tatoo System",
+    "region": "Outer Rim Territories"
+  },
+  {
+    "name": "Dantooine",
+    "imperial": 40,
+    "rebel": 50,
+    "description": "Agricultural world and former rebel base location",
+    "system": "Dantooine System", 
+    "region": "Outer Rim Territories"
+  },
+  {
+    "name": "Naboo",
+    "imperial": 60,
+    "rebel": 25,
+    "description": "Mid Rim peaceful world, home of Senator Amidala",
+    "system": "Naboo System",
+    "region": "Mid Rim"
+  },
+  {
+    "name": "Talus",
+    "imperial": 35,
+    "rebel": 45,
+    "description": "Moon in the Corellian system with mixed allegiances",
+    "system": "Corellian System",
+    "region": "Core Worlds"
+  },
+  {
+    "name": "Rori",
+    "imperial": 30,
+    "rebel": 50,
+    "description": "Naboo system moon with rebel sympathies",
+    "system": "Naboo System", 
+    "region": "Mid Rim"
+  },
+  {
+    "name": "Lok",
+    "imperial": 20,
+    "rebel": 60,
+    "description": "Outer Rim asteroid field and pirate haven",
+    "system": "Karthakk System",
+    "region": "Outer Rim Territories"
+  },
+  {
+    "name": "Endor",
+    "imperial": 55,
+    "rebel": 35,
+    "description": "Forest moon with Imperial research installations",
+    "system": "Endor System",
+    "region": "Outer Rim Territories"
+  },
+  {
+    "name": "Yavin 4",
+    "imperial": 15,
+    "rebel": 70,
+    "description": "Ancient rebel base and site of Death Star battle",
+    "system": "Yavin System",
+    "region": "Outer Rim Territories"
+  },
+  {
+    "name": "Dathomir",
+    "imperial": 40,
+    "rebel": 30,
+    "description": "Mysterious world of the Force-sensitive Nightsisters",
+    "system": "Dathomir System",
+    "region": "Outer Rim Territories" 
+  },
+  {
+    "name": "Kashyyyk",
+    "imperial": 35,
+    "rebel": 55,
+    "description": "Wookiee homeworld under Imperial occupation",
+    "system": "Kashyyyk System",
+    "region": "Mid Rim"
+  },
+  {
+    "name": "Mustafar",
+    "imperial": 70,
+    "rebel": 15,
+    "description": "Volcanic mining world with Imperial facilities",
+    "system": "Mustafar System",
+    "region": "Outer Rim Territories"
+  }
+]

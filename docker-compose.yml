@@ -1,0 +1,166 @@
+version: '3.8'
+
+services:
+  # MS11 Application
+  ms11-app:
+    build:
+      context: .
+      target: production
+    container_name: ms11-app
+    environment:
+      - MS11_ENVIRONMENT=production
+      - MS11_LOG_LEVEL=${MS11_LOG_LEVEL:-INFO}
+      - MS11_DATABASE_URL=postgresql://ms11:${DB_PASSWORD:-ms11_default_pass}@postgres:5432/ms11
+      - MS11_REDIS_URL=redis://redis:6379/0
+      - MS11_SECRET_KEY=${MS11_SECRET_KEY:-change-me-in-production}
+      - PYTHONPATH=/app
+      - DISPLAY=:99
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./backups:/app/backups
+      - ms11_config:/app/config/runtime
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    ports:
+      - "${MS11_PORT:-5000}:5000"
+      - "${MS11_DASHBOARD_PORT:-8080}:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      xvfb:
+        condition: service_started
+    networks:
+      - ms11-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "./scripts/healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ms11-postgres
+    environment:
+      - POSTGRES_DB=ms11
+      - POSTGRES_USER=ms11
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-ms11_default_pass}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    networks:
+      - ms11-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ms11 -d ms11"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: ms11-redis
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    networks:
+      - ms11-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # X Virtual Framebuffer for GUI automation
+  xvfb:
+    image: ubuntu:22.04
+    container_name: ms11-xvfb
+    environment:
+      - DISPLAY=:99
+    command: >
+      bash -c "
+        apt-get update -qq &&
+        apt-get install -y -qq xvfb &&
+        Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset &&
+        tail -f /dev/null
+      "
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    networks:
+      - ms11-network
+    restart: unless-stopped
+
+  # Development version (optional)
+  ms11-dev:
+    build:
+      context: .
+      target: development
+    container_name: ms11-dev
+    environment:
+      - MS11_ENVIRONMENT=development
+      - MS11_LOG_LEVEL=DEBUG
+      - MS11_DATABASE_URL=postgresql://ms11:${DB_PASSWORD:-ms11_default_pass}@postgres:5432/ms11_dev
+      - MS11_REDIS_URL=redis://redis:6379/1
+      - PYTHONPATH=/app
+      - DISPLAY=:99
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    ports:
+      - "5001:5000"
+      - "8081:8080"
+    depends_on:
+      - postgres
+      - redis
+      - xvfb
+    networks:
+      - ms11-network
+    profiles:
+      - dev
+    command: ["python", "src/main.py", "--dev"]
+
+  # Testing service
+  ms11-test:
+    build:
+      context: .
+      target: testing
+    container_name: ms11-test
+    environment:
+      - MS11_ENVIRONMENT=testing
+      - MS11_DATABASE_URL=postgresql://ms11:${DB_PASSWORD:-ms11_default_pass}@postgres:5432/ms11_test
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - ms11-network
+    profiles:
+      - test
+
+networks:
+  ms11-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  ms11_config:
+    driver: local

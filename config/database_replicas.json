@@ -1,0 +1,59 @@
+{
+  "read_replicas": [
+    {
+      "name": "replica-1",
+      "host": "localhost",
+      "port": 5433,
+      "database": "ms11",
+      "username": "",
+      "password": "",
+      "weight": 1.0,
+      "enabled": true,
+      "health_check_interval": 30,
+      "max_connections": 10,
+      "connection_timeout": 10,
+      "ssl_mode": "prefer"
+    },
+    {
+      "name": "replica-2", 
+      "host": "replica2.example.com",
+      "port": 5432,
+      "database": "ms11",
+      "username": "",
+      "password": "",
+      "weight": 0.8,
+      "enabled": false,
+      "health_check_interval": 30,
+      "max_connections": 10,
+      "connection_timeout": 10,
+      "ssl_mode": "require"
+    }
+  ],
+  
+  "load_balancing": {
+    "strategy": "weighted_round_robin",
+    "fallback_to_master": true,
+    "health_check_enabled": true,
+    "circuit_breaker": {
+      "failure_threshold": 5,
+      "recovery_timeout": 60,
+      "half_open_max_calls": 3
+    }
+  },
+  
+  "connection_pooling": {
+    "min_connections_per_replica": 2,
+    "max_connections_per_replica": 10,
+    "connection_idle_timeout": 300,
+    "connection_max_age": 3600,
+    "pool_pre_ping": true
+  },
+  
+  "query_routing": {
+    "read_queries_to_replicas": true,
+    "write_queries_to_master": true,
+    "transaction_queries_to_master": true,
+    "replica_lag_tolerance_ms": 5000,
+    "query_timeout": 30
+  }
+}

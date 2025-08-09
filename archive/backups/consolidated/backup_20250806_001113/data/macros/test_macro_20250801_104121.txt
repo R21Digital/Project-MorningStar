@@ -1,6 +1,0 @@
-# TEST_MACRO MACRO
-# Created: 2025-08-01T10:41:21.881687
-# Category: general
-
-/test {param}
-/say Testing

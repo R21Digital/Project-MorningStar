@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loot Tracker - SWGDB Tools</title>
+    <link rel="icon" type="image/png" href="../../assets/SWGDB Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0C0C0C;
+            color: #F5EEDC;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #FFF8E6;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #FFF8E6;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .feature-card {
+            background: rgba(245, 238, 220, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(245, 238, 220, 0.15);
+        }
+        .feature-card h3 {
+            color: #FFF8E6;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+        }
+        .feature-card p {
+            margin: 0;
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+        .coming-soon {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        .coming-soon h2 {
+            color: #FFD700;
+            font-size: 2.5em;
+            margin: 0 0 20px 0;
+            font-family: 'Orbitron', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Tools Hub</a>
+        
+        <div class="header">
+            <h1>🎯 Loot Tracker</h1>
+            <p>Track your rare loot drops and farming progress</p>
+        </div>
+
+        <div class="coming-soon">
+            <h2>🚧 Coming Soon</h2>
+            <p>This advanced loot tracking tool is currently in development.</p>
+            <p>It will allow you to track your drops, set farming goals, and analyze your loot collection over time.</p>
+        </div>
+
+        <h2 style="color: #FFF8E6; margin-top: 40px;">Planned Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>📊 Drop Tracking</h3>
+                <p>Log every rare drop with timestamps, locations, and drop rates. Build your personal database of farming results.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🎯 Goal Setting</h3>
+                <p>Set collection goals and track your progress. Get notifications when you're close to completing a set.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📈 Analytics</h3>
+                <p>View detailed statistics about your farming efficiency, best locations, and drop rate analysis.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🗺️ Location Memory</h3>
+                <p>Remember where you found each item with integrated mapping and location notes.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

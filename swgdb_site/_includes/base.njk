@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title or "SWGDB" }}</title>
+    <meta name="description" content="{{ description or 'Star Wars Galaxies Database' }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#667eea',
+                        'secondary': '#764ba2',
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+<body class="font-sans bg-gradient-to-br from-purple-600 to-blue-600 min-h-screen text-white">
+    <!-- Header with Dropdown Navigation -->
+    <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+            <!-- Brand Section -->
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/assets/SWGDB Logo.png" alt="SWGDB Logo" class="h-10 w-auto">
+                <div>
+                    <h1 class="text-xl font-bold text-white">SWGDB</h1>
+                    <p class="text-xs text-gray-400">Star Wars Galaxies Database</p>
+                </div>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex space-x-1">
+                <!-- Tools Dropdown -->
+                <div class="relative group">
+                    <button class="py-2 px-4 font-bold text-white hover:text-yellow-300 flex items-center space-x-1">
+                        <i class="fas fa-tools"></i>
+                        <span>Tools</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-gray-800 border border-gray-700 mt-2 rounded shadow-lg z-50 w-64">
+                        <div class="px-4 py-2 bg-gray-700 rounded-t text-yellow-300 font-semibold">
+                            <i class="fas fa-tools mr-2"></i>Interactive Tools
+                        </div>
+                        <a href="/pages/tools/skill-calculator/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-calculator mr-2"></i>Skill Calculator
+                            <span class="block text-xs text-gray-400">Plan profession builds</span>
+                        </a>
+                        <a href="/pages/tools/gcw-calculator/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-globe mr-2"></i>GCW Calculator
+                            <span class="block text-xs text-gray-400">Planet control simulator</span>
+                        </a>
+                        <a href="/pages/tools/loot-tracker.html" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-crosshairs mr-2"></i>Loot Tracker
+                            <span class="block text-xs text-gray-400">Track rare drops</span>
+                        </a>
+                        <a href="/pages/tools/" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-b">
+                            <i class="fas fa-th-large mr-2"></i>All Tools
+                            <span class="block text-xs text-gray-400">Browse complete toolkit</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Guides Dropdown -->
+                <div class="relative group">
+                    <button class="py-2 px-4 font-bold text-white hover:text-yellow-300 flex items-center space-x-1">
+                        <i class="fas fa-book"></i>
+                        <span>Guides</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-gray-800 border border-gray-700 mt-2 rounded shadow-lg z-50 w-64">
+                        <div class="px-4 py-2 bg-gray-700 rounded-t text-yellow-300 font-semibold">
+                            <i class="fas fa-book mr-2"></i>Player Guides
+                        </div>
+                        <a href="/pages/guides/combat-builds/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-sword mr-2"></i>Combat Builds
+                            <span class="block text-xs text-gray-400">PvP and PvE builds</span>
+                        </a>
+                        <a href="/pages/guides/new-player-guides/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-user-plus mr-2"></i>New Player Guides
+                            <span class="block text-xs text-gray-400">Getting started tutorials</span>
+                        </a>
+                        <a href="/pages/guides/credit-farming/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-coins mr-2"></i>Credit Farming
+                            <span class="block text-xs text-gray-400">Efficient earning methods</span>
+                        </a>
+                        <a href="/pages/guides/" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-b">
+                            <i class="fas fa-list mr-2"></i>All Guides
+                            <span class="block text-xs text-gray-400">Complete guide collection</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Heroics Dropdown -->
+                <div class="relative group">
+                    <button class="py-2 px-4 font-bold text-white hover:text-yellow-300 flex items-center space-x-1">
+                        <i class="fas fa-dragon"></i>
+                        <span>Heroics</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-gray-800 border border-gray-700 mt-2 rounded shadow-lg z-50 w-64">
+                        <div class="px-4 py-2 bg-gray-700 rounded-t text-yellow-300 font-semibold">
+                            <i class="fas fa-dragon mr-2"></i>Heroic Instances
+                        </div>
+                        <a href="/pages/heroics/axkva-min/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-mask mr-2"></i>Axkva Min
+                            <span class="block text-xs text-gray-400">Nightsister Stronghold</span>
+                        </a>
+                        <a href="/pages/heroics/krayt-dragon/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-dragon mr-2"></i>Krayt Dragon
+                            <span class="block text-xs text-gray-400">Ancient beast encounter</span>
+                        </a>
+                        <a href="/pages/heroics/ig-88/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-robot mr-2"></i>IG-88
+                            <span class="block text-xs text-gray-400">Bounty hunter droid</span>
+                        </a>
+                        <a href="/pages/heroics/" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-b">
+                            <i class="fas fa-list mr-2"></i>All Heroics
+                            <span class="block text-xs text-gray-400">Complete instance guide</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Loot Tables Dropdown -->
+                <div class="relative group">
+                    <button class="py-2 px-4 font-bold text-white hover:text-yellow-300 flex items-center space-x-1">
+                        <i class="fas fa-gem"></i>
+                        <span>Loot Tables</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block bg-gray-800 border border-gray-700 mt-2 rounded shadow-lg z-50 w-64">
+                        <div class="px-4 py-2 bg-gray-700 rounded-t text-yellow-300 font-semibold">
+                            <i class="fas fa-gem mr-2"></i>Loot Database
+                        </div>
+                        <a href="/pages/heroics/loot-table.html" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-treasure-chest mr-2"></i>Heroic Loot
+                            <span class="block text-xs text-gray-400">Instance drop tables</span>
+                        </a>
+                        <a href="/pages/loot/" class="block px-4 py-2 text-white hover:bg-gray-700">
+                            <i class="fas fa-star mr-2"></i>Rare Items
+                            <span class="block text-xs text-gray-400">Legendary gear database</span>
+                        </a>
+                        <a href="/pages/tools/loot-tracker.html" class="block px-4 py-2 text-white hover:bg-gray-700 rounded-b">
+                            <i class="fas fa-clipboard-list mr-2"></i>Loot Tracker
+                            <span class="block text-xs text-gray-400">Track your collections</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rankings (no dropdown) -->
+                <a href="/pages/leaderboard/" class="py-2 px-4 font-bold text-white hover:text-yellow-300 flex items-center space-x-1">
+                    <i class="fas fa-trophy"></i>
+                    <span>Rankings</span>
+                </a>
+            </nav>
+
+            <!-- Search -->
+            <div class="hidden md:block">
+                <input type="text" placeholder="Search SWGDB..." class="bg-gray-700 border border-gray-600 rounded-full px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-300 w-48">
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobileMenu">
+            <div class="px-6 py-4 bg-gray-900 border-t border-gray-700">
+                <a href="/pages/tools/" class="block py-2 text-white hover:text-yellow-300">
+                    <i class="fas fa-tools mr-2"></i>Tools
+                </a>
+                <a href="/pages/guides/" class="block py-2 text-white hover:text-yellow-300">
+                    <i class="fas fa-book mr-2"></i>Guides
+                </a>
+                <a href="/pages/heroics/" class="block py-2 text-white hover:text-yellow-300">
+                    <i class="fas fa-dragon mr-2"></i>Heroics
+                </a>
+                <a href="/pages/loot/" class="block py-2 text-white hover:text-yellow-300">
+                    <i class="fas fa-gem mr-2"></i>Loot Tables
+                </a>
+                <a href="/pages/leaderboard/" class="block py-2 text-white hover:text-yellow-300">
+                    <i class="fas fa-trophy mr-2"></i>Rankings
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        {{ content | safe }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold mb-2">SWGDB</h3>
+                <p class="text-gray-400">Star Wars Galaxies Database - Empowering the Community</p>
+            </div>
+
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                    <i class="fab fa-discord text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+                <a href="/pages/guides/" class="text-gray-400 hover:text-white transition-colors">Guides</a>
+                <a href="/pages/tools/" class="text-gray-400 hover:text-white transition-colors">Tools</a>
+                <a href="/pages/heroics/" class="text-gray-400 hover:text-white transition-colors">Heroics</a>
+                <a href="/pages/loot/" class="text-gray-400 hover:text-white transition-colors">Loot Database</a>
+                <a href="/pages/leaderboard/" class="text-gray-400 hover:text-white transition-colors">Rankings</a>
+                <a href="/pages/report-bug.html" class="text-gray-400 hover:text-white transition-colors">Report Bug</a>
+            </div>
+
+            <div class="border-t border-gray-700 pt-8 text-sm text-gray-400">
+                <p>&copy; 2025 SWGDB - Built with ❤️ by the Project MorningStar team</p>
+                <p>Empowering the Star Wars Galaxies Restoration community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

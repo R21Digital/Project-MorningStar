@@ -1,0 +1,8 @@
+{
+  "secret_key": "a0439aeef9be817b9c4630337181d5394507b0dfe06371c90cb4aa512e37e81a",
+  "token_expiry_hours": 24,
+  "max_attempts": 5,
+  "rate_limit_window": 300,
+  "created_at": "2025-08-06T15:52:05.907578+00:00",
+  "description": "Discord authentication configuration for SWGDB Private API"
+}

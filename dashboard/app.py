@@ -7,37 +7,157 @@ from datetime import datetime, timedelta
 import glob
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash
-from core.session_tracker import load_session
-from core.session_report_dashboard import session_dashboard
 
-from core import progress_tracker
-from core.build_manager import BuildManager
-from core.profile_loader import SESSION_STATE
-from profiles.special_goals import get_dashboard_data as get_special_goals_data
-from core.guide_manager import GuideManager, GuideMetadata
-from core.player_guild_tracker import PlayerGuildTracker
-from core.player_profile_manager import profile_manager
-from core.multi_character_profile_manager import multi_character_manager
-from core.chat_session_manager import chat_session_manager
-from core.blog_engine import blog_manager
-from core.macro_safety import macro_safety_manager
-from core.heroic_support import heroic_support
-from core.vendor_price_scanner import vendor_price_scanner
-from core.vendor_price_alerts import vendor_price_alerts
-from core.steam_discord_bridge import identity_bridge
-from core.quest_heatmap_tracker import quest_heatmap_tracker
-from core.tools_manager import tools_manager, submit_player_tool, get_player_tools, get_tool_by_id, increment_tool_views, get_tool_content, get_tools_stats
-from core.build_optimizer import analyze_character_build, get_profession_recommendations, get_equipment_recommendations
-from core.cross_character_session_dashboard import cross_character_dashboard
-from core.mods_hub_manager import mods_hub_manager, ModCategory, ModType, ModStatus
-from core.quest_tracker import quest_tracker, QuestCategory, QuestDifficulty, QuestStatus, Planet, RewardType
-from core.build_loader import get_build_loader
-from optimizer.gear_advisor import get_gear_advisor, OptimizationType
-from api.public_build_browser import register_build_routes, get_build_browser
-from api.build_showcase_api import register_build_showcase_routes
-from api.player_encounter_api import register_player_encounter_routes
-from tracking.item_scanner import get_item_scanner
-from core.vendor_history_manager import get_vendor_history_manager, VendorHistoryFilter
+# Import core modules with fallbacks
+try:
+    from core.session_tracker import load_session
+    from core.session_report_dashboard import session_dashboard
+    from core.ms11_license_manager import ms11_license_manager
+    from core import progress_tracker
+    from core.build_manager import BuildManager
+    from core.profile_loader import SESSION_STATE
+    from profiles.special_goals import get_dashboard_data as get_special_goals_data
+    from core.guide_manager import GuideManager, GuideMetadata
+    from core.player_guild_tracker import PlayerGuildTracker
+    from core.player_profile_manager import profile_manager
+    from core.multi_character_profile_manager import multi_character_manager
+    from core.chat_session_manager import chat_session_manager
+    from core.blog_engine import blog_manager
+    from core.macro_safety import macro_safety_manager
+    from core.heroic_support import heroic_support
+    from core.vendor_price_scanner import vendor_price_scanner
+    from core.vendor_price_alerts import vendor_price_alerts
+    from core.steam_discord_bridge import identity_bridge
+    from core.quest_heatmap_tracker import quest_heatmap_tracker
+    from core.tools_manager import tools_manager, submit_player_tool, get_player_tools, get_tool_by_id, increment_tool_views, get_tool_content, get_tools_stats
+    CORE_MODULES_AVAILABLE = True
+except ImportError as e:
+    print(f"[WARNING] Core modules not available: {e}")
+    print("[INFO] Dashboard running in limited mode")
+    CORE_MODULES_AVAILABLE = False
+    
+    # Create fallback implementations
+    def load_session(*args, **kwargs):
+        return {"status": "unavailable"}
+    
+    def session_dashboard(*args, **kwargs):
+        return {"message": "Session dashboard unavailable"}
+        
+    class BuildManager:
+        def __init__(self, *args, **kwargs):
+            pass
+        def get_builds(self):
+            return []
+    
+    SESSION_STATE = {"demo": True}
+    
+    def get_special_goals_data():
+        return {"goals": [], "status": "unavailable"}
+        
+    # Add other fallback implementations as needed
+    class GuideManager:
+        def get_guides(self):
+            return []
+    
+    class PlayerGuildTracker:
+        def __init__(self, *args, **kwargs):
+            pass
+        def get_guilds(self):
+            return []
+    
+    ms11_license_manager = None
+    progress_tracker = None
+    profile_manager = None
+    multi_character_manager = None
+    chat_session_manager = None
+    blog_manager = None
+    macro_safety_manager = None
+    heroic_support = None
+    vendor_price_scanner = None
+    vendor_price_alerts = None
+    identity_bridge = None
+    quest_heatmap_tracker = None
+    tools_manager = None
+    
+    # Additional fallback implementations
+    def analyze_character_build(*args, **kwargs):
+        return {"analysis": "unavailable"}
+    
+    def get_profession_recommendations(*args, **kwargs):
+        return []
+    
+    def get_equipment_recommendations(*args, **kwargs):
+        return []
+    
+    def cross_character_dashboard(*args, **kwargs):
+        return {"message": "Cross-character dashboard unavailable"}
+    
+    def submit_player_tool(*args, **kwargs):
+        return {"status": "unavailable"}
+    
+    def get_player_tools(*args, **kwargs):
+        return []
+    
+    def get_tool_by_id(*args, **kwargs):
+        return None
+    
+    def increment_tool_views(*args, **kwargs):
+        pass
+    
+    def get_tool_content(*args, **kwargs):
+        return ""
+    
+    def get_tools_stats(*args, **kwargs):
+        return {"stats": "unavailable"}
+
+# Additional module imports with fallbacks
+try:
+    from core.build_optimizer import analyze_character_build, get_profession_recommendations, get_equipment_recommendations
+    from core.cross_character_session_dashboard import cross_character_dashboard
+    from core.mods_hub_manager import mods_hub_manager, ModCategory, ModType, ModStatus
+    from core.quest_tracker import quest_tracker, QuestCategory, QuestDifficulty, QuestStatus, Planet, RewardType
+    from core.build_loader import get_build_loader
+    from optimizer.gear_advisor import get_gear_advisor, OptimizationType
+    EXTENDED_MODULES_AVAILABLE = True
+except ImportError as e:
+    EXTENDED_MODULES_AVAILABLE = False
+    # Use fallback implementations defined above
+# Final module imports with fallbacks
+try:
+    from api.public_build_browser import register_build_routes, get_build_browser
+    from api.build_showcase_api import register_build_showcase_routes
+    from api.player_encounter_api import register_player_encounter_routes
+    from tracking.item_scanner import get_item_scanner
+    from core.vendor_history_manager import get_vendor_history_manager, VendorHistoryFilter
+    API_MODULES_AVAILABLE = True
+except ImportError as e:
+    API_MODULES_AVAILABLE = False
+    
+    # API fallback implementations
+    def register_build_routes(app):
+        @app.route('/builds')
+        def builds():
+            return jsonify({"message": "Build browser unavailable"})
+    
+    def get_build_browser():
+        return None
+    
+    def register_build_showcase_routes(app):
+        @app.route('/showcase')
+        def showcase():
+            return jsonify({"message": "Showcase unavailable"})
+    
+    def register_player_encounter_routes(app):
+        pass
+    
+    def get_item_scanner():
+        return None
+    
+    def get_vendor_history_manager():
+        return None
+    
+    class VendorHistoryFilter:
+        pass
 
 # Runtime session data placeholder
 session_state: dict = {}
@@ -369,7 +489,7 @@ def api_select_build(build_id):
 
 
 @app.route("/api/builds/search")
-def api_search_builds():
+def api_search_builds_main():
     """API endpoint to search builds with filters."""
     try:
         build_loader = get_build_loader()
@@ -1206,9 +1326,9 @@ def create_profile():
                          professions=profile_manager.get_supported_professions())
 
 
-@app.route("/players/<player_name>")
-def player_detail(player_name):
-    """Player detail page."""
+@app.route("/public/players/<player_name>")
+def public_player_detail(player_name):
+    """Public player detail page."""
     try:
         # First check public profiles
         public_profiles = profile_manager.list_profiles()
@@ -5672,6 +5792,337 @@ def api_build_optimizer_v2_history(character_name):
             'success': False,
             'error': str(e)
         }), 500
+
+
+# MS11 Dashboard Routes
+@app.route("/ms11")
+def ms11_dashboard():
+    """MS11 Dashboard - requires Discord authentication and license."""
+    # Check if user is authenticated via Discord
+    discord_profile = session.get('discord_profile')
+    if not discord_profile:
+        flash("Please login with Discord to access MS11 dashboard", "warning")
+        return redirect(url_for('ms11_login'))
+    
+    # Check if user has MS11 license
+    discord_id = discord_profile.get('discord_id')
+    if not discord_id or not ms11_license_manager.is_user_authorized(discord_id):
+        flash("Access denied. You need an MS11 license to access this dashboard.", "error")
+        return redirect(url_for('ms11_license_required'))
+    
+    # Update license usage
+    ms11_license_manager.update_license_usage(discord_id)
+    
+    # Get user's license info
+    license_info = ms11_license_manager.get_user_license(discord_id)
+    
+    return render_template('ms11/dashboard.html', 
+                         user=discord_profile, 
+                         license_info=license_info)
+
+
+@app.route("/ms11/login")
+def ms11_login():
+    """MS11 login page with Discord authentication."""
+    return render_template('ms11/login.html')
+
+
+@app.route("/ms11/license-required")
+def ms11_license_required():
+    """Page shown when user doesn't have MS11 license."""
+    return render_template('ms11/license_required.html')
+
+
+@app.route("/ms11/auth/discord")
+def ms11_discord_auth():
+    """Initiate Discord authentication for MS11."""
+    # Load Discord OAuth config
+    try:
+        with open('config/discord_oauth.json', 'r') as f:
+            discord_config = json.load(f)
+        
+        discord_client_id = discord_config['client_id']
+        redirect_uri = discord_config['redirect_uri']
+        scope = discord_config['scope']
+        
+        auth_url = f"https://discord.com/api/oauth2/authorize?client_id={discord_client_id}&redirect_uri={redirect_uri}&response_type=code&scope={scope}"
+        return redirect(auth_url)
+    except Exception as e:
+        flash(f"Discord configuration error: {str(e)}", "error")
+        return redirect(url_for('ms11_login'))
+
+
+@app.route("/ms11/auth/discord/callback")
+def ms11_discord_callback():
+    """Discord OAuth callback for MS11 authentication."""
+    try:
+        code = request.args.get('code')
+        if not code:
+            flash("Discord authentication failed: Missing authorization code", "error")
+            return redirect(url_for('ms11_login'))
+        
+        # Load Discord OAuth config
+        with open('config/discord_oauth.json', 'r') as f:
+            discord_config = json.load(f)
+        
+        # Exchange code for access token
+        token_data = {
+            'client_id': discord_config['client_id'],
+            'client_secret': discord_config['client_secret'],
+            'grant_type': 'authorization_code',
+            'code': code,
+            'redirect_uri': discord_config['redirect_uri']
+        }
+        
+        import requests
+        
+        # Exchange code for access token
+        token_response = requests.post(discord_config['token_url'], data=token_data)
+        if token_response.status_code != 200:
+            flash("Discord authentication failed: Could not exchange code for token", "error")
+            return redirect(url_for('ms11_login'))
+        
+        token_info = token_response.json()
+        access_token = token_info.get('access_token')
+        
+        if not access_token:
+            flash("Discord authentication failed: No access token received", "error")
+            return redirect(url_for('ms11_login'))
+        
+        # Get user information from Discord
+        headers = {'Authorization': f'Bearer {access_token}'}
+        user_response = requests.get(discord_config['user_url'], headers=headers)
+        
+        if user_response.status_code != 200:
+            flash("Discord authentication failed: Could not get user information", "error")
+            return redirect(url_for('ms11_login'))
+        
+        discord_user_data = user_response.json()
+        
+        # Store in session
+        session['discord_profile'] = {
+            'discord_id': discord_user_data['id'],
+            'username': discord_user_data['username'],
+            'avatar': discord_user_data.get('avatar'),
+            'discriminator': discord_user_data.get('discriminator', '0')
+        }
+        session['discord_authenticated'] = True
+        
+        # Check if user has MS11 license
+        if ms11_license_manager.is_user_authorized(discord_user_data['id']):
+            flash(f"Welcome back, {discord_user_data['username']}!", "success")
+            return redirect(url_for('ms11_dashboard'))
+        else:
+            flash("Discord authentication successful, but you need an MS11 license to access the dashboard.", "warning")
+            return redirect(url_for('ms11_license_required'))
+            
+    except Exception as e:
+        flash(f"Discord authentication error: {str(e)}", "error")
+        return redirect(url_for('ms11_login'))
+
+
+@app.route("/ms11/api/status")
+def ms11_api_status():
+    """API endpoint to get MS11 system status."""
+    try:
+        # Check if user is authorized
+        discord_profile = session.get('discord_profile')
+        if not discord_profile:
+            return jsonify({"success": False, "error": "Not authenticated"}), 401
+        
+        discord_id = discord_profile.get('discord_id')
+        if not ms11_license_manager.is_user_authorized(discord_id):
+            return jsonify({"success": False, "error": "Not authorized"}), 403
+        
+        # Get MS11 system status
+        status = {
+            "system_status": "online",
+            "last_updated": datetime.now().isoformat(),
+            "active_sessions": 0,  # Replace with actual session count
+            "available_modes": ["medic", "quest", "combat", "crafting", "dancer", "whisper", "support", "follow", "bounty", "entertainer", "rls", "special-goals"],
+            "license_info": ms11_license_manager.get_user_license(discord_id)
+        }
+        
+        return jsonify({"success": True, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/ms11/api/sessions")
+def ms11_api_sessions():
+    """API endpoint to get MS11 sessions."""
+    try:
+        # Check if user is authorized
+        discord_profile = session.get('discord_profile')
+        if not discord_profile:
+            return jsonify({"success": False, "error": "Not authenticated"}), 401
+        
+        discord_id = discord_profile.get('discord_id')
+        if not ms11_license_manager.is_user_authorized(discord_id):
+            return jsonify({"success": False, "error": "Not authorized"}), 403
+        
+        # Get MS11 sessions (mock data for now)
+        sessions = [
+            {
+                "id": "session_001",
+                "mode": "medic",
+                "start_time": "2024-01-15T10:00:00",
+                "end_time": "2024-01-15T12:00:00",
+                "status": "completed",
+                "xp_gained": 1500,
+                "quests_completed": 3
+            },
+            {
+                "id": "session_002",
+                "mode": "quest",
+                "start_time": "2024-01-14T14:00:00",
+                "end_time": "2024-01-14T16:00:00",
+                "status": "completed",
+                "xp_gained": 2000,
+                "quests_completed": 5
+            }
+        ]
+        
+        return jsonify({"success": True, "sessions": sessions})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/ms11/api/start-session", methods=['POST'])
+def ms11_api_start_session():
+    """API endpoint to start a new MS11 session."""
+    try:
+        # Check if user is authorized
+        discord_profile = session.get('discord_profile')
+        if not discord_profile:
+            return jsonify({"success": False, "error": "Not authenticated"}), 401
+        
+        discord_id = discord_profile.get('discord_id')
+        if not ms11_license_manager.is_user_authorized(discord_id):
+            return jsonify({"success": False, "error": "Not authorized"}), 403
+        
+        data = request.get_json()
+        mode = data.get('mode', 'medic')
+        
+        # Here you would actually start the MS11 session
+        # For now, we'll return a mock response
+        session_id = f"session_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        
+        return jsonify({
+            "success": True,
+            "session_id": session_id,
+            "mode": mode,
+            "status": "started",
+            "message": f"MS11 session started in {mode} mode"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/ms11/api/stop-session/<session_id>", methods=['POST'])
+def ms11_api_stop_session(session_id):
+    """API endpoint to stop an MS11 session."""
+    try:
+        # Check if user is authorized
+        discord_profile = session.get('discord_profile')
+        if not discord_profile:
+            return jsonify({"success": False, "error": "Not authenticated"}), 401
+        
+        discord_id = discord_profile.get('discord_id')
+        if not ms11_license_manager.is_user_authorized(discord_id):
+            return jsonify({"success": False, "error": "Not authorized"}), 403
+        
+        # Here you would actually stop the MS11 session
+        # For now, we'll return a mock response
+        
+        return jsonify({
+            "success": True,
+            "session_id": session_id,
+            "status": "stopped",
+            "message": "MS11 session stopped successfully"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/ms11/admin/licenses")
+def ms11_admin_licenses():
+    """Admin page to manage MS11 licenses."""
+    # Check if user is authorized (you might want to add admin role checking)
+    discord_profile = session.get('discord_profile')
+    if not discord_profile:
+        flash("Please login with Discord to access admin panel", "warning")
+        return redirect(url_for('ms11_login'))
+    
+    discord_id = discord_profile.get('discord_id')
+    if not discord_id or not ms11_license_manager.is_user_authorized(discord_id):
+        flash("Access denied. You need admin privileges to access this page.", "error")
+        return redirect(url_for('ms11_license_required'))
+    
+    licenses = ms11_license_manager.get_all_licenses()
+    stats = ms11_license_manager.get_license_stats()
+    
+    return render_template('ms11/admin/licenses.html', 
+                         licenses=licenses, 
+                         stats=stats,
+                         user=discord_profile)
+
+
+@app.route("/ms11/admin/licenses/add", methods=['POST'])
+def ms11_admin_add_license():
+    """Admin endpoint to add a new MS11 license."""
+    try:
+        # Check if user is authorized
+        discord_profile = session.get('discord_profile')
+        if not discord_profile:
+            return jsonify({"success": False, "error": "Not authenticated"}), 401
+        
+        discord_id = discord_profile.get('discord_id')
+        if not ms11_license_manager.is_user_authorized(discord_id):
+            return jsonify({"success": False, "error": "Not authorized"}), 403
+        
+        data = request.get_json()
+        new_discord_id = data.get('discord_id')
+        new_username = data.get('discord_username')
+        license_type = data.get('license_type', 'standard')
+        expires_at = data.get('expires_at')
+        
+        if not new_discord_id or not new_username:
+            return jsonify({"success": False, "error": "Missing required fields"}), 400
+        
+        success = ms11_license_manager.add_license(new_discord_id, new_username, license_type, expires_at)
+        
+        if success:
+            return jsonify({"success": True, "message": "License added successfully"})
+        else:
+            return jsonify({"success": False, "error": "Failed to add license. User might already have one or max licenses reached."}), 400
+            
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/ms11/admin/licenses/remove/<discord_id>", methods=['POST'])
+def ms11_admin_remove_license(discord_id):
+    """Admin endpoint to remove an MS11 license."""
+    try:
+        # Check if user is authorized
+        profile = session.get('discord_profile')
+        if not profile:
+            return jsonify({"success": False, "error": "Not authenticated"}), 401
+        
+        user_discord_id = profile.get('discord_id')
+        if not ms11_license_manager.is_user_authorized(user_discord_id):
+            return jsonify({"success": False, "error": "Not authorized"}), 403
+        
+        success = ms11_license_manager.remove_license(discord_id)
+        
+        if success:
+            return jsonify({"success": True, "message": "License removed successfully"})
+        else:
+            return jsonify({"success": False, "error": "License not found"}), 404
+            
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
 
 
 if __name__ == "__main__":

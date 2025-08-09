@@ -1,0 +1,62 @@
+{
+    "name": "Master Crafter",
+    "description": "Expert craftsman specializing in multiple professions",
+    "version": "1.0.0",
+    "profession": "crafting",
+    "skills": [
+        "architect",
+        "weaponsmith",
+        "armorsmith"
+    ],
+    "equipment": {
+        "tools": [
+            {
+                "type": "crafting_tool",
+                "min_quality": 0.9
+            },
+            {
+                "type": "survey_tool",
+                "min_quality": 0.8
+            }
+        ],
+        "storage": [
+            {
+                "type": "crafting_station",
+                "min_quality": 0.8
+            },
+            {
+                "type": "resource_container",
+                "min_quality": 0.7
+            }
+        ]
+    },
+    "crafting": {
+        "style": "quality",
+        "focus": "weapons_armor",
+        "specialties": [
+            "experimental_items",
+            "custom_orders",
+            "mass_production"
+        ]
+    },
+    "buffs": {
+        "required": [
+            "crafting_efficiency",
+            "assembly"
+        ],
+        "optional": [
+            "experimentation",
+            "resource_quality"
+        ]
+    },
+    "inventory": {
+        "required": [
+            "crafting_tools",
+            "resource_containers"
+        ],
+        "optional": [
+            "schematics",
+            "rare_resources"
+        ]
+    }
+}

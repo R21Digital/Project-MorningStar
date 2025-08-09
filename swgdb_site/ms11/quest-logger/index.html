@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Logger - MS11 Internal</title>
+    <link rel="icon" type="image/png" href="../../assets/SWGDB Logo.png">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0A0A0A;
+            color: #F5EEDC;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: rgba(255, 107, 107, 0.05);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #FF6B6B;
+            margin: 0 0 10px 0;
+            font-size: 2.2em;
+        }
+        .internal-badge {
+            background: #FF6B6B;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .quest-log {
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            font-family: monospace;
+            font-size: 0.9em;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px 0;
+        }
+        .timestamp { color: #5E5E5E; }
+        .quest-name { color: #FFD700; font-weight: bold; }
+        .status-complete { color: #00FF00; }
+        .status-failed { color: #FF6B6B; }
+        .status-progress { color: #00BFFF; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to MS11 Dashboard</a>
+        
+        <div class="header">
+            <h1>📋 Quest Logger <span class="internal-badge">MS11 INTERNAL</span></h1>
+            <p>AI-powered quest tracking and completion analysis</p>
+        </div>
+
+        <h3>Real-time Quest Log</h3>
+        <div class="quest-log">
+            <div class="log-entry">
+                <span class="timestamp">[14:23:45]</span> 
+                <span class="quest-name">Rebel Hideout Investigation</span> - 
+                <span class="status-progress">IN PROGRESS (Step 3/5)</span>
+            </div>
+            <div class="log-entry">
+                <span class="timestamp">[14:20:12]</span> 
+                <span class="quest-name">Deliver Supplies to Outpost</span> - 
+                <span class="status-complete">COMPLETED</span> (+2,500 XP)
+            </div>
+            <div class="log-entry">
+                <span class="timestamp">[14:18:33]</span> 
+                <span class="quest-name">Hunt Womp Rats</span> - 
+                <span class="status-complete">COMPLETED</span> (+1,200 XP)
+            </div>
+            <div class="log-entry">
+                <span class="timestamp">[14:15:44]</span> 
+                <span class="quest-name">Mining Operation Beta</span> - 
+                <span class="status-failed">FAILED</span> (Resource depleted)
+            </div>
+            <div class="log-entry">
+                <span class="timestamp">[14:12:01]</span> 
+                <span class="quest-name">Imperial Intelligence Gathering</span> - 
+                <span class="status-progress">IN PROGRESS (Step 1/4)</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center; opacity: 0.6; font-size: 0.9em; font-family: monospace;">
+            <p>MS11-QUEST-LOGGER v1.8.3 | AI-ENHANCED | CLASSIFIED</p>
+        </div>
+    </div>
+</body>
+</html>

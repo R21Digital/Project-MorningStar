@@ -1,0 +1,64 @@
+{
+    "name": "Marksman Rifleman",
+    "description": "Basic combat build focusing on ranged combat",
+    "version": "1.0.0",
+    "profession": "combat",
+    "skills": [
+        "marksman",
+        "rifleman",
+        "pistoleer"
+    ],
+    "equipment": {
+        "weapons": [
+            {
+                "type": "rifle",
+                "min_quality": 0.7
+            },
+            {
+                "type": "pistol",
+                "min_quality": 0.6
+            }
+        ],
+        "armor": [
+            {
+                "slot": "chest",
+                "type": "composite",
+                "min_quality": 0.6
+            },
+            {
+                "slot": "legs",
+                "type": "composite",
+                "min_quality": 0.6
+            }
+        ]
+    },
+    "combat": {
+        "style": "ranged",
+        "range": "medium",
+        "tactics": [
+            "kite",
+            "cover",
+            "burst"
+        ]
+    },
+    "buffs": {
+        "required": [
+            "aim",
+            "focus"
+        ],
+        "optional": [
+            "strength",
+            "agility"
+        ]
+    },
+    "inventory": {
+        "required": [
+            "medpack",
+            "power_up"
+        ],
+        "optional": [
+            "stim_pack",
+            "energy_boost"
+        ]
+    }
+}

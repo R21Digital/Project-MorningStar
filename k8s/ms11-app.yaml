@@ -1,0 +1,269 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ms11-data-pvc
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: ms11-app
+    app.kubernetes.io/component: application
+spec:
+  accessModes:
+    - ReadWriteMany  # Allows multiple pods to share data
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-client  # Adjust based on your cluster
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ms11-logs-pvc
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: ms11-app
+    app.kubernetes.io/component: application
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: nfs-client
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms11-app
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: ms11-app
+    app.kubernetes.io/component: application
+spec:
+  replicas: 2  # Scale based on needs
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ms11-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ms11-app
+        app.kubernetes.io/component: application
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox:1.35
+        command:
+        - sh
+        - -c
+        - |
+          until nc -z postgres-service.ms11.svc.cluster.local 5432; do
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
+          echo "PostgreSQL is ready"
+      - name: wait-for-redis
+        image: busybox:1.35
+        command:
+        - sh
+        - -c
+        - |
+          until nc -z redis-service.ms11.svc.cluster.local 6379; do
+            echo "Waiting for Redis..."
+            sleep 2
+          done
+          echo "Redis is ready"
+      containers:
+      - name: ms11-app
+        image: ms11:latest  # Update with your registry
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          name: http
+        - containerPort: 8080
+          name: dashboard
+        env:
+        # Environment variables from ConfigMap
+        - name: MS11_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: ms11-config
+              key: MS11_ENVIRONMENT
+        - name: MS11_LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: ms11-config
+              key: MS11_LOG_LEVEL
+        - name: PYTHONPATH
+          valueFrom:
+            configMapKeyRef:
+              name: ms11-config
+              key: PYTHONPATH
+        - name: DISPLAY
+          valueFrom:
+            configMapKeyRef:
+              name: ms11-config
+              key: DISPLAY
+        # Secrets
+        - name: MS11_DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: ms11-secrets
+              key: MS11_DATABASE_URL
+        - name: MS11_REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: ms11-secrets
+              key: MS11_REDIS_URL
+        - name: MS11_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ms11-secrets
+              key: MS11_SECRET_KEY
+        # Optional OAuth secrets
+        - name: OAUTH_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: ms11-secrets
+              key: OAUTH_CLIENT_ID
+              optional: true
+        - name: OAUTH_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: ms11-secrets
+              key: OAUTH_CLIENT_SECRET
+              optional: true
+        # Pod information
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        volumeMounts:
+        - name: ms11-data
+          mountPath: /app/data
+        - name: ms11-logs
+          mountPath: /app/logs
+        - name: backups
+          mountPath: /app/backups
+        - name: x11-socket
+          mountPath: /tmp/.X11-unix
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30  # Allow up to 5 minutes for startup
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false  # MS11 needs to write temp files
+          capabilities:
+            drop:
+            - ALL
+      volumes:
+      - name: ms11-data
+        persistentVolumeClaim:
+          claimName: ms11-data-pvc
+      - name: ms11-logs
+        persistentVolumeClaim:
+          claimName: ms11-logs-pvc
+      - name: backups
+        emptyDir: {}
+      - name: x11-socket
+        emptyDir: {}
+      securityContext:
+        fsGroup: 1000
+      # Node selection for GPU nodes if needed
+      # nodeSelector:
+      #   gpu: "true"
+      # tolerations:
+      # - key: "gpu"
+      #   operator: "Equal"
+      #   value: "true"
+      #   effect: "NoSchedule"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms11-service
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: ms11-app
+    app.kubernetes.io/component: application
+spec:
+  selector:
+    app.kubernetes.io/name: ms11-app
+  ports:
+  - port: 80
+    targetPort: 5000
+    name: http
+  - port: 8080
+    targetPort: 8080
+    name: dashboard
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms11-service-external
+  namespace: ms11
+  labels:
+    app.kubernetes.io/name: ms11-app
+    app.kubernetes.io/component: application
+  annotations:
+    service.beta.kubernetes.io/external-traffic: OnlyLocal
+spec:
+  selector:
+    app.kubernetes.io/name: ms11-app
+  ports:
+  - port: 80
+    targetPort: 5000
+    name: http
+    nodePort: 30500
+  - port: 8080
+    targetPort: 8080
+    name: dashboard
+    nodePort: 30580
+  type: NodePort  # Change to LoadBalancer for cloud environments

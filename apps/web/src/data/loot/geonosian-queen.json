@@ -1,0 +1,12 @@
+{
+  "boss": "Geonosian Queen",
+  "instance": "Geonosian Queen's Hive",
+  "location": "Geonosis",
+  "drops": [
+    "Queen's Royal Staff",
+    "Geonosian Royal Armor",
+    "Sonic Weaponry",
+    "Hive Defender Equipment",
+    "Insectoid Technology"
+  ]
+}

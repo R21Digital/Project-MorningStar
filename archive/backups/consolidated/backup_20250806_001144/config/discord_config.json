@@ -1,7 +1,0 @@
-{
-  "discord_token": "${DISCORD_TOKEN}",
-  "relay_mode": "notify",
-  "target_user_id": 0,
-  "reply_queue": [],
-  "_comment": "SECURITY: Use environment variable DISCORD_TOKEN instead of hardcoded tokens. Set relay_mode to: notify, manual, or auto. Set target_user_id to your Discord user ID."
-}

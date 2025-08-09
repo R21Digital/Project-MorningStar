@@ -1,0 +1,64 @@
+{
+    "name": "Entertainer Dancer",
+    "description": "Professional entertainer specializing in dance and music",
+    "version": "1.0.0",
+    "profession": "entertainer",
+    "skills": [
+        "dancer",
+        "musician",
+        "imagedesigner"
+    ],
+    "equipment": {
+        "instruments": [
+            {
+                "type": "slitherhorn",
+                "min_quality": 0.7
+            },
+            {
+                "type": "nalargon",
+                "min_quality": 0.8
+            }
+        ],
+        "clothing": [
+            {
+                "slot": "shirt",
+                "type": "formal",
+                "min_quality": 0.7
+            },
+            {
+                "slot": "pants",
+                "type": "formal",
+                "min_quality": 0.7
+            }
+        ]
+    },
+    "performance": {
+        "style": "flourish",
+        "venue": "cantina",
+        "routines": [
+            "basic_dance",
+            "exotic_dance",
+            "popular_music"
+        ]
+    },
+    "buffs": {
+        "required": [
+            "entertainer_buff",
+            "inspiration"
+        ],
+        "optional": [
+            "vitality",
+            "focus"
+        ]
+    },
+    "inventory": {
+        "required": [
+            "instrument_kit",
+            "makeup_kit"
+        ],
+        "optional": [
+            "costume_set",
+            "performance_enhancers"
+        ]
+    }
+}

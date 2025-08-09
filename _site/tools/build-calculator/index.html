@@ -1,0 +1,847 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Calculator - SWGDB Tools</title>
+  <link rel="icon" type="image/png" href="/public/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'swg': ['Rajdhani', 'sans-serif'],
+          },
+          colors: {
+            'swg-navy': '#0f172a',
+            'swg-steel': '#334155',
+            'swg-charcoal': '#1e293b',
+            'swg-cyan': '#06b6d4',
+            'swg-orange': '#ea580c',
+            'swg-gold': '#f59e0b',
+            'swg-red': '#dc2626',
+          },
+          backgroundImage: {
+            'swgdb-space': "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)",
+            'swgdb-starfield': "radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)",
+          },
+          animation: {
+            'holo-glow': 'holo-glow 2s ease-in-out infinite alternate',
+            'terminal-blink': 'terminal-blink 1.5s infinite',
+          },
+          keyframes: {
+            'holo-glow': {
+              '0%': { boxShadow: '0 0 5px rgba(6, 182, 212, 0.5)' },
+              '100%': { boxShadow: '0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.3)' }
+            },
+            'terminal-blink': {
+              '0%, 50%': { opacity: '1' },
+              '51%, 100%': { opacity: '0.3' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* SWG-themed custom styles */
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      background-attachment: fixed;
+    }
+    
+    /* Starfield overlay effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(6, 182, 212, 0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(6, 182, 212, 0.2), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(6, 182, 212, 0.4), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(6, 182, 212, 0.2), transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: starfield 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    @keyframes starfield {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-100px); }
+    }
+    
+    /* Holo-terminal panel styles */
+    .holo-panel {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      border-radius: 8px;
+      box-shadow: 
+        0 0 10px rgba(6, 182, 212, 0.3),
+        inset 0 0 20px rgba(6, 182, 212, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .holo-panel:hover {
+      border-color: rgba(6, 182, 212, 0.8);
+      box-shadow: 
+        0 0 20px rgba(6, 182, 212, 0.5),
+        inset 0 0 30px rgba(6, 182, 212, 0.2);
+    }
+    
+    /* Terminal-style buttons */
+    .terminal-btn {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.9) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.6);
+      color: #06b6d4;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .terminal-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .terminal-btn:hover::before {
+      left: 100%;
+    }
+    
+    .terminal-btn:hover {
+      border-color: rgba(6, 182, 212, 1);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.6);
+      color: #22d3ee;
+    }
+    
+    /* Navigation styles */
+    .nav-link {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #06b6d4, #22d3ee);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Custom dropdown styles */
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      min-width: 16rem;
+      margin-top: 0.5rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(6, 182, 212, 0.3);
+      backdrop-filter: blur(10px);
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown.show .dropdown-menu {
+      display: block !important;
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(6, 182, 212, 0.1);
+    }
+    .dropdown-menu a:hover {
+      background: rgba(6, 182, 212, 0.1);
+      color: #06b6d4;
+      padding-left: 1.5rem;
+    }
+    .dropdown-menu .dropdown-header {
+      padding: 0.75rem 1rem;
+      background: rgba(6, 182, 212, 0.2);
+      color: #06b6d4;
+      font-weight: 600;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .dropdown-menu a:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body class="font-swg bg-swgdb-space bg-cover bg-fixed text-white min-h-screen relative">
+
+<!-- Header with SWG-themed Navigation -->
+<header class="bg-black/80 border-b border-swg-cyan/50 shadow-lg backdrop-blur-sm sticky top-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+    <!-- Brand Section -->
+    <a href="/" class="flex items-center space-x-3 group">
+      <div class="flex items-center space-x-3">
+        <img src="/public/images/swgdb-logo.png" alt="SWGDB Logo" class="h-8 md:h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity" />
+      </div>
+      <div class="text-xs text-slate-400 font-medium">
+        <div>STAR WARS GALAXIES</div>
+        <div class="text-swg-cyan">DATABASE</div>
+      </div>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="flex gap-8 text-sm font-medium">
+      <a href="/tools/skill-calculator/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-calculator mr-2"></i>Skill Calculator
+      </a>
+      <a href="/tools/gcw-calculator/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-globe mr-2"></i>GCW Calculator
+      </a>
+      <a href="/tools/build-calculator/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-cogs mr-2"></i>Build Calculator
+      </a>
+      <a href="/tools/gear-optimizer/" class="nav-link text-slate-300 hover:text-swg-cyan transition-colors">
+        <i class="fas fa-shield-alt mr-2"></i>Gear Optimizer
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main class="relative z-10 min-h-screen">
+  
+    <style>
+        .builds-hero {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(30, 41, 59, 0.8) 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .builds-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #06b6d4;
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .builds-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e2e8f0;
+        }
+
+        .filters-section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #06b6d4;
+        }
+
+        .filter-control {
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .filter-control:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        }
+
+        .stats-bar {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #06b6d4;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            opacity: 0.8;
+        }
+
+        .build-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+            margin-bottom: 25px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .build-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .build-header {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(30, 41, 59, 0.9) 100%);
+            color: white;
+            padding: 25px;
+            border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .build-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #06b6d4;
+            margin-bottom: 8px;
+        }
+
+        .build-subtitle {
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .build-content {
+            padding: 25px;
+        }
+
+        .build-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .build-stat {
+            text-align: center;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .build-stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #06b6d4;
+        }
+
+        .build-stat-label {
+            font-size: 0.8rem;
+            color: #e2e8f0;
+            opacity: 0.8;
+        }
+
+        .build-description {
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .build-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .build-tag {
+            background: rgba(6, 182, 212, 0.2);
+            color: #06b6d4;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .build-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.9) 0%, rgba(8, 145, 178, 0.9) 100%);
+            color: white;
+            border: 1px solid rgba(6, 182, 212, 0.6);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, rgba(8, 145, 178, 0.9) 0%, rgba(6, 182, 212, 0.9) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, rgba(51, 65, 85, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+            color: #e2e8f0;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.9) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 182, 212, 0.3);
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 60px;
+            color: #06b6d4;
+        }
+
+        .loading-spinner i {
+            font-size: 3rem;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <section class="py-12 px-6 max-w-6xl mx-auto text-white relative z-10">
+        <!-- Hero Section -->
+        <div class="builds-hero">
+            <h1><i class="fas fa-user-cog mr-4"></i>Build Calculator</h1>
+            <p>Browse and analyze pre-made character builds for optimal performance</p>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <h3 class="text-xl font-bold text-swg-cyan mb-4">Build Filters</h3>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="profession-filter">Profession</label>
+                    <select id="profession-filter" class="filter-control">
+                        <option value="">All Professions</option>
+                        <option value="rifleman">Rifleman</option>
+                        <option value="pistoleer">Pistoleer</option>
+                        <option value="swordsman">Swordsman</option>
+                        <option value="medic">Combat Medic</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="role-filter">Role</label>
+                    <select id="role-filter" class="filter-control">
+                        <option value="">All Roles</option>
+                        <option value="dps">DPS</option>
+                        <option value="tank">Tank</option>
+                        <option value="support">Support</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="difficulty-filter">Difficulty</label>
+                    <select id="difficulty-filter" class="filter-control">
+                        <option value="">All Difficulties</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-bar">
+            <h3 class="text-xl font-bold text-swg-cyan mb-4">Build Statistics</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="total-builds">0</div>
+                    <div class="stat-label">Total Builds</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="avg-rating">0.0</div>
+                    <div class="stat-label">Avg Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="top-builds">0</div>
+                    <div class="stat-label">Top Rated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="recent-builds">0</div>
+                    <div class="stat-label">Recent</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Builds Grid -->
+        <div id="builds-container">
+            <div class="loading-spinner">
+                <i class="fas fa-spinner"></i>
+                <p style="margin-top: 20px;">Loading builds...</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let builds = [];
+        let filteredBuilds = [];
+
+        // Sample build data
+        const sampleBuilds = [
+            {
+                id: 1,
+                title: "Elite Rifleman",
+                subtitle: "High DPS, Long Range",
+                profession: "rifleman",
+                role: "dps",
+                difficulty: "medium",
+                rating: 4.8,
+                description: "A high-damage rifleman build focused on long-range combat and accuracy. Perfect for PvE content and group play.",
+                stats: {
+                    damage: 95,
+                    accuracy: 90,
+                    defense: 60,
+                    utility: 70
+                },
+                tags: ["PvE", "Group", "Long Range", "High DPS"]
+            },
+            {
+                id: 2,
+                title: "Tank Medic",
+                subtitle: "Support & Survival",
+                profession: "medic",
+                role: "support",
+                difficulty: "hard",
+                rating: 4.6,
+                description: "A hybrid medic build that combines healing abilities with tank-like survivability. Excellent for group content and solo play.",
+                stats: {
+                    damage: 40,
+                    accuracy: 75,
+                    defense: 95,
+                    utility: 90
+                },
+                tags: ["Support", "Tank", "Group", "Solo"]
+            },
+            {
+                id: 3,
+                title: "Pistol Master",
+                subtitle: "Fast & Furious",
+                profession: "pistoleer",
+                role: "dps",
+                difficulty: "easy",
+                rating: 4.4,
+                description: "A fast-paced pistoleer build focused on rapid fire and mobility. Great for PvP and solo content.",
+                stats: {
+                    damage: 85,
+                    accuracy: 80,
+                    defense: 50,
+                    utility: 65
+                },
+                tags: ["PvP", "Solo", "Fast", "Mobile"]
+            }
+        ];
+
+        function loadBuilds() {
+            builds = [...sampleBuilds];
+            filteredBuilds = [...builds];
+            renderBuilds();
+            updateStats();
+        }
+
+        function renderBuilds() {
+            const container = document.getElementById('builds-container');
+            
+            if (filteredBuilds.length === 0) {
+                container.innerHTML = '<div class="text-center text-white py-12"><i class="fas fa-search fa-3x mb-4 text-swg-cyan"></i><p>No builds found matching your criteria.</p></div>';
+                return;
+            }
+
+            container.innerHTML = filteredBuilds.map(build => 
+                '<div class="build-card">' +
+                    '<div class="build-header">' +
+                        '<div class="build-title">' + build.title + '</div>' +
+                        '<div class="build-subtitle">' + build.subtitle + '</div>' +
+                    '</div>' +
+                    '<div class="build-content">' +
+                        '<div class="build-stats">' +
+                            '<div class="build-stat">' +
+                                '<div class="build-stat-value">' + build.stats.damage + '</div>' +
+                                '<div class="build-stat-label">Damage</div>' +
+                            '</div>' +
+                            '<div class="build-stat">' +
+                                '<div class="build-stat-value">' + build.stats.accuracy + '</div>' +
+                                '<div class="build-stat-label">Accuracy</div>' +
+                            '</div>' +
+                            '<div class="build-stat">' +
+                                '<div class="build-stat-value">' + build.stats.defense + '</div>' +
+                                '<div class="build-stat-label">Defense</div>' +
+                            '</div>' +
+                            '<div class="build-stat">' +
+                                '<div class="build-stat-value">' + build.stats.utility + '</div>' +
+                                '<div class="build-stat-label">Utility</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="build-description">' + build.description + '</div>' +
+                        '<div class="build-tags">' +
+                            build.tags.map(tag => '<span class="build-tag">' + tag + '</span>').join('') +
+                        '</div>' +
+                        '<div class="build-actions">' +
+                            '<button class="action-btn btn-primary" onclick="viewBuild(' + build.id + ')">' +
+                                '<i class="fas fa-eye"></i>View Details' +
+                            '</button>' +
+                            '<button class="action-btn btn-secondary" onclick="exportBuild(' + build.id + ')">' +
+                                '<i class="fas fa-download"></i>Export' +
+                            '</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+            ).join('');
+        }
+
+        function updateStats() {
+            document.getElementById('total-builds').textContent = builds.length;
+            document.getElementById('avg-rating').textContent = (builds.reduce((sum, build) => sum + build.rating, 0) / builds.length).toFixed(1);
+            document.getElementById('top-builds').textContent = builds.filter(build => build.rating >= 4.5).length;
+            document.getElementById('recent-builds').textContent = builds.filter(build => build.id > builds.length - 3).length;
+        }
+
+        function filterBuilds() {
+            const profession = document.getElementById('profession-filter').value;
+            const role = document.getElementById('role-filter').value;
+            const difficulty = document.getElementById('difficulty-filter').value;
+
+            filteredBuilds = builds.filter(build => {
+                return (!profession || build.profession === profession) &&
+                       (!role || build.role === role) &&
+                       (!difficulty || build.difficulty === difficulty);
+            });
+
+            renderBuilds();
+        }
+
+        function viewBuild(buildId) {
+            const build = builds.find(b => b.id === buildId);
+            if (build) {
+                alert('Viewing build: ' + build.title + '
+
+This would open a detailed view of the build.');
+            }
+        }
+
+        function exportBuild(buildId) {
+            const build = builds.find(b => b.id === buildId);
+            if (build) {
+                const dataStr = JSON.stringify(build, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'swg-build-' + build.title.toLowerCase().replace(/s+/g, '-') + '.json';
+                link.click();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBuilds();
+            
+            // Add event listeners for filters
+            document.getElementById('profession-filter').addEventListener('change', filterBuilds);
+            document.getElementById('role-filter').addEventListener('change', filterBuilds);
+            document.getElementById('difficulty-filter').addEventListener('change', filterBuilds);
+        });
+    </script>
+    
+</main>
+
+<!-- Footer -->
+<footer class="bg-black/80 border-t border-swg-cyan/50 py-12 relative z-10">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="mb-8">
+      <div class="flex items-center justify-center mb-4">
+        <img src="/public/images/swgdb-logo.png" alt="SWGDB Logo" class="h-16 w-auto opacity-80" />
+      </div>
+      <p class="text-slate-400">Star Wars Galaxies Database - Empowering the Community</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm">
+      <a href="/tools/skill-calculator/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-calculator mr-1"></i>Skill Calculator
+      </a>
+      <a href="/tools/gcw-calculator/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-globe mr-1"></i>GCW Calculator
+      </a>
+      <a href="/tools/build-calculator/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-cogs mr-1"></i>Build Calculator
+      </a>
+      <a href="/tools/gear-optimizer/" class="text-slate-400 hover:text-swg-cyan transition-colors nav-link">
+        <i class="fas fa-shield-alt mr-1"></i>Gear Optimizer
+      </a>
+    </div>
+
+    <div class="border-t border-slate-700 pt-8 text-sm text-slate-500">
+      <p>&copy; 2025 SWGDB - Built with <span class="text-swg-red">❤️</span> by the Project MorningStar team</p>
+      <p class="mt-1">Empowering the Star Wars Galaxies Restoration community</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Enhanced dropdown functionality with JavaScript fallback
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdowns = document.querySelectorAll('.dropdown');
+  
+  dropdowns.forEach(dropdown => {
+    const button = dropdown.querySelector('button');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    
+    if (button && menu) {
+      // Show dropdown on hover
+      dropdown.addEventListener('mouseenter', () => {
+        menu.style.display = 'block';
+      });
+      
+      // Hide dropdown when mouse leaves
+      dropdown.addEventListener('mouseleave', () => {
+        menu.style.display = 'none';
+      });
+      
+      // Also handle click for touch devices
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isVisible = menu.style.display === 'block';
+        
+        // Hide all other dropdowns
+        document.querySelectorAll('.dropdown-menu').forEach(m => {
+          if (m !== menu) m.style.display = 'none';
+        });
+        
+        // Toggle current dropdown
+        menu.style.display = isVisible ? 'none' : 'block';
+      });
+    }
+  });
+  
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu').forEach(menu => {
+        menu.style.display = 'none';
+      });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+# MS11 Production Dependencies
+# Additional production-specific requirements
+
+# Production web server
+gunicorn==21.2.0
+uvicorn[standard]==0.24.0
+
+# Production monitoring
+psutil==5.9.6
+prometheus-client==0.19.0
+
+# Production security
+cryptography==41.0.8
+pyjwt==2.8.0
+
+# Production performance
+cachetools==5.3.2
+orjson==3.9.10
+
+# Production logging
+structlog==23.2.0
+python-json-logger==2.0.7
+
+# Health checks and monitoring
+healthcheck==1.3.3
+
+# Production utilities
+python-dotenv==1.0.0
+click==8.1.7
+
+# Database connection pooling for production
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+
+# Redis for production caching
+redis==5.0.1
+aioredis==2.0.1
+
+# Async HTTP client for production
+aiohttp==3.9.1
+httpx==0.25.2
+
+# Production task queue (optional)
+celery==5.3.4
+
+# Production file handling
+aiofiles==23.2.1

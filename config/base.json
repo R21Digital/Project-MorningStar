@@ -1,0 +1,46 @@
+{
+  "app_name": "MS11",
+  "app_version": "2.0.0",
+  "debug": false,
+  "log_level": "INFO",
+  
+  "host": "localhost",
+  "port": 5000,
+  "workers": 1,
+  
+  "database_pool_size": 10,
+  "database_timeout": 30,
+  
+  "jwt_expiration": 3600,
+  
+  "features": {
+    "web_dashboard": true,
+    "real_time_monitoring": true,
+    "backup_system": true,
+    "plugin_system": true,
+    "read_replicas": false,
+    "distributed_tracing": false,
+    "advanced_caching": false
+  },
+  
+  "monitoring": {
+    "health_check_interval": 30,
+    "metrics_collection_interval": 60,
+    "alert_check_interval": 10
+  },
+  
+  "security": {
+    "rate_limit_requests": 1000,
+    "rate_limit_window": 3600,
+    "session_timeout": 86400,
+    "max_login_attempts": 5,
+    "lockout_duration": 300
+  },
+  
+  "performance": {
+    "cache_ttl": 3600,
+    "query_timeout": 30,
+    "connection_timeout": 10,
+    "request_timeout": 30
+  }
+}

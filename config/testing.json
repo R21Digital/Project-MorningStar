@@ -1,0 +1,56 @@
+{
+  "environment": "testing",
+  "debug": false,
+  "log_level": "WARNING",
+  
+  "host": "localhost",
+  "port": 5001,
+  "workers": 1,
+  
+  "database_url": "sqlite:///:memory:",
+  "database_pool_size": 1,
+  "database_timeout": 5,
+  
+  "secret_key": "test-secret-key-for-testing-purposes-only",
+  "jwt_secret": "test-jwt-secret-for-testing-purposes-only",
+  "jwt_expiration": 300,
+  
+  "features": {
+    "web_dashboard": false,
+    "real_time_monitoring": false,
+    "backup_system": false,
+    "plugin_system": false,
+    "read_replicas": false,
+    "distributed_tracing": false,
+    "advanced_caching": false
+  },
+  
+  "monitoring": {
+    "health_check_interval": 5,
+    "metrics_collection_interval": 10,
+    "alert_check_interval": 1
+  },
+  
+  "security": {
+    "rate_limit_requests": 100000,
+    "rate_limit_window": 1,
+    "session_timeout": 300,
+    "max_login_attempts": 100,
+    "lockout_duration": 1
+  },
+  
+  "performance": {
+    "cache_ttl": 1,
+    "query_timeout": 5,
+    "connection_timeout": 1,
+    "request_timeout": 5
+  },
+  
+  "testing": {
+    "fast_mode": true,
+    "disable_external_calls": true,
+    "mock_all_services": true,
+    "deterministic_ids": true,
+    "parallel_execution": false
+  }
+}

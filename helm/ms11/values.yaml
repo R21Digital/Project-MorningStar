@@ -1,0 +1,296 @@
+# Default values for MS11
+# This file contains default configuration values for the MS11 Helm chart
+
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: ""
+
+# MS11 Application Configuration
+ms11:
+  image:
+    registry: docker.io
+    repository: ms11/ms11-app
+    tag: "latest"
+    pullPolicy: IfNotPresent
+    
+  replicaCount: 2
+  
+  environment: production
+  logLevel: INFO
+  
+  # Resource limits and requests
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+    requests:
+      cpu: 250m
+      memory: 512Mi
+  
+  # Auto-scaling configuration
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+  
+  # Node selection
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  
+  # Pod disruption budget
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+  
+  # Security context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+  
+  # Persistent storage
+  persistence:
+    data:
+      enabled: true
+      storageClass: ""
+      accessMode: ReadWriteMany
+      size: 10Gi
+    logs:
+      enabled: true
+      storageClass: ""
+      accessMode: ReadWriteMany
+      size: 5Gi
+    backups:
+      enabled: true
+      storageClass: ""
+      accessMode: ReadWriteOnce
+      size: 20Gi
+
+# Database Configuration (PostgreSQL)
+postgresql:
+  enabled: true
+  
+  image:
+    registry: docker.io
+    repository: postgres
+    tag: "15-alpine"
+    pullPolicy: IfNotPresent
+  
+  auth:
+    postgresPassword: "changeme"
+    username: "ms11"
+    password: "changeme"
+    database: "ms11"
+  
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 20Gi
+    
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    
+    # PostgreSQL configuration
+    pgHbaConfiguration: |-
+      local all all trust
+      host all all localhost trust
+      host all all 10.0.0.0/8 md5
+      host all all 172.16.0.0/12 md5
+      host all all 192.168.0.0/16 md5
+    
+    postgresqlConfiguration:
+      shared_preload_libraries: "pg_stat_statements"
+      max_connections: "200"
+      shared_buffers: "256MB"
+      effective_cache_size: "1GB"
+      maintenance_work_mem: "64MB"
+      checkpoint_completion_target: "0.9"
+      wal_buffers: "16MB"
+      default_statistics_target: "100"
+      random_page_cost: "1.1"
+      effective_io_concurrency: "200"
+
+# Redis Configuration
+redis:
+  enabled: true
+  
+  image:
+    registry: docker.io
+    repository: redis
+    tag: "7-alpine"
+    pullPolicy: IfNotPresent
+  
+  master:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 2Gi
+    
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+    
+    # Redis configuration
+    configuration: |-
+      appendonly yes
+      maxmemory 512mb
+      maxmemory-policy allkeys-lru
+      save 60 1000
+      tcp-keepalive 60
+      timeout 300
+
+# XVFB Configuration (for GUI automation)
+xvfb:
+  enabled: true
+  
+  image:
+    registry: docker.io
+    repository: ubuntu
+    tag: "22.04"
+    pullPolicy: IfNotPresent
+  
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+# Service Configuration
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+  
+  dashboard:
+    port: 8080
+    targetPort: 8080
+  
+  # External service (NodePort/LoadBalancer)
+  external:
+    enabled: false
+    type: NodePort
+    nodePort: 30500
+    dashboardNodePort: 30580
+
+# Ingress Configuration
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+  
+  hosts:
+    - host: ms11.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: dashboard.ms11.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          service:
+            port: 8080
+  
+  tls:
+    - secretName: ms11-tls
+      hosts:
+        - ms11.example.com
+        - dashboard.ms11.example.com
+
+# Service Monitor for Prometheus
+serviceMonitor:
+  enabled: false
+  interval: 30s
+  scrapeTimeout: 10s
+  namespace: monitoring
+
+# Network Policies
+networkPolicy:
+  enabled: false
+  ingress: []
+  egress: []
+
+# Configuration for secrets management
+secrets:
+  # Use external secret management system
+  external:
+    enabled: false
+    secretStore: vault
+  
+  # Manual secret configuration
+  manual:
+    postgresPassword: "changeme"
+    ms11SecretKey: "changeme_to_32_character_key"
+    oauthClientId: ""
+    oauthClientSecret: ""
+    discordBotToken: ""
+    steamApiKey: ""
+
+# Backup Configuration
+backup:
+  enabled: false
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention: 7  # Keep 7 backups
+  
+  s3:
+    enabled: false
+    bucket: ""
+    region: ""
+    accessKey: ""
+    secretKey: ""
+
+# Monitoring and Observability
+monitoring:
+  enabled: false
+  
+  # Prometheus metrics
+  prometheus:
+    enabled: false
+    path: /metrics
+    port: 8080
+  
+  # Grafana dashboards
+  grafana:
+    enabled: false
+    dashboardsConfigMap: ms11-dashboards
+
+# Development overrides
+dev:
+  enabled: false
+  replicaCount: 1
+  logLevel: DEBUG
+  
+  # Development database
+  postgresql:
+    auth:
+      database: "ms11_dev"
+
+# Testing configuration  
+test:
+  enabled: false
+  image:
+    repository: ms11/ms11-test
+    tag: "latest"

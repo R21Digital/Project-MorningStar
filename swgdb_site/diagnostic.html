@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWGDB Diagnostic Page</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 10px 0;
+            border-left: 4px solid #007bff;
+        }
+        .success { border-left-color: #28a745; }
+        .error { border-left-color: #dc3545; }
+        .links a {
+            display: block;
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .links a:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>SWGDB Diagnostic Page</h1>
+    
+    <div class="status success">
+        <h3>✅ Server Status: Running</h3>
+        <p>If you can see this page, the server is working correctly.</p>
+    </div>
+
+    <div class="status">
+        <h3>🔗 Test Links</h3>
+        <div class="links">
+            <a href="/">Main Page</a>
+            <a href="/pages/tools/index.html">Tools Page</a>
+            <a href="/pages/guides/index.html">Guides Page</a>
+            <a href="/pages/heroics/index.html">Heroics Page</a>
+            <a href="/pages/loot/index.html">Loot Page</a>
+            <a href="/pages/leaderboard/index.html">Leaderboard Page</a>
+            <a href="/css/swgdb-styles.css">CSS File</a>
+        </div>
+    </div>
+
+    <div class="status">
+        <h3>📋 Instructions</h3>
+        <ol>
+            <li>Click each link above</li>
+            <li>If a page doesn't load, note the error message</li>
+            <li>Check browser console (F12) for JavaScript errors</li>
+            <li>Try hard refresh (Ctrl+F5) on broken pages</li>
+        </ol>
+    </div>
+
+    <div class="status">
+        <h3>🚀 Quick Fixes</h3>
+        <p><strong>If pages show "This site can't be reached":</strong></p>
+        <ul>
+            <li>The server has stopped - restart it</li>
+            <li>Check the URL is correct (localhost:8080)</li>
+        </ul>
+        
+        <p><strong>If pages load but look broken:</strong></p>
+        <ul>
+            <li>CSS files aren't loading - check network tab</li>
+            <li>Try clearing browser cache</li>
+        </ul>
+    </div>
+
+    <script>
+        console.log('Diagnostic page loaded successfully');
+        console.log('Current URL:', window.location.href);
+        console.log('Server appears to be running on:', window.location.origin);
+    </script>
+</body>
+</html>

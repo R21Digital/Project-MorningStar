@@ -1,0 +1,377 @@
+# Travel Configuration Template for MS11
+# This template defines automated travel routes, locations, and navigation settings
+
+config_name: "Default Travel Configuration"
+description: "Comprehensive travel automation for MS11"
+version: "1.0.0"
+last_updated: "2024-01-01"
+
+# Global Travel Settings
+settings:
+  # Default starting location
+  default_start_planet: "tatooine"
+  default_start_city: "mos_eisley"
+  
+  # Travel behavior
+  max_travel_attempts: 3
+  travel_timeout_seconds: 60.0
+  verification_delay: 2.0
+  shuttle_interaction_delay: 1.0
+  
+  # Safety settings
+  enable_safe_travel: true
+  avoid_dangerous_zones: true
+  max_travel_distance: 10000
+  
+  # Performance settings
+  enable_route_caching: true
+  route_cache_duration: 3600  # 1 hour
+  enable_parallel_travel: false
+
+# Shuttle Network Configuration
+shuttles:
+  tatooine:
+    - city: "mos_eisley"
+      npc: "Shuttle Conductor"
+      location:
+        x: 3520
+        y: -4800
+        planet: "tatooine"
+      destinations:
+        - planet: "corellia"
+          city: "coronet"
+          travel_time: 30
+          cost: 100
+        - planet: "naboo"
+          city: "theed"
+          travel_time: 45
+          cost: 150
+        - planet: "talus"
+          city: "nashal"
+          travel_time: 25
+          cost: 75
+    
+    - city: "anchorhead"
+      npc: "Shuttle Attendant"
+      location:
+        x: -100
+        y: 200
+        planet: "tatooine"
+      destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          travel_time: 15
+          cost: 25
+        - planet: "corellia"
+          city: "tyrena"
+          travel_time: 35
+          cost: 125
+  
+  corellia:
+    - city: "coronet"
+      npc: "Shuttle Conductor"
+      location:
+        x: 123
+        y: 456
+        planet: "corellia"
+      destinations:
+        - planet: "tatooine"
+          city: "mos_eisley"
+          travel_time: 30
+          cost: 100
+        - planet: "naboo"
+          city: "theed"
+          travel_time: 40
+          cost: 125
+        - planet: "talus"
+          city: "nashal"
+          travel_time: 20
+          cost: 50
+    
+    - city: "tyrena"
+      npc: "Shuttle Attendant"
+      location:
+        x: -200
+        y: 300
+        planet: "corellia"
+      destinations:
+        - planet: "tatooine"
+          city: "anchorhead"
+          travel_time: 35
+          cost: 125
+        - planet: "corellia"
+          city: "coronet"
+          travel_time: 10
+          cost: 25
+
+# Trainer Locations
+trainers:
+  artisan:
+    name: "Artisan Trainer"
+    location:
+      planet: "tatooine"
+      city: "mos_eisley"
+      x: 3432
+      y: -4795
+    skills:
+      - "Novice Artisan"
+      - "Apprentice Artisan"
+      - "Journeyman Artisan"
+    requirements:
+      level: 5
+      credits: 1000
+    schedule:
+      available_hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  
+  marksman:
+    name: "Marksman Trainer"
+    location:
+      planet: "corellia"
+      city: "coronet"
+      x: -150
+      y: 60
+    skills:
+      - "Novice Marksman"
+      - "Apprentice Marksman"
+      - "Journeyman Marksman"
+    requirements:
+      level: 5
+      credits: 1000
+    schedule:
+      available_hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+  
+  medic:
+    name: "Medic Trainer"
+    location:
+      planet: "naboo"
+      city: "theed"
+      x: 500
+      y: -300
+    skills:
+      - "Novice Medic"
+      - "Apprentice Medic"
+      - "Journeyman Medic"
+    requirements:
+      level: 5
+      credits: 1500
+    schedule:
+      available_hours: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+# Quest Locations
+quests:
+  tatooine_artifact_hunt:
+    name: "Tatooine Artifact Hunt"
+    location:
+      planet: "tatooine"
+      city: "anchorhead"
+      x: -75
+      y: 225
+    description: "Search for ancient artifacts in the Tatooine desert"
+    requirements:
+      level: 5
+      skills: ["scout_novice"]
+      reputation: {"tatooine": 100}
+    rewards:
+      experience: 500
+      credits: 200
+      items: ["artifact_fragment"]
+    time_limit: 3600  # 1 hour
+  
+  corellia_smuggler_run:
+    name: "Corellia Smuggler Run"
+    location:
+      planet: "corellia"
+      city: "tyrena"
+      x: -180
+      y: 280
+    description: "Deliver contraband to the Corellian underworld"
+    requirements:
+      level: 10
+      skills: ["smuggler_novice"]
+      reputation: {"corellia": 200}
+    rewards:
+      experience: 1000
+      credits: 500
+      items: ["smuggler_credits"]
+    time_limit: 7200  # 2 hours
+
+# Unlock Locations
+unlocks:
+  tatooine_cantina_access:
+    name: "Tatooine Cantina Access"
+    location:
+      planet: "tatooine"
+      city: "mos_eisley"
+      x: 3500
+      y: -4850
+    description: "Gain access to exclusive cantina with special services"
+    unlock_conditions:
+      reputation: {"tatooine": 1000}
+      quests_completed: ["tatooine_artifact_hunt"]
+      level: 15
+    benefits:
+      - "Access to rare vendors"
+      - "Special quest givers"
+      - "Exclusive social areas"
+  
+  corellia_underworld_access:
+    name: "Corellia Underworld Access"
+    location:
+      planet: "corellia"
+      city: "coronet"
+      x: 100
+      y: 400
+    description: "Access to Corellian criminal network"
+    unlock_conditions:
+      reputation: {"corellia": 1500}
+      quests_completed: ["corellia_smuggler_run"]
+      skills: ["smuggler_journeyman"]
+    benefits:
+      - "Illegal goods vendors"
+      - "Bounty hunting contracts"
+      - "Smuggling missions"
+
+# Movement Profiles
+movement_profiles:
+  walking:
+    name: "Walking Movement"
+    speed: 1.0
+    stamina_cost: 0
+    terrain_penalty: 0.1
+    use_cases: ["short_distance", "stealth", "resource_gathering"]
+  
+  running:
+    name: "Running Movement"
+    speed: 2.5
+    stamina_cost: 5
+    terrain_penalty: 0.2
+    use_cases: ["combat", "escape", "time_critical"]
+  
+  mount:
+    name: "Mount Movement"
+    speed: 4.0
+    stamina_cost: 0
+    terrain_penalty: 0.05
+    use_cases: ["long_distance", "exploration", "trade_routes"]
+
+# Safe Zones and Danger Areas
+zones:
+  safe_zones:
+    - name: "Mos Eisley Spaceport"
+      planet: "tatooine"
+      city: "mos_eisley"
+      bounds:
+        x_min: 3400
+        x_max: 3600
+        y_min: -4900
+        y_max: -4700
+      security_level: "high"
+      description: "Imperial-controlled spaceport with heavy security"
+    
+    - name: "Coronet City Center"
+      planet: "corellia"
+      city: "coronet"
+      bounds:
+        x_min: 100
+        x_max: 300
+        y_min: 50
+        y_max: 250
+      security_level: "high"
+      description: "Corellian government district with patrols"
+  
+  danger_zones:
+    - name: "Tatooine Desert Wastes"
+      planet: "tatooine"
+      bounds:
+        x_min: -500
+        x_max: 500
+        y_min: -500
+        y_max: 500
+      threat_level: "high"
+      threats: ["sand_people", "tusken_raiders", "environmental_hazards"]
+      description: "Hostile territory with aggressive natives"
+    
+    - name: "Corellian Wilderness"
+      planet: "corellia"
+      bounds:
+        x_min: -1000
+        x_max: -500
+        y_min: 100
+        y_max: 600
+      threat_level: "medium"
+      threats: ["wild_animals", "bandits", "rough_terrain"]
+      description: "Uncontrolled wilderness area"
+
+# Travel Routes and Waypoints
+routes:
+  tatooine_to_corellia:
+    name: "Tatooine to Corellia Trade Route"
+    start:
+      planet: "tatooine"
+      city: "mos_eisley"
+    end:
+      planet: "corellia"
+      city: "coronet"
+    waypoints:
+      - planet: "tatooine"
+        city: "mos_eisley"
+        x: 3520
+        y: -4800
+        action: "board_shuttle"
+      - planet: "corellia"
+        city: "coronet"
+        x: 123
+        y: 456
+        action: "disembark_shuttle"
+    estimated_time: 30
+    cost: 100
+    safety_rating: "high"
+  
+  corellia_exploration:
+    name: "Corellia Exploration Circuit"
+    start:
+      planet: "corellia"
+      city: "coronet"
+    end:
+      planet: "corellia"
+      city: "coronet"
+    waypoints:
+      - planet: "corellia"
+        city: "tyrena"
+        x: -200
+        y: 300
+        action: "visit_city"
+      - planet: "corellia"
+        city: "coronet"
+        x: 123
+        y: 456
+        action: "return_home"
+    estimated_time: 120
+    cost: 50
+    safety_rating: "medium"
+
+# Integration Settings
+integration:
+  # Discord notifications
+  discord:
+    enabled: false
+    webhook_url: ""
+    notifications:
+      - "travel_start"
+      - "travel_complete"
+      - "danger_zone_entered"
+      - "safe_zone_reached"
+  
+  # Logging
+  logging:
+    level: "INFO"
+    file: "logs/travel.log"
+    include_screenshots: false
+    log_travel_events: true
+    log_coordinates: true
+  
+  # Performance monitoring
+  monitoring:
+    track_travel_times: true
+    track_route_efficiency: true
+    generate_travel_reports: true

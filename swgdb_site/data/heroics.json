@@ -1,0 +1,360 @@
+[
+  {
+    "id": "axkva-min",
+    "name": "Axkva Min",
+    "shortName": "Axkva Min",
+    "planet": "Dathomir",
+    "region": "Nightsister Stronghold",
+    "difficulty": "Expert",
+    "difficultyLevel": 85,
+    "entryRequirements": {
+      "level": "80+",
+      "groupSize": "5-8 players",
+      "prerequisites": ["Mustafar access", "Death Watch bunker completion"],
+      "recommendedProfessions": ["Jedi", "Bounty Hunter", "Commando", "Medic"]
+    },
+    "description": "The most challenging Nightsister encounter in the galaxy. Face the fallen Jedi Axkva Min in her dark domain, where corruption runs deep and the Force itself seems twisted. This encounter demands perfect coordination, advanced tactics, and the strongest warriors the galaxy has to offer.",
+    "lore": "Once a promising Jedi Knight, Axkva Min fell to the dark side during the Clone Wars. Seduced by Nightsister magic and dark Force techniques, she became one of the most feared beings on Dathomir. Her stronghold is a testament to her power, filled with dark energy and guarded by loyal servants who share her corruption.",
+    "encounters": [
+      {
+        "name": "Nightsister Sentries",
+        "type": "Trash",
+        "mechanics": [
+          "Force Push attacks",
+          "Coordinated spell casting",
+          "Stealth ambushes"
+        ],
+        "difficulty": "Medium",
+        "notes": "Clear these systematically. Watch for stealth attacks from behind."
+      },
+      {
+        "name": "Sister Vex'aria",
+        "type": "Mini-Boss",
+        "health": "850,000",
+        "mechanics": [
+          "Force Lightning chains between players",
+          "Mind Control - takes control of 1 player for 15 seconds",
+          "Barrier Shield - 75% damage reduction for 30 seconds",
+          "Nightsister Healing - regenerates 50k health every 45 seconds"
+        ],
+        "difficulty": "Hard",
+        "strategy": "Interrupt healing at all costs. When mind controlled, others must disable the affected player temporarily. Stack during Force Lightning to minimize chain damage.",
+        "loot": [
+          "Sister's Force Crystal",
+          "Nightsister Spell Components",
+          "Enhanced Meditation Enhancers"
+        ]
+      },
+      {
+        "name": "Axkva Min",
+        "type": "Final Boss",
+        "health": "2,500,000",
+        "phases": [
+          {
+            "name": "Phase 1: Corruption",
+            "healthPercent": "100-70%",
+            "mechanics": [
+              "Corrupt Aura - deals 2000 damage per second to all players",
+              "Dark Force Lightning - massive damage to primary target",
+              "Teleportation - randomly moves around the room",
+              "Mind Twist - confuses player controls for 10 seconds"
+            ],
+            "strategy": "Maintain maximum range. Healers must work overtime to counter corruption damage. Tank positioning is crucial due to teleportation."
+          },
+          {
+            "name": "Phase 2: Nightsister Army",
+            "healthPercent": "70-40%",
+            "mechanics": [
+              "Summon Nightsister Guards - 4 elite adds spawn",
+              "Force Storm - room-wide AoE every 30 seconds",
+              "Life Drain - steals health from nearest player",
+              "Dark Resurrection - revives fallen adds with 50% health"
+            ],
+            "strategy": "Focus fire adds immediately. Spread out for Force Storm. Assign one DPS to interrupt resurrections."
+          },
+          {
+            "name": "Phase 3: Final Corruption",
+            "healthPercent": "40-0%",
+            "mechanics": [
+              "Rage Mode - all abilities enhanced and faster",
+              "Corruption Nova - massive damage if not interrupted",
+              "Death Mark - marks one player for certain death in 20 seconds",
+              "Reality Tear - creates zones of instant death"
+            ],
+            "strategy": "Burn phase. Use all consumables and special abilities. Death Mark requires group healing focus. Avoid tear zones at all costs."
+          }
+        ],
+        "loot": [
+          "Axkva Min's Lightsaber (Legendary)",
+          "Fallen Jedi Robes (Epic)", 
+          "Corruption Crystal (Epic)",
+          "Nightsister Spell Tome (Rare)",
+          "Ancient Force Relic (Rare)",
+          "Dark Side Meditation Crystal (Uncommon)"
+        ]
+      }
+    ],
+    "rewards": {
+      "experience": "500,000 XP",
+      "credits": "150,000-300,000",
+      "tokens": "Heroic Tokens: 25-35",
+      "badges": ["Nightsister Slayer", "Corruption Survivor", "Dark Side Conqueror"]
+    },
+    "strategy": {
+      "preparation": [
+        "Bring maximum stims and healing items",
+        "Coordinate Force powers if using Jedi",
+        "Assign specific roles (tank, healer, DPS, interrupt)",
+        "Practice target switching and positioning"
+      ],
+      "composition": [
+        "1 Tank (Jedi Guardian or BH Tank spec)",
+        "2 Healers (Combat Medic or Jedi Healer)",
+        "4-5 DPS (mixed ranged/melee)",
+        "1 Dedicated Interrupter"
+      ],
+      "tips": [
+        "Communication is absolutely critical",
+        "Save special abilities for Phase 3",
+        "Never fight alone - coordinate all movements",
+        "Practice escape routes in case of wipe"
+      ]
+    },
+    "location": {
+      "waypoint": "/way dathomir -4086 -1653 Nightsister Stronghold",
+      "access": "Speak to Researcher Kem'va at Dathomir Research Outpost",
+      "travelTime": "15 minutes from starport"
+    },
+    "dropRates": {
+      "Axkva Min's Lightsaber": "5%",
+      "Fallen Jedi Robes": "15%",
+      "Corruption Crystal": "25%",
+      "Nightsister Spell Tome": "35%",
+      "Ancient Force Relic": "45%",
+      "Dark Side Meditation Crystal": "75%"
+    }
+  },
+  {
+    "id": "krayt-dragon",
+    "name": "Ancient Krayt Dragon Hunt",
+    "shortName": "Krayt Dragon",
+    "planet": "Tatooine",
+    "region": "Dune Sea",
+    "difficulty": "Expert",
+    "difficultyLevel": 85,
+    "entryRequirements": {
+      "level": "80+",
+      "groupSize": "8-12 players (Raid)",
+      "prerequisites": ["Krayt Dragon tissue sample", "Desert survival training"],
+      "recommendedProfessions": ["Commando", "Rifleman", "Bounty Hunter", "Combat Medic"]
+    },
+    "description": "Hunt the legendary Ancient Krayt Dragon in the vast Dune Sea of Tatooine. This massive predator has ruled the desert for centuries, and only the most skilled hunters dare challenge it. The encounter takes place across multiple canyon systems where the dragon makes its lair.",
+    "lore": "Ancient Krayt Dragons are among the most fearsome creatures in the galaxy. This particular specimen is over 500 years old, having survived countless hunters and grown to immense proportions. Local Tusken Raiders speak of it in whispered legends, calling it the 'Desert Death' that even the Sarlacc fears.",
+    "encounters": [
+      {
+        "name": "Canyon Krayt Scouts",
+        "type": "Trash",
+        "mechanics": [
+          "Pack hunting behavior",
+          "Sand trap attacks",
+          "Territorial roars that summon more droids"
+        ],
+        "difficulty": "Medium",
+        "notes": "These younger dragons scout for the Ancient. Kill quickly to avoid alerting the main target."
+      },
+      {
+        "name": "Ancient Krayt Dragon",
+        "type": "World Boss",
+        "health": "5,000,000",
+        "phases": [
+          {
+            "name": "Phase 1: Surface Combat",
+            "healthPercent": "100-60%",
+            "mechanics": [
+              "Tail Sweep - massive damage in 180° arc behind dragon",
+              "Dragon Roar - fear effect, causes players to run uncontrollably",
+              "Acid Spit - long range attack with DoT damage",
+              "Burrow Attempt - dragon tries to retreat underground"
+            ],
+            "strategy": "Tank in front, DPS from sides. Interrupt burrow attempts at all costs. Healers must be ready for roar fear."
+          },
+          {
+            "name": "Phase 2: Underground Hunt", 
+            "healthPercent": "60-30%",
+            "mechanics": [
+              "Tunnel Attacks - dragon appears randomly from ground",
+              "Sand Storm - reduces visibility and accuracy",
+              "Rock Fall - ceiling collapses in targeted areas",
+              "Echo Location - dragon senses player locations"
+            ],
+            "strategy": "Stay mobile constantly. Watch for ground tremors indicating tunnel attacks. Clear areas before rock falls."
+          },
+          {
+            "name": "Phase 3: Final Rage",
+            "healthPercent": "30-0%",
+            "mechanics": [
+              "Enraged State - all abilities enhanced",
+              "Dragon Fire Breath - devastating cone attack", 
+              "Wing Buffet - knockdown and damage",
+              "Death Throes - room-wide damage as dragon dies"
+            ],
+            "strategy": "Maximum DPS burn. Avoid being in front during fire breath. Prepare for final massive damage."
+          }
+        ],
+        "loot": [
+          "Perfect Krayt Dragon Pearl (Legendary)",
+          "Ancient Dragon Bone Armor (Epic)",
+          "Krayt Dragon Scales (Epic)",
+          "Dragon Heart Crystal (Rare)",
+          "Legendary Krayt Tissue (Rare)",
+          "Desert Survival Kit (Uncommon)"
+        ]
+      }
+    ],
+    "rewards": {
+      "experience": "750,000 XP",
+      "credits": "200,000-500,000", 
+      "tokens": "Heroic Tokens: 35-50",
+      "badges": ["Dragon Slayer", "Desert Legend", "Ancient Hunter"]
+    },
+    "strategy": {
+      "preparation": [
+        "Bring desert survival gear",
+        "Stock up on ranged weapons and ammo",
+        "Coordinate raid positions and roles",
+        "Prepare for long engagement (45+ minutes)"
+      ],
+      "composition": [
+        "2 Tanks (heavy armor recommended)",
+        "3-4 Healers (Combat Medics essential)",
+        "6-8 DPS (mix of ranged and melee)",
+        "Mobile interrupters for burrow attempts"
+      ],
+      "tips": [
+        "Fight during cooler desert hours",
+        "Bring speeder bikes for mobility phases",
+        "Stock emergency medical supplies",
+        "Have escape plan ready"
+      ]
+    },
+    "location": {
+      "waypoint": "/way tatooine 7394 4174 Ancient Dragon Canyon",
+      "access": "Tusken Raider guide required from Anchorhead",
+      "travelTime": "30 minutes from Mos Eisley"
+    },
+    "dropRates": {
+      "Perfect Krayt Dragon Pearl": "3%",
+      "Ancient Dragon Bone Armor": "12%",
+      "Krayt Dragon Scales": "20%",
+      "Dragon Heart Crystal": "30%",
+      "Legendary Krayt Tissue": "40%",
+      "Desert Survival Kit": "65%"
+    }
+  },
+  {
+    "id": "ig-88",
+    "name": "IG-88 Assassination Contract",
+    "shortName": "IG-88",
+    "planet": "Tatooine",
+    "region": "Hidden Bunker Complex",
+    "difficulty": "Hard",
+    "difficultyLevel": 75,
+    "entryRequirements": {
+      "level": "70+",
+      "groupSize": "4-6 players",
+      "prerequisites": ["Bounty Hunter Guild standing", "Imperial or Rebel faction access"],
+      "recommendedProfessions": ["Bounty Hunter", "Commando", "Smuggler", "Combat Medic"]
+    },
+    "description": "Infiltrate the notorious bounty hunter droid IG-88's heavily fortified compound. This assassination-class droid has established a sophisticated base of operations complete with advanced security systems and droid manufacturing facilities.",
+    "lore": "IG-88 is one of the most feared bounty hunters in the galaxy. This particular unit has gone rogue from its original programming and established an independent operation on Tatooine. Intelligence suggests it's building an army of assassination droids while taking contracts from the highest bidders.",
+    "encounters": [
+      {
+        "name": "Security Protocol Droids",
+        "type": "Trash",
+        "mechanics": [
+          "Stun weapons and net launchers",
+          "Coordinated patrol patterns", 
+          "Alert systems that summon reinforcements"
+        ],
+        "difficulty": "Easy-Medium",
+        "notes": "Disable alert systems first. Use slicing to turn security droids against each other."
+      },
+      {
+        "name": "IG-88",
+        "type": "Final Boss",
+        "health": "1,200,000",
+        "phases": [
+          {
+            "name": "Phase 1: Hunter Protocol",
+            "healthPercent": "100-50%",
+            "mechanics": [
+              "Precision Shot - high damage single target",
+              "Target Analysis - increases damage against scanned target",
+              "Smoke Grenades - reduces visibility and accuracy",
+              "Defensive Stance - increased armor and damage resistance"
+            ],
+            "strategy": "Stay mobile to avoid precision shots. Disperse when smoke grenades deploy. Focus fire to break defensive stance."
+          },
+          {
+            "name": "Phase 2: Assassination Protocol",
+            "healthPercent": "50-0%",
+            "mechanics": [
+              "Stealth Mode - IG-88 becomes nearly invisible",
+              "Assassination Strike - massive damage from stealth",
+              "Droid Reinforcements - combat droids join fight",
+              "Self-Destruct Warning - final desperate attack"
+            ],
+            "strategy": "Use area attacks to reveal stealth. Kill reinforcement droids quickly. Heal to full before self-destruct sequence."
+          }
+        ],
+        "loot": [
+          "IG-88's Custom Blaster Rifle (Epic)",
+          "Advanced Targeting Computer (Epic)",
+          "Assassin Droid Components (Rare)",
+          "Bounty Hunter Equipment Pack (Rare)",
+          "Security Override Codes (Uncommon)",
+          "Droid Manufacturing Blueprints (Uncommon)"
+        ]
+      }
+    ],
+    "rewards": {
+      "experience": "350,000 XP",
+      "credits": "100,000-200,000",
+      "tokens": "Heroic Tokens: 20-30",
+      "badges": ["Droid Slayer", "Security Breach", "Assassination Contract"]
+    },
+    "strategy": {
+      "preparation": [
+        "Bring EMP grenades and ion weapons",
+        "Coordinate stealth detection methods",
+        "Plan for droid reinforcement waves",
+        "Prepare healing items for burst damage"
+      ],
+      "composition": [
+        "1 Tank (preferably with taunt abilities)",
+        "1-2 Healers (Combat Medic recommended)", 
+        "2-3 DPS (mix of ranged and tech specialists)",
+        "1 Slicer/Support for security systems"
+      ],
+      "tips": [
+        "Use technology-based attacks when possible",
+        "Keep moving during stealth phases",
+        "Prioritize add control",
+        "Save burst healing for assassination strikes"
+      ]
+    },
+    "location": {
+      "waypoint": "/way tatooine -1347 -6771 Hidden Bunker Entrance",
+      "access": "Bounty Hunter terminal in Mos Eisley Cantina",
+      "travelTime": "20 minutes from Mos Eisley"
+    },
+    "dropRates": {
+      "IG-88's Custom Blaster Rifle": "8%",
+      "Advanced Targeting Computer": "18%",
+      "Assassin Droid Components": "30%",
+      "Bounty Hunter Equipment Pack": "35%",
+      "Security Override Codes": "55%",
+      "Droid Manufacturing Blueprints": "45%"
+    }
+  }
+]

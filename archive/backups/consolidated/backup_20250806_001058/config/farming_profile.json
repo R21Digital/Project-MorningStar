@@ -1,8 +1,0 @@
-{
-    "preferred_terminal": "mission_terminal",
-    "preferred_direction": "north",
-    "mob_priority": [],
-    "distance_limit": 1000,
-    "blacklist_mobs": [],
-    "class_requirements": []
-}
