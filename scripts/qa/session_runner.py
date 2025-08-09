@@ -26,6 +26,11 @@ def run_session(session_id: str, profile: str, character: str, mode: str):
     println(f"[session:{session_id}] starting profile={profile} character={character} mode={mode}")
     t0 = time.time()
     n = 0
+    # Optional: demo behavior tree tick
+    try:
+        from demo_combat_bt import tick as bt_tick
+    except Exception:
+        bt_tick = None
     try:
         while True:
             n += 1
@@ -34,6 +39,11 @@ def run_session(session_id: str, profile: str, character: str, mode: str):
             # demo metrics emitted as lines (main server tags them)
             println(f"METRIC cpu={(5 + (n % 20))}")
             println(f"METRIC memory_mb={(200 + (n % 50))}")
+            if bt_tick:
+                ctx = {"has_target": True, "distance": (5 + n % 40), "max_range": 30}
+                bt_tick(ctx)
+                if ctx.get('log'):
+                    println(f"BT {';'.join(ctx['log'])}")
             time.sleep(2)
     except KeyboardInterrupt:
         println(f"[session:{session_id}] interrupted")

@@ -390,6 +390,10 @@ def shortcuts_page():
 def updates_page():
     return render_template('updates.html')
 
+@app.route('/ocr')
+def ocr_page():
+    return render_template('ocr_calibration.html')
+
 # Static dashboard assets (public/)
 @app.route('/ms11-dashboard.html')
 def serve_ms11_dashboard():
@@ -626,6 +630,51 @@ def api_updates_info():
 def api_updates_apply():
     # Stub: In future, pull latest, install deps, restart services
     return jsonify({"ok": True})
+
+# --- OCR calibration APIs ---
+OCR_REGIONS_FILE = Path('data') / 'ocr_regions.json'
+
+def _load_regions():
+    try:
+        if OCR_REGIONS_FILE.exists():
+            return json.loads(OCR_REGIONS_FILE.read_text(encoding='utf-8'))
+    except Exception:
+        pass
+    return {"hotbar": {}, "chat": {}}
+
+def _save_regions(data):
+    try:
+        OCR_REGIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
+        OCR_REGIONS_FILE.write_text(json.dumps(data, indent=2), encoding='utf-8')
+    except Exception:
+        pass
+
+@app.get('/api/ocr/regions')
+def api_ocr_regions():
+    return jsonify(_load_regions())
+
+@app.post('/api/ocr/regions/<kind>')
+def api_ocr_set(kind: str):
+    data = _load_regions()
+    payload = request.get_json(silent=True) or {}
+    if kind not in ('hotbar','chat'):
+        return jsonify({"ok": False}), 400
+    data[kind] = {"x": int(payload.get('x',0)), "y": int(payload.get('y',0)), "w": int(payload.get('w',0)), "h": int(payload.get('h',0))}
+    _save_regions(data)
+    return jsonify({"ok": True})
+
+@app.get('/api/ocr/test/<kind>')
+def api_ocr_test(kind: str):
+    try:
+        from ms11lib.ocr import grab_text
+        r = _load_regions().get(kind) or {}
+        region = None
+        if r and all(k in r for k in ('x','y','w','h')):
+            region = (int(r['x']), int(r['y']), int(r['x'])+int(r['w']), int(r['y'])+int(r['h']))
+        text = grab_text(region)
+        return jsonify({"text": text})
+    except Exception as e:
+        return jsonify({"text": "", "error": str(e)})
 
 @app.route('/api/modules/<module_id>')
 def api_module_detail(module_id: str):
@@ -886,6 +935,13 @@ def update_system_status():
                     socketio.emit('metric', {"type": "metric", "key": "cpu", "value": perf["cpu_usage"], "ts": datetime.now().isoformat()})
                 if "memory_mb" in perf:
                     socketio.emit('metric', {"type": "metric", "key": "memory_mb", "value": perf["memory_mb"], "ts": datetime.now().isoformat()})
+                # Attachment metric using ms11lib.window
+                try:
+                    from ms11lib.window import find_swg_window
+                    attached = 1 if find_swg_window() else 0
+                    socketio.emit('metric', {"type": "metric", "key": "attachment", "value": attached, "ts": datetime.now().isoformat()})
+                except Exception:
+                    pass
             except Exception:
                 pass
             

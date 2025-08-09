@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}OCR Calibration – MS11{% endblock %}
+{% block content %}
+<section class="space-y-4">
+  <h1 class="text-xl font-semibold">OCR Calibration</h1>
+  <p class="text-neutral-400 text-sm">Set screen regions for Hotbar and Chat to improve detection.</p>
+  <div class="grid sm:grid-cols-2 gap-4">
+    <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
+      <div class="font-medium">Hotbar Region</div>
+      <div class="text-xs text-neutral-500">x,y,w,h</div>
+      <div class="mt-2 grid grid-cols-4 gap-2">
+        <input id="hbX" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="x">
+        <input id="hbY" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="y">
+        <input id="hbW" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="w">
+        <input id="hbH" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="h">
+      </div>
+      <div class="mt-3 flex gap-2">
+        <button id="btnSaveHb" class="px-3 py-2 rounded bg-neutral-800 ring-1 ring-neutral-700">Save</button>
+        <button id="btnTestHb" class="px-3 py-2 rounded bg-primary-600 ring-1 ring-primary-700 text-white">Test OCR</button>
+      </div>
+      <pre id="hbOut" class="mt-3 h-32 overflow-auto bg-black/40 p-2 rounded text-xs"></pre>
+    </div>
+    <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
+      <div class="font-medium">Chat Region</div>
+      <div class="text-xs text-neutral-500">x,y,w,h</div>
+      <div class="mt-2 grid grid-cols-4 gap-2">
+        <input id="chX" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="x">
+        <input id="chY" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="y">
+        <input id="chW" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="w">
+        <input id="chH" class="px-2 py-1 bg-neutral-900 ring-1 ring-neutral-800 rounded" placeholder="h">
+      </div>
+      <div class="mt-3 flex gap-2">
+        <button id="btnSaveCh" class="px-3 py-2 rounded bg-neutral-800 ring-1 ring-neutral-700">Save</button>
+        <button id="btnTestCh" class="px-3 py-2 rounded bg-primary-600 ring-1 ring-primary-700 text-white">Test OCR</button>
+      </div>
+      <pre id="chOut" class="mt-3 h-32 overflow-auto bg-black/40 p-2 rounded text-xs"></pre>
+    </div>
+  </div>
+</section>
+<script>
+  async function load(){
+    const r = await fetch('/api/ocr/regions'); const j = await r.json();
+    const hb = j.hotbar||{}; const ch = j.chat||{};
+    hbX.value = hb.x||''; hbY.value = hb.y||''; hbW.value = hb.w||''; hbH.value = hb.h||'';
+    chX.value = ch.x||''; chY.value = ch.y||''; chW.value = ch.w||''; chH.value = ch.h||'';
+  }
+  async function save(kind){
+    const vals = kind==='hotbar'? {x:+hbX.value,y:+hbY.value,w:+hbW.value,h:+hbH.value} : {x:+chX.value,y:+chY.value,w:+chW.value,h:+chH.value};
+    await fetch('/api/ocr/regions/'+kind, {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(vals)});
+  }
+  async function test(kind){
+    const r = await fetch('/api/ocr/test/'+kind); const j = await r.json();
+    (kind==='hotbar'? hbOut: chOut).textContent = j.text || '';
+  }
+  btnSaveHb.onclick = ()=>save('hotbar'); btnTestHb.onclick = ()=>test('hotbar');
+  btnSaveCh.onclick = ()=>save('chat'); btnTestCh.onclick = ()=>test('chat');
+  document.addEventListener('DOMContentLoaded', load);
+</script>
+{% endblock %}
+
+
