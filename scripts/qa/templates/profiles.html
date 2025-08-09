@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Profiles – MS11{% endblock %}
+{% block content %}
+<section class="space-y-4">
+  <h1 class="text-xl font-semibold">Profiles</h1>
+  <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
+    <div class="flex items-center gap-2">
+      <input id="profileSearch" class="px-3 py-2 rounded-md bg-neutral-900 ring-1 ring-neutral-800 text-neutral-100 flex-1" placeholder="Search profiles" />
+      <button id="btnRefreshProfiles" class="px-3 py-2 rounded-md bg-neutral-800 ring-1 ring-neutral-700">Refresh</button>
+    </div>
+    <div id="profilesList" class="mt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+  </div>
+</section>
+<script>
+  async function loadProfiles(){
+    const r = await fetch('/api/profiles');
+    const j = await r.json();
+    const list = j.profiles || [];
+    const filter = (document.getElementById('profileSearch').value||'').toLowerCase();
+    const root = document.getElementById('profilesList');
+    root.innerHTML = list.filter(p=>p.id.toLowerCase().includes(filter)||p.name.toLowerCase().includes(filter)).map(p=>`
+      <div class="rounded ring-1 ring-neutral-800 bg-neutral-900/60 p-3">
+        <div class="font-medium">${p.name}</div>
+        <div class="text-xs text-neutral-500">${p.id}</div>
+      </div>`).join('');
+  }
+  document.getElementById('profileSearch').addEventListener('input', loadProfiles);
+  document.getElementById('btnRefreshProfiles').addEventListener('click', loadProfiles);
+  document.addEventListener('DOMContentLoaded', loadProfiles);
+</script>
+{% endblock %}
+
+

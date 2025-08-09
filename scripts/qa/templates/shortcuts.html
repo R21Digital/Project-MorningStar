@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Shortcuts – MS11{% endblock %}
+{% block content %}
+<section class="space-y-4">
+  <h1 class="text-xl font-semibold">Shortcuts</h1>
+  <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
+    <div class="flex items-center gap-2">
+      <button id="btnAdd" class="px-3 py-2 rounded-md bg-neutral-800 ring-1 ring-neutral-700">Add</button>
+      <button id="btnExport" class="px-3 py-2 rounded-md bg-neutral-800 ring-1 ring-neutral-700">Export</button>
+      <input id="importFile" type="file" class="hidden" accept="application/json"><button id="btnImport" class="px-3 py-2 rounded-md bg-neutral-800 ring-1 ring-neutral-700">Import</button>
+    </div>
+    <table class="min-w-full text-sm mt-4">
+      <thead class="text-neutral-400">
+        <tr><th class="text-left p-2">Action</th><th class="text-left p-2">Key</th><th></th></tr>
+      </thead>
+      <tbody id="shortcutsTbody"></tbody>
+    </table>
+  </div>
+</section>
+<script>
+  async function loadShortcuts(){
+    const r = await fetch('/api/shortcuts');
+    const j = await r.json();
+    const list = j.shortcuts || [];
+    const tb = document.getElementById('shortcutsTbody');
+    tb.innerHTML = list.map(s=>`<tr class="border-t border-neutral-800"><td class="p-2">${s.action}</td><td class="p-2">${s.key}</td><td class="p-2 text-right"><button class="px-2 py-1 rounded bg-neutral-800" onclick="delShortcut('${s.action}')">Delete</button></td></tr>`).join('');
+  }
+  async function delShortcut(action){ await fetch('/api/shortcuts/'+encodeURIComponent(action), {method:'DELETE'}); loadShortcuts(); }
+  document.getElementById('btnAdd').addEventListener('click', async ()=>{
+    const action = prompt('Action id (e.g. mount)'); if(!action) return;
+    const key = prompt('Key (e.g. F10)'); if(!key) return;
+    await fetch('/api/shortcuts', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({action, key})});
+    loadShortcuts();
+  });
+  document.getElementById('btnExport').addEventListener('click', async ()=>{
+    const r = await fetch('/api/shortcuts/export'); const blob = await r.blob();
+    const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=url; a.download='shortcuts.json'; a.click(); URL.revokeObjectURL(url);
+  });
+  document.getElementById('btnImport').addEventListener('click', ()=> document.getElementById('importFile').click());
+  document.getElementById('importFile').addEventListener('change', async (ev)=>{
+    const f = ev.target.files[0]; if(!f) return; const text = await f.text();
+    await fetch('/api/shortcuts/import', {method:'POST', headers:{'content-type':'application/json'}, body: text});
+    loadShortcuts();
+  });
+  document.addEventListener('DOMContentLoaded', loadShortcuts);
+</script>
+{% endblock %}
+
+

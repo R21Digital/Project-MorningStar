@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Addons – MS11{% endblock %}
+{% block content %}
+<section class="space-y-4">
+  <h1 class="text-xl font-semibold">Addons</h1>
+  <div id="addonsList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+</section>
+<script>
+  async function loadAddons(){
+    try{
+      const r = await fetch('/api/addons');
+      const j = await r.json();
+      const list = j.addons || [];
+      const root = document.getElementById('addonsList');
+      root.innerHTML = list.map(a=>`
+        <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
+          <div class="flex items-center justify-between">
+            <div class="font-medium">${a.name}</div>
+            <span class="text-xs text-neutral-400">v${a.version||'0.1.0'}</span>
+          </div>
+          <div class="text-neutral-400 text-sm mt-1">${a.description||''}</div>
+          <div class="mt-3 flex items-center justify-between text-sm">
+            <div class="text-neutral-500">${a.author||''}</div>
+            <label class="inline-flex items-center gap-2">
+              <input type="checkbox" ${a.enabled? 'checked':''} onchange="toggleAddon('${a.plugin_id}', this.checked)">
+              <span>${a.enabled? 'Enabled':'Disabled'}</span>
+            </label>
+          </div>
+        </div>`).join('');
+    }catch{}
+  }
+  async function toggleAddon(id, enabled){
+    await fetch('/api/addons/'+encodeURIComponent(id), {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({enabled})});
+  }
+  document.addEventListener('DOMContentLoaded', loadAddons);
+</script>
+{% endblock %}
+
+

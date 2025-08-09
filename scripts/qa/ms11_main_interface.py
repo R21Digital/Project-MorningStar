@@ -64,6 +64,7 @@ from flask_socketio import SocketIO, emit
 import yaml
 import platform
 from module_registry import get_all_overviews, get_overview
+from plugin_manager import list_plugins, set_enabled
 from flask import send_from_directory
 
 # Add current directory to path for imports
@@ -372,6 +373,23 @@ def details():
     """Unified details page with navigation and live data."""
     return render_template('details.html')
 
+# New pages: addons, profiles, shortcuts, updates
+@app.route('/addons')
+def addons():
+    return render_template('addons.html')
+
+@app.route('/profiles')
+def profiles_page():
+    return render_template('profiles.html')
+
+@app.route('/shortcuts')
+def shortcuts_page():
+    return render_template('shortcuts.html')
+
+@app.route('/updates')
+def updates_page():
+    return render_template('updates.html')
+
 # Static dashboard assets (public/)
 @app.route('/ms11-dashboard.html')
 def serve_ms11_dashboard():
@@ -499,6 +517,115 @@ def api_system_overview():
         return jsonify({"modules": get_all_overviews()})
     except Exception:
         return jsonify({"modules": []})
+
+# --- Addons API ---
+@app.get('/api/addons')
+def api_addons_list():
+    try:
+        return jsonify({"addons": list_plugins()})
+    except Exception as e:
+        logger.error(f"addons list error: {e}")
+        return jsonify({"addons": []})
+
+@app.post('/api/addons/<plugin_id>')
+def api_addons_toggle(plugin_id: str):
+    payload = request.get_json(silent=True) or {}
+    enabled = bool(payload.get('enabled', True))
+    ok = set_enabled(plugin_id, enabled)
+    return jsonify({"ok": ok})
+
+# --- Profiles API (stub: scan data/quest_profiles or similar) ---
+@app.get('/api/profiles')
+def api_profiles():
+    try:
+        from pathlib import Path
+        profiles_dir = Path('data/quest_profiles')
+        items = []
+        if profiles_dir.exists():
+            for p in sorted(profiles_dir.glob('**/*.json')):
+                items.append({"id": p.stem, "name": p.stem.replace('_', ' ').title(), "path": str(p)})
+        else:
+            # fallback: list quest templates we already have
+            profiles_dir = Path('data/quests')
+            for p in sorted(profiles_dir.glob('**/*.json')):
+                items.append({"id": p.stem, "name": p.stem.replace('_', ' ').title(), "path": str(p)})
+        return jsonify({"profiles": items})
+    except Exception as e:
+        logger.error(f"profiles error: {e}")
+        return jsonify({"profiles": []})
+
+# --- Shortcuts API (local JSON storage) ---
+SHORTCUTS_FILE = Path('data') / 'shortcuts.json'
+
+def _load_shortcuts():
+    try:
+        if SHORTCUTS_FILE.exists():
+            import json
+            return json.loads(SHORTCUTS_FILE.read_text(encoding='utf-8'))
+    except Exception:
+        pass
+    return []
+
+def _save_shortcuts(items):
+    try:
+        import json
+        SHORTCUTS_FILE.parent.mkdir(parents=True, exist_ok=True)
+        SHORTCUTS_FILE.write_text(json.dumps(items, indent=2), encoding='utf-8')
+    except Exception:
+        pass
+
+@app.get('/api/shortcuts')
+def api_shortcuts_list():
+    return jsonify({"shortcuts": _load_shortcuts()})
+
+@app.post('/api/shortcuts')
+def api_shortcuts_add():
+    payload = request.get_json(silent=True) or {}
+    action = (payload.get('action') or '').strip()
+    key = (payload.get('key') or '').strip()
+    if not action or not key:
+        return jsonify({"ok": False, "error": "invalid"}), 400
+    items = _load_shortcuts()
+    items = [s for s in items if s.get('action') != action]
+    items.append({"action": action, "key": key})
+    _save_shortcuts(items)
+    return jsonify({"ok": True})
+
+@app.delete('/api/shortcuts/<action_id>')
+def api_shortcuts_del(action_id: str):
+    items = _load_shortcuts()
+    items = [s for s in items if s.get('action') != action_id]
+    _save_shortcuts(items)
+    return jsonify({"ok": True})
+
+@app.get('/api/shortcuts/export')
+def api_shortcuts_export():
+    from flask import Response
+    data = json.dumps(_load_shortcuts(), indent=2)
+    return Response(data, mimetype='application/json', headers={'Content-Disposition': 'attachment; filename=shortcuts.json'})
+
+@app.post('/api/shortcuts/import')
+def api_shortcuts_import():
+    try:
+        payload = request.get_json(force=True)  # expecting full JSON list
+        if not isinstance(payload, list):
+            return jsonify({"ok": False, "error": "invalid"}), 400
+        _save_shortcuts(payload)
+        return jsonify({"ok": True})
+    except Exception as e:
+        return jsonify({"ok": False, "error": str(e)}), 400
+
+# --- Updates API (stubbed) ---
+@app.get('/api/updates')
+def api_updates_info():
+    current = ms11_state.get('version', '1.0.0')
+    latest = current  # TODO hook to GitHub release/tag check
+    return jsonify({"current": current, "latest": latest, "updateAvailable": latest != current})
+
+@app.post('/api/updates/apply')
+def api_updates_apply():
+    # Stub: In future, pull latest, install deps, restart services
+    return jsonify({"ok": True})
 
 @app.route('/api/modules/<module_id>')
 def api_module_detail(module_id: str):
