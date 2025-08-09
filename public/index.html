@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MS11 MorningStar - Control Center</title>
+    <link rel="icon" href="/img/ms11-logo-32.png" sizes="32x32">
+    <link rel="icon" href="/img/ms11-logo-192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/img/ms11-logo-192.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f5f3ff', 100: '#ede9fe', 200: '#ddd6fe', 300: '#c4b5fd', 400: '#a78bfa', 
+                            500: '#8b5cf6', 600: '#7c3aed', 700: '#6d28d9', 800: '#5b21b6', 900: '#4c1d95'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body class="bg-neutral-950 text-neutral-200 min-h-screen">
+    <!-- Navigation Header -->
+    <header class="border-b border-neutral-800 bg-neutral-950/90 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="/img/ms11-logo-64.png" alt="MS11"
+                    class="h-8 w-8 rounded-md ring-1 ring-primary-700 bg-primary-600/10"
+                    onerror="this.style.display='none'">
+                <span class="font-semibold tracking-tight text-neutral-100">MS11 MorningStar</span>
+            </div>
+            <nav class="flex items-center gap-4">
+                <a href="/" class="text-neutral-400 hover:text-neutral-200 transition-colors">Home</a>
+                <a href="/ms11-dashboard.html" class="text-neutral-400 hover:text-neutral-200 transition-colors">Dashboard</a>
+                <a href="/scripts/qa/templates/main_dashboard.html" class="text-neutral-400 hover:text-neutral-200 transition-colors">Control Center</a>
+                <a href="/web/index.html" class="text-neutral-400 hover:text-neutral-200 transition-colors">Web Components</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-600/20 via-transparent to-primary-600/20"></div>
+        <div class="relative max-w-7xl mx-auto px-6 py-24">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent mb-6">
+                    MS11 MorningStar
+                </h1>
+                <p class="text-xl text-neutral-400 mb-8 max-w-3xl mx-auto">
+                    Advanced automation and control system with AI-powered behavioral learning, 
+                    computer vision, and natural language interfaces for enhanced gaming experiences.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/ms11-dashboard.html"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary-600 hover:bg-primary-500 text-white font-medium transition-colors">
+                        <i class="fas fa-rocket"></i>
+                        Launch Dashboard
+                    </a>
+                    <a href="/scripts/qa/templates/main_dashboard.html"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-lg ring-1 ring-neutral-700 bg-neutral-900 hover:bg-neutral-800 text-neutral-200 font-medium transition-colors">
+                        <i class="fas fa-cog"></i>
+                        Control Center
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-neutral-100 mb-4">System Components</h2>
+            <p class="text-neutral-400 max-w-2xl mx-auto">
+                Explore the various modules and interfaces that make up the MS11 MorningStar ecosystem.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Main Dashboard -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/ms11-dashboard.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-primary-600/20 ring-1 ring-primary-700 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-primary-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">System Dashboard</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Real-time system monitoring, performance metrics, and service management interface.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>Open Dashboard</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Control Center -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/main_dashboard.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-primary-600/20 ring-1 ring-primary-700 flex items-center justify-center">
+                        <i class="fas fa-cogs text-primary-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">Control Center</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Advanced control interface with AI integration, session management, and automation controls.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>Launch Control Center</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/configuration.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-primary-600/20 ring-1 ring-primary-700 flex items-center justify-center">
+                        <i class="fas fa-wrench text-primary-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">Configuration</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    System configuration management with live scan, validation, and deployment tools.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>Manage Config</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Combat Module -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/combat.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-red-600/20 ring-1 ring-red-700 flex items-center justify-center">
+                        <i class="fas fa-sword text-red-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">Combat System</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Combat automation controls, tactics configuration, and performance analytics.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>Combat Controls</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Movement System -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/movement.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-green-600/20 ring-1 ring-green-700 flex items-center justify-center">
+                        <i class="fas fa-route text-green-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">Movement & Travel</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Automated pathfinding, waypoint management, and travel optimization systems.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>Movement Controls</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Quest System -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/quests.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-yellow-600/20 ring-1 ring-yellow-700 flex items-center justify-center">
+                        <i class="fas fa-scroll text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">Quest Management</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Intelligent quest selection, progress tracking, and completion optimization.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>Quest Interface</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- AI Companion -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/web/ai_companion.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-purple-600/20 ring-1 ring-purple-700 flex items-center justify-center">
+                        <i class="fas fa-robot text-purple-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">AI Companion</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Natural language interface with voice commands and conversational automation control.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>AI Interface</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Analytics -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/analytics.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-blue-600/20 ring-1 ring-blue-700 flex items-center justify-center">
+                        <i class="fas fa-chart-bar text-blue-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">Analytics</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Performance analytics, behavioral learning insights, and system optimization metrics.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>View Analytics</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- System Settings -->
+            <div class="group rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6 hover:ring-primary-600 hover:shadow-lg hover:shadow-primary-600/10 transition cursor-pointer"
+                onclick="navigateTo('/scripts/qa/templates/system.html')">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-10 w-10 rounded-md bg-gray-600/20 ring-1 ring-gray-700 flex items-center justify-center">
+                        <i class="fas fa-server text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-neutral-100">System Settings</h3>
+                </div>
+                <p class="text-neutral-400 text-sm mb-4">
+                    Core system settings, service management, and advanced configuration options.
+                </p>
+                <div class="flex items-center text-primary-400 text-sm">
+                    <span>System Settings</span>
+                    <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status Section -->
+    <section class="max-w-7xl mx-auto px-6 py-8">
+        <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-lg font-semibold text-neutral-100 flex items-center gap-2">
+                        <i class="fas fa-heartbeat text-green-400"></i>
+                        System Status
+                    </h3>
+                    <p class="text-sm text-neutral-400">All systems operational and ready for automation tasks</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div id="systemStatus" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ring-1 ring-green-700 bg-green-900/30 text-green-300">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span>Online</span>
+                    </div>
+                    <button onclick="refreshStatus()"
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded-md ring-1 ring-neutral-700 bg-neutral-900 hover:bg-neutral-800 text-neutral-200">
+                        <i class="fas fa-sync"></i>
+                        <span class="hidden sm:inline">Refresh</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-800 mt-16">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-neutral-400 text-sm">
+                    MS11 MorningStar Project &copy; 2024 - Advanced Gaming Automation System
+                </div>
+                <div class="flex items-center gap-4 text-sm">
+                    <a href="/web/support_form.html" class="text-neutral-400 hover:text-neutral-200 transition-colors">Support</a>
+                    <a href="/scripts/qa/templates/discord.html" class="text-neutral-400 hover:text-neutral-200 transition-colors">Discord</a>
+                    <span class="text-neutral-600">Built with Flask & Socket.IO</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation function
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        // System status check
+        async function refreshStatus() {
+            try {
+                const response = await fetch('/api/health');
+                const data = await response.json();
+                
+                const statusEl = document.getElementById('systemStatus');
+                if (data.success) {
+                    statusEl.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ring-1 ring-green-700 bg-green-900/30 text-green-300';
+                    statusEl.innerHTML = '<div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div><span>Online</span>';
+                } else {
+                    statusEl.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ring-1 ring-red-700 bg-red-900/30 text-red-300';
+                    statusEl.innerHTML = '<div class="w-2 h-2 bg-red-400 rounded-full"></div><span>Offline</span>';
+                }
+            } catch (error) {
+                const statusEl = document.getElementById('systemStatus');
+                statusEl.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ring-1 ring-yellow-700 bg-yellow-900/30 text-yellow-300';
+                statusEl.innerHTML = '<div class="w-2 h-2 bg-yellow-400 rounded-full"></div><span>Unknown</span>';
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshStatus();
+            
+            // Refresh status every 30 seconds
+            setInterval(refreshStatus, 30000);
+        });
+
+        // Socket.IO connection for real-time updates
+        if (typeof io !== 'undefined') {
+            const socket = io();
+            
+            socket.on('connect', function() {
+                console.log('Connected to MS11 server');
+                refreshStatus();
+            });
+            
+            socket.on('system_status', function(data) {
+                const statusEl = document.getElementById('systemStatus');
+                if (data.status === 'online') {
+                    statusEl.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ring-1 ring-green-700 bg-green-900/30 text-green-300';
+                    statusEl.innerHTML = '<div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div><span>Online</span>';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

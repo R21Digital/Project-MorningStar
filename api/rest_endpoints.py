@@ -9,7 +9,7 @@ import uuid
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, asdict
-from flask import Blueprint, request, jsonify, g
+from flask import Blueprint, request, jsonify, g, render_template_string, send_from_directory
 from functools import wraps
 
 from core.structured_logging import StructuredLogger
@@ -21,6 +21,9 @@ logger = StructuredLogger("rest_api")
 
 # Create API blueprint
 api_bp = Blueprint('api', __name__, url_prefix='/api')
+
+# Create static routes blueprint for serving dashboard pages
+static_bp = Blueprint('static_routes', __name__)
 
 @dataclass
 class ApiResponse:
@@ -703,5 +706,8 @@ get_health.start_time = time.time()
 
 def register_api_routes(app):
     """Register API routes with Flask app"""
+    from .static_routes import register_static_routes
+    
     app.register_blueprint(api_bp)
-    logger.info("API routes registered")
+    register_static_routes(app)
+    logger.info("API routes and static routes registered")

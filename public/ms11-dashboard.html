@@ -5,10 +5,36 @@
     <title>MS11 – MorningStar Dashboard</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <!-- Socket.IO client served by Flask-SocketIO -->
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body class="h-full text-zinc-100">
+    <!-- Navigation Header -->
+    <header class="border-b border-zinc-800 bg-zinc-950/90 sticky top-0 z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <img src="/img/ms11-logo-64.png" alt="MS11"
+                        class="h-8 w-8 rounded-md ring-1 ring-indigo-700 bg-indigo-600/10"
+                        onerror="this.style.display='none'">
+                    <span class="font-semibold tracking-tight text-zinc-100">MS11 MorningStar</span>
+                </a>
+            </div>
+            <nav class="flex items-center gap-4">
+                <a href="/" class="text-zinc-400 hover:text-zinc-200 transition-colors text-sm">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <span class="text-indigo-400 text-sm font-medium">
+                    <i class="fas fa-chart-line"></i> Dashboard
+                </span>
+                <a href="/scripts/qa/templates/main_dashboard.html" class="text-zinc-400 hover:text-zinc-200 transition-colors text-sm">
+                    <i class="fas fa-cogs"></i> Control Center
+                </a>
+            </nav>
+        </div>
+    </header>
+
     <div class="max-w-7xl mx-auto p-6 space-y-6">
 
       <!-- Header + Quick actions -->
