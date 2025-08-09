@@ -676,6 +676,78 @@ def api_ocr_test(kind: str):
     except Exception as e:
         return jsonify({"text": "", "error": str(e)})
 
+# --- Backup API (on-demand)
+def run_backup_once() -> tuple[bool, str]:
+    try:
+        from pathlib import Path
+        import shutil
+        cfg_dir = Path('config')
+        if not cfg_dir.exists():
+            return False, 'No config directory'
+        dest_root = cfg_dir / 'backups'
+        dest_root.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        dest = dest_root / f"manual_{timestamp}"
+        dest.mkdir(parents=True, exist_ok=True)
+        for p in cfg_dir.glob('*.*'):
+            if p.is_file() and p.suffix.lower() in {'.json', '.yaml', '.yml'}:
+                shutil.copy2(p, dest / p.name)
+        return True, f'Backup saved to {dest}'
+    except Exception as e:
+        return False, f'Backup failed: {e}'
+
+@app.post('/api/backup/run')
+def api_backup_run():
+    ok, msg = run_backup_once()
+    return jsonify({"ok": ok, "message": msg})
+
+# --- Active character for probe
+ACTIVE_CHAR_FILE = Path('data') / 'active_character.json'
+
+def _save_active_character(name: str) -> None:
+    try:
+        ACTIVE_CHAR_FILE.parent.mkdir(parents=True, exist_ok=True)
+        ACTIVE_CHAR_FILE.write_text(json.dumps({"character": name, "ts": datetime.now().isoformat()}), encoding='utf-8')
+    except Exception:
+        pass
+
+def _load_active_character() -> str | None:
+    try:
+        if ACTIVE_CHAR_FILE.exists():
+            d = json.loads(ACTIVE_CHAR_FILE.read_text(encoding='utf-8'))
+            return d.get('character')
+    except Exception:
+        pass
+    return None
+
+@app.get('/api/character/active')
+def api_get_active_character():
+    return jsonify({"character": _load_active_character()})
+
+@app.post('/api/character/active')
+def api_set_active_character():
+    payload = request.get_json(silent=True) or {}
+    name = (payload.get('character') or '').strip()
+    if not name:
+        return jsonify({"ok": False, "error": "invalid"}), 400
+    _save_active_character(name)
+    return jsonify({"ok": True})
+
+# --- Module log tails
+@app.get('/api/modules/<module_id>/logs')
+def api_module_logs(module_id: str):
+    try:
+        base = Path('logs')
+        candidates = [base / f"{module_id}.log", base / f"{module_id}.txt"]
+        path = next((p for p in candidates if p.exists()), None)
+        if not path:
+            return jsonify({"lines": []})
+        # return last 50 lines
+        lines = path.read_text(encoding='utf-8', errors='ignore').splitlines()[-50:]
+        return jsonify({"lines": lines})
+    except Exception:
+        return jsonify({"lines": []})
+
 @app.route('/api/modules/<module_id>')
 def api_module_detail(module_id: str):
     data = get_overview(module_id)
@@ -897,6 +969,9 @@ def handle_module_action(data):
         result = run_diagnostics()
         socketio.emit('diagnostics_result', result)
         emit('action_response', {"success": True, "message": "Diagnostics completed", "timestamp": datetime.now().isoformat()})
+    elif action == 'backup':
+        ok, msg = run_backup_once()
+        emit('action_response', {"success": ok, "message": msg, "timestamp": datetime.now().isoformat()})
     else:
         emit('action_response', {"success": True, "message": f"Action {action} executed for module {module}", "timestamp": datetime.now().isoformat()})
 
