@@ -64,6 +64,7 @@ from flask_socketio import SocketIO, emit
 import yaml
 import platform
 from module_registry import get_all_overviews, get_overview
+from flask import send_from_directory
 
 # Add current directory to path for imports
 sys.path.append(str(Path(__file__).parent))
@@ -370,6 +371,18 @@ def system():
 def details():
     """Unified details page with navigation and live data."""
     return render_template('details.html')
+
+# Static dashboard assets (public/)
+@app.route('/ms11-dashboard.html')
+def serve_ms11_dashboard():
+    public_dir = Path(__file__).parents[2] / 'public'
+    return send_from_directory(str(public_dir), 'ms11-dashboard.html')
+
+
+@app.route('/js/<path:filename>')
+def serve_public_js(filename: str):
+    public_js = Path(__file__).parents[2] / 'public' / 'js'
+    return send_from_directory(str(public_js), filename)
 
 # Disable caching of HTML to avoid stale UI after edits
 @app.after_request

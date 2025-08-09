@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en" class="h-full bg-zinc-950">
+  <head>
+    <meta charset="utf-8" />
+    <title>MS11 – MorningStar Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Socket.IO client served by Flask-SocketIO -->
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body class="h-full text-zinc-100">
+    <div class="max-w-7xl mx-auto p-6 space-y-6">
+
+      <!-- Header + Quick actions -->
+      <div class="flex items-center justify-between">
+        <h1 class="text-xl font-semibold">MS11 System Dashboard</h1>
+        <div class="space-x-2">
+          <button id="btnStartAll" class="px-3 py-2 rounded bg-indigo-600 hover:bg-indigo-500">Start All Services</button>
+          <button id="btnStopAll" class="px-3 py-2 rounded bg-zinc-700 hover:bg-zinc-600">Stop All Services</button>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div id="statsRow" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Module tiles -->
+      <section>
+        <h2 class="text-sm text-zinc-400 mb-2">System Modules</h2>
+        <div id="modulesGrid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <!-- populated by JS -->
+        </div>
+      </section>
+
+      <!-- Session launcher -->
+      <section class="bg-zinc-900 border border-zinc-800 rounded p-4">
+        <h3 class="font-medium mb-3">Launch Session</h3>
+        <div class="grid md:grid-cols-4 gap-3">
+          <input id="inpCharacter" class="px-3 py-2 rounded bg-zinc-800 border border-zinc-700" placeholder="Character name" />
+          <input id="inpProfile"   class="px-3 py-2 rounded bg-zinc-800 border border-zinc-700" placeholder="Profile id (e.g. legacy_tatooine_01)" />
+          <select id="selMode"     class="px-3 py-2 rounded bg-zinc-800 border border-zinc-700">
+            <option value="quest">Quest</option>
+            <option value="farm">Farm</option>
+            <option value="trainer">Trainer</option>
+            <option value="paper">Paper</option>
+          </select>
+          <button id="btnLaunch" class="px-3 py-2 rounded bg-emerald-600 hover:bg-emerald-500">Start Session</button>
+        </div>
+      </section>
+
+      <!-- Sessions table -->
+      <section class="bg-zinc-900 border border-zinc-800 rounded p-4">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="font-medium">Sessions</h3>
+          <div id="attachmentPill" class="text-xs px-2 py-1 rounded bg-zinc-700">Attachment: —</div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead class="text-zinc-400">
+              <tr>
+                <th class="text-left p-2">ID</th>
+                <th class="text-left p-2">Character</th>
+                <th class="text-left p-2">Profile</th>
+                <th class="text-left p-2">Mode</th>
+                <th class="text-left p-2">Status</th>
+                <th class="p-2"></th>
+              </tr>
+            </thead>
+            <tbody id="sessionsTbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Live log -->
+      <section class="bg-zinc-900 border border-zinc-800 rounded p-4">
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="font-medium">Live Logs</h3>
+          <button id="btnClearLog" class="text-xs px-2 py-1 rounded bg-zinc-800 border border-zinc-700">Clear</button>
+        </div>
+        <pre id="logPane" class="h-56 overflow-auto bg-black/60 p-3 rounded text-xs"></pre>
+      </section>
+
+    </div>
+    <script type="module" src="/js/ms11-dashboard.js"></script>
+  </body>
+  </html>
+
+
