@@ -68,11 +68,6 @@ def run_window():
         except KeyboardInterrupt:
             return
 
-    # Try to set window icon if available (Windows supports ico; pywebview also accepts png)
-    icon_path = str((ROOT / 'public' / 'img' / 'ms11-logo-256.png').resolve())
-    if not Path(icon_path).exists():
-        icon_path = None
-
     window = webview.create_window(
         title='MS11 Control Center',
         url='http://127.0.0.1:5000/',
@@ -80,7 +75,6 @@ def run_window():
         height=800,
         resizable=True,
         confirm_close=True,
-        icon=icon_path,
     )
     webview.start()
 
