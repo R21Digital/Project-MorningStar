@@ -1,31 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Analytics - MS11</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
-<body class="bg-neutral-950 text-neutral-200 min-h-screen">
-    <main class="max-w-6xl mx-auto px-6 py-10 space-y-6">
-        <div class="flex items-center gap-3">
-            <a href="/" class="text-neutral-400 hover:text-neutral-200"><i class="fas fa-arrow-left"></i></a>
-            <h1 class="text-xl font-semibold">Analytics & Reports</h1>
-        </div>
-        <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
-            <p class="text-neutral-400 mb-4">Performance metrics and historical trends will be displayed here.
-                Placeholder page to prevent errors.</p>
-            <div class="h-64"><canvas id="chart"></canvas></div>
-        </div>
-    </main>
-    <script>
-        const ctx = document.getElementById('chart').getContext('2d');
-        new Chart(ctx, { type: 'line', data: { labels: [], datasets: [{ label: 'Placeholder', data: [] }] } });
-    </script>
-</body>
-
-</html>
+{% extends 'base.html' %}
+{% block title %}Analytics – MS11{% endblock %}
+{% block content %}
+<section class="space-y-6">
+  <div class="flex items-center gap-3">
+    <h1 class="text-xl font-semibold">Analytics & Reports</h1>
+  </div>
+  <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+    <p class="text-neutral-400 mb-4">Performance metrics and historical trends will be displayed here.</p>
+    <div class="h-64"><canvas id="chart"></canvas></div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('chart').getContext('2d');
+  new Chart(ctx, { type: 'line', data: { labels: [], datasets: [{ label: 'Placeholder', data: [] }] } });
+ </script>
+{% endblock %}

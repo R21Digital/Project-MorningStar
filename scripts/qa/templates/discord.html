@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Discord - MS11</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-
-<body class="bg-neutral-950 text-neutral-200 min-h-screen">
-    <main class="max-w-5xl mx-auto px-6 py-10 space-y-6">
-        <div class="flex items-center gap-3">
-            <a href="/" class="text-neutral-400 hover:text-neutral-200"><i class="fas fa-arrow-left"></i></a>
-            <h1 class="text-xl font-semibold">Discord Integration</h1>
-        </div>
-        <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
-            <p class="text-neutral-400">Manage Discord relay settings here. Placeholder page to prevent errors.</p>
-        </div>
-    </main>
-</body>
-
-</html>
+{% extends 'base.html' %}
+{% block title %}Discord – MS11{% endblock %}
+{% block content %}
+<section class="space-y-6">
+  <h1 class="text-xl font-semibold">Discord Integration</h1>
+  <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
+    <p class="text-neutral-400">Manage Discord relay settings here.</p>
+  </div>
+</section>
+{% endblock %}
