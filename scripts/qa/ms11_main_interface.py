@@ -551,6 +551,52 @@ def api_system_info():
         "uptime": uptime,
     })
 
+# --- Configuration Management APIs ---
+@app.get('/api/config/scan')
+def api_config_scan():
+    try:
+        cfg_dir = Path('config')
+        configs: list[str] = []
+        templates: list[str] = []
+        if cfg_dir.exists():
+            configs = [p.name for p in sorted(cfg_dir.glob('*.json'))]
+            configs += [p.name for p in sorted(cfg_dir.glob('*.yml'))]
+            configs += [p.name for p in sorted(cfg_dir.glob('*.yaml'))]
+        tdir = cfg_dir / 'templates'
+        if tdir.exists():
+            templates = [p.name for p in sorted(tdir.glob('*.yml'))]
+            templates += [p.name for p in sorted(tdir.glob('*.yaml'))]
+        return jsonify({"ok": True, "configs": configs, "templates": templates})
+    except Exception as e:
+        logger.error(f"config scan error: {e}")
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+
+@app.post('/api/config/validate')
+def api_config_validate():
+    if not ConfigurationValidator:
+        return jsonify({"ok": False, "error": "validator_unavailable"}), 400
+    try:
+        validator = ConfigurationValidator()
+        result = validator.validate_all() if hasattr(validator, 'validate_all') else True
+        return jsonify({"ok": bool(result)})
+    except Exception as e:
+        logger.error(f"config validate error: {e}")
+        return jsonify({"ok": False, "error": str(e)}), 500
+
+
+@app.post('/api/config/deploy')
+def api_config_deploy():
+    if not ConfigurationDeployer:
+        return jsonify({"ok": False, "error": "deployer_unavailable"}), 400
+    try:
+        deployer = ConfigurationDeployer()
+        result = deployer.deploy_all() if hasattr(deployer, 'deploy_all') else True
+        return jsonify({"ok": bool(result)})
+    except Exception as e:
+        logger.error(f"config deploy error: {e}")
+        return jsonify({"ok": False, "error": str(e)}), 500
+
 # --- Services start/stop (stubbed commands) ---
 @app.post('/api/services/startAll')
 def api_start_services():

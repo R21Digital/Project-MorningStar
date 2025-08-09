@@ -16,21 +16,43 @@
             <h1 class="text-xl font-semibold">Configuration Management</h1>
         </div>
         <div class="rounded-xl ring-1 ring-neutral-800 bg-neutral-900/60 p-6">
-            <p class="text-neutral-400">Manage MS11 configuration files and templates here. Placeholder page to prevent
-                errors.</p>
+            <p class="text-neutral-400">Manage MS11 configuration files and templates here.</p>
             <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="rounded-lg ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
                     <div class="text-sm text-neutral-400">Configurations</div>
-                    <div class="text-neutral-100 text-2xl font-semibold">{{ configs|length if configs else 0 }}</div>
+                    <div id="cfgCount" class="text-neutral-100 text-2xl font-semibold">{{ configs|length if configs else 0 }}</div>
                 </div>
                 <div class="rounded-lg ring-1 ring-neutral-800 bg-neutral-900/60 p-4">
                     <div class="text-sm text-neutral-400">Templates</div>
-                    <div class="text-neutral-100 text-2xl font-semibold">{{ templates|length if templates else 0 }}
+                    <div id="tplCount" class="text-neutral-100 text-2xl font-semibold">{{ templates|length if templates else 0 }}
                     </div>
                 </div>
             </div>
+            <div class="mt-6 flex gap-2">
+                <button id="btnScan" class="px-3 py-2 rounded-md bg-neutral-800 hover:bg-neutral-700 ring-1 ring-neutral-700">Rescan</button>
+                <button id="btnValidate" class="px-3 py-2 rounded-md bg-emerald-600 hover:bg-emerald-500 ring-1 ring-emerald-700 text-white">Validate</button>
+                <button id="btnDeploy" class="px-3 py-2 rounded-md bg-indigo-600 hover:bg-indigo-500 ring-1 ring-indigo-700 text-white">Deploy</button>
+            </div>
         </div>
     </main>
+    <script>
+        async function scan() {
+            try {
+                const r = await fetch('/api/config/scan');
+                const j = await r.json();
+                if (j.ok) {
+                    document.getElementById('cfgCount').textContent = (j.configs || []).length;
+                    document.getElementById('tplCount').textContent = (j.templates || []).length;
+                }
+            } catch {}
+        }
+        async function validateCfg(){ try { const r = await fetch('/api/config/validate',{method:'POST'}); const j = await r.json(); alert(j.ok? 'Validation OK' : ('Validation failed: '+(j.error||''))); } catch(e){ alert('Validation error'); } }
+        async function deployCfg(){ try { const r = await fetch('/api/config/deploy',{method:'POST'}); const j = await r.json(); alert(j.ok? 'Deploy OK' : ('Deploy failed: '+(j.error||''))); } catch(e){ alert('Deploy error'); } }
+        document.getElementById('btnScan').onclick = scan;
+        document.getElementById('btnValidate').onclick = validateCfg;
+        document.getElementById('btnDeploy').onclick = deployCfg;
+        document.addEventListener('DOMContentLoaded', scan);
+    </script>
 </body>
 
 </html>
