@@ -1,0 +1,19 @@
+{
+    "character_name": "YourCharacterName",
+    "default_mode": "medic",
+    "enable_discord_relay": false,
+    "session": {
+        "idle_timeout": 300,
+        "max_duration": 14400,
+        "auto_resume": true
+    },
+    "logging": {
+        "level": "INFO",
+        "file": "logs/ms11.log"
+    },
+    "safety": {
+        "fatigue_threshold": 75,
+        "health_threshold": 50,
+        "action_threshold": 25
+    }
+}

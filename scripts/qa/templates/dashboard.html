@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS11 Configuration Automation - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --ms11-primary: #2c3e50;
+            --ms11-secondary: #3498db;
+            --ms11-success: #27ae60;
+            --ms11-warning: #f39c12;
+            --ms11-danger: #e74c3c;
+            --ms11-dark: #34495e;
+            --ms11-light: #ecf0f1;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(45deg, var(--ms11-primary), var(--ms11-secondary));
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            border: none;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .status-idle { background-color: var(--ms11-secondary); }
+        .status-deploying { background-color: var(--ms11-warning); }
+        .status-completed { background-color: var(--ms11-success); }
+        .status-failed { background-color: var(--ms11-danger); }
+        
+        .btn-ms11 {
+            background: linear-gradient(45deg, var(--ms11-primary), var(--ms11-secondary));
+            border: none;
+            border-radius: 25px;
+            color: white;
+            padding: 10px 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-ms11:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            color: white;
+        }
+        
+        .progress-bar {
+            border-radius: 10px;
+            height: 8px;
+        }
+        
+        .quick-action {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background: white;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .quick-action i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--ms11-secondary);
+        }
+        
+        .stats-card {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(44, 62, 80, 0.95); backdrop-filter: blur(10px);">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-cog fa-spin me-2"></i>
+                MS11 Configuration Automation
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/configs">
+                            <i class="fas fa-file-code me-1"></i>Configs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/templates">
+                            <i class="fas fa-layer-group me-1"></i>Templates
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/deploy">
+                            <i class="fas fa-rocket me-1"></i>Deploy
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Status Banner -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h5 class="card-title mb-2">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    System Status
+                                </h5>
+                                <p class="card-text mb-0">
+                                    <span class="status-indicator status-{{ deployment_status.status }}"></span>
+                                    {{ deployment_status.message }}
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <small class="text-muted">
+                                    Last updated: {{ deployment_status.timestamp }}
+                                </small>
+                                {% if deployment_status.status == 'deploying' %}
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-warning" style="width: {{ deployment_status.progress }}%"></div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4 class="text-white mb-3">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h4>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action">
+                    <i class="fas fa-file-code"></i>
+                    <h6>Manage Configs</h6>
+                    <p class="text-muted">Edit and validate configuration files</p>
+                    <a href="/configs" class="btn btn-ms11 btn-sm">Go to Configs</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action">
+                    <i class="fas fa-layer-group"></i>
+                    <h6>View Templates</h6>
+                    <p class="text-muted">Browse configuration templates</p>
+                    <a href="/templates" class="btn btn-ms11 btn-sm">View Templates</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action">
+                    <i class="fas fa-rocket"></i>
+                    <h6>Deploy</h6>
+                    <p class="text-muted">Deploy to environments</p>
+                    <a href="/deploy" class="btn btn-ms11 btn-sm">Deploy</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="quick-action">
+                    <i class="fas fa-download"></i>
+                    <h6>Backup</h6>
+                    <p class="text-muted">Create configuration backups</p>
+                    <button class="btn btn-ms11 btn-sm" onclick="createBackup()">Create Backup</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Configuration Files
+                        </h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-primary">{{ config_files|length }}</h2>
+                        <p class="text-muted mb-0">Active configurations</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-layer-group me-2"></i>
+                            Templates
+                        </h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-success">{{ templates|length }}</h2>
+                        <p class="text-muted mb-0">Available templates</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-server me-2"></i>
+                            Environments
+                        </h6>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="text-warning">{{ environments|length }}</h2>
+                        <p class="text-muted mb-0">Deployment targets</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card stats-card">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-history me-2"></i>
+                            Recent Activity
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentActivity">
+                            <p class="text-muted text-center">No recent activity</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script>
+        // Initialize Socket.IO
+        const socket = io();
+        
+        socket.on('connect', function() {
+            console.log('Connected to MS11 Configuration Automation');
+        });
+        
+        socket.on('deployment_update', function(data) {
+            updateDeploymentStatus(data);
+        });
+        
+        socket.on('config_updated', function(data) {
+            addRecentActivity(`Configuration updated: ${data.config_path}`, 'success');
+        });
+        
+        function updateDeploymentStatus(data) {
+            const statusElement = document.querySelector('.status-indicator');
+            const messageElement = document.querySelector('.card-text');
+            const timestampElement = document.querySelector('.text-muted');
+            const progressContainer = document.querySelector('.progress');
+            
+            // Update status indicator
+            statusElement.className = `status-indicator status-${data.status}`;
+            
+            // Update message
+            messageElement.innerHTML = `<span class="status-indicator status-${data.status}"></span>${data.message}`;
+            
+            // Update timestamp
+            timestampElement.textContent = `Last updated: ${data.timestamp}`;
+            
+            // Update progress bar
+            if (data.status === 'deploying') {
+                progressContainer.style.display = 'block';
+                const progressBar = progressContainer.querySelector('.progress-bar');
+                progressBar.style.width = `${data.progress}%`;
+            } else {
+                progressContainer.style.display = 'none';
+            }
+        }
+        
+        function addRecentActivity(message, type) {
+            const container = document.getElementById('recentActivity');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const activityHtml = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-${type === 'success' ? 'success' : 'info'}">
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'} me-2"></i>
+                        ${message}
+                    </span>
+                    <small class="text-muted">${timestamp}</small>
+                </div>
+            `;
+            
+            // Remove "No recent activity" message if it exists
+            if (container.querySelector('.text-muted.text-center')) {
+                container.innerHTML = '';
+            }
+            
+            container.insertAdjacentHTML('afterbegin', activityHtml);
+        }
+        
+        function createBackup() {
+            fetch('/api/backup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    environment: 'development'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    addRecentActivity('Backup created successfully', 'success');
+                } else {
+                    addRecentActivity(`Backup failed: ${data.error}`, 'danger');
+                }
+            })
+            .catch(error => {
+                addRecentActivity(`Backup error: ${error}`, 'danger');
+            });
+        }
+        
+        // Auto-refresh status every 5 seconds
+        setInterval(() => {
+            fetch('/api/configs')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Update config count if needed
+                        const configCount = document.querySelector('.text-primary');
+                        if (configCount && data.data.length !== parseInt(configCount.textContent)) {
+                            configCount.textContent = data.data.length;
+                        }
+                    }
+                })
+                .catch(error => console.error('Status refresh error:', error));
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Callable, Sequence
 
 from src.game_state.feedback import watch_text
-from src.logging import journal
+from src.logging_utils import journal
 
 
 def run_validated_step(

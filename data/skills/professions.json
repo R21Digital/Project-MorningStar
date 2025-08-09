@@ -1,0 +1,400 @@
+{
+  "professions": {
+    "marksman": {
+      "id": "marksman",
+      "name": "Marksman",
+      "icon": "marksman.png",
+      "category": "Combat",
+      "color": "#3b82f6",
+      "skills": [
+        {
+          "id": "carbine_accuracy_1",
+          "name": "Carbine Accuracy I",
+          "cost": 4,
+          "xpType": "CombatXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic carbine accuracy training"
+        },
+        {
+          "id": "carbine_accuracy_2",
+          "name": "Carbine Accuracy II",
+          "cost": 8,
+          "xpType": "CombatXP",
+          "xpRequired": 6000,
+          "prereqs": ["carbine_accuracy_1"],
+          "tier": 2,
+          "description": "Advanced carbine accuracy"
+        },
+        {
+          "id": "carbine_accuracy_3",
+          "name": "Carbine Accuracy III",
+          "cost": 12,
+          "xpType": "CombatXP",
+          "xpRequired": 12000,
+          "prereqs": ["carbine_accuracy_2"],
+          "tier": 3,
+          "description": "Expert carbine accuracy"
+        },
+        {
+          "id": "carbine_accuracy_4",
+          "name": "Carbine Accuracy IV",
+          "cost": 16,
+          "xpType": "CombatXP",
+          "xpRequired": 20000,
+          "prereqs": ["carbine_accuracy_3"],
+          "tier": 4,
+          "description": "Master carbine accuracy"
+        },
+        {
+          "id": "rifle_accuracy_1",
+          "name": "Rifle Accuracy I",
+          "cost": 4,
+          "xpType": "CombatXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic rifle accuracy training"
+        },
+        {
+          "id": "rifle_accuracy_2",
+          "name": "Rifle Accuracy II",
+          "cost": 8,
+          "xpType": "CombatXP",
+          "xpRequired": 6000,
+          "prereqs": ["rifle_accuracy_1"],
+          "tier": 2,
+          "description": "Advanced rifle accuracy"
+        },
+        {
+          "id": "rifle_accuracy_3",
+          "name": "Rifle Accuracy III",
+          "cost": 12,
+          "xpType": "CombatXP",
+          "xpRequired": 12000,
+          "prereqs": ["rifle_accuracy_2"],
+          "tier": 3,
+          "description": "Expert rifle accuracy"
+        },
+        {
+          "id": "rifle_accuracy_4",
+          "name": "Rifle Accuracy IV",
+          "cost": 16,
+          "xpType": "CombatXP",
+          "xpRequired": 20000,
+          "prereqs": ["rifle_accuracy_3"],
+          "tier": 4,
+          "description": "Master rifle accuracy"
+        },
+        {
+          "id": "pistol_accuracy_1",
+          "name": "Pistol Accuracy I",
+          "cost": 4,
+          "xpType": "CombatXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic pistol accuracy training"
+        },
+        {
+          "id": "pistol_accuracy_2",
+          "name": "Pistol Accuracy II",
+          "cost": 8,
+          "xpType": "CombatXP",
+          "xpRequired": 6000,
+          "prereqs": ["pistol_accuracy_1"],
+          "tier": 2,
+          "description": "Advanced pistol accuracy"
+        },
+        {
+          "id": "pistol_accuracy_3",
+          "name": "Pistol Accuracy III",
+          "cost": 12,
+          "xpType": "CombatXP",
+          "xpRequired": 12000,
+          "prereqs": ["pistol_accuracy_2"],
+          "tier": 3,
+          "description": "Expert pistol accuracy"
+        },
+        {
+          "id": "pistol_accuracy_4",
+          "name": "Pistol Accuracy IV",
+          "cost": 16,
+          "xpType": "CombatXP",
+          "xpRequired": 20000,
+          "prereqs": ["pistol_accuracy_3"],
+          "tier": 4,
+          "description": "Master pistol accuracy"
+        }
+      ]
+    },
+    "medic": {
+      "id": "medic",
+      "name": "Medic",
+      "icon": "medic.png",
+      "category": "Combat",
+      "color": "#10b981",
+      "skills": [
+        {
+          "id": "healing_1",
+          "name": "Healing I",
+          "cost": 4,
+          "xpType": "CombatXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic healing techniques"
+        },
+        {
+          "id": "healing_2",
+          "name": "Healing II",
+          "cost": 8,
+          "xpType": "CombatXP",
+          "xpRequired": 6000,
+          "prereqs": ["healing_1"],
+          "tier": 2,
+          "description": "Advanced healing techniques"
+        },
+        {
+          "id": "healing_3",
+          "name": "Healing III",
+          "cost": 12,
+          "xpType": "CombatXP",
+          "xpRequired": 12000,
+          "prereqs": ["healing_2"],
+          "tier": 3,
+          "description": "Expert healing techniques"
+        },
+        {
+          "id": "healing_4",
+          "name": "Healing IV",
+          "cost": 16,
+          "xpType": "CombatXP",
+          "xpRequired": 20000,
+          "prereqs": ["healing_3"],
+          "tier": 4,
+          "description": "Master healing techniques"
+        },
+        {
+          "id": "diagnosis_1",
+          "name": "Diagnosis I",
+          "cost": 4,
+          "xpType": "CombatXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic medical diagnosis"
+        },
+        {
+          "id": "diagnosis_2",
+          "name": "Diagnosis II",
+          "cost": 8,
+          "xpType": "CombatXP",
+          "xpRequired": 6000,
+          "prereqs": ["diagnosis_1"],
+          "tier": 2,
+          "description": "Advanced medical diagnosis"
+        },
+        {
+          "id": "diagnosis_3",
+          "name": "Diagnosis III",
+          "cost": 12,
+          "xpType": "CombatXP",
+          "xpRequired": 12000,
+          "prereqs": ["diagnosis_2"],
+          "tier": 3,
+          "description": "Expert medical diagnosis"
+        },
+        {
+          "id": "diagnosis_4",
+          "name": "Diagnosis IV",
+          "cost": 16,
+          "xpType": "CombatXP",
+          "xpRequired": 20000,
+          "prereqs": ["diagnosis_3"],
+          "tier": 4,
+          "description": "Master medical diagnosis"
+        }
+      ]
+    },
+    "artisan": {
+      "id": "artisan",
+      "name": "Artisan",
+      "icon": "artisan.png",
+      "category": "Crafter",
+      "color": "#f59e0b",
+      "skills": [
+        {
+          "id": "surveying_1",
+          "name": "Surveying I",
+          "cost": 4,
+          "xpType": "CraftingXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic resource surveying"
+        },
+        {
+          "id": "surveying_2",
+          "name": "Surveying II",
+          "cost": 8,
+          "xpType": "CraftingXP",
+          "xpRequired": 6000,
+          "prereqs": ["surveying_1"],
+          "tier": 2,
+          "description": "Advanced resource surveying"
+        },
+        {
+          "id": "surveying_3",
+          "name": "Surveying III",
+          "cost": 12,
+          "xpType": "CraftingXP",
+          "xpRequired": 12000,
+          "prereqs": ["surveying_2"],
+          "tier": 3,
+          "description": "Expert resource surveying"
+        },
+        {
+          "id": "surveying_4",
+          "name": "Surveying IV",
+          "cost": 16,
+          "xpType": "CraftingXP",
+          "xpRequired": 20000,
+          "prereqs": ["surveying_3"],
+          "tier": 4,
+          "description": "Master resource surveying"
+        },
+        {
+          "id": "crafting_1",
+          "name": "Crafting I",
+          "cost": 4,
+          "xpType": "CraftingXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic crafting techniques"
+        },
+        {
+          "id": "crafting_2",
+          "name": "Crafting II",
+          "cost": 8,
+          "xpType": "CraftingXP",
+          "xpRequired": 6000,
+          "prereqs": ["crafting_1"],
+          "tier": 2,
+          "description": "Advanced crafting techniques"
+        },
+        {
+          "id": "crafting_3",
+          "name": "Crafting III",
+          "cost": 12,
+          "xpType": "CraftingXP",
+          "xpRequired": 12000,
+          "prereqs": ["crafting_2"],
+          "tier": 3,
+          "description": "Expert crafting techniques"
+        },
+        {
+          "id": "crafting_4",
+          "name": "Crafting IV",
+          "cost": 16,
+          "xpType": "CraftingXP",
+          "xpRequired": 20000,
+          "prereqs": ["crafting_3"],
+          "tier": 4,
+          "description": "Master crafting techniques"
+        }
+      ]
+    },
+    "entertainer": {
+      "id": "entertainer",
+      "name": "Entertainer",
+      "icon": "entertainer.png",
+      "category": "Entertainer",
+      "color": "#ec4899",
+      "skills": [
+        {
+          "id": "dancing_1",
+          "name": "Dancing I",
+          "cost": 4,
+          "xpType": "DancingXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic dance moves"
+        },
+        {
+          "id": "dancing_2",
+          "name": "Dancing II",
+          "cost": 8,
+          "xpType": "DancingXP",
+          "xpRequired": 6000,
+          "prereqs": ["dancing_1"],
+          "tier": 2,
+          "description": "Advanced dance moves"
+        },
+        {
+          "id": "dancing_3",
+          "name": "Dancing III",
+          "cost": 12,
+          "xpType": "DancingXP",
+          "xpRequired": 12000,
+          "prereqs": ["dancing_2"],
+          "tier": 3,
+          "description": "Expert dance moves"
+        },
+        {
+          "id": "dancing_4",
+          "name": "Dancing IV",
+          "cost": 16,
+          "xpType": "DancingXP",
+          "xpRequired": 20000,
+          "prereqs": ["dancing_3"],
+          "tier": 4,
+          "description": "Master dance moves"
+        },
+        {
+          "id": "music_1",
+          "name": "Music I",
+          "cost": 4,
+          "xpType": "MusicXP",
+          "xpRequired": 2000,
+          "prereqs": [],
+          "tier": 1,
+          "description": "Basic musical performance"
+        },
+        {
+          "id": "music_2",
+          "name": "Music II",
+          "cost": 8,
+          "xpType": "MusicXP",
+          "xpRequired": 6000,
+          "prereqs": ["music_1"],
+          "tier": 2,
+          "description": "Advanced musical performance"
+        },
+        {
+          "id": "music_3",
+          "name": "Music III",
+          "cost": 12,
+          "xpType": "MusicXP",
+          "xpRequired": 12000,
+          "prereqs": ["music_2"],
+          "tier": 3,
+          "description": "Expert musical performance"
+        },
+        {
+          "id": "music_4",
+          "name": "Music IV",
+          "cost": 16,
+          "xpType": "MusicXP",
+          "xpRequired": 20000,
+          "prereqs": ["music_3"],
+          "tier": 4,
+          "description": "Master musical performance"
+        }
+      ]
+    }
+  }
+}

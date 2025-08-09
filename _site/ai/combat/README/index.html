@@ -1,0 +1,51 @@
+<h1>ai.combat</h1>
+<p><code>ai.combat</code> packages a minimal combat decision helper and a runtime wrapper.</p>
+<h2><code>evaluate_state</code></h2>
+<pre><code class="language-python">from ai.combat import evaluate_state
+</code></pre>
+<p>-Return a suggested action string from two dictionaries:</p>
+<ul>
+<li><strong><code>player_state</code></strong> – recognizes <code>hp</code>, <code>healing_items</code>, and <code>buffed</code>.
+Missing keys default to <code>hp=100</code>, <code>healing_items=0</code>, <code>buffed=False</code>.</li>
+<li><strong><code>target_state</code></strong> – only the <code>hp</code> key is consulted and defaults to <code>100</code>.</li>
+<li><strong><code>difficulty</code></strong> – optional string: &quot;easy&quot;, &quot;normal&quot; (default), or &quot;hard&quot;.</li>
+<li><strong><code>behavior</code></strong> – optional string: &quot;aggressive&quot;, &quot;defensive&quot;, or &quot;tactical&quot; (default).</li>
+</ul>
+<p>Possible results:</p>
+<ul>
+<li><code>&quot;heal&quot;</code> – low HP with a heal item available.</li>
+<li><code>&quot;retreat&quot;</code> – low HP and no heal item.</li>
+<li><code>&quot;attack&quot;</code> – target still has HP.</li>
+<li><code>&quot;buff&quot;</code> – target defeated but player lacks a buff.</li>
+<li><code>&quot;idle&quot;</code> – target defeated and player already buffed.</li>
+</ul>
+<h3>Example</h3>
+<pre><code class="language-python">from ai.combat import evaluate_state
+
+action = evaluate_state({&quot;hp&quot;: 25, &quot;healing_items&quot;: 1}, {&quot;hp&quot;: 50})
+print(action)  # &quot;heal&quot;
+
+# Enable debug logging to understand why a choice was made
+action = evaluate_state({&quot;hp&quot;: 25, &quot;healing_items&quot;: 1}, {&quot;hp&quot;: 50}, debug=True)
+# Difficulty can be tuned as well
+hard_action = evaluate_state({&quot;hp&quot;: 25, &quot;healing_items&quot;: 0}, {&quot;hp&quot;: 50}, difficulty=&quot;hard&quot;)
+# Behavior can be adjusted as well
+aggressive_action = evaluate_state({&quot;hp&quot;: 45, &quot;healing_items&quot;: 1}, {&quot;hp&quot;: 50}, behavior=&quot;aggressive&quot;)
+# Prints &quot;Decision: heal ...&quot; to stdout
+</code></pre>
+<h2><code>CombatRunner</code></h2>
+<pre><code class="language-python">from ai.combat import CombatRunner
+</code></pre>
+<p>A thin wrapper exposing <code>tick(player_state, target_state)</code> and storing the
+last returned action on <code>last_action</code>. The runner keeps a short memory of
+recent actions to prevent repeating the same command.</p>
+<h3>Usage Example</h3>
+<pre><code class="language-python">from ai.combat import evaluate_state, CombatRunner
+
+runner = CombatRunner(memory_size=3)  # memory_size controls action history length
+player = {&quot;hp&quot;: 80, &quot;buffed&quot;: True}
+target = {&quot;hp&quot;: 40}
+
+action = runner.tick(player, target)
+print(action)  # &quot;attack&quot;
+</code></pre>

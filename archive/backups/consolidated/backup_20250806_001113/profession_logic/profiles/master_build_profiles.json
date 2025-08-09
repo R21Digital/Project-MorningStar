@@ -1,6 +1,0 @@
-{
-    "combat_medic": {
-        "profession": "Combat Medic",
-        "skills": ["Novice Medic", "Field Medicine", "Combat Medicine", "Master Medic"]
-    }
-}

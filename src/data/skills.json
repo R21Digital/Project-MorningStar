@@ -1,0 +1,389 @@
+[
+  {
+    "profession": "Rifleman",
+    "description": "Specializes in long-range combat with rifles and carbines",
+    "branches": [
+      {
+        "name": "Accuracy",
+        "icon": "fas fa-crosshairs",
+        "description": "Improves accuracy and range with rifles",
+        "skills": [
+          {
+            "id": "rifle_acc_1",
+            "name": "Rifle Accuracy I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic rifle accuracy training"
+          },
+          {
+            "id": "rifle_acc_2", 
+            "name": "Rifle Accuracy II",
+            "cost": 2,
+            "prerequisites": ["rifle_acc_1"],
+            "description": "Improved rifle accuracy"
+          },
+          {
+            "id": "rifle_acc_3",
+            "name": "Rifle Accuracy III", 
+            "cost": 3,
+            "prerequisites": ["rifle_acc_2"],
+            "description": "Advanced rifle accuracy"
+          },
+          {
+            "id": "rifle_acc_4",
+            "name": "Master Rifleman",
+            "cost": 4,
+            "prerequisites": ["rifle_acc_3", "rifle_speed_3"],
+            "description": "Master level rifle skills"
+          }
+        ]
+      },
+      {
+        "name": "Speed",
+        "icon": "fas fa-tachometer-alt",
+        "description": "Increases firing speed and reload time",
+        "skills": [
+          {
+            "id": "rifle_speed_1",
+            "name": "Rifle Speed I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic rifle speed training"
+          },
+          {
+            "id": "rifle_speed_2",
+            "name": "Rifle Speed II", 
+            "cost": 2,
+            "prerequisites": ["rifle_speed_1"],
+            "description": "Improved rifle speed"
+          },
+          {
+            "id": "rifle_speed_3",
+            "name": "Rifle Speed III",
+            "cost": 3, 
+            "prerequisites": ["rifle_speed_2"],
+            "description": "Advanced rifle speed"
+          },
+          {
+            "id": "rifle_speed_4",
+            "name": "Rifle Speed IV",
+            "cost": 4,
+            "prerequisites": ["rifle_speed_3"],
+            "description": "Elite rifle speed"
+          }
+        ]
+      },
+      {
+        "name": "Support",
+        "icon": "fas fa-shield-alt",
+        "description": "Defensive and utility skills for riflemen",
+        "skills": [
+          {
+            "id": "rifle_support_1",
+            "name": "Rifle Support I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic support skills"
+          },
+          {
+            "id": "rifle_support_2",
+            "name": "Rifle Support II",
+            "cost": 2,
+            "prerequisites": ["rifle_support_1"],
+            "description": "Improved support abilities"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "profession": "Pistoleer", 
+    "description": "Expert in dual-wielding pistols and close-range combat",
+    "branches": [
+      {
+        "name": "Accuracy",
+        "icon": "fas fa-bullseye",
+        "description": "Improves accuracy with pistols",
+        "skills": [
+          {
+            "id": "pistol_acc_1",
+            "name": "Pistol Accuracy I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic pistol accuracy training"
+          },
+          {
+            "id": "pistol_acc_2",
+            "name": "Pistol Accuracy II",
+            "cost": 2,
+            "prerequisites": ["pistol_acc_1"],
+            "description": "Improved pistol accuracy"
+          },
+          {
+            "id": "pistol_acc_3",
+            "name": "Pistol Accuracy III",
+            "cost": 3,
+            "prerequisites": ["pistol_acc_2"],
+            "description": "Advanced pistol accuracy"
+          },
+          {
+            "id": "pistol_acc_4",
+            "name": "Master Pistoleer",
+            "cost": 4,
+            "prerequisites": ["pistol_acc_3", "pistol_speed_3"],
+            "description": "Master level pistol skills"
+          }
+        ]
+      },
+      {
+        "name": "Speed",
+        "icon": "fas fa-bolt",
+        "description": "Increases firing rate and dual-wielding ability",
+        "skills": [
+          {
+            "id": "pistol_speed_1",
+            "name": "Pistol Speed I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic pistol speed training"
+          },
+          {
+            "id": "pistol_speed_2",
+            "name": "Pistol Speed II",
+            "cost": 2,
+            "prerequisites": ["pistol_speed_1"],
+            "description": "Improved pistol speed"
+          },
+          {
+            "id": "pistol_speed_3",
+            "name": "Pistol Speed III",
+            "cost": 3,
+            "prerequisites": ["pistol_speed_2"],
+            "description": "Advanced pistol speed"
+          },
+          {
+            "id": "pistol_speed_4",
+            "name": "Pistol Speed IV",
+            "cost": 4,
+            "prerequisites": ["pistol_speed_3"],
+            "description": "Elite pistol speed"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "profession": "Combat Medic",
+    "description": "Provides healing and medical support in combat situations",
+    "branches": [
+      {
+        "name": "Healing",
+        "icon": "fas fa-heart",
+        "description": "Direct healing abilities",
+        "skills": [
+          {
+            "id": "medic_heal_1",
+            "name": "Basic Healing I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic healing techniques"
+          },
+          {
+            "id": "medic_heal_2",
+            "name": "Basic Healing II",
+            "cost": 2,
+            "prerequisites": ["medic_heal_1"],
+            "description": "Improved healing power"
+          },
+          {
+            "id": "medic_heal_3",
+            "name": "Advanced Healing",
+            "cost": 3,
+            "prerequisites": ["medic_heal_2"],
+            "description": "Advanced healing techniques"
+          },
+          {
+            "id": "medic_heal_4",
+            "name": "Master Combat Medic",
+            "cost": 4,
+            "prerequisites": ["medic_heal_3", "medic_support_3"],
+            "description": "Master level medical skills"
+          }
+        ]
+      },
+      {
+        "name": "Support",
+        "icon": "fas fa-plus-square",
+        "description": "Buff and support abilities for groups",
+        "skills": [
+          {
+            "id": "medic_support_1",
+            "name": "Medical Support I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic medical support"
+          },
+          {
+            "id": "medic_support_2",
+            "name": "Medical Support II",
+            "cost": 2,
+            "prerequisites": ["medic_support_1"],
+            "description": "Improved medical support"
+          },
+          {
+            "id": "medic_support_3",
+            "name": "Medical Support III",
+            "cost": 3,
+            "prerequisites": ["medic_support_2"],
+            "description": "Advanced medical support"
+          },
+          {
+            "id": "medic_support_4",
+            "name": "Medical Support IV",
+            "cost": 4,
+            "prerequisites": ["medic_support_3"],
+            "description": "Elite medical support"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "profession": "Brawler",
+    "description": "Unarmed combat specialist with high constitution",
+    "branches": [
+      {
+        "name": "Unarmed",
+        "icon": "fas fa-fist-raised",
+        "description": "Hand-to-hand combat skills",
+        "skills": [
+          {
+            "id": "brawler_unarmed_1",
+            "name": "Unarmed Combat I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic unarmed combat"
+          },
+          {
+            "id": "brawler_unarmed_2",
+            "name": "Unarmed Combat II",
+            "cost": 2,
+            "prerequisites": ["brawler_unarmed_1"],
+            "description": "Improved unarmed techniques"
+          },
+          {
+            "id": "brawler_unarmed_3",
+            "name": "Unarmed Combat III",
+            "cost": 3,
+            "prerequisites": ["brawler_unarmed_2"],
+            "description": "Advanced unarmed combat"
+          },
+          {
+            "id": "brawler_unarmed_4",
+            "name": "Master Brawler",
+            "cost": 4,
+            "prerequisites": ["brawler_unarmed_3", "brawler_toughness_3"],
+            "description": "Master level brawling skills"
+          }
+        ]
+      },
+      {
+        "name": "Toughness",
+        "icon": "fas fa-shield",
+        "description": "Increased health and damage resistance",
+        "skills": [
+          {
+            "id": "brawler_toughness_1",
+            "name": "Toughness I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic toughness training"
+          },
+          {
+            "id": "brawler_toughness_2",
+            "name": "Toughness II",
+            "cost": 2,
+            "prerequisites": ["brawler_toughness_1"],
+            "description": "Improved toughness"
+          },
+          {
+            "id": "brawler_toughness_3",
+            "name": "Toughness III",
+            "cost": 3,
+            "prerequisites": ["brawler_toughness_2"],
+            "description": "Advanced toughness"
+          },
+          {
+            "id": "brawler_toughness_4",
+            "name": "Toughness IV",
+            "cost": 4,
+            "prerequisites": ["brawler_toughness_3"],
+            "description": "Elite toughness"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "profession": "Swordsman",
+    "description": "Melee combat specialist with various blade weapons",
+    "branches": [
+      {
+        "name": "Swords",
+        "icon": "fas fa-sword",
+        "description": "Sword combat techniques",
+        "skills": [
+          {
+            "id": "swordsman_swords_1",
+            "name": "Sword Combat I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic sword techniques"
+          },
+          {
+            "id": "swordsman_swords_2",
+            "name": "Sword Combat II",
+            "cost": 2,
+            "prerequisites": ["swordsman_swords_1"],
+            "description": "Improved sword combat"
+          },
+          {
+            "id": "swordsman_swords_3",
+            "name": "Sword Combat III",
+            "cost": 3,
+            "prerequisites": ["swordsman_swords_2"],
+            "description": "Advanced sword techniques"
+          },
+          {
+            "id": "swordsman_swords_4",
+            "name": "Master Swordsman",
+            "cost": 4,
+            "prerequisites": ["swordsman_swords_3", "swordsman_defense_2"],
+            "description": "Master level sword skills"
+          }
+        ]
+      },
+      {
+        "name": "Defense",
+        "icon": "fas fa-shield-alt",
+        "description": "Defensive techniques and parrying",
+        "skills": [
+          {
+            "id": "swordsman_defense_1",
+            "name": "Sword Defense I",
+            "cost": 1,
+            "prerequisites": [],
+            "description": "Basic defensive techniques"
+          },
+          {
+            "id": "swordsman_defense_2",
+            "name": "Sword Defense II",
+            "cost": 2,
+            "prerequisites": ["swordsman_defense_1"],
+            "description": "Advanced defensive techniques"
+          }
+        ]
+      }
+    ]
+  }
+]

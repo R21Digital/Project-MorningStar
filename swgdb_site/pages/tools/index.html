@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools Hub - SWGDB</title>
+    <link rel="icon" type="image/png" href="../../assets/SWGDB Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/swgdb-styles.css">
+    <style>
+        body {
+            font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0C0C0C;
+            color: #F5EEDC;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #FFF8E6;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .tool-card {
+            background: rgba(245, 238, 220, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-decoration: none;
+            color: #F5EEDC;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(245, 238, 220, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-card:hover {
+            background: rgba(245, 238, 220, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.15), 0 0 12px rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .tool-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+            color: #FFF8E6;
+            font-weight: 600;
+        }
+        .tool-card p {
+            margin: 0;
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .tool-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .status-live {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00FF00;
+            border: 1px solid #00FF00;
+        }
+        .status-beta {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #FFF8E6;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 50px 0 30px 0;
+            padding: 20px 0;
+        }
+        
+        .section-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2em;
+            color: #FFF8E6;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        
+        .section-header p {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        .section-header:first-of-type {
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to SWGDB Home</a>
+        
+        <div class="header">
+            <h1>🛠️ Tools Hub</h1>
+            <p>Public tools and utilities for the Star Wars Galaxies community</p>
+        </div>
+
+        <!-- Gear & Character Tools -->
+        <div class="section-header">
+            <h2>⚙️ Gear & Character</h2>
+            <p>Character optimization and gear management tools</p>
+        </div>
+        <div class="tools-grid">
+            <a href="skill-calculator/" class="tool-card">
+                <h3>📊 Skill Calculator</h3>
+                <p>Interactive skill calculator for planning profession builds. Automatic dependency tracking, point management, and build export functionality.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="gcw-calculator/" class="tool-card">
+                <h3>🌌 GCW Calculator</h3>
+                <p>Simulate Galactic Civil War planet control across the galaxy. Adjust faction percentages and visualize Imperial vs Rebel dominance on each world.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="../gear-optimizer.html" class="tool-card">
+                <h3>⚙️ Gear Optimizer</h3>
+                <p>Optimize your character's gear and equipment. Find the best combinations for your build and playstyle using advanced stat calculations.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="../builds/index.html" class="tool-card">
+                <h3>🎯 Build Calculator</h3>
+                <p>Create and optimize character builds. Plan your skill points, calculate stats, and share builds with the community.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="../item-log/index.html" class="tool-card">
+                <h3>📦 Item Log</h3>
+                <p>Log and track your items, collections, and inventory. Manage your gear and resources effectively with detailed categorization.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+        </div>
+
+        <!-- Loot & Farming Tools -->
+        <div class="section-header">
+            <h2>💎 Loot & Farming</h2>
+            <p>Track drops, analyze loot tables, and optimize farming</p>
+        </div>
+        <div class="tools-grid">
+            <a href="../loot/index.html" class="tool-card">
+                <h3>💎 Loot Database</h3>
+                <p>Comprehensive loot tables, drop rates, and rare item locations. Search and filter by item type, location, or rarity.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="loot-tracker.html" class="tool-card">
+                <h3>🎯 Loot Tracker</h3>
+                <p>Track your rare loot drops and farming progress. Set goals and monitor your collection growth over time.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="loot-memory.html" class="tool-card">
+                <h3>🧠 Loot Memory</h3>
+                <p>Advanced loot tracking with memory features. Remember where you found items and track your farming progress.</p>
+                <span class="tool-status status-beta">Beta</span>
+            </a>
+        </div>
+
+        <!-- Group & Planning Tools -->
+        <div class="section-header">
+            <h2>👥 Group & Planning</h2>
+            <p>Tools for group content and activity planning</p>
+        </div>
+        <div class="tools-grid">
+            <a href="../heroics/index.html" class="tool-card">
+                <h3>⚔️ Heroic Planner</h3>
+                <p>Plan your heroic runs with group composition tools. Track completion status and optimize your heroic farming routes.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+
+            <a href="../bh-leaderboard.html" class="tool-card">
+                <h3>🏆 Bounty Hunter Leaderboard</h3>
+                <p>Current season standings, player rankings, and bounty hunting statistics. Compete with the community.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+        </div>
+
+        <!-- Community Tools -->
+        <div class="section-header">
+            <h2>🤝 Community</h2>
+            <p>Built by players, for players. All tools are free and open-source.</p>
+        </div>
+        <div class="tools-grid">
+            <a href="../report-bug.html" class="tool-card">
+                <h3>🐛 Report Issues</h3>
+                <p>Report bugs, suggest improvements, or provide feedback. Help improve SWGDB for the community.</p>
+                <span class="tool-status status-live">Live</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

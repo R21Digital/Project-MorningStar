@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whisper Relay - MS11 Internal</title>
+    <link rel="icon" type="image/png" href="../../assets/SWGDB Logo.png">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0A0A0A;
+            color: #F5EEDC;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background: rgba(255, 107, 107, 0.05);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            color: #FF6B6B;
+            margin: 0 0 10px 0;
+            font-size: 2.2em;
+        }
+        .internal-badge {
+            background: #FF6B6B;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .whisper-feed {
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            font-family: monospace;
+            font-size: 0.9em;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .whisper-entry {
+            margin: 8px 0;
+            padding: 8px;
+            border-left: 3px solid rgba(255, 215, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .whisper-meta {
+            color: #5E5E5E;
+            font-size: 0.8em;
+        }
+        .whisper-sender {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .whisper-content {
+            margin-top: 5px;
+            color: #F5EEDC;
+        }
+        .status-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .status-card {
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .status-value {
+            font-size: 2em;
+            color: #FFD700;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link">← Back to MS11 Dashboard</a>
+        
+        <div class="header">
+            <h1>💬 Whisper Relay <span class="internal-badge">MS11 INTERNAL</span></h1>
+            <p>Encrypted communication monitoring and relay system</p>
+        </div>
+
+        <h3>Live Whisper Feed</h3>
+        <div class="whisper-feed">
+            <div class="whisper-entry">
+                <div class="whisper-meta">[14:28:12] Guild Channel - Encrypted</div>
+                <div class="whisper-sender">GuildLeader_Alpha:</div>
+                <div class="whisper-content">"Heroic run starting in 10 minutes. Need 2 more DPS."</div>
+            </div>
+            <div class="whisper-entry">
+                <div class="whisper-meta">[14:25:33] Private Message</div>
+                <div class="whisper-sender">TradingPartner_Beta:</div>
+                <div class="whisper-content">"Got those rare components you needed. Meet at Coronet?"</div>
+            </div>
+            <div class="whisper-entry">
+                <div class="whisper-meta">[14:22:45] System Alert</div>
+                <div class="whisper-sender">MS11-AI:</div>
+                <div class="whisper-content">"Auto-response sent to farming inquiry. Session continues."</div>
+            </div>
+            <div class="whisper-entry">
+                <div class="whisper-meta">[14:20:18] Guild Channel - Encrypted</div>
+                <div class="whisper-sender">CraftingSpecialist_Gamma:</div>
+                <div class="whisper-content">"Anyone need weapon cores? I've got extras."</div>
+            </div>
+        </div>
+
+        <div class="status-panel">
+            <div class="status-card">
+                <div class="status-value">247</div>
+                <div>Messages Today</div>
+            </div>
+            <div class="status-card">
+                <div class="status-value">12</div>
+                <div>Active Channels</div>
+            </div>
+            <div class="status-card">
+                <div class="status-value">98.2%</div>
+                <div>Relay Uptime</div>
+            </div>
+            <div class="status-card">
+                <div class="status-value">3</div>
+                <div>Auto-Responses</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center; opacity: 0.6; font-size: 0.9em; font-family: monospace;">
+            <p>MS11-WHISPER-RELAY v3.0.1 | ENCRYPTED | CLASSIFIED</p>
+        </div>
+    </div>
+</body>
+</html>

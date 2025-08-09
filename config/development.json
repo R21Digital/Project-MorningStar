@@ -1,0 +1,47 @@
+{
+  "environment": "development",
+  "debug": true,
+  "log_level": "DEBUG",
+  
+  "host": "localhost",
+  "port": 5000,
+  "workers": 1,
+  
+  "database_url": "sqlite:///data/ms11_dev.db",
+  "database_pool_size": 5,
+  
+  "secret_key": "dev-secret-key-change-in-production-environment",
+  "jwt_secret": "dev-jwt-secret-change-in-production-environment",
+  
+  "features": {
+    "web_dashboard": true,
+    "real_time_monitoring": true,
+    "backup_system": false,
+    "plugin_system": true,
+    "read_replicas": false,
+    "distributed_tracing": false,
+    "advanced_caching": false
+  },
+  
+  "monitoring": {
+    "health_check_interval": 10,
+    "metrics_collection_interval": 30,
+    "alert_check_interval": 5
+  },
+  
+  "security": {
+    "rate_limit_requests": 10000,
+    "rate_limit_window": 3600,
+    "session_timeout": 86400,
+    "max_login_attempts": 10,
+    "lockout_duration": 60
+  },
+  
+  "development": {
+    "auto_reload": true,
+    "hot_reload_config": true,
+    "mock_external_services": true,
+    "detailed_error_pages": true,
+    "profiling_enabled": true
+  }
+}

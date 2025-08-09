@@ -1,0 +1,9 @@
+{
+  "client_id": "1403085672419430470",
+  "client_secret": "Z1q4G31_CwFQuanMTqwASwo5km_hgA6I",
+  "redirect_uri": "http://192.168.0.188:8080/ms11/auth/discord/callback",
+  "scope": "identify",
+  "auth_url": "https://discord.com/api/oauth2/authorize",
+  "token_url": "https://discord.com/api/oauth2/token",
+  "user_url": "https://discord.com/api/users/@me"
+}

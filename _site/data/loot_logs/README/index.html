@@ -1,0 +1,86 @@
+<h1>Heroic Loot Logs Directory</h1>
+<p>This directory contains parsed loot data from heroic instances, extracted from MS11 bot session logs.</p>
+<h2>File Structure</h2>
+<pre><code>loot_logs/
+├── heroic_loot_logs_YYYYMMDD_HHMMSS.json - Parsed loot data files
+├── raw_sessions/                          - Original session logs (optional backup)
+└── README.md                             - This file
+</code></pre>
+<h2>Data Format</h2>
+<p>Each <code>heroic_loot_logs_*.json</code> file contains:</p>
+<pre><code class="language-json">{
+  &quot;metadata&quot;: {
+    &quot;generated_at&quot;: &quot;2025-01-27T12:00:00Z&quot;,
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;total_entries&quot;: 150,
+    &quot;heroic_instances&quot;: [&quot;axkva_min&quot;, &quot;ig_88&quot;, &quot;geonosian_queen&quot;],
+    &quot;date_range&quot;: {
+      &quot;start&quot;: &quot;2025-01-26T10:00:00Z&quot;,
+      &quot;end&quot;: &quot;2025-01-27T12:00:00Z&quot;
+    }
+  },
+  &quot;loot_entries&quot;: [
+    {
+      &quot;timestamp&quot;: &quot;2025-01-27T11:30:00Z&quot;,
+      &quot;player_name&quot;: &quot;PlayerName&quot;,
+      &quot;heroic_instance&quot;: &quot;axkva_min&quot;,
+      &quot;boss_name&quot;: &quot;Axkva Min&quot;,
+      &quot;item_name&quot;: &quot;Axkva Min's Lightsaber&quot;,
+      &quot;item_type&quot;: &quot;weapon&quot;,
+      &quot;rarity&quot;: &quot;legendary&quot;,
+      &quot;quantity&quot;: 1,
+      &quot;stats&quot;: {
+        &quot;damage&quot;: &quot;150-200&quot;,
+        &quot;force_power&quot;: 50
+      },
+      &quot;source_log&quot;: &quot;session_20250127.log&quot;,
+      &quot;completion_status&quot;: &quot;completed&quot;,
+      &quot;difficulty&quot;: &quot;heroic&quot;,
+      &quot;group_size&quot;: 8,
+      &quot;session_id&quot;: &quot;session_abc123&quot;,
+      &quot;raw_log_line&quot;: &quot;[11:30:00] You have received Axkva Min's Lightsaber from Axkva Min&quot;
+    }
+  ]
+}
+</code></pre>
+<h2>Field Descriptions</h2>
+<h3>Metadata</h3>
+<ul>
+<li><code>generated_at</code>: When this file was created</li>
+<li><code>version</code>: Data format version</li>
+<li><code>total_entries</code>: Number of loot entries in this file</li>
+<li><code>heroic_instances</code>: List of heroic instances covered</li>
+<li><code>date_range</code>: Time span of the loot data</li>
+</ul>
+<h3>Loot Entry</h3>
+<ul>
+<li><code>timestamp</code>: When the loot was received (ISO 8601)</li>
+<li><code>player_name</code>: Character who received the loot</li>
+<li><code>heroic_instance</code>: Which heroic instance (axkva_min, ig_88, etc.)</li>
+<li><code>boss_name</code>: Specific boss that dropped the loot</li>
+<li><code>item_name</code>: Name of the loot item</li>
+<li><code>item_type</code>: Category (weapon, armor, material, etc.)</li>
+<li><code>rarity</code>: Item rarity (common, uncommon, rare, epic, legendary)</li>
+<li><code>quantity</code>: Number of items received</li>
+<li><code>stats</code>: Item statistics if available</li>
+<li><code>source_log</code>: Original log file name</li>
+<li><code>completion_status</code>: Instance completion status</li>
+<li><code>difficulty</code>: Difficulty level (normal, heroic)</li>
+<li><code>group_size</code>: Number of players in group</li>
+<li><code>session_id</code>: Unique session identifier</li>
+<li><code>raw_log_line</code>: Original log line for debugging</li>
+</ul>
+<h2>Usage</h2>
+<p>This data is used by:</p>
+<ol>
+<li>The Heroics Loot API (<code>/api/heroics/loot</code>)</li>
+<li>SWGDB web interface for loot tables</li>
+<li>MS11 bot for loot tracking and statistics</li>
+<li>Community tools and analysis</li>
+</ol>
+<h2>Data Retention</h2>
+<ul>
+<li>Files older than 30 days are automatically archived</li>
+<li>Duplicate entries are filtered during processing</li>
+<li>Invalid or corrupted entries are logged but excluded</li>
+</ul>

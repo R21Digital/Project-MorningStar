@@ -1,0 +1,150 @@
+{
+  "rate_limiting": {
+    "enabled": true,
+    "redis_url": "redis://localhost:6379/1",
+    "default_rules": [
+      {
+        "name": "global_api_limit",
+        "algorithm": "sliding_window",
+        "scope": "global",
+        "limit": 10000,
+        "window_seconds": 3600,
+        "action": "reject",
+        "priority": 50,
+        "enabled": true
+      },
+      {
+        "name": "per_ip_general",
+        "algorithm": "token_bucket",
+        "scope": "per_ip",
+        "limit": 100,
+        "window_seconds": 60,
+        "burst_limit": 150,
+        "action": "reject",
+        "priority": 100,
+        "enabled": true,
+        "whitelist": [
+          "127.0.0.1",
+          "::1",
+          "10.0.0.0/8",
+          "172.16.0.0/12",
+          "192.168.0.0/16"
+        ]
+      },
+      {
+        "name": "per_user_authenticated",
+        "algorithm": "sliding_window",
+        "scope": "per_user",
+        "limit": 1000,
+        "window_seconds": 3600,
+        "action": "reject",
+        "priority": 90,
+        "enabled": true
+      },
+      {
+        "name": "login_attempts",
+        "algorithm": "fixed_window",
+        "scope": "per_ip",
+        "limit": 5,
+        "window_seconds": 300,
+        "action": "reject",
+        "priority": 150,
+        "enabled": true
+      },
+      {
+        "name": "api_key_premium",
+        "algorithm": "token_bucket",
+        "scope": "per_api_key",
+        "limit": 5000,
+        "window_seconds": 3600,
+        "burst_limit": 6000,
+        "action": "throttle",
+        "throttle_factor": 0.8,
+        "priority": 80,
+        "enabled": true
+      },
+      {
+        "name": "expensive_operations",
+        "algorithm": "sliding_window",
+        "scope": "per_user",
+        "limit": 10,
+        "window_seconds": 3600,
+        "action": "delay",
+        "delay_seconds": 2.0,
+        "priority": 120,
+        "enabled": true
+      },
+      {
+        "name": "suspicious_activity",
+        "algorithm": "fixed_window",
+        "scope": "per_ip",
+        "limit": 1,
+        "window_seconds": 86400,
+        "action": "reject",
+        "priority": 200,
+        "enabled": true,
+        "blacklist": [
+          "192.0.2.0/24",
+          "198.51.100.0/24",
+          "203.0.113.0/24"
+        ]
+      }
+    ],
+    
+    "endpoint_specific_rules": {
+      "/api/auth/login": {
+        "name": "login_endpoint",
+        "algorithm": "sliding_window",
+        "scope": "per_ip",
+        "limit": 5,
+        "window_seconds": 900,
+        "action": "reject",
+        "priority": 180
+      },
+      "/api/backup/create": {
+        "name": "backup_creation",
+        "algorithm": "fixed_window",
+        "scope": "per_user",
+        "limit": 1,
+        "window_seconds": 3600,
+        "action": "reject",
+        "priority": 160
+      },
+      "/api/admin/*": {
+        "name": "admin_operations",
+        "algorithm": "token_bucket",
+        "scope": "per_user",
+        "limit": 50,
+        "window_seconds": 3600,
+        "burst_limit": 60,
+        "action": "reject",
+        "priority": 140
+      }
+    },
+    
+    "emergency_controls": {
+      "circuit_breaker": {
+        "enabled": true,
+        "failure_threshold": 100,
+        "recovery_time_seconds": 300,
+        "half_open_requests": 10
+      },
+      "emergency_brake": {
+        "enabled": false,
+        "trigger_block_rate": 80,
+        "emergency_limit": 10,
+        "emergency_window": 60
+      }
+    },
+    
+    "monitoring": {
+      "enable_metrics": true,
+      "metrics_interval": 60,
+      "alert_thresholds": {
+        "high_block_rate": 50,
+        "very_high_block_rate": 80,
+        "unusual_traffic_spike": 500
+      }
+    }
+  }
+}

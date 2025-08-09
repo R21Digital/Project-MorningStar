@@ -1,0 +1,65 @@
+{
+    "name": "Combat Medic",
+    "description": "Versatile combat medic build focusing on healing and support",
+    "version": "1.0.0",
+    "profession": "combat",
+    "skills": [
+        "combat_medic",
+        "doctor",
+        "rifleman"
+    ],
+    "equipment": {
+        "weapons": [
+            {
+                "type": "rifle",
+                "min_quality": 0.7
+            },
+            {
+                "type": "medic_tool",
+                "min_quality": 0.8
+            }
+        ],
+        "armor": [
+            {
+                "slot": "chest",
+                "type": "composite",
+                "min_quality": 0.6
+            },
+            {
+                "slot": "legs",
+                "type": "composite",
+                "min_quality": 0.6
+            }
+        ]
+    },
+    "combat": {
+        "style": "support",
+        "range": "medium",
+        "tactics": [
+            "heal",
+            "buff",
+            "cover"
+        ]
+    },
+    "buffs": {
+        "required": [
+            "healing_efficiency",
+            "stamina"
+        ],
+        "optional": [
+            "strength",
+            "agility"
+        ]
+    },
+    "inventory": {
+        "required": [
+            "medpack",
+            "stim_pack",
+            "healing_kit"
+        ],
+        "optional": [
+            "energy_boost",
+            "combat_stim"
+        ]
+    }
+}

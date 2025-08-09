@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MS11 Internal Dashboard - Restricted Access</title>
+    <link rel="icon" type="image/png" href="../assets/SWGDB Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            color: #FF6B6B;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .access-container {
+            max-width: 600px;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 107, 107, 0.05);
+            border: 2px solid #FF6B6B;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+        }
+        .lock-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: #FF6B6B;
+        }
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
+            color: #FF6B6B;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid #FFD700;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFF8E6;
+        }
+        .system-info {
+            margin-top: 30px;
+            font-size: 0.9em;
+            opacity: 0.6;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="access-container">
+        <div class="lock-icon">🔐</div>
+        <h1>MS11 RESTRICTED</h1>
+        <p class="subtitle">Internal System Access Only</p>
+        
+        <div class="warning-box">
+            <h3>⚠️ ACCESS DENIED</h3>
+            <p>This section contains internal MS11 automation tools and is not accessible to public users.</p>
+            <p><strong>Authorized Personnel Only</strong></p>
+        </div>
+        
+        <div class="system-info">
+            <p>SESSION TRACKER | QUEST LOGGER | WHISPER RELAY | AUTOMATION REPORTS</p>
+            <p>MS11-AI-SYSTEM v2.1.0</p>
+        </div>
+        
+        <a href="../index.html" class="back-link">← Return to Public SWGDB</a>
+    </div>
+</body>
+</html>

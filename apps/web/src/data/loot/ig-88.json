@@ -1,0 +1,12 @@
+{
+  "boss": "IG-88",
+  "instance": "IG-88 Assassination",
+  "location": "Tatooine",
+  "drops": [
+    "IG-88's Custom Rifle",
+    "Advanced Droid Components",
+    "Precision Targeting Computer",
+    "Bounty Hunter Equipment",
+    "Ion Weapon Modifications"
+  ]
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rankings & Leaderboards - SWGDB</title>
+    <link rel="icon" type="image/png" href="../../assets/SWGDB Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #0C0C0C;
+            color: #F5EEDC;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #FFF8E6;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2em;
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #FFF8E6;
+        }
+        .section-header {
+            text-align: center;
+            margin: 50px 0 30px 0;
+            padding: 20px 0;
+        }
+        .section-header h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2em;
+            color: #FFF8E6;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        .section-header p {
+            font-size: 1.1em;
+            opacity: 0.8;
+            margin: 0;
+        }
+        .leaderboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .leaderboard-card {
+            background: rgba(245, 238, 220, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-decoration: none;
+            color: #F5EEDC;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(245, 238, 220, 0.15);
+        }
+        .leaderboard-card:hover {
+            background: rgba(245, 238, 220, 0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.15), 0 0 12px rgba(255, 215, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        .leaderboard-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.8em;
+            color: #FFF8E6;
+            font-weight: 600;
+        }
+        .leaderboard-card p {
+            margin: 0;
+            opacity: 0.85;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .leaderboard-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .status-live {
+            background: rgba(0, 255, 0, 0.2);
+            color: #00FF00;
+            border: 1px solid #00FF00;
+        }
+        .status-seasonal {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+        .status-coming-soon {
+            background: rgba(255, 107, 107, 0.2);
+            color: #FF6B6B;
+            border: 1px solid #FF6B6B;
+        }
+        .top-players {
+            background: rgba(245, 238, 220, 0.03);
+            border: 1px solid rgba(245, 238, 220, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .player-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(245, 238, 220, 0.1);
+        }
+        .player-rank {
+            font-weight: bold;
+            color: #FFD700;
+            min-width: 40px;
+        }
+        .player-name {
+            flex: 1;
+            margin-left: 15px;
+            color: #FFF8E6;
+        }
+        .player-score {
+            color: #00FF00;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../../index.html" class="back-link">← Back to SWGDB Home</a>
+        
+        <div class="header">
+            <h1>🏆 Rankings & Leaderboards</h1>
+            <p>Community rankings, statistics, and competitive standings</p>
+        </div>
+
+        <!-- Active Leaderboards -->
+        <div class="section-header">
+            <h2>🎯 Active Leaderboards</h2>
+            <p>Current competitive rankings and seasonal standings</p>
+        </div>
+        <div class="leaderboard-grid">
+            <a href="../bh-leaderboard.html" class="leaderboard-card">
+                <h3>🏹 Bounty Hunter Leaderboard</h3>
+                <p>Current season standings for bounty hunters. Player rankings, bounty statistics, and PvP achievements.</p>
+                <span class="leaderboard-status status-live">Live - Season 8</span>
+            </a>
+
+            <a href="pvp-rankings.html" class="leaderboard-card">
+                <h3>⚔️ PvP Rankings</h3>
+                <p>Player vs Player combat statistics. Kill/death ratios, faction standings, and GCW contributions.</p>
+                <span class="leaderboard-status status-live">Live</span>
+            </a>
+
+            <a href="guild-rankings.html" class="leaderboard-card">
+                <h3>🏛️ Guild Rankings</h3>
+                <p>Top performing guilds by member count, activity levels, and collective achievements across the galaxy.</p>
+                <span class="leaderboard-status status-seasonal">Weekly Reset</span>
+            </a>
+
+            <a href="crafter-rankings.html" class="leaderboard-card">
+                <h3>🔨 Master Crafter Rankings</h3>
+                <p>Top crafters by sales volume, resource quality, and community reputation. Economic powerhouses showcased.</p>
+                <span class="leaderboard-status status-live">Live</span>
+            </a>
+        </div>
+
+        <!-- Community Stats -->
+        <div class="section-header">
+            <h2>📊 Community Statistics</h2>
+            <p>Galaxy-wide data and player achievements</p>
+        </div>
+        <div class="leaderboard-grid">
+            <a href="server-stats.html" class="leaderboard-card">
+                <h3>🌌 Server Statistics</h3>
+                <p>Population data, faction balance, active player counts, and economic indicators across all servers.</p>
+                <span class="leaderboard-status status-live">Live</span>
+            </a>
+
+            <a href="rare-collectors.html" class="leaderboard-card">
+                <h3>💎 Rare Item Collectors</h3>
+                <p>Players with the most impressive rare item collections. Legendary weapons, unique items, and collections.</p>
+                <span class="leaderboard-status status-coming-soon">Coming Soon</span>
+            </a>
+
+            <a href="heroic-completions.html" class="leaderboard-card">
+                <h3>🗡️ Heroic Completions</h3>
+                <p>Fastest clear times and most completions for all heroic instances. Speed runs and consistency records.</p>
+                <span class="leaderboard-status status-coming-soon">Coming Soon</span>
+            </a>
+
+            <a href="exploration-rankings.html" class="leaderboard-card">
+                <h3>🗺️ Exploration Rankings</h3>
+                <p>Players who have discovered the most POIs, completed badge requirements, and explored the galaxy.</p>
+                <span class="leaderboard-status status-coming-soon">Coming Soon</span>
+            </a>
+        </div>
+
+        <!-- Current Top Players Preview -->
+        <div class="section-header">
+            <h2>⭐ Top Players This Week</h2>
+            <p>Leading community members across all categories</p>
+        </div>
+        <div class="top-players">
+            <div class="player-entry">
+                <span class="player-rank">#1</span>
+                <span class="player-name">SithLord_Maximus</span>
+                <span class="player-score">2,847 BH Points</span>
+            </div>
+            <div class="player-entry">
+                <span class="player-rank">#2</span>
+                <span class="player-name">JediMaster_Kenobi</span>
+                <span class="player-score">2,634 BH Points</span>
+            </div>
+            <div class="player-entry">
+                <span class="player-rank">#3</span>
+                <span class="player-name">RebelCommander_Solo</span>
+                <span class="player-score">2,458 BH Points</span>
+            </div>
+            <div class="player-entry">
+                <span class="player-rank">#4</span>
+                <span class="player-name">ImperialAgent_Vader</span>
+                <span class="player-score">2,291 BH Points</span>
+            </div>
+            <div class="player-entry">
+                <span class="player-rank">#5</span>
+                <span class="player-name">MandalorianHunter_Fett</span>
+                <span class="player-score">2,156 BH Points</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

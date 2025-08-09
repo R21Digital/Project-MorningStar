@@ -1,20 +1,36 @@
 """Demo entry point for Android MS11."""
 
 import argparse
+import inspect
 import json
+import logging
 import os
 import threading
 import sys
 from typing import Dict, Any, Mapping
+
+# Configure logging early
+import os
+os.makedirs('logs', exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('logs/ms11.log', mode='a', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Check for required dependencies
 try:
     from discord.ext import commands
     import discord_relay
     DISCORD_AVAILABLE = True
+    logger.info("Discord dependencies loaded successfully")
 except ImportError as e:
-    print(f"[WARNING] Discord dependencies not available: {e}")
-    print("[WARNING] Discord relay functionality will be disabled")
+    logger.warning(f"Discord dependencies not available: {e}")
+    logger.warning("Discord relay functionality will be disabled")
     commands = None
     discord_relay = None
     DISCORD_AVAILABLE = False
@@ -23,26 +39,134 @@ try:
     import pytesseract
     import cv2
     import pyautogui
+    logger.info("Vision dependencies loaded successfully")
 except ImportError as e:
-    print(f"[ERROR] Vision dependencies missing: {e}")
-    print("[ERROR] Please install: pip install pytesseract opencv-python pyautogui")
+    logger.error(f"Vision dependencies missing: {e}")
+    logger.error("Please install: pip install pytesseract opencv-python pyautogui")
     sys.exit(1)
 
-from core.session_manager import SessionManager
-from core import profile_loader, state_tracker, mode_selector
-from core.profile_loader import ProfileValidationError
-from core.session_monitor import monitor_session, FATIGUE_THRESHOLD
-from core import mode_scheduler
-from core.repeat_utils import run_repeating_mode
-from utils.logging_utils import log_event
-from utils.load_trainers import load_trainers
-from utils.check_buff_status import update_buff_state
-from utils.license_hooks import requires_license
-from modules.skills.training_check import get_trainable_skills
-from modules.travel.trainer_travel import travel_to_trainer
-from src.movement.agent_mover import MovementAgent
-from src.movement.movement_profiles import patrol_route  # noqa: F401
-from src.training.trainer_visit import visit_trainer  # noqa: F401
+# Import with fallbacks for missing modules
+try:
+    from core.session_manager import SessionManager
+    from core.window_manager import WindowManager
+    from core import profile_loader, state_tracker, mode_selector
+    from core.profile_loader import ProfileValidationError
+    from core.session_monitor import monitor_session, FATIGUE_THRESHOLD
+    from core import mode_scheduler
+    from core.repeat_utils import run_repeating_mode
+    CORE_MODULES_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"Core modules not available: {e}")
+    logger.info("Using fallback implementations")
+    CORE_MODULES_AVAILABLE = False
+    
+    # Create fallback classes
+    class SessionManager:
+        def __init__(self, *args, **kwargs):
+            logger.warning("Using fallback SessionManager")
+    
+    class WindowManager:
+        def __init__(self, *args, **kwargs):
+            logger.warning("Using fallback WindowManager")
+        
+        def update_status(self):
+            """Fallback update_status method."""
+            logger.debug("Fallback WindowManager update_status called")
+            pass
+            
+    class ProfileValidationError(Exception):
+        pass
+        
+    # Create fallback functions and modules
+    def monitor_session(*args, **kwargs):
+        logger.warning("Session monitoring not available")
+        return {"status": "fallback"}
+        
+    class profile_loader:
+        @staticmethod
+        def validate_profile(profile):
+            return profile
+        
+        @staticmethod
+        def assert_profile_ready(profile):
+            if not profile:
+                raise ProfileValidationError("Profile is empty")
+    
+    class state_tracker:
+        @staticmethod
+        def get_state():
+            return {"mode": "medic", "fatigue_level": 0}
+            
+        @staticmethod
+        def reset_state():
+            pass
+            
+        @staticmethod
+        def update_state(**kwargs):
+            pass
+    
+    class mode_selector:
+        @staticmethod
+        def select_mode(profile, state):
+            return profile.get("mode", "medic")
+    
+    class mode_scheduler:
+        @staticmethod
+        def get_next_mode(profile, state):
+            return profile.get("mode", "medic")
+    
+    def run_repeating_mode(mode, func, rest_time):
+        logger.warning("Repeating mode not available")
+        
+    FATIGUE_THRESHOLD = 100
+
+try:
+    from utils.logging_utils import log_event
+except ImportError:
+    def log_event(event, **kwargs):
+        logger.info(f"Event: {event} - {kwargs}")
+# Import additional utilities with fallbacks
+try:
+    from utils.load_trainers import load_trainers
+    from utils.check_buff_status import update_buff_state
+    from utils.license_hooks import requires_license
+    from modules.skills.training_check import get_trainable_skills
+    from modules.travel.trainer_travel import travel_to_trainer
+    UTILS_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"Utility modules not available: {e}")
+    UTILS_AVAILABLE = False
+    
+    # Fallback functions
+    def load_trainers():
+        return {}
+    def update_buff_state(*args, **kwargs):
+        pass
+    def requires_license(func):
+        return func
+    def get_trainable_skills(*args, **kwargs):
+        return []
+    def travel_to_trainer(*args, **kwargs):
+        return False
+
+try:
+    from src.movement.agent_mover import MovementAgent
+    from src.movement.movement_profiles import patrol_route  # noqa: F401
+    from src.training.trainer_visit import visit_trainer  # noqa: F401
+    MOVEMENT_AVAILABLE = True
+except ImportError as e:
+    logger.warning(f"Movement modules not available: {e}")
+    MOVEMENT_AVAILABLE = False
+    
+    class MovementAgent:
+        def __init__(self, *args, **kwargs):
+            pass
+    
+    def patrol_route(*args, **kwargs):
+        pass
+    
+    def visit_trainer(*args, **kwargs):
+        return False
 
 # Import modes conditionally to avoid Discord dependency issues
 try:
@@ -92,37 +216,129 @@ DISCORD_CONFIG_PATH = os.path.join("config", "discord_config.json")
 
 def load_runtime_profile(name: str, directory: str = DEFAULT_PROFILE_DIR) -> Dict[str, Any]:
     """Return runtime profile data for ``name`` if available."""
-    path = os.path.join(directory, f"{name}.json")
-    if not os.path.exists(path):
+    # Security: Validate profile name to prevent path traversal
+    if not _is_safe_filename(name):
+        logger.warning(f"Unsafe profile name rejected: {name}")
         return {}
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+    
+    path = os.path.join(directory, f"{name}.json")
+    
+    # Security: Ensure path is within the expected directory
+    if not _is_path_safe(path, directory):
+        logger.warning(f"Path traversal attempt blocked: {path}")
+        return {}
+    
+    return load_json(path)
+
+
+def _is_safe_filename(filename: str) -> bool:
+    """Check if filename is safe (no path traversal, special chars)."""
+    if not filename:
+        return False
+    
+    # Check for path traversal attempts
+    dangerous_patterns = ['..', '/', '\\', ':', '*', '?', '"', '<', '>', '|', '\x00']
+    for pattern in dangerous_patterns:
+        if pattern in filename:
+            return False
+    
+    # Check for absolute paths
+    if os.path.isabs(filename):
+        return False
+    
+    # Check length (prevent buffer overflow attempts)
+    if len(filename) > 255:
+        return False
+    
+    return True
+
+
+def _is_path_safe(path: str, expected_dir: str) -> bool:
+    """Check if resolved path is within expected directory."""
+    try:
+        # Resolve to absolute paths
+        abs_path = os.path.abspath(path)
+        abs_expected = os.path.abspath(expected_dir)
+        
+        # Check if path starts with expected directory
+        return abs_path.startswith(abs_expected)
+    except Exception:
+        return False
 
 
 def load_json(path: str) -> Dict[str, Any]:
+    """Load JSON file with error handling and security validation."""
     if os.path.exists(path):
         try:
             with open(path, "r", encoding="utf-8") as f:
-                return json.load(f)
+                data = json.load(f)
+                
+                # Security validation: only accept dict objects for config
+                if isinstance(data, dict):
+                    # Remove potentially dangerous prototype pollution keys
+                    dangerous_keys = ['__proto__', 'constructor', 'prototype']
+                    for key in dangerous_keys:
+                        if key in data:
+                            logger.warning(f"Removed dangerous key '{key}' from JSON data")
+                            del data[key]
+                    
+                    # Recursively clean nested objects
+                    data = _sanitize_json_object(data)
+                    
+                    logger.debug(f"Successfully loaded and sanitized JSON from {path}")
+                    return data
+                else:
+                    # Non-dict JSON is not valid for configuration - return empty dict
+                    logger.warning(f"Non-dict JSON rejected from {path}: {type(data)}")
+                    return {}
         except json.JSONDecodeError as e:
-            print(f"[WARNING] Invalid JSON in {path}: {e}")
+            logger.warning(f"Invalid JSON in {path}: {e}")
             return {}
+        except Exception as e:
+            logger.error(f"Error loading JSON from {path}: {e}")
+            return {}
+    logger.debug(f"JSON file not found: {path}")
     return {}
+
+
+def _sanitize_json_object(obj: Any) -> Any:
+    """Recursively sanitize JSON object removing dangerous keys and null values."""
+    if isinstance(obj, dict):
+        dangerous_keys = ['__proto__', 'constructor', 'prototype', 'eval', 'import', 'require']
+        sanitized = {}
+        for key, value in obj.items():
+            if key not in dangerous_keys:
+                # Skip null values for configuration
+                if value is not None:
+                    sanitized[key] = _sanitize_json_object(value)
+            else:
+                logger.warning(f"Sanitized dangerous key: {key}")
+        return sanitized
+    elif isinstance(obj, list):
+        return [_sanitize_json_object(item) for item in obj if item is not None]
+    else:
+        return obj
 
 
 def load_required_profile(profile_path: str) -> Dict[str, Any]:
     """Load and validate a runtime profile or exit on failure."""
     try:
-        prof = profile_loader.load_profile(profile_path)
-        print(
-            f"[\u2714] Loaded profile for: {prof.get('character_name', 'Unnamed Character')}"
-        )
+        # First load the runtime profile
+        prof = load_runtime_profile(profile_path)
+        if not prof:
+            logger.error(f"Profile not found: {profile_path}")
+            sys.exit(1)
+        
+        # Then validate it using the profile_loader
+        prof = profile_loader.validate_profile(prof)
+        character_name = prof.get('character_name', 'Unnamed Character')
+        logger.info(f"Successfully loaded profile for: {character_name}")
         return prof
     except ProfileValidationError as e:
-        print(f"[\u2718] Profile validation failed: {e}")
+        logger.error(f"Profile validation failed: {e}")
         sys.exit(1)
     except Exception as e:  # pragma: no cover - unexpected
-        print(f"[\u2718] Unexpected error loading profile: {e}")
+        logger.error(f"Unexpected error loading profile: {e}", exc_info=True)
         sys.exit(1)
 
 
@@ -235,14 +451,47 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Quest chain identifier for batch verification",
     )
     args = parser.parse_args(argv)
+    
+    # Security validation of arguments
+    if args.mode is not None and args.mode != "" and not _is_safe_mode_name(args.mode):
+        parser.error(f"Invalid mode name: {args.mode}")
+        
+    if args.profile is not None and args.profile != "" and not _is_safe_filename(args.profile):
+        parser.error(f"Invalid profile name: {args.profile}")
+        
+    if args.rest is not None and args.rest < 0:
+        parser.error("Rest time cannot be negative")
+        
+    if args.max_loops is not None and args.max_loops > 1000000:
+        parser.error("Max loops too large (limit: 1,000,000)")
+        
     if args.farming_target:
         try:
             args.farming_target = json.loads(args.farming_target)
             if not isinstance(args.farming_target, dict):
                 raise ValueError("farming_target must be a JSON object")
+            # Sanitize the farming target
+            args.farming_target = _sanitize_json_object(args.farming_target)
         except Exception as exc:  # pragma: no cover - arg parsing
             parser.error(f"Invalid --farming_target value: {exc}")
     return args
+
+
+def _is_safe_mode_name(mode: str) -> bool:
+    """Validate mode name for security."""
+    if not mode:
+        return False
+    
+    # Allow only alphanumeric, dash, underscore
+    allowed_chars = set('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_')
+    if not all(c in allowed_chars for c in mode):
+        return False
+    
+    # Reasonable length limit
+    if len(mode) > 50:
+        return False
+        
+    return True
 
 
 def run_mode(
@@ -355,9 +604,14 @@ def main(argv: list[str] | None = None) -> None:
 
     print(f"[MODE] Selected mode '{mode}'")
 
-    # Initialize new session using the mode from CLI or profile
-    session = SessionManager(mode=mode)
+    # Initialize new session
+    session = SessionManager()
+    window_manager = WindowManager(session)
+    
+    # Show initial status
+    window_manager.update_status()
     setattr(session, "profile", profile)
+    setattr(session, "mode", mode)
 
     if args.repeat:
         run_repeating_mode(

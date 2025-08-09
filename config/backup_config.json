@@ -1,0 +1,78 @@
+{
+  "backup_settings": {
+    "backup_dir": "backups",
+    "max_backups": 50,
+    "compression": true,
+    "encryption": false,
+    "encryption_key": "",
+    
+    "auto_backup": true,
+    "backup_interval_hours": 24,
+    "incremental_interval_hours": 4,
+    
+    "daily_retention_days": 7,
+    "weekly_retention_weeks": 4,
+    "monthly_retention_months": 12,
+    
+    "s3_bucket": "",
+    "s3_prefix": "ms11-backups",
+    "s3_region": "us-east-1"
+  },
+  
+  "backup_schedules": [
+    {
+      "name": "daily_full",
+      "backup_type": "full",
+      "enabled": true,
+      "interval_hours": 24,
+      "retention_days": 30,
+      "compression": true,
+      "encryption": false,
+      "s3_upload": false,
+      "tables_include": [],
+      "tables_exclude": ["temp_logs", "session_cache"]
+    },
+    {
+      "name": "hourly_incremental",
+      "backup_type": "incremental",
+      "enabled": true,
+      "interval_hours": 4,
+      "retention_days": 7,
+      "compression": true,
+      "encryption": false,
+      "s3_upload": false,
+      "tables_include": ["sessions", "commands", "metrics"],
+      "tables_exclude": []
+    }
+  ],
+  
+  "notification_settings": {
+    "notify_on_success": false,
+    "notify_on_failure": true,
+    "notification_channels": [
+      {
+        "type": "webhook",
+        "url": "",
+        "enabled": false
+      },
+      {
+        "type": "email",
+        "smtp_server": "",
+        "smtp_port": 587,
+        "username": "",
+        "password": "",
+        "from_address": "",
+        "to_addresses": [],
+        "enabled": false
+      }
+    ]
+  },
+  
+  "recovery_settings": {
+    "test_restore_enabled": true,
+    "test_restore_interval_days": 7,
+    "backup_verification": true,
+    "checksum_verification": true,
+    "restore_timeout_minutes": 60
+  }
+}

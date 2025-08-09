@@ -1,0 +1,25 @@
+# MS11 Main Interface Requirements
+# Core web framework and extensions
+Flask==2.3.3
+Flask-SocketIO==5.3.6
+python-socketio==5.8.0
+python-engineio==4.7.1
+Werkzeug==2.3.7
+
+# Configuration and data handling
+PyYAML==6.0.1
+python-dotenv==1.0.0
+
+# System monitoring and utilities
+psutil==5.9.5
+# Relax pin to available versions on PyPI for Windows runners
+pywin32>=307; sys_platform == "win32"
+
+# Additional web enhancements
+Flask-CORS==4.0.0
+Flask-Login==0.6.3
+Flask-WTF==1.1.1
+WTForms==3.0.1
+
+# Development and debugging
+Flask-DebugToolbar==0.13.1

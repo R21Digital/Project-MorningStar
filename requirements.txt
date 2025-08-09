@@ -2,6 +2,7 @@
 pytest==7.4.0
 beautifulsoup4==4.12.3
 requests>=2.0
+markdown>=3.5.0
 
 # For Discord relay bot functionality
 discord.py>=2.0.0

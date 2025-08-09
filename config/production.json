@@ -1,0 +1,60 @@
+{
+  "environment": "production",
+  "debug": false,
+  "log_level": "WARNING",
+  
+  "host": "0.0.0.0",
+  "port": 8000,
+  "workers": 4,
+  
+  "database_pool_size": 20,
+  "database_timeout": 60,
+  
+  "features": {
+    "web_dashboard": true,
+    "real_time_monitoring": true,
+    "backup_system": true,
+    "plugin_system": true,
+    "read_replicas": true,
+    "distributed_tracing": true,
+    "advanced_caching": true
+  },
+  
+  "monitoring": {
+    "health_check_interval": 60,
+    "metrics_collection_interval": 300,
+    "alert_check_interval": 30
+  },
+  
+  "security": {
+    "rate_limit_requests": 1000,
+    "rate_limit_window": 3600,
+    "session_timeout": 28800,
+    "max_login_attempts": 3,
+    "lockout_duration": 600
+  },
+  
+  "performance": {
+    "cache_ttl": 7200,
+    "query_timeout": 60,
+    "connection_timeout": 30,
+    "request_timeout": 60
+  },
+  
+  "production": {
+    "ssl_enabled": true,
+    "ssl_cert_path": "/etc/ssl/certs/ms11.crt",
+    "ssl_key_path": "/etc/ssl/private/ms11.key",
+    "reverse_proxy": true,
+    "cors_origins": [],
+    "trusted_proxies": ["127.0.0.1", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  },
+  
+  "backup": {
+    "auto_backup": true,
+    "backup_interval_hours": 24,
+    "incremental_interval_hours": 4,
+    "s3_upload": true,
+    "retention_days": 30
+  }
+}

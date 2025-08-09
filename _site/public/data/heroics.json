@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "axkva-min",
+    "name": "Axkva Min",
+    "summary": "A high-level group encounter in the Death Watch Bunker.",
+    "loot": ["Axkva Min Headdress", "Ancient Crystal", "Credits Cache"],
+    "strategy": "Bring ranged DPS and poison resistance. Focus down adds fast and interrupt her summon."
+  },
+  {
+    "slug": "ig-88",
+    "name": "IG-88",
+    "summary": "Bounty Hunter-themed instance with droid armies and hard-hitting mechanics.",
+    "loot": ["IG-88's Neural Core", "Shock Baton Blueprint"],
+    "strategy": "Burn the adds before IG enrages. Have one player kite the droid miniboss."
+  },
+  {
+    "slug": "krayt-dragon",
+    "name": "Ancient Krayt Dragon",
+    "summary": "Epic raid encounter against the legendary beast of Tatooine's Dune Sea.",
+    "loot": ["Perfect Krayt Dragon Pearl", "Dragon Scale Armor", "Ancient Bone Weapons"],
+    "strategy": "Coordinate tank swaps during burrow phases. Spread out for sonic roar and watch for tail sweep telegraphs."
+  },
+  {
+    "slug": "nightsister-stronghold",
+    "name": "Nightsister Stronghold", 
+    "summary": "Navigate the dark halls of the Nightsister fortress on Dathomir.",
+    "loot": ["Nightsister Energy Lance", "Ritual Robes", "Force Crystal Shards"],
+    "strategy": "Interrupt healing spells at all costs. Use LOS to break mind control and stack for lightning phases."
+  },
+  {
+    "slug": "geonosian-queen",
+    "name": "Geonosian Queen's Hive",
+    "summary": "Venture deep into the insectoid hive complex to face the queen.",
+    "loot": ["Queen's Royal Staff", "Hive Defender Armor", "Sonic Weaponry"],
+    "strategy": "Clear worker swarms quickly. Tank the queen away from acid pools and rotate cooldowns for royal guard phases."
+  },
+  {
+    "slug": "janta-blood-crisis",
+    "name": "Janta Blood Crisis",
+    "summary": "Stop the blood cult terrorizing Dantooine settlements.",
+    "loot": ["Blood Ritual Artifacts", "Primitive Weapons", "Dantooine Relics"],
+    "strategy": "Entry-level encounter. Focus shamans first, use basic interrupts, and maintain steady DPS rotation."
+  }
+]

@@ -1,1 +1,0 @@
-# Handles session timing and cooldowns
